@@ -1,0 +1,23 @@
+{
+  "level": "A1",
+  "openers": [
+    "Ach, du wieder. Hast du heute geübt?",
+    "Also, sag mal. Welche Wörter kennst du?",
+    "Hallo. Übst du heute Deutsch, ja oder nein?"
+  ],
+  "prompts": [
+    "Und sag, was {WORD} du normalerweise?",
+    "Okay, magst du {WORD}? Ja oder nein.",
+    "Ein Satz mit {WORD}, los.",
+    "Wann hast du das letzte Mal {WORD}?"
+  ],
+  "fillers": [
+    "Aha.",
+    "Okay, okay.",
+    "Mmh, erzähl weiter."
+  ],
+  "closers": [
+    "Na ja, nicht schlecht. Tschüss.",
+    "Okay, genug für heute. Bis zum nächsten Mal."
+  ]
+}

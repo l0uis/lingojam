@@ -1,0 +1,23 @@
+{
+  "level": "B2",
+  "openers": [
+    "Di nuovo a interrompermi la pennichella. Dai, sputalo: come va l'italiano questa settimana?",
+    "Guarda chi si vede. Visto che sei qui, cosa ti è successo ultimamente che ti ha fatto pensare?",
+    "Ah, che noia. Ma visto che mi hai chiamato, dimmi: in cosa ti sei impegnato ultimamente?"
+  ],
+  "prompts": [
+    "E dimmi, che ruolo gioca {WORD} nella tua vita? Senza giri di parole.",
+    "Ok, se dovessi spiegare {WORD} a uno straniero, come faresti?",
+    "Mmm, come è cambiato il tuo rapporto con {WORD} negli anni?",
+    "Dai, dammi un esempio concreto in cui {WORD} è stato cruciale per te."
+  ],
+  "fillers": [
+    "Mmm, sfumatura interessante.",
+    "Ok, ok, ti seguo.",
+    "Ah-ah, questa ha la sua sostanza."
+  ],
+  "closers": [
+    "Beh, non è affatto male quel che fai. Alla prossima, torno alla pennichella.",
+    "Ok, basta per oggi. Continua così e un'altra volta parliamo di più."
+  ]
+}

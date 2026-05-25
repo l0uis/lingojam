@@ -1,0 +1,23 @@
+{
+  "level": "A2",
+  "openers": [
+    "Ah, tu m'as réveillé. Bon, comment va ton français cette semaine ?",
+    "Encore toi. Tu as appris quelque chose ou pas ?",
+    "Bon, je t'écoute. Qu'est-ce que tu as fait aujourd'hui ?"
+  ],
+  "prompts": [
+    "Et toi, qu'est-ce que tu penses de {WORD} ? Sans détour.",
+    "Bon, décris-moi {WORD} en une phrase.",
+    "Quand est-ce que tu {WORD} d'habitude ? Raconte bien.",
+    "Tu connais quelqu'un qui {WORD} beaucoup ? Vas-y."
+  ],
+  "fillers": [
+    "Ah oui, continue.",
+    "Mmm, sans blague.",
+    "Bon, je te suis."
+  ],
+  "closers": [
+    "Bon, pas mal du tout. À la prochaine.",
+    "Bon, ça suffit pour aujourd'hui. Au revoir."
+  ]
+}

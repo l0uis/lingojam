@@ -1,0 +1,18 @@
+# Build cache for generate_vocab.py — downloaded from doozan/spanish_data
+tools/doozan_frequency.csv
+# Old cache name, in case the file lingers locally
+tools/es_50k.txt
+
+# LLM-generated vocabulary entries cache. Keep this if you want generated
+# content versioned (recommended for small batches), or ignore it to keep the
+# repo lean and treat generation as a build step.
+# tools/generated_entries.json
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+
+# macOS
+.DS_Store

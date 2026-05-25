@@ -1,0 +1,23 @@
+{
+  "level": "A1",
+  "openers": [
+    "Ay, te vi con la palabra {WORD}. ¿La usas en una frase?",
+    "Bueno, {WORD}. ¿La conoces de verdad o solo la viste?",
+    "Hola. {WORD}, {WORDS}… ¿qué significan para ti?"
+  ],
+  "prompts": [
+    "Y dime, ¿qué {WORD} normalmente?",
+    "Vale, ¿te gusta {WORD}? Sí o no.",
+    "Una frase con {WORD}, va.",
+    "¿Cuándo fue la última vez que {WORD}?"
+  ],
+  "fillers": [
+    "Ajá.",
+    "Vale, vale.",
+    "Mmm, dime más."
+  ],
+  "closers": [
+    "Bueno, no está mal. Adiós.",
+    "Vale, suficiente por hoy. Hasta otra."
+  ]
+}

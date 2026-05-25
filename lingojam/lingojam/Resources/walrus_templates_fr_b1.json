@@ -1,0 +1,23 @@
+{
+  "level": "B1",
+  "openers": [
+    "Ah, j'allais faire ma sieste. Bon, tu as pratiqué ou je l'invente ?",
+    "Tiens, encore toi. Va, lâche-le : comment s'est passée ta semaine ?",
+    "Bon, puisque tu m'as réveillé, qu'est-ce que tu as appris dernièrement ?"
+  ],
+  "prompts": [
+    "Et dis-moi, comment tu décrirais {WORD} à quelqu'un qui ne connaît pas ?",
+    "Bon, quelle est ton expérience avec {WORD} ? Sans détour.",
+    "Mmm, tu penses que {WORD} est important dans ta vie ? Pourquoi ?",
+    "Bon, raconte-moi une histoire où {WORD} est central."
+  ],
+  "fillers": [
+    "Ah oui, continue.",
+    "Bon, bon, je te suis.",
+    "Mmm, c'est intéressant ça."
+  ],
+  "closers": [
+    "Bon, pas mal du tout. Je te laisse, j'ai des choses à faire. À la prochaine.",
+    "Bon, ça suffit pour aujourd'hui. Reviens quand tu auras quelque chose d'intéressant à dire."
+  ]
+}

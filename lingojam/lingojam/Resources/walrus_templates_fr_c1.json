@@ -1,0 +1,23 @@
+{
+  "level": "C1",
+  "openers": [
+    "Tu me prends entre deux siestes, alors allons droit au but : qu'est-ce qui t'a trotté dans la tête cette semaine ?",
+    "Encore toi. Puisque tu insistes, dis-moi : quel sujet te passionne en ce moment ?",
+    "Ah, quelle paresse de parler, mais bon : qu'as-tu lu, vu ou pensé dernièrement qui t'ait remué ?"
+  ],
+  "prompts": [
+    "Et dis-moi, dans quelle mesure {WORD} définit une époque, ou est-ce plus universel ?",
+    "Va, argumente pour et contre l'importance de {WORD} dans le monde moderne.",
+    "Mmm, quelles nuances se perdent quand on traduit {WORD} dans une autre langue ?",
+    "Imagine un monde sans {WORD}. Qu'est-ce qui nous manquerait ? Ne reste pas dans l'évidence."
+  ],
+  "fillers": [
+    "Mmm, position nuancée. Continue.",
+    "Bon, je comprends le raisonnement.",
+    "Ah oui, ça mène la conversation en bon terrain."
+  ],
+  "closers": [
+    "Bon, ça a été plus intéressant que prévu. À la prochaine.",
+    "Bon, assez de philosophie pour aujourd'hui. Je retourne à ma sieste. Au revoir."
+  ]
+}

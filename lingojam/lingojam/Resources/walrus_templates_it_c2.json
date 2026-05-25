@@ -1,0 +1,23 @@
+{
+  "level": "C2",
+  "openers": [
+    "Senti, non ero in vena di chiacchiere, ma visto che hai chiamato: che argomento varrebbe la pena sviscerare oggi?",
+    "Di nuovo. Risparmiamoci entrambi il riscaldamento: che idea ti ha intrappolato ultimamente?",
+    "Dai, stupiscimi: che tema di fondo ti gira in testa?"
+  ],
+  "prompts": [
+    "Dimmi, che connotazioni culturali porta la parola {WORD} che uno straniero coglie raramente?",
+    "Dai, articola una critica fondata al concetto di {WORD}.",
+    "Mmm, che autori o pensatori hanno influenzato la tua visione di {WORD}?",
+    "Diresti che {WORD} è una costruzione sociale o qualcosa di intrinseco alla natura umana? Difendilo."
+  ],
+  "fillers": [
+    "Distinzione finissima. Continua.",
+    "Ok, questo merita un'altra sfumatura.",
+    "Mmm, porti la cosa su un terreno affascinante."
+  ],
+  "closers": [
+    "Beh, non mi hai fatto perdere tempo, lo ammetto. Alla prossima.",
+    "Ok, basta. Torno alla mia pennichella intellettuale. Ciao."
+  ]
+}

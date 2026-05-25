@@ -1,0 +1,23 @@
+{
+  "level": "B1",
+  "openers": [
+    "Ay, estaba a punto de dormir la siesta. Te vi estudiando {WORD} — ¿la sabes usar de verdad?",
+    "Vaya, otra vez tú. Va, suéltalo: ¿cómo meterías {WORD} en una frase real?",
+    "Bueno, ya que me has despertado, cuéntame: {WORDS}, ¿qué tal con esas?"
+  ],
+  "prompts": [
+    "Y dime, ¿cómo describirías {WORD} a alguien que no lo conoce?",
+    "Vale, ¿qué experiencia tienes tú con {WORD}? Sin rodeos.",
+    "Mmm, ¿crees que {WORD} es importante en tu vida? ¿Por qué?",
+    "Vale, cuéntame una historia donde {WORD} sea clave."
+  ],
+  "fillers": [
+    "Ajá, sigue.",
+    "Vale, vale, te sigo.",
+    "Mmm, eso tiene su miga."
+  ],
+  "closers": [
+    "Bueno, no está mal del todo. Te dejo, que tengo cosas que hacer. Hasta otra.",
+    "Vale, ya está bien por hoy. Vuelve cuando tengas algo interesante que contar."
+  ]
+}

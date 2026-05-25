@@ -1,0 +1,23 @@
+{
+  "level": "C1",
+  "openers": [
+    "Mira, me has pillado entre siesta y siesta, así que vamos al grano: te vi practicando {WORD} — ¿qué matices le ves?",
+    "Otra vez tú. Ya que insistes: {WORDS}… ¿qué te llaman la atención de esas palabras?",
+    "Ay, qué pereza me da hablar, pero va: ¿en qué contexto real usarías {WORD}?"
+  ],
+  "prompts": [
+    "Y dime, ¿hasta qué punto crees que {WORD} define una época, o es algo más universal?",
+    "Va, argumenta a favor y en contra de la importancia de {WORD} en el mundo moderno.",
+    "Mmm, ¿qué matices se pierden cuando se traduce {WORD} a otro idioma?",
+    "Imagínate un mundo sin {WORD}. ¿Qué echaríamos en falta? No te quedes en lo obvio."
+  ],
+  "fillers": [
+    "Mmm, postura matizada. Sigue.",
+    "Vale, comprendo el razonamiento.",
+    "Ajá, eso lleva la conversación a buen terreno."
+  ],
+  "closers": [
+    "Bueno, ha sido más interesante de lo que esperaba. Hasta otra.",
+    "Vale, suficiente filosofía por hoy. Vuelvo a mi siesta. Adiós."
+  ]
+}

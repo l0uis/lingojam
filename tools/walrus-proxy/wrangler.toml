@@ -1,0 +1,21 @@
+name = "walrus-proxy"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+# Cloudflare KV namespace used for per-device rate limiting.
+# Create it once with:
+#   wrangler kv namespace create RATE_LIMIT
+# Then paste the returned id below.
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "614499abcea14e4aaa73299f43a8a1d6"
+
+[vars]
+# Maximum TTS calls per device per UTC day. Lowered for free-tier safety.
+DAILY_LIMIT_PER_DEVICE = "200"
+# Bundle ID expected from the iOS app — requests with a different one
+# are rejected. Adjust if you change the app's bundle ID.
+EXPECTED_BUNDLE_ID = "com.louiscurrie.lingojam"
+
+# Secrets — set with `wrangler secret put`. Never commit values here.
+# OPENAI_API_KEY: your OpenAI API key (sk-...)

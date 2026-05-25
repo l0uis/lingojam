@@ -1,0 +1,6348 @@
+{
+  "version": 4,
+  "language": "fr",
+  "decks": [
+    {
+      "slug": "traveling",
+      "displayName": "Traveling",
+      "description": "Trips, hotels, airports, tickets.",
+      "icon": "airplane",
+      "sortOrder": 10
+    },
+    {
+      "slug": "food-and-drink",
+      "displayName": "Food & Drink",
+      "description": "Groceries, cooking, ingredients.",
+      "icon": "fork.knife",
+      "sortOrder": 20
+    },
+    {
+      "slug": "shopping",
+      "displayName": "Shopping",
+      "description": "Clothes, stores, prices, sizes.",
+      "icon": "bag.fill",
+      "sortOrder": 30
+    },
+    {
+      "slug": "health",
+      "displayName": "Health & Body",
+      "description": "Doctor, pharmacy, body parts, symptoms.",
+      "icon": "heart.fill",
+      "sortOrder": 40
+    },
+    {
+      "slug": "work-and-money",
+      "displayName": "Work & Money",
+      "description": "Jobs, banking, paying, business.",
+      "icon": "briefcase.fill",
+      "sortOrder": 50
+    },
+    {
+      "slug": "feelings",
+      "displayName": "Feelings",
+      "description": "Emotions, moods, reactions.",
+      "icon": "face.smiling",
+      "sortOrder": 60
+    },
+    {
+      "slug": "home",
+      "displayName": "Home & Daily Life",
+      "description": "Rooms, routines, household items.",
+      "icon": "house.fill",
+      "sortOrder": 70
+    },
+    {
+      "slug": "family",
+      "displayName": "Family & People",
+      "description": "Relatives, friends, describing people.",
+      "icon": "person.2.fill",
+      "sortOrder": 80
+    }
+  ],
+  "words": [
+    {
+      "id": "fr-0001",
+      "rank": 1,
+      "lemma": "être",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to be"
+      },
+      "example": {
+        "text": "Je suis étudiant.",
+        "translations": {
+          "en": "I am a student."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0002",
+      "rank": 2,
+      "lemma": "avoir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to have"
+      },
+      "example": {
+        "text": "J'ai faim.",
+        "translations": {
+          "en": "I'm hungry."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0003",
+      "rank": 3,
+      "lemma": "faire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to do, to make"
+      },
+      "example": {
+        "text": "Qu'est-ce que tu fais ?",
+        "translations": {
+          "en": "What are you doing?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0004",
+      "rank": 4,
+      "lemma": "dire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to say, to tell"
+      },
+      "example": {
+        "text": "Dis-moi la vérité.",
+        "translations": {
+          "en": "Tell me the truth."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0005",
+      "rank": 5,
+      "lemma": "aller",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to go"
+      },
+      "example": {
+        "text": "Je vais au marché.",
+        "translations": {
+          "en": "I'm going to the market."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0006",
+      "rank": 6,
+      "lemma": "voir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to see"
+      },
+      "example": {
+        "text": "Je veux voir le film.",
+        "translations": {
+          "en": "I want to see the film."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0007",
+      "rank": 7,
+      "lemma": "savoir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to know (a fact)"
+      },
+      "example": {
+        "text": "Je ne sais pas.",
+        "translations": {
+          "en": "I don't know."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0008",
+      "rank": 8,
+      "lemma": "pouvoir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to be able, can"
+      },
+      "example": {
+        "text": "Je ne peux pas y aller.",
+        "translations": {
+          "en": "I can't go."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0009",
+      "rank": 9,
+      "lemma": "vouloir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to want"
+      },
+      "example": {
+        "text": "Je veux un café.",
+        "translations": {
+          "en": "I want a coffee."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0010",
+      "rank": 10,
+      "lemma": "venir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to come"
+      },
+      "example": {
+        "text": "Viens ici.",
+        "translations": {
+          "en": "Come here."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0011",
+      "rank": 11,
+      "lemma": "prendre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to take"
+      },
+      "example": {
+        "text": "Je prends le bus.",
+        "translations": {
+          "en": "I take the bus."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0012",
+      "rank": 12,
+      "lemma": "trouver",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to find"
+      },
+      "example": {
+        "text": "Je ne trouve pas mes clés.",
+        "translations": {
+          "en": "I can't find my keys."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0013",
+      "rank": 13,
+      "lemma": "donner",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to give"
+      },
+      "example": {
+        "text": "Donne-moi la main.",
+        "translations": {
+          "en": "Give me your hand."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0014",
+      "rank": 14,
+      "lemma": "falloir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to be necessary"
+      },
+      "example": {
+        "text": "Il faut partir.",
+        "translations": {
+          "en": "We need to leave."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0015",
+      "rank": 15,
+      "lemma": "parler",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to speak, to talk"
+      },
+      "example": {
+        "text": "Je parle deux langues.",
+        "translations": {
+          "en": "I speak two languages."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0016",
+      "rank": 16,
+      "lemma": "aimer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to like, to love"
+      },
+      "example": {
+        "text": "J'aime le café.",
+        "translations": {
+          "en": "I like coffee."
+        }
+      },
+      "decks": [
+        "common",
+        "feelings"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0017",
+      "rank": 17,
+      "lemma": "passer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to pass, to spend (time)"
+      },
+      "example": {
+        "text": "Passe une bonne journée.",
+        "translations": {
+          "en": "Have a good day."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0018",
+      "rank": 18,
+      "lemma": "mettre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to put, to place"
+      },
+      "example": {
+        "text": "Mets le livre sur la table.",
+        "translations": {
+          "en": "Put the book on the table."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0019",
+      "rank": 19,
+      "lemma": "devoir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "must, to owe"
+      },
+      "example": {
+        "text": "Je dois travailler.",
+        "translations": {
+          "en": "I have to work."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0020",
+      "rank": 20,
+      "lemma": "comprendre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to understand"
+      },
+      "example": {
+        "text": "Je ne comprends pas.",
+        "translations": {
+          "en": "I don't understand."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0021",
+      "rank": 21,
+      "lemma": "attendre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to wait"
+      },
+      "example": {
+        "text": "Attends-moi.",
+        "translations": {
+          "en": "Wait for me."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0022",
+      "rank": 22,
+      "lemma": "sortir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to go out, to leave"
+      },
+      "example": {
+        "text": "Je sors ce soir.",
+        "translations": {
+          "en": "I'm going out tonight."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0023",
+      "rank": 23,
+      "lemma": "vivre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to live"
+      },
+      "example": {
+        "text": "Je vis à Paris.",
+        "translations": {
+          "en": "I live in Paris."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0024",
+      "rank": 24,
+      "lemma": "tenir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to hold"
+      },
+      "example": {
+        "text": "Tiens, c'est pour toi.",
+        "translations": {
+          "en": "Here, this is for you."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0025",
+      "rank": 25,
+      "lemma": "sembler",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to seem"
+      },
+      "example": {
+        "text": "Ça semble facile.",
+        "translations": {
+          "en": "It seems easy."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0026",
+      "rank": 26,
+      "lemma": "laisser",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to leave, to let"
+      },
+      "example": {
+        "text": "Laisse-moi tranquille.",
+        "translations": {
+          "en": "Leave me alone."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0027",
+      "rank": 27,
+      "lemma": "rester",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to stay"
+      },
+      "example": {
+        "text": "Je reste à la maison.",
+        "translations": {
+          "en": "I'm staying home."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0028",
+      "rank": 28,
+      "lemma": "penser",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to think"
+      },
+      "example": {
+        "text": "À quoi penses-tu ?",
+        "translations": {
+          "en": "What are you thinking about?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0029",
+      "rank": 29,
+      "lemma": "suivre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to follow"
+      },
+      "example": {
+        "text": "Suis-moi.",
+        "translations": {
+          "en": "Follow me."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0030",
+      "rank": 30,
+      "lemma": "connaître",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to know (a person/place)"
+      },
+      "example": {
+        "text": "Je connais ta sœur.",
+        "translations": {
+          "en": "I know your sister."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0031",
+      "rank": 31,
+      "lemma": "jouer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to play"
+      },
+      "example": {
+        "text": "Les enfants jouent dans le parc.",
+        "translations": {
+          "en": "The children play in the park."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0032",
+      "rank": 32,
+      "lemma": "écouter",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to listen"
+      },
+      "example": {
+        "text": "J'écoute de la musique.",
+        "translations": {
+          "en": "I'm listening to music."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0033",
+      "rank": 33,
+      "lemma": "regarder",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to look at, to watch"
+      },
+      "example": {
+        "text": "Regarde le ciel.",
+        "translations": {
+          "en": "Look at the sky."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0034",
+      "rank": 34,
+      "lemma": "entendre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to hear"
+      },
+      "example": {
+        "text": "Tu m'entends ?",
+        "translations": {
+          "en": "Can you hear me?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0035",
+      "rank": 35,
+      "lemma": "sentir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to feel, to smell"
+      },
+      "example": {
+        "text": "Je me sens bien.",
+        "translations": {
+          "en": "I feel good."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0036",
+      "rank": 36,
+      "lemma": "partir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to leave"
+      },
+      "example": {
+        "text": "Je pars demain.",
+        "translations": {
+          "en": "I leave tomorrow."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0037",
+      "rank": 37,
+      "lemma": "arriver",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to arrive, to happen"
+      },
+      "example": {
+        "text": "Le train arrive à huit heures.",
+        "translations": {
+          "en": "The train arrives at eight."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0038",
+      "rank": 38,
+      "lemma": "revenir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to come back"
+      },
+      "example": {
+        "text": "Je reviens dans une heure.",
+        "translations": {
+          "en": "I'll be back in an hour."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0039",
+      "rank": 39,
+      "lemma": "demander",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to ask"
+      },
+      "example": {
+        "text": "Je te demande de m'aider.",
+        "translations": {
+          "en": "I'm asking you to help me."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0040",
+      "rank": 40,
+      "lemma": "répondre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to answer"
+      },
+      "example": {
+        "text": "Réponds à ma question.",
+        "translations": {
+          "en": "Answer my question."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0041",
+      "rank": 41,
+      "lemma": "chercher",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to look for"
+      },
+      "example": {
+        "text": "Je cherche mon téléphone.",
+        "translations": {
+          "en": "I'm looking for my phone."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0042",
+      "rank": 42,
+      "lemma": "payer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to pay"
+      },
+      "example": {
+        "text": "Je paie par carte.",
+        "translations": {
+          "en": "I'll pay by card."
+        }
+      },
+      "decks": [
+        "common",
+        "shopping"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0043",
+      "rank": 43,
+      "lemma": "acheter",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to buy"
+      },
+      "example": {
+        "text": "J'achète du pain.",
+        "translations": {
+          "en": "I'm buying bread."
+        }
+      },
+      "decks": [
+        "common",
+        "shopping"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0044",
+      "rank": 44,
+      "lemma": "vendre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to sell"
+      },
+      "example": {
+        "text": "Ils vendent des fruits.",
+        "translations": {
+          "en": "They sell fruit."
+        }
+      },
+      "decks": [
+        "common",
+        "shopping"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0045",
+      "rank": 45,
+      "lemma": "ouvrir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to open"
+      },
+      "example": {
+        "text": "Ouvre la fenêtre.",
+        "translations": {
+          "en": "Open the window."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0046",
+      "rank": 46,
+      "lemma": "fermer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to close"
+      },
+      "example": {
+        "text": "Ferme la porte.",
+        "translations": {
+          "en": "Close the door."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0047",
+      "rank": 47,
+      "lemma": "commencer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to begin"
+      },
+      "example": {
+        "text": "Le cours commence maintenant.",
+        "translations": {
+          "en": "The class starts now."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0048",
+      "rank": 48,
+      "lemma": "finir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to finish"
+      },
+      "example": {
+        "text": "Je finis le travail.",
+        "translations": {
+          "en": "I'll finish the work."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0049",
+      "rank": 49,
+      "lemma": "manger",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to eat"
+      },
+      "example": {
+        "text": "On va manger.",
+        "translations": {
+          "en": "Let's eat."
+        }
+      },
+      "decks": [
+        "common",
+        "food-and-drink"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0050",
+      "rank": 50,
+      "lemma": "boire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to drink"
+      },
+      "example": {
+        "text": "Je bois de l'eau.",
+        "translations": {
+          "en": "I drink water."
+        }
+      },
+      "decks": [
+        "common",
+        "food-and-drink"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0051",
+      "rank": 51,
+      "lemma": "dormir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to sleep"
+      },
+      "example": {
+        "text": "Je dors huit heures.",
+        "translations": {
+          "en": "I sleep eight hours."
+        }
+      },
+      "decks": [
+        "common",
+        "health"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0052",
+      "rank": 52,
+      "lemma": "lire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to read"
+      },
+      "example": {
+        "text": "Je lis chaque soir.",
+        "translations": {
+          "en": "I read every evening."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0053",
+      "rank": 53,
+      "lemma": "écrire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to write"
+      },
+      "example": {
+        "text": "J'écris une lettre.",
+        "translations": {
+          "en": "I'm writing a letter."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0054",
+      "rank": 54,
+      "lemma": "apprendre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to learn"
+      },
+      "example": {
+        "text": "Je veux apprendre le français.",
+        "translations": {
+          "en": "I want to learn French."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0055",
+      "rank": 55,
+      "lemma": "étudier",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to study"
+      },
+      "example": {
+        "text": "J'étudie pour l'examen.",
+        "translations": {
+          "en": "I'm studying for the exam."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0056",
+      "rank": 56,
+      "lemma": "travailler",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to work"
+      },
+      "example": {
+        "text": "Je travaille au bureau.",
+        "translations": {
+          "en": "I work at the office."
+        }
+      },
+      "decks": [
+        "common",
+        "work-and-money"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0057",
+      "rank": 57,
+      "lemma": "marcher",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to walk, to work (function)"
+      },
+      "example": {
+        "text": "On marche sur la plage.",
+        "translations": {
+          "en": "We walk on the beach."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0058",
+      "rank": 58,
+      "lemma": "courir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to run"
+      },
+      "example": {
+        "text": "Je cours chaque matin.",
+        "translations": {
+          "en": "I run every morning."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0059",
+      "rank": 59,
+      "lemma": "voyager",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to travel"
+      },
+      "example": {
+        "text": "J'aime voyager.",
+        "translations": {
+          "en": "I like to travel."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0060",
+      "rank": 60,
+      "lemma": "conduire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to drive"
+      },
+      "example": {
+        "text": "Je conduis au travail.",
+        "translations": {
+          "en": "I drive to work."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0061",
+      "rank": 61,
+      "lemma": "gagner",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to win, to earn"
+      },
+      "example": {
+        "text": "On a gagné le match.",
+        "translations": {
+          "en": "We won the game."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0062",
+      "rank": 62,
+      "lemma": "perdre",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to lose"
+      },
+      "example": {
+        "text": "J'ai perdu mes clés.",
+        "translations": {
+          "en": "I lost my keys."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0063",
+      "rank": 63,
+      "lemma": "oublier",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to forget"
+      },
+      "example": {
+        "text": "J'ai oublié son nom.",
+        "translations": {
+          "en": "I forgot his name."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0064",
+      "rank": 64,
+      "lemma": "appeler",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to call"
+      },
+      "example": {
+        "text": "Je m'appelle Marie.",
+        "translations": {
+          "en": "My name is Marie."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0065",
+      "rank": 65,
+      "lemma": "rappeler",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to remember, to call back"
+      },
+      "example": {
+        "text": "Je me rappelle ce jour.",
+        "translations": {
+          "en": "I remember that day."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0066",
+      "rank": 66,
+      "lemma": "choisir",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to choose"
+      },
+      "example": {
+        "text": "Choisis une couleur.",
+        "translations": {
+          "en": "Choose a colour."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0067",
+      "rank": 67,
+      "lemma": "montrer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to show"
+      },
+      "example": {
+        "text": "Montre-moi la photo.",
+        "translations": {
+          "en": "Show me the photo."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0068",
+      "rank": 68,
+      "lemma": "expliquer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to explain"
+      },
+      "example": {
+        "text": "Explique-moi le problème.",
+        "translations": {
+          "en": "Explain the problem to me."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0069",
+      "rank": 69,
+      "lemma": "raconter",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to tell (a story)"
+      },
+      "example": {
+        "text": "Raconte-moi une histoire.",
+        "translations": {
+          "en": "Tell me a story."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0070",
+      "rank": 70,
+      "lemma": "aider",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to help"
+      },
+      "example": {
+        "text": "Tu peux m'aider ?",
+        "translations": {
+          "en": "Can you help me?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0071",
+      "rank": 71,
+      "lemma": "chanter",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to sing"
+      },
+      "example": {
+        "text": "Nous chantons à la fête.",
+        "translations": {
+          "en": "We sing at the party."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0072",
+      "rank": 72,
+      "lemma": "danser",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to dance"
+      },
+      "example": {
+        "text": "Je danse le samedi.",
+        "translations": {
+          "en": "I dance on Saturdays."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0073",
+      "rank": 73,
+      "lemma": "cuisiner",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to cook"
+      },
+      "example": {
+        "text": "Mon père cuisine bien.",
+        "translations": {
+          "en": "My father cooks well."
+        }
+      },
+      "decks": [
+        "common",
+        "food-and-drink"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0074",
+      "rank": 74,
+      "lemma": "changer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to change"
+      },
+      "example": {
+        "text": "Je veux changer de travail.",
+        "translations": {
+          "en": "I want to change jobs."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0075",
+      "rank": 75,
+      "lemma": "utiliser",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to use"
+      },
+      "example": {
+        "text": "J'utilise mon téléphone.",
+        "translations": {
+          "en": "I use my phone."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0076",
+      "rank": 76,
+      "lemma": "essayer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to try"
+      },
+      "example": {
+        "text": "Essaie encore une fois.",
+        "translations": {
+          "en": "Try again."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0077",
+      "rank": 77,
+      "lemma": "croire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to believe"
+      },
+      "example": {
+        "text": "Je crois que oui.",
+        "translations": {
+          "en": "I think so."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0078",
+      "rank": 78,
+      "lemma": "rencontrer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to meet"
+      },
+      "example": {
+        "text": "On se rencontre demain.",
+        "translations": {
+          "en": "We're meeting tomorrow."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0079",
+      "rank": 79,
+      "lemma": "homme",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "man"
+      },
+      "example": {
+        "text": "Cet homme est grand.",
+        "translations": {
+          "en": "That man is tall."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0080",
+      "rank": 80,
+      "lemma": "femme",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "woman, wife"
+      },
+      "example": {
+        "text": "Cette femme est ma tante.",
+        "translations": {
+          "en": "That woman is my aunt."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0081",
+      "rank": 81,
+      "lemma": "enfant",
+      "partOfSpeech": "noun (masc./fem.)",
+      "definitions": {
+        "en": "child"
+      },
+      "example": {
+        "text": "L'enfant joue dehors.",
+        "translations": {
+          "en": "The child plays outside."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0082",
+      "rank": 82,
+      "lemma": "fils",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "son"
+      },
+      "example": {
+        "text": "Mon fils a cinq ans.",
+        "translations": {
+          "en": "My son is five years old."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0083",
+      "rank": 83,
+      "lemma": "fille",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "girl, daughter"
+      },
+      "example": {
+        "text": "Ma fille joue de la guitare.",
+        "translations": {
+          "en": "My daughter plays guitar."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0084",
+      "rank": 84,
+      "lemma": "père",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "father"
+      },
+      "example": {
+        "text": "Mon père est médecin.",
+        "translations": {
+          "en": "My father is a doctor."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0085",
+      "rank": 85,
+      "lemma": "mère",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "mother"
+      },
+      "example": {
+        "text": "Ma mère cuisine bien.",
+        "translations": {
+          "en": "My mother cooks well."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0086",
+      "rank": 86,
+      "lemma": "frère",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "brother"
+      },
+      "example": {
+        "text": "Mon frère habite à Lyon.",
+        "translations": {
+          "en": "My brother lives in Lyon."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0087",
+      "rank": 87,
+      "lemma": "sœur",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "sister"
+      },
+      "example": {
+        "text": "Ma sœur est professeure.",
+        "translations": {
+          "en": "My sister is a teacher."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0088",
+      "rank": 88,
+      "lemma": "ami",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "friend (male)"
+      },
+      "example": {
+        "text": "Mon meilleur ami s'appelle Paul.",
+        "translations": {
+          "en": "My best friend's name is Paul."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0089",
+      "rank": 89,
+      "lemma": "amie",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "friend (female)"
+      },
+      "example": {
+        "text": "Mon amie arrive ce soir.",
+        "translations": {
+          "en": "My friend arrives tonight."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0090",
+      "rank": 90,
+      "lemma": "famille",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "family"
+      },
+      "example": {
+        "text": "Ma famille est grande.",
+        "translations": {
+          "en": "My family is big."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0091",
+      "rank": 91,
+      "lemma": "gens",
+      "partOfSpeech": "noun (masc. pl.)",
+      "definitions": {
+        "en": "people"
+      },
+      "example": {
+        "text": "Il y a beaucoup de gens ici.",
+        "translations": {
+          "en": "There are a lot of people here."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0092",
+      "rank": 92,
+      "lemma": "personne",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "person"
+      },
+      "example": {
+        "text": "C'est une bonne personne.",
+        "translations": {
+          "en": "He is a good person."
+        }
+      },
+      "decks": [
+        "common",
+        "family"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0093",
+      "rank": 93,
+      "lemma": "jour",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "day"
+      },
+      "example": {
+        "text": "Bonne journée.",
+        "translations": {
+          "en": "Have a good day."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0094",
+      "rank": 94,
+      "lemma": "nuit",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "night"
+      },
+      "example": {
+        "text": "Bonne nuit.",
+        "translations": {
+          "en": "Good night."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0095",
+      "rank": 95,
+      "lemma": "matin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "morning"
+      },
+      "example": {
+        "text": "Bon matin.",
+        "translations": {
+          "en": "Good morning."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0096",
+      "rank": 96,
+      "lemma": "soir",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "evening"
+      },
+      "example": {
+        "text": "Bonsoir.",
+        "translations": {
+          "en": "Good evening."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0097",
+      "rank": 97,
+      "lemma": "semaine",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "week"
+      },
+      "example": {
+        "text": "À la semaine prochaine.",
+        "translations": {
+          "en": "See you next week."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0098",
+      "rank": 98,
+      "lemma": "mois",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "month"
+      },
+      "example": {
+        "text": "Ce mois est mai.",
+        "translations": {
+          "en": "This month is May."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0099",
+      "rank": 99,
+      "lemma": "année",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "year"
+      },
+      "example": {
+        "text": "Bonne année.",
+        "translations": {
+          "en": "Happy new year."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0100",
+      "rank": 100,
+      "lemma": "an",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "year (age)"
+      },
+      "example": {
+        "text": "J'ai vingt ans.",
+        "translations": {
+          "en": "I am twenty years old."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0101",
+      "rank": 101,
+      "lemma": "heure",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "hour, time"
+      },
+      "example": {
+        "text": "Quelle heure est-il ?",
+        "translations": {
+          "en": "What time is it?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0102",
+      "rank": 102,
+      "lemma": "minute",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "minute"
+      },
+      "example": {
+        "text": "Attends une minute.",
+        "translations": {
+          "en": "Wait a minute."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0103",
+      "rank": 103,
+      "lemma": "moment",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "moment"
+      },
+      "example": {
+        "text": "Un moment, s'il vous plaît.",
+        "translations": {
+          "en": "One moment, please."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0104",
+      "rank": 104,
+      "lemma": "temps",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "time; weather"
+      },
+      "example": {
+        "text": "Je n'ai pas le temps.",
+        "translations": {
+          "en": "I don't have time."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0105",
+      "rank": 105,
+      "lemma": "fois",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "time, occasion"
+      },
+      "example": {
+        "text": "Pour la première fois.",
+        "translations": {
+          "en": "For the first time."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0106",
+      "rank": 106,
+      "lemma": "maison",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "house, home"
+      },
+      "example": {
+        "text": "Je rentre à la maison.",
+        "translations": {
+          "en": "I'm going home."
+        }
+      },
+      "decks": [
+        "common",
+        "home"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0107",
+      "rank": 107,
+      "lemma": "rue",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "street"
+      },
+      "example": {
+        "text": "J'habite dans cette rue.",
+        "translations": {
+          "en": "I live on this street."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling",
+        "home"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0108",
+      "rank": 108,
+      "lemma": "ville",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "city, town"
+      },
+      "example": {
+        "text": "Paris est une grande ville.",
+        "translations": {
+          "en": "Paris is a big city."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0109",
+      "rank": 109,
+      "lemma": "pays",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "country"
+      },
+      "example": {
+        "text": "Je visite un autre pays.",
+        "translations": {
+          "en": "I'm visiting another country."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0110",
+      "rank": 110,
+      "lemma": "monde",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "world"
+      },
+      "example": {
+        "text": "C'est le meilleur du monde.",
+        "translations": {
+          "en": "He's the best in the world."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0111",
+      "rank": 111,
+      "lemma": "lieu",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "place"
+      },
+      "example": {
+        "text": "Ce lieu est joli.",
+        "translations": {
+          "en": "This place is nice."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0112",
+      "rank": 112,
+      "lemma": "place",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "square, place, seat"
+      },
+      "example": {
+        "text": "Sur la place du village.",
+        "translations": {
+          "en": "On the village square."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0113",
+      "rank": 113,
+      "lemma": "école",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "school"
+      },
+      "example": {
+        "text": "Je vais à l'école.",
+        "translations": {
+          "en": "I'm going to school."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0114",
+      "rank": 114,
+      "lemma": "travail",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "work, job"
+      },
+      "example": {
+        "text": "Mon travail est difficile.",
+        "translations": {
+          "en": "My job is hard."
+        }
+      },
+      "decks": [
+        "common",
+        "work-and-money"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0115",
+      "rank": 115,
+      "lemma": "bureau",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "office, desk"
+      },
+      "example": {
+        "text": "Le bureau est fermé.",
+        "translations": {
+          "en": "The office is closed."
+        }
+      },
+      "decks": [
+        "common",
+        "work-and-money"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0116",
+      "rank": 116,
+      "lemma": "chose",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "thing"
+      },
+      "example": {
+        "text": "C'est une autre chose.",
+        "translations": {
+          "en": "That's a different thing."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0117",
+      "rank": 117,
+      "lemma": "vie",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "life"
+      },
+      "example": {
+        "text": "La vie est belle.",
+        "translations": {
+          "en": "Life is beautiful."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0118",
+      "rank": 118,
+      "lemma": "main",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "hand"
+      },
+      "example": {
+        "text": "Donne-moi la main.",
+        "translations": {
+          "en": "Give me your hand."
+        }
+      },
+      "decks": [
+        "common",
+        "health"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0119",
+      "rank": 119,
+      "lemma": "œil",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "eye"
+      },
+      "example": {
+        "text": "Il a les yeux bleus.",
+        "translations": {
+          "en": "He has blue eyes."
+        }
+      },
+      "decks": [
+        "common",
+        "health"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0120",
+      "rank": 120,
+      "lemma": "voiture",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "car"
+      },
+      "example": {
+        "text": "Ma voiture est rouge.",
+        "translations": {
+          "en": "My car is red."
+        }
+      },
+      "decks": [
+        "common",
+        "traveling"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0121",
+      "rank": 121,
+      "lemma": "eau",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "water"
+      },
+      "example": {
+        "text": "Un verre d'eau, s'il vous plaît.",
+        "translations": {
+          "en": "A glass of water, please."
+        }
+      },
+      "decks": [
+        "common",
+        "food-and-drink"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0122",
+      "rank": 122,
+      "lemma": "pain",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "bread"
+      },
+      "example": {
+        "text": "J'achète du pain.",
+        "translations": {
+          "en": "I'm buying bread."
+        }
+      },
+      "decks": [
+        "common",
+        "food-and-drink"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0123",
+      "rank": 123,
+      "lemma": "café",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "coffee, café"
+      },
+      "example": {
+        "text": "Un café, s'il vous plaît.",
+        "translations": {
+          "en": "A coffee, please."
+        }
+      },
+      "decks": [
+        "common",
+        "food-and-drink"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0124",
+      "rank": 124,
+      "lemma": "bon",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "good"
+      },
+      "example": {
+        "text": "C'est très bon.",
+        "translations": {
+          "en": "It's very good."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0125",
+      "rank": 125,
+      "lemma": "mauvais",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "bad"
+      },
+      "example": {
+        "text": "C'est un mauvais signe.",
+        "translations": {
+          "en": "It's a bad sign."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0126",
+      "rank": 126,
+      "lemma": "grand",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "big, tall"
+      },
+      "example": {
+        "text": "C'est un grand homme.",
+        "translations": {
+          "en": "He is a tall man."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0127",
+      "rank": 127,
+      "lemma": "petit",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "small, little"
+      },
+      "example": {
+        "text": "Une petite chambre.",
+        "translations": {
+          "en": "A small room."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0128",
+      "rank": 128,
+      "lemma": "beau",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "beautiful, handsome"
+      },
+      "example": {
+        "text": "Quel beau jardin.",
+        "translations": {
+          "en": "What a beautiful garden."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0129",
+      "rank": 129,
+      "lemma": "joli",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "pretty"
+      },
+      "example": {
+        "text": "C'est une jolie robe.",
+        "translations": {
+          "en": "It's a pretty dress."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0130",
+      "rank": 130,
+      "lemma": "jeune",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "young"
+      },
+      "example": {
+        "text": "Elle est très jeune.",
+        "translations": {
+          "en": "She is very young."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0131",
+      "rank": 131,
+      "lemma": "vieux",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "old"
+      },
+      "example": {
+        "text": "C'est un vieux livre.",
+        "translations": {
+          "en": "It's an old book."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0132",
+      "rank": 132,
+      "lemma": "nouveau",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "new"
+      },
+      "example": {
+        "text": "J'ai un nouveau travail.",
+        "translations": {
+          "en": "I have a new job."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0133",
+      "rank": 133,
+      "lemma": "premier",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "first"
+      },
+      "example": {
+        "text": "C'est sa première fois.",
+        "translations": {
+          "en": "It's his first time."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0134",
+      "rank": 134,
+      "lemma": "dernier",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "last"
+      },
+      "example": {
+        "text": "La dernière chance.",
+        "translations": {
+          "en": "The last chance."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0135",
+      "rank": 135,
+      "lemma": "autre",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "other"
+      },
+      "example": {
+        "text": "Un autre jour.",
+        "translations": {
+          "en": "Another day."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0136",
+      "rank": 136,
+      "lemma": "même",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "same"
+      },
+      "example": {
+        "text": "Le même problème.",
+        "translations": {
+          "en": "The same problem."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0137",
+      "rank": 137,
+      "lemma": "important",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "important"
+      },
+      "example": {
+        "text": "C'est important pour moi.",
+        "translations": {
+          "en": "It's important to me."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0138",
+      "rank": 138,
+      "lemma": "possible",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "possible"
+      },
+      "example": {
+        "text": "Ce n'est pas possible.",
+        "translations": {
+          "en": "It's not possible."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0139",
+      "rank": 139,
+      "lemma": "facile",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "easy"
+      },
+      "example": {
+        "text": "C'est facile.",
+        "translations": {
+          "en": "It's easy."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0140",
+      "rank": 140,
+      "lemma": "difficile",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "difficult"
+      },
+      "example": {
+        "text": "C'est difficile à comprendre.",
+        "translations": {
+          "en": "It's hard to understand."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0141",
+      "rank": 141,
+      "lemma": "heureux",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "happy"
+      },
+      "example": {
+        "text": "Je suis heureux.",
+        "translations": {
+          "en": "I am happy."
+        }
+      },
+      "decks": [
+        "common",
+        "feelings"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0142",
+      "rank": 142,
+      "lemma": "triste",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "sad"
+      },
+      "example": {
+        "text": "Pourquoi es-tu triste ?",
+        "translations": {
+          "en": "Why are you sad?"
+        }
+      },
+      "decks": [
+        "common",
+        "feelings"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0143",
+      "rank": 143,
+      "lemma": "content",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "pleased, happy"
+      },
+      "example": {
+        "text": "Je suis content de te voir.",
+        "translations": {
+          "en": "I'm happy to see you."
+        }
+      },
+      "decks": [
+        "common",
+        "feelings"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0144",
+      "rank": 144,
+      "lemma": "fatigué",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "tired"
+      },
+      "example": {
+        "text": "Je suis fatigué.",
+        "translations": {
+          "en": "I'm tired."
+        }
+      },
+      "decks": [
+        "common",
+        "feelings"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0145",
+      "rank": 145,
+      "lemma": "seul",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "alone, only"
+      },
+      "example": {
+        "text": "Je suis seul ici.",
+        "translations": {
+          "en": "I'm alone here."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0146",
+      "rank": 146,
+      "lemma": "plein",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "full"
+      },
+      "example": {
+        "text": "Le verre est plein.",
+        "translations": {
+          "en": "The glass is full."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0147",
+      "rank": 147,
+      "lemma": "vide",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "empty"
+      },
+      "example": {
+        "text": "La salle est vide.",
+        "translations": {
+          "en": "The room is empty."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0148",
+      "rank": 148,
+      "lemma": "chaud",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "hot, warm"
+      },
+      "example": {
+        "text": "Le café est chaud.",
+        "translations": {
+          "en": "The coffee is hot."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0149",
+      "rank": 149,
+      "lemma": "froid",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "cold"
+      },
+      "example": {
+        "text": "Il fait froid dehors.",
+        "translations": {
+          "en": "It's cold outside."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0150",
+      "rank": 150,
+      "lemma": "oui",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "yes"
+      },
+      "example": {
+        "text": "Oui, bien sûr.",
+        "translations": {
+          "en": "Yes, of course."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-0151",
+      "rank": 151,
+      "lemma": "non",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "no"
+      },
+      "example": {
+        "text": "Non, merci.",
+        "translations": {
+          "en": "No, thank you."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0152",
+      "rank": 152,
+      "lemma": "peut-être",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "maybe"
+      },
+      "example": {
+        "text": "Peut-être demain.",
+        "translations": {
+          "en": "Maybe tomorrow."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0153",
+      "rank": 153,
+      "lemma": "bien",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "well"
+      },
+      "example": {
+        "text": "Ça va bien.",
+        "translations": {
+          "en": "I'm doing well."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0154",
+      "rank": 154,
+      "lemma": "mal",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "badly"
+      },
+      "example": {
+        "text": "Je dors mal.",
+        "translations": {
+          "en": "I sleep badly."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0155",
+      "rank": 155,
+      "lemma": "très",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "very"
+      },
+      "example": {
+        "text": "Très bien.",
+        "translations": {
+          "en": "Very good."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0156",
+      "rank": 156,
+      "lemma": "beaucoup",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "a lot, much"
+      },
+      "example": {
+        "text": "Merci beaucoup.",
+        "translations": {
+          "en": "Thank you very much."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0157",
+      "rank": 157,
+      "lemma": "peu",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "little, few"
+      },
+      "example": {
+        "text": "Je mange peu.",
+        "translations": {
+          "en": "I eat little."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0158",
+      "rank": 158,
+      "lemma": "trop",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "too much"
+      },
+      "example": {
+        "text": "C'est trop cher.",
+        "translations": {
+          "en": "It's too expensive."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0159",
+      "rank": 159,
+      "lemma": "encore",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "still, again"
+      },
+      "example": {
+        "text": "Encore une fois.",
+        "translations": {
+          "en": "Once again."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0160",
+      "rank": 160,
+      "lemma": "déjà",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "already"
+      },
+      "example": {
+        "text": "C'est déjà fait.",
+        "translations": {
+          "en": "It's already done."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0161",
+      "rank": 161,
+      "lemma": "toujours",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "always"
+      },
+      "example": {
+        "text": "Toujours en retard.",
+        "translations": {
+          "en": "Always late."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0162",
+      "rank": 162,
+      "lemma": "jamais",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "never"
+      },
+      "example": {
+        "text": "Je ne fume jamais.",
+        "translations": {
+          "en": "I never smoke."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0163",
+      "rank": 163,
+      "lemma": "souvent",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "often"
+      },
+      "example": {
+        "text": "Je viens souvent ici.",
+        "translations": {
+          "en": "I often come here."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0164",
+      "rank": 164,
+      "lemma": "ici",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "here"
+      },
+      "example": {
+        "text": "Viens ici.",
+        "translations": {
+          "en": "Come here."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0165",
+      "rank": 165,
+      "lemma": "là",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "there"
+      },
+      "example": {
+        "text": "Il est là.",
+        "translations": {
+          "en": "He is there."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0166",
+      "rank": 166,
+      "lemma": "maintenant",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "now"
+      },
+      "example": {
+        "text": "Pas maintenant.",
+        "translations": {
+          "en": "Not now."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0167",
+      "rank": 167,
+      "lemma": "aujourd'hui",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "today"
+      },
+      "example": {
+        "text": "Aujourd'hui, il pleut.",
+        "translations": {
+          "en": "Today, it's raining."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0168",
+      "rank": 168,
+      "lemma": "hier",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "yesterday"
+      },
+      "example": {
+        "text": "Hier, j'ai travaillé.",
+        "translations": {
+          "en": "Yesterday, I worked."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0169",
+      "rank": 169,
+      "lemma": "demain",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "tomorrow"
+      },
+      "example": {
+        "text": "À demain.",
+        "translations": {
+          "en": "See you tomorrow."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0170",
+      "rank": 170,
+      "lemma": "vite",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "quickly"
+      },
+      "example": {
+        "text": "Marche vite.",
+        "translations": {
+          "en": "Walk fast."
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0171",
+      "rank": 171,
+      "lemma": "où",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "where"
+      },
+      "example": {
+        "text": "Où vas-tu ?",
+        "translations": {
+          "en": "Where are you going?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0172",
+      "rank": 172,
+      "lemma": "quand",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "when"
+      },
+      "example": {
+        "text": "Quand arrives-tu ?",
+        "translations": {
+          "en": "When do you arrive?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0173",
+      "rank": 173,
+      "lemma": "comment",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "how"
+      },
+      "example": {
+        "text": "Comment ça va ?",
+        "translations": {
+          "en": "How are you?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0174",
+      "rank": 174,
+      "lemma": "pourquoi",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "why"
+      },
+      "example": {
+        "text": "Pourquoi pas ?",
+        "translations": {
+          "en": "Why not?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0175",
+      "rank": 175,
+      "lemma": "combien",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "how much / many"
+      },
+      "example": {
+        "text": "Combien ça coûte ?",
+        "translations": {
+          "en": "How much does it cost?"
+        }
+      },
+      "decks": [
+        "common"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-0176",
+      "rank": 176,
+      "lemma": "voyage",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "trip, journey"
+      },
+      "example": {
+        "text": "Bon voyage !",
+        "translations": {
+          "en": "Have a good trip!"
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0177",
+      "rank": 177,
+      "lemma": "aéroport",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "airport"
+      },
+      "example": {
+        "text": "L'aéroport est loin.",
+        "translations": {
+          "en": "The airport is far."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0178",
+      "rank": 178,
+      "lemma": "avion",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "airplane"
+      },
+      "example": {
+        "text": "Je prends l'avion demain.",
+        "translations": {
+          "en": "I'm taking the plane tomorrow."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0179",
+      "rank": 179,
+      "lemma": "train",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "train"
+      },
+      "example": {
+        "text": "Le train est en retard.",
+        "translations": {
+          "en": "The train is late."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0180",
+      "rank": 180,
+      "lemma": "gare",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "train station"
+      },
+      "example": {
+        "text": "On se retrouve à la gare.",
+        "translations": {
+          "en": "Let's meet at the station."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0181",
+      "rank": 181,
+      "lemma": "hôtel",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "hotel"
+      },
+      "example": {
+        "text": "L'hôtel est complet.",
+        "translations": {
+          "en": "The hotel is full."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0182",
+      "rank": 182,
+      "lemma": "billet",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "ticket"
+      },
+      "example": {
+        "text": "J'achète un billet.",
+        "translations": {
+          "en": "I'm buying a ticket."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0183",
+      "rank": 183,
+      "lemma": "valise",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "suitcase"
+      },
+      "example": {
+        "text": "Ma valise est lourde.",
+        "translations": {
+          "en": "My suitcase is heavy."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0184",
+      "rank": 184,
+      "lemma": "passeport",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "passport"
+      },
+      "example": {
+        "text": "Montre ton passeport.",
+        "translations": {
+          "en": "Show your passport."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0185",
+      "rank": 185,
+      "lemma": "bus",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "bus"
+      },
+      "example": {
+        "text": "Je prends le bus.",
+        "translations": {
+          "en": "I take the bus."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0186",
+      "rank": 186,
+      "lemma": "métro",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "subway"
+      },
+      "example": {
+        "text": "Le métro est rapide.",
+        "translations": {
+          "en": "The subway is fast."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0187",
+      "rank": 187,
+      "lemma": "taxi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "taxi"
+      },
+      "example": {
+        "text": "Appelle un taxi.",
+        "translations": {
+          "en": "Call a taxi."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0188",
+      "rank": 188,
+      "lemma": "plage",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "beach"
+      },
+      "example": {
+        "text": "La plage est belle.",
+        "translations": {
+          "en": "The beach is beautiful."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0189",
+      "rank": 189,
+      "lemma": "montagne",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "mountain"
+      },
+      "example": {
+        "text": "Nous allons à la montagne.",
+        "translations": {
+          "en": "We're going to the mountains."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0190",
+      "rank": 190,
+      "lemma": "vacances",
+      "partOfSpeech": "noun (fem. pl.)",
+      "definitions": {
+        "en": "vacation"
+      },
+      "example": {
+        "text": "Bonnes vacances !",
+        "translations": {
+          "en": "Have a good vacation!"
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0191",
+      "rank": 191,
+      "lemma": "carte",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "map, card"
+      },
+      "example": {
+        "text": "Regarde la carte.",
+        "translations": {
+          "en": "Look at the map."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0192",
+      "rank": 192,
+      "lemma": "frontière",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "border"
+      },
+      "example": {
+        "text": "On traverse la frontière.",
+        "translations": {
+          "en": "We're crossing the border."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0193",
+      "rank": 193,
+      "lemma": "nourriture",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "food"
+      },
+      "example": {
+        "text": "La nourriture est délicieuse.",
+        "translations": {
+          "en": "The food is delicious."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0194",
+      "rank": 194,
+      "lemma": "repas",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "meal"
+      },
+      "example": {
+        "text": "Le repas est prêt.",
+        "translations": {
+          "en": "The meal is ready."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0195",
+      "rank": 195,
+      "lemma": "petit-déjeuner",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "breakfast"
+      },
+      "example": {
+        "text": "Je prends mon petit-déjeuner à sept heures.",
+        "translations": {
+          "en": "I have breakfast at seven."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0196",
+      "rank": 196,
+      "lemma": "déjeuner",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "lunch"
+      },
+      "example": {
+        "text": "À quelle heure est le déjeuner ?",
+        "translations": {
+          "en": "What time is lunch?"
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0197",
+      "rank": 197,
+      "lemma": "dîner",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "dinner"
+      },
+      "example": {
+        "text": "Le dîner est servi.",
+        "translations": {
+          "en": "Dinner is served."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0198",
+      "rank": 198,
+      "lemma": "vin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "wine"
+      },
+      "example": {
+        "text": "Un verre de vin rouge.",
+        "translations": {
+          "en": "A glass of red wine."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0199",
+      "rank": 199,
+      "lemma": "bière",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "beer"
+      },
+      "example": {
+        "text": "Une bière, s'il vous plaît.",
+        "translations": {
+          "en": "A beer, please."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0200",
+      "rank": 200,
+      "lemma": "lait",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "milk"
+      },
+      "example": {
+        "text": "Du lait dans le café.",
+        "translations": {
+          "en": "Milk in the coffee."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0201",
+      "rank": 201,
+      "lemma": "fromage",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "cheese"
+      },
+      "example": {
+        "text": "J'aime le fromage français.",
+        "translations": {
+          "en": "I like French cheese."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0202",
+      "rank": 202,
+      "lemma": "viande",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "meat"
+      },
+      "example": {
+        "text": "Je ne mange pas de viande.",
+        "translations": {
+          "en": "I don't eat meat."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0203",
+      "rank": 203,
+      "lemma": "poisson",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "fish"
+      },
+      "example": {
+        "text": "Le poisson est frais.",
+        "translations": {
+          "en": "The fish is fresh."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0204",
+      "rank": 204,
+      "lemma": "légume",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "vegetable"
+      },
+      "example": {
+        "text": "Mange tes légumes.",
+        "translations": {
+          "en": "Eat your vegetables."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0205",
+      "rank": 205,
+      "lemma": "fruit",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "fruit"
+      },
+      "example": {
+        "text": "J'adore les fruits.",
+        "translations": {
+          "en": "I love fruit."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0206",
+      "rank": 206,
+      "lemma": "pomme",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "apple"
+      },
+      "example": {
+        "text": "Une pomme par jour.",
+        "translations": {
+          "en": "An apple a day."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0207",
+      "rank": 207,
+      "lemma": "œuf",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "egg"
+      },
+      "example": {
+        "text": "Deux œufs au plat.",
+        "translations": {
+          "en": "Two fried eggs."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0208",
+      "rank": 208,
+      "lemma": "sucre",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "sugar"
+      },
+      "example": {
+        "text": "Du sucre dans mon thé.",
+        "translations": {
+          "en": "Sugar in my tea."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0209",
+      "rank": 209,
+      "lemma": "sel",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "salt"
+      },
+      "example": {
+        "text": "Passe-moi le sel.",
+        "translations": {
+          "en": "Pass me the salt."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0210",
+      "rank": 210,
+      "lemma": "restaurant",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "restaurant"
+      },
+      "example": {
+        "text": "Allons au restaurant.",
+        "translations": {
+          "en": "Let's go to the restaurant."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0211",
+      "rank": 211,
+      "lemma": "menu",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "menu"
+      },
+      "example": {
+        "text": "Le menu, s'il vous plaît.",
+        "translations": {
+          "en": "The menu, please."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0212",
+      "rank": 212,
+      "lemma": "addition",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "bill"
+      },
+      "example": {
+        "text": "L'addition, s'il vous plaît.",
+        "translations": {
+          "en": "The bill, please."
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0213",
+      "rank": 213,
+      "lemma": "délicieux",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "delicious"
+      },
+      "example": {
+        "text": "C'est délicieux !",
+        "translations": {
+          "en": "It's delicious!"
+        }
+      },
+      "decks": [
+        "food-and-drink"
+      ]
+    },
+    {
+      "id": "fr-0214",
+      "rank": 214,
+      "lemma": "réunion",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "meeting"
+      },
+      "example": {
+        "text": "La réunion commence à dix heures.",
+        "translations": {
+          "en": "The meeting starts at ten."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0215",
+      "rank": 215,
+      "lemma": "projet",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "project"
+      },
+      "example": {
+        "text": "Mon projet est fini.",
+        "translations": {
+          "en": "My project is finished."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0216",
+      "rank": 216,
+      "lemma": "collègue",
+      "partOfSpeech": "noun (masc./fem.)",
+      "definitions": {
+        "en": "colleague"
+      },
+      "example": {
+        "text": "Mes collègues sont sympas.",
+        "translations": {
+          "en": "My colleagues are nice."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0217",
+      "rank": 217,
+      "lemma": "patron",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "boss"
+      },
+      "example": {
+        "text": "Le patron arrive demain.",
+        "translations": {
+          "en": "The boss arrives tomorrow."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0218",
+      "rank": 218,
+      "lemma": "entreprise",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "company"
+      },
+      "example": {
+        "text": "J'aime mon entreprise.",
+        "translations": {
+          "en": "I like my company."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0219",
+      "rank": 219,
+      "lemma": "ordinateur",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "computer"
+      },
+      "example": {
+        "text": "Mon ordinateur ne marche pas.",
+        "translations": {
+          "en": "My computer isn't working."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0220",
+      "rank": 220,
+      "lemma": "téléphone",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "phone"
+      },
+      "example": {
+        "text": "Mon téléphone sonne.",
+        "translations": {
+          "en": "My phone is ringing."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0221",
+      "rank": 221,
+      "lemma": "email",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "email"
+      },
+      "example": {
+        "text": "J'ai envoyé un email.",
+        "translations": {
+          "en": "I sent an email."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0222",
+      "rank": 222,
+      "lemma": "salaire",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "salary"
+      },
+      "example": {
+        "text": "Mon salaire est correct.",
+        "translations": {
+          "en": "My salary is okay."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0223",
+      "rank": 223,
+      "lemma": "client",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "client"
+      },
+      "example": {
+        "text": "Le client attend.",
+        "translations": {
+          "en": "The client is waiting."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0224",
+      "rank": 224,
+      "lemma": "emploi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "job, employment"
+      },
+      "example": {
+        "text": "Je cherche un emploi.",
+        "translations": {
+          "en": "I'm looking for a job."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0225",
+      "rank": 225,
+      "lemma": "équipe",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "team"
+      },
+      "example": {
+        "text": "Mon équipe est forte.",
+        "translations": {
+          "en": "My team is strong."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0226",
+      "rank": 226,
+      "lemma": "idée",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "idea"
+      },
+      "example": {
+        "text": "J'ai une bonne idée.",
+        "translations": {
+          "en": "I have a good idea."
+        }
+      },
+      "decks": [
+        "work-and-money"
+      ]
+    },
+    {
+      "id": "fr-0227",
+      "rank": 227,
+      "lemma": "grand-père",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "grandfather"
+      },
+      "example": {
+        "text": "Mon grand-père raconte des histoires.",
+        "translations": {
+          "en": "My grandfather tells stories."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0228",
+      "rank": 228,
+      "lemma": "grand-mère",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "grandmother"
+      },
+      "example": {
+        "text": "Ma grand-mère fait des gâteaux.",
+        "translations": {
+          "en": "My grandmother makes cakes."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0229",
+      "rank": 229,
+      "lemma": "oncle",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "uncle"
+      },
+      "example": {
+        "text": "Mon oncle est gentil.",
+        "translations": {
+          "en": "My uncle is kind."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0230",
+      "rank": 230,
+      "lemma": "tante",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "aunt"
+      },
+      "example": {
+        "text": "Ma tante habite à Marseille.",
+        "translations": {
+          "en": "My aunt lives in Marseille."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0231",
+      "rank": 231,
+      "lemma": "cousin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "cousin (male)"
+      },
+      "example": {
+        "text": "Mon cousin a mon âge.",
+        "translations": {
+          "en": "My cousin is my age."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0232",
+      "rank": 232,
+      "lemma": "cousine",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "cousin (female)"
+      },
+      "example": {
+        "text": "Ma cousine est étudiante.",
+        "translations": {
+          "en": "My cousin is a student."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0233",
+      "rank": 233,
+      "lemma": "mari",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "husband"
+      },
+      "example": {
+        "text": "Mon mari travaille beaucoup.",
+        "translations": {
+          "en": "My husband works a lot."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0234",
+      "rank": 234,
+      "lemma": "épouse",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "wife"
+      },
+      "example": {
+        "text": "Mon épouse est médecin.",
+        "translations": {
+          "en": "My wife is a doctor."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0235",
+      "rank": 235,
+      "lemma": "bébé",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "baby"
+      },
+      "example": {
+        "text": "Le bébé dort.",
+        "translations": {
+          "en": "The baby is sleeping."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0236",
+      "rank": 236,
+      "lemma": "voisin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "neighbor"
+      },
+      "example": {
+        "text": "Mon voisin est sympa.",
+        "translations": {
+          "en": "My neighbor is nice."
+        }
+      },
+      "decks": [
+        "family"
+      ]
+    },
+    {
+      "id": "fr-0237",
+      "rank": 237,
+      "lemma": "chambre",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "bedroom"
+      },
+      "example": {
+        "text": "Ma chambre est petite.",
+        "translations": {
+          "en": "My bedroom is small."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0238",
+      "rank": 238,
+      "lemma": "cuisine",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "kitchen"
+      },
+      "example": {
+        "text": "La cuisine est en bas.",
+        "translations": {
+          "en": "The kitchen is downstairs."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0239",
+      "rank": 239,
+      "lemma": "salon",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "living room"
+      },
+      "example": {
+        "text": "On regarde la télé au salon.",
+        "translations": {
+          "en": "We watch TV in the living room."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0240",
+      "rank": 240,
+      "lemma": "salle de bain",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "bathroom"
+      },
+      "example": {
+        "text": "La salle de bain est libre.",
+        "translations": {
+          "en": "The bathroom is free."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0241",
+      "rank": 241,
+      "lemma": "toilettes",
+      "partOfSpeech": "noun (fem. pl.)",
+      "definitions": {
+        "en": "toilet"
+      },
+      "example": {
+        "text": "Où sont les toilettes ?",
+        "translations": {
+          "en": "Where is the toilet?"
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0242",
+      "rank": 242,
+      "lemma": "porte",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "door"
+      },
+      "example": {
+        "text": "Ferme la porte.",
+        "translations": {
+          "en": "Close the door."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0243",
+      "rank": 243,
+      "lemma": "fenêtre",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "window"
+      },
+      "example": {
+        "text": "Ouvre la fenêtre.",
+        "translations": {
+          "en": "Open the window."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0244",
+      "rank": 244,
+      "lemma": "table",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "table"
+      },
+      "example": {
+        "text": "Mets la table.",
+        "translations": {
+          "en": "Set the table."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0245",
+      "rank": 245,
+      "lemma": "chaise",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "chair"
+      },
+      "example": {
+        "text": "Assieds-toi sur la chaise.",
+        "translations": {
+          "en": "Sit on the chair."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0246",
+      "rank": 246,
+      "lemma": "lit",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "bed"
+      },
+      "example": {
+        "text": "Va au lit.",
+        "translations": {
+          "en": "Go to bed."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0247",
+      "rank": 247,
+      "lemma": "clé",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "key"
+      },
+      "example": {
+        "text": "J'ai perdu mes clés.",
+        "translations": {
+          "en": "I lost my keys."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0248",
+      "rank": 248,
+      "lemma": "lumière",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "light"
+      },
+      "example": {
+        "text": "Allume la lumière.",
+        "translations": {
+          "en": "Turn on the light."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0249",
+      "rank": 249,
+      "lemma": "mur",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "wall"
+      },
+      "example": {
+        "text": "Le mur est blanc.",
+        "translations": {
+          "en": "The wall is white."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0250",
+      "rank": 250,
+      "lemma": "toit",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "roof"
+      },
+      "example": {
+        "text": "Un chat sur le toit.",
+        "translations": {
+          "en": "A cat on the roof."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0251",
+      "rank": 251,
+      "lemma": "jardin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "garden"
+      },
+      "example": {
+        "text": "On mange dans le jardin.",
+        "translations": {
+          "en": "We eat in the garden."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0252",
+      "rank": 252,
+      "lemma": "appartement",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "apartment"
+      },
+      "example": {
+        "text": "Mon appartement est au deuxième étage.",
+        "translations": {
+          "en": "My apartment is on the second floor."
+        }
+      },
+      "decks": [
+        "home"
+      ]
+    },
+    {
+      "id": "fr-0253",
+      "rank": 253,
+      "lemma": "tête",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "head"
+      },
+      "example": {
+        "text": "J'ai mal à la tête.",
+        "translations": {
+          "en": "I have a headache."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0254",
+      "rank": 254,
+      "lemma": "cheveux",
+      "partOfSpeech": "noun (masc. pl.)",
+      "definitions": {
+        "en": "hair"
+      },
+      "example": {
+        "text": "Elle a les cheveux longs.",
+        "translations": {
+          "en": "She has long hair."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0255",
+      "rank": 255,
+      "lemma": "visage",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "face"
+      },
+      "example": {
+        "text": "Lave-toi le visage.",
+        "translations": {
+          "en": "Wash your face."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0256",
+      "rank": 256,
+      "lemma": "bouche",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "mouth"
+      },
+      "example": {
+        "text": "Ouvre la bouche.",
+        "translations": {
+          "en": "Open your mouth."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0257",
+      "rank": 257,
+      "lemma": "nez",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "nose"
+      },
+      "example": {
+        "text": "J'ai le nez bouché.",
+        "translations": {
+          "en": "My nose is blocked."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0258",
+      "rank": 258,
+      "lemma": "oreille",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "ear"
+      },
+      "example": {
+        "text": "J'ai mal à l'oreille.",
+        "translations": {
+          "en": "My ear hurts."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0259",
+      "rank": 259,
+      "lemma": "dent",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "tooth"
+      },
+      "example": {
+        "text": "Brosse-toi les dents.",
+        "translations": {
+          "en": "Brush your teeth."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0260",
+      "rank": 260,
+      "lemma": "bras",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "arm"
+      },
+      "example": {
+        "text": "Lève le bras.",
+        "translations": {
+          "en": "Raise your arm."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0261",
+      "rank": 261,
+      "lemma": "jambe",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "leg"
+      },
+      "example": {
+        "text": "Ma jambe me fait mal.",
+        "translations": {
+          "en": "My leg hurts."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0262",
+      "rank": 262,
+      "lemma": "pied",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "foot"
+      },
+      "example": {
+        "text": "À pied, c'est plus rapide.",
+        "translations": {
+          "en": "On foot, it's faster."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0263",
+      "rank": 263,
+      "lemma": "cœur",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "heart"
+      },
+      "example": {
+        "text": "Mon cœur bat vite.",
+        "translations": {
+          "en": "My heart is beating fast."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0264",
+      "rank": 264,
+      "lemma": "ventre",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "stomach"
+      },
+      "example": {
+        "text": "J'ai mal au ventre.",
+        "translations": {
+          "en": "I have a stomachache."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0265",
+      "rank": 265,
+      "lemma": "malade",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "sick"
+      },
+      "example": {
+        "text": "Je suis malade aujourd'hui.",
+        "translations": {
+          "en": "I'm sick today."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0266",
+      "rank": 266,
+      "lemma": "santé",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "health"
+      },
+      "example": {
+        "text": "La santé d'abord.",
+        "translations": {
+          "en": "Health first."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0267",
+      "rank": 267,
+      "lemma": "médecin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "doctor"
+      },
+      "example": {
+        "text": "Le médecin est arrivé.",
+        "translations": {
+          "en": "The doctor has arrived."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0268",
+      "rank": 268,
+      "lemma": "hôpital",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "hospital"
+      },
+      "example": {
+        "text": "Il est à l'hôpital.",
+        "translations": {
+          "en": "He's at the hospital."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0269",
+      "rank": 269,
+      "lemma": "médicament",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "medicine"
+      },
+      "example": {
+        "text": "Prends ce médicament.",
+        "translations": {
+          "en": "Take this medicine."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0270",
+      "rank": 270,
+      "lemma": "douleur",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "pain"
+      },
+      "example": {
+        "text": "La douleur diminue.",
+        "translations": {
+          "en": "The pain is going down."
+        }
+      },
+      "decks": [
+        "health"
+      ]
+    },
+    {
+      "id": "fr-0271",
+      "rank": 271,
+      "lemma": "seconde",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "second"
+      },
+      "example": {
+        "text": "Attends une seconde.",
+        "translations": {
+          "en": "Wait a second."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0272",
+      "rank": 272,
+      "lemma": "lundi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Monday"
+      },
+      "example": {
+        "text": "Lundi, je travaille.",
+        "translations": {
+          "en": "On Monday, I work."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0273",
+      "rank": 273,
+      "lemma": "mardi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Tuesday"
+      },
+      "example": {
+        "text": "Mardi prochain.",
+        "translations": {
+          "en": "Next Tuesday."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0274",
+      "rank": 274,
+      "lemma": "mercredi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Wednesday"
+      },
+      "example": {
+        "text": "On se voit mercredi.",
+        "translations": {
+          "en": "Let's meet Wednesday."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0275",
+      "rank": 275,
+      "lemma": "jeudi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Thursday"
+      },
+      "example": {
+        "text": "Jeudi soir.",
+        "translations": {
+          "en": "Thursday evening."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0276",
+      "rank": 276,
+      "lemma": "vendredi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Friday"
+      },
+      "example": {
+        "text": "Vendredi est mon jour préféré.",
+        "translations": {
+          "en": "Friday is my favorite day."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0277",
+      "rank": 277,
+      "lemma": "samedi",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Saturday"
+      },
+      "example": {
+        "text": "Samedi, on sort.",
+        "translations": {
+          "en": "On Saturday, we go out."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0278",
+      "rank": 278,
+      "lemma": "dimanche",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "Sunday"
+      },
+      "example": {
+        "text": "Dimanche, je me repose.",
+        "translations": {
+          "en": "On Sunday, I rest."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0279",
+      "rank": 279,
+      "lemma": "un",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "one"
+      },
+      "example": {
+        "text": "Un café.",
+        "translations": {
+          "en": "One coffee."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0280",
+      "rank": 280,
+      "lemma": "deux",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "two"
+      },
+      "example": {
+        "text": "Deux frères.",
+        "translations": {
+          "en": "Two brothers."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0281",
+      "rank": 281,
+      "lemma": "trois",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "three"
+      },
+      "example": {
+        "text": "Trois enfants.",
+        "translations": {
+          "en": "Three children."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0282",
+      "rank": 282,
+      "lemma": "quatre",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "four"
+      },
+      "example": {
+        "text": "Quatre saisons.",
+        "translations": {
+          "en": "Four seasons."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0283",
+      "rank": 283,
+      "lemma": "cinq",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "five"
+      },
+      "example": {
+        "text": "Cinq euros.",
+        "translations": {
+          "en": "Five euros."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0284",
+      "rank": 284,
+      "lemma": "dix",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "ten"
+      },
+      "example": {
+        "text": "Dix minutes.",
+        "translations": {
+          "en": "Ten minutes."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0285",
+      "rank": 285,
+      "lemma": "cent",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "hundred"
+      },
+      "example": {
+        "text": "Cent ans.",
+        "translations": {
+          "en": "A hundred years."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0286",
+      "rank": 286,
+      "lemma": "mille",
+      "partOfSpeech": "number",
+      "definitions": {
+        "en": "thousand"
+      },
+      "example": {
+        "text": "Mille mercis.",
+        "translations": {
+          "en": "A thousand thanks."
+        }
+      },
+      "decks": [
+        "common"
+      ]
+    },
+    {
+      "id": "fr-0287",
+      "rank": 287,
+      "lemma": "argent",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "money"
+      },
+      "example": {
+        "text": "Je n'ai pas d'argent.",
+        "translations": {
+          "en": "I don't have money."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0288",
+      "rank": 288,
+      "lemma": "euro",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "euro"
+      },
+      "example": {
+        "text": "Dix euros, s'il vous plaît.",
+        "translations": {
+          "en": "Ten euros, please."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0289",
+      "rank": 289,
+      "lemma": "prix",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "price"
+      },
+      "example": {
+        "text": "Le prix est correct.",
+        "translations": {
+          "en": "The price is fair."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0290",
+      "rank": 290,
+      "lemma": "magasin",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "shop"
+      },
+      "example": {
+        "text": "Le magasin ferme à huit heures.",
+        "translations": {
+          "en": "The shop closes at eight."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0291",
+      "rank": 291,
+      "lemma": "marché",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "market"
+      },
+      "example": {
+        "text": "Je vais au marché.",
+        "translations": {
+          "en": "I'm going to the market."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0292",
+      "rank": 292,
+      "lemma": "carte bancaire",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "credit card"
+      },
+      "example": {
+        "text": "Je paie par carte bancaire.",
+        "translations": {
+          "en": "I pay by credit card."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0293",
+      "rank": 293,
+      "lemma": "espèces",
+      "partOfSpeech": "noun (fem. pl.)",
+      "definitions": {
+        "en": "cash"
+      },
+      "example": {
+        "text": "En espèces ou par carte ?",
+        "translations": {
+          "en": "Cash or card?"
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0294",
+      "rank": 294,
+      "lemma": "monnaie",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "change, currency"
+      },
+      "example": {
+        "text": "Tu as de la monnaie ?",
+        "translations": {
+          "en": "Do you have change?"
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0295",
+      "rank": 295,
+      "lemma": "cher",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "expensive"
+      },
+      "example": {
+        "text": "C'est trop cher.",
+        "translations": {
+          "en": "It's too expensive."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0296",
+      "rank": 296,
+      "lemma": "bon marché",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "cheap"
+      },
+      "example": {
+        "text": "Ce restaurant est bon marché.",
+        "translations": {
+          "en": "This restaurant is cheap."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0297",
+      "rank": 297,
+      "lemma": "gratuit",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "free"
+      },
+      "example": {
+        "text": "L'entrée est gratuite.",
+        "translations": {
+          "en": "Entry is free."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0298",
+      "rank": 298,
+      "lemma": "vêtement",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "clothing item"
+      },
+      "example": {
+        "text": "J'achète des vêtements.",
+        "translations": {
+          "en": "I'm buying clothes."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0299",
+      "rank": 299,
+      "lemma": "chemise",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "shirt"
+      },
+      "example": {
+        "text": "Une chemise blanche.",
+        "translations": {
+          "en": "A white shirt."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0300",
+      "rank": 300,
+      "lemma": "chaussure",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "shoe"
+      },
+      "example": {
+        "text": "Mes chaussures sont neuves.",
+        "translations": {
+          "en": "My shoes are new."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0301",
+      "rank": 301,
+      "lemma": "sac",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "bag"
+      },
+      "example": {
+        "text": "Mon sac est lourd.",
+        "translations": {
+          "en": "My bag is heavy."
+        }
+      },
+      "decks": [
+        "shopping"
+      ]
+    },
+    {
+      "id": "fr-0302",
+      "rank": 302,
+      "lemma": "peur",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "fear"
+      },
+      "example": {
+        "text": "J'ai peur du noir.",
+        "translations": {
+          "en": "I'm afraid of the dark."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0303",
+      "rank": 303,
+      "lemma": "colère",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "anger"
+      },
+      "example": {
+        "text": "Il est en colère.",
+        "translations": {
+          "en": "He is angry."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0304",
+      "rank": 304,
+      "lemma": "joie",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "joy"
+      },
+      "example": {
+        "text": "Quelle joie de te voir.",
+        "translations": {
+          "en": "What a joy to see you."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0305",
+      "rank": 305,
+      "lemma": "amour",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "love"
+      },
+      "example": {
+        "text": "L'amour, c'est tout.",
+        "translations": {
+          "en": "Love is everything."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0306",
+      "rank": 306,
+      "lemma": "inquiet",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "worried"
+      },
+      "example": {
+        "text": "Je suis inquiet pour toi.",
+        "translations": {
+          "en": "I'm worried about you."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0307",
+      "rank": 307,
+      "lemma": "calme",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "calm"
+      },
+      "example": {
+        "text": "Reste calme.",
+        "translations": {
+          "en": "Stay calm."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0308",
+      "rank": 308,
+      "lemma": "nerveux",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "nervous"
+      },
+      "example": {
+        "text": "Je suis nerveux avant l'examen.",
+        "translations": {
+          "en": "I'm nervous before the exam."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0309",
+      "rank": 309,
+      "lemma": "surpris",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "surprised"
+      },
+      "example": {
+        "text": "Je suis très surpris.",
+        "translations": {
+          "en": "I'm very surprised."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0310",
+      "rank": 310,
+      "lemma": "fier",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "proud"
+      },
+      "example": {
+        "text": "Je suis fier de toi.",
+        "translations": {
+          "en": "I'm proud of you."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0311",
+      "rank": 311,
+      "lemma": "amoureux",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "in love"
+      },
+      "example": {
+        "text": "Il est amoureux.",
+        "translations": {
+          "en": "He is in love."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0312",
+      "rank": 312,
+      "lemma": "ennuyé",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "bored"
+      },
+      "example": {
+        "text": "Je suis ennuyé.",
+        "translations": {
+          "en": "I'm bored."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0313",
+      "rank": 313,
+      "lemma": "excité",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "excited"
+      },
+      "example": {
+        "text": "Les enfants sont excités.",
+        "translations": {
+          "en": "The kids are excited."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0314",
+      "rank": 314,
+      "lemma": "rire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to laugh"
+      },
+      "example": {
+        "text": "On a beaucoup ri.",
+        "translations": {
+          "en": "We laughed a lot."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0315",
+      "rank": 315,
+      "lemma": "pleurer",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to cry"
+      },
+      "example": {
+        "text": "Ne pleure pas.",
+        "translations": {
+          "en": "Don't cry."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0316",
+      "rank": 316,
+      "lemma": "sourire",
+      "partOfSpeech": "verb",
+      "definitions": {
+        "en": "to smile"
+      },
+      "example": {
+        "text": "Souris pour la photo.",
+        "translations": {
+          "en": "Smile for the photo."
+        }
+      },
+      "decks": [
+        "feelings"
+      ]
+    },
+    {
+      "id": "fr-0317",
+      "rank": 317,
+      "lemma": "soleil",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "sun"
+      },
+      "example": {
+        "text": "Le soleil brille.",
+        "translations": {
+          "en": "The sun is shining."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0318",
+      "rank": 318,
+      "lemma": "lune",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "moon"
+      },
+      "example": {
+        "text": "La lune est pleine.",
+        "translations": {
+          "en": "The moon is full."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0319",
+      "rank": 319,
+      "lemma": "étoile",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "star"
+      },
+      "example": {
+        "text": "Les étoiles brillent.",
+        "translations": {
+          "en": "The stars are shining."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0320",
+      "rank": 320,
+      "lemma": "ciel",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "sky"
+      },
+      "example": {
+        "text": "Le ciel est bleu.",
+        "translations": {
+          "en": "The sky is blue."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0321",
+      "rank": 321,
+      "lemma": "nuage",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "cloud"
+      },
+      "example": {
+        "text": "Il y a des nuages.",
+        "translations": {
+          "en": "There are clouds."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0322",
+      "rank": 322,
+      "lemma": "pluie",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "rain"
+      },
+      "example": {
+        "text": "La pluie tombe fort.",
+        "translations": {
+          "en": "The rain is falling hard."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0323",
+      "rank": 323,
+      "lemma": "neige",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "snow"
+      },
+      "example": {
+        "text": "La neige est blanche.",
+        "translations": {
+          "en": "The snow is white."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0324",
+      "rank": 324,
+      "lemma": "vent",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "wind"
+      },
+      "example": {
+        "text": "Le vent souffle.",
+        "translations": {
+          "en": "The wind is blowing."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0325",
+      "rank": 325,
+      "lemma": "arbre",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "tree"
+      },
+      "example": {
+        "text": "Un grand arbre dans le jardin.",
+        "translations": {
+          "en": "A big tree in the garden."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0326",
+      "rank": 326,
+      "lemma": "fleur",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "flower"
+      },
+      "example": {
+        "text": "Des fleurs sur la table.",
+        "translations": {
+          "en": "Flowers on the table."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0327",
+      "rank": 327,
+      "lemma": "rivière",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "river"
+      },
+      "example": {
+        "text": "La rivière est froide.",
+        "translations": {
+          "en": "The river is cold."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0328",
+      "rank": 328,
+      "lemma": "mer",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "sea"
+      },
+      "example": {
+        "text": "On va à la mer.",
+        "translations": {
+          "en": "We're going to the sea."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0329",
+      "rank": 329,
+      "lemma": "forêt",
+      "partOfSpeech": "noun (fem.)",
+      "definitions": {
+        "en": "forest"
+      },
+      "example": {
+        "text": "On se promène dans la forêt.",
+        "translations": {
+          "en": "We walk in the forest."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0330",
+      "rank": 330,
+      "lemma": "animal",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "animal"
+      },
+      "example": {
+        "text": "J'aime les animaux.",
+        "translations": {
+          "en": "I love animals."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0331",
+      "rank": 331,
+      "lemma": "chien",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "dog"
+      },
+      "example": {
+        "text": "Mon chien est gentil.",
+        "translations": {
+          "en": "My dog is friendly."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0332",
+      "rank": 332,
+      "lemma": "chat",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "cat"
+      },
+      "example": {
+        "text": "Le chat dort sur le canapé.",
+        "translations": {
+          "en": "The cat is sleeping on the sofa."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0333",
+      "rank": 333,
+      "lemma": "oiseau",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "bird"
+      },
+      "example": {
+        "text": "L'oiseau chante.",
+        "translations": {
+          "en": "The bird is singing."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0334",
+      "rank": 334,
+      "lemma": "printemps",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "spring"
+      },
+      "example": {
+        "text": "Au printemps, tout fleurit.",
+        "translations": {
+          "en": "In spring, everything blooms."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0335",
+      "rank": 335,
+      "lemma": "été",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "summer"
+      },
+      "example": {
+        "text": "L'été est chaud.",
+        "translations": {
+          "en": "Summer is hot."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0336",
+      "rank": 336,
+      "lemma": "automne",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "autumn"
+      },
+      "example": {
+        "text": "En automne, il pleut.",
+        "translations": {
+          "en": "In autumn, it rains."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    },
+    {
+      "id": "fr-0337",
+      "rank": 337,
+      "lemma": "hiver",
+      "partOfSpeech": "noun (masc.)",
+      "definitions": {
+        "en": "winter"
+      },
+      "example": {
+        "text": "L'hiver est froid.",
+        "translations": {
+          "en": "Winter is cold."
+        }
+      },
+      "decks": [
+        "traveling"
+      ]
+    }
+  ]
+}

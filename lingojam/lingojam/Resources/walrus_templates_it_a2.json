@@ -1,0 +1,23 @@
+{
+  "level": "A2",
+  "openers": [
+    "Ah, mi hai svegliato. Allora, come va il tuo italiano questa settimana?",
+    "Di nuovo tu. Hai imparato qualcosa o no?",
+    "Ok, ti ascolto. Cosa hai fatto oggi?"
+  ],
+  "prompts": [
+    "E tu, cosa pensi di {WORD}? Senza giri di parole.",
+    "Ok, descrivimi {WORD} in una frase.",
+    "Quando di solito {WORD}? Racconta bene.",
+    "Conosci qualcuno che {WORD} molto? Parla."
+  ],
+  "fillers": [
+    "Ah-ah, continua.",
+    "Mmm, ma non mi dire.",
+    "Ok, ti seguo."
+  ],
+  "closers": [
+    "Beh, non è stato male. Alla prossima.",
+    "Ok, basta per oggi. Ciao."
+  ]
+}

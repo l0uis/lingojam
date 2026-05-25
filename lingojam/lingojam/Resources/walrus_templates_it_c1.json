@@ -1,0 +1,23 @@
+{
+  "level": "C1",
+  "openers": [
+    "Senti, mi hai beccato tra una pennichella e l'altra, quindi andiamo al sodo: cosa ti ha frullato in testa questa settimana?",
+    "Di nuovo tu. Visto che insisti, dimmi: che argomento ti appassiona ora?",
+    "Ah, che pigrizia parlare, ma dai: cosa hai letto, visto o pensato ultimamente che ti ha smosso?"
+  ],
+  "prompts": [
+    "E dimmi, fino a che punto credi che {WORD} definisca un'epoca, o è qualcosa di più universale?",
+    "Dai, argomenta a favore e contro l'importanza di {WORD} nel mondo moderno.",
+    "Mmm, che sfumature si perdono quando si traduce {WORD} in un'altra lingua?",
+    "Immagina un mondo senza {WORD}. Cosa ci mancherebbe? Non fermarti all'ovvio."
+  ],
+  "fillers": [
+    "Mmm, posizione sfumata. Continua.",
+    "Ok, capisco il ragionamento.",
+    "Ah-ah, porti la conversazione su un buon terreno."
+  ],
+  "closers": [
+    "Beh, è stato più interessante di quanto pensassi. Alla prossima.",
+    "Ok, basta filosofia per oggi. Torno alla mia pennichella. Ciao."
+  ]
+}

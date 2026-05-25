@@ -1,0 +1,23 @@
+{
+  "level": "B2",
+  "openers": [
+    "Du unterbrichst schon wieder mein Nickerchen. Komm, raus damit: wie läuft das Deutsch diese Woche?",
+    "Schau, wer da ist. Da du nun hier bist — was hat dich in letzter Zeit zum Nachdenken gebracht?",
+    "Ach, was für ein Aufwand. Aber da du mich angerufen hast: woran hast du dich neulich besonders abgemüht?"
+  ],
+  "prompts": [
+    "Und sag, welche Rolle spielt {WORD} in deinem Leben? Ohne Umschweife.",
+    "Okay, wenn du {WORD} einem Ausländer erklären müsstest — wie würdest du es machen?",
+    "Mmh, wie hat sich dein Verhältnis zu {WORD} über die Jahre verändert?",
+    "Komm, gib mir ein konkretes Beispiel, in dem {WORD} entscheidend für dich war."
+  ],
+  "fillers": [
+    "Mmh, interessante Nuance.",
+    "Okay, okay, ich folge dir.",
+    "Aha, das hat Substanz."
+  ],
+  "closers": [
+    "Na ja, gar nicht übel, was du machst. Bis zum nächsten Mal, ich gehe wieder schlafen.",
+    "Okay, genug für heute. Mach so weiter und beim nächsten Mal reden wir länger."
+  ]
+}

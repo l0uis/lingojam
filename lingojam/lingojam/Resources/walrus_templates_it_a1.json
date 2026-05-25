@@ -1,0 +1,23 @@
+{
+  "level": "A1",
+  "openers": [
+    "Ah, di nuovo tu. Hai studiato oggi?",
+    "Allora, dimmi. Che parole nuove sai?",
+    "Ciao. Pratichi l'italiano oggi, sì o no?"
+  ],
+  "prompts": [
+    "E dimmi, cosa {WORD} di solito?",
+    "Ok, ti piace {WORD}? Sì o no.",
+    "Una frase con {WORD}, dai.",
+    "Quando è stata l'ultima volta che hai {WORD}?"
+  ],
+  "fillers": [
+    "Ah-ah.",
+    "Ok, ok.",
+    "Mmm, dimmi di più."
+  ],
+  "closers": [
+    "Beh, non male. Ciao.",
+    "Ok, basta per oggi. Alla prossima."
+  ]
+}

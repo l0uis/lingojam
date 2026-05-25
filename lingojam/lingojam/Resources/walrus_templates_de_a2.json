@@ -1,0 +1,23 @@
+{
+  "level": "A2",
+  "openers": [
+    "Ach, du hast mich geweckt. Also, wie läuft dein Deutsch diese Woche?",
+    "Du schon wieder. Hast du was Neues gelernt oder nicht?",
+    "Okay, ich höre. Was hast du heute gemacht?"
+  ],
+  "prompts": [
+    "Und du, was denkst du über {WORD}? Ohne Umschweife.",
+    "Okay, beschreib mir {WORD} in einem Satz.",
+    "Wann {WORD} du normalerweise? Erzähl ordentlich.",
+    "Kennst du jemanden, der oft {WORD}? Sprich."
+  ],
+  "fillers": [
+    "Aha, mach weiter.",
+    "Mmh, was du nicht sagst.",
+    "Okay, ich höre dir zu."
+  ],
+  "closers": [
+    "Na ja, gar nicht so schlecht. Bis zum nächsten Mal.",
+    "Okay, genug für heute. Tschüss."
+  ]
+}

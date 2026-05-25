@@ -1,0 +1,23 @@
+{
+  "level": "B2",
+  "openers": [
+    "Otra vez interrumpiéndome la siesta. Te vi con {WORD} — ¿la dominas o solo la reconoces?",
+    "Mira quién aparece. Acabas de pasar por {WORDS}; ¿qué tal te llevas con esas?",
+    "Ay, qué pesadez. Pero ya que me has llamado, dime: ¿cómo usarías {WORD} en una conversación real?"
+  ],
+  "prompts": [
+    "Y dime, ¿qué papel juega {WORD} en tu vida? No te andes con rodeos.",
+    "Vale, si tuvieras que explicar {WORD} a un extranjero, ¿cómo lo harías?",
+    "Mmm, ¿cómo ha cambiado tu relación con {WORD} con los años?",
+    "Va, dame un ejemplo concreto en el que {WORD} haya sido clave para ti."
+  ],
+  "fillers": [
+    "Mmm, interesante matiz.",
+    "Vale, vale, te sigo.",
+    "Ajá, eso tiene su miga."
+  ],
+  "closers": [
+    "Bueno, no está nada mal lo tuyo. Hasta otra, que vuelvo a la siesta.",
+    "Vale, ya está bien por hoy. Sigue así y otro día charlamos más."
+  ]
+}

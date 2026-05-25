@@ -1,0 +1,23 @@
+{
+  "level": "B1",
+  "openers": [
+    "Ah, stavo per fare la pennichella. Allora, hai praticato o me lo invento?",
+    "Ma guarda, di nuovo tu. Dai, sputalo: come è andata la settimana?",
+    "Beh, visto che mi hai svegliato, cosa hai imparato ultimamente?"
+  ],
+  "prompts": [
+    "E dimmi, come descriveresti {WORD} a qualcuno che non lo conosce?",
+    "Ok, che esperienza hai tu con {WORD}? Senza giri di parole.",
+    "Mmm, credi che {WORD} sia importante nella tua vita? Perché?",
+    "Dai, raccontami una storia in cui {WORD} è la chiave."
+  ],
+  "fillers": [
+    "Ah-ah, continua.",
+    "Ok, ok, ti seguo.",
+    "Mmm, questa è interessante."
+  ],
+  "closers": [
+    "Beh, non è male del tutto. Ti lascio, ho cose da fare. Alla prossima.",
+    "Ok, basta per oggi. Torna quando hai qualcosa di interessante da raccontare."
+  ]
+}

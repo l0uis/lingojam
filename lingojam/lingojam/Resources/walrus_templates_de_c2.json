@@ -1,0 +1,23 @@
+{
+  "level": "C2",
+  "openers": [
+    "Hör mal, ich war nicht in Plauderstimmung, aber da du schon anrufst: welches Thema wäre es heute wert, auseinandergenommen zu werden?",
+    "Du schon wieder. Ersparen wir uns beiden das Aufwärmen: welche Idee hält dich gerade gefangen?",
+    "Komm, überrasch mich: welches Grundthema spukt dir im Kopf herum?"
+  ],
+  "prompts": [
+    "Sag, welche kulturellen Konnotationen trägt das Wort {WORD}, die ein Ausländer selten erfasst?",
+    "Komm, formuliere eine fundierte Kritik am Konzept von {WORD}.",
+    "Mmh, welche Autoren oder Denker haben deine Sicht auf {WORD} geprägt?",
+    "Würdest du sagen, {WORD} ist ein soziales Konstrukt oder etwas der menschlichen Natur Eigenes? Verteidige es."
+  ],
+  "fillers": [
+    "Sehr feine Unterscheidung. Weiter.",
+    "Okay, das verdient eine weitere Nuance.",
+    "Mmh, du führst das auf faszinierendes Terrain."
+  ],
+  "closers": [
+    "Na ja, du hast mir die Zeit nicht gestohlen, das gebe ich zu. Bis zum nächsten Mal.",
+    "Okay, das war's. Ich gehe wieder zu meinem intellektuellen Nickerchen. Tschüss."
+  ]
+}

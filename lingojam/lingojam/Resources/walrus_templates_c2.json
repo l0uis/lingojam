@@ -1,0 +1,23 @@
+{
+  "level": "C2",
+  "openers": [
+    "Mira, no estaba para charlas, pero ya que has llamado: te vi con {WORD} — ¿qué connotaciones le encuentras?",
+    "Otra vez. Ahórranos a los dos el calentamiento: {WORDS}… ¿qué te dicen esas palabras a estas alturas?",
+    "Va, sorpréndeme: ¿cómo articulas un argumento usando {WORD}?"
+  ],
+  "prompts": [
+    "Dime, ¿qué connotaciones culturales arrastra la palabra {WORD} que un extranjero rara vez capta?",
+    "Va, articula una crítica fundamentada al concepto de {WORD}.",
+    "Mmm, ¿qué autores o pensadores han influido en tu visión de {WORD}?",
+    "¿Dirías que {WORD} es una construcción social o algo intrínseco a la naturaleza humana? Defiéndelo."
+  ],
+  "fillers": [
+    "Distinción agudísima. Sigue.",
+    "Vale, eso amerita un matiz más.",
+    "Mmm, llevas la cosa a un terreno fascinante."
+  ],
+  "closers": [
+    "Bueno, no me has hecho perder el tiempo, lo admito. Hasta otra.",
+    "Vale, ya está. Vuelvo a mi siesta intelectual. Adiós."
+  ]
+}

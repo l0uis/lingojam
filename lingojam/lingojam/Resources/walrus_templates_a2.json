@@ -1,0 +1,23 @@
+{
+  "level": "A2",
+  "openers": [
+    "Ay, me has despertado. Te vi con {WORD} hace nada — ¿la usas o la copias?",
+    "Hola otra vez. Acabas de estudiar {WORDS}… ¿te queda algo claro?",
+    "Vale, soy todo oídos. Cuéntame, ¿cómo usarías {WORD} en una frase?"
+  ],
+  "prompts": [
+    "Y tú, ¿qué piensas sobre {WORD}? Sin rodeos.",
+    "Vale, descríbeme {WORD} en una frase.",
+    "¿Cuándo sueles {WORD}? Cuéntamelo bien.",
+    "¿Conoces a alguien que {WORD} mucho? Habla."
+  ],
+  "fillers": [
+    "Ajá, sigue.",
+    "Mmm, no me digas.",
+    "Vale, te sigo."
+  ],
+  "closers": [
+    "Bueno, no ha estado mal. Hasta la próxima.",
+    "Vale, ya está bien por hoy. Adiós."
+  ]
+}

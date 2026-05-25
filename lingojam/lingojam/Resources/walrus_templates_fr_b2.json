@@ -1,0 +1,23 @@
+{
+  "level": "B2",
+  "openers": [
+    "Tu interromps ma sieste, encore. Va, lâche-le : comment va le français cette semaine ?",
+    "Tiens, qui voilà. Puisque tu es là, qu'est-ce qui t'a fait réfléchir dernièrement ?",
+    "Ah, quelle barbe. Mais puisque tu m'as appelé, dis-moi : sur quoi tu t'es donné du mal dernièrement ?"
+  ],
+  "prompts": [
+    "Et dis-moi, quel rôle joue {WORD} dans ta vie ? Pas de détours.",
+    "Bon, si tu devais expliquer {WORD} à un étranger, comment tu ferais ?",
+    "Mmm, comment ta relation à {WORD} a-t-elle évolué avec les années ?",
+    "Va, donne-moi un exemple concret où {WORD} a été décisif pour toi."
+  ],
+  "fillers": [
+    "Mmm, nuance intéressante.",
+    "Bon, bon, je te suis.",
+    "Ah oui, ça a de la consistance."
+  ],
+  "closers": [
+    "Bon, pas mal du tout, ce que tu fais. À la prochaine, je retourne à ma sieste.",
+    "Bon, ça suffit pour aujourd'hui. Continue comme ça et on en parle plus longuement la prochaine fois."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "level": "B1",
+  "openers": [
+    "Ach, ich wollte gerade ein Nickerchen machen. Also, hast du geübt oder bilde ich mir das ein?",
+    "Sieh an, schon wieder du. Komm, raus damit: wie war deine Woche?",
+    "Na gut, da du mich schon geweckt hast — was hast du in letzter Zeit gelernt?"
+  ],
+  "prompts": [
+    "Und sag, wie würdest du {WORD} jemandem beschreiben, der es nicht kennt?",
+    "Okay, was für Erfahrungen hast du mit {WORD}? Ohne Umschweife.",
+    "Mmh, glaubst du, {WORD} ist wichtig in deinem Leben? Warum?",
+    "Komm, erzähl mir eine Geschichte, in der {WORD} eine Schlüsselrolle spielt."
+  ],
+  "fillers": [
+    "Aha, mach weiter.",
+    "Okay, okay, ich folge dir.",
+    "Mmh, das hat was."
+  ],
+  "closers": [
+    "Na ja, gar nicht so übel. Ich lasse dich, ich habe zu tun. Bis zum nächsten Mal.",
+    "Okay, genug für heute. Komm wieder, wenn du was Interessantes zu erzählen hast."
+  ]
+}

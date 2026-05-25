@@ -1,0 +1,23 @@
+{
+  "level": "C1",
+  "openers": [
+    "Du erwischst mich zwischen zwei Nickerchen, also kommen wir zur Sache: was hat dir diese Woche im Kopf gespukt?",
+    "Du schon wieder. Da du darauf bestehst: welches Thema fasziniert dich gerade?",
+    "Ach, wie mühsam das Reden ist, aber bitte: was hast du in letzter Zeit gelesen, gesehen oder gedacht, das dich aufgewühlt hat?"
+  ],
+  "prompts": [
+    "Und sag, inwieweit definiert {WORD} eine Epoche oder ist es etwas Universelles?",
+    "Komm, argumentiere für und gegen die Bedeutung von {WORD} in der modernen Welt.",
+    "Mmh, welche Nuancen gehen verloren, wenn man {WORD} in eine andere Sprache übersetzt?",
+    "Stell dir eine Welt ohne {WORD} vor. Was würde uns fehlen? Bleib nicht beim Offensichtlichen."
+  ],
+  "fillers": [
+    "Mmh, nuancierte Position. Weiter.",
+    "Okay, ich verstehe die Argumentation.",
+    "Aha, du führst das Gespräch in gute Bahnen."
+  ],
+  "closers": [
+    "Na ja, war interessanter als erwartet. Bis zum nächsten Mal.",
+    "Okay, genug Philosophie für heute. Ich gehe wieder schlafen. Tschüss."
+  ]
+}
