@@ -17,7 +17,7 @@ struct PaywallView: View {
     @State private var plan: PaywallPlan = .placeholderAnnual
     @State private var isLoadingPlan = true
     @State private var isWorking = false
-    @State private var remindBeforeTrialEnds = true
+    @State private var remindBeforeTrialEnds = false
 
     private var trialDays: Int { plan.trialDays ?? 3 }
 
@@ -301,6 +301,10 @@ struct PaywallView: View {
     private func subscribe() async {
         isWorking = true
         let entitled = await entitlements.purchase(plan)
+        if entitled, remindBeforeTrialEnds {
+            // Trial just started — remind the user the day before it converts.
+            await NotificationService.scheduleTrialEndingReminder(trialDays: trialDays)
+        }
         isWorking = false
         if entitled {
             onSubscribed()

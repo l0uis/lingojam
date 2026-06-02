@@ -238,4 +238,50 @@ enum NotificationService {
         }
         return picks.sorted()
     }
+
+    // MARK: - Trial-ending reminder
+
+    private static let trialReminderIdentifier = "wordrus.trial.endingReminder"
+
+    /// Schedule a one-off local notification reminding the user their free
+    /// trial is about to convert to a paid subscription. Fires `daysBeforeEnd`
+    /// days before the trial ends (default 1), around 10am. Requests
+    /// notification authorization if needed; no-ops if the user declines.
+    /// Call when a trial purchase succeeds and the user opted in.
+    static func scheduleTrialEndingReminder(trialDays: Int, daysBeforeEnd: Int = 1) async {
+        guard await requestAuthorization() else { return }
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [trialReminderIdentifier])
+
+        let cal = Calendar.current
+        let leadDays = max(trialDays - daysBeforeEnd, 0)
+        guard let day = cal.date(byAdding: .day, value: leadDays, to: .now) else { return }
+        var components = cal.dateComponents([.year, .month, .day], from: day)
+        components.hour = 10
+        components.minute = 0
+
+        let trigger: UNNotificationTrigger
+        if let fireDate = cal.date(from: components), fireDate > .now {
+            trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        } else {
+            // Trial too short for a future 10am slot — remind in an hour.
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: false)
+        }
+
+        let content = UNMutableNotificationContent()
+        content.title = "Your free trial is ending"
+        content.body = "Your Wordrus Pro trial ends soon. Cancel anytime if it's not for you."
+        content.sound = .default
+
+        try? await center.add(UNNotificationRequest(
+            identifier: trialReminderIdentifier,
+            content: content,
+            trigger: trigger
+        ))
+    }
+
+    static func cancelTrialEndingReminder() {
+        UNUserNotificationCenter.current()
+            .removePendingNotificationRequests(withIdentifiers: [trialReminderIdentifier])
+    }
 }
