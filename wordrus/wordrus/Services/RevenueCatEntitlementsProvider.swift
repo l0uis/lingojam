@@ -95,23 +95,28 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
         // the real yearly price + trial come from the store, shown in the
         // detail line; the headline is the marketing per-month figure.
         if pkg.packageType == .annual {
-            let trial = trialString(for: product)
-            let detail = [trial, "then \(product.localizedPriceString)/year"]
-                .compactMap { $0 }
-                .joined(separator: ", ")
+            // Trial from the store when present; otherwise fall back to the
+            // designed 3-day trial — the Test Store doesn't simulate intro
+            // offers, and the real trial is configured in App Store Connect
+            // for production.
+            let trial = trialString(for: product) ?? "3-day free trial"
+            let detail = "\(trial), then \(product.localizedPriceString)/year"
             return PaywallPlan(
                 id: product.productIdentifier,
                 title: "Yearly",
                 priceText: PaywallPlan.advertisedMonthlyPriceText,
                 subtitle: detail,
+                trialText: trial,
                 isBestValue: false
             )
         }
+        let trial = trialString(for: product)
         return PaywallPlan(
             id: product.productIdentifier,
             title: title(for: pkg),
             priceText: priceText(for: pkg),
-            subtitle: trialString(for: product),
+            subtitle: trial,
+            trialText: trial,
             isBestValue: false
         )
     }

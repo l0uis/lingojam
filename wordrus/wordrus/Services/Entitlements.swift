@@ -28,6 +28,9 @@ struct PaywallPlan: Identifiable, Hashable {
     let title: String
     let priceText: String
     let subtitle: String?
+    /// Free-trial phrase (e.g. "3-day free trial") when the plan has one.
+    /// Drives the CTA copy ("Start <trial> now"); nil → "Subscribe".
+    let trialText: String?
     let isBestValue: Bool
 
     /// Advertised per-month framing for the yearly plan. The REAL charged
@@ -42,6 +45,7 @@ struct PaywallPlan: Identifiable, Hashable {
         title: "Yearly",
         priceText: advertisedMonthlyPriceText,
         subtitle: "3-day free trial, then €23.99/year",
+        trialText: "3-day free trial",
         isBestValue: false
     )
 

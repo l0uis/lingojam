@@ -211,9 +211,10 @@ struct PaywallView: View {
     }
 
     private var ctaTitle: String {
-        selectedPlan.subtitle?.localizedCaseInsensitiveContains("trial") == true
-            ? "Start free trial"
-            : "Subscribe"
+        if let trial = selectedPlan.trialText {
+            return "Start \(trial) now"
+        }
+        return "Subscribe"
     }
 
     // MARK: - Footer
