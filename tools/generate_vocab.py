@@ -526,6 +526,8 @@ def call_claude(client: Any, model: str, lemmas: list[str], cfg: LangConfig) -> 
 
 
 def validate_entry(entry: dict[str, Any], cfg: LangConfig) -> tuple[bool, str]:
+    if not isinstance(entry, dict):
+        return False, "non-object entry"
     if entry.get("skip"):
         return False, str(entry["skip"])
     required = ("lemma", "partOfSpeech", "gloss", cfg.endonym_field, "exampleEnglish", "decks", "cefrLevel")

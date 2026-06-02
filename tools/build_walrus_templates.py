@@ -25,10 +25,10 @@ TEMPLATES = {
                 "Salut. Tu pratiques le français aujourd'hui, oui ou non ?",
             ],
             "prompts": [
-                "Dis-moi, qu'est-ce que tu {WORD} normalement ?",
-                "Bon, tu aimes {WORD} ? Oui ou non.",
-                "Une phrase avec {WORD}, vas-y.",
-                "Quand est-ce que tu as {WORD} pour la dernière fois ?",
+                "Fais-moi une phrase avec « {WORD} », vas-y.",
+                "Et « {WORD} » ? Mets-le dans une phrase.",
+                "Allez, une phrase avec « {WORD} ».",
+                "Donne-moi un exemple avec le mot « {WORD} ».",
             ],
             "fillers": ["Ah oui.", "D'accord, d'accord.", "Mmm, raconte."],
             "closers": [
@@ -43,10 +43,10 @@ TEMPLATES = {
                 "Bon, je t'écoute. Qu'est-ce que tu as fait aujourd'hui ?",
             ],
             "prompts": [
-                "Et toi, qu'est-ce que tu penses de {WORD} ? Sans détour.",
-                "Bon, décris-moi {WORD} en une phrase.",
-                "Quand est-ce que tu {WORD} d'habitude ? Raconte bien.",
-                "Tu connais quelqu'un qui {WORD} beaucoup ? Vas-y.",
+                "Et toi, qu'est-ce que tu penses de « {WORD} » ? Sans détour.",
+                "Bon, décris-moi « {WORD} » en une phrase.",
+                "Bon, utilise « {WORD} » dans une phrase. Raconte bien.",
+                "Fais-moi une phrase avec « {WORD} », vas-y.",
             ],
             "fillers": ["Ah oui, continue.", "Mmm, sans blague.", "Bon, je te suis."],
             "closers": [
@@ -61,10 +61,10 @@ TEMPLATES = {
                 "Bon, puisque tu m'as réveillé, qu'est-ce que tu as appris dernièrement ?",
             ],
             "prompts": [
-                "Et dis-moi, comment tu décrirais {WORD} à quelqu'un qui ne connaît pas ?",
-                "Bon, quelle est ton expérience avec {WORD} ? Sans détour.",
-                "Mmm, tu penses que {WORD} est important dans ta vie ? Pourquoi ?",
-                "Bon, raconte-moi une histoire où {WORD} est central.",
+                "Et dis-moi, comment tu décrirais « {WORD} » à quelqu'un qui ne le connaît pas ?",
+                "Bon, quelle est ton expérience avec « {WORD} » ? Sans détour.",
+                "Mmm, tu penses que « {WORD} » est important dans ta vie ? Pourquoi ?",
+                "Bon, raconte-moi une histoire où « {WORD} » a toute sa place.",
             ],
             "fillers": ["Ah oui, continue.", "Bon, bon, je te suis.", "Mmm, c'est intéressant ça."],
             "closers": [
@@ -79,10 +79,10 @@ TEMPLATES = {
                 "Ah, quelle barbe. Mais puisque tu m'as appelé, dis-moi : sur quoi tu t'es donné du mal dernièrement ?",
             ],
             "prompts": [
-                "Et dis-moi, quel rôle joue {WORD} dans ta vie ? Pas de détours.",
-                "Bon, si tu devais expliquer {WORD} à un étranger, comment tu ferais ?",
-                "Mmm, comment ta relation à {WORD} a-t-elle évolué avec les années ?",
-                "Va, donne-moi un exemple concret où {WORD} a été décisif pour toi.",
+                "Et dis-moi, quel rôle joue « {WORD} » dans ta vie ? Pas de détours.",
+                "Bon, si tu devais expliquer « {WORD} » à un étranger, comment tu ferais ?",
+                "Mmm, comment ta relation à « {WORD} » a-t-elle évolué avec les années ?",
+                "Va, fais-moi une phrase où « {WORD} » joue un rôle décisif.",
             ],
             "fillers": ["Mmm, nuance intéressante.", "Bon, bon, je te suis.", "Ah oui, ça a de la consistance."],
             "closers": [
@@ -97,10 +97,10 @@ TEMPLATES = {
                 "Ah, quelle paresse de parler, mais bon : qu'as-tu lu, vu ou pensé dernièrement qui t'ait remué ?",
             ],
             "prompts": [
-                "Et dis-moi, dans quelle mesure {WORD} définit une époque, ou est-ce plus universel ?",
-                "Va, argumente pour et contre l'importance de {WORD} dans le monde moderne.",
-                "Mmm, quelles nuances se perdent quand on traduit {WORD} dans une autre langue ?",
-                "Imagine un monde sans {WORD}. Qu'est-ce qui nous manquerait ? Ne reste pas dans l'évidence.",
+                "Et dis-moi, dans quelle mesure « {WORD} » définit une époque, ou est-ce plus universel ?",
+                "Va, argumente pour et contre l'importance de « {WORD} » dans le monde moderne.",
+                "Mmm, quelles nuances se perdent quand on traduit « {WORD} » dans une autre langue ?",
+                "Imagine un monde sans « {WORD} ». Qu'est-ce qui nous manquerait ? Ne reste pas dans l'évidence.",
             ],
             "fillers": ["Mmm, position nuancée. Continue.", "Bon, je comprends le raisonnement.", "Ah oui, ça mène la conversation en bon terrain."],
             "closers": [
@@ -115,10 +115,10 @@ TEMPLATES = {
                 "Va, surprends-moi : quel thème de fond te trotte dans la tête ?",
             ],
             "prompts": [
-                "Dis-moi, quelles connotations culturelles porte le mot {WORD} qu'un étranger saisit rarement ?",
-                "Va, articule une critique étayée du concept de {WORD}.",
-                "Mmm, quels auteurs ou penseurs ont influencé ta vision de {WORD} ?",
-                "Tu dirais que {WORD} est une construction sociale ou quelque chose d'intrinsèque à la nature humaine ? Défends-le.",
+                "Dis-moi, quelles connotations culturelles porte le mot « {WORD} » qu'un étranger saisit rarement ?",
+                "Va, articule une critique étayée du concept de « {WORD} ».",
+                "Mmm, quels auteurs ou penseurs ont influencé ta vision de « {WORD} » ?",
+                "Tu dirais que « {WORD} » est une construction sociale ou quelque chose d'intrinsèque à la nature humaine ? Défends-le.",
             ],
             "fillers": ["Distinction très fine. Continue.", "Bon, ça mérite une nuance supplémentaire.", "Mmm, tu mènes la chose sur un terrain fascinant."],
             "closers": [
@@ -352,7 +352,7 @@ TEMPLATES = {
 
 def main() -> None:
     project_root = Path(__file__).resolve().parent.parent
-    out_dir = project_root / "lingojam" / "lingojam" / "Resources"
+    out_dir = project_root / "wordrus" / "wordrus" / "Resources"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     count = 0

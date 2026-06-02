@@ -152,7 +152,7 @@ def build_dataset(
     """
     if project_root is None:
         project_root = Path(__file__).resolve().parent.parent
-    output_path = project_root / "lingojam" / "lingojam" / "Resources" / output_filename
+    output_path = project_root / "wordrus" / "wordrus" / "Resources" / output_filename
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     decks = deck_definitions or DEFAULT_DECKS

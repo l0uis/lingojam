@@ -1,12 +1,12 @@
 # Walrus Proxy
 
-Cloudflare Worker that sits between the Lingojam iOS app and OpenAI's TTS API. Holds the OpenAI API key as a Worker secret so the app never has to ship it. Per-device rate limiting via KV bounds the damage if the proxy URL leaks.
+Cloudflare Worker that sits between the Wordrus iOS app and OpenAI's TTS API. Holds the OpenAI API key as a Worker secret so the app never has to ship it. Per-device rate limiting via KV bounds the damage if the proxy URL leaks.
 
 Currently exposes one endpoint:
 
 - `POST /v1/walrus/tts` → proxies to OpenAI `audio/speech`, returns MP3 audio.
 
-A future revision will add `/v1/walrus/turn` and `/v1/walrus/evaluate` for the Claude chat brain (see [`ClaudeWalrusBrain.swift`](../../lingojam/lingojam/Services/ClaudeWalrusBrain.swift)).
+A future revision will add `/v1/walrus/turn` and `/v1/walrus/evaluate` for the Claude chat brain (see [`ClaudeWalrusBrain.swift`](../../wordrus/wordrus/Services/ClaudeWalrusBrain.swift)).
 
 ## Deploy
 
@@ -49,7 +49,7 @@ Then from another shell:
 curl -X POST http://localhost:8787/v1/walrus/tts \
   -H "content-type: application/json" \
   -H "x-walrus-device-id: $(uuidgen)" \
-  -H "x-walrus-bundle-id: com.louiscurrie.lingojam" \
+  -H "x-walrus-bundle-id: com.louiscurrie.wordrus" \
   -d '{"text":"Ay, otra vez tú. ¿Qué quieres ahora?","voice":"onyx","instructions":"Speak as a grumpy, sleepy older Spaniard"}' \
   --output walter.mp3
 open walter.mp3

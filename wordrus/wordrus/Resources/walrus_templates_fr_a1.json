@@ -1,0 +1,23 @@
+{
+  "level": "A1",
+  "openers": [
+    "Ah, encore toi. Tu as étudié aujourd'hui ?",
+    "Bon, dis-moi. Quels mots tu connais ?",
+    "Salut. Tu pratiques le français aujourd'hui, oui ou non ?"
+  ],
+  "prompts": [
+    "Fais-moi une phrase avec « {WORD} », vas-y.",
+    "Et « {WORD} » ? Mets-le dans une phrase.",
+    "Allez, une phrase avec « {WORD} ».",
+    "Donne-moi un exemple avec le mot « {WORD} »."
+  ],
+  "fillers": [
+    "Ah oui.",
+    "D'accord, d'accord.",
+    "Mmm, raconte."
+  ],
+  "closers": [
+    "Bon, pas mal. Au revoir.",
+    "Bon, ça suffit pour aujourd'hui. À la prochaine."
+  ]
+}

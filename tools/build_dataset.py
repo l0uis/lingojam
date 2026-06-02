@@ -2,7 +2,7 @@
 """Generate spanish_top1000.json from a hand-curated dictionary.
 
 This script is a build-time tool — it is NOT bundled in the app. It produces
-`lingojam/Resources/spanish_top1000.json` which the app reads on first launch.
+`wordrus/Resources/spanish_top1000.json` which the app reads on first launch.
 
 The curated entries below were authored manually with reference to the
 hermitdave/FrequencyWords Spanish list (top frequencies in OpenSubtitles).
@@ -1063,7 +1063,7 @@ def cefr_for_rank(rank: int) -> str:
 
 def main() -> None:
     project_root = Path(__file__).resolve().parent.parent
-    output_path = project_root / "lingojam" / "lingojam" / "Resources" / "spanish_top1000.json"
+    output_path = project_root / "wordrus" / "wordrus" / "Resources" / "spanish_top1000.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Collect all entries with their deck memberships. Main ENTRIES → "common".

@@ -1,7 +1,7 @@
 {
   "name": "walrus-proxy",
   "version": "0.1.0",
-  "description": "Cloudflare Worker proxy in front of OpenAI TTS for the Lingojam iOS app.",
+  "description": "Cloudflare Worker proxy in front of OpenAI TTS for the Wordrus iOS app.",
   "private": true,
   "scripts": {
     "dev": "wrangler dev",

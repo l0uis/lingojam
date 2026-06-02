@@ -4,7 +4,7 @@ Build-time scripts. Nothing here ships in the app bundle.
 
 ## Vocabulary pipeline
 
-Each supported language has its own seed JSON in `lingojam/lingojam/Resources/`:
+Each supported language has its own seed JSON in `wordrus/wordrus/Resources/`:
 
 | Language | Seed file               | Build script              | LLM cache                          |
 |----------|-------------------------|---------------------------|------------------------------------|
@@ -100,7 +100,7 @@ In `generate_vocab.py`, append a `LangConfig` to `LANG_CONFIGS`:
 
 Then create `tools/build_{language}.py` (copy one of the existing FR/IT/DE
 ones) and add a `TargetLanguage.{language}` case in
-`lingojam/Services/OnboardingStore.swift` plus a matching seed-resource
+`wordrus/Services/OnboardingStore.swift` plus a matching seed-resource
 name. The Swift loader and brain wiring pick it up automatically.
 
 ## Attribution
