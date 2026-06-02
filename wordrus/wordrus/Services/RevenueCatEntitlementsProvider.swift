@@ -99,24 +99,26 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
             // designed 3-day trial — the Test Store doesn't simulate intro
             // offers, and the real trial is configured in App Store Connect
             // for production.
-            let trial = trialString(for: product) ?? "3-day free trial"
-            let detail = "\(trial), then \(product.localizedPriceString)/year"
+            // Trial from the store when present; otherwise fall back to the
+            // designed 3-day trial — the Test Store doesn't simulate intro
+            // offers, and the real trial is configured in App Store Connect
+            // for production.
+            let days = trialDays(for: product) ?? 3
             return PaywallPlan(
                 id: product.productIdentifier,
                 title: "Yearly",
                 priceText: PaywallPlan.advertisedMonthlyPriceText,
-                subtitle: detail,
-                trialText: trial,
+                trialDays: days,
+                billingText: "\(product.localizedPriceString)/year",
                 isBestValue: false
             )
         }
-        let trial = trialString(for: product)
         return PaywallPlan(
             id: product.productIdentifier,
             title: title(for: pkg),
             priceText: priceText(for: pkg),
-            subtitle: trial,
-            trialText: trial,
+            trialDays: trialDays(for: product),
+            billingText: nil,
             isBestValue: false
         )
     }
@@ -147,21 +149,19 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
         }
     }
 
-    /// Surfaces a free-trial intro offer as text, e.g. "3-day free trial".
-    /// Returns nil when there's no trial.
-    private static func trialString(for product: StoreProduct) -> String? {
+    /// Length of a free-trial intro offer in days. Returns nil when there's
+    /// no free trial.
+    private static func trialDays(for product: StoreProduct) -> Int? {
         guard let intro = product.introductoryDiscount,
               intro.paymentMode == .freeTrial else { return nil }
         let period = intro.subscriptionPeriod
-        let unit: String
         switch period.unit {
-        case .day: unit = "day"
-        case .week: unit = "week"
-        case .month: unit = "month"
-        case .year: unit = "year"
-        @unknown default: unit = "day"
+        case .day: return period.value
+        case .week: return period.value * 7
+        case .month: return period.value * 30
+        case .year: return period.value * 365
+        @unknown default: return period.value
         }
-        return "\(period.value)-\(unit) free trial"
     }
 }
 #endif

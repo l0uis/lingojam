@@ -27,11 +27,16 @@ struct PaywallPlan: Identifiable, Hashable {
     let id: String
     let title: String
     let priceText: String
-    let subtitle: String?
-    /// Free-trial phrase (e.g. "3-day free trial") when the plan has one.
-    /// Drives the CTA copy ("Start <trial> now"); nil → "Subscribe".
-    let trialText: String?
+    /// Length of the free trial in days, when the plan has one. Drives the
+    /// CTA copy and the trial-timeline dates.
+    let trialDays: Int?
+    /// Real billing line (e.g. "€23.99/year"), rendered bold.
+    let billingText: String?
     let isBestValue: Bool
+
+    /// Free-trial phrase derived from `trialDays`, e.g. "3-day free trial".
+    /// nil → no trial (CTA reads "Subscribe").
+    var trialText: String? { trialDays.map { "\($0)-day free trial" } }
 
     /// Advertised per-month framing for the yearly plan. The REAL charged
     /// price (€23.99/year) + 3-day trial come from the store; this is the
@@ -44,8 +49,8 @@ struct PaywallPlan: Identifiable, Hashable {
         id: "wordrus_pro_annual",
         title: "Yearly",
         priceText: advertisedMonthlyPriceText,
-        subtitle: "3-day free trial, then €23.99/year",
-        trialText: "3-day free trial",
+        trialDays: 3,
+        billingText: "€23.99/year",
         isBestValue: false
     )
 

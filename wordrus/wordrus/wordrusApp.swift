@@ -42,7 +42,24 @@ struct wordrusApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("-uiPreviewPaywall") {
+                // Launch straight into the paywall for visual QA / screenshots:
+                //   xcrun simctl launch <udid> <bundle> -uiPreviewPaywall
+                PaywallView()
+                    .preferredColorScheme(.light)
+            } else {
+                rootScene
+            }
+            #else
+            rootScene
+            #endif
+        }
+        .modelContainer(sharedModelContainer)
+    }
+
+    private var rootScene: some View {
+        RootView()
                 .preferredColorScheme(.light)
                 .task {
                     // Start observing Pro entitlement. Uses RevenueCat once
@@ -70,7 +87,5 @@ struct wordrusApp: App {
                     guard !id.isEmpty, id != "word" else { return }
                     UserDefaults.standard.set(id, forKey: DeepLink.pendingWordIDKey)
                 }
-        }
-        .modelContainer(sharedModelContainer)
     }
 }
