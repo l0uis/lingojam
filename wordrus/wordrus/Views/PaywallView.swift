@@ -55,7 +55,7 @@ struct PaywallView: View {
                 .multilineTextAlignment(.center)
             Text("You won't be charged anything today")
                 .font(.sniglet(.callout))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(DS.Color.charcoal)
                 .multilineTextAlignment(.center)
         }
     }
