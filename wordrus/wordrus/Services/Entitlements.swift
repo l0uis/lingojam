@@ -30,24 +30,24 @@ struct PaywallPlan: Identifiable, Hashable {
     let subtitle: String?
     let isBestValue: Bool
 
+    /// Advertised per-month framing for the yearly plan. The REAL charged
+    /// price (€23.99/year) + 3-day trial come from the store; this is the
+    /// marketing headline the product owner chose ("just €1.99/mo, billed
+    /// yearly"). NOTE: hardcoded in €, so it won't auto-localize to other
+    /// currencies — revisit if non-Euro storefronts are targeted.
+    static let advertisedMonthlyPriceText = "€1.99 / mo"
+
     static let placeholderAnnual = PaywallPlan(
         id: "wordrus_pro_annual",
-        title: "Annual",
-        priceText: "$39.99 / year",
-        subtitle: "7-day free trial, then billed yearly",
-        isBestValue: true
-    )
-
-    static let placeholderMonthly = PaywallPlan(
-        id: "wordrus_pro_monthly",
-        title: "Monthly",
-        priceText: "$6.99 / month",
-        subtitle: nil,
+        title: "Yearly",
+        priceText: advertisedMonthlyPriceText,
+        subtitle: "3-day free trial, then €23.99/year",
         isBestValue: false
     )
 
     /// Plans rendered before a real store backend supplies live products.
-    static let placeholders = [placeholderAnnual, placeholderMonthly]
+    /// Single yearly plan (the only plan offered).
+    static let placeholders = [placeholderAnnual]
 }
 
 /// Abstraction over whatever actually grants entitlements (RevenueCat, a
@@ -59,6 +59,11 @@ protocol EntitlementsProvider: AnyObject {
     /// current Pro status on start and again whenever it changes (purchase,
     /// restore, renewal, expiry).
     func start(onChange: @escaping (Bool) -> Void)
+
+    /// The purchasable plans to show on the paywall. Real providers fetch
+    /// these live (e.g. from a RevenueCat Offering) so prices are accurate
+    /// and localized. May return an empty array if none are available.
+    func availablePlans() async -> [PaywallPlan]
 
     /// Run the purchase flow for `plan`. Returns whether the user ends up
     /// entitled. A user cancellation is **not** an error — return `false`.
@@ -76,6 +81,7 @@ protocol EntitlementsProvider: AnyObject {
 @MainActor
 final class FreeEntitlementsProvider: EntitlementsProvider {
     func start(onChange: @escaping (Bool) -> Void) { onChange(false) }
+    func availablePlans() async -> [PaywallPlan] { PaywallPlan.placeholders }
     func purchase(_ plan: PaywallPlan) async throws -> Bool { false }
     func restore() async throws -> Bool { false }
 }
@@ -122,6 +128,11 @@ final class Entitlements {
         provider.start { [weak self] storeIsPro in
             Task { @MainActor in self?.apply(storeIsPro: storeIsPro) }
         }
+    }
+
+    /// The plans to show on the paywall, fetched from the active provider.
+    func availablePlans() async -> [PaywallPlan] {
+        await provider.availablePlans()
     }
 
     /// Purchase `plan`. Returns whether the user is now entitled.

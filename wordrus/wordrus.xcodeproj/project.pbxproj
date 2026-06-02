@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA00000000000000000000B1 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = AA00000000000000000000B2 /* RevenueCat */; };
 		364025BC2FBDF4A9003DE00F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364025BB2FBDF4A9003DE00F /* WidgetKit.framework */; };
 		364025BE2FBDF4A9003DE00F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364025BD2FBDF4A9003DE00F /* SwiftUI.framework */; };
 		364025CB2FBDF4AA003DE00F /* WordrusWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 364025B92FBDF4A9003DE00F /* WordrusWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -131,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA00000000000000000000B1 /* RevenueCat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +229,7 @@
 			);
 			name = wordrus;
 			packageProductDependencies = (
+				AA00000000000000000000B2 /* RevenueCat */,
 			);
 			productName = wordrus;
 			productReference = 36913EFB2FBB689600178995 /* wordrus.app */;
@@ -314,6 +317,9 @@
 			mainGroup = 36913EF22FBB689600178995;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
+			packageReferences = (
+				AA00000000000000000000B3 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+			);
 			productRefGroup = 36913EFC2FBB689600178995 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -837,6 +843,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA00000000000000000000B3 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA00000000000000000000B2 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA00000000000000000000B3 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36913EF32FBB689600178995 /* Project object */;
 }

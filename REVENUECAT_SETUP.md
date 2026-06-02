@@ -34,12 +34,10 @@ in `wordrusApp.swift` touches the SDK.
 
 ## Steps to go live
 
-1. **Add the SPM package** (Xcode, ~30 s):
-   - File → Add Package Dependencies…
-   - URL: `https://github.com/RevenueCat/purchases-ios`
-   - Add the **RevenueCat** library product to the **wordrus** target.
-   - That's all the code needs — `#if canImport(RevenueCat)` flips everything
-     on automatically on the next build.
+1. **Add the SPM package** ✅ DONE — RevenueCat `5.75.0` is added to the
+   `wordrus` target (via `purchases-ios`, pinned in `Package.resolved`,
+   up-to-next-major from 5.0.0). `#if canImport(RevenueCat)` is now active and
+   the project builds against the live SDK.
 
 2. **Set your API key** in `Services/RevenueCatEntitlementsProvider.swift`:
    - RevenueCat dashboard → Project → API keys → **Public app-specific key for

@@ -16,8 +16,8 @@ struct PaywallView: View {
     @State private var entitlements = Entitlements.shared
     @State private var selectedPlan: PaywallPlan = .placeholderAnnual
     @State private var isWorking = false
-
-    private let plans = PaywallPlan.placeholders
+    @State private var plans: [PaywallPlan] = []
+    @State private var isLoadingPlans = true
 
     var body: some View {
         ZStack {
@@ -26,9 +26,9 @@ struct PaywallView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     hero
-                    benefits
                     planPicker
                     callToAction
+                    benefits
                     footer
                 }
                 .padding(.horizontal, 24)
@@ -36,8 +36,20 @@ struct PaywallView: View {
                 .padding(.bottom, 32)
             }
         }
+        .overlay(alignment: .topLeading) { moreMenu }
         .overlay(alignment: .topTrailing) { closeButton }
         .interactiveDismissDisabled(isWorking)
+        .task { await loadPlans() }
+    }
+
+    /// Pull purchasable plans from the active provider (live RevenueCat
+    /// packages when available; placeholders otherwise), then preselect the
+    /// best-value option.
+    private func loadPlans() async {
+        let fetched = await entitlements.availablePlans()
+        plans = fetched.isEmpty ? PaywallPlan.placeholders : fetched
+        selectedPlan = plans.first(where: { $0.isBestValue }) ?? plans.first ?? .placeholderAnnual
+        isLoadingPlans = false
     }
 
     // MARK: - Hero
@@ -122,8 +134,14 @@ struct PaywallView: View {
 
     private var planPicker: some View {
         VStack(spacing: 12) {
-            ForEach(plans) { plan in
-                planRow(plan)
+            if isLoadingPlans {
+                ProgressView()
+                    .tint(DS.Color.ink)
+                    .padding(.vertical, 20)
+            } else {
+                ForEach(plans) { plan in
+                    planRow(plan)
+                }
             }
         }
     }
@@ -179,41 +197,17 @@ struct PaywallView: View {
     // MARK: - Call to action
 
     private var callToAction: some View {
-        VStack(spacing: 10) {
-            Button {
-                Task { await subscribe() }
-            } label: {
-                if isWorking {
-                    ProgressView().tint(.white)
-                } else {
-                    Text(ctaTitle)
-                }
+        Button {
+            Task { await subscribe() }
+        } label: {
+            if isWorking {
+                ProgressView().tint(.white)
+            } else {
+                Text(ctaTitle)
             }
-            .buttonStyle(.primary)
-            .disabled(isWorking)
-
-            Button {
-                Task { await restore() }
-            } label: {
-                Text("Restore purchases")
-                    .font(.sniglet(.subheadline))
-                    .foregroundStyle(DS.Color.ink)
-            }
-            .disabled(isWorking)
-
-            #if DEBUG
-            Button {
-                entitlements.setSimulatedPro(true)
-                onSubscribed()
-                dismiss()
-            } label: {
-                Text("Simulate Pro (debug)")
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(.secondary)
-            }
-            .padding(.top, 4)
-            #endif
         }
+        .buttonStyle(.primary)
+        .disabled(isWorking || isLoadingPlans)
     }
 
     private var ctaTitle: String {
@@ -243,6 +237,35 @@ struct PaywallView: View {
         }
         .disabled(isWorking)
         .accessibilityLabel("Close")
+    }
+
+    /// Secondary actions tucked top-left so they don't compete with the
+    /// subscribe CTA. Restore is required by App Review; the debug toggle is
+    /// stripped from release builds.
+    private var moreMenu: some View {
+        Menu {
+            Button {
+                Task { await restore() }
+            } label: {
+                Label("Restore Purchases", systemImage: "arrow.clockwise")
+            }
+            #if DEBUG
+            Button {
+                entitlements.setSimulatedPro(true)
+                onSubscribed()
+                dismiss()
+            } label: {
+                Label("Simulate Pro (Debug)", systemImage: "ladybug")
+            }
+            #endif
+        } label: {
+            Image(systemName: "ellipsis.circle.fill")
+                .font(.title2)
+                .foregroundStyle(.secondary)
+                .padding(16)
+        }
+        .disabled(isWorking)
+        .accessibilityLabel("More options")
     }
 
     // MARK: - Actions
