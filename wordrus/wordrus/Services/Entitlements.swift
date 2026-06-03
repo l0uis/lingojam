@@ -46,7 +46,7 @@ struct PaywallPlan: Identifiable, Hashable {
     static let advertisedMonthlyPriceText = "€1.99 / mo"
 
     static let placeholderAnnual = PaywallPlan(
-        id: "wordrus_pro_annual",
+        id: "wordrus_pro_yearly",
         title: "Yearly",
         priceText: advertisedMonthlyPriceText,
         trialDays: 3,

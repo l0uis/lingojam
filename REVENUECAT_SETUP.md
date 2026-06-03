@@ -47,11 +47,14 @@ in `wordrusApp.swift` touches the SDK.
 
 3. **Configure products in App Store Connect**, then import them into
    RevenueCat:
-   - Two auto-renewing subscriptions in one subscription group:
-     - `wordrus_pro_annual` (with a 7-day free-trial intro offer)
-     - `wordrus_pro_monthly`
-   - These IDs must match `PaywallPlan.placeholderAnnual.id` /
-     `placeholderMonthly.id` in `Entitlements.swift` (or update those to match).
+   - One auto-renewing subscription in a "Wordrus Pro" group:
+     - **`wordrus_pro_yearly`** — 1 year, €23.99, **Free 3-day** intro offer.
+       (NOTE: `wordrus_pro_annual` is permanently burned — it was created
+       under the old `com.louiscurrie.lingojam` app record and Apple product
+       IDs can't be reused, so the live product is `wordrus_pro_yearly`.)
+   - This ID must match `PaywallPlan.placeholderAnnual.id` in
+     `Entitlements.swift` (the offline fallback; the live purchase keys off the
+     RevenueCat package, so any ID works as long as the offering serves it).
 
 4. **Create the entitlement** in RevenueCat:
    - Entitlement identifier: **`pro`** (matches `ProEntitlement.identifier`).
