@@ -11,12 +11,11 @@ import RevenueCat
 /// RevenueCat configuration. The public SDK key is NOT a secret — it ships
 /// inside every app binary.
 ///
-/// NOTE: this is currently a **Test Store** key (`test_…`) — dev only,
-/// simulated purchases, no App Store Connect setup required. Before shipping
-/// real subscriptions, replace it with the Apple **public app-specific key**
-/// (`appl_…`) from the RevenueCat dashboard.
+/// This is the Apple **public app-specific key** (`appl_…`) for the Wordrus
+/// App Store app — it drives real StoreKit purchases. (A `test_…` Test Store
+/// key was used during early development.)
 enum RevenueCatConfig {
-    static let apiKey = "test_xZUjoSzgRXMOjyLgqDguojagsNx"
+    static let apiKey = "appl_XeOpXDxUoBdFpyQFiaIpTPYzhVi"
 }
 
 /// Bridges RevenueCat to the app's `EntitlementsProvider` abstraction so no
