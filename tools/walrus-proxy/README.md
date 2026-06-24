@@ -2,9 +2,10 @@
 
 Cloudflare Worker that sits between the Wordrus iOS app and OpenAI's TTS API. Holds the OpenAI API key as a Worker secret so the app never has to ship it. Per-device rate limiting via KV bounds the damage if the proxy URL leaks.
 
-Currently exposes one endpoint:
+Exposes:
 
 - `POST /v1/walrus/tts` → proxies to OpenAI `audio/speech`, returns MP3 audio.
+- `POST /v1/walrus/enrich` → runs a vocabulary lookup through Claude (Anthropic Messages API), returns a structured dictionary entry as JSON. Backs the "Add a word" feature in the Vocabulary tab (see [`WalrusEnrichmentClient.swift`](../../wordrus/wordrus/Services/WalrusEnrichmentClient.swift)).
 
 A future revision will add `/v1/walrus/turn` and `/v1/walrus/evaluate` for the Claude chat brain (see [`ClaudeWalrusBrain.swift`](../../wordrus/wordrus/Services/ClaudeWalrusBrain.swift)).
 
@@ -26,9 +27,17 @@ npx wrangler login
 npx wrangler kv namespace create RATE_LIMIT
 # → copy the printed `id = "..."` into wrangler.toml
 
+# Create the KV namespace for the shared enrichment cache
+npx wrangler kv namespace create ENRICH_CACHE
+# → copy the printed `id = "..."` into wrangler.toml (replaces PASTE_ENRICH_CACHE_ID_HERE)
+
 # Store the OpenAI key as an encrypted Worker secret
 npx wrangler secret put OPENAI_API_KEY
 # (paste your sk-... key when prompted)
+
+# Store the Anthropic key (for /v1/walrus/enrich)
+npx wrangler secret put ANTHROPIC_API_KEY
+# (paste your sk-ant-... key when prompted)
 
 # Deploy
 npx wrangler deploy
@@ -84,6 +93,59 @@ Responses:
 - `403` → wrong bundle ID
 - `429` → rate-limit hit (`{error, resetAt}` JSON; `resetAt` is unix seconds)
 - `502` → OpenAI returned an error
+
+### `POST /v1/walrus/enrich`
+
+Same required headers as TTS. Body (JSON):
+
+```jsonc
+{
+  "word": "geläufig",        // required, ≤ 80 chars
+  "targetLanguage": "German", // required, English name of the word's language
+  "nativeLanguage": "English" // optional, language to define/translate into; default 'English'
+}
+```
+
+Returns the dictionary entry as JSON (forced via a Claude tool call, so it's always well-formed):
+
+```jsonc
+{
+  "lemma": "geläufig",
+  "partOfSpeech": "adjective",
+  "definition": "common, familiar, fluent",
+  "exampleSentence": "Dieses Wort ist mir geläufig.",
+  "exampleTranslation": "This word is familiar to me."
+}
+```
+
+**Shared cache.** Results are cached in the `ENRICH_CACHE` KV namespace keyed by `enrich:v1:<targetLang>:<nativeLang>:<lowercased-word>`, with no expiry. The first lookup of a word calls Claude (response header `x-walrus-cache: miss`); every later lookup of that word — from any user — is served from KV for free (`x-walrus-cache: hit`). The cache also accumulates into a shared dictionary you can export:
+
+```bash
+# list cached keys
+npx wrangler kv key list --binding ENRICH_CACHE
+# read one entry
+npx wrangler kv key get --binding ENRICH_CACHE "enrich:v1:german:english:geläufig"
+```
+
+Bump the `v1` prefix in `src/index.ts` if you change the prompt/output shape and want to invalidate old entries.
+
+Responses:
+
+- `200` → entry JSON above
+- `400` → missing/oversized `word` or missing `targetLanguage`
+- `403` → wrong bundle ID
+- `429` → rate-limit hit
+- `502` → Anthropic returned an error or no tool call
+
+Test it locally:
+
+```bash
+curl -X POST http://localhost:8787/v1/walrus/enrich \
+  -H "content-type: application/json" \
+  -H "x-walrus-device-id: $(uuidgen)" \
+  -H "x-walrus-bundle-id: com.louiscurrie.wordrus" \
+  -d '{"word":"geläufig","targetLanguage":"German","nativeLanguage":"English"}'
+```
 
 ## Rate limiting
 

@@ -14,6 +14,15 @@ account_id = "f0249f0a2ab4ce77a77d00ba5e73ad94"
 binding = "RATE_LIMIT"
 id = "614499abcea14e4aaa73299f43a8a1d6"
 
+# Shared cache of enrichment results — a growing dictionary of every word
+# users have added. First lookup of a word hits Claude; everyone after is
+# served from here (free + instant). Create it once with:
+#   wrangler kv namespace create ENRICH_CACHE
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "ENRICH_CACHE"
+id = "0057cc75b2204b6da53025c781a15bd9"
+
 [vars]
 # Maximum TTS calls per device per UTC day. Lowered for free-tier safety.
 DAILY_LIMIT_PER_DEVICE = "200"
@@ -22,4 +31,5 @@ DAILY_LIMIT_PER_DEVICE = "200"
 EXPECTED_BUNDLE_ID = "com.louiscurrie.wordrus"
 
 # Secrets — set with `wrangler secret put`. Never commit values here.
-# OPENAI_API_KEY: your OpenAI API key (sk-...)
+# OPENAI_API_KEY: your OpenAI API key (sk-...) — used by /v1/walrus/tts
+# ANTHROPIC_API_KEY: your Anthropic API key (sk-ant-...) — used by /v1/walrus/enrich

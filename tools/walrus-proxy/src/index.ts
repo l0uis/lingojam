@@ -8,7 +8,9 @@
 
 export interface Env {
   OPENAI_API_KEY: string
+  ANTHROPIC_API_KEY: string
   RATE_LIMIT: KVNamespace
+  ENRICH_CACHE: KVNamespace
   DAILY_LIMIT_PER_DEVICE: string
   EXPECTED_BUNDLE_ID: string
 }
@@ -24,7 +26,27 @@ interface TTSRequest {
   model?: string
 }
 
+interface EnrichRequest {
+  /** The word or short phrase the user wants to add. Required. */
+  word: string
+  /** Language the word is in, English name (e.g. "German"). Required. */
+  targetLanguage: string
+  /** Language the definition should be written in (e.g. "English"). */
+  nativeLanguage?: string
+}
+
 const MAX_TEXT_LENGTH = 4000
+const MAX_WORD_LENGTH = 80
+
+// Models for vocabulary enrichment, tried in order. Haiku first: it's ~3x
+// cheaper and faster, and plenty accurate for single-word dictionary entries.
+// Sonnet is the fallback when Haiku is overloaded (529), so a busy-server
+// moment still resolves rather than failing the lookup.
+const ENRICH_MODELS = ['claude-haiku-4-5-20251001', 'claude-sonnet-4-6']
+
+// Anthropic statuses worth retrying / failing over on: rate limit, transient
+// 5xx, and 529 "overloaded".
+const RETRYABLE_STATUSES = [429, 500, 502, 503, 529]
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -44,6 +66,15 @@ export default {
             headers: { 'content-type': 'application/json' },
           })
         )
+      }
+    }
+
+    if (url.pathname === '/v1/walrus/enrich' && request.method === 'POST') {
+      try {
+        return cors(await handleEnrich(request, env))
+      } catch (err) {
+        console.error('enrich error', err)
+        return cors(json({ error: 'internal error' }, 500))
       }
     }
 
@@ -70,7 +101,7 @@ async function handleTTS(request: Request, env: Env): Promise<Response> {
     return json({ error: 'invalid bundle' }, 403)
   }
 
-  const allowed = await checkRateLimit(env, deviceID)
+  const allowed = await checkRateLimit(env, deviceID, 'tts')
   if (!allowed.ok) {
     return json({ error: 'rate limited', resetAt: allowed.resetAt }, 429)
   }
@@ -121,13 +152,175 @@ async function handleTTS(request: Request, env: Env): Promise<Response> {
   })
 }
 
+async function handleEnrich(request: Request, env: Env): Promise<Response> {
+  const deviceID = request.headers.get('X-Walrus-Device-ID')
+  const bundleID = request.headers.get('X-Walrus-Bundle-ID')
+
+  if (!deviceID || deviceID.length < 16 || deviceID.length > 128) {
+    return json({ error: 'invalid device id' }, 400)
+  }
+  if (bundleID !== env.EXPECTED_BUNDLE_ID) {
+    return json({ error: 'invalid bundle' }, 403)
+  }
+
+  const allowed = await checkRateLimit(env, deviceID, 'enrich')
+  if (!allowed.ok) {
+    return json({ error: 'rate limited', resetAt: allowed.resetAt }, 429)
+  }
+
+  const body = (await request.json().catch(() => null)) as EnrichRequest | null
+  const word = body?.word?.trim()
+  const targetLanguage = body?.targetLanguage?.trim()
+  if (!word || word.length === 0) {
+    return json({ error: 'missing word' }, 400)
+  }
+  if (word.length > MAX_WORD_LENGTH) {
+    return json({ error: 'word too long' }, 400)
+  }
+  if (!targetLanguage) {
+    return json({ error: 'missing targetLanguage' }, 400)
+  }
+  const nativeLanguage = body?.nativeLanguage?.trim() || 'English'
+
+  // Shared cache: the same word from any user resolves to the same entry, so
+  // serve a prior result instead of paying for another Claude call. Keyed on
+  // the lowercased input + both languages; `v1` lets us bust the cache if the
+  // prompt/shape changes. Entries never expire — they accumulate into a
+  // shared dictionary of everything users have looked up.
+  const cacheKey = `enrich:v1:${targetLanguage.toLowerCase()}:${nativeLanguage.toLowerCase()}:${word.toLowerCase()}`
+  const cached = await env.ENRICH_CACHE.get(cacheKey)
+  if (cached) {
+    return new Response(cached, {
+      status: 200,
+      headers: { 'content-type': 'application/json', 'x-walrus-cache': 'hit' },
+    })
+  }
+
+  // Force structured output with a single tool the model must call, so we
+  // get clean JSON rather than parsing prose.
+  const tool = {
+    name: 'save_vocabulary_entry',
+    description: 'Record the dictionary entry for the word.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        lemma: {
+          type: 'string',
+          description: `The standard dictionary spelling of the SAME word, in ${targetLanguage}, reduced to its base form. Fix only diacritics/casing; never substitute or invent a different word.`,
+        },
+        partOfSpeech: {
+          type: 'string',
+          description:
+            'One lowercase English word: noun, verb, adjective, adverb, pronoun, preposition, conjunction, or interjection.',
+        },
+        definition: {
+          type: 'string',
+          description: `A short ${nativeLanguage} translation gloss, like a dictionary headword — NOT an explanation. Give the direct equivalent in a few words; use a comma-separated list for multiple senses. For a verb, use the infinitive ("to arrive"). Examples: "to arrive"; "common, familiar, fluent"; "house". No full sentences, no "used to describe…", no usage notes.`,
+        },
+        exampleSentence: {
+          type: 'string',
+          description: `One short, natural sentence in ${targetLanguage} that actually uses the word. Only real, correctly spelled ${targetLanguage} words.`,
+        },
+        exampleTranslation: {
+          type: 'string',
+          description: `The example sentence translated into ${nativeLanguage}.`,
+        },
+      },
+      required: [
+        'lemma',
+        'partOfSpeech',
+        'definition',
+        'exampleSentence',
+        'exampleTranslation',
+      ],
+    },
+  }
+
+  const system = `You are an accurate bilingual dictionary for a language-learning app. \
+You are given one word in ${targetLanguage} and must return its dictionary entry. \
+Be precise: use the real, attested meaning and spelling. Never invent words, never \
+guess wildly. Keep the definition terse — a short translation gloss like a flashcard \
+("to arrive", "common, familiar"), never an explanatory sentence. The example sentence \
+MUST contain the word (you may inflect it for grammar) and use only real, correctly \
+spelled ${targetLanguage} words.`
+
+  const baseBody = {
+    max_tokens: 1024,
+    system,
+    tools: [tool],
+    tool_choice: { type: 'tool', name: 'save_vocabulary_entry' },
+    messages: [
+      {
+        role: 'user',
+        content: `Word: ${word}\nLanguage: ${targetLanguage}\nDefinition language: ${nativeLanguage}`,
+      },
+    ],
+  }
+
+  // Try each model in order; within a model, retry transient errors with a
+  // short backoff. This rides out a busy-server moment (529 overloaded) and,
+  // if Sonnet stays overloaded, fails over to Haiku rather than erroring.
+  let anthropicResp: Response | null = null
+  let lastStatus = -1
+  outer: for (const model of ENRICH_MODELS) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ model, ...baseBody }),
+      })
+      if (anthropicResp.ok) break outer
+      lastStatus = anthropicResp.status
+      // Non-retryable (e.g. 400 bad request, 401 auth) — stop entirely.
+      if (!RETRYABLE_STATUSES.includes(lastStatus)) break outer
+      // Retry the same model once on the first failure; otherwise move on to
+      // the next model.
+      if (attempt === 0) {
+        await new Promise((resolve) => setTimeout(resolve, 500))
+      }
+    }
+  }
+
+  if (!anthropicResp || !anthropicResp.ok) {
+    const errText = anthropicResp ? await anthropicResp.text() : 'no response'
+    console.error('anthropic error', lastStatus, errText)
+    return json({ error: 'upstream error', status: lastStatus }, 502)
+  }
+
+  const data = (await anthropicResp.json()) as {
+    content?: Array<{ type: string; name?: string; input?: unknown }>
+  }
+  const toolUse = data.content?.find(
+    (block) => block.type === 'tool_use' && block.name === 'save_vocabulary_entry'
+  )
+  if (!toolUse || typeof toolUse.input !== 'object' || toolUse.input === null) {
+    console.error('anthropic returned no tool_use', JSON.stringify(data))
+    return json({ error: 'no result' }, 502)
+  }
+
+  // Store for everyone else. waitUntil isn't used so we await — the write is
+  // fast and we'd rather guarantee the entry lands than shave a few ms.
+  const resultJson = JSON.stringify(toolUse.input)
+  await env.ENRICH_CACHE.put(cacheKey, resultJson)
+
+  return new Response(resultJson, {
+    status: 200,
+    headers: { 'content-type': 'application/json', 'x-walrus-cache': 'miss' },
+  })
+}
+
 async function checkRateLimit(
   env: Env,
-  deviceID: string
+  deviceID: string,
+  prefix: string
 ): Promise<{ ok: true } | { ok: false; resetAt: number }> {
   const dailyLimit = parseInt(env.DAILY_LIMIT_PER_DEVICE, 10) || 200
   const today = new Date().toISOString().slice(0, 10) // YYYY-MM-DD UTC
-  const key = `tts:${deviceID}:${today}`
+  const key = `${prefix}:${deviceID}:${today}`
   const tomorrow = new Date()
   tomorrow.setUTCDate(tomorrow.getUTCDate() + 1)
   tomorrow.setUTCHours(0, 0, 0, 0)
