@@ -38,25 +38,26 @@ struct RootView: View {
     var body: some View {
         ZStack {
             TabView(selection: tabSelection) {
-                Tab("Vocabulary", systemImage: "text.book.closed", value: AppTab.myWords) {
+                // Top bar per tab: flag (leading) is supplied by each view's
+                // own deckLanguageToolbar. Trailing differs by tab — add on
+                // Vocabulary, streak on Jam, settings on Phone — so each tab
+                // shows exactly one trailing action.
+                Tab("Words", systemImage: "text.book.closed", value: AppTab.myWords) {
                     NavigationStack {
+                        // Trailing + (add a word) lives in MyWordsView.
                         MyWordsView(scrollToTopSignal: vocabularyScrollToTopSignal)
-                            .settingsToolbar(onRestartOnboarding: presentOnboarding)
-                            .streakToolbar()
                     }
                 }
-                Tab("Jam", systemImage: "waveform", value: AppTab.jam) {
+                Tab("Deck", systemImage: "waveform", value: AppTab.jam) {
                     NavigationStack {
                         JamView()
-                            .settingsToolbar(onRestartOnboarding: presentOnboarding)
                             .streakToolbar()
                     }
                 }
                 Tab("Phone", systemImage: "phone.fill", value: AppTab.phone) {
                     NavigationStack {
                         PhoneView()
-                            .settingsToolbar(onRestartOnboarding: presentOnboarding)
-                            .streakToolbar()
+                            .settingsToolbar(placement: .topBarTrailing, onRestartOnboarding: presentOnboarding)
                     }
                 }
             }
@@ -168,8 +169,11 @@ struct RootView: View {
     }
 
     private func pickTargetWords() -> [VocabularyWord] {
-        ChatStore.pickTargetWords(
-            from: allWords,
+        // Scope to the active language: custom words from other languages
+        // persist across switches and must not become call targets.
+        let languageCode = (OnboardingStore.targetLanguage ?? .spanish).languageCode
+        return ChatStore.pickTargetWords(
+            from: allWords.scoped(to: languageCode),
             progress: allProgress,
             level: OnboardingStore.cefrLevel
         )

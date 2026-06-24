@@ -46,10 +46,19 @@ struct MyWordsView: View {
     @Query(sort: \VocabularyWord.rank) private var words: [VocabularyWord]
     @Query private var progress: [LearningProgress]
     @Query(sort: \ReviewLog.reviewedAt, order: .reverse) private var reviewLogs: [ReviewLog]
+    @AppStorage(OnboardingDefaultsKey.targetLanguage) private var targetLanguageRaw = TargetLanguage.spanish.rawValue
 
     @State private var filter: MyWordsFilter = .learning
     @State private var posFilter: POSFilter = .all
     @State private var selectedWord: VocabularyWord?
+
+    /// Inline "add a word" composer — revealed as a row above the list when
+    /// the toolbar + is tapped.
+    @State private var isComposing = false
+    @State private var newWord = ""
+    @State private var isLookingUp = false
+    @State private var addError: String?
+    @FocusState private var addFieldFocused: Bool
 
     private let topAnchorID = "vocab-list-top"
 
@@ -95,11 +104,19 @@ struct MyWordsView: View {
         return nil
     }
 
+    private var currentLanguageCode: String {
+        (TargetLanguage(rawValue: targetLanguageRaw) ?? .spanish).languageCode
+    }
+
     private var filtered: [VocabularyWord] {
         let ratings = latestRatingByID
         let progressMap = progressByID
+        let language = currentLanguageCode
         return words
             .filter { word in
+                // Scope to the active language so custom words from other
+                // languages (which survive switches) don't leak in.
+                guard word.languageCode == language else { return false }
                 guard bucket(for: word.id, ratings: ratings, progressByID: progressMap) == filter else {
                     return false
                 }
@@ -114,26 +131,6 @@ struct MyWordsView: View {
                 if aDate != bDate { return aDate > bDate }
                 return a.rank < b.rank
             }
-    }
-
-    private var knownCountForPOS: Int {
-        let ratings = latestRatingByID
-        let progressMap = progressByID
-        return words.reduce(0) { acc, word in
-            let matchesPOS = posFilter == .all || POSFilter.primary(of: word.partOfSpeech) == posFilter
-            return acc + (matchesPOS && bucket(for: word.id, ratings: ratings, progressByID: progressMap) == .know ? 1 : 0)
-        }
-    }
-
-    private var knownCountLabel: String {
-        switch posFilter {
-        case .all: knownCountForPOS == 1 ? "word" : "words"
-        case .noun: knownCountForPOS == 1 ? "noun" : "nouns"
-        case .verb: knownCountForPOS == 1 ? "verb" : "verbs"
-        case .adjective: knownCountForPOS == 1 ? "adjective" : "adjectives"
-        case .adverb: knownCountForPOS == 1 ? "adverb" : "adverbs"
-        case .other: knownCountForPOS == 1 ? "word" : "words"
-        }
     }
 
     var body: some View {
@@ -166,13 +163,9 @@ struct MyWordsView: View {
                 .padding(.top, 24)
 
                 List {
-                    if filter == .know {
+                    if isComposing {
                         Section {
-                            knownCountBanner
-                                .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-                                .listRowSeparator(.hidden)
-                                .listRowBackground(Color.clear)
-                                .id(topAnchorID)
+                            addComposerRow
                         }
                     }
 
@@ -183,7 +176,7 @@ struct MyWordsView: View {
                             } label: {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(word.lemma.capitalizedFirst)
-                                        .font(.gochiHand(size: 30, relativeTo: .headline))
+                                        .font(.gochiHand(size: 19, relativeTo: .headline))
                                         .foregroundStyle(Color.whiteboardInk)
                                     Text(LocaleService.definition(for: word))
                                         .font(.sniglet(.subheadline))
@@ -223,6 +216,7 @@ struct MyWordsView: View {
                         Text("\(filtered.count) \(filtered.count == 1 ? "word" : "words")")
                             .sectionHeaderStyle()
                     }
+                    .id(topAnchorID)
                 }
                 .listStyle(.insetGrouped)
                 .scrollContentBackground(.hidden)
@@ -232,8 +226,23 @@ struct MyWordsView: View {
             }
         }
         .background(DS.Color.paper.ignoresSafeArea())
-        .gochiHandNavigationTitle("Vocabulary")
+        .gochiHandNavigationTitle("Words")
         .deckLanguageToolbar()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    withAnimation(.snappy) { isComposing.toggle() }
+                    if !isComposing {
+                        newWord = ""
+                        addError = nil
+                        addFieldFocused = false
+                    }
+                } label: {
+                    Image(systemName: isComposing ? "xmark" : "plus")
+                }
+                .accessibilityLabel(isComposing ? "Cancel adding word" : "Add a word")
+            }
+        }
         .sheet(item: $selectedWord) { word in
             WordDetailView(
                 word: word,
@@ -250,30 +259,128 @@ struct MyWordsView: View {
         }
     }
 
-    private var knownCountBanner: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 10) {
-            Text("\(knownCountForPOS)")
-                .font(.gochiHand(size: 56))
-                .foregroundStyle(DS.Color.ink)
-            Text("\(knownCountLabel) you know")
-                .font(.sniglet(.title3, weight: .medium))
-                .foregroundStyle(.secondary)
-            Spacer()
-        }
-        .tintedSurface()
-    }
-
-    /// Scrolls the list back to the top. When the Know banner is showing,
-    /// the banner row holds the top anchor; otherwise we target the first
-    /// word row by its id.
+    /// Scrolls the list back to the top — anchored on the word-list section
+    /// header.
     private func scrollToTop(proxy: ScrollViewProxy) {
         withAnimation {
-            if filter == .know {
-                proxy.scrollTo(topAnchorID, anchor: .top)
-            } else if let firstID = filtered.first?.id {
-                proxy.scrollTo(firstID, anchor: .top)
+            proxy.scrollTo(topAnchorID, anchor: .top)
+        }
+    }
+
+    /// Inline composer row pinned to the top of the list. Type a word, submit,
+    /// and it's looked up and dropped straight into the list — no sheet, no
+    /// editable fields. A spinner shows during lookup; a failure shows an
+    /// inline message instead of adding anything.
+    private var addComposerRow: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 12) {
+                TextField("Add a word you heard or saw", text: $newWord)
+                    .font(.sniglet(.body))
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .submitLabel(.done)
+                    .focused($addFieldFocused)
+                    .onSubmit { Task { await addWord() } }
+                    .onChange(of: newWord) { _, _ in addError = nil }
+                if isLookingUp {
+                    ProgressView()
+                } else {
+                    Button {
+                        Task { await addWord() }
+                    } label: {
+                        Image(systemName: "arrow.up.circle.fill")
+                            .font(.sniglet(.title2))
+                            .foregroundStyle(canSubmitNewWord ? DS.Color.ink : Color.secondary.opacity(0.35))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(!canSubmitNewWord)
+                    .accessibilityLabel("Add word")
+                }
+            }
+            if let addError {
+                Text(addError)
+                    .font(.sniglet(.footnote))
+                    .foregroundStyle(.orange)
             }
         }
+        .listRowSeparatorTint(DS.Color.inkSeparator)
+        .onAppear { addFieldFocused = true }
+    }
+
+    private var canSubmitNewWord: Bool {
+        !newWord.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
+    /// Looks the typed word up and, on success, persists it. Clears the field
+    /// and keeps focus so several words can be added in a row.
+    @MainActor
+    private func addWord() async {
+        let trimmed = newWord.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, !isLookingUp else { return }
+        isLookingUp = true
+        addError = nil
+
+        let language = OnboardingStore.targetLanguage ?? .spanish
+        let result = await WordEnrichmentService.shared.enrich(
+            word: trimmed,
+            targetLanguage: language,
+            nativeLanguageCode: LocaleService.preferredDefinitionLocale
+        )
+        isLookingUp = false
+
+        guard let result else {
+            addError = "Couldn't look that up. Check your connection and try again."
+            return
+        }
+        let word = persist(result, language: language)
+        newWord = ""
+        // New words land in Learning; switch there so the word is visible
+        // behind the detail card once it's dismissed.
+        if filter != .learning { filter = .learning }
+        if posFilter != .all { posFilter = .all }
+        // Collapse the composer and open the new word's detail card as the
+        // confirmation, rather than refocusing the field for another add.
+        isComposing = false
+        addFieldFocused = false
+        selectedWord = word
+    }
+
+    /// Persists an enriched word and seeds it into the Learning tab. The
+    /// definition and example translation are stored under the user's
+    /// definition locale so `LocaleService` reads them straight back; a fresh
+    /// `LearningProgress` in the `.learning` state makes the word show up
+    /// immediately at the top of Learning instead of falling into the
+    /// unreviewed limbo that `bucket(for:)` leaves seeded words in.
+    @discardableResult
+    private func persist(_ enrichment: WordEnrichmentService.Enrichment, language: TargetLanguage) -> VocabularyWord {
+        let localeKey = LocaleService.preferredDefinitionLocale
+        let encoder = JSONEncoder()
+        func encode(_ map: [String: String]) -> String {
+            (try? encoder.encode(map))
+                .flatMap { String(data: $0, encoding: .utf8) } ?? "{}"
+        }
+
+        let id = "custom-\(language.languageCode)-\(UUID().uuidString)"
+        let nextRank = (words.map(\.rank).max() ?? 1000) + 1
+
+        let word = VocabularyWord(
+            id: id,
+            rank: nextRank,
+            lemma: enrichment.lemma,
+            partOfSpeech: enrichment.partOfSpeech,
+            definitionsJSON: encode([localeKey: enrichment.definition]),
+            exampleSentence: enrichment.exampleSentence,
+            exampleTranslationsJSON: enrichment.exampleTranslation.isEmpty
+                ? "{}"
+                : encode([localeKey: enrichment.exampleTranslation])
+        )
+        word.setDeckSlugs([DeckConstants.commonSlug])
+        context.insert(word)
+
+        let p = LearningProgress(wordID: id, state: .learning, lastReviewedAt: .now)
+        context.insert(p)
+        try? context.save()
+        return word
     }
 
     private func delete(word: VocabularyWord) {
@@ -325,7 +432,7 @@ private struct WordDetailView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(word.lemma.capitalizedFirst)
-                            .font(.gochiHand(size: 52))
+                            .font(.gochiHand(size: 42))
                             .foregroundStyle(Color.whiteboardInk)
                         Text(word.partOfSpeech)
                             .font(.sniglet(.subheadline))

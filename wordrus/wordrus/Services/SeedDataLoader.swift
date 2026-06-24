@@ -111,6 +111,15 @@ enum SeedDataLoader {
         }
 
         let language = OnboardingStore.targetLanguage ?? .spanish
+        seedLanguage(language, context: context)
+    }
+
+    /// Insert the bundled decks + words for `language`. Assumes the previous
+    /// language's *seeded* rows have already been cleared; user-added custom
+    /// words may remain (they're language-scoped at query time). Bypasses the
+    /// `seedIfNeeded` empty-DB guard so it works even when custom words from
+    /// other languages are still present.
+    private static func seedLanguage(_ language: TargetLanguage, context: ModelContext) {
         guard let seed = loadSeed(for: language) else { return }
         let encoder = JSONEncoder()
         for deck in seed.decks ?? [] {
@@ -120,6 +129,7 @@ enum SeedDataLoader {
             context.insert(makeWord(word, encoder: encoder))
         }
         try? context.save()
+        let defaults = UserDefaults.standard
         defaults.set(language.rawValue, forKey: OnboardingDefaultsKey.seededLanguage)
         defaults.set(currentDeckTaxonomyVersion, forKey: OnboardingDefaultsKey.deckTaxonomyVersion)
     }
@@ -185,23 +195,31 @@ enum SeedDataLoader {
         defaults.set(true, forKey: OnboardingDefaultsKey.chatSessionLanguageBackfilled)
     }
 
-    /// Swap the user's target language. Wipes vocabulary and decks — these
-    /// are tied to the previous language — then reseeds from the new
-    /// language's bundled JSON. Resets the deck and level filters so the new
-    /// catalogue isn't hidden by a slug that doesn't exist in it.
+    /// Swap the user's target language. Wipes the previous language's *seeded*
+    /// vocabulary and decks, then reseeds from the new language's bundled JSON.
+    /// Resets the deck and level filters so the new catalogue isn't hidden by
+    /// a slug that doesn't exist in it.
+    ///
+    /// User-added custom words (id `custom-…`) are deliberately KEPT — they're
+    /// the user's own content and would otherwise be lost permanently on a
+    /// language round-trip. They carry their language in their id and every
+    /// word query scopes by language, so a German custom word stays hidden
+    /// while Spanish is active and reappears on switching back.
     ///
     /// `LearningProgress`, `ReviewLog`, `ChatSession`, and `ChatMessage` are
-    /// intentionally preserved. Progress' `wordID` values are language-prefixed
-    /// (e.g. `es-0001`, `fr-0001`) so they harmlessly orphan while another
-    /// language is active and rebind when the user switches back. Chat sessions
-    /// carry a `languageRaw` tag so the Phone tab can scope its history to the
-    /// selected language — keeping call history per language too.
+    /// likewise preserved. Progress' `wordID` values are language-prefixed so
+    /// they harmlessly orphan while another language is active and rebind when
+    /// the user switches back.
     static func switchLanguage(to language: TargetLanguage, context: ModelContext) {
         let defaults = UserDefaults.standard
         defaults.set(language.rawValue, forKey: OnboardingDefaultsKey.targetLanguage)
 
         do {
-            try context.delete(model: VocabularyWord.self)
+            // Delete only seeded words; keep the user's custom words.
+            let existing = try context.fetch(FetchDescriptor<VocabularyWord>())
+            for word in existing where !word.id.hasPrefix("custom-") {
+                context.delete(word)
+            }
             try context.delete(model: Deck.self)
             try context.save()
         } catch {
@@ -209,12 +227,11 @@ enum SeedDataLoader {
         }
 
         defaults.set(DeckConstants.allSlug, forKey: DeckConstants.selectedDeckDefaultsKey)
-        defaults.set(DeckConstants.defaultCEFRLevel, forKey: DeckConstants.selectedCEFRLevelDefaultsKey)
-        // Clear the seed marker so the next seedIfNeeded call performs a real
-        // seed for the new language (the delete above will have emptied the DB).
         defaults.removeObject(forKey: OnboardingDefaultsKey.seededLanguage)
 
-        seedIfNeeded(context)
+        // Seed directly (not via seedIfNeeded): surviving custom words mean the
+        // DB isn't empty, so the seedIfNeeded guard would skip the new seed.
+        seedLanguage(language, context: context)
         DailyWordService.refresh(context: context)
     }
 

@@ -22,7 +22,6 @@ struct JamView: View {
     @Query(sort: \Deck.sortOrder) private var decks: [Deck]
 
     @AppStorage(DeckConstants.selectedDeckDefaultsKey) private var selectedDeckSlug: String = DeckConstants.allSlug
-    @AppStorage(DeckConstants.selectedCEFRLevelDefaultsKey) private var selectedCEFRLevel: String = DeckConstants.defaultCEFRLevel
     @AppStorage("jam.soundEnabled") private var soundEnabled: Bool = true
     @AppStorage(OnboardingDefaultsKey.targetLanguage) private var targetLanguageRaw: String = TargetLanguage.spanish.rawValue
     @AppStorage("dailySet.themeIndex") private var dailyThemeIndex: Int = 0
@@ -49,14 +48,23 @@ struct JamView: View {
     /// True while replaying a finished set via "Practice again" — finishing a
     /// replay returns to the completion screen instead of advancing the theme.
     @State private var isReplaying: Bool = false
+    @State private var entitlements = Entitlements.shared
+    /// Surfaced when a free user taps "Tomorrow's topic" — jumping ahead of
+    /// the daily unlock is a Pro perk (content-breadth gate).
+    @State private var isShowingPaywall: Bool = false
+    @State private var isShowingWidgetSheet: Bool = false
+
+    /// First-run nudge to install the Home Screen widget, shown above the card
+    /// stack until the user taps it or dismisses it. Persists once dismissed.
+    @AppStorage("widgetBanner.dismissed") private var widgetBannerDismissed: Bool = false
 
     private let swipeThreshold: CGFloat = 110
 
     /// The themed daily-set loop runs for any language that ships a deck
-    /// taxonomy (all four bundled languages do). It orders by frequency `rank`
-    /// and ignores the CEFR filter, so it works even where CEFR tagging is
-    /// sparse (FR/DE/IT). Falls back to the endless deck only if a language
-    /// somehow has no decks seeded.
+    /// taxonomy (all four bundled languages do). It orders by frequency `rank`,
+    /// which gives an easy→hard gradient without relying on CEFR tags (sparse
+    /// for FR/DE/IT). Falls back to the endless deck only if a language somehow
+    /// has no decks seeded.
     private var dailySetActive: Bool {
         !decks.isEmpty
     }
@@ -86,14 +94,21 @@ struct JamView: View {
                     }
                 }
             }
+            .safeAreaInset(edge: .top) {
+                // First-run widget nudge, pinned above whichever learning
+                // screen is showing (intro card or card stack). Hidden on the
+                // completion / empty / loading states.
+                if !widgetBannerDismissed && !isSetComplete && !queue.isEmpty {
+                    widgetBanner
+                        .padding(.horizontal, 24)
+                        .padding(.top, 8)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+            }
         }
-        .navigationTitle("")
-        .toolbarTitleDisplayMode(.inline)
+        .gochiHandNavigationTitle("Deck")
         .deckLanguageToolbar(isPresented: $isFilterSheetPresented)
         .onAppear {
-            if selectedCEFRLevel == DeckConstants.allLevelsValue {
-                selectedCEFRLevel = DeckConstants.defaultCEFRLevel
-            }
             // A set completed in a prior session unlocks once the day rolls over.
             if dailySetActive, isSetComplete, dailySetLastCompletedDay != Self.dayKey(.now) {
                 isSetComplete = false
@@ -118,12 +133,6 @@ struct JamView: View {
         }
         .onChange(of: selectedDeckSlug) { _, _ in
             // In themed-daily mode the path picks the deck, not the filter.
-            guard !dailySetActive else { DailyWordService.refresh(context: context); return }
-            queue = []
-            rebuildQueueIfNeeded()
-            DailyWordService.refresh(context: context)
-        }
-        .onChange(of: selectedCEFRLevel) { _, _ in
             guard !dailySetActive else { DailyWordService.refresh(context: context); return }
             queue = []
             rebuildQueueIfNeeded()
@@ -156,7 +165,7 @@ struct JamView: View {
             } else if soundEnabled, !inCall, !onIntro {
                 SpeechService.shared.speak(word.exampleSentence)
             }
-            DailyWordService.setActiveWord(word, progress: allProgress.first { $0.wordID == id })
+            publishWidgetSet()
         }
         .onChange(of: isFilterSheetPresented) { wasPresented, isPresented in
             // When the filter sheet closes after rebuilding the queue, speak
@@ -171,10 +180,65 @@ struct JamView: View {
             guard !inCall else { return }
             SpeechService.shared.speak(word.exampleSentence)
         }
+        .sheet(isPresented: $isShowingPaywall) {
+            // Once subscribed, jump straight into the next theme the user
+            // tapped — no waiting for the daily unlock.
+            PaywallView(onSubscribed: { advanceToTomorrowTopic() })
+        }
+        .sheet(isPresented: $isShowingWidgetSheet) {
+            InstallWidgetSheet()
+        }
     }
 
     private var dragProgress: CGFloat {
         min(1, abs(dragOffset.width) / swipeThreshold)
+    }
+
+    /// First-run widget nudge. Tapping the banner opens the same install sheet
+    /// as Settings; the trailing ✕ dismisses it for good.
+    private var widgetBanner: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "square.grid.2x2.fill")
+                .font(.sniglet(.title3))
+                .foregroundStyle(DS.Color.ink)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Add the wordrus widget")
+                    .font(.sniglet(.subheadline, weight: .bold))
+                    .foregroundStyle(Color.whiteboardInk)
+                Text("Keep today's word on your Home Screen.")
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer(minLength: 0)
+
+            Button {
+                playLightHaptic()
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                    widgetBannerDismissed = true
+                }
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.sniglet(.caption, weight: .bold))
+                    .foregroundStyle(.secondary)
+                    .padding(8)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Dismiss widget tip")
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(.background)
+                .shadow(color: .black.opacity(0.08), radius: 8, y: 3)
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isShowingWidgetSheet = true
+        }
     }
 
     @ViewBuilder
@@ -227,7 +291,9 @@ struct JamView: View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(word.lemma.capitalizedFirst)
-                    .font(.gochiHand(size: 52))
+                    .font(.gochiHand(size: 30))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                     .foregroundStyle(Color.whiteboardInk)
                 Text(word.partOfSpeech)
                     .font(.sniglet(.subheadline))
@@ -469,6 +535,14 @@ struct JamView: View {
         isSetComplete = false
     }
 
+    /// Push the current stack (front card first, then upcoming) to the App
+    /// Group so the widget can rotate through today's words over the day and
+    /// re-sync whenever the user swipes.
+    private func publishWidgetSet() {
+        let progressByID = Dictionary(allProgress.map { ($0.wordID, $0) }) { first, _ in first }
+        DailyWordService.publishSet(queue, progressByID: progressByID)
+    }
+
     private func rebuildQueueIfNeeded() {
         syncDailySetLanguage()
         guard queue.isEmpty, !isSetComplete else { return }
@@ -485,6 +559,10 @@ struct JamView: View {
             refillQueue()
             applyPendingDeepLink()
         }
+        // Publish directly here too: the `queue.first?.id` change handler misses
+        // a same-day relaunch that rebuilds a set starting on the same word, so
+        // the widget would otherwise never get this session's list.
+        publishWidgetSet()
     }
 
     // MARK: - Themed daily set
@@ -508,15 +586,22 @@ struct JamView: View {
         return d[(((dailyThemeIndex - 1) % d.count) + d.count) % d.count]
     }
 
+    /// `allWords` scoped to the active language. Custom words from other
+    /// languages survive language switches, so the raw query is no longer
+    /// single-language — every word-pool read goes through this.
+    private var currentWords: [VocabularyWord] {
+        allWords.scoped(to: (TargetLanguage(rawValue: targetLanguageRaw) ?? .spanish).languageCode)
+    }
+
     /// Build the frozen daily set: due reviews (any theme — the hybrid pool)
-    /// first, then new words from today's theme by frequency rank, ignoring
-    /// the CEFR filter. Capped at `dailySetTarget`.
+    /// first, then new words from today's theme by frequency rank. Capped at
+    /// `dailySetTarget`.
     private func buildDailySet() {
         guard let theme = currentTheme else { queue = []; return }
         let now = Date.now
         let progressByID = Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
 
-        let dueReviews = allWords
+        let dueReviews = currentWords
             .compactMap { word -> (VocabularyWord, Date)? in
                 guard let progress = progressByID[word.id], progress.dueDate <= now else { return nil }
                 return (word, progress.dueDate)
@@ -524,7 +609,7 @@ struct JamView: View {
             .sorted { $0.1 < $1.1 }
             .map(\.0)
 
-        let themeNew = allWords
+        let themeNew = currentWords
             .filter { $0.deckSlugs.contains(theme.slug) && progressByID[$0.id] == nil }
             .sorted { $0.rank < $1.rank }
 
@@ -544,7 +629,7 @@ struct JamView: View {
         // frequency rank (including untagged `common` words, which otherwise
         // never surface in a themed set). `allWords` is already rank-sorted.
         if set.count < target {
-            for word in allWords where progressByID[word.id] == nil {
+            for word in currentWords where progressByID[word.id] == nil {
                 guard seen.insert(word.id).inserted else { continue }
                 set.append(word)
                 if set.count >= target { break }
@@ -573,14 +658,14 @@ struct JamView: View {
     private func lastSetWords() -> [VocabularyWord] {
         let ids = lastSetIDsRaw.split(separator: ",").map(String.init)
         if !ids.isEmpty {
-            let byID = Dictionary(uniqueKeysWithValues: allWords.map { ($0.id, $0) })
+            let byID = Dictionary(uniqueKeysWithValues: currentWords.map { ($0.id, $0) })
             let words = ids.compactMap { byID[$0] }
             if !words.isEmpty { return words }
         }
         guard let theme = justCompletedTheme else { return [] }
         let target = DailySetConfig.clamp(dailySetTarget)
         return Array(
-            allWords
+            currentWords
                 .filter { $0.deckSlugs.contains(theme.slug) }
                 .sorted { $0.rank < $1.rank }
                 .prefix(target)
@@ -598,6 +683,30 @@ struct JamView: View {
         // Setting `queue` fires the `queue.first` change handler, which speaks
         // the front card (setStarted is already true) — no explicit speak here.
         withAnimation { queue = words }
+    }
+
+    /// "Tomorrow's topic" tapped on the completion screen. Jumping ahead of the
+    /// daily unlock is a Pro perk — free users see the paywall first.
+    private func tomorrowTopicTapped() {
+        if entitlements.isPro {
+            playLightHaptic()
+            advanceToTomorrowTopic()
+        } else {
+            isShowingPaywall = true
+        }
+    }
+
+    /// Start the next theme's set immediately, without waiting for the day to
+    /// roll over. `dailyThemeIndex` already points at the next theme (advanced
+    /// in `completeSet`), so clearing the lock and rebuilding lands on it and
+    /// shows its intro card.
+    private func advanceToTomorrowTopic() {
+        dailySetLastCompletedDay = ""
+        isReplaying = false
+        isSetComplete = false
+        setStarted = false
+        queue = []
+        rebuildQueueIfNeeded()
     }
 
     /// Walter rings as the set's climax. Mirrors the engagement-call haptic so
@@ -629,7 +738,9 @@ struct JamView: View {
                     Image(systemName: currentTheme?.iconSystemName ?? "square.stack")
                     Text(currentTheme?.displayName ?? "Today's Set")
                 }
-                .font(.gochiHand(size: 36))
+                .font(.gochiHand(size: 30))
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .foregroundStyle(Color.whiteboardInk)
 
                 if let desc = currentTheme?.deckDescription, !desc.isEmpty {
@@ -652,16 +763,8 @@ struct JamView: View {
                 }
             } label: {
                 Text("Start")
-                    .font(.sniglet(.title3, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
-                            .fill(DS.Color.ink)
-                    )
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.primary)
             .padding(.top, 4)
         }
         .padding(28)
@@ -688,24 +791,35 @@ struct JamView: View {
                     .multilineTextAlignment(.center)
             }
             if let next = currentTheme {
-                VStack(spacing: 6) {
-                    Text("TOMORROW")
-                        .font(.sniglet(.caption2, weight: .bold))
-                        .foregroundStyle(.secondary)
-                    HStack(spacing: 8) {
-                        Image(systemName: next.iconSystemName)
-                        Text(next.displayName)
+                Button {
+                    tomorrowTopicTapped()
+                } label: {
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("TOMORROW'S TOPIC")
+                                .font(.sniglet(.caption2, weight: .bold))
+                                .foregroundStyle(.secondary)
+                            HStack(spacing: 8) {
+                                Image(systemName: next.iconSystemName)
+                                Text(next.displayName)
+                            }
+                            .font(.sniglet(.title3, weight: .bold))
+                            .foregroundStyle(Color.whiteboardInk)
+                        }
+                        Spacer(minLength: 0)
+                        Image(systemName: entitlements.isPro ? "arrow.right.circle.fill" : "lock.fill")
+                            .font(.sniglet(.title3, weight: .bold))
+                            .foregroundStyle(DS.Color.ink)
                     }
-                    .font(.sniglet(.title3, weight: .bold))
-                    .foregroundStyle(Color.whiteboardInk)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .fill(.background)
+                            .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
+                    )
                 }
-                .padding(.horizontal, 24)
-                .padding(.vertical, 16)
-                .background(
-                    RoundedRectangle(cornerRadius: 18, style: .continuous)
-                        .fill(.background)
-                        .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
-                )
+                .buttonStyle(.plain)
             }
             Button {
                 playLightHaptic()
@@ -723,9 +837,11 @@ struct JamView: View {
             .buttonStyle(.plain)
             .padding(.top, 4)
 
-            Label("Next theme unlocks tomorrow", systemImage: "lock.fill")
-                .font(.sniglet(.footnote))
-                .foregroundStyle(.secondary)
+            if !entitlements.isPro {
+                Label("Unlock tomorrow's topic today with Pro", systemImage: "lock.fill")
+                    .font(.sniglet(.footnote))
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding(28)
     }
@@ -745,7 +861,7 @@ struct JamView: View {
         if let index = queue.firstIndex(where: { $0.id == pendingID }) {
             let word = queue.remove(at: index)
             queue.insert(word, at: 0)
-        } else if let word = allWords.first(where: { $0.id == pendingID }) {
+        } else if let word = currentWords.first(where: { $0.id == pendingID }) {
             queue.insert(word, at: 0)
         }
     }
@@ -782,15 +898,8 @@ struct JamView: View {
 
     private func wordsInSelectedDeck() -> [VocabularyWord] {
         let deckSlug = selectedDeckSlug
-        let level = selectedCEFRLevel
-        return allWords.filter { word in
-            if deckSlug != DeckConstants.allSlug, !word.deckSlugs.contains(deckSlug) {
-                return false
-            }
-            if level != DeckConstants.allLevelsValue, word.cefrLevel != level {
-                return false
-            }
-            return true
+        return currentWords.filter { word in
+            deckSlug == DeckConstants.allSlug || word.deckSlugs.contains(deckSlug)
         }
     }
 
@@ -800,7 +909,7 @@ struct JamView: View {
         // progress from a previously-selected language persists in the store
         // (so learned/known state is preserved across switches) but must not
         // surface here as a misleading "next review" date.
-        let currentWordIDs = Set(allWords.map(\.id))
+        let currentWordIDs = Set(currentWords.map(\.id))
         return allProgress
             .filter { currentWordIDs.contains($0.wordID) && $0.dueDate > now }
             .min { $0.dueDate < $1.dueDate }?

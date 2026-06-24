@@ -87,4 +87,18 @@ enum FeatureFlags {
     /// Flip to true ONLY once the Cloudflare proxy is deployed and the
     /// app has a configured proxy URL. See tools/walrus-proxy/README.md.
     static let useRealWalrus = false
+
+    /// Route Add-a-Word vocabulary lookups through the Claude proxy
+    /// (`/v1/walrus/enrich`) for accuracy. Requires the `ANTHROPIC_API_KEY`
+    /// secret set on the worker. Safe to leave on before deploy: a missing
+    /// endpoint just 404s and (with the fallback off) the user sees the
+    /// "couldn't look this up" banner instead of a wrong answer.
+    static let useCloudEnrichment = true
+
+    /// Whether to fall back to the on-device Apple model when the cloud
+    /// lookup fails. OFF by default: the small on-device model hallucinates
+    /// vocabulary (mangles lemmas, invents definitions), which is worse than
+    /// showing nothing for a feature whose whole point is accuracy. Turn on
+    /// only if you want a best-effort offline guess and accept the risk.
+    static let useOnDeviceEnrichmentFallback = false
 }

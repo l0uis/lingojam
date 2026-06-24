@@ -13,7 +13,46 @@ enum DailyWordService {
 
     @MainActor
     static func setActiveWord(_ word: VocabularyWord, progress: LearningProgress?, now: Date = .now) {
-        let snapshot = DailyWordSnapshot(
+        publish(snapshot(for: word, progress: progress, now: now))
+    }
+
+    /// Publish today's ordered word list (the card stack) so the widget can
+    /// rotate through it over the day. `words[0]` is the current front card.
+    /// Passing an empty list clears the set and falls back to the single
+    /// snapshot. No-op (no widget reload) when the word IDs are unchanged.
+    @MainActor
+    static func publishSet(
+        _ words: [VocabularyWord],
+        progressByID: [String: LearningProgress],
+        now: Date = .now
+    ) {
+        guard !words.isEmpty else {
+            if DailyWordSet.load() != nil {
+                DailyWordSet.clear()
+                reloadWidgets()
+            }
+            return
+        }
+
+        let snapshots = words.map { snapshot(for: $0, progress: progressByID[$0.id], now: now) }
+        let existing = DailyWordSet.load()
+        let unchanged = existing?.words.map(\.wordID) == snapshots.map(\.wordID)
+
+        DailyWordSet(words: snapshots, computedAt: now).save()
+        // Keep the single snapshot + notification aligned with the front card.
+        if let front = snapshots.first {
+            front.save()
+            NotificationService.scheduleDailyReminder(using: front)
+        }
+        if !unchanged { reloadWidgets() }
+    }
+
+    private static func snapshot(
+        for word: VocabularyWord,
+        progress: LearningProgress?,
+        now: Date
+    ) -> DailyWordSnapshot {
+        DailyWordSnapshot(
             wordID: word.id,
             lemma: word.lemma,
             partOfSpeech: word.partOfSpeech,
@@ -24,42 +63,37 @@ enum DailyWordService {
             dueDate: progress?.dueDate,
             computedAt: now
         )
-        publish(snapshot)
     }
 
     private static func publish(_ snapshot: DailyWordSnapshot) {
         let existing = DailyWordSnapshot.load()
         if existing?.wordID == snapshot.wordID { return }
         snapshot.save()
+        reloadWidgets()
+        NotificationService.scheduleDailyReminder(using: snapshot)
+    }
+
+    private static func reloadWidgets() {
         #if canImport(WidgetKit)
         WidgetCenter.shared.reloadAllTimelines()
         #endif
-        NotificationService.scheduleDailyReminder(using: snapshot)
     }
 
     @MainActor
     private static func makeSnapshot(context: ModelContext, now: Date) -> DailyWordSnapshot? {
         guard let pick = pickWord(context: context, now: now) else { return nil }
-        let (word, progress) = pick
-
-        return DailyWordSnapshot(
-            wordID: word.id,
-            lemma: word.lemma,
-            partOfSpeech: word.partOfSpeech,
-            definition: LocaleService.definition(for: word),
-            exampleSentence: word.exampleSentence,
-            exampleTranslation: LocaleService.exampleTranslation(for: word),
-            isDueNow: (progress?.dueDate ?? .distantPast) <= now,
-            dueDate: progress?.dueDate,
-            computedAt: now
-        )
+        return snapshot(for: pick.0, progress: pick.1, now: now)
     }
 
     @MainActor
     private static func pickWord(context: ModelContext, now: Date) -> (VocabularyWord, LearningProgress?)? {
-        let allWords = (try? context.fetch(
+        let fetched = (try? context.fetch(
             FetchDescriptor<VocabularyWord>(sortBy: [SortDescriptor(\.rank)])
         )) ?? []
+        // Scope to the active language — custom words from other languages
+        // persist in the store across switches and must not surface here.
+        let languageCode = (OnboardingStore.targetLanguage ?? .spanish).languageCode
+        let allWords = fetched.scoped(to: languageCode)
         let words = filterBySelectedDeck(allWords)
         guard !words.isEmpty else { return nil }
 
@@ -92,13 +126,6 @@ enum DailyWordService {
 
     private static func filterBySelectedDeck(_ words: [VocabularyWord]) -> [VocabularyWord] {
         let slug = UserDefaults.standard.string(forKey: DeckConstants.selectedDeckDefaultsKey) ?? DeckConstants.allSlug
-        let level = UserDefaults.standard.string(forKey: DeckConstants.selectedCEFRLevelDefaultsKey) ?? DeckConstants.allLevelsValue
-        let deckFiltered = words.filter { slug == DeckConstants.allSlug || $0.deckSlugs.contains(slug) }
-        guard level != DeckConstants.allLevelsValue else { return deckFiltered }
-        let levelFiltered = deckFiltered.filter { $0.cefrLevel == level }
-        // Sparse languages (FR/DE/IT) have no words above A2; if the selected
-        // level matches nothing, fall back to the deck pool rather than leaving
-        // the daily word / widget blank.
-        return levelFiltered.isEmpty ? deckFiltered : levelFiltered
+        return words.filter { slug == DeckConstants.allSlug || $0.deckSlugs.contains(slug) }
     }
 }
