@@ -10,9 +10,51 @@ struct SettingsView: View {
 
     @State private var isEditingReminder: Bool = false
     @State private var isShowingWidgetSheet: Bool = false
+    @State private var isShowingPaywall: Bool = false
+    @State private var entitlements = Entitlements.shared
+    @State private var restoreMessage: String?
 
     var body: some View {
         Form {
+            // A visible, always-reachable entry to the subscription. Without
+            // this the paywall is only surfaced by in-context Pro gates (e.g.
+            // calling Dr Tusk), which App Review couldn't locate.
+            Section {
+                if entitlements.isPro {
+                    LabeledContent {
+                        Text("Active")
+                            .font(.sniglet(.body))
+                            .foregroundStyle(.secondary)
+                    } label: {
+                        Label("Wordrus Pro", systemImage: "key.fill")
+                            .font(.sniglet(.body))
+                            .foregroundStyle(.primary)
+                    }
+                } else {
+                    HStack {
+                        Label("Upgrade to Wordrus Pro", systemImage: "key.fill")
+                            .font(.sniglet(.body))
+                            .foregroundStyle(DS.Color.ink)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.sniglet(.caption, weight: .semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture { isShowingPaywall = true }
+                }
+
+                Button {
+                    Task { await restorePurchases() }
+                } label: {
+                    Label("Restore Purchases", systemImage: "arrow.clockwise")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                }
+            } header: {
+                sectionHeader("Wordrus Pro")
+            }
+
             if !displayName.isEmpty {
                 Section {
                     LabeledContent {
@@ -41,44 +83,55 @@ struct SettingsView: View {
                     }
                 }
 
-                Button {
+                HStack {
+                    Text("Reminders")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Text(notificationsEnabled ? "\(notificationsPerDay) / day" : "Off")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.secondary)
+                    Image(systemName: "chevron.right")
+                        .font(.sniglet(.caption, weight: .semibold))
+                        .foregroundStyle(.tertiary)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
                     isEditingReminder = true
-                } label: {
-                    HStack {
-                        Text("Reminders")
-                            .font(.sniglet(.body))
-                            .foregroundStyle(.primary)
-                        Spacer()
-                        Text(notificationsEnabled ? "\(notificationsPerDay) / day" : "Off")
-                            .font(.sniglet(.body))
-                            .foregroundStyle(.secondary)
-                        Image(systemName: "chevron.right")
-                            .font(.sniglet(.caption, weight: .semibold))
-                            .foregroundStyle(.tertiary)
-                    }
                 }
-                .buttonStyle(.plain)
 
-                Button {
-                    isShowingWidgetSheet = true
-                } label: {
-                    HStack {
-                        Text("Widget")
-                            .font(.sniglet(.body))
-                            .foregroundStyle(.primary)
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.sniglet(.caption, weight: .semibold))
-                            .foregroundStyle(.tertiary)
-                    }
+                HStack {
+                    Text("Widget")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.sniglet(.caption, weight: .semibold))
+                        .foregroundStyle(.tertiary)
                 }
-                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    isShowingWidgetSheet = true
+                }
             } header: {
                 sectionHeader("Learning")
             }
 
             #if DEBUG
             Section {
+                Toggle(isOn: debugSimulateProBinding) {
+                    Label("Pro features unlocked", systemImage: "crown.fill")
+                        .font(.sniglet(.body))
+                }
+                .tint(DS.Color.ink)
+                .disabled(entitlements.isForcingFree)
+
+                Toggle(isOn: debugForceFreeBinding) {
+                    Label("Force free (ignore real purchase)", systemImage: "lock.fill")
+                        .font(.sniglet(.body))
+                }
+                .tint(DS.Color.ink)
+
                 Button(role: .destructive) {
                     onRestartOnboarding()
                 } label: {
@@ -88,7 +141,7 @@ struct SettingsView: View {
             } header: {
                 sectionHeader("Debug")
             } footer: {
-                Text("Resets onboarding answers and shows the flow again. Debug builds only.")
+                Text("Flip Pro on to walk through paid flows without buying. Force free overrides a real sandbox purchase so you can test the free/paywall experience. Restarting onboarding resets all answers. Debug builds only.")
                     .font(.sniglet(.footnote))
             }
             #endif
@@ -103,12 +156,56 @@ struct SettingsView: View {
         .sheet(isPresented: $isShowingWidgetSheet) {
             InstallWidgetSheet()
         }
+        .sheet(isPresented: $isShowingPaywall) {
+            PaywallView()
+        }
+        .alert("Restore Purchases",
+               isPresented: Binding(get: { restoreMessage != nil },
+                                    set: { if !$0 { restoreMessage = nil } }),
+               presenting: restoreMessage) { _ in
+            Button("OK", role: .cancel) { restoreMessage = nil }
+        } message: { message in
+            Text(message)
+        }
+    }
+
+    private func restorePurchases() async {
+        switch await Entitlements.shared.restore() {
+        case .restored:
+            restoreMessage = "Your Pro membership has been restored."
+        case .nothingToRestore:
+            restoreMessage = "No previous purchases were found for this Apple Account."
+        case .failed(let message):
+            restoreMessage = message
+        }
     }
 
     private func sectionHeader(_ title: String) -> some View {
         Text(title).sectionHeaderStyle()
     }
 
+    #if DEBUG
+    /// Bridges the DEBUG-only Pro override to a SwiftUI `Toggle`. Writes go
+    /// through `Entitlements.setSimulatedPro` so `isPro` recomputes in place
+    /// and any gated view in the app reacts instantly.
+    private var debugSimulateProBinding: Binding<Bool> {
+        Binding(
+            get: { Entitlements.shared.isSimulatingPro },
+            set: { Entitlements.shared.setSimulatedPro($0) }
+        )
+    }
+
+    /// Bridges the DEBUG-only force-free override to a SwiftUI `Toggle`. When
+    /// on, the app behaves as free even if the store reports an active Pro
+    /// entitlement, so the free/paywall flows are testable on a sandbox
+    /// account that already owns Pro.
+    private var debugForceFreeBinding: Binding<Bool> {
+        Binding(
+            get: { Entitlements.shared.isForcingFree },
+            set: { Entitlements.shared.setForceFree($0) }
+        )
+    }
+    #endif
 }
 
 #Preview {
