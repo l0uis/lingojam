@@ -56,25 +56,39 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
         }
     }
 
-    func purchase(_ plan: PaywallPlan) async throws -> Bool {
-        // Preferred path: buy the exact package the paywall displayed.
-        if let pkg = packagesByPlanID[plan.id] {
-            let result = try await Purchases.shared.purchase(package: pkg)
-            if result.userCancelled { return false }
-            return Self.isPro(result.customerInfo)
+    func purchase(_ plan: PaywallPlan) async -> PurchaseResult {
+        do {
+            // Preferred path: buy the exact package the paywall displayed.
+            if let pkg = packagesByPlanID[plan.id] {
+                let result = try await Purchases.shared.purchase(package: pkg)
+                if result.userCancelled { return .cancelled }
+                return Self.isPro(result.customerInfo) ? .success
+                    : .failed("The purchase didn't complete. Please try again.")
+            }
+            // Fallback: buy by raw product id (e.g. placeholder plans shown
+            // before offerings loaded). An empty result means the product
+            // isn't available in this environment — surface it rather than
+            // letting the CTA silently do nothing.
+            let products = await Purchases.shared.products([plan.id])
+            guard let product = products.first else {
+                return .failed("This subscription is temporarily unavailable. Please try again in a moment.")
+            }
+            let result = try await Purchases.shared.purchase(product: product)
+            if result.userCancelled { return .cancelled }
+            return Self.isPro(result.customerInfo) ? .success
+                : .failed("The purchase didn't complete. Please try again.")
+        } catch {
+            return .failed((error as NSError).localizedDescription)
         }
-        // Fallback: buy by raw product id (e.g. placeholder plans shown before
-        // offerings loaded).
-        let products = await Purchases.shared.products([plan.id])
-        guard let product = products.first else { return false }
-        let result = try await Purchases.shared.purchase(product: product)
-        if result.userCancelled { return false }
-        return Self.isPro(result.customerInfo)
     }
 
-    func restore() async throws -> Bool {
-        let info = try await Purchases.shared.restorePurchases()
-        return Self.isPro(info)
+    func restore() async -> RestoreResult {
+        do {
+            let info = try await Purchases.shared.restorePurchases()
+            return Self.isPro(info) ? .restored : .nothingToRestore
+        } catch {
+            return .failed((error as NSError).localizedDescription)
+        }
     }
 
     // Live updates: renewals, expiries, family-sharing changes, etc.
@@ -85,7 +99,12 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
     // MARK: - Mapping RevenueCat → PaywallPlan
 
     private static func isPro(_ info: CustomerInfo) -> Bool {
-        info.entitlements[ProEntitlement.identifier]?.isActive == true
+        // Prefer the named entitlement, but fall back to "any active
+        // entitlement" — Wordrus ships a single Pro entitlement, so this is
+        // correct and immune to an identifier mismatch between the app and the
+        // RevenueCat dashboard (the original cause of purchases not unlocking).
+        if info.entitlements[ProEntitlement.identifier]?.isActive == true { return true }
+        return !info.entitlements.active.isEmpty
     }
 
     private static func plan(from pkg: Package) -> PaywallPlan {
@@ -94,20 +113,15 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
         // the real yearly price + trial come from the store, shown in the
         // detail line; the headline is the marketing per-month figure.
         if pkg.packageType == .annual {
-            // Trial from the store when present; otherwise fall back to the
-            // designed 3-day trial — the Test Store doesn't simulate intro
-            // offers, and the real trial is configured in App Store Connect
-            // for production.
-            // Trial from the store when present; otherwise fall back to the
-            // designed 3-day trial — the Test Store doesn't simulate intro
-            // offers, and the real trial is configured in App Store Connect
-            // for production.
-            let days = trialDays(for: product) ?? 3
+            // Trial comes ONLY from the store's real introductory offer — never
+            // fabricated. Advertising a trial the App Store payment sheet won't
+            // honour is a 2.1(b) rejection (paywall/dialog discrepancy). nil
+            // here ⇒ the paywall shows no trial.
             return PaywallPlan(
                 id: product.productIdentifier,
                 title: "Yearly",
                 priceText: PaywallPlan.advertisedMonthlyPriceText,
-                trialDays: days,
+                trialDays: trialDays(for: product),
                 billingText: "\(product.localizedPriceString)/year",
                 isBestValue: false
             )
