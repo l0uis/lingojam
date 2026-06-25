@@ -17,9 +17,23 @@ struct PaywallView: View {
     @State private var plan: PaywallPlan = .placeholderAnnual
     @State private var isLoadingPlan = true
     @State private var isWorking = false
-    @State private var remindBeforeTrialEnds = false
+    /// True when the live plans couldn't be fetched — we show a Retry instead
+    /// of a CTA that would buy nothing, and avoid presenting placeholder prices
+    /// as if they were real.
+    @State private var planLoadFailed = false
+    @State private var alert: PaywallAlert?
 
-    private var trialDays: Int { plan.trialDays ?? 3 }
+    /// Configured free-trial length, or nil when the store product has no
+    /// introductory free-trial offer. Never fabricated — the paywall must not
+    /// advertise a trial the App Store payment sheet won't honour (2.1(b)).
+    private var trialDays: Int? { plan.trialDays }
+
+    /// A user-facing message surfaced when a purchase/restore needs feedback.
+    private struct PaywallAlert: Identifiable {
+        let id = UUID()
+        let title: String
+        let message: String
+    }
 
     var body: some View {
         ZStack {
@@ -29,7 +43,7 @@ struct PaywallView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         header
-                        timelineCard
+                        if plan.trialDays != nil { timelineCard }
                         benefitsCard
                     }
                     .padding(.horizontal, 24)
@@ -43,21 +57,20 @@ struct PaywallView: View {
         .overlay(alignment: .topTrailing) { closeButton }
         .interactiveDismissDisabled(isWorking)
         .task { await loadPlan() }
+        .alert(item: $alert) { alert in
+            Alert(title: Text(alert.title),
+                  message: Text(alert.message),
+                  dismissButton: .default(Text("OK")))
+        }
     }
 
     // MARK: - Header
 
     private var header: some View {
-        VStack(spacing: 8) {
-            Text("How your free trial works")
-                .font(.gochiHand(size: 38, relativeTo: .largeTitle))
-                .foregroundStyle(Color.whiteboardInk)
-                .multilineTextAlignment(.center)
-            Text("You won't be charged anything today")
-                .font(.sniglet(.callout))
-                .foregroundStyle(DS.Color.charcoal)
-                .multilineTextAlignment(.center)
-        }
+        Text("Unlock Wordrus Pro")
+            .font(.gochiHand(size: 38, relativeTo: .largeTitle))
+            .foregroundStyle(Color.whiteboardInk)
+            .multilineTextAlignment(.center)
     }
 
     // MARK: - Timeline
@@ -73,13 +86,12 @@ struct PaywallView: View {
     private var trialSteps: [TrialStep] {
         let now = Date()
         let cal = Calendar.current
-        let reminder = cal.date(byAdding: .day, value: max(trialDays - 1, 0), to: now) ?? now
-        let end = cal.date(byAdding: .day, value: trialDays, to: now) ?? now
+        let days = plan.trialDays ?? 0
+        let reminder = cal.date(byAdding: .day, value: max(days - 1, 0), to: now) ?? now
+        let end = cal.date(byAdding: .day, value: days, to: now) ?? now
         let fmt = DateFormatter()
         fmt.setLocalizedDateFormatFromTemplate("ddMMM")
         return [
-            TrialStep(icon: "checkmark", title: "Install the app",
-                      detail: "Done — you're all set.", strikethrough: true),
             TrialStep(icon: "lock.open.fill", title: "Today — Free trial starts",
                       detail: "Everything unlocked, free."),
             TrialStep(icon: "bell.fill", title: "\(fmt.string(from: reminder)) — Trial reminder",
@@ -191,34 +203,45 @@ struct PaywallView: View {
 
     private var footerArea: some View {
         VStack(spacing: 12) {
-            Toggle(isOn: $remindBeforeTrialEnds) {
-                Text("Reminder before trial ends")
-                    .font(.sniglet(.headline))
-                    .foregroundStyle(DS.Color.charcoal)
-            }
-            .tint(DS.Color.ink)
-            .padding(.horizontal, 18)
-            .padding(.vertical, 12)
-            .background(
-                RoundedRectangle(cornerRadius: DS.Radius.card, style: .continuous)
-                    .fill(.white)
-            )
-
-            Button {
-                Task { await subscribe() }
-            } label: {
-                if isWorking {
-                    ProgressView().tint(.white)
-                } else {
-                    Text(ctaTitle)
+            if planLoadFailed {
+                Button {
+                    Task { await retryLoadPlan() }
+                } label: {
+                    if isLoadingPlan {
+                        ProgressView().tint(.white)
+                    } else {
+                        Text("Retry")
+                    }
                 }
-            }
-            .buttonStyle(.primary)
-            .disabled(isWorking || isLoadingPlan)
+                .buttonStyle(.primary)
+                .disabled(isLoadingPlan)
 
-            priceFooter
-                .font(.sniglet(.caption))
-                .multilineTextAlignment(.center)
+                Text("Couldn't load subscription details. Check your connection and try again.")
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            } else {
+                priceBlock
+
+                Button {
+                    Task { await subscribe() }
+                } label: {
+                    if isWorking {
+                        ProgressView().tint(.white)
+                    } else {
+                        Text(ctaTitle)
+                    }
+                }
+                .buttonStyle(.primary)
+                .disabled(isWorking || isLoadingPlan)
+
+                Text(billingNote)
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(DS.Color.charcoal)
+                    .multilineTextAlignment(.center)
+            }
+
+            legalLinks
         }
         .padding(.horizontal, 24)
         .padding(.top, 16)
@@ -231,21 +254,56 @@ struct PaywallView: View {
     }
 
     private var ctaTitle: String {
-        if let trial = plan.trialText {
-            return "Start \(trial) now"
-        }
-        return "Subscribe"
+        plan.trialDays.map { "Start \($0)-day free trial" } ?? "Subscribe"
     }
 
-    /// "€1.99 / mo, billed yearly as **€23.99/year**"
-    private var priceFooter: Text {
-        var text = Text(plan.priceText).foregroundStyle(.secondary)
-        if let billing = plan.billingText {
-            text = text
-                + Text(", billed yearly as ").foregroundStyle(.secondary)
-                + Text(billing).fontWeight(.bold).foregroundStyle(DS.Color.charcoal)
+    /// Small print under the CTA. Clarifies the billing cadence.
+    private var billingNote: String {
+        plan.billingText != nil ? "Billed annually. Cancel anytime." : "Cancel anytime."
+    }
+
+    /// Pricing block: the total billed amount is the most clear and
+    /// conspicuous element (large, in our blue), with the free-trial and
+    /// calculated per-month framing in a subordinate size and colour beneath
+    /// it. Required by Guideline 3.1.2(c) — introductory/calculated pricing
+    /// must not be more prominent than the amount the user is actually billed.
+    private var priceBlock: some View {
+        VStack(spacing: 3) {
+            Text(plan.billingText ?? plan.priceText)
+                .font(.sniglet(.title, weight: .bold))
+                .foregroundStyle(DS.Color.ink)
+            if let subtitle = priceSubtitle {
+                Text(subtitle)
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(DS.Color.charcoal)
+            }
         }
-        return text
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity)
+    }
+
+    /// Subordinate pricing line — trial length + the calculated per-month
+    /// figure, both kept smaller than the billed amount above.
+    private var priceSubtitle: String? {
+        guard let days = plan.trialDays else { return nil }
+        if plan.billingText != nil {
+            // Annual: surface the calculated per-month figure, subordinate.
+            return "\(days) days free, then only \(plan.priceText)"
+        }
+        return "\(days) days free"
+    }
+
+    /// Terms of Use (EULA) + Privacy Policy links, required in the purchase
+    /// flow for auto-renewable subscriptions (Guideline 3.1.2(c)).
+    private var legalLinks: some View {
+        HStack(spacing: 6) {
+            Link("Terms of Use", destination: LegalLinks.termsOfUse)
+            Text("•")
+            Link("Privacy Policy", destination: LegalLinks.privacyPolicy)
+        }
+        .font(.sniglet(.caption))
+        .foregroundStyle(.secondary)
+        .tint(DS.Color.charcoal)
     }
 
     // MARK: - Top controls
@@ -294,31 +352,56 @@ struct PaywallView: View {
 
     private func loadPlan() async {
         let fetched = await entitlements.availablePlans()
-        plan = fetched.first(where: { $0.isBestValue }) ?? fetched.first ?? .placeholderAnnual
+        if let best = fetched.first(where: { $0.isBestValue }) ?? fetched.first {
+            plan = best
+            planLoadFailed = false
+        } else {
+            // No live products — don't show placeholder prices as if real, and
+            // don't offer a CTA that would buy nothing.
+            planLoadFailed = true
+        }
         isLoadingPlan = false
+    }
+
+    private func retryLoadPlan() async {
+        isLoadingPlan = true
+        await loadPlan()
     }
 
     private func subscribe() async {
         isWorking = true
-        let entitled = await entitlements.purchase(plan)
-        if entitled, remindBeforeTrialEnds {
-            // Trial just started — remind the user the day before it converts.
-            await NotificationService.scheduleTrialEndingReminder(trialDays: trialDays)
-        }
+        let result = await entitlements.purchase(plan)
         isWorking = false
-        if entitled {
+        switch result {
+        case .success:
+            if let days = plan.trialDays {
+                // Trial just started — remind everyone the day before it
+                // converts (previously gated behind an opt-in toggle).
+                await NotificationService.scheduleTrialEndingReminder(trialDays: days)
+            }
             onSubscribed()
             dismiss()
+        case .cancelled:
+            break
+        case .failed(let message):
+            alert = PaywallAlert(title: "Purchase Failed", message: message)
         }
     }
 
     private func restore() async {
         isWorking = true
-        let restored = await entitlements.restore()
+        let result = await entitlements.restore()
         isWorking = false
-        if restored {
+        switch result {
+        case .restored:
             onSubscribed()
             dismiss()
+        case .nothingToRestore:
+            alert = PaywallAlert(
+                title: "Nothing to Restore",
+                message: "No previous purchases were found for this Apple Account.")
+        case .failed(let message):
+            alert = PaywallAlert(title: "Restore Failed", message: message)
         }
     }
 }
