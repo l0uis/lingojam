@@ -117,6 +117,11 @@ struct RootView: View {
         .onAppear {
             if !hasCompletedOnboarding { isShowingOnboarding = true }
         }
+        .task {
+            // Restore any user-added words backed up to the proxy — recovers
+            // them after an app delete/reinstall.
+            await CustomWordSync.restore(context: context)
+        }
         .fullScreenCover(isPresented: $isShowingOnboarding) {
             OnboardingFlow()
                 .interactiveDismissDisabled()

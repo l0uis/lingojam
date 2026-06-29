@@ -567,8 +567,25 @@ struct JamView: View {
 
     // MARK: - Themed daily set
 
+    private var hasCustomWords: Bool {
+        currentWords.contains { $0.id.hasPrefix("custom-") }
+    }
+
     private var themedDecks: [Deck] {
-        decks.sorted { $0.sortOrder < $1.sortOrder }
+        var result = decks.sorted { $0.sortOrder < $1.sortOrder }
+        // Append a synthetic "My Words" theme so the user's own added words get
+        // their own day in the rotation — only when they have some, so the
+        // theme never comes up empty.
+        if hasCustomWords {
+            result.append(Deck(
+                slug: DeckConstants.myWordsSlug,
+                displayName: "My Words",
+                deckDescription: "Words you added yourself.",
+                iconSystemName: "star.fill",
+                sortOrder: 9999
+            ))
+        }
+        return result
     }
 
     /// Theme whose set the user is on today (or will start next).
@@ -601,7 +618,24 @@ struct JamView: View {
         let now = Date.now
         let progressByID = Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
 
+        // "My Words" theme: a stable daily-random pick of the user's own added
+        // words. Ordered by a day-seeded hash so the set is the same all day
+        // (survives relaunch/rebuild) but rotates which words appear day to day.
+        if theme.slug == DeckConstants.myWordsSlug {
+            let dayKey = Self.dayKey(now)
+            queue = Array(
+                currentWords
+                    .filter { $0.id.hasPrefix("custom-") }
+                    .sorted { Self.stableHash("\(dayKey)|\($0.id)") < Self.stableHash("\(dayKey)|\($1.id)") }
+                    .prefix(DailySetConfig.clamp(dailySetTarget))
+            )
+            return
+        }
+
+        // Every other theme is seeded vocabulary only — custom words are
+        // excluded so they don't flood the front of the themed set.
         let dueReviews = currentWords
+            .filter { !$0.id.hasPrefix("custom-") }
             .compactMap { word -> (VocabularyWord, Date)? in
                 guard let progress = progressByID[word.id], progress.dueDate <= now else { return nil }
                 return (word, progress.dueDate)
@@ -610,7 +644,7 @@ struct JamView: View {
             .map(\.0)
 
         let themeNew = currentWords
-            .filter { $0.deckSlugs.contains(theme.slug) && progressByID[$0.id] == nil }
+            .filter { !$0.id.hasPrefix("custom-") && $0.deckSlugs.contains(theme.slug) && progressByID[$0.id] == nil }
             .sorted { $0.rank < $1.rank }
 
         let target = DailySetConfig.clamp(dailySetTarget)
@@ -629,13 +663,24 @@ struct JamView: View {
         // frequency rank (including untagged `common` words, which otherwise
         // never surface in a themed set). `allWords` is already rank-sorted.
         if set.count < target {
-            for word in currentWords where progressByID[word.id] == nil {
+            for word in currentWords where !word.id.hasPrefix("custom-") && progressByID[word.id] == nil {
                 guard seen.insert(word.id).inserted else { continue }
                 set.append(word)
                 if set.count >= target { break }
             }
         }
         queue = set
+    }
+
+    /// Deterministic FNV-1a hash — stable across launches (unlike
+    /// `String.hashValue`, which is randomized per process), so the day-seeded
+    /// "My Words" ordering is identical every time the set rebuilds in a day.
+    private static func stableHash(_ string: String) -> UInt64 {
+        var hash: UInt64 = 0xcbf29ce484222325
+        for byte in string.utf8 {
+            hash = (hash ^ UInt64(byte)) &* 0x00000100000001B3
+        }
+        return hash
     }
 
     private func completeSet() {
@@ -898,8 +943,13 @@ struct JamView: View {
 
     private func wordsInSelectedDeck() -> [VocabularyWord] {
         let deckSlug = selectedDeckSlug
+        if deckSlug == DeckConstants.myWordsSlug {
+            return currentWords.filter { $0.id.hasPrefix("custom-") }
+        }
         return currentWords.filter { word in
-            deckSlug == DeckConstants.allSlug || word.deckSlugs.contains(deckSlug)
+            // Custom words live only under "My Words", never in seeded decks.
+            guard !word.id.hasPrefix("custom-") else { return false }
+            return deckSlug == DeckConstants.allSlug || word.deckSlugs.contains(deckSlug)
         }
     }
 

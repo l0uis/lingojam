@@ -164,10 +164,10 @@ struct PaywallView: View {
                 .foregroundStyle(DS.Color.ink)
             benefitRow(icon: "phone.fill", title: "Call Dr Tusk anytime",
                        detail: "He still calls you for free — Pro lets you call him on demand.")
+            benefitRow(icon: "text.badge.plus", title: "Add your own words",
+                       detail: "Look up any word you hear or see — definition and example added instantly.")
             benefitRow(icon: "globe", title: "Every language",
                        detail: "Switch between all supported languages.")
-            benefitRow(icon: "chart.line.uptrend.xyaxis", title: "Every level",
-                       detail: "Practise across every CEFR level, A1 to C2.")
             benefitRow(icon: "square.grid.2x2.fill", title: "Every topic",
                        detail: "Unlock all themed decks, not just the basics.")
         }

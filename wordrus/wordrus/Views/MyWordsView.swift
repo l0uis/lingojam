@@ -53,12 +53,15 @@ struct MyWordsView: View {
     @State private var selectedWord: VocabularyWord?
 
     /// Inline "add a word" composer — revealed as a row above the list when
-    /// the toolbar + is tapped.
+    /// the toolbar + is tapped. Adding words is a Pro feature, so opening the
+    /// composer is gated behind the paywall.
     @State private var isComposing = false
     @State private var newWord = ""
     @State private var isLookingUp = false
     @State private var addError: String?
     @FocusState private var addFieldFocused: Bool
+    @State private var entitlements = Entitlements.shared
+    @State private var isShowingPaywall = false
 
     private let topAnchorID = "vocab-list-top"
 
@@ -231,17 +234,21 @@ struct MyWordsView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    withAnimation(.snappy) { isComposing.toggle() }
-                    if !isComposing {
-                        newWord = ""
-                        addError = nil
-                        addFieldFocused = false
+                    if isComposing {
+                        closeComposer()
+                    } else if entitlements.isPro {
+                        openComposer()
+                    } else {
+                        isShowingPaywall = true
                     }
                 } label: {
                     Image(systemName: isComposing ? "xmark" : "plus")
                 }
                 .accessibilityLabel(isComposing ? "Cancel adding word" : "Add a word")
             }
+        }
+        .sheet(isPresented: $isShowingPaywall) {
+            PaywallView(onSubscribed: openComposer)
         }
         .sheet(item: $selectedWord) { word in
             WordDetailView(
@@ -265,6 +272,17 @@ struct MyWordsView: View {
         withAnimation {
             proxy.scrollTo(topAnchorID, anchor: .top)
         }
+    }
+
+    private func openComposer() {
+        withAnimation(.snappy) { isComposing = true }
+    }
+
+    private func closeComposer() {
+        withAnimation(.snappy) { isComposing = false }
+        newWord = ""
+        addError = nil
+        addFieldFocused = false
     }
 
     /// Inline composer row pinned to the top of the list. Type a word, submit,
@@ -317,6 +335,11 @@ struct MyWordsView: View {
     private func addWord() async {
         let trimmed = newWord.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty, !isLookingUp else { return }
+        guard entitlements.isPro else {
+            closeComposer()
+            isShowingPaywall = true
+            return
+        }
         isLookingUp = true
         addError = nil
 
@@ -333,6 +356,21 @@ struct MyWordsView: View {
             return
         }
         let word = persist(result, language: language)
+        // Back up so the word survives an app delete/reinstall.
+        let localeKey = LocaleService.preferredDefinitionLocale
+        Task {
+            try? await WordBackupClient.shared.upsert(BackupWord(
+                id: word.id,
+                lang: language.languageCode,
+                localeKey: localeKey,
+                lemma: result.lemma,
+                partOfSpeech: result.partOfSpeech,
+                definition: result.definition,
+                exampleSentence: result.exampleSentence,
+                exampleTranslation: result.exampleTranslation,
+                addedAt: Date().timeIntervalSince1970
+            ))
+        }
         newWord = ""
         // New words land in Learning; switch there so the word is visible
         // behind the detail card once it's dismissed.
@@ -374,7 +412,7 @@ struct MyWordsView: View {
                 ? "{}"
                 : encode([localeKey: enrichment.exampleTranslation])
         )
-        word.setDeckSlugs([DeckConstants.commonSlug])
+        word.setDeckSlugs([DeckConstants.myWordsSlug])
         context.insert(word)
 
         let p = LearningProgress(wordID: id, state: .learning, lastReviewedAt: .now)
@@ -384,14 +422,19 @@ struct MyWordsView: View {
     }
 
     private func delete(word: VocabularyWord) {
-        for p in progress where p.wordID == word.id {
+        let wordID = word.id
+        for p in progress where p.wordID == wordID {
             context.delete(p)
         }
-        for log in reviewLogs where log.wordID == word.id {
+        for log in reviewLogs where log.wordID == wordID {
             context.delete(log)
         }
         context.delete(word)
         try? context.save()
+        // Drop it from the backup too, so it doesn't reappear on reinstall.
+        if wordID.hasPrefix("custom-") {
+            Task { try? await WordBackupClient.shared.delete(id: wordID) }
+        }
     }
 
     private func record(rating: ReviewRating, for word: VocabularyWord) {

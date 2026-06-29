@@ -27,9 +27,9 @@ final class Deck {
 enum DeckConstants {
     static let commonSlug = "common"
     static let allSlug = "__all"
+    /// Synthetic deck for the user's own added words. Not seeded from JSON —
+    /// JamView injects it into the theme rotation when custom words exist, and
+    /// new custom words are tagged with it.
+    static let myWordsSlug = "__mywords"
     static let selectedDeckDefaultsKey = "selectedDeckSlug"
-    static let selectedCEFRLevelDefaultsKey = "selectedCEFRLevel"
-    static let allLevelsValue = "__all"
-    static let cefrLevels: [String] = ["A1", "A2", "B1", "B2", "C1", "C2"]
-    static let defaultCEFRLevel = "A1"
 }
