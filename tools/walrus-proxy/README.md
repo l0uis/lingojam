@@ -7,7 +7,19 @@ Exposes:
 - `POST /v1/walrus/tts` → proxies to OpenAI `audio/speech`, returns MP3 audio.
 - `POST /v1/walrus/enrich` → runs a vocabulary lookup through Claude (Anthropic Messages API), returns a structured dictionary entry as JSON. Backs the "Add a word" feature in the Vocabulary tab (see [`WalrusEnrichmentClient.swift`](../../wordrus/wordrus/Services/WalrusEnrichmentClient.swift)).
 
+- `GET|POST /v1/walrus/words` + `POST /v1/walrus/words/delete` → per-device backup of user-added words, so they survive an app delete/reinstall (see [`WordBackupClient.swift`](../../wordrus/wordrus/Services/WordBackupClient.swift)).
+
 A future revision will add `/v1/walrus/turn` and `/v1/walrus/evaluate` for the Claude chat brain (see [`ClaudeWalrusBrain.swift`](../../wordrus/wordrus/Services/ClaudeWalrusBrain.swift)).
+
+### Word backup — `/v1/walrus/words`
+
+Same required headers as the others. Stored in the `ENRICH_CACHE` KV namespace under `words:<deviceID>` (one JSON array per device). The device ID comes from the iOS Keychain, which persists across app delete/reinstall — so reinstalling restores the user's words.
+
+- `GET /v1/walrus/words` → `{ "words": [ {id, lang, localeKey, lemma, partOfSpeech, definition, exampleSentence, exampleTranslation, addedAt}, … ] }`
+- `POST /v1/walrus/words` with one word entry as the body → upsert (add or update by `id`).
+- `POST /v1/walrus/words/delete` with `{ "id": "custom-…" }` → remove one word.
+
+Per-device, no account system — words follow the Keychain device ID (same device only; cross-device would need an iCloud-synced key).
 
 ## Deploy
 

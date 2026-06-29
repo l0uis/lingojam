@@ -78,6 +78,26 @@ export default {
       }
     }
 
+    // Per-device backup of user-added words, so they survive app
+    // delete/reinstall. Keyed by device ID in ENRICH_CACHE.
+    if (url.pathname === '/v1/walrus/words') {
+      try {
+        if (request.method === 'GET') return cors(await handleWordsList(request, env))
+        if (request.method === 'POST') return cors(await handleWordsUpsert(request, env))
+      } catch (err) {
+        console.error('words error', err)
+        return cors(json({ error: 'internal error' }, 500))
+      }
+    }
+    if (url.pathname === '/v1/walrus/words/delete' && request.method === 'POST') {
+      try {
+        return cors(await handleWordsDelete(request, env))
+      } catch (err) {
+        console.error('words delete error', err)
+        return cors(json({ error: 'internal error' }, 500))
+      }
+    }
+
     if (url.pathname === '/health') {
       return cors(new Response('ok'))
     }
@@ -313,6 +333,99 @@ spelled ${targetLanguage} words.`
   })
 }
 
+// MARK: - Word backup (survives app delete/reinstall)
+
+interface BackupWord {
+  id: string
+  lang: string
+  localeKey: string
+  lemma: string
+  partOfSpeech: string
+  definition: string
+  exampleSentence: string
+  exampleTranslation: string
+  addedAt?: number
+}
+
+const MAX_BACKUP_WORDS = 5000
+
+function wordsKey(deviceID: string): string {
+  return `words:${deviceID}`
+}
+
+// Validate the caller and return its device ID, or an error Response.
+function authDevice(request: Request, env: Env): { deviceID: string } | Response {
+  const deviceID = request.headers.get('X-Walrus-Device-ID')
+  const bundleID = request.headers.get('X-Walrus-Bundle-ID')
+  if (!deviceID || deviceID.length < 16 || deviceID.length > 128) {
+    return json({ error: 'invalid device id' }, 400)
+  }
+  if (bundleID !== env.EXPECTED_BUNDLE_ID) {
+    return json({ error: 'invalid bundle' }, 403)
+  }
+  return { deviceID }
+}
+
+async function readWords(env: Env, deviceID: string): Promise<BackupWord[]> {
+  const raw = await env.ENRICH_CACHE.get(wordsKey(deviceID))
+  if (!raw) return []
+  try {
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? (parsed as BackupWord[]) : []
+  } catch {
+    return []
+  }
+}
+
+async function handleWordsList(request: Request, env: Env): Promise<Response> {
+  const auth = authDevice(request, env)
+  if (auth instanceof Response) return auth
+  return json({ words: await readWords(env, auth.deviceID) }, 200)
+}
+
+async function handleWordsUpsert(request: Request, env: Env): Promise<Response> {
+  const auth = authDevice(request, env)
+  if (auth instanceof Response) return auth
+
+  const body = (await request.json().catch(() => null)) as Partial<BackupWord> | null
+  if (!body || typeof body.id !== 'string' || body.id.length === 0) {
+    return json({ error: 'missing id' }, 400)
+  }
+  const str = (v: unknown, fallback = ''): string => (typeof v === 'string' ? v : fallback)
+  const entry: BackupWord = {
+    id: body.id,
+    lang: str(body.lang),
+    localeKey: str(body.localeKey, 'en'),
+    lemma: str(body.lemma),
+    partOfSpeech: str(body.partOfSpeech),
+    definition: str(body.definition),
+    exampleSentence: str(body.exampleSentence),
+    exampleTranslation: str(body.exampleTranslation),
+    addedAt: typeof body.addedAt === 'number' ? body.addedAt : undefined,
+  }
+
+  const words = await readWords(env, auth.deviceID)
+  const idx = words.findIndex((w) => w.id === entry.id)
+  if (idx >= 0) {
+    words[idx] = entry
+  } else {
+    if (words.length >= MAX_BACKUP_WORDS) return json({ error: 'backup full' }, 409)
+    words.push(entry)
+  }
+  await env.ENRICH_CACHE.put(wordsKey(auth.deviceID), JSON.stringify(words))
+  return json({ ok: true, count: words.length }, 200)
+}
+
+async function handleWordsDelete(request: Request, env: Env): Promise<Response> {
+  const auth = authDevice(request, env)
+  if (auth instanceof Response) return auth
+  const body = (await request.json().catch(() => null)) as { id?: string } | null
+  if (!body || typeof body.id !== 'string') return json({ error: 'missing id' }, 400)
+  const words = (await readWords(env, auth.deviceID)).filter((w) => w.id !== body.id)
+  await env.ENRICH_CACHE.put(wordsKey(auth.deviceID), JSON.stringify(words))
+  return json({ ok: true, count: words.length }, 200)
+}
+
 async function checkRateLimit(
   env: Env,
   deviceID: string,
@@ -345,7 +458,7 @@ function json(body: unknown, status: number): Response {
 function cors(resp: Response): Response {
   const headers = new Headers(resp.headers)
   headers.set('access-control-allow-origin', '*')
-  headers.set('access-control-allow-methods', 'POST, OPTIONS')
+  headers.set('access-control-allow-methods', 'GET, POST, OPTIONS')
   headers.set('access-control-allow-headers', 'content-type, x-walrus-device-id, x-walrus-bundle-id')
   return new Response(resp.body, { status: resp.status, headers })
 }
