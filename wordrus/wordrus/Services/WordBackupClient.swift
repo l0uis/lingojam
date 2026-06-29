@@ -1,8 +1,22 @@
 import Foundation
 import SwiftData
 
+/// Review state for a backed-up word — enough to rebuild its Known/Learning
+/// bucket and its spaced-repetition schedule on restore. `latestRating` is the
+/// signal that drives the Known vs Learning split (a Good/Easy review = Known).
+struct BackupProgress: Codable {
+    var state: String
+    var easeFactor: Double
+    var intervalDays: Int
+    var repetitions: Int
+    var lapses: Int
+    var dueDate: Double
+    var lastReviewedAt: Double?
+    var latestRating: Int?
+}
+
 /// One user-added word, as backed up to the walrus proxy. Flat shape so the
-/// worker can store it as plain JSON; `VocabularyWord` is reconstructed from
+/// worker can store it opaquely; `VocabularyWord` (+ progress) is rebuilt from
 /// it on restore.
 struct BackupWord: Codable {
     var id: String
@@ -14,12 +28,13 @@ struct BackupWord: Codable {
     var exampleSentence: String
     var exampleTranslation: String
     var addedAt: Double?
+    var progress: BackupProgress?
 }
 
-/// Backs the user's added words up to the walrus proxy (keyed by the Keychain
-/// device ID, which survives app delete/reinstall) so they aren't lost when
-/// the local SwiftData store is wiped. See `tools/walrus-proxy/src/index.ts`
-/// (`/v1/walrus/words`).
+/// Backs the user's added words (with review progress) up to the walrus proxy,
+/// keyed by the Keychain device ID — which survives app delete/reinstall and,
+/// being iCloud-synced, follows the user to a new device. See
+/// `tools/walrus-proxy/src/index.ts` (`/v1/walrus/words`).
 @MainActor
 final class WordBackupClient {
     static let shared = WordBackupClient()
@@ -34,6 +49,7 @@ final class WordBackupClient {
     }
 
     private struct ListResponse: Decodable { let words: [BackupWord] }
+    private struct ReplaceBody: Encodable { let words: [BackupWord] }
 
     /// Fetch every word backed up for this device.
     func list() async throws -> [BackupWord] {
@@ -41,16 +57,10 @@ final class WordBackupClient {
         return try JSONDecoder().decode(ListResponse.self, from: data).words
     }
 
-    /// Add or update one word in the backup.
-    func upsert(_ word: BackupWord) async throws {
-        let body = try JSONEncoder().encode(word)
+    /// Replace the whole backup with the given snapshot (one round trip).
+    func replaceAll(_ words: [BackupWord]) async throws {
+        let body = try JSONEncoder().encode(ReplaceBody(words: words))
         _ = try await send(path: "/v1/walrus/words", method: "POST", body: body)
-    }
-
-    /// Remove one word from the backup (called when the user deletes it).
-    func delete(id: String) async throws {
-        let body = try JSONSerialization.data(withJSONObject: ["id": id])
-        _ = try await send(path: "/v1/walrus/words/delete", method: "POST", body: body)
     }
 
     private func send(path: String, method: String, body: Data?) async throws -> (Data, HTTPURLResponse) {
@@ -72,13 +82,65 @@ final class WordBackupClient {
     }
 }
 
-/// Reconciles the per-device word backup into the local SwiftData store.
+/// Reconciles the per-device word backup with the local SwiftData store.
 @MainActor
 enum CustomWordSync {
-    /// Pull the backup and insert any custom words missing locally — this is
-    /// what restores a user's words after a delete/reinstall. Idempotent:
-    /// words already present are left untouched, so it's safe to run on every
-    /// launch.
+    /// Push a snapshot of every custom word (with its current review progress)
+    /// to the backup. One network call; called after add/delete and when the
+    /// app backgrounds, so reviews from any screen are captured.
+    static func pushAll(context: ModelContext) async {
+        let all = (try? context.fetch(FetchDescriptor<VocabularyWord>())) ?? []
+        let custom = all.filter { $0.id.hasPrefix("custom-") }.sorted { $0.rank < $1.rank }
+
+        let progresses = (try? context.fetch(FetchDescriptor<LearningProgress>())) ?? []
+        let progressByID = Dictionary(progresses.map { ($0.wordID, $0) }) { first, _ in first }
+
+        let logs = (try? context.fetch(
+            FetchDescriptor<ReviewLog>(sortBy: [SortDescriptor(\.reviewedAt, order: .reverse)])
+        )) ?? []
+        var latestRatingByID: [String: Int] = [:]
+        for log in logs where latestRatingByID[log.wordID] == nil {
+            latestRatingByID[log.wordID] = log.ratingRaw
+        }
+
+        let entries: [BackupWord] = custom.map { word in
+            let def = word.definitions.first
+            let localeKey = def?.key ?? "en"
+            let progress = progressByID[word.id].map { p in
+                BackupProgress(
+                    state: p.state.rawValue,
+                    easeFactor: p.easeFactor,
+                    intervalDays: p.intervalDays,
+                    repetitions: p.repetitions,
+                    lapses: p.lapses,
+                    dueDate: p.dueDate.timeIntervalSince1970,
+                    lastReviewedAt: p.lastReviewedAt?.timeIntervalSince1970,
+                    latestRating: latestRatingByID[word.id]
+                )
+            }
+            return BackupWord(
+                id: word.id,
+                lang: word.languageCode,
+                localeKey: localeKey,
+                lemma: word.lemma,
+                partOfSpeech: word.partOfSpeech,
+                definition: def?.value ?? "",
+                exampleSentence: word.exampleSentence,
+                exampleTranslation: word.exampleTranslations[localeKey]
+                    ?? word.exampleTranslations.values.first ?? "",
+                addedAt: nil,
+                progress: progress
+            )
+        }
+
+        // Even an empty list is pushed, so a deletion of the last word clears
+        // the backup rather than leaving a stale entry to be re-restored.
+        try? await WordBackupClient.shared.replaceAll(entries)
+    }
+
+    /// Pull the backup and insert any custom words missing locally, rebuilding
+    /// their Known/Learning state and spaced-repetition schedule. Idempotent:
+    /// words already present are left untouched, so it's safe on every launch.
     static func restore(context: ModelContext) async {
         let backup: [BackupWord]
         do {
@@ -104,9 +166,7 @@ enum CustomWordSync {
 
         var nextRank = (existing.map(\.rank).max() ?? 1000) + 1
         var changed = false
-        // Restore in the order they were added, where known.
-        for entry in backup.sorted(by: { ($0.addedAt ?? 0) < ($1.addedAt ?? 0) })
-        where !existingIDs.contains(entry.id) {
+        for entry in backup where !existingIDs.contains(entry.id) {
             let word = VocabularyWord(
                 id: entry.id,
                 rank: nextRank,
@@ -121,13 +181,43 @@ enum CustomWordSync {
             word.setDeckSlugs([DeckConstants.myWordsSlug])
             context.insert(word)
             nextRank += 1
-            // Seed Learning progress (unless it somehow survived) so the word
-            // shows in the Learning tab, matching a fresh add.
+
             if !progressIDs.contains(entry.id) {
-                context.insert(LearningProgress(wordID: entry.id, state: .learning, lastReviewedAt: .now))
+                restoreProgress(entry, into: context)
             }
             changed = true
         }
         if changed { try? context.save() }
+    }
+
+    /// Rebuild a word's `LearningProgress` (and a `ReviewLog` for the latest
+    /// rating, which is what `MyWordsView.bucket` reads to place the word in
+    /// Known vs Learning). Falls back to a fresh Learning state for old backup
+    /// entries that predate progress storage.
+    private static func restoreProgress(_ entry: BackupWord, into context: ModelContext) {
+        guard let bp = entry.progress else {
+            context.insert(LearningProgress(wordID: entry.id, state: .learning, lastReviewedAt: .now))
+            return
+        }
+        let lastReviewedAt = bp.lastReviewedAt.map { Date(timeIntervalSince1970: $0) }
+        context.insert(LearningProgress(
+            wordID: entry.id,
+            state: LearningState(rawValue: bp.state) ?? .learning,
+            easeFactor: bp.easeFactor,
+            intervalDays: bp.intervalDays,
+            repetitions: bp.repetitions,
+            lapses: bp.lapses,
+            dueDate: Date(timeIntervalSince1970: bp.dueDate),
+            lastReviewedAt: lastReviewedAt
+        ))
+        if let raw = bp.latestRating, let rating = ReviewRating(rawValue: raw) {
+            context.insert(ReviewLog(
+                wordID: entry.id,
+                reviewedAt: lastReviewedAt ?? .now,
+                rating: rating,
+                intervalBeforeDays: bp.intervalDays,
+                intervalAfterDays: bp.intervalDays
+            ))
+        }
     }
 }

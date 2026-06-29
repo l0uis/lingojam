@@ -5,6 +5,7 @@ private enum AppTab: Hashable { case myWords, jam, phone }
 
 struct RootView: View {
     @Environment(\.modelContext) private var context
+    @Environment(\.scenePhase) private var scenePhase
     @Query private var allWords: [VocabularyWord]
     @Query private var allProgress: [LearningProgress]
 
@@ -121,6 +122,14 @@ struct RootView: View {
             // Restore any user-added words backed up to the proxy — recovers
             // them after an app delete/reinstall.
             await CustomWordSync.restore(context: context)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            // On the way to the background, snapshot custom words (with the
+            // session's review changes) to the backup so Known/Learning state
+            // is preserved across a reinstall.
+            if phase == .background {
+                Task { await CustomWordSync.pushAll(context: context) }
+            }
         }
         .fullScreenCover(isPresented: $isShowingOnboarding) {
             OnboardingFlow()

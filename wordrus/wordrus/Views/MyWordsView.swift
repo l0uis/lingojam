@@ -355,22 +355,9 @@ struct MyWordsView: View {
             addError = "Couldn't look that up. Check your connection and try again."
             return
         }
-        let word = persist(result, language: language)
+        persist(result, language: language)
         // Back up so the word survives an app delete/reinstall.
-        let localeKey = LocaleService.preferredDefinitionLocale
-        Task {
-            try? await WordBackupClient.shared.upsert(BackupWord(
-                id: word.id,
-                lang: language.languageCode,
-                localeKey: localeKey,
-                lemma: result.lemma,
-                partOfSpeech: result.partOfSpeech,
-                definition: result.definition,
-                exampleSentence: result.exampleSentence,
-                exampleTranslation: result.exampleTranslation,
-                addedAt: Date().timeIntervalSince1970
-            ))
-        }
+        Task { await CustomWordSync.pushAll(context: context) }
         newWord = ""
         // New words land in Learning; switch there so the word is visible
         // behind the detail card once it's dismissed.
@@ -431,9 +418,10 @@ struct MyWordsView: View {
         }
         context.delete(word)
         try? context.save()
-        // Drop it from the backup too, so it doesn't reappear on reinstall.
+        // Re-push the snapshot so the deletion (and any review changes) reach
+        // the backup and the word doesn't reappear on reinstall.
         if wordID.hasPrefix("custom-") {
-            Task { try? await WordBackupClient.shared.delete(id: wordID) }
+            Task { await CustomWordSync.pushAll(context: context) }
         }
     }
 
