@@ -78,22 +78,15 @@ export default {
       }
     }
 
-    // Per-device backup of user-added words, so they survive app
-    // delete/reinstall. Keyed by device ID in ENRICH_CACHE.
+    // Per-device backup of user-added words (with review progress), so they
+    // survive app delete/reinstall. GET reads, POST replaces the whole list.
+    // Keyed by device ID in ENRICH_CACHE.
     if (url.pathname === '/v1/walrus/words') {
       try {
         if (request.method === 'GET') return cors(await handleWordsList(request, env))
-        if (request.method === 'POST') return cors(await handleWordsUpsert(request, env))
+        if (request.method === 'POST') return cors(await handleWordsReplace(request, env))
       } catch (err) {
         console.error('words error', err)
-        return cors(json({ error: 'internal error' }, 500))
-      }
-    }
-    if (url.pathname === '/v1/walrus/words/delete' && request.method === 'POST') {
-      try {
-        return cors(await handleWordsDelete(request, env))
-      } catch (err) {
-        console.error('words delete error', err)
         return cors(json({ error: 'internal error' }, 500))
       }
     }
@@ -334,18 +327,11 @@ spelled ${targetLanguage} words.`
 }
 
 // MARK: - Word backup (survives app delete/reinstall)
-
-interface BackupWord {
-  id: string
-  lang: string
-  localeKey: string
-  lemma: string
-  partOfSpeech: string
-  definition: string
-  exampleSentence: string
-  exampleTranslation: string
-  addedAt?: number
-}
+//
+// The app pushes the full list of its custom words (each with review
+// progress) as one snapshot; we store it verbatim and hand it back on
+// restore. The proxy doesn't interpret the fields — it's an opaque per-device
+// blob — so the app can evolve the entry shape without a worker change.
 
 const MAX_BACKUP_WORDS = 5000
 
@@ -366,12 +352,12 @@ function authDevice(request: Request, env: Env): { deviceID: string } | Response
   return { deviceID }
 }
 
-async function readWords(env: Env, deviceID: string): Promise<BackupWord[]> {
+async function readWords(env: Env, deviceID: string): Promise<unknown[]> {
   const raw = await env.ENRICH_CACHE.get(wordsKey(deviceID))
   if (!raw) return []
   try {
     const parsed = JSON.parse(raw)
-    return Array.isArray(parsed) ? (parsed as BackupWord[]) : []
+    return Array.isArray(parsed) ? parsed : []
   } catch {
     return []
   }
@@ -383,47 +369,25 @@ async function handleWordsList(request: Request, env: Env): Promise<Response> {
   return json({ words: await readWords(env, auth.deviceID) }, 200)
 }
 
-async function handleWordsUpsert(request: Request, env: Env): Promise<Response> {
+async function handleWordsReplace(request: Request, env: Env): Promise<Response> {
   const auth = authDevice(request, env)
   if (auth instanceof Response) return auth
 
-  const body = (await request.json().catch(() => null)) as Partial<BackupWord> | null
-  if (!body || typeof body.id !== 'string' || body.id.length === 0) {
-    return json({ error: 'missing id' }, 400)
+  const body = (await request.json().catch(() => null)) as { words?: unknown } | null
+  if (!body || !Array.isArray(body.words)) {
+    return json({ error: 'missing words' }, 400)
   }
-  const str = (v: unknown, fallback = ''): string => (typeof v === 'string' ? v : fallback)
-  const entry: BackupWord = {
-    id: body.id,
-    lang: str(body.lang),
-    localeKey: str(body.localeKey, 'en'),
-    lemma: str(body.lemma),
-    partOfSpeech: str(body.partOfSpeech),
-    definition: str(body.definition),
-    exampleSentence: str(body.exampleSentence),
-    exampleTranslation: str(body.exampleTranslation),
-    addedAt: typeof body.addedAt === 'number' ? body.addedAt : undefined,
+  if (body.words.length > MAX_BACKUP_WORDS) {
+    return json({ error: 'too many words' }, 400)
   }
-
-  const words = await readWords(env, auth.deviceID)
-  const idx = words.findIndex((w) => w.id === entry.id)
-  if (idx >= 0) {
-    words[idx] = entry
-  } else {
-    if (words.length >= MAX_BACKUP_WORDS) return json({ error: 'backup full' }, 409)
-    words.push(entry)
-  }
-  await env.ENRICH_CACHE.put(wordsKey(auth.deviceID), JSON.stringify(words))
-  return json({ ok: true, count: words.length }, 200)
-}
-
-async function handleWordsDelete(request: Request, env: Env): Promise<Response> {
-  const auth = authDevice(request, env)
-  if (auth instanceof Response) return auth
-  const body = (await request.json().catch(() => null)) as { id?: string } | null
-  if (!body || typeof body.id !== 'string') return json({ error: 'missing id' }, 400)
-  const words = (await readWords(env, auth.deviceID)).filter((w) => w.id !== body.id)
-  await env.ENRICH_CACHE.put(wordsKey(auth.deviceID), JSON.stringify(words))
-  return json({ ok: true, count: words.length }, 200)
+  // Keep only objects carrying a string id; otherwise store entries verbatim
+  // (so review-progress and any future fields round-trip untouched).
+  const clean = body.words.filter(
+    (w): w is Record<string, unknown> =>
+      !!w && typeof w === 'object' && typeof (w as { id?: unknown }).id === 'string'
+  )
+  await env.ENRICH_CACHE.put(wordsKey(auth.deviceID), JSON.stringify(clean))
+  return json({ ok: true, count: clean.length }, 200)
 }
 
 async function checkRateLimit(
