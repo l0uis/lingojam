@@ -140,6 +140,7 @@ def build_dataset(
     project_root: Path | None = None,
     cefr_bands: dict[str, range] | None = None,
     generated_glob: str | None = None,
+    preserve_existing: bool = True,
 ) -> None:
     """Write `output_filename` under Resources/, populated from ENTRIES + TOPIC_DECKS.
 
@@ -149,6 +150,15 @@ def build_dataset(
     `generated_glob` (optional): glob pattern (relative to tools/) for
     additional LLM-generated entry files to merge. Same shape as the
     Spanish `generated_entries*.json` format.
+
+    `preserve_existing`: when the output file already exists, its words are
+    loaded first as a frozen baseline — same rank, id, and content — and
+    ENTRIES / TOPIC_DECKS / generated caches only contribute lemmas not
+    already shipped. Word ids are stable references from user learning
+    progress and the generator caches get regenerated over time, so a
+    rebuild must never reorder or rewrite what an install may already have.
+    Pass False to rebuild from scratch (e.g. before the first release of a
+    language).
     """
     if project_root is None:
         project_root = Path(__file__).resolve().parent.parent
@@ -186,6 +196,24 @@ def build_dataset(
             "cefrLevel": cefr_level,
         }
         order.append(lemma)
+
+    if preserve_existing and output_path.exists():
+        shipped = json.loads(output_path.read_text(encoding="utf-8"))
+        for word in shipped.get("words", []):
+            word_index[word["lemma"]] = {
+                "lemma": word["lemma"],
+                "partOfSpeech": word["partOfSpeech"],
+                "gloss": word["definitions"]["en"],
+                # Pre-v3 seeds keyed the sentence by language code.
+                "example_native": word["example"].get("text")
+                    or next(v for k, v in word["example"].items() if k != "translations"),
+                "example_en": word["example"]["translations"]["en"],
+                "decks": list(word.get("decks") or ["common"]),
+                "cefrLevel": word.get("cefrLevel"),
+            }
+            order.append(word["lemma"])
+        if order:
+            print(f"Preserved {len(order)} shipped words from {output_path.name}")
 
     for rank, (lemma, pos, gloss, example_native, example_en) in enumerate(entries, start=1):
         add_entry(lemma, pos, gloss, example_native, example_en, "common", cefr(rank))
@@ -250,8 +278,9 @@ def build_dataset(
             },
             "decks": final_slugs,
         }
-        if entry_data.get("cefrLevel"):
-            out["cefrLevel"] = entry_data["cefrLevel"]
+        # Every shipped word carries a level: fall back to the frequency-band
+        # heuristic when neither the generator nor the baseline provided one.
+        out["cefrLevel"] = entry_data.get("cefrLevel") or cefr(rank)
         words.append(out)
 
     payload = {

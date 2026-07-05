@@ -1,0 +1,6669 @@
+{
+ "version": 1,
+ "language": "fr",
+ "source": "in-session generation (claude-fable-5), 2026-07-03, hermitdave frequency continuation + domain-partitioned generation",
+ "entries": [
+  {
+   "lemma": "se mêler",
+   "partOfSpeech": "verb",
+   "gloss": "to meddle, get involved",
+   "exampleNative": "Ne te mêle pas de mes affaires !",
+   "exampleEnglish": "Stay out of my business!",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "se battre",
+   "partOfSpeech": "verb",
+   "gloss": "to fight",
+   "exampleNative": "Arrêtez de vous battre tout de suite !",
+   "exampleEnglish": "Stop fighting right now!",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "amélioration",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "improvement",
+   "exampleNative": "On note une nette amélioration de ses résultats.",
+   "exampleEnglish": "There is a clear improvement in his results.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "diminution",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "decrease, reduction",
+   "exampleNative": "La diminution du bruit a été très appréciée.",
+   "exampleEnglish": "The decrease in noise was much appreciated.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hausse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "rise, increase",
+   "exampleNative": "La hausse des prix inquiète tout le monde.",
+   "exampleEnglish": "The rise in prices worries everyone.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "ressemblance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "resemblance, likeness",
+   "exampleNative": "La ressemblance entre les deux frères est frappante.",
+   "exampleEnglish": "The resemblance between the two brothers is striking.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "similitude",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "similarity",
+   "exampleNative": "Il y a une grande similitude entre ces deux langues.",
+   "exampleEnglish": "There is a great similarity between these two languages.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "inégalité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "inequality",
+   "exampleNative": "Ils luttent contre les inégalités sociales.",
+   "exampleEnglish": "They are fighting against social inequality.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "diversité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "diversity, variety",
+   "exampleNative": "La diversité culturelle enrichit notre ville.",
+   "exampleEnglish": "Cultural diversity enriches our city.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "variété",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "variety",
+   "exampleNative": "Ce marché offre une grande variété de fruits.",
+   "exampleEnglish": "This market offers a wide variety of fruit.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "totalité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "totality, whole",
+   "exampleNative": "Il a dépensé la totalité de son argent.",
+   "exampleEnglish": "He spent all of his money.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "minorité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "minority",
+   "exampleNative": "Seule une minorité a voté contre le projet.",
+   "exampleEnglish": "Only a minority voted against the plan.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "intensité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "intensity",
+   "exampleNative": "L'intensité de la lumière baisse le soir.",
+   "exampleEnglish": "The intensity of the light drops in the evening.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "proportion",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "proportion, ratio",
+   "exampleNative": "La proportion de jeunes augmente dans cette région.",
+   "exampleEnglish": "The proportion of young people is rising in this region.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "déséquilibre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "imbalance",
+   "exampleNative": "Ce régime crée un déséquilibre alimentaire.",
+   "exampleEnglish": "This diet creates a nutritional imbalance.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stabilité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stability",
+   "exampleNative": "Elle cherche avant tout la stabilité financière.",
+   "exampleEnglish": "Above all, she is looking for financial stability.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "instabilité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "instability",
+   "exampleNative": "L'instabilité politique effraie les investisseurs.",
+   "exampleEnglish": "Political instability scares investors.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "continuité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "continuity",
+   "exampleNative": "Le nouveau directeur assure la continuité du projet.",
+   "exampleEnglish": "The new director ensures the continuity of the project.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "probabilité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "probability, likelihood",
+   "exampleNative": "La probabilité de pluie est très élevée demain.",
+   "exampleEnglish": "The probability of rain is very high tomorrow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "incertitude",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "uncertainty",
+   "exampleNative": "Nous vivons une période de grande incertitude.",
+   "exampleEnglish": "We are living through a period of great uncertainty.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "raisonnement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "reasoning",
+   "exampleNative": "Son raisonnement est logique mais un peu froid.",
+   "exampleEnglish": "His reasoning is logical but a bit cold.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "rivalité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "rivalry",
+   "exampleNative": "La rivalité entre les deux équipes est ancienne.",
+   "exampleEnglish": "The rivalry between the two teams is longstanding.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "interaction",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "interaction",
+   "exampleNative": "L'interaction entre élèves favorise l'apprentissage.",
+   "exampleEnglish": "Interaction between pupils encourages learning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "appartenance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "belonging, membership",
+   "exampleNative": "Le sentiment d'appartenance renforce le groupe.",
+   "exampleEnglish": "A sense of belonging strengthens the group.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tempérament",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "temperament, disposition",
+   "exampleNative": "Elle a un tempérament calme et posé.",
+   "exampleEnglish": "She has a calm and composed temperament.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "norme",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "norm, standard",
+   "exampleNative": "Ce bâtiment respecte toutes les normes de sécurité.",
+   "exampleEnglish": "This building meets all the safety standards.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "inconvénient",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "drawback, disadvantage",
+   "exampleNative": "Le seul inconvénient de cet appartement est le bruit.",
+   "exampleEnglish": "The only drawback of this apartment is the noise.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "gain",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "gain, profit, saving",
+   "exampleNative": "Ce logiciel offre un gain de temps énorme.",
+   "exampleEnglish": "This software offers a huge time saving.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "prévention",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "prevention",
+   "exampleNative": "La prévention des accidents est notre priorité.",
+   "exampleEnglish": "Accident prevention is our priority.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "oubli",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "forgetting, oversight",
+   "exampleNative": "Cet oubli m'a coûté un rendez-vous important.",
+   "exampleEnglish": "That oversight cost me an important appointment.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "apprentissage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "learning, apprenticeship",
+   "exampleNative": "L'apprentissage d'une langue demande de la patience.",
+   "exampleEnglish": "Learning a language takes patience.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "créativité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "creativity",
+   "exampleNative": "Ce métier exige beaucoup de créativité.",
+   "exampleEnglish": "This job requires a lot of creativity.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "originalité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "originality",
+   "exampleNative": "Le jury a salué l'originalité de son projet.",
+   "exampleEnglish": "The jury praised the originality of her project.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "innovation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "innovation",
+   "exampleNative": "L'innovation est au cœur de notre entreprise.",
+   "exampleEnglish": "Innovation is at the heart of our company.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "synthèse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "synthesis, summary",
+   "exampleNative": "Faites une synthèse des idées principales du texte.",
+   "exampleEnglish": "Write a summary of the main ideas of the text.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "perception",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "perception",
+   "exampleNative": "Chacun a une perception différente de la réalité.",
+   "exampleEnglish": "Everyone has a different perception of reality.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "persévérance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "perseverance",
+   "exampleNative": "Sa persévérance a fini par payer.",
+   "exampleEnglish": "Her perseverance finally paid off.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ténacité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tenacity, doggedness",
+   "exampleNative": "Grâce à sa ténacité, il a obtenu le poste.",
+   "exampleEnglish": "Thanks to his tenacity, he got the job.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rigueur",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "rigor, strictness",
+   "exampleNative": "Ce travail demande beaucoup de rigueur.",
+   "exampleEnglish": "This work demands great rigor.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "exactitude",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "accuracy, exactness",
+   "exampleNative": "Il vérifie l'exactitude de chaque information.",
+   "exampleEnglish": "He checks the accuracy of every piece of information.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "clarté",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "clarity, brightness",
+   "exampleNative": "Elle explique tout avec une grande clarté.",
+   "exampleEnglish": "She explains everything with great clarity.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "simplicité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "simplicity",
+   "exampleNative": "J'aime la simplicité de cette recette.",
+   "exampleEnglish": "I like the simplicity of this recipe.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "complexité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "complexity",
+   "exampleNative": "La complexité du problème nous a surpris.",
+   "exampleEnglish": "The complexity of the problem surprised us.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "facilité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "ease, easiness",
+   "exampleNative": "Il apprend les langues avec une facilité étonnante.",
+   "exampleEnglish": "He learns languages with astonishing ease.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "souplesse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "flexibility, suppleness",
+   "exampleNative": "Le yoga améliore la souplesse du corps.",
+   "exampleEnglish": "Yoga improves the body's flexibility.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "flexibilité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "flexibility",
+   "exampleNative": "Ce poste offre une grande flexibilité d'horaires.",
+   "exampleEnglish": "This job offers great flexibility in working hours.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rigidité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "rigidity, stiffness",
+   "exampleNative": "La rigidité des règles décourage les employés.",
+   "exampleEnglish": "The rigidity of the rules discourages employees.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "dépendance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dependence, addiction",
+   "exampleNative": "Sa dépendance au téléphone devient un problème.",
+   "exampleEnglish": "His dependence on his phone is becoming a problem.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "autonomie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "autonomy, independence",
+   "exampleNative": "Les étudiants gagnent en autonomie chaque année.",
+   "exampleEnglish": "Students gain more autonomy every year.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "solidarité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "solidarity",
+   "exampleNative": "La solidarité entre voisins est précieuse en hiver.",
+   "exampleEnglish": "Solidarity between neighbors is precious in winter.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "égoïsme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "selfishness",
+   "exampleNative": "Son égoïsme a fini par éloigner ses amis.",
+   "exampleEnglish": "His selfishness eventually drove his friends away.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "altruisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "altruism",
+   "exampleNative": "Son altruisme impressionne tous ses collègues.",
+   "exampleEnglish": "Her altruism impresses all her colleagues.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "tolérance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tolerance",
+   "exampleNative": "La tolérance est essentielle pour vivre ensemble.",
+   "exampleEnglish": "Tolerance is essential for living together.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "intolérance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "intolerance",
+   "exampleNative": "L'intolérance naît souvent de l'ignorance.",
+   "exampleEnglish": "Intolerance often stems from ignorance.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "admiration",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "admiration",
+   "exampleNative": "Elle regarde son professeur avec admiration.",
+   "exampleEnglish": "She looks at her teacher with admiration.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "empathie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "empathy",
+   "exampleNative": "Une infirmière doit faire preuve d'empathie.",
+   "exampleEnglish": "A nurse must show empathy.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "impolitesse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "rudeness, impoliteness",
+   "exampleNative": "Son impolitesse a choqué tous les invités.",
+   "exampleEnglish": "His rudeness shocked all the guests.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "humilité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "humility",
+   "exampleNative": "Il a accepté sa défaite avec humilité.",
+   "exampleEnglish": "He accepted his defeat with humility.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "modestie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "modesty",
+   "exampleNative": "Sa modestie cache un immense talent.",
+   "exampleEnglish": "Her modesty hides an immense talent.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vanité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "vanity",
+   "exampleNative": "La vanité de cet acteur est bien connue.",
+   "exampleEnglish": "That actor's vanity is well known.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "prétention",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pretension, claim",
+   "exampleNative": "Il parle de son travail sans aucune prétention.",
+   "exampleEnglish": "He talks about his work without any pretension.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sincérité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sincerity",
+   "exampleNative": "Je te réponds en toute sincérité.",
+   "exampleEnglish": "I am answering you in all sincerity.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hypocrisie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hypocrisy",
+   "exampleNative": "Elle déteste l'hypocrisie des discours politiques.",
+   "exampleEnglish": "She hates the hypocrisy of political speeches.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tromperie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "deception, trickery",
+   "exampleNative": "Cette publicité est une véritable tromperie.",
+   "exampleEnglish": "This advertisement is pure deception.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "dévouement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "devotion, dedication",
+   "exampleNative": "Le dévouement des soignants mérite notre respect.",
+   "exampleEnglish": "The dedication of caregivers deserves our respect.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "noblesse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "nobility",
+   "exampleNative": "Pardonner demande une certaine noblesse d'âme.",
+   "exampleEnglish": "Forgiving requires a certain nobility of soul.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "médiocrité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mediocrity",
+   "exampleNative": "Il refuse de se contenter de la médiocrité.",
+   "exampleEnglish": "He refuses to settle for mediocrity.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "imperfection",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "imperfection, flaw",
+   "exampleNative": "Les petites imperfections rendent ce vase unique.",
+   "exampleEnglish": "The small imperfections make this vase unique.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lucidité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "lucidity, clear-sightedness",
+   "exampleNative": "Elle analyse la situation avec une grande lucidité.",
+   "exampleEnglish": "She analyzes the situation with great lucidity.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "stupidité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stupidity",
+   "exampleNative": "Cette décision est d'une stupidité incroyable.",
+   "exampleEnglish": "This decision is unbelievably stupid.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "indifférence",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "indifference",
+   "exampleNative": "Son indifférence me blesse plus que ses critiques.",
+   "exampleEnglish": "His indifference hurts me more than his criticism.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lassitude",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "weariness, lassitude",
+   "exampleNative": "Une profonde lassitude se lisait sur son visage.",
+   "exampleEnglish": "Deep weariness could be seen on his face.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "épuisement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "exhaustion",
+   "exampleNative": "Après le marathon, il était au bord de l'épuisement.",
+   "exampleEnglish": "After the marathon, he was on the verge of exhaustion.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "relaxation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "relaxation",
+   "exampleNative": "La relaxation aide à mieux dormir.",
+   "exampleEnglish": "Relaxation helps you sleep better.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sérénité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "serenity, peace of mind",
+   "exampleNative": "Elle aborde l'examen avec sérénité.",
+   "exampleEnglish": "She approaches the exam with serenity.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tranquillité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tranquility, peace",
+   "exampleNative": "Je cherche un peu de tranquillité à la campagne.",
+   "exampleEnglish": "I am looking for some peace in the countryside.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "nervosité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "nervousness",
+   "exampleNative": "Sa nervosité était visible avant l'entretien.",
+   "exampleEnglish": "His nervousness was visible before the interview.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "étonnement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "astonishment, surprise",
+   "exampleNative": "À mon grand étonnement, il a accepté tout de suite.",
+   "exampleEnglish": "To my great astonishment, he accepted right away.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "émerveillement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "wonder, amazement",
+   "exampleNative": "Les enfants regardaient le feu d'artifice avec émerveillement.",
+   "exampleEnglish": "The children watched the fireworks with wonder.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "frustration",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "frustration",
+   "exampleNative": "Il a exprimé sa frustration après la défaite.",
+   "exampleEnglish": "He expressed his frustration after the defeat.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "insatisfaction",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dissatisfaction",
+   "exampleNative": "L'insatisfaction des clients augmente depuis un an.",
+   "exampleEnglish": "Customer dissatisfaction has been rising for a year.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contentement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "contentment, satisfaction",
+   "exampleNative": "Un sourire de contentement éclaira son visage.",
+   "exampleEnglish": "A smile of contentment lit up her face.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "gaieté",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "cheerfulness, gaiety",
+   "exampleNative": "Sa gaieté est contagieuse dans toute la maison.",
+   "exampleEnglish": "Her cheerfulness is contagious throughout the house.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mélancolie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "melancholy",
+   "exampleNative": "Cette chanson me plonge dans la mélancolie.",
+   "exampleEnglish": "This song plunges me into melancholy.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "nostalgie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "nostalgia, homesickness",
+   "exampleNative": "Il pense à son enfance avec nostalgie.",
+   "exampleEnglish": "He thinks of his childhood with nostalgia.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "consolation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "consolation, comfort",
+   "exampleNative": "Sa présence fut ma seule consolation ce jour-là.",
+   "exampleEnglish": "Her presence was my only consolation that day.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "optimisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "optimism",
+   "exampleNative": "Malgré tout, elle garde son optimisme.",
+   "exampleEnglish": "Despite everything, she keeps her optimism.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pessimisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pessimism",
+   "exampleNative": "Son pessimisme décourage toute l'équipe.",
+   "exampleEnglish": "His pessimism discourages the whole team.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "réalisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "realism",
+   "exampleNative": "Il faut aborder ce projet avec réalisme.",
+   "exampleEnglish": "We must approach this project with realism.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "idéalisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "idealism",
+   "exampleNative": "L'idéalisme de la jeunesse peut changer le monde.",
+   "exampleEnglish": "The idealism of youth can change the world.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "désillusion",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "disillusionment",
+   "exampleNative": "Après tant de promesses, la désillusion fut immense.",
+   "exampleEnglish": "After so many promises, the disillusionment was immense.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "utopie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "utopia",
+   "exampleNative": "Un monde sans conflits reste une utopie.",
+   "exampleEnglish": "A world without conflict remains a utopia.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "fondement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "foundation, basis",
+   "exampleNative": "La confiance est le fondement de toute amitié.",
+   "exampleEnglish": "Trust is the foundation of any friendship.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "finalité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "purpose, aim",
+   "exampleNative": "Quelle est la finalité de cette réforme ?",
+   "exampleEnglish": "What is the purpose of this reform?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "hiérarchie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hierarchy",
+   "exampleNative": "Il respecte la hiérarchie de l'entreprise.",
+   "exampleEnglish": "He respects the company hierarchy.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "supériorité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "superiority",
+   "exampleNative": "Son air de supériorité agace ses collègues.",
+   "exampleEnglish": "His air of superiority annoys his colleagues.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "infériorité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "inferiority",
+   "exampleNative": "Elle a longtemps souffert d'un complexe d'infériorité.",
+   "exampleEnglish": "She long suffered from an inferiority complex.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "obéissance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "obedience",
+   "exampleNative": "Ce dressage repose sur l'obéissance du chien.",
+   "exampleEnglish": "This training relies on the dog's obedience.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "nuance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "nuance, shade",
+   "exampleNative": "Il y a une nuance importante entre ces deux mots.",
+   "exampleEnglish": "There is an important nuance between these two words.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "enjeu",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "stake, issue",
+   "exampleNative": "L'enjeu de ces négociations est énorme.",
+   "exampleEnglish": "The stakes in these negotiations are enormous.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "méfiance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "distrust, wariness",
+   "exampleNative": "Il observe les inconnus avec méfiance.",
+   "exampleEnglish": "He watches strangers with distrust.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contrainte",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "constraint, obligation",
+   "exampleNative": "Ce métier impose de nombreuses contraintes horaires.",
+   "exampleEnglish": "This job imposes many scheduling constraints.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "enseignant",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "teacher",
+   "exampleNative": "L'enseignant explique la leçon aux élèves.",
+   "exampleEnglish": "The teacher explains the lesson to the pupils.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "instituteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "primary school teacher",
+   "exampleNative": "L'instituteur apprend à lire aux enfants.",
+   "exampleEnglish": "The primary school teacher teaches the children to read.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "lycéen",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "high school student",
+   "exampleNative": "Ce lycéen prépare son baccalauréat cette année.",
+   "exampleEnglish": "This high schooler is preparing for his baccalaureate this year.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "collégien",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "middle school student",
+   "exampleNative": "Les collégiens attendent le bus devant l'école.",
+   "exampleEnglish": "The middle schoolers are waiting for the bus outside the school.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "écolier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "schoolboy, pupil",
+   "exampleNative": "Les écoliers rentrent en classe à huit heures.",
+   "exampleEnglish": "The schoolchildren go back to class at eight o'clock.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "crèche",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "day nursery, crèche",
+   "exampleNative": "Elle dépose son fils à la crèche le matin.",
+   "exampleEnglish": "She drops her son off at the nursery in the morning.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "baccalauréat",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "French high school diploma",
+   "exampleNative": "Il a réussi son baccalauréat avec mention.",
+   "exampleEnglish": "He passed his baccalaureate with honors.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "master",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "master's degree",
+   "exampleNative": "Elle fait un master de droit à Lyon.",
+   "exampleEnglish": "She is doing a master's in law in Lyon.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "doctorat",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "doctorate, PhD",
+   "exampleNative": "Il prépare un doctorat en histoire.",
+   "exampleEnglish": "He is working on a PhD in history.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "dissertation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "essay",
+   "exampleNative": "La dissertation de philosophie dure quatre heures.",
+   "exampleEnglish": "The philosophy essay exam lasts four hours.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rédaction",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "essay, writing",
+   "exampleNative": "Le professeur a noté ma rédaction sur vingt.",
+   "exampleEnglish": "The teacher graded my essay out of twenty.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "gomme",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "eraser",
+   "exampleNative": "Tu peux me prêter ta gomme ?",
+   "exampleEnglish": "Can you lend me your eraser?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "cartable",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "school bag",
+   "exampleNative": "Son cartable est trop lourd pour lui.",
+   "exampleEnglish": "His school bag is too heavy for him.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "craie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "chalk",
+   "exampleNative": "La maîtresse écrit au tableau avec une craie.",
+   "exampleEnglish": "The teacher writes on the board with a piece of chalk.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "feutre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "felt-tip pen, marker",
+   "exampleNative": "Les enfants dessinent avec des feutres de couleur.",
+   "exampleEnglish": "The children draw with colored felt-tip pens.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "pupitre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "school desk",
+   "exampleNative": "Chaque élève range ses livres dans son pupitre.",
+   "exampleEnglish": "Each pupil puts their books away in their desk.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "bibliothécaire",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "librarian",
+   "exampleNative": "La bibliothécaire m'a conseillé un bon roman.",
+   "exampleEnglish": "The librarian recommended a good novel to me.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "amphithéâtre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "lecture hall",
+   "exampleNative": "Le cours a lieu dans le grand amphithéâtre.",
+   "exampleEnglish": "The class takes place in the big lecture hall.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "récréation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "break, playtime",
+   "exampleNative": "Les enfants jouent dans la cour pendant la récréation.",
+   "exampleEnglish": "The children play in the yard during break time.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "mathématiques",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mathematics",
+   "exampleNative": "Elle est très forte en mathématiques.",
+   "exampleEnglish": "She is very good at mathematics.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "géographie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "geography",
+   "exampleNative": "Nous étudions l'Europe en cours de géographie.",
+   "exampleEnglish": "We are studying Europe in geography class.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "grammaire",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "grammar",
+   "exampleNative": "La grammaire française est parfois difficile.",
+   "exampleEnglish": "French grammar is sometimes difficult.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "orthographe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "spelling",
+   "exampleNative": "Il fait très attention à son orthographe.",
+   "exampleEnglish": "He pays close attention to his spelling.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "vocabulaire",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "vocabulary",
+   "exampleNative": "Je révise mon vocabulaire tous les soirs.",
+   "exampleEnglish": "I review my vocabulary every evening.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "conjugaison",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "conjugation",
+   "exampleNative": "La conjugaison des verbes irréguliers est difficile.",
+   "exampleEnglish": "The conjugation of irregular verbs is difficult.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "prononciation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pronunciation",
+   "exampleNative": "Sa prononciation s'améliore avec la pratique.",
+   "exampleEnglish": "Her pronunciation is improving with practice.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "traducteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "translator",
+   "exampleNative": "Le traducteur travaille pour une maison d'édition.",
+   "exampleEnglish": "The translator works for a publishing house.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "bilingue",
+   "partOfSpeech": "adjective",
+   "gloss": "bilingual",
+   "exampleNative": "Elle est bilingue en français et en anglais.",
+   "exampleEnglish": "She is bilingual in French and English.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "paragraphe",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "paragraph",
+   "exampleNative": "Lisez le premier paragraphe du texte.",
+   "exampleEnglish": "Read the first paragraph of the text.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "alphabet",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "alphabet",
+   "exampleNative": "Les enfants apprennent l'alphabet à la maternelle.",
+   "exampleEnglish": "Children learn the alphabet in nursery school.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "réciter",
+   "partOfSpeech": "verb",
+   "gloss": "to recite",
+   "exampleNative": "Il récite un poème devant la classe.",
+   "exampleEnglish": "He recites a poem in front of the class.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mémoriser",
+   "partOfSpeech": "verb",
+   "gloss": "to memorize",
+   "exampleNative": "J'essaie de mémoriser dix mots par jour.",
+   "exampleEnglish": "I try to memorize ten words a day.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "révision",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "revision, review",
+   "exampleNative": "Je fais mes révisions avant l'examen.",
+   "exampleEnglish": "I do my revision before the exam.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "apprenti",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "apprentice",
+   "exampleNative": "L'apprenti travaille chez un boulanger du quartier.",
+   "exampleEnglish": "The apprentice works at a local baker's.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "progresser",
+   "partOfSpeech": "verb",
+   "gloss": "to progress, improve",
+   "exampleNative": "Tu progresses vite en espagnol.",
+   "exampleEnglish": "You are improving quickly in Spanish.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "interrogation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "test, quiz",
+   "exampleNative": "Nous avons une interrogation de maths demain.",
+   "exampleEnglish": "We have a math test tomorrow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "dictionnaire",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dictionary",
+   "exampleNative": "Cherche ce mot dans le dictionnaire.",
+   "exampleEnglish": "Look this word up in the dictionary.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "encyclopédie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "encyclopedia",
+   "exampleNative": "Il consulte une encyclopédie pour son exposé.",
+   "exampleEnglish": "He consults an encyclopedia for his presentation.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "proviseur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "high school principal",
+   "exampleNative": "Le proviseur a convoqué les parents d'élèves.",
+   "exampleEnglish": "The principal summoned the pupils' parents.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "surveillant",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "supervisor, monitor",
+   "exampleNative": "Le surveillant surveille les élèves à la cantine.",
+   "exampleEnglish": "The monitor watches the pupils in the canteen.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "redoubler",
+   "partOfSpeech": "verb",
+   "gloss": "to repeat a year",
+   "exampleNative": "Il risque de redoubler sa classe.",
+   "exampleEnglish": "He may have to repeat the school year.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "copier",
+   "partOfSpeech": "verb",
+   "gloss": "to copy",
+   "exampleNative": "Il est interdit de copier pendant l'examen.",
+   "exampleEnglish": "Copying is forbidden during the exam.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "admission",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "admission",
+   "exampleNative": "Elle attend sa lettre d'admission à l'université.",
+   "exampleEnglish": "She is waiting for her university admission letter.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "boursier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "scholarship student",
+   "exampleNative": "Étudiant boursier, il ne paie pas les frais.",
+   "exampleEnglish": "As a scholarship student, he doesn't pay the fees.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "scolarité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "schooling",
+   "exampleNative": "Toute sa scolarité s'est déroulée en France.",
+   "exampleEnglish": "All his schooling took place in France.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "académique",
+   "partOfSpeech": "adjective",
+   "gloss": "academic",
+   "exampleNative": "Elle poursuit une brillante carrière académique.",
+   "exampleEnglish": "She is pursuing a brilliant academic career.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pédagogie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "teaching skills, pedagogy",
+   "exampleNative": "Ce professeur a beaucoup de pédagogie.",
+   "exampleEnglish": "This teacher is very good at explaining things.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pédagogique",
+   "partOfSpeech": "adjective",
+   "gloss": "educational, teaching",
+   "exampleNative": "L'école utilise de nouvelles méthodes pédagogiques.",
+   "exampleEnglish": "The school uses new teaching methods.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "internat",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "boarding school",
+   "exampleNative": "Il vit à l'internat pendant la semaine.",
+   "exampleEnglish": "He lives at boarding school during the week.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "brevet",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "diploma, certificate",
+   "exampleNative": "Les collégiens passent le brevet en juin.",
+   "exampleEnglish": "Middle school students take their diploma exam in June.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "attestation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "certificate, attestation",
+   "exampleNative": "L'université délivre une attestation de réussite.",
+   "exampleEnglish": "The university issues a certificate of achievement.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mention",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "distinction, honors",
+   "exampleNative": "Elle a eu son bac avec mention bien.",
+   "exampleEnglish": "She passed her baccalaureate with honors.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "coefficient",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "weighting, coefficient",
+   "exampleNative": "Les maths ont un gros coefficient au bac.",
+   "exampleEnglish": "Math carries a heavy weighting in the baccalaureate.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "oral",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "oral exam",
+   "exampleNative": "Je passe mon oral de français lundi.",
+   "exampleEnglish": "I'm taking my French oral exam on Monday.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "rattrapage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "resit, catch-up session",
+   "exampleNative": "Il passe les épreuves de rattrapage en juillet.",
+   "exampleEnglish": "He is taking the resit exams in July.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "soutenance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "thesis defense",
+   "exampleNative": "Sa soutenance de thèse a duré deux heures.",
+   "exampleEnglish": "His thesis defense lasted two hours.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "autodidacte",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "self-taught person",
+   "exampleNative": "Cet autodidacte a tout appris dans les livres.",
+   "exampleEnglish": "This self-taught man learned everything from books.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "polyglotte",
+   "partOfSpeech": "adjective",
+   "gloss": "multilingual, polyglot",
+   "exampleNative": "Ma voisine polyglotte parle cinq langues.",
+   "exampleEnglish": "My multilingual neighbor speaks five languages.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "dialecte",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dialect",
+   "exampleNative": "On parle encore ce dialecte dans les villages.",
+   "exampleEnglish": "This dialect is still spoken in the villages.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "argot",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "slang",
+   "exampleNative": "Les jeunes utilisent beaucoup d'argot entre eux.",
+   "exampleEnglish": "Young people use a lot of slang with each other.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "locuteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "speaker",
+   "exampleNative": "Cette langue compte des millions de locuteurs.",
+   "exampleEnglish": "This language has millions of speakers.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "natif",
+   "partOfSpeech": "adjective",
+   "gloss": "native",
+   "exampleNative": "Il parle anglais comme un locuteur natif.",
+   "exampleEnglish": "He speaks English like a native speaker.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "syllabe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "syllable",
+   "exampleNative": "Ce mot ne compte que deux syllabes.",
+   "exampleEnglish": "This word has only two syllables.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "voyelle",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "vowel",
+   "exampleNative": "Le français a plus de voyelles que l'espagnol.",
+   "exampleEnglish": "French has more vowels than Spanish.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "consonne",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "consonant",
+   "exampleNative": "Cette consonne ne se prononce pas ici.",
+   "exampleEnglish": "This consonant is not pronounced here.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "majuscule",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "capital letter",
+   "exampleNative": "Les noms propres commencent par une majuscule.",
+   "exampleEnglish": "Proper nouns start with a capital letter.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "ponctuation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "punctuation",
+   "exampleNative": "Fais attention à la ponctuation dans ta rédaction.",
+   "exampleEnglish": "Pay attention to the punctuation in your essay.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "virgule",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "comma",
+   "exampleNative": "Il manque une virgule dans cette phrase.",
+   "exampleEnglish": "There is a comma missing in this sentence.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "apostrophe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "apostrophe",
+   "exampleNative": "On écrit ce mot avec une apostrophe.",
+   "exampleEnglish": "This word is written with an apostrophe.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "verbe",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "verb",
+   "exampleNative": "Souligne le verbe dans chaque phrase.",
+   "exampleEnglish": "Underline the verb in each sentence.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "adjectif",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "adjective",
+   "exampleNative": "L'adjectif s'accorde avec le nom.",
+   "exampleEnglish": "The adjective agrees with the noun.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "adverbe",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "adverb",
+   "exampleNative": "L'adverbe précise le sens du verbe.",
+   "exampleEnglish": "The adverb clarifies the meaning of the verb.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pronom",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pronoun",
+   "exampleNative": "Remplace le nom par un pronom.",
+   "exampleEnglish": "Replace the noun with a pronoun.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "préposition",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "preposition",
+   "exampleNative": "Quelle préposition faut-il utiliser ici ?",
+   "exampleEnglish": "Which preposition should be used here?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "conjonction",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "conjunction",
+   "exampleNative": "La conjonction relie les deux phrases.",
+   "exampleEnglish": "The conjunction links the two sentences.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "singulier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "singular",
+   "exampleNative": "Mets ce nom au singulier.",
+   "exampleEnglish": "Put this noun in the singular.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "pluriel",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "plural",
+   "exampleNative": "Le pluriel de ce mot est irrégulier.",
+   "exampleEnglish": "The plural of this word is irregular.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "imparfait",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "imperfect tense",
+   "exampleNative": "On utilise l'imparfait pour décrire le passé.",
+   "exampleEnglish": "The imperfect is used to describe the past.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "subjonctif",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "subjunctive",
+   "exampleNative": "Le subjonctif est difficile pour les étudiants.",
+   "exampleEnglish": "The subjunctive is difficult for students.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "infinitif",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "infinitive",
+   "exampleNative": "Donne l'infinitif de ce verbe.",
+   "exampleEnglish": "Give the infinitive of this verb.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "participe",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "participle",
+   "exampleNative": "Le participe passé s'accorde parfois.",
+   "exampleEnglish": "The past participle sometimes agrees.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "préfixe",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "prefix",
+   "exampleNative": "Le préfixe change le sens du mot.",
+   "exampleEnglish": "The prefix changes the meaning of the word.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "suffixe",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "suffix",
+   "exampleNative": "On forme cet adverbe avec un suffixe.",
+   "exampleEnglish": "This adverb is formed with a suffix.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "synonyme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "synonym",
+   "exampleNative": "Trouve un synonyme du mot « content ».",
+   "exampleEnglish": "Find a synonym for the word “happy”.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "antonyme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "antonym, opposite",
+   "exampleNative": "Donne l'antonyme de l'adjectif « grand ».",
+   "exampleEnglish": "Give the antonym of the adjective “big”.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "épeler",
+   "partOfSpeech": "verb",
+   "gloss": "to spell",
+   "exampleNative": "Pouvez-vous épeler votre nom, s'il vous plaît ?",
+   "exampleEnglish": "Can you spell your name, please?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "chuchoter",
+   "partOfSpeech": "verb",
+   "gloss": "to whisper",
+   "exampleNative": "Les élèves chuchotent au fond de la classe.",
+   "exampleEnglish": "The pupils are whispering at the back of the class.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "dictée",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dictation",
+   "exampleNative": "La maîtresse nous fait une dictée chaque semaine.",
+   "exampleEnglish": "The teacher gives us a dictation every week.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "rédiger",
+   "partOfSpeech": "verb",
+   "gloss": "to write, draft",
+   "exampleNative": "Il doit rédiger un rapport pour demain.",
+   "exampleEnglish": "He has to write a report for tomorrow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "souligner",
+   "partOfSpeech": "verb",
+   "gloss": "to underline, emphasize",
+   "exampleNative": "Soulignez les mots importants du texte.",
+   "exampleEnglish": "Underline the important words in the text.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "surligner",
+   "partOfSpeech": "verb",
+   "gloss": "to highlight",
+   "exampleNative": "Elle surligne les dates importantes en jaune.",
+   "exampleEnglish": "She highlights the important dates in yellow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "classeur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "binder, folder",
+   "exampleNative": "Je range mes cours dans un classeur.",
+   "exampleEnglish": "I keep my class notes in a binder.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "brouillon",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "rough draft",
+   "exampleNative": "Écris d'abord ton texte au brouillon.",
+   "exampleEnglish": "Write your text in rough first.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "calculatrice",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "calculator",
+   "exampleNative": "La calculatrice est interdite pendant ce contrôle.",
+   "exampleEnglish": "Calculators are not allowed during this test.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "éduquer",
+   "partOfSpeech": "verb",
+   "gloss": "to educate, bring up",
+   "exampleNative": "Les parents et l'école éduquent les enfants.",
+   "exampleEnglish": "Parents and school educate children.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "instruire",
+   "partOfSpeech": "verb",
+   "gloss": "to educate, instruct",
+   "exampleNative": "Ce documentaire instruit autant qu'il amuse.",
+   "exampleEnglish": "This documentary educates as much as it entertains.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cultivé",
+   "partOfSpeech": "adjective",
+   "gloss": "educated, cultured",
+   "exampleNative": "C'est un homme très cultivé qui lit beaucoup.",
+   "exampleEnglish": "He is a very cultured man who reads a lot.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "relire",
+   "partOfSpeech": "verb",
+   "gloss": "to reread, proofread",
+   "exampleNative": "Relis ta copie avant de la rendre.",
+   "exampleEnglish": "Reread your paper before handing it in.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "questionnaire",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "questionnaire",
+   "exampleNative": "Remplissez ce questionnaire avant l'entretien.",
+   "exampleEnglish": "Fill in this questionnaire before the interview.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tronc",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "trunk (of a tree)",
+   "exampleNative": "Le tronc de ce vieil arbre est creux.",
+   "exampleEnglish": "The trunk of this old tree is hollow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "écorce",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "bark",
+   "exampleNative": "L'écorce du bouleau est blanche et fine.",
+   "exampleEnglish": "Birch bark is white and thin.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tige",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stem, stalk",
+   "exampleNative": "La tige de cette fleur est très fragile.",
+   "exampleEnglish": "This flower's stem is very fragile.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "buisson",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bush, shrub",
+   "exampleNative": "Un lapin s'est caché derrière le buisson.",
+   "exampleEnglish": "A rabbit hid behind the bush.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "chêne",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "oak",
+   "exampleNative": "Ce chêne a plus de deux cents ans.",
+   "exampleEnglish": "This oak is over two hundred years old.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pin",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pine",
+   "exampleNative": "Les pins sentent bon près de la plage.",
+   "exampleEnglish": "The pines smell good near the beach.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "olivier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "olive tree",
+   "exampleNative": "Des oliviers poussent sur la colline.",
+   "exampleEnglish": "Olive trees grow on the hillside.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "palmier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "palm tree",
+   "exampleNative": "Des palmiers bordent la promenade du bord de mer.",
+   "exampleEnglish": "Palm trees line the seaside promenade.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "tulipe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tulip",
+   "exampleNative": "Elle a planté des tulipes rouges au jardin.",
+   "exampleEnglish": "She planted red tulips in the garden.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "marguerite",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "daisy",
+   "exampleNative": "La prairie est pleine de marguerites blanches.",
+   "exampleEnglish": "The meadow is full of white daisies.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tournesol",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "sunflower",
+   "exampleNative": "Les tournesols se tournent vers le soleil.",
+   "exampleEnglish": "Sunflowers turn toward the sun.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "coquelicot",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "poppy",
+   "exampleNative": "Des coquelicots rouges poussent au bord du champ.",
+   "exampleEnglish": "Red poppies grow at the edge of the field.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lavande",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "lavender",
+   "exampleNative": "La lavande parfume les champs de Provence.",
+   "exampleEnglish": "Lavender scents the fields of Provence.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pétale",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "petal",
+   "exampleNative": "Le vent emporte les pétales de la rose.",
+   "exampleEnglish": "The wind carries away the rose's petals.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "bourgeon",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bud",
+   "exampleNative": "Les premiers bourgeons apparaissent au printemps.",
+   "exampleEnglish": "The first buds appear in spring.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pollen",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pollen",
+   "exampleNative": "Les abeilles transportent le pollen de fleur en fleur.",
+   "exampleEnglish": "Bees carry pollen from flower to flower.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "épine",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "thorn",
+   "exampleNative": "Je me suis piqué avec une épine de rose.",
+   "exampleEnglish": "I pricked myself on a rose thorn.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "châtaigne",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "chestnut",
+   "exampleNative": "En automne, nous ramassons des châtaignes en forêt.",
+   "exampleEnglish": "In autumn we gather chestnuts in the forest.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "noisette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hazelnut",
+   "exampleNative": "L'écureuil cache des noisettes pour l'hiver.",
+   "exampleEnglish": "The squirrel hides hazelnuts for the winter.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "mûre",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "blackberry",
+   "exampleNative": "Nous cueillons des mûres le long du chemin.",
+   "exampleEnglish": "We pick blackberries along the path.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "haie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hedge",
+   "exampleNative": "Une haie sépare le jardin du champ voisin.",
+   "exampleEnglish": "A hedge separates the garden from the neighboring field.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "vigne",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "vine, grapevine",
+   "exampleNative": "La vigne pousse bien sur ce coteau ensoleillé.",
+   "exampleEnglish": "Vines grow well on this sunny slope.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hérisson",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hedgehog",
+   "exampleNative": "Un hérisson traverse lentement le jardin la nuit.",
+   "exampleEnglish": "A hedgehog slowly crosses the garden at night.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sanglier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "wild boar",
+   "exampleNative": "Un sanglier a traversé la route devant nous.",
+   "exampleEnglish": "A wild boar crossed the road in front of us.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "lièvre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hare",
+   "exampleNative": "Le lièvre court plus vite que le lapin.",
+   "exampleEnglish": "The hare runs faster than the rabbit.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "crapaud",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "toad",
+   "exampleNative": "Un crapaud chante près de la mare le soir.",
+   "exampleEnglish": "A toad sings near the pond in the evening.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "escargot",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "snail",
+   "exampleNative": "Après la pluie, les escargots sortent sur le sentier.",
+   "exampleEnglish": "After the rain, snails come out on the path.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "moustique",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "mosquito",
+   "exampleNative": "Un moustique m'a piqué pendant la nuit.",
+   "exampleEnglish": "A mosquito bit me during the night.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "guêpe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "wasp",
+   "exampleNative": "Une guêpe tourne autour de mon verre de jus.",
+   "exampleEnglish": "A wasp is circling my glass of juice.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "chenille",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "caterpillar",
+   "exampleNative": "La chenille deviendra un papillon au printemps.",
+   "exampleEnglish": "The caterpillar will become a butterfly in spring.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "libellule",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dragonfly",
+   "exampleNative": "Une libellule bleue vole au-dessus de l'étang.",
+   "exampleEnglish": "A blue dragonfly flies over the pond.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "coccinelle",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "ladybug, ladybird",
+   "exampleNative": "Une coccinelle s'est posée sur ma main.",
+   "exampleEnglish": "A ladybug landed on my hand.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sauterelle",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "grasshopper",
+   "exampleNative": "Les sauterelles sautent dans l'herbe haute.",
+   "exampleEnglish": "Grasshoppers jump in the tall grass.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hibou",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "owl",
+   "exampleNative": "Le hibou chasse les souris pendant la nuit.",
+   "exampleEnglish": "The owl hunts mice during the night.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "hirondelle",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "swallow",
+   "exampleNative": "Les hirondelles reviennent chaque année au printemps.",
+   "exampleEnglish": "The swallows return every year in spring.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "colombe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dove",
+   "exampleNative": "Une colombe blanche s'est posée sur le toit.",
+   "exampleEnglish": "A white dove landed on the roof.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mouette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "seagull",
+   "exampleNative": "Les mouettes crient au-dessus du port.",
+   "exampleEnglish": "Seagulls cry above the harbor.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "cygne",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "swan",
+   "exampleNative": "Un cygne blanc glisse sur le lac.",
+   "exampleEnglish": "A white swan glides across the lake.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "perroquet",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "parrot",
+   "exampleNative": "Ce perroquet répète tout ce que je dis.",
+   "exampleEnglish": "This parrot repeats everything I say.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "merle",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "blackbird",
+   "exampleNative": "Un merle chante dans le jardin dès l'aube.",
+   "exampleEnglish": "A blackbird sings in the garden from dawn.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "autruche",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "ostrich",
+   "exampleNative": "L'autruche est un oiseau qui ne vole pas.",
+   "exampleEnglish": "The ostrich is a bird that cannot fly.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "paon",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "peacock",
+   "exampleNative": "Le paon ouvre sa magnifique queue colorée.",
+   "exampleEnglish": "The peacock spreads its magnificent colorful tail.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "cigogne",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stork",
+   "exampleNative": "Les cigognes font leur nid sur les toits d'Alsace.",
+   "exampleEnglish": "Storks build their nests on the rooftops of Alsace.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "dauphin",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dolphin",
+   "exampleNative": "Des dauphins nagent à côté du bateau.",
+   "exampleEnglish": "Dolphins are swimming alongside the boat.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "phoque",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "seal",
+   "exampleNative": "Un phoque se repose sur les rochers.",
+   "exampleEnglish": "A seal is resting on the rocks.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pieuvre",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "octopus",
+   "exampleNative": "La pieuvre a huit bras et se cache bien.",
+   "exampleEnglish": "The octopus has eight arms and hides well.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "méduse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "jellyfish",
+   "exampleNative": "Attention, il y a des méduses près de la plage.",
+   "exampleEnglish": "Careful, there are jellyfish near the beach.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "huître",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "oyster",
+   "exampleNative": "On élève des huîtres sur la côte atlantique.",
+   "exampleEnglish": "Oysters are farmed on the Atlantic coast.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "moule",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mussel",
+   "exampleNative": "Les moules s'accrochent aux rochers à marée basse.",
+   "exampleEnglish": "Mussels cling to the rocks at low tide.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "truite",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "trout",
+   "exampleNative": "Il pêche la truite dans la rivière de montagne.",
+   "exampleEnglish": "He fishes for trout in the mountain river.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sardine",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sardine",
+   "exampleNative": "Des bancs de sardines nagent près de la côte.",
+   "exampleEnglish": "Schools of sardines swim near the coast.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "poulain",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "foal",
+   "exampleNative": "Le poulain reste toujours près de sa mère.",
+   "exampleEnglish": "The foal always stays close to its mother.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "jument",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mare",
+   "exampleNative": "La jument galope dans le pré avec son poulain.",
+   "exampleEnglish": "The mare gallops in the meadow with her foal.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "prédateur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "predator",
+   "exampleNative": "Le loup est le principal prédateur de la région.",
+   "exampleEnglish": "The wolf is the region's main predator.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mammifère",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "mammal",
+   "exampleNative": "La baleine est un mammifère, pas un poisson.",
+   "exampleEnglish": "The whale is a mammal, not a fish.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "reptile",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "reptile",
+   "exampleNative": "Les reptiles aiment se chauffer au soleil.",
+   "exampleEnglish": "Reptiles like to warm themselves in the sun.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "museau",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "muzzle, snout",
+   "exampleNative": "Le chien pousse la porte avec son museau.",
+   "exampleEnglish": "The dog pushes the door open with its muzzle.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sabot",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hoof",
+   "exampleNative": "Le cheval a perdu un fer sous son sabot.",
+   "exampleEnglish": "The horse lost a shoe from its hoof.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "écaille",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "scale (of fish)",
+   "exampleNative": "Les écailles du poisson brillent au soleil.",
+   "exampleEnglish": "The fish's scales shine in the sun.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "nageoire",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "fin",
+   "exampleNative": "Le requin montre sa nageoire au-dessus de l'eau.",
+   "exampleEnglish": "The shark shows its fin above the water.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "carapace",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "shell (turtle, crab)",
+   "exampleNative": "La tortue se cache dans sa carapace.",
+   "exampleEnglish": "The turtle hides in its shell.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "ruche",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "beehive",
+   "exampleNative": "Les abeilles rentrent à la ruche avant l'orage.",
+   "exampleEnglish": "The bees return to the hive before the storm.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "miauler",
+   "partOfSpeech": "verb",
+   "gloss": "to meow",
+   "exampleNative": "Le chat miaule devant la porte de la cuisine.",
+   "exampleEnglish": "The cat meows at the kitchen door.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "aboyer",
+   "partOfSpeech": "verb",
+   "gloss": "to bark",
+   "exampleNative": "Le chien aboie chaque fois que quelqu'un sonne.",
+   "exampleEnglish": "The dog barks every time someone rings the bell.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "rugir",
+   "partOfSpeech": "verb",
+   "gloss": "to roar",
+   "exampleNative": "On entend le lion rugir au loin.",
+   "exampleEnglish": "You can hear the lion roaring in the distance.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "ramper",
+   "partOfSpeech": "verb",
+   "gloss": "to crawl, slither",
+   "exampleNative": "Le serpent rampe lentement dans l'herbe sèche.",
+   "exampleEnglish": "The snake slithers slowly through the dry grass.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hiberner",
+   "partOfSpeech": "verb",
+   "gloss": "to hibernate",
+   "exampleNative": "L'ours hiberne dans sa grotte tout l'hiver.",
+   "exampleEnglish": "The bear hibernates in its cave all winter.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "migrer",
+   "partOfSpeech": "verb",
+   "gloss": "to migrate",
+   "exampleNative": "Ces oiseaux migrent vers l'Afrique en automne.",
+   "exampleEnglish": "These birds migrate to Africa in the autumn.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "élevage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "livestock farming, breeding",
+   "exampleNative": "Cette ferme vit de l'élevage de moutons.",
+   "exampleEnglish": "This farm makes its living from sheep farming.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "faune",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "wildlife, fauna",
+   "exampleNative": "La faune de cette île est très riche.",
+   "exampleEnglish": "The wildlife of this island is very rich.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "grêle",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hail",
+   "exampleNative": "La grêle a abîmé les voitures et les vignes.",
+   "exampleEnglish": "The hail damaged the cars and the vines.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "brume",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mist, haze",
+   "exampleNative": "Une brume légère couvre la vallée ce matin.",
+   "exampleEnglish": "A light mist covers the valley this morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "verglas",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "black ice",
+   "exampleNative": "Attention au verglas sur la route ce matin.",
+   "exampleEnglish": "Watch out for black ice on the road this morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "canicule",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "heatwave",
+   "exampleNative": "La canicule va durer encore trois jours.",
+   "exampleEnglish": "The heatwave will last another three days.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sécheresse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "drought",
+   "exampleNative": "La sécheresse menace les récoltes cet été.",
+   "exampleEnglish": "The drought is threatening the harvests this summer.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "inondation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "flood",
+   "exampleNative": "Les fortes pluies ont provoqué des inondations.",
+   "exampleEnglish": "The heavy rains caused flooding.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "averse",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "shower, downpour",
+   "exampleNative": "Une averse soudaine nous a surpris au parc.",
+   "exampleEnglish": "A sudden shower caught us out at the park.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "cyclone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cyclone, hurricane",
+   "exampleNative": "Un cyclone approche des côtes de l'île.",
+   "exampleEnglish": "A cyclone is approaching the island's coast.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "humidité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "humidity, dampness",
+   "exampleNative": "L'humidité rend la chaleur difficile à supporter.",
+   "exampleEnglish": "The humidity makes the heat hard to bear.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "orageux",
+   "partOfSpeech": "adjective",
+   "gloss": "stormy",
+   "exampleNative": "Le ciel est orageux, rentrons vite.",
+   "exampleEnglish": "The sky is stormy, let's hurry home.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "nuageux",
+   "partOfSpeech": "adjective",
+   "gloss": "cloudy",
+   "exampleNative": "Le ciel restera nuageux toute la journée.",
+   "exampleEnglish": "The sky will stay cloudy all day.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "ensoleillé",
+   "partOfSpeech": "adjective",
+   "gloss": "sunny",
+   "exampleNative": "Nous avons choisi une terrasse ensoleillée.",
+   "exampleEnglish": "We chose a sunny terrace.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "pluvieux",
+   "partOfSpeech": "adjective",
+   "gloss": "rainy",
+   "exampleNative": "L'automne est souvent pluvieux dans cette région.",
+   "exampleEnglish": "Autumn is often rainy in this region.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "glacial",
+   "partOfSpeech": "adjective",
+   "gloss": "icy, freezing",
+   "exampleNative": "Un vent glacial souffle sur la plaine.",
+   "exampleEnglish": "An icy wind blows across the plain.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tiède",
+   "partOfSpeech": "adjective",
+   "gloss": "lukewarm, mild",
+   "exampleNative": "L'eau du lac est tiède en fin d'été.",
+   "exampleEnglish": "The lake water is lukewarm in late summer.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "neiger",
+   "partOfSpeech": "verb",
+   "gloss": "to snow",
+   "exampleNative": "Il neige depuis ce matin sur les montagnes.",
+   "exampleEnglish": "It has been snowing on the mountains since this morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "prévision",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "forecast",
+   "exampleNative": "Les prévisions annoncent du soleil pour demain.",
+   "exampleEnglish": "The forecast says sunshine for tomorrow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "thermomètre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "thermometer",
+   "exampleNative": "Le thermomètre affiche trente-cinq degrés à l'ombre.",
+   "exampleEnglish": "The thermometer reads thirty-five degrees in the shade.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "glacier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "glacier",
+   "exampleNative": "Le glacier recule un peu plus chaque année.",
+   "exampleEnglish": "The glacier retreats a little more every year.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "cascade",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "waterfall",
+   "exampleNative": "Une cascade tombe entre les rochers de la montagne.",
+   "exampleEnglish": "A waterfall tumbles between the mountain rocks.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "torrent",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "mountain stream, torrent",
+   "exampleNative": "Un torrent descend rapidement de la montagne.",
+   "exampleEnglish": "A torrent rushes down from the mountain.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "plaine",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "plain",
+   "exampleNative": "La plaine s'étend jusqu'à l'horizon.",
+   "exampleEnglish": "The plain stretches to the horizon.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "cime",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "treetop, summit",
+   "exampleNative": "Le vent agite la cime des arbres.",
+   "exampleEnglish": "The wind stirs the treetops.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pente",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "slope",
+   "exampleNative": "La pente devient raide près du sommet.",
+   "exampleEnglish": "The slope gets steep near the summit.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mare",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pond, puddle",
+   "exampleNative": "Des grenouilles vivent dans la mare du village.",
+   "exampleEnglish": "Frogs live in the village pond.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "littoral",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "coastline",
+   "exampleNative": "Le littoral breton est sauvage et magnifique.",
+   "exampleEnglish": "The Breton coastline is wild and magnificent.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "dune",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dune",
+   "exampleNative": "Nous avons marché sur les dunes face à l'océan.",
+   "exampleEnglish": "We walked on the dunes facing the ocean.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "prairie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "meadow",
+   "exampleNative": "Les vaches paissent dans la prairie verte.",
+   "exampleEnglish": "The cows graze in the green meadow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "panorama",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "panorama, view",
+   "exampleNative": "Du sommet, le panorama sur la vallée est superbe.",
+   "exampleEnglish": "From the summit, the view over the valley is superb.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "crépuscule",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dusk, twilight",
+   "exampleNative": "Les chauves-souris sortent au crépuscule.",
+   "exampleEnglish": "Bats come out at dusk.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "basket-ball",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "basketball",
+   "exampleNative": "Mon frère joue au basket-ball tous les mercredis.",
+   "exampleEnglish": "My brother plays basketball every Wednesday.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "natation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "swimming",
+   "exampleNative": "La natation est excellente pour le dos.",
+   "exampleEnglish": "Swimming is excellent for your back.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "cyclisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cycling",
+   "exampleNative": "Le cyclisme est très populaire en France.",
+   "exampleEnglish": "Cycling is very popular in France.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "équitation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "horse riding",
+   "exampleNative": "Ma fille fait de l'équitation depuis trois ans.",
+   "exampleEnglish": "My daughter has been horse riding for three years.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "snowboard",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "snowboard, snowboarding",
+   "exampleNative": "Il préfère le snowboard au ski classique.",
+   "exampleEnglish": "He prefers snowboarding to regular skiing.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "patinage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "skating, ice skating",
+   "exampleNative": "Le patinage artistique demande des années de travail.",
+   "exampleEnglish": "Figure skating takes years of work.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "patiner",
+   "partOfSpeech": "verb",
+   "gloss": "to skate",
+   "exampleNative": "On apprend à patiner sur la patinoire municipale.",
+   "exampleEnglish": "We're learning to skate at the local rink.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "randonnée",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hike, hiking",
+   "exampleNative": "Nous avons fait une longue randonnée en montagne.",
+   "exampleEnglish": "We went on a long hike in the mountains.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "randonner",
+   "partOfSpeech": "verb",
+   "gloss": "to hike",
+   "exampleNative": "Ils aiment randonner dans les Alpes chaque été.",
+   "exampleEnglish": "They love hiking in the Alps every summer.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "gymnastique",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "gymnastics, exercise",
+   "exampleNative": "Elle fait de la gymnastique tous les matins.",
+   "exampleEnglish": "She does gymnastics every morning.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "athlétisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "athletics, track and field",
+   "exampleNative": "Il fait de l'athlétisme au club du lycée.",
+   "exampleEnglish": "He does track and field at the school club.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "judo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "judo",
+   "exampleNative": "Beaucoup d'enfants français font du judo.",
+   "exampleEnglish": "Many French children do judo.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "escrime",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "fencing",
+   "exampleNative": "La France gagne souvent des médailles en escrime.",
+   "exampleEnglish": "France often wins medals in fencing.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "aviron",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "rowing, oar",
+   "exampleNative": "Il fait de l'aviron sur la Seine le dimanche.",
+   "exampleEnglish": "He goes rowing on the Seine on Sundays.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "handball",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "handball",
+   "exampleNative": "L'équipe de France de handball est très forte.",
+   "exampleEnglish": "The French handball team is very strong.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "volley-ball",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "volleyball",
+   "exampleNative": "On joue au volley-ball sur la plage.",
+   "exampleEnglish": "We play volleyball on the beach.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "badminton",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "badminton",
+   "exampleNative": "Tu veux faire une partie de badminton ?",
+   "exampleEnglish": "Do you want to play a game of badminton?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "ping-pong",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "table tennis, ping-pong",
+   "exampleNative": "Il y a une table de ping-pong au camping.",
+   "exampleEnglish": "There's a ping-pong table at the campsite.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "pétanque",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "petanque, boules",
+   "exampleNative": "Les voisins jouent à la pétanque sur la place.",
+   "exampleEnglish": "The neighbors play petanque in the square.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "raquette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "racket",
+   "exampleNative": "J'ai oublié ma raquette de tennis chez moi.",
+   "exampleEnglish": "I left my tennis racket at home.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "échauffement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "warm-up",
+   "exampleNative": "L'échauffement dure dix minutes avant le match.",
+   "exampleEnglish": "The warm-up lasts ten minutes before the match.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "étirement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "stretch, stretching",
+   "exampleNative": "Fais des étirements après chaque séance de sport.",
+   "exampleEnglish": "Do some stretches after every workout.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "musculation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "weight training, bodybuilding",
+   "exampleNative": "Il fait de la musculation trois fois par semaine.",
+   "exampleEnglish": "He does weight training three times a week.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "haltère",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dumbbell",
+   "exampleNative": "Elle soulève des haltères devant le miroir.",
+   "exampleEnglish": "She lifts dumbbells in front of the mirror.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "endurance",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "endurance, stamina",
+   "exampleNative": "Le marathon demande beaucoup d'endurance.",
+   "exampleEnglish": "A marathon requires a lot of endurance.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sprint",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "sprint",
+   "exampleNative": "Il a gagné la course grâce à son sprint final.",
+   "exampleEnglish": "He won the race thanks to his final sprint.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "défenseur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "defender",
+   "exampleNative": "Le défenseur a arrêté l'attaquant juste à temps.",
+   "exampleEnglish": "The defender stopped the striker just in time.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "attaquant",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "striker, forward, attacker",
+   "exampleNative": "L'attaquant a marqué deux buts hier soir.",
+   "exampleEnglish": "The striker scored two goals last night.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "prolongation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "extra time, extension",
+   "exampleNative": "Le match s'est décidé pendant la prolongation.",
+   "exampleEnglish": "The match was decided in extra time.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pénalty",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "penalty kick",
+   "exampleNative": "L'arbitre a sifflé un pénalty à la dernière minute.",
+   "exampleEnglish": "The referee awarded a penalty in the last minute.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tribune",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stand, grandstand",
+   "exampleNative": "Les supporters chantent dans les tribunes du stade.",
+   "exampleEnglish": "The fans are singing in the stadium stands.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "olympique",
+   "partOfSpeech": "adjective",
+   "gloss": "Olympic",
+   "exampleNative": "Elle rêve de participer aux Jeux olympiques.",
+   "exampleEnglish": "She dreams of competing in the Olympic Games.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "classement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "ranking, standings",
+   "exampleNative": "Notre équipe est première au classement cette saison.",
+   "exampleEnglish": "Our team is top of the standings this season.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "échecs",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "chess",
+   "exampleNative": "Mon grand-père m'a appris à jouer aux échecs.",
+   "exampleEnglish": "My grandfather taught me to play chess.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "pion",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pawn, game piece",
+   "exampleNative": "Avance ton pion de deux cases.",
+   "exampleEnglish": "Move your piece forward two squares.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "casse-tête",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "puzzle, brain-teaser",
+   "exampleNative": "Ce casse-tête m'a occupé toute la soirée.",
+   "exampleEnglish": "This brain-teaser kept me busy all evening.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "devinette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "riddle",
+   "exampleNative": "Les enfants adorent poser des devinettes.",
+   "exampleEnglish": "Children love asking riddles.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mots croisés",
+   "partOfSpeech": "phrase",
+   "gloss": "crossword",
+   "exampleNative": "Ma mère fait des mots croisés chaque matin.",
+   "exampleEnglish": "My mother does crosswords every morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "manette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "game controller, lever",
+   "exampleNative": "Passe-moi la manette, c'est mon tour de jouer.",
+   "exampleEnglish": "Hand me the controller, it's my turn to play.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tricheur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cheater",
+   "exampleNative": "Personne ne veut jouer aux cartes avec un tricheur.",
+   "exampleEnglish": "Nobody wants to play cards with a cheater.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "domino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "domino",
+   "exampleNative": "On a joué aux dominos après le dîner.",
+   "exampleEnglish": "We played dominoes after dinner.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "loisir",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "leisure, hobby, pastime",
+   "exampleNative": "Quels sont vos loisirs préférés le week-end ?",
+   "exampleEnglish": "What are your favorite hobbies on weekends?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "collectionner",
+   "partOfSpeech": "verb",
+   "gloss": "to collect",
+   "exampleNative": "Il collectionne les pièces de monnaie anciennes.",
+   "exampleEnglish": "He collects old coins.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "collectionneur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "collector",
+   "exampleNative": "Un collectionneur a acheté le tableau très cher.",
+   "exampleEnglish": "A collector bought the painting for a high price.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "timbre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "stamp",
+   "exampleNative": "Mon oncle collectionne les timbres depuis son enfance.",
+   "exampleEnglish": "My uncle has collected stamps since childhood.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "jardinage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "gardening",
+   "exampleNative": "Le jardinage me détend après le travail.",
+   "exampleEnglish": "Gardening relaxes me after work.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "jardiner",
+   "partOfSpeech": "verb",
+   "gloss": "to garden",
+   "exampleNative": "Mes parents jardinent tout le week-end au printemps.",
+   "exampleEnglish": "My parents garden all weekend in spring.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "bricolage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "DIY, tinkering",
+   "exampleNative": "Il passe son samedi à faire du bricolage.",
+   "exampleEnglish": "He spends his Saturday doing DIY.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "bricoler",
+   "partOfSpeech": "verb",
+   "gloss": "to do DIY, tinker",
+   "exampleNative": "Mon père adore bricoler dans le garage.",
+   "exampleEnglish": "My dad loves tinkering in the garage.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "coudre",
+   "partOfSpeech": "verb",
+   "gloss": "to sew",
+   "exampleNative": "Ma grand-mère m'a appris à coudre un bouton.",
+   "exampleEnglish": "My grandmother taught me to sew on a button.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tricot",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "knitting, knitted garment",
+   "exampleNative": "Le tricot redevient à la mode chez les jeunes.",
+   "exampleEnglish": "Knitting is becoming fashionable again among young people.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tricoter",
+   "partOfSpeech": "verb",
+   "gloss": "to knit",
+   "exampleNative": "Elle tricote une écharpe pour son petit-fils.",
+   "exampleEnglish": "She's knitting a scarf for her grandson.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "broderie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "embroidery",
+   "exampleNative": "La broderie de cette nappe est très fine.",
+   "exampleEnglish": "The embroidery on this tablecloth is very fine.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "méditation",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "meditation",
+   "exampleNative": "La méditation l'aide à gérer son stress.",
+   "exampleEnglish": "Meditation helps him manage his stress.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "chef-d'œuvre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "masterpiece",
+   "exampleNative": "Ce film est un chef-d'œuvre du cinéma français.",
+   "exampleEnglish": "This film is a masterpiece of French cinema.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pinceau",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "paintbrush",
+   "exampleNative": "L'artiste nettoie ses pinceaux après chaque séance.",
+   "exampleEnglish": "The artist cleans her brushes after each session.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "palette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "palette",
+   "exampleNative": "Le peintre mélange les couleurs sur sa palette.",
+   "exampleEnglish": "The painter mixes colors on his palette.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sculpture",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sculpture",
+   "exampleNative": "Cette sculpture en bronze date du dix-neuvième siècle.",
+   "exampleEnglish": "This bronze sculpture dates from the nineteenth century.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sculpteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "sculptor",
+   "exampleNative": "Le sculpteur travaille le marbre dans son atelier.",
+   "exampleEnglish": "The sculptor works marble in his studio.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sculpter",
+   "partOfSpeech": "verb",
+   "gloss": "to sculpt, carve",
+   "exampleNative": "Il apprend à sculpter le bois avec son grand-père.",
+   "exampleEnglish": "He's learning to carve wood with his grandfather.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "aquarelle",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "watercolor",
+   "exampleNative": "Elle peint des paysages à l'aquarelle.",
+   "exampleEnglish": "She paints landscapes in watercolor.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "abstrait",
+   "partOfSpeech": "adjective",
+   "gloss": "abstract",
+   "exampleNative": "Je ne comprends pas toujours l'art abstrait.",
+   "exampleEnglish": "I don't always understand abstract art.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contemporain",
+   "partOfSpeech": "adjective",
+   "gloss": "contemporary",
+   "exampleNative": "Ce musée est consacré à l'art contemporain.",
+   "exampleEnglish": "This museum is dedicated to contemporary art.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "partition",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "musical score, sheet music",
+   "exampleNative": "La pianiste joue sans regarder la partition.",
+   "exampleEnglish": "The pianist plays without looking at the sheet music.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "violoncelle",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cello",
+   "exampleNative": "Elle joue du violoncelle depuis l'âge de six ans.",
+   "exampleEnglish": "She has played the cello since she was six.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "trompette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "trumpet",
+   "exampleNative": "Il apprend la trompette au conservatoire.",
+   "exampleEnglish": "He's learning the trumpet at the conservatory.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "saxophone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "saxophone",
+   "exampleNative": "Le saxophone donne au morceau un air de jazz.",
+   "exampleEnglish": "The saxophone gives the piece a jazzy feel.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "harpe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "harp",
+   "exampleNative": "Le son de la harpe est très doux.",
+   "exampleEnglish": "The sound of the harp is very soft.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "accordéon",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "accordion",
+   "exampleNative": "Un musicien joue de l'accordéon dans le métro.",
+   "exampleEnglish": "A musician is playing the accordion in the metro.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "clarinette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "clarinet",
+   "exampleNative": "Elle répète un morceau difficile à la clarinette.",
+   "exampleEnglish": "She's practicing a difficult piece on the clarinet.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "orgue",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "organ (instrument)",
+   "exampleNative": "L'orgue de la cathédrale est impressionnant.",
+   "exampleEnglish": "The cathedral organ is impressive.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "chœur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "choir, chorus",
+   "exampleNative": "Elle chante dans le chœur de son village.",
+   "exampleEnglish": "She sings in her village choir.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "refrain",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "chorus, refrain",
+   "exampleNative": "Tout le public a repris le refrain en chœur.",
+   "exampleEnglish": "The whole audience sang the chorus together.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "applaudir",
+   "partOfSpeech": "verb",
+   "gloss": "to applaud, clap",
+   "exampleNative": "Le public a applaudi pendant cinq minutes.",
+   "exampleEnglish": "The audience applauded for five minutes.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "écouteurs",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "earphones, headphones",
+   "exampleNative": "J'écoute de la musique avec mes écouteurs dans le train.",
+   "exampleEnglish": "I listen to music with my earphones on the train.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "clip",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "music video, clip",
+   "exampleNative": "Le clip de cette chanson a des millions de vues.",
+   "exampleEnglish": "This song's music video has millions of views.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "playlist",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "playlist",
+   "exampleNative": "J'ai créé une playlist pour la fête de samedi.",
+   "exampleEnglish": "I made a playlist for Saturday's party.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "symphonie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "symphony",
+   "exampleNative": "L'orchestre a joué une symphonie de Beethoven.",
+   "exampleEnglish": "The orchestra played a Beethoven symphony.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vinyle",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "vinyl record",
+   "exampleNative": "Il achète des vinyles dans une petite boutique.",
+   "exampleEnglish": "He buys vinyl records in a little shop.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "comédien",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "actor, stage actor",
+   "exampleNative": "Ce comédien joue au théâtre depuis vingt ans.",
+   "exampleEnglish": "This actor has performed in theater for twenty years.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "coulisses",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "backstage, wings",
+   "exampleNative": "Les danseurs attendent en coulisses avant le spectacle.",
+   "exampleEnglish": "The dancers wait backstage before the show.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "bande-annonce",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "trailer (film)",
+   "exampleNative": "La bande-annonce du film m'a donné envie de le voir.",
+   "exampleEnglish": "The film's trailer made me want to see it.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "dessin animé",
+   "partOfSpeech": "phrase",
+   "gloss": "cartoon, animated film",
+   "exampleNative": "Les enfants regardent un dessin animé avant le dîner.",
+   "exampleEnglish": "The kids are watching a cartoon before dinner.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "animateur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "host, presenter, activity leader",
+   "exampleNative": "L'animateur de l'émission pose des questions amusantes.",
+   "exampleEnglish": "The show's host asks funny questions.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "présentateur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "presenter, anchor",
+   "exampleNative": "Le présentateur du journal annonce les titres du soir.",
+   "exampleEnglish": "The news anchor announces the evening headlines.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "jongleur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "juggler",
+   "exampleNative": "Un jongleur amuse les passants sur la place.",
+   "exampleEnglish": "A juggler entertains passers-by in the square.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "jongler",
+   "partOfSpeech": "verb",
+   "gloss": "to juggle",
+   "exampleNative": "Il sait jongler avec cinq balles en même temps.",
+   "exampleEnglish": "He can juggle five balls at once.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "feu d'artifice",
+   "partOfSpeech": "phrase",
+   "gloss": "fireworks",
+   "exampleNative": "Le feu d'artifice du 14 juillet était magnifique.",
+   "exampleEnglish": "The Bastille Day fireworks were magnificent.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "manège",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "merry-go-round, carousel",
+   "exampleNative": "Les enfants font un tour de manège à la fête.",
+   "exampleEnglish": "The children take a ride on the carousel at the fair.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "entracte",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "intermission, interval",
+   "exampleNative": "Nous avons pris un café pendant l'entracte.",
+   "exampleEnglish": "We had a coffee during the intermission.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "humoriste",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "comedian, humorist",
+   "exampleNative": "Cet humoriste remplit les salles partout en France.",
+   "exampleEnglish": "This comedian fills venues all over France.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sketch",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "comedy sketch",
+   "exampleNative": "Son sketch sur les vacances fait toujours rire.",
+   "exampleEnglish": "His sketch about holidays always gets laughs.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "siffler",
+   "partOfSpeech": "verb",
+   "gloss": "to whistle, boo",
+   "exampleNative": "L'arbitre a sifflé la fin du match.",
+   "exampleEnglish": "The referee blew the whistle for full time.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "demi-finale",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "semifinal",
+   "exampleNative": "L'équipe s'est qualifiée pour la demi-finale.",
+   "exampleEnglish": "The team qualified for the semifinal.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "se qualifier",
+   "partOfSpeech": "verb",
+   "gloss": "to qualify",
+   "exampleNative": "La France s'est qualifiée pour la finale du tournoi.",
+   "exampleEnglish": "France qualified for the tournament final.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "exploit",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "feat, achievement",
+   "exampleNative": "Finir ce marathon est un véritable exploit.",
+   "exampleEnglish": "Finishing that marathon is a real feat.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "s'entraîner",
+   "partOfSpeech": "verb",
+   "gloss": "to train, practice",
+   "exampleNative": "Elle s'entraîne au tennis deux heures par jour.",
+   "exampleEnglish": "She practices tennis two hours a day.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "transpirer",
+   "partOfSpeech": "verb",
+   "gloss": "to sweat",
+   "exampleNative": "On transpire beaucoup pendant un cours de sport.",
+   "exampleEnglish": "You sweat a lot during a gym class.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hobby",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hobby",
+   "exampleNative": "La photo est mon hobby depuis des années.",
+   "exampleEnglish": "Photography has been my hobby for years.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "clavier",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "keyboard",
+   "exampleNative": "Je tape vite sur le clavier de mon ordinateur.",
+   "exampleEnglish": "I type fast on my computer keyboard.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "courriel",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "email",
+   "exampleNative": "Je t'envoie le document par courriel demain matin.",
+   "exampleEnglish": "I'll send you the document by email tomorrow morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "télécharger",
+   "partOfSpeech": "verb",
+   "gloss": "to download",
+   "exampleNative": "Tu peux télécharger l'application gratuitement.",
+   "exampleEnglish": "You can download the app for free.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "téléchargement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "download",
+   "exampleNative": "Le téléchargement du fichier prend deux minutes.",
+   "exampleEnglish": "The file download takes two minutes.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "imprimer",
+   "partOfSpeech": "verb",
+   "gloss": "to print",
+   "exampleNative": "Je dois imprimer mon billet de train.",
+   "exampleEnglish": "I have to print my train ticket.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "imprimante",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "printer",
+   "exampleNative": "L'imprimante du bureau n'a plus d'encre.",
+   "exampleEnglish": "The office printer is out of ink.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "appli",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "app",
+   "exampleNative": "Cette appli est très pratique pour apprendre le français.",
+   "exampleEnglish": "This app is really handy for learning French.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "coder",
+   "partOfSpeech": "verb",
+   "gloss": "to code, program",
+   "exampleNative": "Mon frère apprend à coder à l'école.",
+   "exampleEnglish": "My brother is learning to code at school.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "wifi",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "Wi-Fi",
+   "exampleNative": "Le wifi de l'hôtel ne marche pas.",
+   "exampleEnglish": "The hotel Wi-Fi isn't working.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "déconnecter",
+   "partOfSpeech": "verb",
+   "gloss": "to disconnect, log out",
+   "exampleNative": "N'oublie pas de te déconnecter après ta séance.",
+   "exampleEnglish": "Don't forget to log out after your session.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "identifiant",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "username, login ID",
+   "exampleNative": "J'ai oublié mon identifiant et mon mot de passe.",
+   "exampleEnglish": "I forgot my username and my password.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "piratage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hacking, piracy",
+   "exampleNative": "La banque a été victime d'un piratage informatique.",
+   "exampleEnglish": "The bank was the victim of a hack.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sauvegarder",
+   "partOfSpeech": "verb",
+   "gloss": "to save, back up",
+   "exampleNative": "Pense à sauvegarder ton travail régulièrement.",
+   "exampleEnglish": "Remember to save your work regularly.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "sauvegarde",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "backup",
+   "exampleNative": "Je fais une sauvegarde de mes photos chaque semaine.",
+   "exampleEnglish": "I back up my photos every week.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "cliquer",
+   "partOfSpeech": "verb",
+   "gloss": "to click",
+   "exampleNative": "Cliquez sur le bouton vert pour continuer.",
+   "exampleEnglish": "Click the green button to continue.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "clic",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "click",
+   "exampleNative": "Aujourd'hui, tout s'achète en un clic.",
+   "exampleEnglish": "These days everything can be bought in one click.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "technologique",
+   "partOfSpeech": "adjective",
+   "gloss": "technological",
+   "exampleNative": "Les progrès technologiques changent notre vie quotidienne.",
+   "exampleEnglish": "Technological progress is changing our daily lives.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "informaticien",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "IT specialist",
+   "exampleNative": "Mon voisin est informaticien dans une grande entreprise.",
+   "exampleEnglish": "My neighbor is an IT specialist at a big company.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "robotique",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "robotics",
+   "exampleNative": "Elle étudie la robotique à l'université.",
+   "exampleEnglish": "She studies robotics at university.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "artificiel",
+   "partOfSpeech": "adjective",
+   "gloss": "artificial",
+   "exampleNative": "L'intelligence artificielle est partout dans les médias.",
+   "exampleEnglish": "Artificial intelligence is everywhere in the media.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "algorithme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "algorithm",
+   "exampleNative": "L'algorithme choisit les vidéos que tu vois.",
+   "exampleEnglish": "The algorithm chooses the videos you see.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "recharger",
+   "partOfSpeech": "verb",
+   "gloss": "to recharge",
+   "exampleNative": "Je dois recharger mon téléphone avant de partir.",
+   "exampleEnglish": "I need to charge my phone before leaving.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "écouteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "earphone, earbud",
+   "exampleNative": "J'ai perdu un de mes écouteurs dans le bus.",
+   "exampleEnglish": "I lost one of my earbuds on the bus.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "haut-parleur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "loudspeaker",
+   "exampleNative": "Mets la musique sur le haut-parleur.",
+   "exampleEnglish": "Put the music on the speaker.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "microphone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "microphone",
+   "exampleNative": "Ton microphone est coupé, on ne t'entend pas.",
+   "exampleEnglish": "Your microphone is muted, we can't hear you.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "photographier",
+   "partOfSpeech": "verb",
+   "gloss": "to photograph",
+   "exampleNative": "Les touristes photographient la vieille cathédrale.",
+   "exampleEnglish": "The tourists are photographing the old cathedral.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "audio",
+   "partOfSpeech": "adjective",
+   "gloss": "audio",
+   "exampleNative": "Elle m'a laissé un long message audio.",
+   "exampleEnglish": "She left me a long voice message.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "podcast",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "podcast",
+   "exampleNative": "J'écoute un podcast en français tous les matins.",
+   "exampleEnglish": "I listen to a French podcast every morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "journalisme",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "journalism",
+   "exampleNative": "Elle veut faire des études de journalisme.",
+   "exampleEnglish": "She wants to study journalism.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "publication",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "publication, post",
+   "exampleNative": "Sa dernière publication a reçu mille commentaires.",
+   "exampleEnglish": "Her latest post got a thousand comments.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "rédacteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "editor, writer",
+   "exampleNative": "Il travaille comme rédacteur pour un magazine.",
+   "exampleEnglish": "He works as an editor for a magazine.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "actualité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "news, current events",
+   "exampleNative": "Je suis l'actualité à la radio chaque matin.",
+   "exampleEnglish": "I follow the news on the radio every morning.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "commenter",
+   "partOfSpeech": "verb",
+   "gloss": "to comment on",
+   "exampleNative": "Des milliers de personnes ont commenté sa vidéo.",
+   "exampleEnglish": "Thousands of people commented on her video.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "s'abonner",
+   "partOfSpeech": "verb",
+   "gloss": "to subscribe",
+   "exampleNative": "Tu peux t'abonner à ma chaîne gratuitement.",
+   "exampleEnglish": "You can subscribe to my channel for free.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "abonnement",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "subscription",
+   "exampleNative": "Mon abonnement coûte dix euros par mois.",
+   "exampleEnglish": "My subscription costs ten euros a month.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "abonné",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "subscriber, follower",
+   "exampleNative": "Cette chaîne a un million d'abonnés.",
+   "exampleEnglish": "This channel has a million subscribers.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "forum",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "forum",
+   "exampleNative": "J'ai trouvé la réponse sur un forum en ligne.",
+   "exampleEnglish": "I found the answer on an online forum.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "blogueur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "blogger",
+   "exampleNative": "Ce blogueur écrit sur la cuisine italienne.",
+   "exampleEnglish": "This blogger writes about Italian cooking.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "influenceur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "influencer",
+   "exampleNative": "Cet influenceur fait de la publicité pour des marques.",
+   "exampleEnglish": "This influencer advertises for brands.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tablette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tablet",
+   "exampleNative": "Les enfants regardent un dessin animé sur la tablette.",
+   "exampleEnglish": "The kids are watching a cartoon on the tablet.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "smartphone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "smartphone",
+   "exampleNative": "Il passe des heures sur son smartphone.",
+   "exampleEnglish": "He spends hours on his smartphone.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "stocker",
+   "partOfSpeech": "verb",
+   "gloss": "to store",
+   "exampleNative": "Je stocke toutes mes photos en ligne.",
+   "exampleEnglish": "I store all my photos online.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "stockage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "storage",
+   "exampleNative": "Mon téléphone n'a plus d'espace de stockage.",
+   "exampleEnglish": "My phone has no storage space left.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "navigateur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "browser",
+   "exampleNative": "Quel navigateur utilises-tu sur ton ordinateur ?",
+   "exampleEnglish": "Which browser do you use on your computer?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "onglet",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "tab (browser)",
+   "exampleNative": "J'ai vingt onglets ouverts dans mon navigateur.",
+   "exampleEnglish": "I have twenty tabs open in my browser.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "icône",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "icon",
+   "exampleNative": "Clique sur l'icône bleue pour ouvrir l'application.",
+   "exampleEnglish": "Click the blue icon to open the app.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "curseur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cursor",
+   "exampleNative": "Place le curseur au début de la phrase.",
+   "exampleEnglish": "Put the cursor at the start of the sentence.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "paramètre",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "setting, parameter",
+   "exampleNative": "Tu peux changer la langue dans les paramètres.",
+   "exampleEnglish": "You can change the language in the settings.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "réglage",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "setting, adjustment",
+   "exampleNative": "Vérifie les réglages du son avant la réunion.",
+   "exampleEnglish": "Check the sound settings before the meeting.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "actualiser",
+   "partOfSpeech": "verb",
+   "gloss": "to refresh, update",
+   "exampleNative": "Actualise la page pour voir les nouveaux messages.",
+   "exampleEnglish": "Refresh the page to see the new messages.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "désinstaller",
+   "partOfSpeech": "verb",
+   "gloss": "to uninstall",
+   "exampleNative": "J'ai désinstallé le jeu pour gagner de la place.",
+   "exampleEnglish": "I uninstalled the game to free up space.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "redémarrer",
+   "partOfSpeech": "verb",
+   "gloss": "to restart",
+   "exampleNative": "Redémarre l'ordinateur si le programme se bloque.",
+   "exampleEnglish": "Restart the computer if the program freezes.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "débrancher",
+   "partOfSpeech": "verb",
+   "gloss": "to unplug",
+   "exampleNative": "Débranche le chargeur quand la batterie est pleine.",
+   "exampleEnglish": "Unplug the charger when the battery is full.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "numériser",
+   "partOfSpeech": "verb",
+   "gloss": "to digitize, scan",
+   "exampleNative": "La bibliothèque numérise ses vieux livres.",
+   "exampleEnglish": "The library is digitizing its old books.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "photocopier",
+   "partOfSpeech": "verb",
+   "gloss": "to photocopy",
+   "exampleNative": "Peux-tu photocopier ce document pour la réunion ?",
+   "exampleEnglish": "Can you photocopy this document for the meeting?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "photocopie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "photocopy",
+   "exampleNative": "Il me faut une photocopie de votre passeport.",
+   "exampleEnglish": "I need a photocopy of your passport.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "messagerie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "voicemail, messaging",
+   "exampleNative": "Laissez un message sur ma messagerie.",
+   "exampleEnglish": "Leave a message on my voicemail.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "vibrer",
+   "partOfSpeech": "verb",
+   "gloss": "to vibrate",
+   "exampleNative": "Mon téléphone vibre au fond de mon sac.",
+   "exampleEnglish": "My phone is vibrating at the bottom of my bag.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "notification",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "notification",
+   "exampleNative": "Je coupe les notifications pendant la nuit.",
+   "exampleEnglish": "I turn off notifications at night.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "spam",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "spam",
+   "exampleNative": "Regarde dans les spams, mon message y est peut-être.",
+   "exampleEnglish": "Check your spam folder, my message might be there.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "arobase",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "at sign (@)",
+   "exampleNative": "Mon adresse, c'est marie arobase exemple point fr.",
+   "exampleEnglish": "My address is marie at example dot fr.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tactile",
+   "partOfSpeech": "adjective",
+   "gloss": "touch, touch-screen",
+   "exampleNative": "L'écran tactile ne répond plus.",
+   "exampleEnglish": "The touchscreen isn't responding anymore.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pixel",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pixel",
+   "exampleNative": "L'image est floue, on voit les pixels.",
+   "exampleEnglish": "The picture is blurry, you can see the pixels.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "format",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "format",
+   "exampleNative": "Envoie-moi le fichier au format PDF.",
+   "exampleEnglish": "Send me the file in PDF format.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "bogue",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bug (software)",
+   "exampleNative": "Un bogue empêche l'application de démarrer.",
+   "exampleEnglish": "A bug is stopping the app from starting.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "débit",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "speed, data rate",
+   "exampleNative": "Le débit de notre connexion est très faible ce soir.",
+   "exampleEnglish": "Our connection speed is very slow tonight.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "émettre",
+   "partOfSpeech": "verb",
+   "gloss": "to broadcast, emit",
+   "exampleNative": "Cette radio émet vingt-quatre heures sur vingt-quatre.",
+   "exampleEnglish": "This radio station broadcasts around the clock.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "récepteur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "receiver",
+   "exampleNative": "Le récepteur capte mal le signal ici.",
+   "exampleEnglish": "The receiver gets a poor signal here.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "forfait",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "phone plan, package",
+   "exampleNative": "Mon forfait comprend les appels et internet.",
+   "exampleEnglish": "My plan includes calls and internet.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "composer",
+   "partOfSpeech": "verb",
+   "gloss": "to dial, compose",
+   "exampleNative": "Composez le numéro et attendez la tonalité.",
+   "exampleEnglish": "Dial the number and wait for the tone.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tonalité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dial tone, tone",
+   "exampleNative": "Il n'y a pas de tonalité, la ligne est coupée.",
+   "exampleEnglish": "There's no dial tone, the line is dead.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "visioconférence",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "video conference",
+   "exampleNative": "La réunion aura lieu en visioconférence lundi.",
+   "exampleEnglish": "The meeting will take place by video call on Monday.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "visio",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "video call",
+   "exampleNative": "On se fait une visio ce soir ?",
+   "exampleEnglish": "Shall we do a video call tonight?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "webcam",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "webcam",
+   "exampleNative": "Allume ta webcam pour que je te voie.",
+   "exampleEnglish": "Turn on your webcam so I can see you.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "virtuel",
+   "partOfSpeech": "adjective",
+   "gloss": "virtual",
+   "exampleNative": "Ils se sont rencontrés dans un monde virtuel.",
+   "exampleEnglish": "They met in a virtual world.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "cybersécurité",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "cybersecurity",
+   "exampleNative": "L'entreprise investit beaucoup dans la cybersécurité.",
+   "exampleEnglish": "The company invests heavily in cybersecurity.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "visionner",
+   "partOfSpeech": "verb",
+   "gloss": "to view, watch",
+   "exampleNative": "Nous avons visionné la vidéo plusieurs fois.",
+   "exampleEnglish": "We watched the video several times.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pièce jointe",
+   "partOfSpeech": "phrase",
+   "gloss": "attachment",
+   "exampleNative": "Vous trouverez le contrat en pièce jointe.",
+   "exampleEnglish": "You will find the contract attached.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "imprimé",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "printed form, leaflet",
+   "exampleNative": "Remplissez cet imprimé et signez en bas.",
+   "exampleEnglish": "Fill in this form and sign at the bottom.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "payant",
+   "partOfSpeech": "adjective",
+   "gloss": "paid, not free",
+   "exampleNative": "Cette application est payante, celle-là est gratuite.",
+   "exampleEnglish": "This app is paid, that one is free.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "sans fil",
+   "partOfSpeech": "phrase",
+   "gloss": "wireless",
+   "exampleNative": "J'ai acheté un casque sans fil pour courir.",
+   "exampleEnglish": "I bought wireless headphones for running.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mot de passe",
+   "partOfSpeech": "phrase",
+   "gloss": "password",
+   "exampleNative": "Je change mon mot de passe tous les mois.",
+   "exampleEnglish": "I change my password every month.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "en ligne",
+   "partOfSpeech": "phrase",
+   "gloss": "online",
+   "exampleNative": "Elle suit un cours de français en ligne.",
+   "exampleEnglish": "She's taking a French course online.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "réseau social",
+   "partOfSpeech": "phrase",
+   "gloss": "social network",
+   "exampleNative": "Les jeunes passent des heures sur les réseaux sociaux.",
+   "exampleEnglish": "Young people spend hours on social media.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "jeu vidéo",
+   "partOfSpeech": "phrase",
+   "gloss": "video game",
+   "exampleNative": "Il joue aux jeux vidéo tous les soirs.",
+   "exampleEnglish": "He plays video games every evening.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "moteur de recherche",
+   "partOfSpeech": "phrase",
+   "gloss": "search engine",
+   "exampleNative": "Tape ta question dans le moteur de recherche.",
+   "exampleEnglish": "Type your question into the search engine.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "disque dur",
+   "partOfSpeech": "phrase",
+   "gloss": "hard drive",
+   "exampleNative": "Mon disque dur est presque plein.",
+   "exampleEnglish": "My hard drive is almost full.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "capture d'écran",
+   "partOfSpeech": "phrase",
+   "gloss": "screenshot",
+   "exampleNative": "Fais une capture d'écran de la carte.",
+   "exampleEnglish": "Take a screenshot of the map.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pseudo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "username, nickname",
+   "exampleNative": "Quel est ton pseudo sur ce jeu ?",
+   "exampleEnglish": "What's your username in this game?",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "emoji",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "emoji",
+   "exampleNative": "Elle termine tous ses messages par un emoji.",
+   "exampleEnglish": "She ends all her messages with an emoji.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "internaute",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "internet user",
+   "exampleNative": "Des millions d'internautes ont vu cette vidéo.",
+   "exampleEnglish": "Millions of internet users saw this video.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "utilisateur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "user",
+   "exampleNative": "Le site compte des milliers d'utilisateurs actifs.",
+   "exampleEnglish": "The site has thousands of active users.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mise à jour",
+   "partOfSpeech": "phrase",
+   "gloss": "update",
+   "exampleNative": "Installe la mise à jour avant de redémarrer.",
+   "exampleEnglish": "Install the update before restarting.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "développeur",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "developer",
+   "exampleNative": "Il est développeur dans une petite entreprise.",
+   "exampleEnglish": "He's a developer at a small company.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "méditer",
+   "partOfSpeech": "verb",
+   "gloss": "to meditate, ponder",
+   "exampleNative": "Elle médite dix minutes chaque matin avant le travail.",
+   "exampleEnglish": "She meditates for ten minutes every morning before work.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "songer",
+   "partOfSpeech": "verb",
+   "gloss": "to think of, consider",
+   "exampleNative": "Je songe à changer de métier depuis quelques mois.",
+   "exampleEnglish": "I've been thinking about changing careers for a few months.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "percevoir",
+   "partOfSpeech": "verb",
+   "gloss": "to perceive, sense",
+   "exampleNative": "On perçoit une légère hésitation dans sa voix.",
+   "exampleEnglish": "You can sense a slight hesitation in his voice.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "constater",
+   "partOfSpeech": "verb",
+   "gloss": "to notice, observe",
+   "exampleNative": "Je constate que tu as fait beaucoup de progrès.",
+   "exampleEnglish": "I notice that you have made a lot of progress.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "s'apercevoir",
+   "partOfSpeech": "verb",
+   "gloss": "to realize, notice",
+   "exampleNative": "Elle s'est aperçue de son erreur trop tard.",
+   "exampleEnglish": "She realized her mistake too late.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "anticiper",
+   "partOfSpeech": "verb",
+   "gloss": "to anticipate",
+   "exampleNative": "Il faut anticiper les problèmes avant qu'ils arrivent.",
+   "exampleEnglish": "You have to anticipate problems before they happen.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "redouter",
+   "partOfSpeech": "verb",
+   "gloss": "to dread, fear",
+   "exampleNative": "Les élèves redoutent l'examen de fin d'année.",
+   "exampleEnglish": "The students dread the end-of-year exam.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "déduire",
+   "partOfSpeech": "verb",
+   "gloss": "to deduce, deduct",
+   "exampleNative": "J'en déduis que tu n'as pas lu mon message.",
+   "exampleEnglish": "I gather that you didn't read my message.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "négliger",
+   "partOfSpeech": "verb",
+   "gloss": "to neglect",
+   "exampleNative": "Il ne faut pas négliger son sommeil pendant les examens.",
+   "exampleEnglish": "You mustn't neglect your sleep during exams.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "confondre",
+   "partOfSpeech": "verb",
+   "gloss": "to confuse, mix up",
+   "exampleNative": "Je confonds toujours ces deux mots en français.",
+   "exampleEnglish": "I always mix up those two words in French.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "assimiler",
+   "partOfSpeech": "verb",
+   "gloss": "to absorb, take in",
+   "exampleNative": "Il faut du temps pour assimiler toutes ces règles.",
+   "exampleEnglish": "It takes time to absorb all these rules.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "contempler",
+   "partOfSpeech": "verb",
+   "gloss": "to gaze at, contemplate",
+   "exampleNative": "Nous avons contemplé le coucher de soleil depuis la plage.",
+   "exampleEnglish": "We gazed at the sunset from the beach.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "interpréter",
+   "partOfSpeech": "verb",
+   "gloss": "to interpret, perform",
+   "exampleNative": "Chacun interprète cette histoire à sa manière.",
+   "exampleEnglish": "Everyone interprets this story in their own way.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tolérer",
+   "partOfSpeech": "verb",
+   "gloss": "to tolerate",
+   "exampleNative": "Le professeur ne tolère aucun retard en cours.",
+   "exampleEnglish": "The teacher doesn't tolerate any lateness in class.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "taquiner",
+   "partOfSpeech": "verb",
+   "gloss": "to tease",
+   "exampleNative": "Mon grand frère adore me taquiner à table.",
+   "exampleEnglish": "My big brother loves teasing me at the table.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "complimenter",
+   "partOfSpeech": "verb",
+   "gloss": "to compliment",
+   "exampleNative": "Elle m'a complimenté sur ma nouvelle coupe de cheveux.",
+   "exampleEnglish": "She complimented me on my new haircut.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "flatter",
+   "partOfSpeech": "verb",
+   "gloss": "to flatter",
+   "exampleNative": "Il flatte son patron pour obtenir une augmentation.",
+   "exampleEnglish": "He flatters his boss to get a raise.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "gronder",
+   "partOfSpeech": "verb",
+   "gloss": "to scold, tell off",
+   "exampleNative": "Sa mère l'a grondé parce qu'il rentrait tard.",
+   "exampleEnglish": "His mother scolded him because he came home late.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "désobéir",
+   "partOfSpeech": "verb",
+   "gloss": "to disobey",
+   "exampleNative": "L'enfant a désobéi à ses parents encore une fois.",
+   "exampleEnglish": "The child disobeyed his parents once again.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "secourir",
+   "partOfSpeech": "verb",
+   "gloss": "to rescue, help",
+   "exampleNative": "Les pompiers ont secouru deux personnes dans l'incendie.",
+   "exampleEnglish": "The firefighters rescued two people from the fire.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "collaborer",
+   "partOfSpeech": "verb",
+   "gloss": "to collaborate",
+   "exampleNative": "Nos deux équipes collaborent sur ce projet depuis janvier.",
+   "exampleEnglish": "Our two teams have been collaborating on this project since January.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "se réconcilier",
+   "partOfSpeech": "verb",
+   "gloss": "to make up, reconcile",
+   "exampleNative": "Ils se sont réconciliés après leur dispute d'hier.",
+   "exampleEnglish": "They made up after their argument yesterday.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "se marier",
+   "partOfSpeech": "verb",
+   "gloss": "to get married",
+   "exampleNative": "Ils se marient en juin dans un petit village.",
+   "exampleEnglish": "They are getting married in June in a small village.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "enlacer",
+   "partOfSpeech": "verb",
+   "gloss": "to embrace, hug",
+   "exampleNative": "Elle a enlacé sa fille avant son départ.",
+   "exampleEnglish": "She embraced her daughter before her departure.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "câliner",
+   "partOfSpeech": "verb",
+   "gloss": "to cuddle",
+   "exampleNative": "Le petit garçon câline son chat sur le canapé.",
+   "exampleEnglish": "The little boy is cuddling his cat on the sofa.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "murmurer",
+   "partOfSpeech": "verb",
+   "gloss": "to murmur, whisper",
+   "exampleNative": "Elle a murmuré quelque chose que personne n'a entendu.",
+   "exampleEnglish": "She murmured something that nobody heard.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "répliquer",
+   "partOfSpeech": "verb",
+   "gloss": "to retort, reply",
+   "exampleNative": "« Ce n'est pas ma faute », a-t-il répliqué aussitôt.",
+   "exampleEnglish": "\"It's not my fault,\" he retorted immediately.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "envier",
+   "partOfSpeech": "verb",
+   "gloss": "to envy",
+   "exampleNative": "J'envie les gens qui parlent plusieurs langues.",
+   "exampleEnglish": "I envy people who speak several languages.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "héberger",
+   "partOfSpeech": "verb",
+   "gloss": "to host, put up",
+   "exampleNative": "Des amis nous hébergent pendant notre séjour à Lyon.",
+   "exampleEnglish": "Friends are putting us up during our stay in Lyon.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "se présenter",
+   "partOfSpeech": "verb",
+   "gloss": "to introduce oneself",
+   "exampleNative": "Chaque étudiant se présente au début du cours.",
+   "exampleEnglish": "Each student introduces themselves at the start of the class.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "protester",
+   "partOfSpeech": "verb",
+   "gloss": "to protest",
+   "exampleNative": "Les habitants protestent contre la fermeture de la gare.",
+   "exampleEnglish": "The residents are protesting against the station's closure.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "mâcher",
+   "partOfSpeech": "verb",
+   "gloss": "to chew",
+   "exampleNative": "Il faut bien mâcher avant d'avaler.",
+   "exampleEnglish": "You have to chew well before swallowing.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "croquer",
+   "partOfSpeech": "verb",
+   "gloss": "to bite into, crunch",
+   "exampleNative": "Elle croque une pomme en lisant son livre.",
+   "exampleEnglish": "She's crunching on an apple while reading her book.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tousser",
+   "partOfSpeech": "verb",
+   "gloss": "to cough",
+   "exampleNative": "Il tousse beaucoup depuis le début de la semaine.",
+   "exampleEnglish": "He has been coughing a lot since the start of the week.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "éternuer",
+   "partOfSpeech": "verb",
+   "gloss": "to sneeze",
+   "exampleNative": "Le pollen me fait éternuer tout le printemps.",
+   "exampleEnglish": "Pollen makes me sneeze all spring long.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "bâiller",
+   "partOfSpeech": "verb",
+   "gloss": "to yawn",
+   "exampleNative": "Il bâillait pendant toute la réunion du matin.",
+   "exampleEnglish": "He was yawning throughout the whole morning meeting.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "ronfler",
+   "partOfSpeech": "verb",
+   "gloss": "to snore",
+   "exampleNative": "Mon mari ronfle tellement fort que je dors mal.",
+   "exampleEnglish": "My husband snores so loudly that I sleep badly.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "frissonner",
+   "partOfSpeech": "verb",
+   "gloss": "to shiver",
+   "exampleNative": "Elle frissonnait de froid en attendant le bus.",
+   "exampleEnglish": "She was shivering with cold while waiting for the bus.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "essuyer",
+   "partOfSpeech": "verb",
+   "gloss": "to wipe, dry",
+   "exampleNative": "Essuie la table avant de mettre les assiettes.",
+   "exampleEnglish": "Wipe the table before setting out the plates.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "rincer",
+   "partOfSpeech": "verb",
+   "gloss": "to rinse",
+   "exampleNative": "Rince les verres à l'eau chaude, s'il te plaît.",
+   "exampleEnglish": "Rinse the glasses with hot water, please.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "peigner",
+   "partOfSpeech": "verb",
+   "gloss": "to comb",
+   "exampleNative": "Elle peigne les cheveux de sa fille chaque matin.",
+   "exampleEnglish": "She combs her daughter's hair every morning.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "boutonner",
+   "partOfSpeech": "verb",
+   "gloss": "to button up",
+   "exampleNative": "Boutonne ton manteau, il fait très froid dehors.",
+   "exampleEnglish": "Button up your coat, it's very cold outside.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "nouer",
+   "partOfSpeech": "verb",
+   "gloss": "to tie, knot",
+   "exampleNative": "Il noue ses lacets avant de partir courir.",
+   "exampleEnglish": "He ties his shoelaces before going for a run.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "déplier",
+   "partOfSpeech": "verb",
+   "gloss": "to unfold",
+   "exampleNative": "Elle déplie la carte pour trouver notre chemin.",
+   "exampleEnglish": "She unfolds the map to find our way.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "hacher",
+   "partOfSpeech": "verb",
+   "gloss": "to chop, mince",
+   "exampleNative": "Hache l'oignon finement pour la sauce tomate.",
+   "exampleEnglish": "Chop the onion finely for the tomato sauce.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "éplucher",
+   "partOfSpeech": "verb",
+   "gloss": "to peel",
+   "exampleNative": "Je vais éplucher les pommes de terre pour le dîner.",
+   "exampleEnglish": "I'm going to peel the potatoes for dinner.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "gifler",
+   "partOfSpeech": "verb",
+   "gloss": "to slap",
+   "exampleNative": "Dans le film, elle gifle son mari en pleine rue.",
+   "exampleEnglish": "In the film, she slaps her husband right in the street.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "caresser",
+   "partOfSpeech": "verb",
+   "gloss": "to stroke, caress",
+   "exampleNative": "Le chat ronronne quand on le caresse doucement.",
+   "exampleEnglish": "The cat purrs when you stroke it gently.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pincer",
+   "partOfSpeech": "verb",
+   "gloss": "to pinch",
+   "exampleNative": "Elle m'a pincé le bras pour me réveiller.",
+   "exampleEnglish": "She pinched my arm to wake me up.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "chatouiller",
+   "partOfSpeech": "verb",
+   "gloss": "to tickle",
+   "exampleNative": "Arrête de me chatouiller, je n'arrive plus à respirer !",
+   "exampleEnglish": "Stop tickling me, I can't breathe anymore!",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "arroser",
+   "partOfSpeech": "verb",
+   "gloss": "to water",
+   "exampleNative": "N'oublie pas d'arroser les plantes pendant mon absence.",
+   "exampleEnglish": "Don't forget to water the plants while I'm away.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "cueillir",
+   "partOfSpeech": "verb",
+   "gloss": "to pick, gather",
+   "exampleNative": "Nous avons cueilli des fraises dans le jardin.",
+   "exampleEnglish": "We picked strawberries in the garden.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "balayer",
+   "partOfSpeech": "verb",
+   "gloss": "to sweep",
+   "exampleNative": "Il balaie la cuisine après chaque repas.",
+   "exampleEnglish": "He sweeps the kitchen after every meal.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "visser",
+   "partOfSpeech": "verb",
+   "gloss": "to screw in",
+   "exampleNative": "Il faut visser cette étagère au mur du salon.",
+   "exampleEnglish": "This shelf needs to be screwed to the living room wall.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "étirer",
+   "partOfSpeech": "verb",
+   "gloss": "to stretch",
+   "exampleNative": "Étire bien tes jambes après la course.",
+   "exampleEnglish": "Stretch your legs well after the run.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "s'étirer",
+   "partOfSpeech": "verb",
+   "gloss": "to stretch (oneself)",
+   "exampleNative": "Le chat s'étire longuement avant de sauter du canapé.",
+   "exampleEnglish": "The cat stretches at length before jumping off the sofa.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "se pencher",
+   "partOfSpeech": "verb",
+   "gloss": "to lean, bend over",
+   "exampleNative": "Ne te penche pas trop par la fenêtre du train.",
+   "exampleEnglish": "Don't lean too far out of the train window.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "s'accroupir",
+   "partOfSpeech": "verb",
+   "gloss": "to crouch, squat",
+   "exampleNative": "Elle s'accroupit pour parler à l'enfant.",
+   "exampleEnglish": "She crouches down to talk to the child.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "s'agenouiller",
+   "partOfSpeech": "verb",
+   "gloss": "to kneel",
+   "exampleNative": "Il s'est agenouillé pour ramasser ses clés.",
+   "exampleEnglish": "He knelt down to pick up his keys.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "s'allonger",
+   "partOfSpeech": "verb",
+   "gloss": "to lie down",
+   "exampleNative": "Je vais m'allonger cinq minutes avant le dîner.",
+   "exampleEnglish": "I'm going to lie down for five minutes before dinner.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "se retourner",
+   "partOfSpeech": "verb",
+   "gloss": "to turn around",
+   "exampleNative": "Elle s'est retournée quand j'ai crié son nom.",
+   "exampleEnglish": "She turned around when I shouted her name.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "cligner",
+   "partOfSpeech": "verb",
+   "gloss": "to blink, wink",
+   "exampleNative": "La lumière était si forte qu'il clignait des yeux.",
+   "exampleEnglish": "The light was so bright that he was blinking.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "empiler",
+   "partOfSpeech": "verb",
+   "gloss": "to stack, pile up",
+   "exampleNative": "Empile les assiettes propres dans le placard.",
+   "exampleEnglish": "Stack the clean plates in the cupboard.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "escalader",
+   "partOfSpeech": "verb",
+   "gloss": "to climb, scale",
+   "exampleNative": "Ils ont escaladé le mur pour récupérer le ballon.",
+   "exampleEnglish": "They climbed over the wall to get the ball back.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "chuter",
+   "partOfSpeech": "verb",
+   "gloss": "to fall, drop",
+   "exampleNative": "Le cycliste a chuté dans le dernier virage.",
+   "exampleEnglish": "The cyclist fell on the last bend.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "trébucher",
+   "partOfSpeech": "verb",
+   "gloss": "to trip, stumble",
+   "exampleNative": "J'ai trébuché sur une pierre en descendant le sentier.",
+   "exampleEnglish": "I tripped on a stone while going down the path.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "flotter",
+   "partOfSpeech": "verb",
+   "gloss": "to float",
+   "exampleNative": "Des feuilles mortes flottent à la surface du lac.",
+   "exampleEnglish": "Dead leaves are floating on the surface of the lake.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "pédaler",
+   "partOfSpeech": "verb",
+   "gloss": "to pedal",
+   "exampleNative": "Il faut pédaler fort pour monter cette côte.",
+   "exampleEnglish": "You have to pedal hard to get up this hill.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "freiner",
+   "partOfSpeech": "verb",
+   "gloss": "to brake, slow down",
+   "exampleNative": "Freine doucement, la route est glissante ce matin.",
+   "exampleEnglish": "Brake gently, the road is slippery this morning.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "s'approcher",
+   "partOfSpeech": "verb",
+   "gloss": "to approach, come closer",
+   "exampleNative": "Le chien s'approche lentement de la porte ouverte.",
+   "exampleEnglish": "The dog slowly approaches the open door.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "précéder",
+   "partOfSpeech": "verb",
+   "gloss": "to precede",
+   "exampleNative": "Un long silence a précédé sa réponse.",
+   "exampleEnglish": "A long silence preceded her answer.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "longer",
+   "partOfSpeech": "verb",
+   "gloss": "to go along, follow",
+   "exampleNative": "Le sentier longe la rivière jusqu'au vieux pont.",
+   "exampleEnglish": "The path runs along the river up to the old bridge.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "errer",
+   "partOfSpeech": "verb",
+   "gloss": "to wander, roam",
+   "exampleNative": "Nous avons erré dans les ruelles de la vieille ville.",
+   "exampleEnglish": "We wandered through the alleys of the old town.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "flâner",
+   "partOfSpeech": "verb",
+   "gloss": "to stroll, wander leisurely",
+   "exampleNative": "J'adore flâner le long des quais le dimanche.",
+   "exampleEnglish": "I love strolling along the riverside on Sundays.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "se promener",
+   "partOfSpeech": "verb",
+   "gloss": "to go for a walk",
+   "exampleNative": "Nous nous promenons dans le parc tous les dimanches.",
+   "exampleEnglish": "We go for a walk in the park every Sunday.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "A1"
+  },
+  {
+   "lemma": "se balader",
+   "partOfSpeech": "verb",
+   "gloss": "to stroll, wander",
+   "exampleNative": "On s'est baladés en ville tout l'après-midi.",
+   "exampleEnglish": "We strolled around town all afternoon.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "A2"
+  },
+  {
+   "lemma": "se précipiter",
+   "partOfSpeech": "verb",
+   "gloss": "to rush, hurry",
+   "exampleNative": "Tout le monde s'est précipité vers la sortie.",
+   "exampleEnglish": "Everyone rushed towards the exit.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "bondir",
+   "partOfSpeech": "verb",
+   "gloss": "to leap, spring",
+   "exampleNative": "Le chat a bondi sur la souris en un instant.",
+   "exampleEnglish": "The cat pounced on the mouse in an instant.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sautiller",
+   "partOfSpeech": "verb",
+   "gloss": "to hop, skip",
+   "exampleNative": "La petite fille sautille de joie devant le manège.",
+   "exampleEnglish": "The little girl is hopping with joy in front of the carousel.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "boiter",
+   "partOfSpeech": "verb",
+   "gloss": "to limp",
+   "exampleNative": "Il boite depuis sa chute au ski.",
+   "exampleEnglish": "He has been limping since his skiing fall.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "tituber",
+   "partOfSpeech": "verb",
+   "gloss": "to stagger, totter",
+   "exampleNative": "L'homme titubait de fatigue en sortant du bureau.",
+   "exampleEnglish": "The man was staggering with exhaustion as he left the office.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pivoter",
+   "partOfSpeech": "verb",
+   "gloss": "to pivot, swivel",
+   "exampleNative": "La danseuse pivote gracieusement sur un pied.",
+   "exampleEnglish": "The dancer pivots gracefully on one foot.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "enjamber",
+   "partOfSpeech": "verb",
+   "gloss": "to step over",
+   "exampleNative": "Il a enjambé la flaque pour garder ses chaussures sèches.",
+   "exampleEnglish": "He stepped over the puddle to keep his shoes dry.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "gravir",
+   "partOfSpeech": "verb",
+   "gloss": "to climb (up)",
+   "exampleNative": "Nous avons gravi la colline pour admirer la vue.",
+   "exampleEnglish": "We climbed the hill to admire the view.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "dévaler",
+   "partOfSpeech": "verb",
+   "gloss": "to hurtle down",
+   "exampleNative": "Les enfants dévalent la pente en riant.",
+   "exampleEnglish": "The children hurtle down the slope, laughing.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "galoper",
+   "partOfSpeech": "verb",
+   "gloss": "to gallop",
+   "exampleNative": "Les chevaux galopent librement dans le pré.",
+   "exampleEnglish": "The horses gallop freely in the meadow.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "surgir",
+   "partOfSpeech": "verb",
+   "gloss": "to appear suddenly",
+   "exampleNative": "Un cerf a surgi devant la voiture sur la route.",
+   "exampleEnglish": "A deer suddenly appeared in front of the car on the road.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "jaillir",
+   "partOfSpeech": "verb",
+   "gloss": "to gush, spring out",
+   "exampleNative": "L'eau jaillit de la fontaine au milieu de la place.",
+   "exampleEnglish": "Water gushes from the fountain in the middle of the square.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rebondir",
+   "partOfSpeech": "verb",
+   "gloss": "to bounce",
+   "exampleNative": "Le ballon a rebondi deux fois avant la ligne.",
+   "exampleEnglish": "The ball bounced twice before the line.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "basculer",
+   "partOfSpeech": "verb",
+   "gloss": "to tip over, switch",
+   "exampleNative": "La chaise a basculé en arrière et il est tombé.",
+   "exampleEnglish": "The chair tipped backwards and he fell.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "se balancer",
+   "partOfSpeech": "verb",
+   "gloss": "to swing, sway",
+   "exampleNative": "Les enfants se balancent sur les balançoires du parc.",
+   "exampleEnglish": "The children are swinging on the swings in the park.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "émigrer",
+   "partOfSpeech": "verb",
+   "gloss": "to emigrate",
+   "exampleNative": "Ses grands-parents ont émigré au Canada dans les années soixante.",
+   "exampleEnglish": "His grandparents emigrated to Canada in the sixties.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "immigrer",
+   "partOfSpeech": "verb",
+   "gloss": "to immigrate",
+   "exampleNative": "Beaucoup de familles ont immigré en France après la guerre.",
+   "exampleEnglish": "Many families immigrated to France after the war.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  },
+  {
+   "lemma": "accourir",
+   "partOfSpeech": "verb",
+   "gloss": "to come running",
+   "exampleNative": "Les voisins ont accouru en entendant les cris.",
+   "exampleEnglish": "The neighbors came running when they heard the shouts.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "s'élancer",
+   "partOfSpeech": "verb",
+   "gloss": "to dash, launch oneself",
+   "exampleNative": "Le coureur s'élance dès le coup de sifflet.",
+   "exampleEnglish": "The runner dashes off as soon as the whistle blows.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "piétiner",
+   "partOfSpeech": "verb",
+   "gloss": "to trample, stamp",
+   "exampleNative": "Ne piétine pas les fleurs que je viens de planter !",
+   "exampleEnglish": "Don't trample the flowers I've just planted!",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "hisser",
+   "partOfSpeech": "verb",
+   "gloss": "to hoist, pull up",
+   "exampleNative": "Les marins hissent la grande voile du bateau.",
+   "exampleEnglish": "The sailors hoist the boat's mainsail.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "redresser",
+   "partOfSpeech": "verb",
+   "gloss": "to straighten, right",
+   "exampleNative": "Redresse le dos quand tu travailles à l'ordinateur.",
+   "exampleEnglish": "Straighten your back when you work at the computer.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "agripper",
+   "partOfSpeech": "verb",
+   "gloss": "to grip, clutch",
+   "exampleNative": "Elle agrippe la rampe pour descendre l'escalier.",
+   "exampleEnglish": "She grips the handrail to go down the stairs.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "agiter",
+   "partOfSpeech": "verb",
+   "gloss": "to shake, wave",
+   "exampleNative": "Agitez bien la bouteille avant de l'ouvrir.",
+   "exampleEnglish": "Shake the bottle well before opening it.",
+   "decks": [
+    "common"
+   ],
+   "cefrLevel": "B1"
+  }
+ ],
+ "skipped": []
+}
