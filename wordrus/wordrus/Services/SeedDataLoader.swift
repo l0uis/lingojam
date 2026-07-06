@@ -212,7 +212,14 @@ enum SeedDataLoader {
     /// the user switches back.
     static func switchLanguage(to language: TargetLanguage, context: ModelContext) {
         let defaults = UserDefaults.standard
+
+        // Levels are per language: freeze the outgoing language's level (and
+        // chat-promotion progress) and activate the incoming one's.
+        let previous = OnboardingStore.targetLanguage ?? .spanish
+        OnboardingStore.stashLevel(for: previous)
+
         defaults.set(language.rawValue, forKey: OnboardingDefaultsKey.targetLanguage)
+        OnboardingStore.activateLevel(for: language)
 
         do {
             // Delete only seeded words; keep the user's custom words.

@@ -8,6 +8,10 @@ import SwiftData
 ///   - Updates deck membership for existing words (so adding a tag in the
 ///     seed propagates to already-seeded installs).
 ///   - Backfills empty membership to ["common"] for legacy rows.
+///   - Deletes seeded words the current seed no longer ships (vetted-out
+///     junk). Custom words are the user's own and are never touched; a
+///     removed word's LearningProgress row stays behind, orphaning harmlessly
+///     (and rebinding if the word ever returns to the seed).
 enum DeckSyncMigrator {
     static func sync(_ context: ModelContext) {
         guard let seed = SeedDataLoader.loadSeed() else { return }
@@ -52,6 +56,18 @@ enum DeckSyncMigrator {
         // Legacy rows that predate deckSlugsJSON: tag with "common".
         for word in existingWords where word.deckSlugs.isEmpty {
             word.setDeckSlugs([DeckConstants.commonSlug])
+            changed = true
+        }
+
+        // Seeded words removed from the bundled seed (vetting blocklist).
+        // Scoped to ids of the seed's own language so the Spanish-fallback
+        // path in `loadSeed` (missing seed file) can never mass-delete
+        // another language's rows.
+        let seedIDs = Set(seed.words.map(\.id))
+        let seedPrefix = "\(seed.language)-"
+        for word in existingWords
+        where word.id.hasPrefix(seedPrefix) && !seedIDs.contains(word.id) {
+            context.delete(word)
             changed = true
         }
 

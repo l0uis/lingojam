@@ -14,6 +14,8 @@ struct DeckPickerSheet: View {
     /// change is replayed once they subscribe.
     @State private var isShowingPaywall: Bool = false
     @State private var pendingChange: PendingChange?
+    @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
+    @State private var levelStatus: LevelProgression.Status?
 
     /// A filter change a free user attempted; applied after they go Pro.
     private enum PendingChange {
@@ -40,6 +42,28 @@ struct DeckPickerSheet: View {
                 }
 
                 Section {
+                    HStack(spacing: 10) {
+                        ForEach(CEFRLevel.allCases) { level in
+                            levelChip(level)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+
+                    if let status = levelStatus, !status.isMaxLevel {
+                        progressRow(status)
+                            .listRowInsets(EdgeInsets(top: 4, leading: 20, bottom: 12, trailing: 20))
+                    }
+                } header: {
+                    sectionHeader("Level")
+                } footer: {
+                    Text("New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing stay in rotation. Level up by mastering \(LevelProgression.knownWordsToLevelUp) words at your level or passing \(LevelProgression.passingCallsToLevelUp) calls with Walter.")
+                        .font(.sniglet(.caption))
+                        .foregroundStyle(.secondary)
+                }
+
+                Section {
                     deckRow(slug: DeckConstants.allSlug, title: "All Words")
                     ForEach(decks, id: \.slug) { deck in
                         deckRow(slug: deck.slug, title: deck.displayName)
@@ -51,6 +75,8 @@ struct DeckPickerSheet: View {
             .scrollContentBackground(.hidden)
             .background(DS.Color.paper.ignoresSafeArea())
             .gochiHandNavigationTitle("Filter")
+            .onAppear { levelStatus = LevelProgression.status(context: context) }
+            .onChange(of: cefrLevelRaw) { levelStatus = LevelProgression.status(context: context) }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { dismiss() }
@@ -126,6 +152,68 @@ struct DeckPickerSheet: View {
             }
         }
         .buttonStyle(.plain)
+    }
+
+    @ViewBuilder
+    private func progressRow(_ status: LevelProgression.Status) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if status.eligible, let next = status.next {
+                Button {
+                    LevelProgression.promote()
+                    cefrLevelRaw = next.rawValue   // drives the chips + LevelAnchor refresh
+                    levelStatus = LevelProgression.status(context: context)
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "sparkles")
+                        Text("Move up to \(next.title)")
+                            .font(.sniglet(.body, weight: .semibold))
+                        Spacer()
+                        Image(systemName: "arrow.up.circle.fill")
+                    }
+                    .foregroundStyle(DS.Color.paper)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 14)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                            .fill(DS.Color.ink)
+                    )
+                }
+                .buttonStyle(.plain)
+            } else {
+                ProgressView(value: status.fraction)
+                    .tint(DS.Color.ink)
+                Text(status.summary())
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func levelChip(_ level: CEFRLevel) -> some View {
+        let isSelected = cefrLevelRaw == level.rawValue
+        Button {
+            guard !isSelected else { return }
+            cefrLevelRaw = level.rawValue
+            // A manual level change restarts progress toward the next
+            // chat-based promotion at the new level.
+            UserDefaults.standard.set(0, forKey: OnboardingDefaultsKey.cefrPassesAtCurrentLevel)
+        } label: {
+            Text(level.title)
+                .font(.sniglet(.body, weight: .semibold))
+                .foregroundStyle(isSelected ? DS.Color.paper : Color.whiteboardInk)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle().fill(isSelected ? DS.Color.ink : DS.Color.paper)
+                )
+                .overlay(
+                    Circle().strokeBorder(DS.Color.ink.opacity(isSelected ? 0 : 0.35), lineWidth: 1.5)
+                )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(level.title): \(level.subtitle)")
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
     @ViewBuilder

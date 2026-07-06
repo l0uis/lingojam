@@ -413,6 +413,42 @@ enum OnboardingStore {
         set { UserDefaults.standard.set(newValue, forKey: OnboardingDefaultsKey.cefrPassesAtCurrentLevel) }
     }
 
+    // MARK: - Per-language level snapshots
+
+    /// The learner's level differs per language (C1 German, A1 Italian). The
+    /// global `cefrLevel` key stays the *active* level — every @AppStorage
+    /// binding, Walter prompt, and LevelAnchor read goes through it — and
+    /// these snapshots swap it on language switch. Any level change made from
+    /// the UI while a language is active is captured by `stashLevel` at the
+    /// moment the user switches away.
+
+    private static func levelKey(for language: TargetLanguage) -> String {
+        "\(OnboardingDefaultsKey.cefrLevel).\(language.rawValue)"
+    }
+
+    private static func passesKey(for language: TargetLanguage) -> String {
+        "\(OnboardingDefaultsKey.cefrPassesAtCurrentLevel).\(language.rawValue)"
+    }
+
+    /// Save the active level + promotion progress under `language`'s keys.
+    /// Call with the OLD language before a switch.
+    static func stashLevel(for language: TargetLanguage) {
+        let defaults = UserDefaults.standard
+        defaults.set(cefrLevel.rawValue, forKey: levelKey(for: language))
+        defaults.set(cefrPassesAtCurrentLevel, forKey: passesKey(for: language))
+    }
+
+    /// Load `language`'s stored level + promotion progress into the active
+    /// keys. A language never used before starts at A1 with zero passes —
+    /// the level chips in the filter sheet are right there to correct it.
+    static func activateLevel(for language: TargetLanguage) {
+        let defaults = UserDefaults.standard
+        let stored = defaults.string(forKey: levelKey(for: language))
+            .flatMap(CEFRLevel.init(rawValue:)) ?? .a1
+        cefrLevel = stored
+        cefrPassesAtCurrentLevel = defaults.integer(forKey: passesKey(for: language))
+    }
+
     static var lastWalterCallDate: Date? {
         get { UserDefaults.standard.object(forKey: OnboardingDefaultsKey.lastWalterCallDate) as? Date }
         set { UserDefaults.standard.set(newValue, forKey: OnboardingDefaultsKey.lastWalterCallDate) }

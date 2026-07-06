@@ -1,11 +1,14 @@
 import Foundation
 
 /// Common European Framework of Reference levels — used to gate Walter's
-/// chat difficulty and the user's self-assessed Spanish level.
+/// chat difficulty and the user's self-assessed proficiency level set during
+/// onboarding.
 ///
-/// `DeckConstants.cefrLevels` lists the raw string values used to tag
-/// vocabulary words; this enum mirrors them so the chat feature can reason
-/// about ordering, promotion, and display.
+/// The raw values mirror the `cefrLevel` strings used to tag vocabulary words,
+/// so the chat feature can reason about ordering, promotion, and display. The
+/// learner's level also anchors new-word selection (see `LevelAnchor`): unseen
+/// words at or above it surface first, easier bands only as backfill. It is
+/// changeable anytime in Settings and promoted via passing chats.
 enum CEFRLevel: String, CaseIterable, Identifiable, Comparable, Codable {
     case a1 = "A1"
     case a2 = "A2"

@@ -32,6 +32,7 @@ struct JamView: View {
     /// lock ("come back tomorrow" without ever practicing) or theme position.
     @AppStorage("dailySet.stateLanguage") private var dailySetStateLanguage: String = ""
     @AppStorage(DailySetConfig.defaultsKey) private var dailySetTarget: Int = DailySetConfig.defaultSize
+    @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
     /// Word IDs of the most recently built set, comma-joined, so "Practice
     /// again" can replay the exact same words — even after an app relaunch.
     @AppStorage("dailySet.lastSetIDs") private var lastSetIDsRaw: String = ""
@@ -61,10 +62,10 @@ struct JamView: View {
     private let swipeThreshold: CGFloat = 110
 
     /// The themed daily-set loop runs for any language that ships a deck
-    /// taxonomy (all four bundled languages do). It orders by frequency `rank`,
-    /// which gives an easy→hard gradient without relying on CEFR tags (sparse
-    /// for FR/DE/IT). Falls back to the endless deck only if a language somehow
-    /// has no decks seeded.
+    /// taxonomy (all four bundled languages do). New words come from the
+    /// learner's level-anchored pool (see `LevelAnchor`), ordered by frequency
+    /// `rank` within it for an easy→hard gradient. Falls back to the endless
+    /// deck only if a language somehow has no decks seeded.
     private var dailySetActive: Bool {
         !decks.isEmpty
     }
@@ -142,6 +143,16 @@ struct JamView: View {
             // Resize only a set that hasn't been started yet; a set in progress
             // stays frozen so the count doesn't shift under the user.
             guard dailySetActive, !setStarted, !isSetComplete else { return }
+            queue = []
+            rebuildQueueIfNeeded()
+        }
+        .onChange(of: cefrLevelRaw) { _, _ in
+            // Level change re-anchors the new-word pool (see LevelAnchor).
+            // A daily set in progress stays frozen; anything unstarted rebuilds.
+            DailyWordService.refresh(context: context)
+            if dailySetActive {
+                guard !setStarted, !isSetComplete else { return }
+            }
             queue = []
             rebuildQueueIfNeeded()
         }
@@ -643,9 +654,13 @@ struct JamView: View {
             .sorted { $0.1 < $1.1 }
             .map(\.0)
 
-        let themeNew = currentWords
-            .filter { !$0.id.hasPrefix("custom-") && $0.deckSlugs.contains(theme.slug) && progressByID[$0.id] == nil }
-            .sorted { $0.rank < $1.rank }
+        let level = OnboardingStore.cefrLevel
+        let themeNew = LevelAnchor.anchored(
+            currentWords
+                .filter { !$0.id.hasPrefix("custom-") && $0.deckSlugs.contains(theme.slug) && progressByID[$0.id] == nil }
+                .sorted { $0.rank < $1.rank },
+            to: level
+        )
 
         let target = DailySetConfig.clamp(dailySetTarget)
         var set: [VocabularyWord] = []
@@ -656,14 +671,17 @@ struct JamView: View {
             if set.count >= target { break }
         }
 
-        // Backfill when the theme can't fill the set on its own. Sparse
-        // languages (FR/DE/IT) have only ~16–45 words per theme, so a theme
-        // exhausts in a few days; without this the set would dead-end empty and
-        // never reach the climax call. Pulls any remaining unlearned word by
-        // frequency rank (including untagged `common` words, which otherwise
+        // Backfill when the theme can't fill the set on its own — without this
+        // the set would dead-end empty and never reach the climax call. Pulls
+        // any remaining unlearned word by frequency rank within the same
+        // level-anchored pool (including `common`-only words, which otherwise
         // never surface in a themed set). `allWords` is already rank-sorted.
         if set.count < target {
-            for word in currentWords where !word.id.hasPrefix("custom-") && progressByID[word.id] == nil {
+            let backfill = LevelAnchor.anchored(
+                currentWords.filter { !$0.id.hasPrefix("custom-") && progressByID[$0.id] == nil },
+                to: level
+            )
+            for word in backfill {
                 guard seen.insert(word.id).inserted else { continue }
                 set.append(word)
                 if set.count >= target { break }
@@ -933,10 +951,14 @@ struct JamView: View {
             (byDay[day] ?? []).map(\.0).shuffled()
         }
 
-        // New pool: shuffle so frequency-adjacent lemmas don't cluster.
-        let newWords = pool
-            .filter { !excluded.contains($0.id) && progressByID[$0.id] == nil }
-            .shuffled()
+        // New pool: shuffle so frequency-adjacent lemmas don't cluster, then
+        // anchor to the learner's level (shuffle survives within each band).
+        let newWords = LevelAnchor.anchored(
+            pool
+                .filter { !excluded.contains($0.id) && progressByID[$0.id] == nil }
+                .shuffled(),
+            to: OnboardingStore.cefrLevel
+        )
 
         return Array((dueWords + newWords).prefix(limit))
     }

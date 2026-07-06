@@ -7,6 +7,7 @@ struct SettingsView: View {
     @AppStorage(OnboardingDefaultsKey.notificationsEnabled) private var notificationsEnabled: Bool = false
     @AppStorage(OnboardingDefaultsKey.notificationsPerDay) private var notificationsPerDay: Int = 10
     @AppStorage(DailySetConfig.defaultsKey) private var dailySetSize: Int = DailySetConfig.defaultSize
+    @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
 
     @State private var isEditingReminder: Bool = false
     @State private var isShowingWidgetSheet: Bool = false
@@ -68,6 +69,23 @@ struct SettingsView: View {
             }
 
             Section {
+                Picker(selection: $cefrLevelRaw) {
+                    ForEach(CEFRLevel.allCases) { level in
+                        Text("\(level.title) · \(level.subtitle)")
+                            .tag(level.rawValue)
+                    }
+                } label: {
+                    Text("My level")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                }
+                .font(.sniglet(.body))
+                .onChange(of: cefrLevelRaw) {
+                    // A manual level change restarts progress toward the
+                    // next chat-based promotion at the new level.
+                    UserDefaults.standard.set(0, forKey: OnboardingDefaultsKey.cefrPassesAtCurrentLevel)
+                }
+
                 Stepper(
                     value: $dailySetSize,
                     in: DailySetConfig.minSize...DailySetConfig.maxSize
@@ -115,6 +133,10 @@ struct SettingsView: View {
                 }
             } header: {
                 sectionHeader("Learning")
+            } footer: {
+                Text("New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing aren't affected.")
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(.secondary)
             }
 
             #if DEBUG

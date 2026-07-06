@@ -109,7 +109,11 @@ enum DailyWordService {
 
         if let dueCandidate { return (dueCandidate.0, dueCandidate.1) }
 
-        if let firstNew = words.first(where: { progressByID[$0.id] == nil }) {
+        let newCandidates = LevelAnchor.anchored(
+            words.filter { progressByID[$0.id] == nil },
+            to: OnboardingStore.cefrLevel
+        )
+        if let firstNew = newCandidates.first {
             return (firstNew, nil)
         }
 

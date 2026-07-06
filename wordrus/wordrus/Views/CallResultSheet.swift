@@ -10,14 +10,14 @@ struct CallResultSheet: View {
     let onDismiss: () -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
     @State private var levelUpAccepted: Bool = false
 
+    /// Eligible if either progression path is complete — the just-finished
+    /// call may have been the 2nd pass, or the user may have crossed the
+    /// vocabulary threshold earlier and this is the first sheet since.
     private var isEligibleForLevelUp: Bool {
-        guard evaluation.passed,
-              OnboardingStore.cefrLevel.next != nil,
-              OnboardingStore.cefrPassesAtCurrentLevel >= 2
-        else { return false }
-        return true
+        LevelProgression.status(context: context).eligible
     }
 
     var body: some View {
@@ -84,8 +84,7 @@ struct CallResultSheet: View {
                 .font(.sniglet(.caption))
                 .foregroundStyle(.secondary)
             Button("Move me up to \(next.title)") {
-                OnboardingStore.cefrLevel = next
-                OnboardingStore.cefrPassesAtCurrentLevel = 0
+                LevelProgression.promote()
                 levelUpAccepted = true
                 finish()
             }
