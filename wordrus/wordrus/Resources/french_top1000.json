@@ -7313,25 +7313,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "fr-0373",
-      "rank": 373,
-      "lemma": "merde",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "damn!, crap!, shit!"
-      },
-      "example": {
-        "text": "Merde, j'ai oublié mes clés à la maison !",
-        "translations": {
-          "en": "Damn, I left my keys at home!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "A2"
-    },
-    {
       "id": "fr-0374",
       "rank": 374,
       "lemma": "hé",
@@ -8134,25 +8115,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "fr-0416",
-      "rank": 416,
-      "lemma": "putain",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "damn!, bloody hell! (vulgar exclamation)"
-      },
-      "example": {
-        "text": "Putain, j'ai encore raté mon bus !",
-        "translations": {
-          "en": "Damn, I missed my bus again!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "fr-0417",
@@ -12618,26 +12580,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "fr-0650",
-      "rank": 650,
-      "lemma": "bordel",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "mess, chaos; brothel (vulgar)"
-      },
-      "example": {
-        "text": "Quel bordel dans ta chambre, range-la !",
-        "translations": {
-          "en": "What a mess in your room — clean it up!"
-        }
-      },
-      "decks": [
-        "common",
-        "home"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "fr-0651",
       "rank": 651,
       "lemma": "habitude",
@@ -15898,25 +15840,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "fr-0819",
-      "rank": 819,
-      "lemma": "pute",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "whore, prostitute (vulgar)"
-      },
-      "example": {
-        "text": "C'est une insulte très vulgaire en français.",
-        "translations": {
-          "en": "It is a very vulgar insult in French."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "fr-0820",
       "rank": 820,
       "lemma": "entrée",
@@ -17747,25 +17670,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "fr-0914",
-      "rank": 914,
-      "lemma": "connard",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "asshole, jerk (vulgar insult)"
-      },
-      "example": {
-        "text": "Quel connard, il m'a coupé la route sans prévenir !",
-        "translations": {
-          "en": "What a jerk, he cut me off without warning!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "fr-0915",
       "rank": 915,
       "lemma": "occasion",
@@ -18928,25 +18832,6 @@
         "family"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-0975",
-      "rank": 975,
-      "lemma": "salope",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "slut, bitch (vulgar insult)"
-      },
-      "example": {
-        "text": "Ce mot est une insulte vulgaire à éviter.",
-        "translations": {
-          "en": "This word is a vulgar insult to be avoided."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "fr-0976",
@@ -20276,25 +20161,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "fr-1044",
-      "rank": 1044,
-      "lemma": "foutu",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "done for, ruined; damned (vulgar)"
-      },
-      "example": {
-        "text": "Mon vieux téléphone est complètement foutu.",
-        "translations": {
-          "en": "My old phone is completely done for."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "fr-1045",
       "rank": 1045,
       "lemma": "image",
@@ -21302,25 +21168,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "fr-1098",
-      "rank": 1098,
-      "lemma": "enfoiré",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard, jerk, scoundrel"
-      },
-      "example": {
-        "text": "Cet enfoiré m'a volé ma place de parking.",
-        "translations": {
-          "en": "That bastard stole my parking spot."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "fr-1099",
       "rank": 1099,
       "lemma": "discours",
@@ -21377,25 +21224,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "fr-1102",
-      "rank": 1102,
-      "lemma": "salaud",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard, scoundrel (vulgar)"
-      },
-      "example": {
-        "text": "Ces salauds ont tout volé sans honte.",
-        "translations": {
-          "en": "Those bastards stole everything shamelessly."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-1103",
@@ -28022,25 +27850,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "fr-1447",
-      "rank": 1447,
-      "lemma": "couille",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "testicle (vulgar); blunder (slang)"
-      },
-      "example": {
-        "text": "Il y a une couille dans le projet, tout est bloqué.",
-        "translations": {
-          "en": "There's a screw-up in the project — everything is stuck."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "fr-1448",
       "rank": 1448,
       "lemma": "quiconque",
@@ -30121,25 +29930,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-1555",
-      "rank": 1555,
-      "lemma": "mac",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "pimp; (informal) Mac computer"
-      },
-      "example": {
-        "text": "Il travaille sur son mac toute la journée.",
-        "translations": {
-          "en": "He works on his Mac all day long."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-1556",
@@ -32492,25 +32282,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "fr-1677",
-      "rank": 1677,
-      "lemma": "bite",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "penis (vulgar)"
-      },
-      "example": {
-        "text": "C'est un mot vulgaire à éviter en public.",
-        "translations": {
-          "en": "It is a vulgar word to avoid in public."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-1678",
@@ -39109,25 +38880,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "fr-2018",
-      "rank": 2018,
-      "lemma": "enculé",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard, fucker (vulgar insult)"
-      },
-      "example": {
-        "text": "Il l'a traité d'enculé devant tout le monde.",
-        "translations": {
-          "en": "He called him a fucker in front of everyone."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "fr-2019",
       "rank": 2019,
       "lemma": "renvoyer",
@@ -41373,25 +41125,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-2136",
-      "rank": 2136,
-      "lemma": "garce",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "bitch, nasty woman (vulgar)"
-      },
-      "example": {
-        "text": "Elle s'est comportée comme une vraie garce avec tout le monde.",
-        "translations": {
-          "en": "She behaved like a real bitch to everyone."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-2137",
@@ -46042,25 +45775,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "fr-2379",
-      "rank": 2379,
-      "lemma": "bâtard",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard; mongrel"
-      },
-      "example": {
-        "text": "Ce chien est un bâtard mais très affectueux.",
-        "translations": {
-          "en": "This dog is a mongrel but very affectionate."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "fr-2380",
       "rank": 2380,
       "lemma": "torture",
@@ -49200,25 +48914,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-2547",
-      "rank": 2547,
-      "lemma": "salopard",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard, scoundrel (vulgar)"
-      },
-      "example": {
-        "text": "Ce salopard m'a volé mon portefeuille.",
-        "translations": {
-          "en": "That bastard stole my wallet."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-2548",
@@ -53646,25 +53341,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "fr-2780",
-      "rank": 2780,
-      "lemma": "prostituée",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "prostitute, sex worker"
-      },
-      "example": {
-        "text": "Le documentaire parle de la vie des prostituées.",
-        "translations": {
-          "en": "The documentary talks about the lives of sex workers."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "fr-2781",
       "rank": 2781,
       "lemma": "homo",
@@ -54150,25 +53826,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-2806",
-      "rank": 2806,
-      "lemma": "merder",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to mess up, screw up (vulgar)"
-      },
-      "example": {
-        "text": "J'ai complètement merdé mon entretien d'embauche.",
-        "translations": {
-          "en": "I completely screwed up my job interview."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-2807",
@@ -71314,25 +70971,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-3697",
-      "rank": 3697,
-      "lemma": "pétasse",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "bitch, slag (vulgar insult for a woman)"
-      },
-      "example": {
-        "text": "C'est un mot très vulgaire et insultant.",
-        "translations": {
-          "en": "It is a very vulgar and insulting word."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "fr-3698",
@@ -96620,25 +96258,6 @@
       "cefrLevel": "C1"
     },
     {
-      "id": "fr-5013",
-      "rank": 5013,
-      "lemma": "prostitution",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "prostitution"
-      },
-      "example": {
-        "text": "La prostitution est un sujet de débat dans de nombreux pays.",
-        "translations": {
-          "en": "Prostitution is a debated topic in many countries."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "fr-5014",
       "rank": 5014,
       "lemma": "strictement",
@@ -98225,25 +97844,6 @@
         "home"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-5097",
-      "rank": 5097,
-      "lemma": "ducon",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "idiot, jerk (vulgar slang)"
-      },
-      "example": {
-        "text": "Ce ducon a encore raté son bus.",
-        "translations": {
-          "en": "That idiot missed his bus again."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "fr-5098",
@@ -100005,25 +99605,6 @@
         "feelings"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-5190",
-      "rank": 5190,
-      "lemma": "orgasme",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "orgasm"
-      },
-      "example": {
-        "text": "Le roman décrit l'orgasme comme une libération totale.",
-        "translations": {
-          "en": "The novel describes orgasm as a total release."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "fr-5191",
@@ -102529,25 +102110,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "fr-5321",
-      "rank": 5321,
-      "lemma": "ostie",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "damn, damn it (Québécois vulgar exclamation)"
-      },
-      "example": {
-        "text": "Ostie, j'ai encore oublié mes clés !",
-        "translations": {
-          "en": "Damn, I forgot my keys again!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "fr-5322",

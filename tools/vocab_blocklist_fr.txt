@@ -69,3 +69,28 @@ whoa
 ya
 yep
 évanouir
+# Strong language removed 2026-07-06 (family-friendly pass):
+bite
+connard
+enculé
+enfoiré
+garce
+merde
+merder
+ostie
+putain
+pute
+pétasse
+salaud
+salopard
+salope
+# Family-friendly round 2 (2026-07-06): remaining vulgarity + harmonised sexual/vice terms:
+bordel
+bâtard
+couille
+ducon
+foutu
+mac
+orgasme
+prostitution
+prostituée

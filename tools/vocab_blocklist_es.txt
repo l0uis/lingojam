@@ -1,0 +1,28 @@
+# Vetting blocklist — lemmas that must never ship in the seed.
+# Strong language removed 2026-07-06 (family-friendly pass).
+# Exact, case-sensitive lemma match.
+bastardo
+cabrón
+carajo
+coño
+follar
+gilipollas
+hostia
+joder
+jodidamente
+jodido
+mierda
+polla
+puta
+puto
+ramera
+verga
+zorra
+# Family-friendly round 2 (2026-07-06): remaining vulgarity + harmonised sexual/vice terms:
+burdel
+cojón
+maricón
+masturbar
+orgasmo
+prostitución
+prostituto

@@ -8753,25 +8753,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "de-0447",
-      "rank": 447,
-      "lemma": "Scheiße",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "shit; damn (expletive)"
-      },
-      "example": {
-        "text": "Scheiße, ich habe meinen Schlüssel vergessen!",
-        "translations": {
-          "en": "Damn, I forgot my key!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "A2"
-    },
-    {
       "id": "de-0448",
       "rank": 448,
       "lemma": "sonst",
@@ -8809,25 +8790,6 @@
         "health"
       ],
       "cefrLevel": "A1"
-    },
-    {
-      "id": "de-0450",
-      "rank": 450,
-      "lemma": "verdammt",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "damned, damn"
-      },
-      "example": {
-        "text": "Das ist verdammt noch mal nicht fair!",
-        "translations": {
-          "en": "That is just not damn fair!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "de-0451",
@@ -11314,25 +11276,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "de-0582",
-      "rank": 582,
-      "lemma": "Scheiß",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "crap, rubbish (vulgar)"
-      },
-      "example": {
-        "text": "So ein Scheiß, das hätte nicht passieren sollen.",
-        "translations": {
-          "en": "What a load of crap, that shouldn't have happened."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-0583",
       "rank": 583,
       "lemma": "Hölle",
@@ -13568,25 +13511,6 @@
         "text": "Die Polizei fand eine Leiche im Park.",
         "translations": {
           "en": "The police found a body in the park."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
-      "id": "de-0699",
-      "rank": 699,
-      "lemma": "Arschloch",
-      "partOfSpeech": "noun (das)",
-      "definitions": {
-        "en": "asshole (vulgar insult)"
-      },
-      "example": {
-        "text": "Er hat mich als Arschloch beschimpft.",
-        "translations": {
-          "en": "He called me an asshole."
         }
       },
       "decks": [
@@ -18968,25 +18892,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-0980",
-      "rank": 980,
-      "lemma": "Schlampe",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "slut, slob (vulgar insult)"
-      },
-      "example": {
-        "text": "Er beschimpfte sie mit dem Wort Schlampe.",
-        "translations": {
-          "en": "He insulted her with the word slut."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-0981",
       "rank": 981,
       "lemma": "Adresse",
@@ -23201,25 +23106,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-1200",
-      "rank": 1200,
-      "lemma": "Fick",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "fuck (vulgar)"
-      },
-      "example": {
-        "text": "Das Wort ist sehr vulgär.",
-        "translations": {
-          "en": "The word is very vulgar."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-1201",
       "rank": 1201,
       "lemma": "Scherz",
@@ -23237,25 +23123,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "de-1202",
-      "rank": 1202,
-      "lemma": "Wichser",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "wanker, jerk (vulgar insult)"
-      },
-      "example": {
-        "text": "Er nannte ihn wütend einen Wichser.",
-        "translations": {
-          "en": "He angrily called him a wanker."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "de-1203",
@@ -23451,25 +23318,6 @@
         "common"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "de-1213",
-      "rank": 1213,
-      "lemma": "Mistkerl",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "bastard, scoundrel, rotten guy"
-      },
-      "example": {
-        "text": "Dieser Mistkerl hat mich wieder belogen!",
-        "translations": {
-          "en": "That bastard lied to me again!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "de-1214",
@@ -27341,25 +27189,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-1413",
-      "rank": 1413,
-      "lemma": "Hure",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "whore, prostitute"
-      },
-      "example": {
-        "text": "Das Wort Hure gilt als sehr beleidigend.",
-        "translations": {
-          "en": "The word 'whore' is considered very offensive."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-1414",
       "rank": 1414,
       "lemma": "einsam",
@@ -28439,25 +28268,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "de-1471",
-      "rank": 1471,
-      "lemma": "Bastard",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "bastard"
-      },
-      "example": {
-        "text": "Er schimpfte ihn einen Bastard.",
-        "translations": {
-          "en": "He called him a bastard."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "de-1472",
@@ -31935,25 +31745,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "de-1651",
-      "rank": 1651,
-      "lemma": "ficken",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to fuck (vulgar)"
-      },
-      "example": {
-        "text": "Das Wort ficken gilt als vulgär.",
-        "translations": {
-          "en": "The word ficken is considered vulgar."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-1652",
       "rank": 1652,
       "lemma": "Stoff",
@@ -32378,25 +32169,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "de-1674",
-      "rank": 1674,
-      "lemma": "Arsch",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "arse, ass (vulgar)"
-      },
-      "example": {
-        "text": "Er fiel auf den Arsch und alle lachten.",
-        "translations": {
-          "en": "He fell on his arse and everyone laughed."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "de-1675",
@@ -39773,25 +39545,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-2057",
-      "rank": 2057,
-      "lemma": "Titten",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "tits, boobs (vulgar)"
-      },
-      "example": {
-        "text": "Das ist ein vulgäres Wort für weibliche Brüste.",
-        "translations": {
-          "en": "That is a vulgar word for female breasts."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-2058",
       "rank": 2058,
       "lemma": "betreten",
@@ -40281,25 +40034,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-2083",
-      "rank": 2083,
-      "lemma": "Scheißkerl",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "bastard, asshole"
-      },
-      "example": {
-        "text": "Dieser Scheißkerl hat mich wieder belogen!",
-        "translations": {
-          "en": "That bastard lied to me again!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-2084",
       "rank": 2084,
       "lemma": "gestört",
@@ -40434,25 +40168,6 @@
         "common"
       ],
       "cefrLevel": "A1"
-    },
-    {
-      "id": "de-2091",
-      "rank": 2091,
-      "lemma": "Hurensohn",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "son of a bitch (vulgar insult)"
-      },
-      "example": {
-        "text": "Du elender Hurensohn, lass mich in Ruhe!",
-        "translations": {
-          "en": "You miserable son of a bitch, leave me alone!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "de-2092",
@@ -41826,26 +41541,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "de-2163",
-      "rank": 2163,
-      "lemma": "scheißegal",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "not giving a damn, totally indifferent"
-      },
-      "example": {
-        "text": "Das ist mir doch scheißegal, was sie denken.",
-        "translations": {
-          "en": "I couldn't give a damn what they think."
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-2164",
       "rank": 2164,
       "lemma": "höchstens",
@@ -41960,25 +41655,6 @@
         "traveling"
       ],
       "cefrLevel": "A1"
-    },
-    {
-      "id": "de-2170",
-      "rank": 2170,
-      "lemma": "Nutte",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "prostitute, whore (vulgar)"
-      },
-      "example": {
-        "text": "Das Wort Nutte gilt als sehr abwertend.",
-        "translations": {
-          "en": "The word 'Nutte' is considered very derogatory."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "de-2171",
@@ -58629,26 +58305,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-3035",
-      "rank": 3035,
-      "lemma": "Dreckskerl",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "bastard, scoundrel, dirty swine"
-      },
-      "example": {
-        "text": "Dieser Dreckskerl hat mich angelogen!",
-        "translations": {
-          "en": "That bastard lied to me!"
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-3036",
       "rank": 3036,
       "lemma": "Mitgefühl",
@@ -65433,25 +65089,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "de-3390",
-      "rank": 3390,
-      "lemma": "Kacke",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "poop, crap (vulgar)"
-      },
-      "example": {
-        "text": "Das ist doch totale Kacke!",
-        "translations": {
-          "en": "This is total crap!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-3391",
       "rank": 3391,
       "lemma": "versammelt",
@@ -72027,25 +71664,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-3732",
-      "rank": 3732,
-      "lemma": "Muschi",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "pussy (vulgar); kitty (informal)"
-      },
-      "example": {
-        "text": "Das Wort kann verniedlichend oder vulgär gemeint sein.",
-        "translations": {
-          "en": "The word can be used as a cute or vulgar term."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-3733",
       "rank": 3733,
       "lemma": "Aktie",
@@ -72064,25 +71682,6 @@
         "work-and-money"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "de-3734",
-      "rank": 3734,
-      "lemma": "Scheißer",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "bastard, coward (vulgar insult)"
-      },
-      "example": {
-        "text": "Du kleiner Scheißer, hau ab!",
-        "translations": {
-          "en": "You little bastard, get out of here!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "de-3735",
@@ -74796,25 +74395,6 @@
         "common"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "de-3877",
-      "rank": 3877,
-      "lemma": "Flittchen",
-      "partOfSpeech": "noun (das)",
-      "definitions": {
-        "en": "slut, floozy (derogatory)"
-      },
-      "example": {
-        "text": "Er nannte sie abfällig ein Flittchen.",
-        "translations": {
-          "en": "He disparagingly called her a floozy."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "de-3879",
@@ -77685,25 +77265,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-4027",
-      "rank": 4027,
-      "lemma": "Prostituierte",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "prostitute, sex worker"
-      },
-      "example": {
-        "text": "Die Prostituierte stand an der Straßenecke.",
-        "translations": {
-          "en": "The prostitute stood on the street corner."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-4028",
       "rank": 4028,
       "lemma": "umgehend",
@@ -78586,25 +78147,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-4074",
-      "rank": 4074,
-      "lemma": "gottverdammt",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "goddamned"
-      },
-      "example": {
-        "text": "Das ist der gottverdammte Fehler, den er immer macht.",
-        "translations": {
-          "en": "That's the goddamned mistake he always makes."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-4075",
       "rank": 4075,
       "lemma": "gesammelt",
@@ -79074,25 +78616,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "de-4099",
-      "rank": 4099,
-      "lemma": "pissen",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to piss, to urinate (vulgar)"
-      },
-      "example": {
-        "text": "Er musste dringend pissen.",
-        "translations": {
-          "en": "He urgently needed to take a piss."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "de-4100",
       "rank": 4100,
       "lemma": "Outfit",
@@ -79477,25 +79000,6 @@
       "decks": [
         "common",
         "feelings"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
-      "id": "de-4120",
-      "rank": 4120,
-      "lemma": "Drecksack",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "bastard, scumbag (vulgar insult)"
-      },
-      "example": {
-        "text": "Er nannte ihn wütend einen Drecksack.",
-        "translations": {
-          "en": "He angrily called him a scumbag."
-        }
-      },
-      "decks": [
-        "common"
       ],
       "cefrLevel": "B2"
     },
@@ -82878,25 +82382,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "de-4296",
-      "rank": 4296,
-      "lemma": "Zuhälter",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "pimp"
-      },
-      "example": {
-        "text": "Der Zuhälter wurde von der Polizei verhaftet.",
-        "translations": {
-          "en": "The pimp was arrested by the police."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "de-4297",
       "rank": 4297,
       "lemma": "zutiefst",
@@ -83556,25 +83041,6 @@
       "decks": [
         "common",
         "work-and-money"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
-      "id": "de-4331",
-      "rank": 4331,
-      "lemma": "scheißen",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to defecate, to give a damn (vulgar)"
-      },
-      "example": {
-        "text": "Er scheißt auf die Regeln.",
-        "translations": {
-          "en": "He doesn't give a damn about the rules."
-        }
-      },
-      "decks": [
-        "common"
       ],
       "cefrLevel": "B1"
     },
@@ -91187,25 +90653,6 @@
       "cefrLevel": "C1"
     },
     {
-      "id": "de-4728",
-      "rank": 4728,
-      "lemma": "verpissen",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to piss off, to get lost (vulgar)"
-      },
-      "example": {
-        "text": "Er hat sich einfach verpißt, ohne ein Wort zu sagen.",
-        "translations": {
-          "en": "He just pissed off without saying a word."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "de-4729",
       "rank": 4729,
       "lemma": "Unterwelt",
@@ -96488,25 +95935,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-5002",
-      "rank": 5002,
-      "lemma": "verfickt",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "fucking (vulgar intensifier)"
-      },
-      "example": {
-        "text": "Das ist eine verfickte Katastrophe.",
-        "translations": {
-          "en": "This is a fucking disaster."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-5003",
       "rank": 5003,
       "lemma": "ausstellen",
@@ -97712,25 +97140,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "de-5065",
-      "rank": 5065,
-      "lemma": "Luder",
-      "partOfSpeech": "noun (das)",
-      "definitions": {
-        "en": "rascal, minx; (vulgar) slut"
-      },
-      "example": {
-        "text": "Du kleines Luder, du hast mich erschreckt!",
-        "translations": {
-          "en": "You little rascal, you gave me a fright!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "de-5066",
       "rank": 5066,
       "lemma": "Verfolgung",
@@ -98100,26 +97509,6 @@
         "shopping"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "de-5085",
-      "rank": 5085,
-      "lemma": "angepisst",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "pissed off, annoyed (vulgar)"
-      },
-      "example": {
-        "text": "Er war total angepisst, als er die Nachricht hörte.",
-        "translations": {
-          "en": "He was totally pissed off when he heard the news."
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "de-5086",
@@ -101307,25 +100696,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "de-5251",
-      "rank": 5251,
-      "lemma": "Scheißdreck",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "damn filth, utter rubbish (vulgar)"
-      },
-      "example": {
-        "text": "Das geht dich einen Scheißdreck an!",
-        "translations": {
-          "en": "That's none of your damn business!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-5252",
       "rank": 5252,
       "lemma": "zuverlässig",
@@ -102629,25 +101999,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "de-5321",
-      "rank": 5321,
-      "lemma": "Schwanzlutscher",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "cock-sucker (vulgar insult)"
-      },
-      "example": {
-        "text": "Er beschimpfte ihn als Schwanzlutscher.",
-        "translations": {
-          "en": "He called him a cock-sucker."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "de-5322",
       "rank": 5322,
       "lemma": "Banane",
@@ -103231,25 +102582,6 @@
       "decks": [
         "common",
         "work-and-money"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
-      "id": "de-5352",
-      "rank": 5352,
-      "lemma": "Orgasmus",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "orgasm"
-      },
-      "example": {
-        "text": "Das Thema Orgasmus wird in der Aufklärung behandelt.",
-        "translations": {
-          "en": "The topic of orgasm is covered in sex education."
-        }
-      },
-      "decks": [
-        "common"
       ],
       "cefrLevel": "C1"
     },
@@ -106110,25 +105442,6 @@
         "food-and-drink"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "de-5499",
-      "rank": 5499,
-      "lemma": "Pisse",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "piss, urine (vulgar)"
-      },
-      "example": {
-        "text": "Das Klo riecht nach Pisse.",
-        "translations": {
-          "en": "The toilet smells of piss."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "de-5500",
@@ -113842,25 +113155,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "de-5900",
-      "rank": 5900,
-      "lemma": "Bordell",
-      "partOfSpeech": "noun (das)",
-      "definitions": {
-        "en": "brothel"
-      },
-      "example": {
-        "text": "Die Polizei schloss das Bordell.",
-        "translations": {
-          "en": "The police shut down the brothel."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "de-5901",
       "rank": 5901,
       "lemma": "Straftat",
@@ -115774,25 +115068,6 @@
         "common"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "de-6000",
-      "rank": 6000,
-      "lemma": "Puff",
-      "partOfSpeech": "noun (der)",
-      "definitions": {
-        "en": "puff, nudge; brothel (informal)"
-      },
-      "example": {
-        "text": "Er gab ihm einen kleinen Puff mit dem Ellbogen.",
-        "translations": {
-          "en": "He gave him a little nudge with his elbow."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "de-6001",
@@ -119707,25 +118982,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "de-6205",
-      "rank": 6205,
-      "lemma": "Prostitution",
-      "partOfSpeech": "noun (die)",
-      "definitions": {
-        "en": "prostitution"
-      },
-      "example": {
-        "text": "Prostitution ist in einigen Ländern legal.",
-        "translations": {
-          "en": "Prostitution is legal in some countries."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "de-6206",

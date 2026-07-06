@@ -7199,25 +7199,6 @@
       "cefrLevel": "A1"
     },
     {
-      "id": "it-0367",
-      "rank": 367,
-      "lemma": "cazzo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "cock (vulgar); damn, hell (expletive)"
-      },
-      "example": {
-        "text": "Non me ne frega un cazzo di quello che pensi.",
-        "translations": {
-          "en": "I don't give a damn about what you think."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "it-0368",
       "rank": 368,
       "lemma": "sembrare",
@@ -8481,25 +8462,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "it-0435",
-      "rank": 435,
-      "lemma": "merda",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "shit, crap (vulgar)"
-      },
-      "example": {
-        "text": "Che merda, ho perso le chiavi di casa!",
-        "translations": {
-          "en": "Damn it, I've lost my house keys!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "it-0436",
@@ -10784,25 +10746,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "it-0554",
-      "rank": 554,
-      "lemma": "culo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "backside, bottom, butt (vulgar)"
-      },
-      "example": {
-        "text": "Ha avuto culo a trovare parcheggio così in fretta.",
-        "translations": {
-          "en": "He was damn lucky to find parking so quickly."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "it-0555",
       "rank": 555,
       "lemma": "fuoco",
@@ -10876,25 +10819,6 @@
       "decks": [
         "common",
         "work-and-money"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
-      "id": "it-0559",
-      "rank": 559,
-      "lemma": "puttana",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "whore, prostitute (vulgar)"
-      },
-      "example": {
-        "text": "È una parolaccia molto volgare in italiano.",
-        "translations": {
-          "en": "It is a very vulgar swear word in Italian."
-        }
-      },
-      "decks": [
-        "common"
       ],
       "cefrLevel": "B2"
     },
@@ -12323,26 +12247,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "it-0634",
-      "rank": 634,
-      "lemma": "stronzo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard, jerk (vulgar)"
-      },
-      "example": {
-        "text": "Quel tipo si è comportato da vero stronzo.",
-        "translations": {
-          "en": "That guy acted like a total jerk."
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "it-0635",
@@ -14122,25 +14026,6 @@
         "health"
       ],
       "cefrLevel": "A1"
-    },
-    {
-      "id": "it-0727",
-      "rank": 727,
-      "lemma": "bastardo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard (offensive insult)"
-      },
-      "example": {
-        "text": "Non posso credere che quel bastardo mi abbia tradito.",
-        "translations": {
-          "en": "I can't believe that bastard betrayed me."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "it-0728",
@@ -17313,25 +17198,6 @@
       "cefrLevel": "A1"
     },
     {
-      "id": "it-0893",
-      "rank": 893,
-      "lemma": "stronzata",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "bullshit, nonsense (vulgar)"
-      },
-      "example": {
-        "text": "Non dire stronzate, sii serio.",
-        "translations": {
-          "en": "Don't talk nonsense, be serious."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "it-0894",
       "rank": 894,
       "lemma": "indirizzo",
@@ -20167,25 +20033,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "it-1041",
-      "rank": 1041,
-      "lemma": "fanculo",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "fuck off (vulgar expletive)"
-      },
-      "example": {
-        "text": "Si è arrabbiato e ha detto «fanculo» a tutti.",
-        "translations": {
-          "en": "He got angry and told everyone to fuck off."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "it-1042",
       "rank": 1042,
       "lemma": "contratto",
@@ -20788,25 +20635,6 @@
       "decks": [
         "common",
         "feelings"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
-      "id": "it-1073",
-      "rank": 1073,
-      "lemma": "vaffanculo",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "fuck off (vulgar expletive)"
-      },
-      "example": {
-        "text": "Gli ha urlato vaffanculo in faccia.",
-        "translations": {
-          "en": "He shouted 'fuck off' right in his face."
-        }
-      },
-      "decks": [
-        "common"
       ],
       "cefrLevel": "B1"
     },
@@ -21933,25 +21761,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-1132",
-      "rank": 1132,
-      "lemma": "fottuto",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "damned, bloody, fucked (vulgar intensifier)"
-      },
-      "example": {
-        "text": "Non riesco a trovare le fottute chiavi!",
-        "translations": {
-          "en": "I can't find the damn keys!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "it-1133",
@@ -24191,26 +24000,6 @@
         "common"
       ],
       "cefrLevel": "A1"
-    },
-    {
-      "id": "it-1248",
-      "rank": 1248,
-      "lemma": "tetta",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "breast, boob (informal)"
-      },
-      "example": {
-        "text": "La parola tetta è considerata volgare in italiano.",
-        "translations": {
-          "en": "The word 'tetta' is considered vulgar in Italian."
-        }
-      },
-      "decks": [
-        "common",
-        "health"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "it-1249",
@@ -27234,25 +27023,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-1408",
-      "rank": 1408,
-      "lemma": "cazzata",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "nonsense, bullshit, stupid thing (vulgar)"
-      },
-      "example": {
-        "text": "Non dire cazzate, stai esagerando.",
-        "translations": {
-          "en": "Don't talk nonsense, you're exaggerating."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "it-1409",
@@ -37390,25 +37160,6 @@
       "cefrLevel": "A1"
     },
     {
-      "id": "it-1936",
-      "rank": 1936,
-      "lemma": "fottersi",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "fuck off, get screwed (vulgar interjection)"
-      },
-      "example": {
-        "text": "Gli disse di fottiti e uscì sbattendo la porta.",
-        "translations": {
-          "en": "He told him to fuck off and left slamming the door."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "it-1937",
       "rank": 1937,
       "lemma": "coraggioso",
@@ -42356,25 +42107,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "it-2193",
-      "rank": 2193,
-      "lemma": "fottiti",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "fuck you (vulgar)"
-      },
-      "example": {
-        "text": "Gli ho detto «fottiti» e sono uscito dalla stanza.",
-        "translations": {
-          "en": "I told him 'fuck you' and left the room."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "it-2194",
       "rank": 2194,
       "lemma": "testimonianza",
@@ -43327,25 +43059,6 @@
         "feelings"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-2244",
-      "rank": 2244,
-      "lemma": "prostituta",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "prostitute, sex worker"
-      },
-      "example": {
-        "text": "Il romanzo racconta la storia di una prostituta nel XIX secolo.",
-        "translations": {
-          "en": "The novel tells the story of a prostitute in the 19th century."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "it-2245",
@@ -50252,26 +49965,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "it-2607",
-      "rank": 2607,
-      "lemma": "incazzare",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to infuriate, to piss off"
-      },
-      "example": {
-        "text": "Quella situazione mi ha fatto incazzare moltissimo.",
-        "translations": {
-          "en": "That situation really pissed me off."
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "it-2608",
       "rank": 2608,
       "lemma": "ricetta",
@@ -51072,25 +50765,6 @@
         "work-and-money"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "it-2651",
-      "rank": 2651,
-      "lemma": "cazzone",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "idiot, dickhead (vulgar insult)"
-      },
-      "example": {
-        "text": "Quel cazzone ha parcheggiato davanti al mio garage.",
-        "translations": {
-          "en": "That idiot parked in front of my garage."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "it-2652",
@@ -54123,25 +53797,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "it-2809",
-      "rank": 2809,
-      "lemma": "fottere",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to fuck; to cheat, to screw over"
-      },
-      "example": {
-        "text": "Mi ha fottuto con quella truffa.",
-        "translations": {
-          "en": "He screwed me over with that scam."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "it-2810",
       "rank": 2810,
       "lemma": "sentiero",
@@ -56628,26 +56283,6 @@
       "decks": [
         "common",
         "health"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
-      "id": "it-2937",
-      "rank": 2937,
-      "lemma": "incazzato",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "pissed off, furious, angry (vulgar)"
-      },
-      "example": {
-        "text": "Era incazzata nera dopo quella discussione.",
-        "translations": {
-          "en": "She was absolutely furious after that argument."
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
       ],
       "cefrLevel": "B1"
     },
@@ -61409,25 +61044,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "it-3184",
-      "rank": 3184,
-      "lemma": "pisciare",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to piss, to urinate (vulgar)"
-      },
-      "example": {
-        "text": "Ha bisogno di pisciare dopo aver bevuto troppo.",
-        "translations": {
-          "en": "He needs to piss after drinking too much."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "it-3185",
       "rank": 3185,
       "lemma": "verificare",
@@ -61602,25 +61218,6 @@
         "food-and-drink"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-3195",
-      "rank": 3195,
-      "lemma": "sgualdrina",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "slut, prostitute (vulgar insult)"
-      },
-      "example": {
-        "text": "Quella parola è un insulto volgare da evitare.",
-        "translations": {
-          "en": "That word is a vulgar insult to be avoided."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "it-3196",
@@ -67042,25 +66639,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "it-3480",
-      "rank": 3480,
-      "lemma": "cagare",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to defecate (vulgar)"
-      },
-      "example": {
-        "text": "Quella storia non me ne caga proprio nessuno.",
-        "translations": {
-          "en": "Nobody gives a damn about that story."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "it-3481",
       "rank": 3481,
       "lemma": "portiere",
@@ -70668,25 +70246,6 @@
         "food-and-drink"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-3668",
-      "rank": 3668,
-      "lemma": "fottutamente",
-      "partOfSpeech": "adverb",
-      "definitions": {
-        "en": "fucking, damn, absolutely (vulgar intensifier)"
-      },
-      "example": {
-        "text": "Era fottutamente stanco dopo dodici ore di lavoro.",
-        "translations": {
-          "en": "He was fucking exhausted after twelve hours of work."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "it-3669",
@@ -75597,25 +75156,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "it-3922",
-      "rank": 3922,
-      "lemma": "stronzetto",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "little bastard, little jerk (vulgar)"
-      },
-      "example": {
-        "text": "Quello stronzetto mi ha rubato il posto.",
-        "translations": {
-          "en": "That little jerk stole my spot."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "it-3923",
       "rank": 3923,
       "lemma": "sostituto",
@@ -76203,25 +75743,6 @@
         "food-and-drink"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-3955",
-      "rank": 3955,
-      "lemma": "bordello",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "brothel; chaos, mess (informal)"
-      },
-      "example": {
-        "text": "Che bordello! Come fai a lavorare in questo disordine?",
-        "translations": {
-          "en": "What a mess! How can you work in this disorder?"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "it-3956",
@@ -77550,25 +77071,6 @@
         "food-and-drink"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "it-4025",
-      "rank": 4025,
-      "lemma": "puttanella",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "little whore, promiscuous girl (vulgar)"
-      },
-      "example": {
-        "text": "È una puttanella del quartiere, dicono tutti.",
-        "translations": {
-          "en": "She's the neighborhood tramp, everyone says so."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "it-4026",
@@ -83569,25 +83071,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-4336",
-      "rank": 4336,
-      "lemma": "orgasmo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "orgasm"
-      },
-      "example": {
-        "text": "La parola orgasmo deriva dal greco antico.",
-        "translations": {
-          "en": "The word orgasm comes from ancient Greek."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "it-4337",
@@ -95551,25 +95034,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "it-4955",
-      "rank": 4955,
-      "lemma": "prostituzione",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "prostitution"
-      },
-      "example": {
-        "text": "La prostituzione è un fenomeno complesso da affrontare.",
-        "translations": {
-          "en": "Prostitution is a complex phenomenon to address."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "it-4956",

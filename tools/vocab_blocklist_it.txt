@@ -61,3 +61,33 @@ veronica
 verro
 whiskey
 yankee
+# Strong language removed 2026-07-06 (family-friendly pass):
+bastardo
+cazzo
+fanculo
+fottere
+fottersi
+fottiti
+fottutamente
+incazzare
+merda
+pisciare
+puttana
+puttanella
+sgualdrina
+stronzetto
+stronzo
+tetta
+vaffanculo
+# Family-friendly round 2 (2026-07-06): remaining vulgarity + harmonised sexual/vice terms:
+bordello
+cagare
+cazzata
+cazzone
+culo
+fottuto
+incazzato
+orgasmo
+stronzata
+prostituta
+prostituzione

@@ -21053,25 +21053,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "es-1082",
-      "rank": 1082,
-      "lemma": "mierda",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "shit, crap (vulgar)"
-      },
-      "example": {
-        "es": "¡Mierda, se me olvidó el paraguas!",
-        "translations": {
-          "en": "Shit, I forgot my umbrella!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "es-1083",
       "rank": 1083,
       "lemma": "propio",
@@ -22348,25 +22329,6 @@
         "home"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "es-1149",
-      "rank": 1149,
-      "lemma": "puta",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "whore; vulgar expletive"
-      },
-      "example": {
-        "es": "Usó esa palabra como insulto en la discusión.",
-        "translations": {
-          "en": "He used that word as an insult during the argument."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "es-1150",
@@ -24754,25 +24716,6 @@
         "es": "La policía investiga el asesinato ocurrido anoche.",
         "translations": {
           "en": "The police are investigating the murder that happened last night."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
-      "id": "es-1272",
-      "rank": 1272,
-      "lemma": "joder",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "damn, fuck (vulgar exclamation)"
-      },
-      "example": {
-        "es": "¡Joder, se me olvidó el pasaporte en casa!",
-        "translations": {
-          "en": "Damn, I left my passport at home!"
         }
       },
       "decks": [
@@ -28943,25 +28886,6 @@
         "common"
       ],
       "cefrLevel": "A2"
-    },
-    {
-      "id": "es-1486",
-      "rank": 1486,
-      "lemma": "carajo",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "damn!, hell! (vulgar expletive)"
-      },
-      "example": {
-        "es": "¡Carajo, olvidé las llaves dentro del coche!",
-        "translations": {
-          "en": "Damn, I left the keys inside the car!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "es-1487",
@@ -35634,26 +35558,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "es-1828",
-      "rank": 1828,
-      "lemma": "jodido",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "damn, screwed, fucked up"
-      },
-      "example": {
-        "es": "Este trabajo es jodido, no hay manera de terminarlo.",
-        "translations": {
-          "en": "This job is a pain in the ass, there's no way to finish it."
-        }
-      },
-      "decks": [
-        "common",
-        "feelings"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-1829",
       "rank": 1829,
       "lemma": "ciego",
@@ -36729,25 +36633,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "es-1884",
-      "rank": 1884,
-      "lemma": "coño",
-      "partOfSpeech": "interjection",
-      "definitions": {
-        "en": "damn!, hell! (vulgar exclamation)"
-      },
-      "example": {
-        "es": "¡Coño, se me olvidó el paraguas en casa!",
-        "translations": {
-          "en": "Damn, I left my umbrella at home!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
-    },
-    {
       "id": "es-1885",
       "rank": 1885,
       "lemma": "olor",
@@ -37706,25 +37591,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "es-1934",
-      "rank": 1934,
-      "lemma": "puto",
-      "partOfSpeech": "adjective",
-      "definitions": {
-        "en": "bloody, damn (vulgar intensifier)"
-      },
-      "example": {
-        "es": "No encuentro las puto llaves.",
-        "translations": {
-          "en": "I can't find the damn keys."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-1935",
       "rank": 1935,
       "lemma": "gloria",
@@ -37897,25 +37763,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "es-1944",
-      "rank": 1944,
-      "lemma": "bastardo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard (vulgar insult; illegitimate child)"
-      },
-      "example": {
-        "es": "Ese bastardo me robó el trabajo.",
-        "translations": {
-          "en": "That bastard stole my job."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "es-1945",
@@ -40583,25 +40430,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "es-2081",
-      "rank": 2081,
-      "lemma": "cabrón",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "bastard, jerk (vulgar)"
-      },
-      "example": {
-        "es": "Ese cabrón me robó la cartera.",
-        "translations": {
-          "en": "That bastard stole my wallet."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "es-2082",
@@ -51495,25 +51323,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "es-2636",
-      "rank": 2636,
-      "lemma": "prostituto",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "male prostitute"
-      },
-      "example": {
-        "es": "La novela narra la vida de un prostituto en la ciudad.",
-        "translations": {
-          "en": "The novel tells the story of a male prostitute in the city."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "es-2637",
       "rank": 2637,
       "lemma": "crema",
@@ -52738,26 +52547,6 @@
         "work-and-money"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "es-2699",
-      "rank": 2699,
-      "lemma": "zorra",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "vixen, female fox; (vulgar) slut"
-      },
-      "example": {
-        "es": "Una zorra cruzó el camino del bosque al amanecer.",
-        "translations": {
-          "en": "A vixen crossed the forest path at dawn."
-        }
-      },
-      "decks": [
-        "common",
-        "traveling"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "es-2700",
@@ -55499,25 +55288,6 @@
         "common"
       ],
       "cefrLevel": "C1"
-    },
-    {
-      "id": "es-2839",
-      "rank": 2839,
-      "lemma": "follar",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to fuck (vulgar)"
-      },
-      "example": {
-        "es": "Es una palabra muy vulgar que se usa en lenguaje informal.",
-        "translations": {
-          "en": "It is a very vulgar word used in informal language."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "es-2840",
@@ -63278,25 +63048,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "es-3235",
-      "rank": 3235,
-      "lemma": "cojón",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "testicle; (vulgar expletive)"
-      },
-      "example": {
-        "es": "¡Qué cojones, no me lo puedo creer!",
-        "translations": {
-          "en": "For crying out loud, I can't believe it!"
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
-    },
-    {
       "id": "es-3236",
       "rank": 3236,
       "lemma": "angustia",
@@ -65516,25 +65267,6 @@
         "feelings"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "es-3349",
-      "rank": 3349,
-      "lemma": "gilipollas",
-      "partOfSpeech": "noun",
-      "definitions": {
-        "en": "idiot, jerk, asshole (vulgar)"
-      },
-      "example": {
-        "es": "No seas gilipollas y pide perdón de una vez.",
-        "translations": {
-          "en": "Don't be an idiot and just apologise already."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
     },
     {
       "id": "es-3350",
@@ -76152,25 +75884,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "es-3891",
-      "rank": 3891,
-      "lemma": "polla",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "young hen; (vulgar) penis"
-      },
-      "example": {
-        "es": "En el corral había una polla recién nacida.",
-        "translations": {
-          "en": "There was a newly hatched pullet in the yard."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-3892",
       "rank": 3892,
       "lemma": "green",
@@ -77032,25 +76745,6 @@
         "work-and-money"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "es-3936",
-      "rank": 3936,
-      "lemma": "maricón",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "gay man (slur); wimp (insult)"
-      },
-      "example": {
-        "es": "Le llamaron maricón por llorar en público.",
-        "translations": {
-          "en": "They called him a faggot for crying in public."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B1"
     },
     {
       "id": "es-3937",
@@ -85625,25 +85319,6 @@
       "cefrLevel": "B1"
     },
     {
-      "id": "es-4372",
-      "rank": 4372,
-      "lemma": "hostia",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "Eucharist wafer; (vulgar) damn, punch"
-      },
-      "example": {
-        "es": "El sacerdote repartió la hostia durante la misa.",
-        "translations": {
-          "en": "The priest distributed the communion wafer during Mass."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-4373",
       "rank": 4373,
       "lemma": "exhibición",
@@ -86436,25 +86111,6 @@
         "common"
       ],
       "cefrLevel": "B1"
-    },
-    {
-      "id": "es-4413",
-      "rank": 4413,
-      "lemma": "jodidamente",
-      "partOfSpeech": "adverb",
-      "definitions": {
-        "en": "damn, bloody, incredibly (vulgar intensifier)"
-      },
-      "example": {
-        "es": "El examen fue jodidamente difícil para todos.",
-        "translations": {
-          "en": "The exam was damn difficult for everyone."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "es-4414",
@@ -96854,25 +96510,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "es-4943",
-      "rank": 4943,
-      "lemma": "masturbar",
-      "partOfSpeech": "verb",
-      "definitions": {
-        "en": "to masturbate"
-      },
-      "example": {
-        "es": "Es un tema del que pocas personas hablan abiertamente.",
-        "translations": {
-          "en": "It is a topic that few people talk about openly."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-4944",
       "rank": 4944,
       "lemma": "requerido",
@@ -98899,25 +98536,6 @@
         "common"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "es-5047",
-      "rank": 5047,
-      "lemma": "verga",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "yard (nautical); penis (vulgar)"
-      },
-      "example": {
-        "es": "Los marineros izaron la vela desde la verga del mástil.",
-        "translations": {
-          "en": "The sailors raised the sail from the mast's yard."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "es-5048",
@@ -103059,26 +102677,6 @@
       "cefrLevel": "A2"
     },
     {
-      "id": "es-5259",
-      "rank": 5259,
-      "lemma": "orgasmo",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "orgasm"
-      },
-      "example": {
-        "es": "La novela describe el orgasmo de forma poética.",
-        "translations": {
-          "en": "The novel describes orgasm in a poetic way."
-        }
-      },
-      "decks": [
-        "common",
-        "health"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-5260",
       "rank": 5260,
       "lemma": "alcaldía",
@@ -105585,25 +105183,6 @@
         "es": "La humedad puede deteriorar los muebles de madera.",
         "translations": {
           "en": "Moisture can damage wooden furniture."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
-      "id": "es-5388",
-      "rank": 5388,
-      "lemma": "prostitución",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "prostitution"
-      },
-      "example": {
-        "es": "El gobierno debate leyes para combatir la prostitución.",
-        "translations": {
-          "en": "The government debates laws to combat prostitution."
         }
       },
       "decks": [
@@ -111775,25 +111354,6 @@
       "cefrLevel": "B2"
     },
     {
-      "id": "es-5703",
-      "rank": 5703,
-      "lemma": "burdel",
-      "partOfSpeech": "noun (masc.)",
-      "definitions": {
-        "en": "brothel"
-      },
-      "example": {
-        "es": "La novela describe la vida en un burdel del siglo XIX.",
-        "translations": {
-          "en": "The novel depicts life in a 19th-century brothel."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "B2"
-    },
-    {
       "id": "es-5704",
       "rank": 5704,
       "lemma": "enorgullecer",
@@ -114600,25 +114160,6 @@
         "common"
       ],
       "cefrLevel": "B2"
-    },
-    {
-      "id": "es-5847",
-      "rank": 5847,
-      "lemma": "ramera",
-      "partOfSpeech": "noun (fem.)",
-      "definitions": {
-        "en": "prostitute, whore"
-      },
-      "example": {
-        "es": "La obra retrata la vida difícil de una ramera.",
-        "translations": {
-          "en": "The play portrays the hard life of a prostitute."
-        }
-      },
-      "decks": [
-        "common"
-      ],
-      "cefrLevel": "C1"
     },
     {
       "id": "es-5848",
