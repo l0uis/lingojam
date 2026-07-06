@@ -1,0 +1,63 @@
+# Vetting blocklist — lemmas that must never ship in the seed.
+# Produced by the 2026-07-06 subtitle-junk vetting pass: movie-culture
+# words, proper nouns/brands, English pass-throughs, transcription and
+# lemmatization artifacts, and rarer spelling-variant duplicates.
+# Exact, case-sensitive lemma match (German case-pairs are distinct).
+aah
+accetto
+ahh
+ava
+bam
+barbara
+berlino
+bourbon
+bum
+celia
+cheerleader
+cowboy
+diana
+doc
+erica
+ford
+hei
+hey
+hmm
+huh
+jean
+jersey
+lady
+lasciarmi
+laura
+linda
+lord
+mac
+manchester
+mason
+max
+melissa
+mmm
+montgomery
+ninja
+nora
+okay
+park
+parlerò
+penny
+perfino
+piacerà
+porter
+ranch
+ranger
+rio
+romeo
+samurai
+satana
+sceriffo
+shh
+sir
+spencer
+um
+veronica
+verro
+whiskey
+yankee

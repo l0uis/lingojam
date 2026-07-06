@@ -1,0 +1,6536 @@
+{
+ "version": 1,
+ "language": "it",
+ "source": "themed B2/C1 domain generation, 2026-07-06",
+ "entries": [
+  {
+   "lemma": "discendenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "lineage, descent",
+   "exampleNative": "È orgoglioso della sua discendenza contadina.",
+   "exampleEnglish": "He is proud of his peasant lineage.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "stirpe",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stock, ancestry",
+   "exampleNative": "Proviene da una stirpe di artigiani.",
+   "exampleEnglish": "He comes from a line of craftsmen.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "parentela",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "kinship, relatives",
+   "exampleNative": "Abbiamo una parentela lontana con quella famiglia.",
+   "exampleEnglish": "We have a distant kinship with that family.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "suocero",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "father-in-law",
+   "exampleNative": "Mio suocero mi tratta come un figlio.",
+   "exampleEnglish": "My father-in-law treats me like a son.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "suocera",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mother-in-law",
+   "exampleNative": "La suocera passa ogni domenica a pranzo.",
+   "exampleEnglish": "My mother-in-law comes every Sunday for lunch.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "genero",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "son-in-law",
+   "exampleNative": "Suo genero lavora nella stessa azienda.",
+   "exampleEnglish": "Her son-in-law works at the same company.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "nuora",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "daughter-in-law",
+   "exampleNative": "La nuora aiuta molto in casa.",
+   "exampleEnglish": "Her daughter-in-law helps a lot around the house.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cognata",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sister-in-law",
+   "exampleNative": "Vado in vacanza con mia cognata.",
+   "exampleEnglish": "I'm going on holiday with my sister-in-law.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "matrigna",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stepmother",
+   "exampleNative": "La matrigna la crebbe come una figlia.",
+   "exampleEnglish": "Her stepmother raised her like a daughter.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "figliastro",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "stepson",
+   "exampleNative": "Considera il figliastro come un figlio suo.",
+   "exampleEnglish": "He considers his stepson his own child.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "figliastra",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stepdaughter",
+   "exampleNative": "La figliastra vive con loro da anni.",
+   "exampleEnglish": "His stepdaughter has lived with them for years.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "fratellastro",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "half-brother, stepbrother",
+   "exampleNative": "Ho scoperto di avere un fratellastro maggiore.",
+   "exampleEnglish": "I found out I have an older half-brother.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sorellastra",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "half-sister, stepsister",
+   "exampleNative": "Va molto d'accordo con la sorellastra.",
+   "exampleEnglish": "She gets along well with her stepsister.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "primogenito",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "firstborn",
+   "exampleNative": "Il primogenito porterà avanti l'attività di famiglia.",
+   "exampleEnglish": "The firstborn will carry on the family business.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "prole",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "offspring, children",
+   "exampleNative": "Hanno cresciuto una numerosa prole con affetto.",
+   "exampleEnglish": "They raised a large brood with affection.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "bisnonno",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "great-grandfather",
+   "exampleNative": "Mio bisnonno emigrò in America da giovane.",
+   "exampleEnglish": "My great-grandfather emigrated to America when young.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "bisnonna",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "great-grandmother",
+   "exampleNative": "La bisnonna ha compiuto cento anni.",
+   "exampleEnglish": "My great-grandmother turned a hundred.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pronipote",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "great-grandchild",
+   "exampleNative": "È felice di conoscere il suo primo pronipote.",
+   "exampleEnglish": "She is happy to meet her first great-grandchild.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "avo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "forefather, ancestor",
+   "exampleNative": "I nostri avi coltivavano queste terre.",
+   "exampleEnglish": "Our forefathers farmed these lands.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "capostipite",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "family founder, progenitor",
+   "exampleNative": "Fu lui il capostipite della nostra famiglia.",
+   "exampleEnglish": "He was the founder of our family line.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "coetaneo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "peer, same-age person",
+   "exampleNative": "Preferisce giocare con i suoi coetanei.",
+   "exampleEnglish": "He prefers to play with kids his own age.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "consorte",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "spouse, consort",
+   "exampleNative": "Ha invitato anche il suo consorte alla cerimonia.",
+   "exampleEnglish": "She also invited her spouse to the ceremony.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "convivente",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "live-in partner",
+   "exampleNative": "Ha presentato il convivente ai genitori.",
+   "exampleEnglish": "She introduced her live-in partner to her parents.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "corteggiare",
+   "partOfSpeech": "verb",
+   "gloss": "to court, woo",
+   "exampleNative": "La corteggiò per mesi prima del sì.",
+   "exampleEnglish": "He courted her for months before she agreed.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "corteggiamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "courtship",
+   "exampleNative": "Il corteggiamento durò un anno intero.",
+   "exampleEnglish": "The courtship lasted a whole year.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "innamoramento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "falling in love",
+   "exampleNative": "L'innamoramento iniziale lasciò spazio a un amore maturo.",
+   "exampleEnglish": "The initial infatuation gave way to mature love.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "infatuazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "infatuation, crush",
+   "exampleNative": "Era solo un'infatuazione passeggera da adolescente.",
+   "exampleEnglish": "It was just a passing teenage infatuation.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "cotta",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "crush",
+   "exampleNative": "Ha preso una bella cotta per il vicino.",
+   "exampleEnglish": "She has a big crush on the neighbour.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sposalizio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "wedding",
+   "exampleNative": "Lo sposalizio si terrà in campagna.",
+   "exampleEnglish": "The wedding will be held in the countryside.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "convolare",
+   "partOfSpeech": "verb",
+   "gloss": "to wed, get married",
+   "exampleNative": "Dopo dieci anni decisero di convolare a nozze.",
+   "exampleEnglish": "After ten years they decided to tie the knot.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "coniuge",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "spouse",
+   "exampleNative": "Il coniuge deve firmare anche questo documento.",
+   "exampleEnglish": "The spouse must sign this document too.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "separarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to separate, split up",
+   "exampleNative": "Hanno deciso di separarsi dopo vent'anni.",
+   "exampleEnglish": "They decided to separate after twenty years.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vedovanza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "widowhood",
+   "exampleNative": "Ha affrontato la vedovanza con grande dignità.",
+   "exampleEnglish": "She faced widowhood with great dignity.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "vedovo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "widower",
+   "exampleNative": "È rimasto vedovo troppo giovane.",
+   "exampleEnglish": "He was widowed far too young.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "celibe",
+   "partOfSpeech": "adjective",
+   "gloss": "single (of a man)",
+   "exampleNative": "È ancora celibe a quarant'anni.",
+   "exampleEnglish": "He is still single at forty.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "nubile",
+   "partOfSpeech": "adjective",
+   "gloss": "single (of a woman)",
+   "exampleNative": "Sul modulo ha scritto di essere nubile.",
+   "exampleEnglish": "On the form she wrote that she is single.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "scapolo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bachelor",
+   "exampleNative": "Resta uno scapolo convinto e felice.",
+   "exampleEnglish": "He remains a convinced and happy bachelor.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "convivenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "cohabitation, living together",
+   "exampleNative": "La convivenza richiede molti compromessi.",
+   "exampleEnglish": "Living together requires a lot of compromise.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "affiatato",
+   "partOfSpeech": "adjective",
+   "gloss": "close-knit, in tune",
+   "exampleNative": "Sono una coppia molto affiatata.",
+   "exampleEnglish": "They are a very close-knit couple.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "affiatamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "harmony, rapport",
+   "exampleNative": "Tra i fratelli c'è un raro affiatamento.",
+   "exampleEnglish": "There is a rare rapport between the siblings.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "vincolo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bond, tie",
+   "exampleNative": "Il vincolo tra madre e figlia è fortissimo.",
+   "exampleEnglish": "The bond between mother and daughter is very strong.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "riappacificarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to make up, reconcile",
+   "exampleNative": "I due fratelli si sono finalmente riappacificati.",
+   "exampleEnglish": "The two brothers have finally made up.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "riconciliarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to reconcile",
+   "exampleNative": "Dopo il litigio si sono riconciliati subito.",
+   "exampleEnglish": "After the argument they reconciled at once.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "riconciliazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "reconciliation",
+   "exampleNative": "La riconciliazione ha unito di nuovo la famiglia.",
+   "exampleEnglish": "The reconciliation brought the family back together.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "risentimento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "resentment",
+   "exampleNative": "Prova ancora un vecchio risentimento verso il padre.",
+   "exampleEnglish": "He still feels an old resentment toward his father.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "incomprensione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "misunderstanding",
+   "exampleNative": "Una banale incomprensione ha rovinato l'amicizia.",
+   "exampleEnglish": "A trivial misunderstanding ruined the friendship.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "complicità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "closeness, complicity",
+   "exampleNative": "Tra le sorelle c'è una grande complicità.",
+   "exampleEnglish": "There is great closeness between the sisters.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "intesa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "understanding, rapport",
+   "exampleNative": "Con lui c'è sempre stata una perfetta intesa.",
+   "exampleEnglish": "There has always been perfect understanding with him.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sintonia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "harmony, attunement",
+   "exampleNative": "Siamo in piena sintonia su come crescere i figli.",
+   "exampleEnglish": "We are fully in sync on how to raise the kids.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "confidente",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "confidant",
+   "exampleNative": "Mia sorella è la mia migliore confidente.",
+   "exampleEnglish": "My sister is my best confidant.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "premura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "care, attentiveness",
+   "exampleNative": "Si prende cura dei genitori con grande premura.",
+   "exampleEnglish": "She looks after her parents with great care.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "allevare",
+   "partOfSpeech": "verb",
+   "gloss": "to raise, bring up",
+   "exampleNative": "Hanno allevato quattro figli da soli.",
+   "exampleEnglish": "They raised four children on their own.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "viziare",
+   "partOfSpeech": "verb",
+   "gloss": "to spoil (a child)",
+   "exampleNative": "I nonni tendono a viziare i nipoti.",
+   "exampleEnglish": "Grandparents tend to spoil their grandchildren.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "coccolare",
+   "partOfSpeech": "verb",
+   "gloss": "to cuddle, pamper",
+   "exampleNative": "Ama coccolare il suo bambino la sera.",
+   "exampleEnglish": "She loves to cuddle her baby in the evening.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "accudire",
+   "partOfSpeech": "verb",
+   "gloss": "to look after, tend",
+   "exampleNative": "Accudisce la madre anziana ogni giorno.",
+   "exampleEnglish": "She looks after her elderly mother every day.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "abbracciarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to hug each other",
+   "exampleNative": "Si abbracciarono commossi alla stazione.",
+   "exampleEnglish": "They hugged, moved to tears, at the station.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "adottare",
+   "partOfSpeech": "verb",
+   "gloss": "to adopt",
+   "exampleNative": "Hanno deciso di adottare un bambino.",
+   "exampleEnglish": "They decided to adopt a child.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "madrina",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "godmother",
+   "exampleNative": "La madrina le ha regalato una collana.",
+   "exampleEnglish": "Her godmother gave her a necklace.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "figlioccio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "godson",
+   "exampleNative": "Porta sempre un regalo al suo figlioccio.",
+   "exampleEnglish": "He always brings a gift for his godson.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "svezzamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "weaning",
+   "exampleNative": "Lo svezzamento inizia intorno ai sei mesi.",
+   "exampleEnglish": "Weaning begins around six months.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pubertà",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "puberty",
+   "exampleNative": "Durante la pubertà il carattere cambia molto.",
+   "exampleEnglish": "During puberty one's character changes a lot.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "invecchiare",
+   "partOfSpeech": "verb",
+   "gloss": "to grow old, age",
+   "exampleNative": "I miei genitori stanno invecchiando serenamente.",
+   "exampleEnglish": "My parents are growing old peacefully.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cordoglio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "condolences, grief",
+   "exampleNative": "Le abbiamo espresso il nostro sincero cordoglio.",
+   "exampleEnglish": "We expressed our sincere condolences to her.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "orfano",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "orphan",
+   "exampleNative": "È cresciuto orfano di entrambi i genitori.",
+   "exampleEnglish": "He grew up an orphan of both parents.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "distacco",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "separation, detachment",
+   "exampleNative": "Il distacco dai figli è stato doloroso.",
+   "exampleEnglish": "The separation from her children was painful.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "affezionato",
+   "partOfSpeech": "adjective",
+   "gloss": "fond, attached",
+   "exampleNative": "Sono molto affezionato a mia zia.",
+   "exampleEnglish": "I am very fond of my aunt.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "intimità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "intimacy, closeness",
+   "exampleNative": "Con il tempo è nata una profonda intimità.",
+   "exampleEnglish": "Over time a deep intimacy developed.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "compagno di vita",
+   "partOfSpeech": "phrase",
+   "gloss": "life partner",
+   "exampleNative": "Ha trovato in lei la sua compagna di vita.",
+   "exampleEnglish": "He found his life partner in her.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "anima gemella",
+   "partOfSpeech": "phrase",
+   "gloss": "soulmate",
+   "exampleNative": "Dopo anni ha incontrato la sua anima gemella.",
+   "exampleEnglish": "After years he met his soulmate.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mammone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "mummy's boy",
+   "exampleNative": "A trent'anni è ancora un mammone.",
+   "exampleEnglish": "At thirty he is still a mummy's boy.",
+   "decks": [
+    "common",
+    "family"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sgomento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dismay",
+   "exampleNative": "La notizia ha lasciato tutti in preda allo sgomento.",
+   "exampleEnglish": "The news left everyone in a state of dismay.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sconforto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dejection, discouragement",
+   "exampleNative": "Dopo il fallimento fu preso da un profondo sconforto.",
+   "exampleEnglish": "After the failure he was overcome by deep dejection.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sconcerto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bewilderment, dismay",
+   "exampleNative": "Le sue parole hanno suscitato sconcerto tra i presenti.",
+   "exampleEnglish": "His words caused bewilderment among those present.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "smarrimento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bewilderment, disorientation",
+   "exampleNative": "Provò un attimo di smarrimento davanti a tanta confusione.",
+   "exampleEnglish": "She felt a moment of bewilderment faced with such confusion.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rammarico",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "regret",
+   "exampleNative": "Ha espresso il suo rammarico per l'occasione perduta.",
+   "exampleEnglish": "He expressed his regret over the lost opportunity.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stizza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "irritation, pique",
+   "exampleNative": "Rispose con stizza alla domanda del giornalista.",
+   "exampleEnglish": "She answered the journalist's question with irritation.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "esasperazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "exasperation",
+   "exampleNative": "L'attesa infinita lo portò alla pura esasperazione.",
+   "exampleEnglish": "The endless wait drove him to sheer exasperation.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "indignazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "indignation, outrage",
+   "exampleNative": "La sentenza ha provocato indignazione nell'opinione pubblica.",
+   "exampleEnglish": "The verdict sparked outrage in public opinion.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sdegno",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "disdain, indignation",
+   "exampleNative": "Rifiutò l'offerta con un gesto di sdegno.",
+   "exampleEnglish": "He refused the offer with a gesture of disdain.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "disappunto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "disappointment, annoyance",
+   "exampleNative": "Non riuscì a nascondere il proprio disappunto.",
+   "exampleEnglish": "She could not hide her disappointment.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "inquietudine",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "unease, restlessness",
+   "exampleNative": "Una strana inquietudine le impediva di dormire.",
+   "exampleEnglish": "A strange unease kept her from sleeping.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "apprensione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "apprehension, anxiety",
+   "exampleNative": "Aspettava i risultati delle analisi con apprensione.",
+   "exampleEnglish": "He was waiting for the test results with apprehension.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "commozione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "deep emotion, being moved",
+   "exampleNative": "Alla premiazione pianse per la commozione.",
+   "exampleEnglish": "At the award ceremony she wept with emotion.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "euforia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "euphoria",
+   "exampleNative": "Dopo la vittoria l'euforia contagiò tutta la squadra.",
+   "exampleEnglish": "After the win, euphoria swept through the whole team.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "appagamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "fulfilment, contentment",
+   "exampleNative": "Il volontariato le dà un profondo senso di appagamento.",
+   "exampleEnglish": "Volunteering gives her a deep sense of fulfilment.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "spensieratezza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "carefreeness, lightheartedness",
+   "exampleNative": "Ricordo con nostalgia la spensieratezza dell'infanzia.",
+   "exampleEnglish": "I remember the carefreeness of childhood with nostalgia.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "malumore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bad mood",
+   "exampleNative": "È di malumore da quando ha ricevuto quella lettera.",
+   "exampleEnglish": "He has been in a bad mood since he got that letter.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "disillusione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "disillusionment",
+   "exampleNative": "Dopo tante promesse mancate arrivò la disillusione.",
+   "exampleEnglish": "After so many broken promises, disillusionment set in.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "soggezione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "awe, intimidation",
+   "exampleNative": "Il nuovo direttore mi mette molta soggezione.",
+   "exampleEnglish": "The new director really makes me feel intimidated.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ribrezzo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "revulsion, disgust",
+   "exampleNative": "I ragni le hanno sempre fatto ribrezzo.",
+   "exampleEnglish": "Spiders have always filled her with revulsion.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "avversione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "aversion, dislike",
+   "exampleNative": "Ha una forte avversione per ogni forma di ipocrisia.",
+   "exampleEnglish": "He has a strong aversion to any form of hypocrisy.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "trepidazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "trepidation, anxious anticipation",
+   "exampleNative": "Attendeva con trepidazione l'esito del colloquio.",
+   "exampleEnglish": "She awaited the outcome of the interview with trepidation.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "batticuore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "pounding heart, jitters",
+   "exampleNative": "Prima dell'esame avevo un gran batticuore.",
+   "exampleEnglish": "Before the exam my heart was pounding.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rimpianto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "regret",
+   "exampleNative": "Il suo più grande rimpianto è non aver viaggiato.",
+   "exampleEnglish": "His biggest regret is not having traveled.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sfogo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "outburst, venting",
+   "exampleNative": "Aveva bisogno di uno sfogo dopo quella giornata terribile.",
+   "exampleEnglish": "She needed to vent after that terrible day.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "insofferenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "impatience, intolerance",
+   "exampleNative": "Mostrava una crescente insofferenza verso le regole.",
+   "exampleEnglish": "He showed a growing impatience with the rules.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "magone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "lump in the throat",
+   "exampleNative": "Quando ripenso ai nonni mi viene il magone.",
+   "exampleEnglish": "When I think back to my grandparents I get a lump in my throat.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "compiacersi",
+   "partOfSpeech": "verb",
+   "gloss": "to take satisfaction in",
+   "exampleNative": "Si compiace dei progressi fatti dai suoi studenti.",
+   "exampleEnglish": "He takes satisfaction in his students' progress.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "crogiolarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to wallow, bask",
+   "exampleNative": "Smettila di crogiolarti nella tua tristezza.",
+   "exampleEnglish": "Stop wallowing in your sadness.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "struggersi",
+   "partOfSpeech": "verb",
+   "gloss": "to pine, be consumed",
+   "exampleNative": "Si strugge di nostalgia per il suo paese.",
+   "exampleEnglish": "She is consumed with longing for her homeland.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "angosciarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to agonize, be anguished",
+   "exampleNative": "Non angosciarti per cose che non puoi controllare.",
+   "exampleEnglish": "Don't torment yourself over things you can't control.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rimuginare",
+   "partOfSpeech": "verb",
+   "gloss": "to brood, mull over",
+   "exampleNative": "Passa le notti a rimuginare sui propri errori.",
+   "exampleEnglish": "He spends his nights brooding over his mistakes.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sfogarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to vent, let off steam",
+   "exampleNative": "Ogni tanto ha bisogno di sfogarsi con un'amica.",
+   "exampleEnglish": "Every now and then she needs to vent to a friend.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "immedesimarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to identify with, empathize",
+   "exampleNative": "Cerca di immedesimarti nella sua situazione prima di giudicare.",
+   "exampleEnglish": "Try to put yourself in his situation before judging.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "spazientirsi",
+   "partOfSpeech": "verb",
+   "gloss": "to lose patience",
+   "exampleNative": "Il cliente si spazientì per la lunga attesa.",
+   "exampleEnglish": "The customer lost patience over the long wait.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "infuriarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to fly into a rage",
+   "exampleNative": "Si infuriò quando scoprì la bugia.",
+   "exampleEnglish": "He flew into a rage when he discovered the lie.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "placarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to calm down, subside",
+   "exampleNative": "La sua rabbia si placò solo dopo le scuse.",
+   "exampleEnglish": "His anger subsided only after the apology.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rasserenarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to cheer up, calm down",
+   "exampleNative": "Parlando con lei mi sono subito rasserenato.",
+   "exampleEnglish": "Talking with her, I immediately felt at ease again.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rincuorare",
+   "partOfSpeech": "verb",
+   "gloss": "to hearten, reassure",
+   "exampleNative": "Le parole del medico ci hanno rincuorato molto.",
+   "exampleEnglish": "The doctor's words greatly reassured us.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "esultare",
+   "partOfSpeech": "verb",
+   "gloss": "to rejoice, exult",
+   "exampleNative": "I tifosi esultarono al gol della vittoria.",
+   "exampleEnglish": "The fans rejoiced at the winning goal.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sussultare",
+   "partOfSpeech": "verb",
+   "gloss": "to jump, be startled",
+   "exampleNative": "Sussultò quando il telefono squillò all'improvviso.",
+   "exampleEnglish": "She jumped when the phone suddenly rang.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rabbrividire",
+   "partOfSpeech": "verb",
+   "gloss": "to shudder, shiver",
+   "exampleNative": "Quel racconto mi fa ancora rabbrividire.",
+   "exampleEnglish": "That story still makes me shudder.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "trasalire",
+   "partOfSpeech": "verb",
+   "gloss": "to start, flinch",
+   "exampleNative": "Trasalì nel sentire il proprio nome.",
+   "exampleEnglish": "He started when he heard his own name.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "compatire",
+   "partOfSpeech": "verb",
+   "gloss": "to pity",
+   "exampleNative": "Non voglio essere compatita, voglio essere capita.",
+   "exampleEnglish": "I don't want to be pitied, I want to be understood.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "disapprovare",
+   "partOfSpeech": "verb",
+   "gloss": "to disapprove of",
+   "exampleNative": "I suoi genitori disapprovano apertamente questa scelta.",
+   "exampleEnglish": "Her parents openly disapprove of this choice.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "affranto",
+   "partOfSpeech": "adjective",
+   "gloss": "heartbroken, devastated",
+   "exampleNative": "Era affranto per la perdita del suo cane.",
+   "exampleEnglish": "He was heartbroken over the loss of his dog.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sconsolato",
+   "partOfSpeech": "adjective",
+   "gloss": "disconsolate, forlorn",
+   "exampleNative": "Sedeva sconsolato davanti al progetto respinto.",
+   "exampleEnglish": "He sat disconsolately in front of the rejected project.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "avvilito",
+   "partOfSpeech": "adjective",
+   "gloss": "dejected, demoralized",
+   "exampleNative": "Dopo l'ennesimo rifiuto si sentiva davvero avvilito.",
+   "exampleEnglish": "After yet another rejection he felt truly dejected.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contrariato",
+   "partOfSpeech": "adjective",
+   "gloss": "annoyed, displeased",
+   "exampleNative": "Sembrava contrariato dal cambio di programma.",
+   "exampleEnglish": "He seemed annoyed by the change of plans.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stizzito",
+   "partOfSpeech": "adjective",
+   "gloss": "irritated, piqued",
+   "exampleNative": "Rispose stizzito ai commenti dei colleghi.",
+   "exampleEnglish": "He replied irritably to his colleagues' comments.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "furibondo",
+   "partOfSpeech": "adjective",
+   "gloss": "furious, enraged",
+   "exampleNative": "Uscì furibondo dalla riunione sbattendo la porta.",
+   "exampleEnglish": "He stormed out of the meeting in a fury, slamming the door.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "esasperato",
+   "partOfSpeech": "adjective",
+   "gloss": "exasperated",
+   "exampleNative": "Esasperata dai rumori continui, chiamò la polizia.",
+   "exampleEnglish": "Exasperated by the constant noise, she called the police.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "suscettibile",
+   "partOfSpeech": "adjective",
+   "gloss": "touchy, easily offended",
+   "exampleNative": "È così suscettibile che si offende per un nonnulla.",
+   "exampleEnglish": "He is so touchy that he takes offense at the slightest thing.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "irascibile",
+   "partOfSpeech": "adjective",
+   "gloss": "irritable, quick-tempered",
+   "exampleNative": "Con l'età è diventato sempre più irascibile.",
+   "exampleEnglish": "With age he has become increasingly quick-tempered.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "perplesso",
+   "partOfSpeech": "adjective",
+   "gloss": "puzzled, perplexed",
+   "exampleNative": "La sua proposta mi lascia alquanto perplesso.",
+   "exampleEnglish": "His proposal leaves me rather puzzled.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sbigottito",
+   "partOfSpeech": "adjective",
+   "gloss": "dumbfounded, astonished",
+   "exampleNative": "Rimase sbigottita davanti a quella scena assurda.",
+   "exampleEnglish": "She stood dumbfounded before that absurd scene.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "esterrefatto",
+   "partOfSpeech": "adjective",
+   "gloss": "astounded, aghast",
+   "exampleNative": "Siamo rimasti esterrefatti dalla sua reazione violenta.",
+   "exampleEnglish": "We were astounded by his violent reaction.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sbalordito",
+   "partOfSpeech": "adjective",
+   "gloss": "stunned, amazed",
+   "exampleNative": "Il pubblico rimase sbalordito dal colpo di scena.",
+   "exampleEnglish": "The audience was stunned by the plot twist.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "attonito",
+   "partOfSpeech": "adjective",
+   "gloss": "astonished, speechless",
+   "exampleNative": "Ascoltava attonito la notizia del licenziamento.",
+   "exampleEnglish": "He listened in stunned silence to the news of his dismissal.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "titubante",
+   "partOfSpeech": "adjective",
+   "gloss": "hesitant, wavering",
+   "exampleNative": "Era titubante all'idea di esprimere la propria opinione.",
+   "exampleEnglish": "She was hesitant about voicing her own opinion.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "riluttante",
+   "partOfSpeech": "adjective",
+   "gloss": "reluctant",
+   "exampleNative": "Era riluttante ad ammettere i propri sentimenti.",
+   "exampleEnglish": "He was reluctant to admit his feelings.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "toccante",
+   "partOfSpeech": "adjective",
+   "gloss": "touching, moving",
+   "exampleNative": "Il suo discorso di addio è stato davvero toccante.",
+   "exampleEnglish": "Her farewell speech was truly touching.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "spaesato",
+   "partOfSpeech": "adjective",
+   "gloss": "disoriented, out of place",
+   "exampleNative": "I primi mesi all'estero mi sentivo completamente spaesato.",
+   "exampleEnglish": "In my first months abroad I felt completely lost.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "malvolentieri",
+   "partOfSpeech": "adverb",
+   "gloss": "reluctantly, grudgingly",
+   "exampleNative": "Ha prestato la macchina, ma molto malvolentieri.",
+   "exampleEnglish": "He lent his car, but very grudgingly.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "controvoglia",
+   "partOfSpeech": "adverb",
+   "gloss": "unwillingly",
+   "exampleNative": "Andò alla festa controvoglia, solo per cortesia.",
+   "exampleEnglish": "She went to the party unwillingly, just out of politeness.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "a malincuore",
+   "partOfSpeech": "phrase",
+   "gloss": "with a heavy heart",
+   "exampleNative": "A malincuore ho dovuto rifiutare il suo invito.",
+   "exampleEnglish": "With a heavy heart I had to decline his invitation.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "stare sulle spine",
+   "partOfSpeech": "phrase",
+   "gloss": "to be on tenterhooks",
+   "exampleNative": "Dimmi com'è andata, sto sulle spine da stamattina!",
+   "exampleEnglish": "Tell me how it went, I've been on tenterhooks since this morning!",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "essere al settimo cielo",
+   "partOfSpeech": "phrase",
+   "gloss": "to be over the moon",
+   "exampleNative": "Da quando è nata sua figlia è al settimo cielo.",
+   "exampleEnglish": "Since his daughter was born he has been over the moon.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "avere la luna storta",
+   "partOfSpeech": "phrase",
+   "gloss": "to be in a foul mood",
+   "exampleNative": "Oggi il capo ha la luna storta, stai attento.",
+   "exampleEnglish": "The boss is in a foul mood today, watch out.",
+   "decks": [
+    "common",
+    "feelings"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "soffriggere",
+   "partOfSpeech": "verb",
+   "gloss": "fry gently, sauté",
+   "exampleNative": "Soffriggi la cipolla in poco olio d'oliva.",
+   "exampleEnglish": "Sauté the onion in a little olive oil.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rosolare",
+   "partOfSpeech": "verb",
+   "gloss": "brown (food)",
+   "exampleNative": "Fate rosolare la carne su tutti i lati.",
+   "exampleEnglish": "Brown the meat on all sides.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sbollentare",
+   "partOfSpeech": "verb",
+   "gloss": "blanch",
+   "exampleNative": "Sbollenta i pomodori per pelarli più facilmente.",
+   "exampleEnglish": "Blanch the tomatoes to peel them more easily.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "brasare",
+   "partOfSpeech": "verb",
+   "gloss": "braise",
+   "exampleNative": "Il manzo va brasato nel vino rosso per ore.",
+   "exampleEnglish": "The beef should be braised in red wine for hours.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "marinare",
+   "partOfSpeech": "verb",
+   "gloss": "marinate",
+   "exampleNative": "Lascia marinare il pollo nel limone per un'ora.",
+   "exampleEnglish": "Let the chicken marinate in lemon for an hour.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "frullare",
+   "partOfSpeech": "verb",
+   "gloss": "blend, whizz",
+   "exampleNative": "Frulla la zuppa fino a ottenere una crema liscia.",
+   "exampleEnglish": "Blend the soup until you get a smooth cream.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tritare",
+   "partOfSpeech": "verb",
+   "gloss": "chop finely, mince",
+   "exampleNative": "Trita finemente il prezzemolo con l'aglio.",
+   "exampleEnglish": "Finely chop the parsley with the garlic.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "affettare",
+   "partOfSpeech": "verb",
+   "gloss": "slice",
+   "exampleNative": "Affetta sottile il prosciutto crudo, per favore.",
+   "exampleEnglish": "Slice the cured ham thinly, please.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "grattugiare",
+   "partOfSpeech": "verb",
+   "gloss": "grate",
+   "exampleNative": "Grattugia un po' di parmigiano sulla pasta.",
+   "exampleEnglish": "Grate a little Parmesan over the pasta.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "impanare",
+   "partOfSpeech": "verb",
+   "gloss": "coat in breadcrumbs",
+   "exampleNative": "Impana le cotolette prima di friggerle.",
+   "exampleEnglish": "Bread the cutlets before frying them.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "impastare",
+   "partOfSpeech": "verb",
+   "gloss": "knead",
+   "exampleNative": "Ho impastato il pane a mano per venti minuti.",
+   "exampleEnglish": "I kneaded the bread by hand for twenty minutes.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lievitare",
+   "partOfSpeech": "verb",
+   "gloss": "rise (of dough)",
+   "exampleNative": "L'impasto deve lievitare almeno due ore.",
+   "exampleEnglish": "The dough needs to rise for at least two hours.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sfornare",
+   "partOfSpeech": "verb",
+   "gloss": "take out of the oven",
+   "exampleNative": "Il panettiere sforna il pane alle sei.",
+   "exampleEnglish": "The baker takes the bread out of the oven at six.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sfumare",
+   "partOfSpeech": "verb",
+   "gloss": "deglaze (with wine)",
+   "exampleNative": "Sfuma il risotto con un bicchiere di vino bianco.",
+   "exampleEnglish": "Deglaze the risotto with a glass of white wine.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "insaporire",
+   "partOfSpeech": "verb",
+   "gloss": "add flavor to",
+   "exampleNative": "Le erbe aromatiche insaporiscono il brodo.",
+   "exampleEnglish": "The herbs add flavor to the broth.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "condire",
+   "partOfSpeech": "verb",
+   "gloss": "season, dress",
+   "exampleNative": "Condisci l'insalata con olio e aceto balsamico.",
+   "exampleEnglish": "Dress the salad with oil and balsamic vinegar.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "farcire",
+   "partOfSpeech": "verb",
+   "gloss": "stuff, fill",
+   "exampleNative": "Ho farcito la torta con crema al limone.",
+   "exampleEnglish": "I filled the cake with lemon cream.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "setacciare",
+   "partOfSpeech": "verb",
+   "gloss": "sift",
+   "exampleNative": "Setaccia la farina per evitare i grumi.",
+   "exampleEnglish": "Sift the flour to avoid lumps.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "scolare",
+   "partOfSpeech": "verb",
+   "gloss": "drain",
+   "exampleNative": "Scola la pasta quando è ancora al dente.",
+   "exampleEnglish": "Drain the pasta while it is still al dente.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "addensare",
+   "partOfSpeech": "verb",
+   "gloss": "thicken",
+   "exampleNative": "La maizena serve ad addensare la salsa.",
+   "exampleEnglish": "Cornstarch is used to thicken the sauce.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "macinare",
+   "partOfSpeech": "verb",
+   "gloss": "grind",
+   "exampleNative": "Preferisco macinare il caffè al momento.",
+   "exampleEnglish": "I prefer to grind the coffee fresh.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "soffritto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "sautéed onion-celery-carrot base",
+   "exampleNative": "Il soffritto di sedano, carota e cipolla è pronto.",
+   "exampleEnglish": "The celery, carrot and onion base is ready.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "impasto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dough, mixture",
+   "exampleNative": "Stendi l'impasto con il mattarello.",
+   "exampleEnglish": "Roll out the dough with the rolling pin.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lievito",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "yeast",
+   "exampleNative": "Aggiungi il lievito di birra all'acqua tiepida.",
+   "exampleEnglish": "Add the brewer's yeast to the lukewarm water.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ripieno",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "filling, stuffing",
+   "exampleNative": "Il ripieno dei tortellini è di carne e parmigiano.",
+   "exampleEnglish": "The tortellini filling is meat and Parmesan.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "condimento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "seasoning, dressing",
+   "exampleNative": "Questo condimento è troppo pesante per il pesce.",
+   "exampleEnglish": "This dressing is too heavy for the fish.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cottura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "cooking (process/time)",
+   "exampleNative": "Controlla la cottura del risotto ogni tanto.",
+   "exampleEnglish": "Check how the risotto is cooking every so often.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mollica",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "soft part of bread",
+   "exampleNative": "Ammorbidisci la mollica nel latte per le polpette.",
+   "exampleEnglish": "Soften the bread crumb in milk for the meatballs.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "scorza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "zest, peel",
+   "exampleNative": "Aggiungi la scorza grattugiata di un limone.",
+   "exampleEnglish": "Add the grated zest of one lemon.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "spicchio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "clove, segment",
+   "exampleNative": "Basta uno spicchio d'aglio per il sugo.",
+   "exampleEnglish": "One clove of garlic is enough for the sauce.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "legume",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "legume, pulse",
+   "exampleNative": "I legumi secchi vanno lasciati in ammollo.",
+   "exampleEnglish": "Dried pulses need to be left to soak.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pangrattato",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "breadcrumbs",
+   "exampleNative": "Copri il gratin con abbondante pangrattato.",
+   "exampleEnglish": "Cover the gratin with plenty of breadcrumbs.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "teglia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "baking tray, tin",
+   "exampleNative": "Ungi la teglia prima di versare l'impasto.",
+   "exampleEnglish": "Grease the tin before pouring in the batter.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tegame",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "(sauce)pan",
+   "exampleNative": "Scalda l'olio in un tegame antiaderente.",
+   "exampleEnglish": "Heat the oil in a non-stick pan.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "frattaglie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "offal",
+   "exampleNative": "In Toscana le frattaglie si cucinano ancora spesso.",
+   "exampleEnglish": "In Tuscany offal is still often cooked.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "stagionatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "aging, curing",
+   "exampleNative": "Questo pecorino ha una stagionatura di dodici mesi.",
+   "exampleEnglish": "This pecorino has been aged for twelve months.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "conservante",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "preservative",
+   "exampleNative": "Questa marmellata è senza conservanti né coloranti.",
+   "exampleEnglish": "This jam has no preservatives or colorings.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "macelleria",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "butcher's shop",
+   "exampleNative": "In macelleria ho preso due etti di macinato.",
+   "exampleEnglish": "At the butcher's I got two hundred grams of mince.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "salumeria",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "delicatessen",
+   "exampleNative": "La salumeria del quartiere fa panini eccezionali.",
+   "exampleEnglish": "The neighborhood deli makes exceptional sandwiches.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pescheria",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "fishmonger's",
+   "exampleNative": "In pescheria oggi hanno orate freschissime.",
+   "exampleEnglish": "The fishmonger has very fresh sea bream today.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "filiera",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "supply chain",
+   "exampleNative": "Il ristorante usa solo prodotti a filiera corta.",
+   "exampleEnglish": "The restaurant only uses short-supply-chain products.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sfuso",
+   "partOfSpeech": "adjective",
+   "gloss": "loose, unpackaged",
+   "exampleNative": "Compro riso e legumi sfusi per risparmiare.",
+   "exampleEnglish": "I buy loose rice and pulses to save money.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sottovuoto",
+   "partOfSpeech": "adjective",
+   "gloss": "vacuum-packed",
+   "exampleNative": "Il salmone sottovuoto si conserva più a lungo.",
+   "exampleEnglish": "Vacuum-packed salmon keeps longer.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "surgelato",
+   "partOfSpeech": "adjective",
+   "gloss": "(deep-)frozen",
+   "exampleNative": "I piselli surgelati mantengono le vitamine.",
+   "exampleEnglish": "Frozen peas keep their vitamins.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "dispensa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pantry, larder",
+   "exampleNative": "Tengo la pasta e i barattoli in dispensa.",
+   "exampleEnglish": "I keep the pasta and jars in the pantry.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "deperibile",
+   "partOfSpeech": "adjective",
+   "gloss": "perishable",
+   "exampleNative": "Gli alimenti deperibili vanno subito in frigorifero.",
+   "exampleEnglish": "Perishable foods must go straight into the fridge.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "avariato",
+   "partOfSpeech": "adjective",
+   "gloss": "spoiled, gone bad",
+   "exampleNative": "Quel pesce era avariato e l'ho buttato.",
+   "exampleEnglish": "That fish had gone bad and I threw it away.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rancido",
+   "partOfSpeech": "adjective",
+   "gloss": "rancid",
+   "exampleNative": "Quest'olio sa di rancido, non usarlo.",
+   "exampleEnglish": "This oil tastes rancid, don't use it.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "abbuffarsi",
+   "partOfSpeech": "verb",
+   "gloss": "stuff oneself",
+   "exampleNative": "A Natale ci abbuffiamo sempre di dolci.",
+   "exampleEnglish": "At Christmas we always stuff ourselves with sweets.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sgranocchiare",
+   "partOfSpeech": "verb",
+   "gloss": "munch, crunch on",
+   "exampleNative": "Sgranocchiava grissini aspettando il primo piatto.",
+   "exampleEnglish": "He was munching breadsticks while waiting for the first course.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "trangugiare",
+   "partOfSpeech": "verb",
+   "gloss": "gulp down",
+   "exampleNative": "Ha trangugiato il pranzo in cinque minuti.",
+   "exampleEnglish": "He gulped down his lunch in five minutes.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "assaporare",
+   "partOfSpeech": "verb",
+   "gloss": "savor",
+   "exampleNative": "Assapora il vino lentamente, senza fretta.",
+   "exampleEnglish": "Savor the wine slowly, without rushing.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "commensale",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "fellow diner",
+   "exampleNative": "I commensali hanno applaudito il cuoco.",
+   "exampleEnglish": "The diners applauded the cook.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pietanza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dish, course",
+   "exampleNative": "Ogni pietanza era abbinata a un vino diverso.",
+   "exampleEnglish": "Each dish was paired with a different wine.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "prelibatezza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "delicacy",
+   "exampleNative": "Il tartufo bianco è una prelibatezza costosa.",
+   "exampleEnglish": "White truffle is an expensive delicacy.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "buongustaio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "gourmet, foodie",
+   "exampleNative": "Da vero buongustaio, sceglie sempre ristoranti di qualità.",
+   "exampleEnglish": "As a true gourmet, he always picks quality restaurants.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "palato",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "palate",
+   "exampleNative": "Questo vino soddisfa anche i palati più esigenti.",
+   "exampleEnglish": "This wine satisfies even the most demanding palates.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "insipido",
+   "partOfSpeech": "adjective",
+   "gloss": "bland, tasteless",
+   "exampleNative": "La minestra è insipida, aggiungi del sale.",
+   "exampleEnglish": "The soup is bland, add some salt.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vellutato",
+   "partOfSpeech": "adjective",
+   "gloss": "velvety, smooth",
+   "exampleNative": "La crema di zucca ha una consistenza vellutata.",
+   "exampleEnglish": "The pumpkin soup has a velvety texture.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "amarognolo",
+   "partOfSpeech": "adjective",
+   "gloss": "slightly bitter",
+   "exampleNative": "Il radicchio ha un gusto amarognolo che adoro.",
+   "exampleEnglish": "Radicchio has a slightly bitter taste that I love.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "annata",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "vintage (year)",
+   "exampleNative": "Questo barolo è di un'annata eccezionale.",
+   "exampleEnglish": "This Barolo is from an exceptional vintage.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vendemmia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "grape harvest",
+   "exampleNative": "A settembre tutta la famiglia partecipa alla vendemmia.",
+   "exampleEnglish": "In September the whole family takes part in the grape harvest.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vitigno",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "grape variety",
+   "exampleNative": "Da questo vitigno si ottiene un vino corposo.",
+   "exampleEnglish": "This grape variety produces a full-bodied wine.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "astemio",
+   "partOfSpeech": "adjective",
+   "gloss": "teetotal",
+   "exampleNative": "Sono astemio, prendo un analcolico, grazie.",
+   "exampleEnglish": "I don't drink, I'll have a soft drink, thanks.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "distillato",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "spirit, distillate",
+   "exampleNative": "La grappa è un distillato di vinacce.",
+   "exampleEnglish": "Grappa is a spirit distilled from grape pomace.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "frizzante",
+   "partOfSpeech": "adjective",
+   "gloss": "sparkling, fizzy",
+   "exampleNative": "Preferisci acqua naturale o frizzante?",
+   "exampleEnglish": "Do you prefer still or sparkling water?",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "corposo",
+   "partOfSpeech": "adjective",
+   "gloss": "full-bodied",
+   "exampleNative": "Con l'arrosto serve un rosso corposo.",
+   "exampleEnglish": "A full-bodied red is needed with the roast.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "al dente",
+   "partOfSpeech": "phrase",
+   "gloss": "firm to the bite",
+   "exampleNative": "Gli italiani mangiano la pasta rigorosamente al dente.",
+   "exampleEnglish": "Italians eat their pasta strictly al dente.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "a fuoco lento",
+   "partOfSpeech": "phrase",
+   "gloss": "over low heat",
+   "exampleNative": "Il ragù deve cuocere a fuoco lento per ore.",
+   "exampleEnglish": "The ragù has to cook over low heat for hours.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "alla spina",
+   "partOfSpeech": "phrase",
+   "gloss": "on tap (beer)",
+   "exampleNative": "Prendiamo due birre alla spina, per favore.",
+   "exampleEnglish": "We'll have two draft beers, please.",
+   "decks": [
+    "common",
+    "food-and-drink"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ricovero",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hospitalization",
+   "exampleNative": "Il medico ha deciso il ricovero immediato del paziente.",
+   "exampleEnglish": "The doctor decided on the patient's immediate hospitalization.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ricoverare",
+   "partOfSpeech": "verb",
+   "gloss": "to hospitalize, admit",
+   "exampleNative": "L'hanno ricoverato d'urgenza dopo l'incidente.",
+   "exampleEnglish": "They admitted him urgently after the accident.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "degenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hospital stay",
+   "exampleNative": "La degenza è durata circa due settimane.",
+   "exampleEnglish": "The hospital stay lasted about two weeks.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pronto soccorso",
+   "partOfSpeech": "phrase",
+   "gloss": "emergency room",
+   "exampleNative": "Siamo andati al pronto soccorso nel cuore della notte.",
+   "exampleEnglish": "We went to the emergency room in the middle of the night.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "visita medica",
+   "partOfSpeech": "phrase",
+   "gloss": "medical examination",
+   "exampleNative": "Ho prenotato una visita medica per la prossima settimana.",
+   "exampleEnglish": "I booked a medical examination for next week.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "prescrizione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "prescription",
+   "exampleNative": "Senza prescrizione non posso vendervi questo farmaco.",
+   "exampleEnglish": "Without a prescription I can't sell you this medicine.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "posologia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dosage instructions",
+   "exampleNative": "Leggi bene la posologia prima di prendere lo sciroppo.",
+   "exampleEnglish": "Read the dosage instructions carefully before taking the syrup.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "effetto collaterale",
+   "partOfSpeech": "phrase",
+   "gloss": "side effect",
+   "exampleNative": "La sonnolenza è un effetto collaterale comune.",
+   "exampleEnglish": "Drowsiness is a common side effect.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "controindicazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "contraindication",
+   "exampleNative": "Il farmaco ha alcune controindicazioni per i cardiopatici.",
+   "exampleEnglish": "The drug has some contraindications for heart patients.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "dosaggio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dosage",
+   "exampleNative": "Il medico ha ridotto il dosaggio dell'antibiotico.",
+   "exampleEnglish": "The doctor reduced the dosage of the antibiotic.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "antinfiammatorio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "anti-inflammatory",
+   "exampleNative": "Ho preso un antinfiammatorio per il mal di schiena.",
+   "exampleEnglish": "I took an anti-inflammatory for my back pain.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "analgesico",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "painkiller",
+   "exampleNative": "Le hanno somministrato un analgesico per il dolore.",
+   "exampleEnglish": "They gave her a painkiller for the pain.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sedativo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "sedative",
+   "exampleNative": "Il paziente agitato ha ricevuto un leggero sedativo.",
+   "exampleEnglish": "The agitated patient received a mild sedative.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "vaccinazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "vaccination",
+   "exampleNative": "La vaccinazione antinfluenzale è consigliata agli anziani.",
+   "exampleEnglish": "The flu vaccination is recommended for the elderly.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "puntura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "injection, shot",
+   "exampleNative": "L'infermiera mi ha fatto una puntura nel braccio.",
+   "exampleEnglish": "The nurse gave me a shot in the arm.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sutura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "suture, stitching",
+   "exampleNative": "La ferita ha richiesto una sutura profonda.",
+   "exampleEnglish": "The wound required a deep suture.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "punto di sutura",
+   "partOfSpeech": "phrase",
+   "gloss": "stitch",
+   "exampleNative": "Mi hanno messo cinque punti di sutura sul mento.",
+   "exampleEnglish": "They put five stitches on my chin.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "benda",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "bandage",
+   "exampleNative": "Ha avvolto la caviglia con una benda elastica.",
+   "exampleEnglish": "She wrapped the ankle with an elastic bandage.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fasciatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dressing, bandaging",
+   "exampleNative": "La fasciatura va cambiata ogni due giorni.",
+   "exampleEnglish": "The dressing must be changed every two days.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "garza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "gauze",
+   "exampleNative": "Ho tamponato la ferita con una garza sterile.",
+   "exampleEnglish": "I dabbed the wound with a sterile gauze.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cerotto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "plaster, band-aid",
+   "exampleNative": "Metti un cerotto sul taglio prima che si infetti.",
+   "exampleEnglish": "Put a plaster on the cut before it gets infected.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stampella",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "crutch",
+   "exampleNative": "Dopo l'intervento cammina con una stampella.",
+   "exampleEnglish": "After the surgery he walks with a crutch.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ingessatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "plaster cast",
+   "exampleNative": "L'ingessatura al braccio resterà per un mese.",
+   "exampleEnglish": "The plaster cast on the arm will stay for a month.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "distorsione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sprain",
+   "exampleNative": "Ho rimediato una distorsione alla caviglia giocando.",
+   "exampleEnglish": "I got an ankle sprain while playing.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "slogatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dislocation, sprain",
+   "exampleNative": "La slogatura al polso lo tiene lontano dal lavoro.",
+   "exampleEnglish": "The wrist sprain keeps him away from work.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "contusione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "bruise, contusion",
+   "exampleNative": "L'urto gli ha causato una brutta contusione al ginocchio.",
+   "exampleEnglish": "The impact caused him a nasty bruise on the knee.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "gonfiore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "swelling",
+   "exampleNative": "Il ghiaccio riduce il gonfiore della caviglia.",
+   "exampleEnglish": "Ice reduces the swelling of the ankle.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "infiammazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "inflammation",
+   "exampleNative": "L'antibiotico ha ridotto l'infiammazione alla gola.",
+   "exampleEnglish": "The antibiotic reduced the inflammation in the throat.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contagio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "contagion, infection",
+   "exampleNative": "La mascherina limita il rischio di contagio.",
+   "exampleEnglish": "The mask limits the risk of contagion.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contagioso",
+   "partOfSpeech": "adjective",
+   "gloss": "contagious",
+   "exampleNative": "Il morbillo è una malattia molto contagiosa.",
+   "exampleEnglish": "Measles is a very contagious disease.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pandemia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pandemic",
+   "exampleNative": "Durante la pandemia gli ospedali erano sovraccarichi.",
+   "exampleEnglish": "During the pandemic the hospitals were overloaded.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "convalescenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "convalescence, recovery",
+   "exampleNative": "Dopo l'operazione servono settimane di convalescenza.",
+   "exampleEnglish": "After the operation weeks of convalescence are needed.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ricaduta",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "relapse",
+   "exampleNative": "Ha avuto una ricaduta poco dopo le dimissioni.",
+   "exampleEnglish": "He had a relapse shortly after being discharged.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "recidiva",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "recurrence",
+   "exampleNative": "I controlli servono a prevenire una recidiva del tumore.",
+   "exampleEnglish": "The checks serve to prevent a recurrence of the tumor.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "cronico",
+   "partOfSpeech": "adjective",
+   "gloss": "chronic",
+   "exampleNative": "Soffre di una malattia cronica al fegato.",
+   "exampleEnglish": "He suffers from a chronic liver disease.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "acuto",
+   "partOfSpeech": "adjective",
+   "gloss": "acute",
+   "exampleNative": "È stato ricoverato per un dolore acuto all'addome.",
+   "exampleEnglish": "He was admitted for acute abdominal pain.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "benigno",
+   "partOfSpeech": "adjective",
+   "gloss": "benign",
+   "exampleNative": "Per fortuna il tumore è risultato benigno.",
+   "exampleEnglish": "Fortunately the tumor turned out to be benign.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "maligno",
+   "partOfSpeech": "adjective",
+   "gloss": "malignant",
+   "exampleNative": "La biopsia ha rivelato un tessuto maligno.",
+   "exampleEnglish": "The biopsy revealed malignant tissue.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "insufficienza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "failure, insufficiency",
+   "exampleNative": "È in cura per un'insufficienza renale.",
+   "exampleEnglish": "He is being treated for renal insufficiency.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "allergia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "allergy",
+   "exampleNative": "Ho un'allergia grave alle noccioline.",
+   "exampleEnglish": "I have a severe allergy to peanuts.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "asma",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "asthma",
+   "exampleNative": "Porta sempre con sé l'inalatore per l'asma.",
+   "exampleEnglish": "She always carries her inhaler for asthma.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "diabete",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "diabetes",
+   "exampleNative": "Chi ha il diabete deve controllare la glicemia.",
+   "exampleEnglish": "Those with diabetes must monitor their blood sugar.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ipertensione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hypertension",
+   "exampleNative": "L'ipertensione va tenuta sotto controllo con i farmaci.",
+   "exampleEnglish": "Hypertension must be kept under control with medication.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pressione sanguigna",
+   "partOfSpeech": "phrase",
+   "gloss": "blood pressure",
+   "exampleNative": "L'infermiere mi ha misurato la pressione sanguigna.",
+   "exampleEnglish": "The nurse measured my blood pressure.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "battito cardiaco",
+   "partOfSpeech": "phrase",
+   "gloss": "heartbeat",
+   "exampleNative": "Il battito cardiaco era irregolare all'arrivo.",
+   "exampleEnglish": "The heartbeat was irregular on arrival.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "frequenza cardiaca",
+   "partOfSpeech": "phrase",
+   "gloss": "heart rate",
+   "exampleNative": "Il monitor mostra una frequenza cardiaca elevata.",
+   "exampleEnglish": "The monitor shows an elevated heart rate.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "respirazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "breathing",
+   "exampleNative": "La respirazione del paziente si è stabilizzata.",
+   "exampleEnglish": "The patient's breathing has stabilized.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "affaticamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "fatigue",
+   "exampleNative": "Un affaticamento persistente può nascondere una malattia.",
+   "exampleEnglish": "Persistent fatigue can hide an illness.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "spossatezza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "exhaustion",
+   "exampleNative": "Dopo la febbre avvertiva una profonda spossatezza.",
+   "exampleEnglish": "After the fever she felt a deep exhaustion.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "svenimento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "fainting",
+   "exampleNative": "Lo svenimento è stato causato dal caldo.",
+   "exampleEnglish": "The fainting was caused by the heat.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "capogiro",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dizziness",
+   "exampleNative": "Ha avuto un capogiro alzandosi troppo in fretta.",
+   "exampleEnglish": "He had a dizzy spell getting up too quickly.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "vertigine",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "vertigo, dizziness",
+   "exampleNative": "Soffre di vertigini quando guarda in basso.",
+   "exampleEnglish": "He suffers from vertigo when he looks down.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "diarrea",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "diarrhea",
+   "exampleNative": "La diarrea può portare a una forte disidratazione.",
+   "exampleEnglish": "Diarrhea can lead to severe dehydration.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stitichezza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "constipation",
+   "exampleNative": "Bere poca acqua favorisce la stitichezza.",
+   "exampleEnglish": "Drinking little water encourages constipation.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "insonnia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "insomnia",
+   "exampleNative": "L'insonnia lo perseguita da diverse settimane.",
+   "exampleEnglish": "Insomnia has been plaguing him for several weeks.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "emicrania",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "migraine",
+   "exampleNative": "Un'emicrania forte l'ha costretta a letto.",
+   "exampleEnglish": "A severe migraine forced her to bed.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "brividi",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "chills, shivers",
+   "exampleNative": "La febbre gli ha provocato brividi in tutto il corpo.",
+   "exampleEnglish": "The fever gave him chills all over his body.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sudorazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sweating",
+   "exampleNative": "Una sudorazione eccessiva può segnalare un'infezione.",
+   "exampleEnglish": "Excessive sweating can signal an infection.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "prelievo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "blood draw, sample",
+   "exampleNative": "Il prelievo va fatto a digiuno la mattina.",
+   "exampleEnglish": "The blood draw must be done fasting in the morning.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "analisi del sangue",
+   "partOfSpeech": "phrase",
+   "gloss": "blood test",
+   "exampleNative": "Le analisi del sangue hanno mostrato valori nella norma.",
+   "exampleEnglish": "The blood tests showed values within the normal range.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "radiografia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "X-ray",
+   "exampleNative": "La radiografia ha confermato la frattura.",
+   "exampleEnglish": "The X-ray confirmed the fracture.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ecografia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "ultrasound",
+   "exampleNative": "L'ecografia all'addome non ha rilevato anomalie.",
+   "exampleEnglish": "The abdominal ultrasound detected no abnormalities.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "biopsia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "biopsy",
+   "exampleNative": "Il medico ha prescritto una biopsia per sicurezza.",
+   "exampleEnglish": "The doctor prescribed a biopsy to be sure.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "referto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "medical report",
+   "exampleNative": "Ritira il referto degli esami allo sportello.",
+   "exampleEnglish": "Pick up the report of the tests at the counter.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "cartella clinica",
+   "partOfSpeech": "phrase",
+   "gloss": "medical record",
+   "exampleNative": "Il chirurgo ha consultato la sua cartella clinica.",
+   "exampleEnglish": "The surgeon consulted her medical record.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "anamnesi",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "medical history",
+   "exampleNative": "Il medico ha raccolto un'anamnesi dettagliata.",
+   "exampleEnglish": "The doctor took a detailed medical history.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sintomatologia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "symptoms, symptomatology",
+   "exampleNative": "La sintomatologia è compatibile con un'influenza.",
+   "exampleEnglish": "The symptomatology is consistent with the flu.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "fisioterapia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "physiotherapy",
+   "exampleNative": "Dopo la frattura ha iniziato la fisioterapia.",
+   "exampleEnglish": "After the fracture he started physiotherapy.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "anestesia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "anesthesia",
+   "exampleNative": "L'intervento si svolge in anestesia totale.",
+   "exampleEnglish": "The operation takes place under general anesthesia.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "anestesista",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "anesthetist",
+   "exampleNative": "L'anestesista ha controllato i parametri prima dell'operazione.",
+   "exampleEnglish": "The anesthetist checked the vitals before the operation.",
+   "decks": [
+    "common",
+    "health"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sottotetto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "attic space",
+   "exampleNative": "Il sottotetto è pieno di scatole vecchie.",
+   "exampleEnglish": "The attic is full of old boxes.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mansarda",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "loft / attic room",
+   "exampleNative": "La mansarda ha un soffitto molto inclinato.",
+   "exampleEnglish": "The loft has a very slanted ceiling.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ripostiglio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "storage room",
+   "exampleNative": "Teniamo l'aspirapolvere nel ripostiglio.",
+   "exampleEnglish": "We keep the vacuum cleaner in the storage room.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sgabuzzino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "closet / cubbyhole",
+   "exampleNative": "Ho nascosto le scope nello sgabuzzino.",
+   "exampleEnglish": "I hid the brooms in the closet.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pianerottolo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "landing (stairs)",
+   "exampleNative": "I vicini chiacchierano sul pianerottolo.",
+   "exampleEnglish": "The neighbors chat on the landing.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "androne",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "entrance hall",
+   "exampleNative": "L'androne del palazzo è buio e freddo.",
+   "exampleEnglish": "The building's entrance hall is dark and cold.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "infisso",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "window/door frame",
+   "exampleNative": "Dobbiamo sostituire gli infissi vecchi.",
+   "exampleEnglish": "We must replace the old window frames.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "davanzale",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "windowsill",
+   "exampleNative": "Ho messo i vasi sul davanzale della finestra.",
+   "exampleEnglish": "I put the pots on the windowsill.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "persiana",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "shutter",
+   "exampleNative": "Chiudi le persiane, entra troppo sole.",
+   "exampleEnglish": "Close the shutters, too much sun comes in.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tapparella",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "roller blind",
+   "exampleNative": "La tapparella si è bloccata di nuovo.",
+   "exampleEnglish": "The roller blind got stuck again.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "zerbino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "doormat",
+   "exampleNative": "Pulisci le scarpe sullo zerbino.",
+   "exampleEnglish": "Wipe your shoes on the doormat.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "battiscopa",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "baseboard",
+   "exampleNative": "Ho ridipinto il battiscopa del corridoio.",
+   "exampleEnglish": "I repainted the hallway baseboard.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "controsoffitto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "false ceiling",
+   "exampleNative": "Il controsoffitto nasconde i cavi elettrici.",
+   "exampleEnglish": "The false ceiling hides the electrical cables.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "mattonella",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tile",
+   "exampleNative": "Una mattonella del bagno si è crepata.",
+   "exampleEnglish": "A bathroom tile has cracked.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "piastrella",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tile (floor/wall)",
+   "exampleNative": "Abbiamo posato piastrelle nuove in cucina.",
+   "exampleEnglish": "We laid new tiles in the kitchen.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "parquet",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hardwood floor",
+   "exampleNative": "Il parquet cigola quando ci cammini sopra.",
+   "exampleEnglish": "The hardwood floor creaks when you walk on it.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "moquette",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "fitted carpet",
+   "exampleNative": "La moquette trattiene molta polvere.",
+   "exampleEnglish": "The fitted carpet traps a lot of dust.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "comodino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "nightstand",
+   "exampleNative": "Ho lasciato gli occhiali sul comodino.",
+   "exampleEnglish": "I left my glasses on the nightstand.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cassettiera",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "chest of drawers",
+   "exampleNative": "Piega i vestiti e mettili nella cassettiera.",
+   "exampleEnglish": "Fold the clothes and put them in the dresser.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "credenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sideboard / cupboard",
+   "exampleNative": "I piatti buoni sono nella credenza.",
+   "exampleEnglish": "The good plates are in the sideboard.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pensile",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "wall cabinet",
+   "exampleNative": "I bicchieri stanno nel pensile in alto.",
+   "exampleEnglish": "The glasses are in the upper wall cabinet.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "piano cottura",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cooktop / hob",
+   "exampleNative": "Ho pulito il piano cottura dopo cena.",
+   "exampleEnglish": "I cleaned the cooktop after dinner.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cappa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "kitchen hood",
+   "exampleNative": "Accendi la cappa mentre friggi.",
+   "exampleEnglish": "Turn on the hood while you fry.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lavastoviglie",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "dishwasher",
+   "exampleNative": "Carica la lavastoviglie prima di uscire.",
+   "exampleEnglish": "Load the dishwasher before leaving.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "asciugatrice",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tumble dryer",
+   "exampleNative": "L'asciugatrice consuma molta energia.",
+   "exampleEnglish": "The tumble dryer uses a lot of energy.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stendino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "clothes drying rack",
+   "exampleNative": "Stendo i panni sullo stendino in balcone.",
+   "exampleEnglish": "I hang the laundry on the rack on the balcony.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "scaldabagno",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "water heater",
+   "exampleNative": "Lo scaldabagno si è rotto stamattina.",
+   "exampleEnglish": "The water heater broke this morning.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "caldaia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "boiler",
+   "exampleNative": "La caldaia va revisionata ogni anno.",
+   "exampleEnglish": "The boiler must be serviced every year.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "termosifone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "radiator",
+   "exampleNative": "Il termosifone in salotto non scalda.",
+   "exampleEnglish": "The radiator in the living room doesn't heat.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "lampadario",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "ceiling lamp",
+   "exampleNative": "Il lampadario del salotto è molto vecchio.",
+   "exampleEnglish": "The living room ceiling lamp is very old.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "detersivo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "detergent",
+   "exampleNative": "È finito il detersivo per i piatti.",
+   "exampleEnglish": "The dish detergent has run out.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "candeggina",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "bleach",
+   "exampleNative": "Disinfetto il bagno con la candeggina.",
+   "exampleEnglish": "I disinfect the bathroom with bleach.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sgrassatore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "degreaser",
+   "exampleNative": "Lo sgrassatore toglie l'unto dai fornelli.",
+   "exampleEnglish": "The degreaser removes grease from the stove.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ammorbidente",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "fabric softener",
+   "exampleNative": "Aggiungi l'ammorbidente all'ultimo risciacquo.",
+   "exampleEnglish": "Add the fabric softener at the last rinse.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "stiro",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "ironing",
+   "exampleNative": "Odio lo stiro più di ogni altra faccenda.",
+   "exampleEnglish": "I hate ironing more than any other chore.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rassettare",
+   "partOfSpeech": "verb",
+   "gloss": "to tidy up",
+   "exampleNative": "Rassetto la camera ogni mattina.",
+   "exampleEnglish": "I tidy the bedroom every morning.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "riordinare",
+   "partOfSpeech": "verb",
+   "gloss": "to tidy / put in order",
+   "exampleNative": "Riordino il salotto prima degli ospiti.",
+   "exampleEnglish": "I tidy the living room before the guests.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stendere",
+   "partOfSpeech": "verb",
+   "gloss": "to hang out (laundry)",
+   "exampleNative": "Stendo il bucato prima di andare al lavoro.",
+   "exampleEnglish": "I hang out the laundry before going to work.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "innaffiare",
+   "partOfSpeech": "verb",
+   "gloss": "to water (plants)",
+   "exampleNative": "Innaffio le piante ogni due giorni.",
+   "exampleEnglish": "I water the plants every two days.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sturare",
+   "partOfSpeech": "verb",
+   "gloss": "to unclog",
+   "exampleNative": "Ho sturato il lavandino con lo sturalavandini.",
+   "exampleEnglish": "I unclogged the sink with the plunger.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "intasarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to get clogged",
+   "exampleNative": "Lo scarico si è intasato di nuovo.",
+   "exampleEnglish": "The drain got clogged again.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "gocciolare",
+   "partOfSpeech": "verb",
+   "gloss": "to drip / leak",
+   "exampleNative": "Il rubinetto gocciola tutta la notte.",
+   "exampleEnglish": "The tap drips all night.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "allagare",
+   "partOfSpeech": "verb",
+   "gloss": "to flood",
+   "exampleNative": "La lavatrice ha allagato il bagno.",
+   "exampleEnglish": "The washing machine flooded the bathroom.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "otturare",
+   "partOfSpeech": "verb",
+   "gloss": "to block / plug",
+   "exampleNative": "I capelli otturano lo scarico della doccia.",
+   "exampleEnglish": "Hair blocks the shower drain.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "imbianchino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "house painter",
+   "exampleNative": "L'imbianchino ridipinge le pareti domani.",
+   "exampleEnglish": "The painter repaints the walls tomorrow.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "affittuario",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "tenant",
+   "exampleNative": "L'affittuario paga puntualmente ogni mese.",
+   "exampleEnglish": "The tenant pays punctually every month.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "inquilino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "tenant / occupant",
+   "exampleNative": "Il nuovo inquilino è molto silenzioso.",
+   "exampleEnglish": "The new tenant is very quiet.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "padrone di casa",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "landlord",
+   "exampleNative": "Il padrone di casa aumenta l'affitto.",
+   "exampleEnglish": "The landlord is raising the rent.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "locatore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "lessor / landlord",
+   "exampleNative": "Il locatore ha firmato il contratto.",
+   "exampleEnglish": "The lessor signed the contract.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "canone",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "rent (fee)",
+   "exampleNative": "Il canone mensile include le spese.",
+   "exampleEnglish": "The monthly rent includes the fees.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "morosità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "rent arrears",
+   "exampleNative": "La morosità può portare allo sfratto.",
+   "exampleEnglish": "Rent arrears can lead to eviction.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sfratto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "eviction",
+   "exampleNative": "Hanno ricevuto lo sfratto per morosità.",
+   "exampleEnglish": "They got an eviction for unpaid rent.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "disdetta",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "notice / cancellation",
+   "exampleNative": "Ho dato la disdetta con tre mesi di anticipo.",
+   "exampleEnglish": "I gave notice three months in advance.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "condòmino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "co-owner (building)",
+   "exampleNative": "Ogni condòmino paga la sua quota.",
+   "exampleEnglish": "Each co-owner pays their share.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "spese condominiali",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "building service charges",
+   "exampleNative": "Le spese condominiali sono aumentate.",
+   "exampleEnglish": "The building service charges have gone up.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "utenze",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "utilities",
+   "exampleNative": "Le utenze non sono incluse nell'affitto.",
+   "exampleEnglish": "The utilities aren't included in the rent.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "contatore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "meter (utility)",
+   "exampleNative": "Leggono il contatore del gas domani.",
+   "exampleEnglish": "They read the gas meter tomorrow.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "allaccio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "utility hook-up",
+   "exampleNative": "L'allaccio della luce richiede una settimana.",
+   "exampleEnglish": "The electricity hook-up takes a week.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "trasloco",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "house move",
+   "exampleNative": "Il trasloco ci ha stancati tutti.",
+   "exampleEnglish": "The move exhausted us all.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "traslocare",
+   "partOfSpeech": "verb",
+   "gloss": "to move house",
+   "exampleNative": "Traslochiamo in periferia il mese prossimo.",
+   "exampleEnglish": "We're moving to the suburbs next month.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "arredare",
+   "partOfSpeech": "verb",
+   "gloss": "to furnish",
+   "exampleNative": "Abbiamo arredato la casa con mobili usati.",
+   "exampleEnglish": "We furnished the house with second-hand furniture.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ammobiliato",
+   "partOfSpeech": "adjective",
+   "gloss": "furnished",
+   "exampleNative": "Cerco un appartamento ammobiliato.",
+   "exampleEnglish": "I'm looking for a furnished apartment.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sgombero",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "clearing out",
+   "exampleNative": "Lo sgombero della cantina è finito.",
+   "exampleEnglish": "The cellar clear-out is finished.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "muffa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "mold",
+   "exampleNative": "È spuntata la muffa dietro l'armadio.",
+   "exampleEnglish": "Mold has appeared behind the wardrobe.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "crepa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "crack (wall)",
+   "exampleNative": "Una crepa attraversa il soffitto.",
+   "exampleEnglish": "A crack runs across the ceiling.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "infiltrazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "water seepage",
+   "exampleNative": "L'infiltrazione viene dal tetto.",
+   "exampleEnglish": "The seepage comes from the roof.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "coibentazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "insulation",
+   "exampleNative": "La coibentazione riduce le spese di riscaldamento.",
+   "exampleEnglish": "Insulation reduces heating costs.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ingombrante",
+   "partOfSpeech": "adjective",
+   "gloss": "bulky / cumbersome",
+   "exampleNative": "Il divano è troppo ingombrante per l'ascensore.",
+   "exampleEnglish": "The sofa is too bulky for the elevator.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "spazioso",
+   "partOfSpeech": "adjective",
+   "gloss": "spacious",
+   "exampleNative": "La cucina è luminosa e spaziosa.",
+   "exampleEnglish": "The kitchen is bright and spacious.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "angusto",
+   "partOfSpeech": "adjective",
+   "gloss": "cramped / narrow",
+   "exampleNative": "Il corridoio è troppo angusto.",
+   "exampleEnglish": "The hallway is too cramped.",
+   "decks": [
+    "common",
+    "home"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ribasso",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "price reduction",
+   "exampleNative": "Con i saldi tutti i cappotti sono in ribasso.",
+   "exampleEnglish": "With the sales all the coats are reduced.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rincaro",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "price increase",
+   "exampleNative": "Il rincaro dei tessuti ha fatto salire i prezzi.",
+   "exampleEnglish": "The rise in fabric costs has pushed prices up.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rimborso",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "refund",
+   "exampleNative": "Ho chiesto il rimborso per la giacca difettosa.",
+   "exampleEnglish": "I asked for a refund for the faulty jacket.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "reso",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "return (of goods)",
+   "exampleNative": "Il reso è gratuito entro trenta giorni dall'acquisto.",
+   "exampleEnglish": "Returns are free within thirty days of purchase.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "scontrino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "receipt",
+   "exampleNative": "Conservi lo scontrino, serve per eventuali cambi.",
+   "exampleEnglish": "Keep the receipt; you'll need it for any exchanges.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fattura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "invoice",
+   "exampleNative": "Per l'azienda mi serve la fattura, non lo scontrino.",
+   "exampleEnglish": "For the company I need an invoice, not a receipt.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "difettoso",
+   "partOfSpeech": "adjective",
+   "gloss": "faulty, defective",
+   "exampleNative": "La cerniera era difettosa, così ho riportato la borsa.",
+   "exampleEnglish": "The zip was faulty, so I took the bag back.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cassiere",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cashier",
+   "exampleNative": "Il cassiere mi ha chiesto se avevo la tessera.",
+   "exampleEnglish": "The cashier asked me if I had the loyalty card.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rata",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "installment",
+   "exampleNative": "Pago il televisore in dieci rate mensili.",
+   "exampleEnglish": "I'm paying for the TV in ten monthly installments.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rateale",
+   "partOfSpeech": "adjective",
+   "gloss": "installment-based",
+   "exampleNative": "Il negozio offre un pagamento rateale senza interessi.",
+   "exampleEnglish": "The store offers interest-free installment payment.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rateizzare",
+   "partOfSpeech": "verb",
+   "gloss": "pay in installments",
+   "exampleNative": "Possiamo rateizzare l'importo in sei mesi.",
+   "exampleEnglish": "We can spread the amount over six months.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "acconto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "down payment",
+   "exampleNative": "Ho lasciato un acconto per il vestito su misura.",
+   "exampleEnglish": "I left a down payment for the made-to-measure suit.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "caparra",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "deposit (binding)",
+   "exampleNative": "Senza caparra il negozio non tiene da parte l'abito.",
+   "exampleEnglish": "Without a deposit the shop won't hold the dress.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "listino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "price list",
+   "exampleNative": "Il prezzo di listino è più alto di quello scontato.",
+   "exampleEnglish": "The list price is higher than the discounted one.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cartellino",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "price tag",
+   "exampleNative": "Sul cartellino c'era ancora il prezzo pieno.",
+   "exampleEnglish": "The tag still showed the full price.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "codice a barre",
+   "partOfSpeech": "phrase",
+   "gloss": "barcode",
+   "exampleNative": "La cassiera non riusciva a leggere il codice a barre.",
+   "exampleEnglish": "The cashier couldn't scan the barcode.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "grande magazzino",
+   "partOfSpeech": "phrase",
+   "gloss": "department store",
+   "exampleNative": "Al grande magazzino trovi abbigliamento su tre piani.",
+   "exampleEnglish": "At the department store you'll find clothing on three floors.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "centro commerciale",
+   "partOfSpeech": "phrase",
+   "gloss": "shopping mall",
+   "exampleNative": "Il sabato il centro commerciale è sempre affollatissimo.",
+   "exampleEnglish": "On Saturdays the mall is always packed.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "liquidazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "clearance sale",
+   "exampleNative": "Il negozio chiude e vende tutto in liquidazione.",
+   "exampleEnglish": "The shop is closing and selling everything off in clearance.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "svendita",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "sell-off, clearance",
+   "exampleNative": "In svendita ho trovato stivali di pelle a metà prezzo.",
+   "exampleEnglish": "In the clearance I found leather boots at half price.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "contrattare",
+   "partOfSpeech": "verb",
+   "gloss": "haggle, negotiate",
+   "exampleNative": "Al mercato conviene sempre contrattare il prezzo.",
+   "exampleEnglish": "At the market it's always worth haggling over the price.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mercanteggiare",
+   "partOfSpeech": "verb",
+   "gloss": "bargain, haggle",
+   "exampleNative": "Non mi piace mercanteggiare, ma quel cappotto costava troppo.",
+   "exampleEnglish": "I don't like haggling, but that coat cost too much.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "tirare sul prezzo",
+   "partOfSpeech": "phrase",
+   "gloss": "haggle over the price",
+   "exampleNative": "Mio padre tira sempre sul prezzo, anche in boutique.",
+   "exampleEnglish": "My father always haggles over the price, even in boutiques.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sborsare",
+   "partOfSpeech": "verb",
+   "gloss": "fork out, shell out",
+   "exampleNative": "Ho dovuto sborsare duecento euro per quelle scarpe.",
+   "exampleEnglish": "I had to fork out two hundred euros for those shoes.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "acquirente",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "buyer, purchaser",
+   "exampleNative": "L'acquirente ha diritto alla garanzia di due anni.",
+   "exampleEnglish": "The buyer is entitled to the two-year warranty.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "clientela",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "clientele",
+   "exampleNative": "La boutique ha una clientela affezionata e esigente.",
+   "exampleEnglish": "The boutique has a loyal, demanding clientele.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "consumatore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "consumer",
+   "exampleNative": "La legge tutela il consumatore in caso di difetti.",
+   "exampleEnglish": "The law protects the consumer in case of defects.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "consumismo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "consumerism",
+   "exampleNative": "I saldi continui alimentano il consumismo sfrenato.",
+   "exampleEnglish": "Constant sales fuel unbridled consumerism.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "griffato",
+   "partOfSpeech": "adjective",
+   "gloss": "designer-label",
+   "exampleNative": "Compra solo capi griffati, anche se costano il triplo.",
+   "exampleEnglish": "She only buys designer clothes, even if they cost three times as much.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "contraffatto",
+   "partOfSpeech": "adjective",
+   "gloss": "counterfeit, fake",
+   "exampleNative": "Quella borsa griffata era chiaramente contraffatta.",
+   "exampleEnglish": "That designer bag was clearly counterfeit.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contraffazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "counterfeiting",
+   "exampleNative": "La contraffazione danneggia i negozi che vendono originali.",
+   "exampleEnglish": "Counterfeiting harms the shops that sell genuine goods.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rapporto qualità-prezzo",
+   "partOfSpeech": "phrase",
+   "gloss": "value for money",
+   "exampleNative": "Questo piumino ha un ottimo rapporto qualità-prezzo.",
+   "exampleEnglish": "This down jacket is excellent value for money.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "conveniente",
+   "partOfSpeech": "adjective",
+   "gloss": "good value, cheap",
+   "exampleNative": "Era più conveniente comprare due camicie che una.",
+   "exampleEnglish": "It was better value to buy two shirts than one.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "convenienza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "value, affordability",
+   "exampleNative": "Confronto sempre i prezzi per valutare la convenienza.",
+   "exampleEnglish": "I always compare prices to judge the value.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "dispendioso",
+   "partOfSpeech": "adjective",
+   "gloss": "costly, expensive",
+   "exampleNative": "Rinnovare il guardaroba ogni stagione è troppo dispendioso.",
+   "exampleEnglish": "Renewing your wardrobe every season is too costly.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "esoso",
+   "partOfSpeech": "adjective",
+   "gloss": "extortionate",
+   "exampleNative": "I prezzi di quella boutique sono davvero esosi.",
+   "exampleEnglish": "That boutique's prices are truly extortionate.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "salato",
+   "partOfSpeech": "adjective",
+   "gloss": "steep, pricey",
+   "exampleNative": "Il conto della sartoria era piuttosto salato.",
+   "exampleEnglish": "The tailor's bill was pretty steep.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "stracciato",
+   "partOfSpeech": "adjective",
+   "gloss": "rock-bottom (price)",
+   "exampleNative": "Vendono i capi invernali a prezzi stracciati.",
+   "exampleEnglish": "They're selling winter garments at rock-bottom prices.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "invenduto",
+   "partOfSpeech": "adjective",
+   "gloss": "unsold",
+   "exampleNative": "A fine stagione la merce invenduta finisce in svendita.",
+   "exampleEnglish": "At season's end, unsold stock goes into the clearance sale.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pregiato",
+   "partOfSpeech": "adjective",
+   "gloss": "fine, high-quality",
+   "exampleNative": "La cravatta è di seta pregiata, per questo costa.",
+   "exampleEnglish": "The tie is made of fine silk; that's why it's expensive.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "esorbitante",
+   "partOfSpeech": "adjective",
+   "gloss": "exorbitant",
+   "exampleNative": "Chiedevano una cifra esorbitante per un semplice cappotto.",
+   "exampleEnglish": "They were asking an exorbitant sum for a simple coat.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "proibitivo",
+   "partOfSpeech": "adjective",
+   "gloss": "prohibitive (price)",
+   "exampleNative": "I prezzi di quel negozio sono proibitivi per me.",
+   "exampleEnglish": "That shop's prices are prohibitive for me.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "abbordabile",
+   "partOfSpeech": "adjective",
+   "gloss": "affordable",
+   "exampleNative": "Cerco un completo elegante a un prezzo abbordabile.",
+   "exampleEnglish": "I'm looking for a smart suit at an affordable price.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "accessibile",
+   "partOfSpeech": "adjective",
+   "gloss": "affordable, accessible",
+   "exampleNative": "La nuova catena punta su prezzi accessibili a tutti.",
+   "exampleEnglish": "The new chain focuses on prices affordable to everyone.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vantaggioso",
+   "partOfSpeech": "adjective",
+   "gloss": "advantageous, good-deal",
+   "exampleNative": "L'offerta tre per due mi sembra molto vantaggiosa.",
+   "exampleEnglish": "The three-for-two offer seems like a great deal to me.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "camoscio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "suede",
+   "exampleNative": "Le scarpe di camoscio si rovinano con la pioggia.",
+   "exampleEnglish": "Suede shoes get ruined in the rain.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sartoria",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tailor's shop",
+   "exampleNative": "Ho fatto stringere i pantaloni in sartoria.",
+   "exampleEnglish": "I had the trousers taken in at the tailor's.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "su misura",
+   "partOfSpeech": "phrase",
+   "gloss": "made to measure",
+   "exampleNative": "Per il matrimonio ha ordinato un abito su misura.",
+   "exampleEnglish": "For the wedding he ordered a made-to-measure suit.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cucitura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "seam, stitching",
+   "exampleNative": "La cucitura della manica si è scucita dopo un giorno.",
+   "exampleEnglish": "The sleeve seam came apart after one day.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fodera",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "lining",
+   "exampleNative": "La fodera della giacca è di raso viola.",
+   "exampleEnglish": "The jacket's lining is purple satin.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "vestibilità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "fit (of clothing)",
+   "exampleNative": "Questo modello ha una vestibilità ampia e comoda.",
+   "exampleEnglish": "This model has a loose, comfortable fit.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "attillato",
+   "partOfSpeech": "adjective",
+   "gloss": "tight-fitting",
+   "exampleNative": "Preferisco le camicie attillate a quelle larghe.",
+   "exampleEnglish": "I prefer tight-fitting shirts to loose ones.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "accorciare",
+   "partOfSpeech": "verb",
+   "gloss": "shorten",
+   "exampleNative": "Devo far accorciare l'orlo di questi pantaloni.",
+   "exampleEnglish": "I need to have the hem of these trousers shortened.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "allargare",
+   "partOfSpeech": "verb",
+   "gloss": "widen, let out",
+   "exampleNative": "Il sarto può allargare la giacca di un centimetro.",
+   "exampleEnglish": "The tailor can let the jacket out by a centimeter.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "calzare",
+   "partOfSpeech": "verb",
+   "gloss": "fit (shoes, gloves)",
+   "exampleNative": "Questi stivali calzano stretti, prenda il numero dopo.",
+   "exampleEnglish": "These boots fit tight; take the next size up.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "reclamo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "complaint (formal)",
+   "exampleNative": "Ho presentato un reclamo per il capo danneggiato.",
+   "exampleEnglish": "I filed a complaint about the damaged garment.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "restituzione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "return, giving back",
+   "exampleNative": "La restituzione è possibile solo con lo scontrino originale.",
+   "exampleEnglish": "Returns are only possible with the original receipt.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sostituzione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "replacement, exchange",
+   "exampleNative": "La garanzia prevede la sostituzione gratuita del prodotto.",
+   "exampleEnglish": "The warranty provides for free replacement of the product.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ricambio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "spare part",
+   "exampleNative": "Per questo orologio i ricambi sono introvabili.",
+   "exampleEnglish": "Spare parts for this watch are impossible to find.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "recesso",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "withdrawal (from contract)",
+   "exampleNative": "Per gli acquisti online hai diritto di recesso.",
+   "exampleEnglish": "For online purchases you have the right of withdrawal.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "recedere",
+   "partOfSpeech": "verb",
+   "gloss": "withdraw (from purchase)",
+   "exampleNative": "Puoi recedere dal contratto entro quattordici giorni.",
+   "exampleEnglish": "You can withdraw from the contract within fourteen days.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "rimborsare",
+   "partOfSpeech": "verb",
+   "gloss": "refund, reimburse",
+   "exampleNative": "Il negozio si è rifiutato di rimborsarmi la spesa.",
+   "exampleEnglish": "The shop refused to refund my purchase.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "validità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "validity",
+   "exampleNative": "La validità della garanzia è di due anni.",
+   "exampleEnglish": "The warranty is valid for two years.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "maggiorazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "surcharge, markup",
+   "exampleNative": "C'è una maggiorazione per il pagamento in tre rate.",
+   "exampleEnglish": "There's a surcharge for paying in three installments.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sovrapprezzo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "surcharge, extra cost",
+   "exampleNative": "Le modifiche sartoriali comportano un piccolo sovrapprezzo.",
+   "exampleEnglish": "Tailoring alterations involve a small surcharge.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "addebito",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "debit, charge",
+   "exampleNative": "Ho notato un addebito doppio sulla carta di credito.",
+   "exampleEnglish": "I noticed a double charge on my credit card.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "addebitare",
+   "partOfSpeech": "verb",
+   "gloss": "charge (an account)",
+   "exampleNative": "Mi hanno addebitato due volte lo stesso maglione.",
+   "exampleEnglish": "They charged me twice for the same sweater.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "accredito",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "credit (to an account)",
+   "exampleNative": "L'accredito del rimborso arriva entro cinque giorni lavorativi.",
+   "exampleEnglish": "The refund credit arrives within five working days.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "accreditare",
+   "partOfSpeech": "verb",
+   "gloss": "credit (money)",
+   "exampleNative": "Il rimborso verrà accreditato sulla sua carta.",
+   "exampleEnglish": "The refund will be credited to your card.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "bonifico",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "bank transfer",
+   "exampleNative": "Per gli ordini grandi accettano solo il bonifico.",
+   "exampleEnglish": "For large orders they only accept bank transfer.",
+   "decks": [
+    "common",
+    "shopping"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "scalo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "layover, stopover",
+   "exampleNative": "Abbiamo uno scalo di tre ore a Francoforte.",
+   "exampleEnglish": "We have a three-hour layover in Frankfurt.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "imbarcarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to board, embark",
+   "exampleNative": "Ci siamo imbarcati sul traghetto poco prima della partenza.",
+   "exampleEnglish": "We boarded the ferry just before departure.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pernottamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "overnight stay",
+   "exampleNative": "Il prezzo include due pernottamenti e la prima colazione.",
+   "exampleEnglish": "The price includes two overnight stays and breakfast.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pernottare",
+   "partOfSpeech": "verb",
+   "gloss": "to stay overnight",
+   "exampleNative": "Abbiamo pernottato in un piccolo albergo vicino alla stazione.",
+   "exampleEnglish": "We stayed overnight in a small hotel near the station.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "soggiornare",
+   "partOfSpeech": "verb",
+   "gloss": "to stay, sojourn",
+   "exampleNative": "Durante il viaggio soggiorneremo in un agriturismo toscano.",
+   "exampleEnglish": "During the trip we will stay at a Tuscan farmhouse.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "sistemazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "accommodation",
+   "exampleNative": "Cerchiamo una sistemazione economica vicino al centro.",
+   "exampleEnglish": "We are looking for cheap accommodation near the center.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "alloggiare",
+   "partOfSpeech": "verb",
+   "gloss": "to lodge, stay",
+   "exampleNative": "I turisti alloggiano spesso in appartamenti privati.",
+   "exampleEnglish": "Tourists often stay in private apartments.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "disdire",
+   "partOfSpeech": "verb",
+   "gloss": "to cancel (a booking)",
+   "exampleNative": "Ho dovuto disdire la prenotazione all'ultimo momento.",
+   "exampleEnglish": "I had to cancel the reservation at the last moment.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "annullamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "cancellation",
+   "exampleNative": "L'annullamento del volo ci ha rovinato le vacanze.",
+   "exampleEnglish": "The flight cancellation ruined our holiday.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "supplemento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "supplement, extra charge",
+   "exampleNative": "Per la camera con vista si paga un supplemento.",
+   "exampleEnglish": "You pay a supplement for the room with a view.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "franchigia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "baggage allowance; deductible",
+   "exampleNative": "La franchigia bagaglio è di venti chili a passeggero.",
+   "exampleEnglish": "The baggage allowance is twenty kilos per passenger.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "stiva",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hold (of plane, ship)",
+   "exampleNative": "La valigia grande va imbarcata in stiva.",
+   "exampleEnglish": "The big suitcase has to go in the hold.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "eccedenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "excess, surplus",
+   "exampleNative": "Abbiamo pagato cinquanta euro per l'eccedenza di bagaglio.",
+   "exampleEnglish": "We paid fifty euros for the excess baggage.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "nastro trasportatore",
+   "partOfSpeech": "phrase",
+   "gloss": "baggage carousel, conveyor belt",
+   "exampleNative": "Aspettavamo le valigie accanto al nastro trasportatore.",
+   "exampleEnglish": "We were waiting for our suitcases by the carousel.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "doganale",
+   "partOfSpeech": "adjective",
+   "gloss": "customs-related",
+   "exampleNative": "I controlli doganali all'aeroporto sono stati velocissimi.",
+   "exampleEnglish": "The customs checks at the airport were very quick.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "sdoganare",
+   "partOfSpeech": "verb",
+   "gloss": "to clear through customs",
+   "exampleNative": "Abbiamo dovuto sdoganare gli acquisti fatti all'estero.",
+   "exampleEnglish": "We had to clear our foreign purchases through customs.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "valico",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "mountain pass; border crossing",
+   "exampleNative": "Il valico alpino è chiuso per neve fino a maggio.",
+   "exampleEnglish": "The Alpine pass is closed for snow until May.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "espatriare",
+   "partOfSpeech": "verb",
+   "gloss": "to leave the country",
+   "exampleNative": "Per espatriare serve un documento valido.",
+   "exampleEnglish": "You need a valid document to leave the country.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "accettazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "check-in desk",
+   "exampleNative": "L'accettazione dei bagagli chiude quaranta minuti prima del volo.",
+   "exampleEnglish": "Baggage check-in closes forty minutes before the flight.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "carta d'imbarco",
+   "partOfSpeech": "phrase",
+   "gloss": "boarding pass",
+   "exampleNative": "Mostra la carta d'imbarco al controllo di sicurezza.",
+   "exampleEnglish": "Show your boarding pass at the security check.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "imprevisto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "unforeseen event, hitch",
+   "exampleNative": "Un imprevisto ci ha costretti a rimandare la partenza.",
+   "exampleEnglish": "An unforeseen event forced us to postpone our departure.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "disguido",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "mix-up, hitch",
+   "exampleNative": "Per un disguido la nostra camera era stata assegnata ad altri.",
+   "exampleEnglish": "Due to a mix-up, our room had been given to others.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "indennizzo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "compensation, indemnity",
+   "exampleNative": "L'assicurazione ci ha versato un indennizzo per il bagaglio smarrito.",
+   "exampleEnglish": "The insurance paid us compensation for the lost luggage.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "polizza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "insurance policy",
+   "exampleNative": "Prima di partire ho stipulato una polizza di viaggio.",
+   "exampleEnglish": "Before leaving I took out a travel insurance policy.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "massimale",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "coverage limit",
+   "exampleNative": "La polizza ha un massimale di diecimila euro per spese mediche.",
+   "exampleEnglish": "The policy has a ten-thousand-euro cap for medical expenses.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "itinerario",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "itinerary, route",
+   "exampleNative": "Abbiamo pianificato un itinerario di dieci giorni in Sicilia.",
+   "exampleEnglish": "We planned a ten-day itinerary around Sicily.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tappa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "stage, stopover",
+   "exampleNative": "La prima tappa del viaggio è Firenze.",
+   "exampleEnglish": "The first stop of the trip is Florence.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "tragitto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "journey, ride",
+   "exampleNative": "Il tragitto in autobus fino all'aeroporto dura mezz'ora.",
+   "exampleEnglish": "The bus ride to the airport takes half an hour.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "deviazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "detour, diversion",
+   "exampleNative": "Per i lavori c'è una deviazione sulla strada costiera.",
+   "exampleEnglish": "Because of roadworks there is a detour on the coastal road.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "traversata",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "crossing (by sea)",
+   "exampleNative": "La traversata in traghetto è durata quasi nove ore.",
+   "exampleEnglish": "The ferry crossing took almost nine hours.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cuccetta",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "couchette, sleeper berth",
+   "exampleNative": "Ho prenotato una cuccetta sul treno notturno per Palermo.",
+   "exampleEnglish": "I booked a couchette on the night train to Palermo.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vagone letto",
+   "partOfSpeech": "phrase",
+   "gloss": "sleeping car",
+   "exampleNative": "Viaggiare in vagone letto costa più della cuccetta.",
+   "exampleEnglish": "Traveling in a sleeping car costs more than a couchette.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "capotreno",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "train conductor",
+   "exampleNative": "Il capotreno ha annunciato un ritardo di venti minuti.",
+   "exampleEnglish": "The conductor announced a twenty-minute delay.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "soppressione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "cancellation (of a service)",
+   "exampleNative": "La soppressione del treno ci ha fatto perdere la coincidenza.",
+   "exampleEnglish": "The train's cancellation made us miss our connection.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "disservizio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "service disruption",
+   "exampleNative": "I passeggeri hanno protestato per i continui disservizi della linea.",
+   "exampleEnglish": "Passengers protested against the line's constant disruptions.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "levataccia",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "very early rise",
+   "exampleNative": "Per il volo delle sei ci aspetta una levataccia.",
+   "exampleEnglish": "For the six o'clock flight we are in for a brutally early start.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "fuso orario",
+   "partOfSpeech": "phrase",
+   "gloss": "time zone",
+   "exampleNative": "Con il cambio di fuso orario non riesco a dormire.",
+   "exampleEnglish": "With the time-zone change I cannot sleep.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "acclimatarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to acclimatize",
+   "exampleNative": "Ci vuole qualche giorno per acclimatarsi all'altitudine.",
+   "exampleEnglish": "It takes a few days to acclimatize to the altitude.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ambientarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to settle in",
+   "exampleNative": "Mi sono ambientato subito nella nuova città.",
+   "exampleEnglish": "I settled into the new city right away.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "smarrirsi",
+   "partOfSpeech": "verb",
+   "gloss": "to get lost",
+   "exampleNative": "Ci siamo smarriti nei vicoli del centro storico.",
+   "exampleEnglish": "We got lost in the alleys of the old town.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fuori mano",
+   "partOfSpeech": "phrase",
+   "gloss": "out of the way, remote",
+   "exampleNative": "Il villaggio è bellissimo ma un po' fuori mano.",
+   "exampleEnglish": "The village is beautiful but a bit out of the way.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "villeggiatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "holiday stay, summer retreat",
+   "exampleNative": "Da bambini passavamo la villeggiatura in montagna.",
+   "exampleEnglish": "As children we spent our summer holidays in the mountains.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "balneare",
+   "partOfSpeech": "adjective",
+   "gloss": "seaside, bathing (adj.)",
+   "exampleNative": "Rimini è una delle località balneari più famose d'Italia.",
+   "exampleEnglish": "Rimini is one of Italy's most famous seaside resorts.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "termale",
+   "partOfSpeech": "adjective",
+   "gloss": "thermal, spa (adj.)",
+   "exampleNative": "Abbiamo trascorso il weekend in una stazione termale.",
+   "exampleEnglish": "We spent the weekend at a spa resort.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "pensione completa",
+   "partOfSpeech": "phrase",
+   "gloss": "full board",
+   "exampleNative": "L'offerta comprende sette notti in pensione completa.",
+   "exampleEnglish": "The deal includes seven nights with full board.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "mezza pensione",
+   "partOfSpeech": "phrase",
+   "gloss": "half board",
+   "exampleNative": "Con la mezza pensione la cena è inclusa.",
+   "exampleEnglish": "With half board, dinner is included.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "area di sosta",
+   "partOfSpeech": "phrase",
+   "gloss": "rest area",
+   "exampleNative": "Ci fermiamo alla prossima area di sosta per riposare.",
+   "exampleEnglish": "We will stop at the next rest area to rest.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fare il pieno",
+   "partOfSpeech": "phrase",
+   "gloss": "to fill up the tank",
+   "exampleNative": "Prima di partire conviene fare il pieno.",
+   "exampleEnglish": "Before setting off it is best to fill up the tank.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "noleggiare",
+   "partOfSpeech": "verb",
+   "gloss": "to rent (a vehicle)",
+   "exampleNative": "Abbiamo noleggiato un'auto per girare l'isola.",
+   "exampleEnglish": "We rented a car to tour the island.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "valuta",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "currency",
+   "exampleNative": "Conviene cambiare la valuta prima della partenza.",
+   "exampleEnglish": "It is best to exchange currency before departure.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "alta stagione",
+   "partOfSpeech": "phrase",
+   "gloss": "high season",
+   "exampleNative": "In alta stagione i prezzi degli alberghi raddoppiano.",
+   "exampleEnglish": "In high season hotel prices double.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "bassa stagione",
+   "partOfSpeech": "phrase",
+   "gloss": "low season",
+   "exampleNative": "Viaggiare in bassa stagione permette di risparmiare molto.",
+   "exampleEnglish": "Traveling in low season lets you save a lot.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "gettonato",
+   "partOfSpeech": "adjective",
+   "gloss": "popular, in demand",
+   "exampleNative": "Quest'isola è la meta più gettonata dell'estate.",
+   "exampleEnglish": "This island is the most popular destination of the summer.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pittoresco",
+   "partOfSpeech": "adjective",
+   "gloss": "picturesque",
+   "exampleNative": "Abbiamo pranzato in un pittoresco borgo di pescatori.",
+   "exampleEnglish": "We had lunch in a picturesque fishing village.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "suggestivo",
+   "partOfSpeech": "adjective",
+   "gloss": "evocative, striking",
+   "exampleNative": "Il tramonto sulla laguna era davvero suggestivo.",
+   "exampleEnglish": "The sunset over the lagoon was truly striking.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "mozzafiato",
+   "partOfSpeech": "adjective",
+   "gloss": "breathtaking",
+   "exampleNative": "Dalla terrazza si gode una vista mozzafiato.",
+   "exampleEnglish": "From the terrace you get a breathtaking view.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "panoramico",
+   "partOfSpeech": "adjective",
+   "gloss": "panoramic, scenic",
+   "exampleNative": "Abbiamo preso la strada panoramica lungo la costa.",
+   "exampleEnglish": "We took the scenic road along the coast.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "belvedere",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "viewpoint, lookout",
+   "exampleNative": "Dal belvedere si vede tutto il golfo.",
+   "exampleEnglish": "From the lookout you can see the whole gulf.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "entroterra",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "hinterland, inland area",
+   "exampleNative": "L'entroterra ligure nasconde borghi poco conosciuti.",
+   "exampleEnglish": "The Ligurian hinterland hides little-known villages.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "litorale",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "coastline, shore",
+   "exampleNative": "Abbiamo percorso tutto il litorale in bicicletta.",
+   "exampleEnglish": "We rode along the whole coastline by bike.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "costiero",
+   "partOfSpeech": "adjective",
+   "gloss": "coastal",
+   "exampleNative": "La strada costiera offre scorci davvero spettacolari.",
+   "exampleEnglish": "The coastal road offers truly spectacular views.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "insenatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "inlet, cove",
+   "exampleNative": "La barca si è fermata in una piccola insenatura.",
+   "exampleEnglish": "The boat stopped in a small cove.",
+   "decks": [
+    "common",
+    "traveling"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "assunzione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "hiring, recruitment",
+   "exampleNative": "L'azienda ha annunciato l'assunzione di venti nuovi dipendenti.",
+   "exampleEnglish": "The company announced the hiring of twenty new employees.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "licenziamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dismissal, layoff",
+   "exampleNative": "Dopo il licenziamento ha fatto ricorso al sindacato.",
+   "exampleEnglish": "After his dismissal he turned to the union.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "retribuzione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pay, remuneration",
+   "exampleNative": "La retribuzione mensile comprende anche i buoni pasto.",
+   "exampleEnglish": "The monthly pay also includes meal vouchers.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "salario",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "wage",
+   "exampleNative": "Chiedono un salario minimo garantito per legge.",
+   "exampleEnglish": "They are demanding a minimum wage guaranteed by law.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "busta paga",
+   "partOfSpeech": "phrase",
+   "gloss": "payslip",
+   "exampleNative": "Controlla sempre le trattenute sulla busta paga.",
+   "exampleEnglish": "Always check the deductions on your payslip.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "indennità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "allowance, compensation",
+   "exampleNative": "Riceve un'indennità di trasferta per ogni viaggio di lavoro.",
+   "exampleEnglish": "He receives a travel allowance for every business trip.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "trattenuta",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "payroll deduction",
+   "exampleNative": "In busta paga c'è una trattenuta per i contributi.",
+   "exampleEnglish": "There is a deduction for social security contributions on the payslip.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "detrazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tax deduction",
+   "exampleNative": "Le spese mediche danno diritto a una detrazione fiscale.",
+   "exampleEnglish": "Medical expenses entitle you to a tax deduction.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "aliquota",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "tax rate",
+   "exampleNative": "Sopra quella soglia si applica un'aliquota più alta.",
+   "exampleEnglish": "Above that threshold a higher tax rate applies.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "imponibile",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "taxable income",
+   "exampleNative": "L'imponibile si calcola sottraendo le spese deducibili.",
+   "exampleEnglish": "Taxable income is calculated by subtracting deductible expenses.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "fatturato",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "turnover, revenue",
+   "exampleNative": "Il fatturato dell'azienda è cresciuto del dieci per cento.",
+   "exampleEnglish": "The company's turnover grew by ten percent.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fatturare",
+   "partOfSpeech": "verb",
+   "gloss": "to invoice, to bill",
+   "exampleNative": "Il consulente fattura ogni ora di lavoro svolta.",
+   "exampleEnglish": "The consultant bills for every hour of work done.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "partita iva",
+   "partOfSpeech": "phrase",
+   "gloss": "VAT number, freelancer status",
+   "exampleNative": "Per lavorare in proprio ha aperto la partita IVA.",
+   "exampleEnglish": "To work for himself he registered for a VAT number.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "commercialista",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "accountant, tax advisor",
+   "exampleNative": "Il commercialista prepara la dichiarazione dei redditi per me.",
+   "exampleEnglish": "The accountant prepares my tax return for me.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "contabilità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "accounting, bookkeeping",
+   "exampleNative": "Si occupa della contabilità di diverse piccole imprese.",
+   "exampleEnglish": "She handles the accounting for several small businesses.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "bilancio",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "budget, balance sheet",
+   "exampleNative": "Il consiglio ha approvato il bilancio annuale della società.",
+   "exampleEnglish": "The board approved the company's annual budget.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "ricavo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "revenue, proceeds",
+   "exampleNative": "I ricavi del trimestre superano le previsioni.",
+   "exampleEnglish": "The quarter's revenues exceed forecasts.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "ammortamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "amortization, depreciation",
+   "exampleNative": "L'ammortamento del macchinario è previsto in cinque anni.",
+   "exampleEnglish": "The machinery is to be depreciated over five years.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "azionista",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "shareholder",
+   "exampleNative": "Gli azionisti voteranno sulla proposta di fusione.",
+   "exampleEnglish": "The shareholders will vote on the merger proposal.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "obbligazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "bond",
+   "exampleNative": "Ha investito i risparmi in obbligazioni dello Stato.",
+   "exampleEnglish": "He invested his savings in government bonds.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "dividendo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "dividend",
+   "exampleNative": "La società distribuisce un dividendo agli azionisti ogni anno.",
+   "exampleEnglish": "The company pays a dividend to shareholders every year.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "quotazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "market price, listing",
+   "exampleNative": "La quotazione del titolo è crollata dopo lo scandalo.",
+   "exampleEnglish": "The stock's price collapsed after the scandal.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "tasso di interesse",
+   "partOfSpeech": "phrase",
+   "gloss": "interest rate",
+   "exampleNative": "La banca ha alzato il tasso di interesse sul mutuo.",
+   "exampleEnglish": "The bank raised the interest rate on the mortgage.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "estratto conto",
+   "partOfSpeech": "phrase",
+   "gloss": "bank statement",
+   "exampleNative": "Sull'estratto conto risulta un addebito che non riconosco.",
+   "exampleEnglish": "There is a charge on the bank statement that I don't recognize.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "conto corrente",
+   "partOfSpeech": "phrase",
+   "gloss": "checking account",
+   "exampleNative": "Ho aperto un conto corrente senza spese di gestione.",
+   "exampleEnglish": "I opened a checking account with no management fees.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "prelevare",
+   "partOfSpeech": "verb",
+   "gloss": "to withdraw money",
+   "exampleNative": "Devo prelevare contanti prima di partire.",
+   "exampleEnglish": "I need to withdraw cash before leaving.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "versamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "deposit, payment",
+   "exampleNative": "Ha fatto un versamento di mille euro sul conto.",
+   "exampleEnglish": "He made a deposit of a thousand euros into the account.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "insolvenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "insolvency",
+   "exampleNative": "L'impresa ha dichiarato l'insolvenza davanti al tribunale.",
+   "exampleEnglish": "The company declared insolvency before the court.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "creditore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "creditor",
+   "exampleNative": "I creditori chiedono il pagamento immediato delle fatture.",
+   "exampleEnglish": "The creditors are demanding immediate payment of the invoices.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "debitore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "debtor",
+   "exampleNative": "Il debitore ha ottenuto una dilazione del pagamento.",
+   "exampleEnglish": "The debtor obtained a deferral of the payment.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "fideiussione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "guarantee, surety",
+   "exampleNative": "Il proprietario chiede una fideiussione bancaria per l'affitto.",
+   "exampleEnglish": "The landlord requires a bank guarantee for the rent.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "proroga",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "extension, deferral",
+   "exampleNative": "Abbiamo chiesto una proroga per consegnare il progetto.",
+   "exampleEnglish": "We asked for an extension to deliver the project.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "rinnovo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "renewal",
+   "exampleNative": "Il rinnovo del contratto è previsto a settembre.",
+   "exampleEnglish": "The contract renewal is scheduled for September.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "appalto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "public contract, tender",
+   "exampleNative": "La ditta ha vinto l'appalto per la nuova scuola.",
+   "exampleEnglish": "The firm won the contract for the new school.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "subappalto",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "subcontract",
+   "exampleNative": "Parte dei lavori è stata affidata in subappalto.",
+   "exampleEnglish": "Part of the work was given out under subcontract.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "fornitore",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "supplier",
+   "exampleNative": "Stiamo cercando un fornitore più economico per i materiali.",
+   "exampleEnglish": "We are looking for a cheaper supplier for the materials.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "committente",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "client, commissioning party",
+   "exampleNative": "Il committente ha approvato il preventivo dei lavori.",
+   "exampleEnglish": "The client approved the estimate for the work.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "preventivo",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "quote, estimate",
+   "exampleNative": "Chiedi un preventivo scritto prima di firmare.",
+   "exampleEnglish": "Ask for a written quote before signing.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "trattativa",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "negotiation",
+   "exampleNative": "La trattativa sul nuovo contratto è ancora in corso.",
+   "exampleEnglish": "Negotiations on the new contract are still ongoing.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "negoziazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "negotiation, bargaining",
+   "exampleNative": "La negoziazione dello stipendio richiede molta preparazione.",
+   "exampleEnglish": "Salary negotiation requires a lot of preparation.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "mansione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "duty, job task",
+   "exampleNative": "Le sue mansioni includono la gestione dei fornitori.",
+   "exampleEnglish": "Her duties include managing the suppliers.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "qualifica",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "qualification, job title",
+   "exampleNative": "Con questa qualifica può accedere a ruoli dirigenziali.",
+   "exampleEnglish": "With this qualification he can move into management roles.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "inquadramento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "job grade, classification",
+   "exampleNative": "Il suo inquadramento non corrisponde alle mansioni svolte.",
+   "exampleEnglish": "His job grade does not match the duties he performs.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "organico",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "staff, workforce",
+   "exampleNative": "L'azienda vuole ridurre l'organico del venti per cento.",
+   "exampleEnglish": "The company wants to cut its workforce by twenty percent.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "autonomo",
+   "partOfSpeech": "adjective",
+   "gloss": "self-employed",
+   "exampleNative": "Come lavoratore autonomo paga da solo i contributi.",
+   "exampleEnglish": "As a self-employed worker he pays his own contributions.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "libero professionista",
+   "partOfSpeech": "phrase",
+   "gloss": "freelance professional",
+   "exampleNative": "Da libero professionista gestisce direttamente i propri clienti.",
+   "exampleEnglish": "As a freelance professional she manages her clients directly.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "precariato",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "precarious employment",
+   "exampleNative": "Il precariato giovanile è un problema strutturale del paese.",
+   "exampleEnglish": "Precarious youth employment is a structural problem in the country.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "precario",
+   "partOfSpeech": "adjective",
+   "gloss": "precarious, temporary",
+   "exampleNative": "Ha accettato un contratto precario pur di lavorare.",
+   "exampleEnglish": "She accepted a temporary contract just to have work.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "vertenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "labor dispute",
+   "exampleNative": "Il sindacato ha aperto una vertenza contro l'azienda.",
+   "exampleEnglish": "The union opened a dispute against the company.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "contrattazione",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "collective bargaining",
+   "exampleNative": "La contrattazione collettiva ha ottenuto un aumento salariale.",
+   "exampleEnglish": "Collective bargaining secured a wage increase.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "telelavoro",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "remote work",
+   "exampleNative": "Il telelavoro mi fa risparmiare due ore al giorno.",
+   "exampleEnglish": "Remote work saves me two hours a day.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "collocamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "job placement",
+   "exampleNative": "Si è iscritto all'ufficio di collocamento dopo il licenziamento.",
+   "exampleEnglish": "He registered at the employment office after being laid off.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "disoccupato",
+   "partOfSpeech": "adjective",
+   "gloss": "unemployed",
+   "exampleNative": "È disoccupato da sei mesi e cerca attivamente lavoro.",
+   "exampleEnglish": "He has been unemployed for six months and is actively job hunting.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "cassa integrazione",
+   "partOfSpeech": "phrase",
+   "gloss": "temporary layoff scheme",
+   "exampleNative": "Gli operai sono in cassa integrazione da marzo.",
+   "exampleEnglish": "The workers have been on the temporary layoff scheme since March.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "pensionamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "retirement",
+   "exampleNative": "Dopo il pensionamento vuole dedicarsi al volontariato.",
+   "exampleEnglish": "After retirement he wants to devote himself to volunteering.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "previdenza",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "pension provision",
+   "exampleNative": "Versa ogni mese una quota alla previdenza complementare.",
+   "exampleEnglish": "Every month she pays into a supplementary pension plan.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "C1"
+  },
+  {
+   "lemma": "tredicesima",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "thirteenth-month bonus",
+   "exampleNative": "Con la tredicesima pagherò i regali di Natale.",
+   "exampleEnglish": "I'll pay for the Christmas presents with my thirteenth-month bonus.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "anzianità",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "seniority",
+   "exampleNative": "L'aumento scatta in base all'anzianità di servizio.",
+   "exampleEnglish": "The raise kicks in based on seniority of service.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "avanzamento",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "advancement, promotion",
+   "exampleNative": "Il suo avanzamento di carriera è stato molto rapido.",
+   "exampleEnglish": "His career advancement was very rapid.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "candidatura",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "job application",
+   "exampleNative": "Ho inviato la mia candidatura per il posto di analista.",
+   "exampleEnglish": "I sent in my application for the analyst position.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "candidarsi",
+   "partOfSpeech": "verb",
+   "gloss": "to apply for a job",
+   "exampleNative": "Vuole candidarsi per la posizione di responsabile vendite.",
+   "exampleEnglish": "She wants to apply for the sales manager position.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "referenze",
+   "partOfSpeech": "noun (fem.)",
+   "gloss": "references",
+   "exampleNative": "Il datore di lavoro ha chiesto le referenze precedenti.",
+   "exampleEnglish": "The employer asked for previous references.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  },
+  {
+   "lemma": "requisito",
+   "partOfSpeech": "noun (masc.)",
+   "gloss": "requirement",
+   "exampleNative": "La laurea è un requisito essenziale per questo ruolo.",
+   "exampleEnglish": "A degree is an essential requirement for this role.",
+   "decks": [
+    "common",
+    "work-and-money"
+   ],
+   "cefrLevel": "B2"
+  }
+ ],
+ "skipped": []
+}

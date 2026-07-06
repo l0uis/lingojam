@@ -210,6 +210,10 @@ def build_dataset(
                 "example_en": word["example"]["translations"]["en"],
                 "decks": list(word.get("decks") or ["common"]),
                 "cefrLevel": word.get("cefrLevel"),
+                # Shipped id/rank are frozen — user learning progress binds to
+                # them, so they survive rebuilds verbatim (see the output loop).
+                "id": word["id"],
+                "rank": word["rank"],
             }
             order.append(word["lemma"])
         if order:
@@ -256,8 +260,32 @@ def build_dataset(
 
     valid_slugs = {d["slug"] for d in decks} | {"common"}
 
+    # Vetting blocklist: lemmas that must not ship (subtitle-corpus junk like
+    # "Bourbon" or "KGB"). Removal never renumbers survivors — shipped words
+    # keep their frozen id/rank (leaving gaps), and brand-new words are
+    # numbered above every rank the shipped seed has ever used, computed
+    # BEFORE filtering so a removed tail word's id can't be reused later.
+    # Matching is case-sensitive: German case-pairs (Weg/weg) are distinct.
+    blocklist_path = Path(__file__).resolve().parent / f"vocab_blocklist_{language_code}.txt"
+    blocklist: set[str] = set()
+    if blocklist_path.exists():
+        blocklist = {
+            line.strip()
+            for line in blocklist_path.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+
+    next_rank = 1 + max(
+        (word_index[l]["rank"] for l in order if word_index[l].get("rank") is not None),
+        default=0,
+    )
+
     words = []
-    for rank, lemma in enumerate(order, start=1):
+    removed = 0
+    for lemma in order:
+        if lemma in blocklist:
+            removed += 1
+            continue
         entry_data = word_index[lemma]
         normalized = normalize_slugs(entry_data["decks"])
         # Drop slugs that aren't part of the published taxonomy or the hidden
@@ -266,8 +294,13 @@ def build_dataset(
         final_slugs = [s for s in normalized if s in valid_slugs]
         if not final_slugs:
             final_slugs = ["common"]
+        rank = entry_data.get("rank")
+        if rank is None:
+            rank = next_rank
+            next_rank += 1
+        word_id = entry_data.get("id") or f"{language_code}-{rank:04d}"
         out = {
-            "id": f"{language_code}-{rank:04d}",
+            "id": word_id,
             "rank": rank,
             "lemma": entry_data["lemma"],
             "partOfSpeech": entry_data["partOfSpeech"],
@@ -282,6 +315,8 @@ def build_dataset(
         # heuristic when neither the generator nor the baseline provided one.
         out["cefrLevel"] = entry_data.get("cefrLevel") or cefr(rank)
         words.append(out)
+    if removed:
+        print(f"Removed {removed} blocklisted words ({blocklist_path.name})")
 
     payload = {
         "version": 4,

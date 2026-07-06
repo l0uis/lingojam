@@ -1,0 +1,68 @@
+{
+ "version": 1,
+ "language": "de",
+ "source": "deck-tagging pass over untagged B2+ words, 2026-07-05 (tags-only entries)",
+ "entries": [
+  {
+   "lemma": "absurd",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "erbärmlich",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "herrje",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "kreischen",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "wimmern",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "widersprechen",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "doll",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "exzellent",
+   "decks": [
+    "feelings"
+   ]
+  },
+  {
+   "lemma": "hartnäckig",
+   "decks": [
+    "family"
+   ]
+  },
+  {
+   "lemma": "oberflächlich",
+   "decks": [
+    "family"
+   ]
+  }
+ ],
+ "skipped": []
+}
