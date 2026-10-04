@@ -14,6 +14,10 @@ Usage:
     python3 tools/generate_vocab.py --language it --limit 700
     python3 tools/generate_vocab.py --language de --limit 700
 
+    # British English for es/fr/it/de speakers — one call glosses each word
+    # in all four learner languages at once
+    python3 tools/generate_vocab.py --language en --limit 8000
+
 Frequency sources:
   - es: doozan/spanish_data (already lemmatised + POS-tagged, very clean)
   - fr/it/de: hermitdave/FrequencyWords 2018 (word-form frequencies from
@@ -22,10 +26,11 @@ Frequency sources:
     than doozan but is the best easily-pullable source for these languages.
 
 Output files (one per language, all auto-merged by build_*.py on next run):
-  - es: tools/generated_entries.json  (back-compat with prior runs)
+  - es: tools/generated_entries_es.json
   - fr: tools/generated_entries_fr.json
   - it: tools/generated_entries_it.json
   - de: tools/generated_entries_de.json
+  - en: tools/generated_entries_en.json  (glosses keyed es/fr/it/de)
 
 The cache is resumable: Ctrl-C is safe and re-running picks up where it left off.
 """
@@ -58,10 +63,8 @@ PRICE_OUTPUT_PER_MTOK = 15.0
 PRICE_CACHE_READ_PER_MTOK = 0.30  # ~10% of input
 PRICE_CACHE_WRITE_PER_MTOK = 3.75  # ~125% of input (5-min TTL)
 
-TOPIC_DECK_SLUGS = [
-    "traveling", "food-and-drink", "shopping", "health",
-    "work-and-money", "feelings", "home", "family",
-]
+sys.path.insert(0, str(TOOLS_DIR))
+from vocab_pipeline import DEFAULT_DECKS  # noqa: E402  (the shipped taxonomy)
 
 CEFR_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"]
 
@@ -83,6 +86,17 @@ class LangConfig:
     cefr_examples: dict[str, str]              # per-level example lemmas for the prompt
     notes: str                                 # one-line "use these conventions" reminder
     output_filename: str                       # tools/{this}
+    # Languages the gloss and example translation are written in. ("en",) is
+    # the original English-speaking-learner shape (flat `gloss` /
+    # `exampleEnglish` fields); anything else uses per-language maps.
+    learner_languages: tuple[str, ...] = ("en",)
+
+    @property
+    def multi_gloss(self) -> bool:
+        return self.learner_languages != ("en",)
+
+
+LANGUAGE_NAMES = {"en": "English", "es": "Spanish", "fr": "French", "it": "Italian", "de": "German"}
 
 
 # --- Spanish (doozan, lemmatised) -----------------------------------------
@@ -154,6 +168,23 @@ HERMITDAVE_STOPLISTS: dict[str, set[str]] = {
         "è", "sono", "era", "erano", "stato", "stata", "sarà",
         "ho", "hai", "ha", "abbiamo", "avete", "hanno",
     },
+    "en": {
+        "the", "a", "an", "and", "or", "but", "nor", "so", "yet", "of", "to",
+        "in", "on", "at", "by", "for", "with", "from", "into", "onto", "about",
+        "as", "if", "than", "that", "this", "these", "those", "which", "who",
+        "whom", "whose", "what", "where", "when", "why", "how",
+        "i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us",
+        "them", "my", "your", "his", "its", "our", "their", "mine", "yours",
+        "hers", "ours", "theirs", "myself", "yourself", "himself", "herself",
+        "itself", "ourselves", "themselves",
+        "is", "am", "are", "was", "were", "been", "being", "be",
+        "has", "had", "having", "does", "did", "doing",
+        "not", "no", "yes", "oh", "ok", "okay", "hey", "uh", "um",
+        # Contraction fragments the subtitle tokeniser split off (don't →
+        # "don" + "t"); the regex already drops the one-letter halves.
+        "don", "didn", "doesn", "isn", "wasn", "aren", "weren", "couldn",
+        "wouldn", "shouldn", "hasn", "haven", "hadn", "ain", "ve", "ll", "re",
+    },
     "de": {
         "der", "die", "das", "den", "dem", "des", "ein", "eine", "einen",
         "einem", "einer", "eines", "und", "oder", "aber", "denn", "doch",
@@ -205,6 +236,7 @@ LEMMA_RE_ES = re.compile(r"^[a-záéíóúüñ]{2,20}$")
 LEMMA_RE_FR = re.compile(r"^[a-zàâæçéèêëîïôœùûüÿ\-]{2,25}$")
 LEMMA_RE_IT = re.compile(r"^[a-zàèéìíòóùú]{2,20}$")
 LEMMA_RE_DE = re.compile(r"^[a-zäöüß\-]{2,30}$")
+LEMMA_RE_EN = re.compile(r"^[a-z][a-z\-]{1,24}$")
 
 
 # --- Per-language CEFR rubric examples (used in the system prompt) --------
@@ -243,6 +275,16 @@ CEFR_EXAMPLES_DE = {
 }
 
 
+CEFR_EXAMPLES_EN = {
+    "A1": "house, eat, water, mother, day",
+    "A2": "job, travel, money, shop, health",
+    "B1": "achieve, attempt, society",
+    "B2": "reach, accomplish, scope",
+    "C1": "facet, outline (verb)",
+    "C2": "ominous, strikebreaker",
+}
+
+
 LANG_CONFIGS: dict[str, LangConfig] = {
     "es": LangConfig(
         code="es",
@@ -253,7 +295,7 @@ LANG_CONFIGS: dict[str, LangConfig] = {
         build_module="build_dataset",
         cefr_examples=CEFR_EXAMPLES_ES,
         notes="Preserve diacritics. Lowercase. No proper nouns.",
-        output_filename="generated_entries.json",
+        output_filename="generated_entries_es.json",
     ),
     "fr": LangConfig(
         code="fr",
@@ -304,6 +346,27 @@ LANG_CONFIGS: dict[str, LangConfig] = {
         ),
         output_filename="generated_entries_de.json",
     ),
+    "en": LangConfig(
+        code="en",
+        name="British English",
+        endonym_field="example",
+        fetch_frequency=_make_hermitdave_fetcher("en"),
+        valid_lemma=LEMMA_RE_EN,
+        build_module="build_english",
+        cefr_examples=CEFR_EXAMPLES_EN,
+        notes=(
+            "Lowercase. Use BRITISH spelling and vocabulary throughout "
+            "(colour, favourite, centre, travelling; flat, holiday, mobile, "
+            "lorry) — inputs come from mostly-American subtitles, so return "
+            "the British lemma (input 'color' → lemma 'colour'). Inputs are "
+            "word forms — return the lemma (base form for verbs, singular for "
+            "nouns) and set skip='inflection' if it's one you've already "
+            "produced. Phrasal verbs are fine as lemmas only when the input "
+            "is the particle-less verb; don't invent them."
+        ),
+        output_filename="generated_entries_en.json",
+        learner_languages=("es", "fr", "it", "de"),
+    ),
 }
 
 
@@ -311,7 +374,15 @@ LANG_CONFIGS: dict[str, LangConfig] = {
 # Prompt templating
 # ---------------------------------------------------------------------------
 
+def _deck_lines() -> str:
+    return "\n".join(
+        f"    - {d['slug']}: {d['description']}" for d in DEFAULT_DECKS
+    )
+
+
 def system_prompt_for(cfg: LangConfig) -> str:
+    if cfg.multi_gloss:
+        return _multi_gloss_system_prompt(cfg)
     cefr_lines = "\n    ".join(
         f"{level}: {cfg.cefr_examples[level]}." for level in CEFR_LEVELS
     )
@@ -333,15 +404,7 @@ Each entry must include:
 - exampleEnglish: idiomatic English translation of the example.
 - decks: list of deck slugs. ALWAYS include "common" (the hidden catch-all
   used to populate "All Words"). Add zero or more topic tags from:
-    - traveling: trips, hotels, airports, tickets, transport modes, weather
-      and nature (the outdoors as part of travel)
-    - food-and-drink: groceries, cooking, ingredients, eating, drinks
-    - shopping: clothes, stores, prices, sizes, paying for goods
-    - health: doctor, pharmacy, body parts, symptoms, illness
-    - work-and-money: jobs, offices, banking, salaries, business
-    - feelings: emotions, moods, reactions, opinions
-    - home: rooms, furniture, household items, daily routines, chores
-    - family: relatives, friends, describing or talking about people
+{_deck_lines()}
   Only tag a topic when the word is clearly central to that domain. Most
   words will be "common" only.
 - cefrLevel: one of {", ".join(CEFR_LEVELS)}. Estimate based on the lemma's
@@ -360,9 +423,80 @@ Always return exactly one entry per input, in the same order received.
 Do not invent meanings — if you're unsure, prefer skip over guessing."""
 
 
+def _multi_gloss_system_prompt(cfg: LangConfig) -> str:
+    """Prompt for a target whose learners speak several languages (English,
+    learnt by es/fr/it/de speakers): every gloss and example translation is
+    a map keyed by learner language code."""
+    cefr_lines = "\n    ".join(
+        f"{level}: {cfg.cefr_examples[level]}." for level in CEFR_LEVELS
+    )
+    langs = ", ".join(f'"{c}" ({LANGUAGE_NAMES[c]})' for c in cfg.learner_languages)
+    return f"""You are a {cfg.name} lexicographer producing vocabulary
+entries for a flashcard app whose learners are native speakers of
+{", ".join(LANGUAGE_NAMES[c] for c in cfg.learner_languages)}.
+
+For each {cfg.name} input you receive, call the `save_entries` tool with one
+entry per input. Process all inputs in the order they were given.
+
+Each entry must include:
+- lemma: the dictionary form. {cfg.notes}
+- partOfSpeech: one of "noun", "verb", "adjective", "adverb",
+  "interjection", "number", or "phrase" (written in English).
+- glosses: an object with exactly these keys: {langs}. Each value is the
+  concise translation of the lemma into that language, 1-6 words, commas
+  for alternatives. Give the word a native speaker would actually use, with
+  its article/gender where the learner needs it (es "la casa", fr "la
+  maison", it "la casa", de "das Haus" for "house"); for verbs use the
+  infinitive.
+- {cfg.endonym_field}: one short natural {cfg.name} sentence using the lemma
+  in its most common form. 5-12 words. British spelling.
+- exampleTranslations: an object with the same keys, each an idiomatic
+  translation of the example sentence into that language.
+- decks: list of deck slugs. ALWAYS include "common" (the hidden catch-all
+  used to populate "All Words"). Add zero or more topic tags from:
+{_deck_lines()}
+  Only tag a topic when the word is clearly central to that domain. Most
+  words will be "common" only.
+- cefrLevel: one of {", ".join(CEFR_LEVELS)}. Estimate based on the lemma's
+  frequency, concreteness, and typical English-as-a-foreign-language
+  curricula (CEFR, e.g. the English Vocabulary Profile). Rule of thumb:
+    {cefr_lines}
+
+Skip rules — set the "skip" field instead of producing other fields if input is:
+- A pure function word: "function word"
+- A proper noun: "proper noun"
+- An inflected form of a more basic lemma you've already produced: "inflection"
+- An obscure technical term that's not flashcard-worthy: "obscure"
+- Slang, profanity or a vulgar word: "obscure"
+- A typo, contraction fragment or non-English word: "non-lemma"
+
+Always return exactly one entry per input, in the same order received.
+Do not invent meanings — if you're unsure, prefer skip over guessing."""
+
+
+def _language_map_schema(cfg: LangConfig) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {c: {"type": "string"} for c in cfg.learner_languages},
+        "required": list(cfg.learner_languages),
+    }
+
+
 def save_entries_tool_for(cfg: LangConfig) -> dict[str, Any]:
     """The tool schema mirrors `entries[*]` fields — note the per-language
     example-field name."""
+    if cfg.multi_gloss:
+        gloss_fields: dict[str, Any] = {
+            "glosses": _language_map_schema(cfg),
+            cfg.endonym_field: {"type": "string"},
+            "exampleTranslations": _language_map_schema(cfg),
+        }
+    else:
+        gloss_fields = {
+            "gloss": {"type": "string"},
+            cfg.endonym_field: {"type": "string"},
+            "exampleEnglish": {"type": "string"},
+        }
     return {
         "name": "save_entries",
         "description": "Save the vocabulary entries you generated.",
@@ -377,9 +511,7 @@ def save_entries_tool_for(cfg: LangConfig) -> dict[str, Any]:
                         "properties": {
                             "lemma": {"type": "string"},
                             "partOfSpeech": {"type": "string"},
-                            "gloss": {"type": "string"},
-                            cfg.endonym_field: {"type": "string"},
-                            "exampleEnglish": {"type": "string"},
+                            **gloss_fields,
                             "decks": {
                                 "type": "array",
                                 "items": {"type": "string"},
@@ -530,10 +662,18 @@ def validate_entry(entry: dict[str, Any], cfg: LangConfig) -> tuple[bool, str]:
         return False, "non-object entry"
     if entry.get("skip"):
         return False, str(entry["skip"])
-    required = ("lemma", "partOfSpeech", "gloss", cfg.endonym_field, "exampleEnglish", "decks", "cefrLevel")
+    if cfg.multi_gloss:
+        required = ("lemma", "partOfSpeech", "glosses", cfg.endonym_field, "exampleTranslations", "decks", "cefrLevel")
+    else:
+        required = ("lemma", "partOfSpeech", "gloss", cfg.endonym_field, "exampleEnglish", "decks", "cefrLevel")
     for k in required:
         if not entry.get(k):
             return False, f"missing field: {k}"
+    if cfg.multi_gloss:
+        for k in ("glosses", "exampleTranslations"):
+            m = entry[k]
+            if not isinstance(m, dict) or any(not m.get(c) for c in cfg.learner_languages):
+                return False, f"{k} must have non-empty {', '.join(cfg.learner_languages)}"
     if not isinstance(entry["decks"], list) or "common" not in entry["decks"]:
         return False, "decks must be a list including 'common'"
     if entry["cefrLevel"] not in CEFR_LEVELS:
@@ -545,14 +685,15 @@ def validate_entry(entry: dict[str, Any], cfg: LangConfig) -> tuple[bool, str]:
 # Cost estimation
 # ---------------------------------------------------------------------------
 
-def estimate_cost(n_lemmas: int, batch_size: int) -> tuple[float, int]:
+def estimate_cost(n_lemmas: int, batch_size: int, cfg: LangConfig) -> tuple[float, int]:
     n_batches = (n_lemmas + batch_size - 1) // batch_size
     # ~900 tokens system + tools (cached after first), ~50 tokens user prompt,
-    # ~120 tokens per entry output.
-    system_tokens = 900
+    # ~120 tokens per entry output — plus ~90 per extra learner language
+    # (a gloss and an example translation each).
+    system_tokens = 900 + 150 * (len(cfg.learner_languages) - 1)
     cached_input = system_tokens * (n_batches - 1)
     fresh_input = system_tokens + 50 * n_batches
-    output_tokens = 120 * n_lemmas
+    output_tokens = (120 + 90 * (len(cfg.learner_languages) - 1)) * n_lemmas
 
     cost = (
         fresh_input / 1e6 * PRICE_INPUT_PER_MTOK
@@ -616,7 +757,7 @@ def main() -> None:
         print("Nothing to do.")
         return
 
-    cost, n_batches = estimate_cost(len(pending), args.batch_size)
+    cost, n_batches = estimate_cost(len(pending), args.batch_size, cfg)
     print(f"Estimated: {n_batches} batches, ~${cost:.2f} ({args.model} pricing).")
     print(f"Sample: {pending[:10]}{'...' if len(pending) > 10 else ''}")
 
@@ -659,12 +800,24 @@ def main() -> None:
         for inp, entry in zip(batch, entries):
             valid, reason = validate_entry(entry, cfg)
             if valid:
+                if cfg.multi_gloss:
+                    gloss_part = {
+                        "glosses": {c: entry["glosses"][c] for c in cfg.learner_languages},
+                        cfg.endonym_field: entry[cfg.endonym_field],
+                        "exampleTranslations": {
+                            c: entry["exampleTranslations"][c] for c in cfg.learner_languages
+                        },
+                    }
+                else:
+                    gloss_part = {
+                        "gloss": entry["gloss"],
+                        cfg.endonym_field: entry[cfg.endonym_field],
+                        "exampleEnglish": entry["exampleEnglish"],
+                    }
                 cleaned = {
                     "lemma": entry["lemma"],
                     "partOfSpeech": entry["partOfSpeech"],
-                    "gloss": entry["gloss"],
-                    cfg.endonym_field: entry[cfg.endonym_field],
-                    "exampleEnglish": entry["exampleEnglish"],
+                    **gloss_part,
                     "decks": entry["decks"],
                     "cefrLevel": entry["cefrLevel"],
                 }
@@ -742,8 +895,7 @@ def main() -> None:
           f"cache_write={total_cache_write}, out={total_out}.")
     print(f"  Cost: ~${actual_cost:.3f}")
     print(f"  Output: tools/{cfg.output_filename}")
-    print(f"\nNext: run `python3 tools/build_{cfg.code if cfg.code != 'es' else 'dataset'}"
-          f"{'' if cfg.code == 'es' else f'_{cfg.code}'}.py` to merge into the seed JSON.")
+    print(f"\nNext: run `python3 tools/{cfg.build_module}.py` to merge into the seed JSON.")
 
 
 if __name__ == "__main__":

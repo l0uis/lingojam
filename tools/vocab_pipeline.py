@@ -11,14 +11,20 @@ defines:
 …then calls `build_dataset(...)` to write the seed JSON.
 
 The output schema matches what `SeedDataLoader.swift` expects:
-  - `version: 3`
-  - `language: "es" | "fr" | "it" | "de"`
+  - `version: 4`
+  - `language: "es" | "fr" | "it" | "de" | "en"`
   - `decks: [...]`
   - `words: [{ id, rank, lemma, partOfSpeech, definitions, example, decks, cefrLevel }]`
 
-`example.text` carries the native-language sentence; the loader's
+`example.text` carries the target-language sentence; the loader's
 SeedExample decoder also accepts the legacy per-language keys (`es`, `fr`,
 `it`, `de`) for backward compatibility.
+
+`definitions` and `example.translations` are maps keyed by the LEARNER's
+language. The es/fr/it/de seeds carry `en`; the English seed carries
+es/fr/it/de. Every key survives a rebuild, and a generator cache that brings
+a key a shipped word lacks fills it in without touching the rest — that's
+how a new learner language is added to an existing seed (ids stay frozen).
 """
 
 from __future__ import annotations
@@ -181,6 +187,26 @@ def cefr_for_rank(rank: int) -> str:
     return "B1"
 
 
+def _generated_glosses(entry: dict) -> tuple[dict, dict]:
+    """Learner-language maps from a generator cache entry: the multi-gloss
+    shape (`glosses` / `exampleTranslations`, e.g. the English seed) or the
+    original English-learner shape (`gloss` / `exampleEnglish`). Partial
+    cache rows (cefr- or deck-only) yield empty maps."""
+    if "glosses" in entry or "exampleTranslations" in entry:
+        return dict(entry.get("glosses") or {}), dict(entry.get("exampleTranslations") or {})
+    definitions = {"en": entry["gloss"]} if entry.get("gloss") else {}
+    translations = {"en": entry["exampleEnglish"]} if entry.get("exampleEnglish") else {}
+    return definitions, translations
+
+
+def _rules_gloss(language_code: str, entry_data: dict) -> str:
+    """English text for `deck_rules.retag`, whose regexes are written
+    against English. For an English target the lemma IS the English word."""
+    if language_code == "en":
+        return entry_data["lemma"]
+    return entry_data["definitions"].get("en", "")
+
+
 def build_dataset(
     *,
     language_code: str,
@@ -240,13 +266,20 @@ def build_dataset(
         word_index[lemma] = {
             "lemma": lemma,
             "partOfSpeech": pos,
-            "gloss": gloss,
+            "definitions": {"en": gloss},
             "example_native": example_native,
-            "example_en": example_en,
+            "translations": {"en": example_en},
             "decks": [deck],
             "cefrLevel": cefr_level,
         }
         order.append(lemma)
+
+    def fill_missing(target: dict, incoming: dict | None) -> None:
+        """Add learner-language keys a word doesn't have yet. Never
+        overwrites: shipped glosses are frozen like ids and ranks."""
+        for key, value in (incoming or {}).items():
+            if value and not target.get(key):
+                target[key] = value
 
     if preserve_existing and output_path.exists():
         shipped = json.loads(output_path.read_text(encoding="utf-8"))
@@ -254,11 +287,11 @@ def build_dataset(
             word_index[word["lemma"]] = {
                 "lemma": word["lemma"],
                 "partOfSpeech": word["partOfSpeech"],
-                "gloss": word["definitions"]["en"],
+                "definitions": dict(word["definitions"]),
                 # Pre-v3 seeds keyed the sentence by language code.
                 "example_native": word["example"].get("text")
                     or next(v for k, v in word["example"].items() if k != "translations"),
-                "example_en": word["example"]["translations"]["en"],
+                "translations": dict(word["example"].get("translations") or {}),
                 "decks": list(word.get("decks") or ["common"]),
                 "cefrLevel": word.get("cefrLevel"),
                 # Shipped id/rank are frozen — user learning progress binds to
@@ -290,6 +323,7 @@ def build_dataset(
             for entry in payload.get("entries", []):
                 lemma = entry["lemma"]
                 explicit_slugs = entry.get("decks")
+                definitions, translations = _generated_glosses(entry)
                 if lemma in word_index:
                     if explicit_slugs:
                         for slug in explicit_slugs:
@@ -297,13 +331,17 @@ def build_dataset(
                                 word_index[lemma]["decks"].append(slug)
                     if entry.get("cefrLevel") and not word_index[lemma].get("cefrLevel"):
                         word_index[lemma]["cefrLevel"] = entry["cefrLevel"]
+                    fill_missing(word_index[lemma]["definitions"], definitions)
+                    fill_missing(word_index[lemma]["translations"], translations)
                 else:
                     word_index[lemma] = {
                         "lemma": lemma,
                         "partOfSpeech": entry["partOfSpeech"],
-                        "gloss": entry["gloss"],
-                        "example_native": entry.get("exampleNative") or entry.get("exampleSpanish"),
-                        "example_en": entry["exampleEnglish"],
+                        "definitions": definitions,
+                        "example_native": entry.get("example")
+                            or entry.get("exampleNative")
+                            or entry.get("exampleSpanish"),
+                        "translations": translations,
                         "decks": list(explicit_slugs or ["common"]),
                         "cefrLevel": entry.get("cefrLevel"),
                     }
@@ -345,7 +383,7 @@ def build_dataset(
         # shipped word (id, rank and content stay frozen), because the taxonomy
         # itself changed underneath them.
         normalized = deck_rules.retag(
-            language_code, entry_data["lemma"], entry_data["gloss"], normalized
+            language_code, entry_data["lemma"], _rules_gloss(language_code, entry_data), normalized
         )
         # Drop slugs that aren't part of the published taxonomy or the hidden
         # 'common' bucket. This catches stale slugs from legacy generator
@@ -363,10 +401,10 @@ def build_dataset(
             "rank": rank,
             "lemma": entry_data["lemma"],
             "partOfSpeech": entry_data["partOfSpeech"],
-            "definitions": {"en": entry_data["gloss"]},
+            "definitions": dict(sorted(entry_data["definitions"].items())),
             "example": {
                 "text": entry_data["example_native"],
-                "translations": {"en": entry_data["example_en"]},
+                "translations": dict(sorted(entry_data["translations"].items())),
             },
             "decks": final_slugs,
         }

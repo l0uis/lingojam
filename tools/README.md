@@ -8,10 +8,18 @@ Each supported language has its own seed JSON in `wordrus/wordrus/Resources/`:
 
 | Language | Seed file               | Build script              | LLM cache                          |
 |----------|-------------------------|---------------------------|------------------------------------|
-| Spanish  | `spanish_top1000.json`  | `tools/build_dataset.py`  | `tools/generated_entries*.json`    |
+| Spanish  | `spanish_top1000.json`  | `tools/build_dataset.py`  | `tools/generated_entries_es*.json` |
 | French   | `french_top1000.json`   | `tools/build_french.py`   | `tools/generated_entries_fr*.json` |
 | Italian  | `italian_top1000.json`  | `tools/build_italian.py`  | `tools/generated_entries_it*.json` |
 | German   | `german_top1000.json`   | `tools/build_german.py`   | `tools/generated_entries_de*.json` |
+| English (GB) | `english_top1000.json` | `tools/build_english.py` | `tools/generated_entries_en*.json` |
+
+`definitions` and `example.translations` are maps keyed by the **learner's**
+language: the es/fr/it/de seeds carry `en`, the English seed (for es/fr/it/de
+speakers) carries `es`/`fr`/`it`/`de`. The app reads the key for the learner's
+stored native language (`LocaleService`). Rebuilds keep every key, and a cache
+entry that brings a key a shipped word lacks fills it in without touching ids,
+ranks or existing glosses — that's how a learner language is added to a seed.
 
 The build scripts share scaffolding via `tools/vocab_pipeline.py` (CEFR
 bucketing, deck definitions, JSON emission). Each build script:
@@ -29,6 +37,7 @@ python3 tools/build_dataset.py     # Spanish
 python3 tools/build_french.py
 python3 tools/build_italian.py
 python3 tools/build_german.py
+python3 tools/build_english.py
 ```
 
 ## Story lexicons (`tools/build_story_lexicon.py`)
@@ -81,6 +90,11 @@ python3 tools/generate_vocab.py --language fr --limit 50 --dry-run
 python3 tools/generate_vocab.py --language fr --limit 1000 --yes
 python3 tools/generate_vocab.py --language it --limit 1000 --yes
 python3 tools/generate_vocab.py --language de --limit 1000 --yes
+
+# British English for es/fr/it/de speakers — hermitdave en_50k. One call
+# glosses each word in all four learner languages (~$47 per 8000 inputs).
+python3 tools/generate_vocab.py --language en --limit 8000 --yes
+python3 tools/build_english.py
 ```
 
 After a generation run, run the matching `build_*.py` to merge the new
@@ -100,6 +114,11 @@ pick them up on next launch without a reset.
   "inflection"` when an input is just a conjugated/inflected form of a
   lemma already produced. Skip rate is higher (~25–30%) — plan `--limit`
   accordingly to land your target word count.
+- **English** (`--language en`) uses the multi-gloss prompt: `glosses` and
+  `exampleTranslations` are objects keyed es/fr/it/de, the example sentence
+  field is `example`, and the lemma is the British spelling (the subtitle
+  list is mostly American). `deck_rules.retag` matches its English regexes
+  against the lemma itself.
 - **German nouns are capitalised** by the prompt (the frequency list is
   lowercase from subtitles). Part-of-speech for nouns includes the
   article: `"noun (der)"`, `"noun (die)"`, `"noun (das)"`.
