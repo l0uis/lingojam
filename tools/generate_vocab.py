@@ -841,6 +841,12 @@ def main() -> None:
     if batches:
         print(f"\nWarming cache with batch 1/{len(batches)}...")
         _, _, entries, usage, err = process_batch(0, batches[0])
+        if isinstance(err, (anthropic.AuthenticationError, anthropic.PermissionDeniedError)):
+            # Every other batch would fail the same way — stop instead of
+            # firing the remaining hundreds of requests.
+            print(f"\nERROR: the API rejected the key ({err.status_code}). "
+                  "Check ANTHROPIC_API_KEY and re-run; nothing was cached.", file=sys.stderr)
+            sys.exit(1)
         if err:
             print(f"  WARN: first batch failed: {err}", file=sys.stderr)
             n_err += len(batches[0])
