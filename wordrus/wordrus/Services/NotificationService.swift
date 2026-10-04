@@ -232,7 +232,7 @@ enum NotificationService {
                 for (index, date) in fireDates.enumerated() {
                     let content = UNMutableNotificationContent()
                     content.title = "Dr Tusk is calling"
-                    content.body = "Tap to answer and practice your \((OnboardingStore.targetLanguage ?? .spanish).englishName)."
+                    content.body = "Tap to answer and practice your \((OnboardingStore.targetLanguage ?? .spanish).title)."
                     content.sound = .default
                     content.categoryIdentifier = walrusCallCategory
                     content.userInfo = ["kind": walrusCallCategory]

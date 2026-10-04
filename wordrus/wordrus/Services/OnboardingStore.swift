@@ -65,13 +65,15 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         Bundle.main.url(forResource: seedResourceName, withExtension: "json") != nil
     }
 
+    /// Display name in the UI language ("Spanish", "Español", "Spagnolo"…).
+    /// Prompts must use `englishName` instead.
     var title: String {
         switch self {
-        case .spanish: "Spanish"
-        case .french: "French"
-        case .italian: "Italian"
-        case .german: "German"
-        case .english: "English"
+        case .spanish: String(localized: "Spanish")
+        case .french: String(localized: "French")
+        case .italian: String(localized: "Italian")
+        case .german: String(localized: "German")
+        case .english: String(localized: "English")
         }
     }
 
@@ -82,7 +84,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "Français"
         case .italian: "Italiano"
         case .german: "Deutsch"
-        case .english: "British English"
+        case .english: String(localized: "British English")
         }
     }
 
@@ -141,10 +143,17 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         }
     }
 
-    /// English name used in prompts and UI strings ("learn Spanish",
-    /// "practice your French"). Same as `title` but kept distinct so callers
-    /// can express intent (display vs. prompt copy) clearly.
-    var englishName: String { title }
+    /// English name for LLM prompts and proxy payloads ("learn Spanish").
+    /// Never shown to the user — UI copy uses the localized `title`.
+    var englishName: String {
+        switch self {
+        case .spanish: "Spanish"
+        case .french: "French"
+        case .italian: "Italian"
+        case .german: "German"
+        case .english: "English"
+        }
+    }
 
     /// Endonym used in chat prompts ("habla en español", "parle en français").
     var endonym: String {
@@ -195,20 +204,20 @@ enum LearningTopic: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .traveling: "Traveling"
-        case .weatherAndNature: "Weather & Nature"
-        case .animals: "Animals"
-        case .foodAndDrink: "Food & Drink"
-        case .shopping: "Shopping"
-        case .health: "Health & Body"
-        case .work: "Work"
-        case .money: "Money & Bills"
-        case .feelings: "Feelings"
-        case .home: "Home & Daily Life"
-        case .family: "Family & People"
-        case .outAndAbout: "Out & About"
-        case .studying: "Studying"
-        case .phoneAndInternet: "Phone & Internet"
+        case .traveling: String(localized: "Traveling")
+        case .weatherAndNature: String(localized: "Weather & Nature")
+        case .animals: String(localized: "Animals")
+        case .foodAndDrink: String(localized: "Food & Drink")
+        case .shopping: String(localized: "Shopping")
+        case .health: String(localized: "Health & Body")
+        case .work: String(localized: "Work")
+        case .money: String(localized: "Money & Bills")
+        case .feelings: String(localized: "Feelings")
+        case .home: String(localized: "Home & Daily Life")
+        case .family: String(localized: "Family & People")
+        case .outAndAbout: String(localized: "Out & About")
+        case .studying: String(localized: "Studying")
+        case .phoneAndInternet: String(localized: "Phone & Internet")
         }
     }
 
@@ -241,17 +250,17 @@ enum VocabularyLevel: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .beginner: "Beginner"
-        case .intermediate: "Intermediate"
-        case .advanced: "Advanced"
+        case .beginner: String(localized: "Beginner")
+        case .intermediate: String(localized: "Intermediate")
+        case .advanced: String(localized: "Advanced")
         }
     }
 
     var subtitle: String {
         switch self {
-        case .beginner: "Just getting started"
-        case .intermediate: "I can hold short conversations"
-        case .advanced: "I'm comfortable in most situations"
+        case .beginner: String(localized: "Just getting started")
+        case .intermediate: String(localized: "I can hold short conversations")
+        case .advanced: String(localized: "I'm comfortable in most situations")
         }
     }
 

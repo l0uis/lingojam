@@ -22,6 +22,14 @@ final class Deck {
         self.iconSystemName = iconSystemName
         self.sortOrder = sortOrder
     }
+
+    /// Name to show in the UI. `displayName` comes from the seed JSON in
+    /// English; topic decks map onto `LearningTopic`, whose titles are in the
+    /// String Catalog.
+    var localizedName: String {
+        if slug == DeckConstants.myWordsSlug { return String(localized: "My Words") }
+        return LearningTopic(rawValue: slug)?.title ?? displayName
+    }
 }
 
 enum DeckConstants {

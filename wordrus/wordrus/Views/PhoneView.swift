@@ -189,7 +189,7 @@ struct PhoneView: View {
             Text("Dr Tusk")
                 .font(.gochiHand(size: 36, relativeTo: .title))
                 .foregroundStyle(Color.whiteboardInk)
-            Text("Tap to start a conversation in \((OnboardingStore.targetLanguage ?? .spanish).englishName).")
+            Text("Tap to start a conversation in \((OnboardingStore.targetLanguage ?? .spanish).title).")
                 .font(.sniglet(.callout))
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

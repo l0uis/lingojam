@@ -1335,7 +1335,7 @@ private struct VocabularyLevelStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            line: "Where are you with \((targetLanguage ?? .spanish).englishName) — A1 is brand new, C2 is near-native.",
+            line: "Where are you with \((targetLanguage ?? .spanish).title) — A1 is brand new, C2 is near-native.",
             primaryEnabled: selection != nil,
             onPrimary: onContinue
         ) {
@@ -1597,7 +1597,7 @@ private struct FinalPitchStep: View {
             OnboardingBottomSheet {
                 OnboardingHeadline(
                     title: "You're all set",
-                    subtitle: "Let's start learning \(targetLanguage.englishName) at \(level.title),\n\(dailySetSize) new words a day."
+                    subtitle: "Let's start learning \(targetLanguage.title) at \(level.title),\n\(dailySetSize) new words a day."
                 )
                 Button("Start learning", action: onContinue)
                     .buttonStyle(.primary)

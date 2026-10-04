@@ -23,12 +23,12 @@ enum CEFRLevel: String, CaseIterable, Identifiable, Comparable, Codable {
 
     var subtitle: String {
         switch self {
-        case .a1: "Just getting started"
-        case .a2: "Basic phrases and everyday questions"
-        case .b1: "Short conversations on familiar topics"
-        case .b2: "Comfortable in most situations"
-        case .c1: "Fluent on complex topics"
-        case .c2: "Near-native — anything goes"
+        case .a1: String(localized: "Just getting started")
+        case .a2: String(localized: "Basic phrases and everyday questions")
+        case .b1: String(localized: "Short conversations on familiar topics")
+        case .b2: String(localized: "Comfortable in most situations")
+        case .c1: String(localized: "Fluent on complex topics")
+        case .c2: String(localized: "Near-native — anything goes")
         }
     }
 
