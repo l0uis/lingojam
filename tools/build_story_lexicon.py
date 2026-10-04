@@ -1,6 +1,7 @@
 """Build the per-language story lexicons used by Walter's daily story.
 
-Writes `wordrus/wordrus/Resources/story_lexicon_{code}.json` for es/fr/de/it:
+Writes `wordrus/wordrus/Resources/story_lexicon_{code}.json` for es/fr/de/it/en
+(each language whose seed has been built):
 
     {
       "version": 1,
@@ -74,6 +75,7 @@ SEED_FILES = {
     "fr": "french_top1000.json",
     "de": "german_top1000.json",
     "it": "italian_top1000.json",
+    "en": "english_top1000.json",
 }
 
 
@@ -180,6 +182,42 @@ FUNCTION_WORDS: dict[str, list[str]] = {
 # key: a lowercase surface form OR a (wrong) NLTagger lemma; value: lemmas to
 # also try. Contractions map to their parts. Keep entries evidence-based (see
 # module docstring) — a quirk list; irregular verb forms live in IRREGULAR_FORMS.
+
+# British English. Contractions are listed whole AND as the pieces a tokeniser
+# may split them into (n't, 's, 'm…; "don'"/"t" from the checker's elision
+# split), because the checker's apostrophe handling was written for French
+# and Italian elision. Bare "s" covers possessives (Tusk's → tusk' + s).
+FUNCTION_WORDS["en"] = _words("""
+    the a an
+    i you he she it we they me him her us them one
+    my your his its our their mine yours hers ours theirs
+    myself yourself himself herself itself ourselves yourselves themselves
+    this that these those
+    who whom whose which what where when why how whatever whoever
+    some any no none every each all both either neither other another such
+    something anything nothing everything someone anyone nobody everyone somebody anybody everybody
+    much many more most few less least lot lots
+    about above across after against along among around at before behind below beneath beside
+    between beyond by down during except for from in inside into near of off on onto out outside
+    over past since through throughout till to toward towards under until up upon with within without
+    and or but nor so yet if because although though while whereas unless than whether as
+    not no yes very too also just only even still already ever never always often
+    be am is are was were been being have has had having do does did done doing
+    will would shall should can could may might must ought
+    there here now then
+    don't doesn't didn't isn't aren't wasn't weren't can't cannot couldn't won't wouldn't
+    shouldn't haven't hasn't hadn't mustn't needn't
+    i'm you're he's she's it's we're they're i've you've we've they've
+    i'd you'd he'd she'd we'd they'd i'll you'll he'll she'll it'll we'll they'll
+    that's there's here's what's who's where's how's let's
+    n't 's 're 've 'd 'll 'm s t don' doesn' didn' isn' aren' wasn' weren' can' couldn'
+    won' wouldn' shouldn' haven' hasn' hadn' i' you' he' she' it' we' they' that' there'
+    here' what' who' let'
+    zero two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen
+    sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety
+    hundred thousand million
+""")
+
 
 ALIASES: dict[str, dict[str, list[str]]] = {
     "es": {
@@ -323,6 +361,17 @@ ALIASES: dict[str, dict[str, list[str]]] = {
 # inflectionSuffixes: tried on noun/adjective tokens (surface and tagger lemma)
 # only when no other candidate is allowed. Longest suffix first.
 
+# Irregular noun plurals (the regular ones go through INFLECTION_SUFFIXES).
+ALIASES_EN = {
+    "men": ["man"], "women": ["woman"], "children": ["child"], "people": ["person"],
+    "feet": ["foot"], "teeth": ["tooth"], "mice": ["mouse"], "geese": ["goose"],
+    "lives": ["life"], "wives": ["wife"], "knives": ["knife"], "leaves": ["leaf"],
+    "halves": ["half"], "shelves": ["shelf"], "wolves": ["wolf"], "loaves": ["loaf"],
+    "better": ["good", "well"], "best": ["good", "well"], "worse": ["bad"], "worst": ["bad"],
+    "further": ["far"], "farther": ["far"],
+}
+
+
 INFLECTION_SUFFIXES: dict[str, list[list[str]]] = {
     "es": [
         ["oras", "or"], ["ora", "or"], ["olas", "ol"], ["ola", "ol"], ["esas", "es"], ["esa", "es"],
@@ -347,6 +396,16 @@ INFLECTION_SUFFIXES: dict[str, list[list[str]]] = {
         ["eren", ""], ["eres", ""], ["erer", ""], ["erem", ""], ["ere", ""],
         ["nen", ""], ["ern", ""], ["en", ""], ["em", ""], ["er", ""], ["er", "e"], ["es", ""],
         ["n", ""], ["e", ""], ["s", ""],
+    ],
+    "en": [
+        # Plurals, comparatives/superlatives and -ly adverbs → base form.
+        ["iest", "y"], ["ier", "y"], ["ily", "y"], ["ies", "y"],
+        ["ggest", "g"], ["gger", "g"], ["ttest", "t"], ["tter", "t"], ["ddest", "d"], ["dder", "d"],
+        ["nnest", "n"], ["nner", "n"],
+        ["ches", "ch"], ["shes", "sh"], ["sses", "ss"], ["xes", "x"], ["zes", "z"], ["oes", "o"],
+        ["ves", "f"], ["ves", "fe"],
+        ["est", ""], ["est", "e"], ["er", ""], ["er", "e"], ["ly", ""], ["ly", "le"],
+        ["es", ""], ["s", ""],
     ],
 }
 
@@ -406,6 +465,10 @@ VERB_ENDINGS: dict[str, dict[str, list[str]]] = {
 }
 # Bare stems are real forms: German imperative "komm", French 3sg "il attend",
 # "il sent" (stem-final t dropped via STEM_FINAL_ALTERNATIONS: sen|s, sen|t).
+# English has no infinitive ending, so its single class is "" (the stem is the
+# whole verb). No bare "d" ending: go+d would accept "god"; liked/likes come
+# from the e-drop alternation instead (lik|ed, lik|es).
+VERB_ENDINGS["en"] = {"": ["", "s", "es", "ed", "ing"]}
 VERB_ENDINGS["de"]["en"].append("")
 VERB_ENDINGS["fr"]["re"].append("")
 VERB_ENDINGS["fr"]["ir"].append("")
@@ -421,6 +484,7 @@ STEM_ALTERNATIONS: dict[str, list[list[str]]] = {
     "it": [["o", "uo"], ["e", "ie"]],
     "fr": [["e", "ie"], ["o", "eu"]],
     "de": [["a", "ae"], ["e", "ie"], ["e", "i"], ["au", "aeu"], ["o", "oe"]],
+    "en": [],
 }
 
 STEM_FINAL_ALTERNATIONS: dict[str, list[list[str]]] = {
@@ -428,6 +492,10 @@ STEM_FINAL_ALTERNATIONS: dict[str, list[list[str]]] = {
     "it": [["c", "ch"], ["g", "gh"], ["sc", "sch"], ["i", ""]],
     "fr": [["l", "ll"], ["t", "tt"], ["y", "i"], ["t", ""], ["m", ""], ["v", ""]],
     "de": [["el", "l"], ["er", "r"]],
+    # e-drop (make → mak|ing), y → i (try → tri|ed), consonant doubling
+    # (stop → stopp|ed, plan → plann|ing).
+    "en": [["e", ""], ["y", "i"], ["p", "pp"], ["t", "tt"], ["g", "gg"], ["n", "nn"], ["m", "mm"],
+           ["b", "bb"], ["d", "dd"], ["r", "rr"], ["l", "ll"]],
 }
 
 # Irregular forms of the most frequent verbs: lemma → forms. Folded into the
@@ -617,6 +685,104 @@ IRREGULAR_FORMS: dict[str, dict[str, str]] = {
 }
 
 
+IRREGULAR_FORMS["en"] = {
+    "be": "am is are was were been being",
+    "have": "has had having",
+    "do": "does did done doing",
+    "go": "goes went gone",
+    "say": "says said",
+    "get": "got gotten",
+    "make": "made",
+    "know": "knew known",
+    "think": "thought",
+    "take": "took taken",
+    "see": "saw seen",
+    "come": "came",
+    "give": "gave given",
+    "find": "found",
+    "tell": "told",
+    "feel": "felt",
+    "leave": "left",
+    "bring": "brought",
+    "buy": "bought",
+    "begin": "began begun",
+    "keep": "kept",
+    "hold": "held",
+    "write": "wrote written",
+    "stand": "stood",
+    "hear": "heard",
+    "mean": "meant",
+    "meet": "met",
+    "run": "ran",
+    "pay": "paid",
+    "sit": "sat",
+    "speak": "spoke spoken",
+    "lie": "lay lain lying",
+    "lead": "led",
+    "grow": "grew grown",
+    "lose": "lost",
+    "fall": "fell fallen",
+    "send": "sent",
+    "build": "built",
+    "understand": "understood",
+    "draw": "drew drawn",
+    "break": "broke broken",
+    "spend": "spent",
+    "rise": "rose risen",
+    "drive": "drove driven",
+    "wear": "wore worn",
+    "choose": "chose chosen",
+    "eat": "ate eaten",
+    "drink": "drank drunk",
+    "sleep": "slept",
+    "swim": "swam swum",
+    "sing": "sang sung",
+    "fly": "flew flown flies",
+    "forget": "forgot forgotten",
+    "teach": "taught",
+    "catch": "caught",
+    "fight": "fought",
+    "sell": "sold",
+    "win": "won",
+    "throw": "threw thrown",
+    "wake": "woke woken",
+    "ride": "rode ridden",
+    "hide": "hid hidden",
+    "steal": "stole stolen",
+    "shake": "shook shaken",
+    "feed": "fed",
+    "light": "lit",
+    "learn": "learnt",
+    "dream": "dreamt",
+    "smell": "smelt",
+    "spell": "spelt",
+    "burn": "burnt",
+    "bite": "bit bitten",
+    "blow": "blew blown",
+    "freeze": "froze frozen",
+    "hang": "hung",
+    "hit": "hits",
+    "hurt": "hurts",
+    "lend": "lent",
+    "ring": "rang rung",
+    "shine": "shone",
+    "shoot": "shot",
+    "sink": "sank sunk",
+    "slide": "slid",
+    "stick": "stuck",
+    "sting": "stung",
+    "swing": "swung",
+    "tear": "tore torn",
+    "dig": "dug",
+    "bend": "bent",
+    "bleed": "bled",
+    "deal": "dealt",
+    "die": "dying",
+    "tie": "tying",
+}
+ALIASES["en"] = ALIASES_EN
+
+
 def merged_aliases(lang: str) -> dict[str, list[str]]:
     """Quirk aliases + irregular verb forms, form → sorted unique lemmas."""
     merged: dict[str, list[str]] = {k: list(v) for k, v in ALIASES[lang].items()}
@@ -666,7 +832,8 @@ def base_lemma(lang: str, lemma: str) -> str:
 
 
 def verb_class(lang: str, lemma: str) -> str | None:
-    """Longest matching ending class (Italian "are" before French-style "re")."""
+    """Longest matching ending class (Italian "are" before French-style "re").
+    English's only class is "" — callers must test `is not None`."""
     for ending in sorted(VERB_ENDINGS[lang], key=len, reverse=True):
         if lemma.endswith(ending) and len(lemma) > len(ending) + 1:
             return ending
@@ -680,12 +847,18 @@ def regular_forms(lang: str, lemma: str, pos: str) -> set[str]:
     forms: set[str] = set()
     if pos.startswith("verb"):
         cls = verb_class(lang, w)
-        if cls:
-            stem = w[: -len(cls)]
+        if cls is not None:
+            # len(w) - len(cls), not -len(cls): English's class ending is "".
+            stem = w[: len(w) - len(cls)]
             if len(stem) >= 2:
                 forms |= {stem + e for e in VERB_ENDINGS[lang][cls] if e}
                 if lang == "de":
                     forms.add("ge" + stem + "t")
+                if lang == "en":
+                    if w.endswith("e"):
+                        forms |= {w[:-1] + "ing", w + "d"}
+                    if w.endswith("y") and len(w) > 2 and w[-2] not in "aeiou":
+                        forms |= {w[:-1] + "ies", w[:-1] + "ied"}
     elif pos.startswith("noun") or pos.startswith("adjective"):
         if lang == "fr":
             forms |= {w + "s", w + "x", w + "e", w + "es"}
@@ -694,6 +867,10 @@ def regular_forms(lang: str, lemma: str, pos: str) -> set[str]:
             forms |= {stem + e for e in ("o", "a", "i", "e")}
         elif lang == "de":
             forms |= {w + e for e in ("e", "en", "n", "er", "s", "es", "em", "nen")}
+        elif lang == "en":
+            forms |= {w + "s", w + "es"}
+            if w.endswith("y") and len(w) > 2 and w[-2] not in "aeiou":
+                forms.add(w[:-1] + "ies")
     forms.discard(w)
     return forms
 
@@ -824,10 +1001,11 @@ def build(lang: str, report: bool = False) -> None:
 
 def main(argv: list[str]) -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("languages", nargs="*", help="es fr de it (default: all)")
+    parser.add_argument("languages", nargs="*", help="es fr de it en (default: every language whose seed exists)")
     parser.add_argument("--report", action="store_true", help="list frequent forms the lexicon can't explain")
     args = parser.parse_args(argv)
-    for lang in args.languages or list(SEED_FILES):
+    default = [lang for lang, name in SEED_FILES.items() if (RESOURCES_DIR / name).exists()]
+    for lang in args.languages or default:
         if lang not in SEED_FILES:
             parser.error(f"unknown language {lang!r}; choose from {', '.join(SEED_FILES)}")
         build(lang, report=args.report)

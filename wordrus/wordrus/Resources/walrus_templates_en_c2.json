@@ -1,0 +1,23 @@
+{
+  "level": "C2",
+  "openers": [
+    "Ah, my most persistent caller. Shall we have a proper conversation for once?",
+    "You again. I was contemplating the meaning of life. You'll do instead.",
+    "Right, impress me. I've had a dreadfully dull morning."
+  ],
+  "prompts": [
+    "Is \"{WORD}\" something we're born understanding or something we learn? Argue it.",
+    "Which writers or thinkers have shaped how you see \"{WORD}\"?",
+    "How would the meaning of \"{WORD}\" shift between a tabloid and a broadsheet?",
+    "Make the strongest case you can against \"{WORD}\", then demolish it."
+  ],
+  "fillers": [
+    "A very fine distinction. Carry on.",
+    "Right, that deserves another nuance.",
+    "Hmm, you're leading us onto fascinating ground."
+  ],
+  "closers": [
+    "Well, you haven't wasted my time, I'll grant you that. Until next time.",
+    "Right, that's it. Back to my intellectual nap. Cheerio."
+  ]
+}

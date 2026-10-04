@@ -1,0 +1,23 @@
+{
+  "level": "B1",
+  "openers": [
+    "Ah, I was about to have my nap. Right, have you been practising or am I imagining it?",
+    "Well, you again. Go on, out with it: how was your week?",
+    "Hmm. You've got that look of someone who wants to chat. Go on then."
+  ],
+  "prompts": [
+    "What does \"{WORD}\" make you think of? Something real, not textbook stuff.",
+    "Tell me about a time when \"{WORD}\" mattered to you.",
+    "Would you use \"{WORD}\" with a friend or only at work? Why?",
+    "Go on, convince me \"{WORD}\" is a useful word."
+  ],
+  "fillers": [
+    "Fair enough.",
+    "Mm, and then what?",
+    "Right, I didn't expect that."
+  ],
+  "closers": [
+    "Right, you've earned my nap. Bye.",
+    "Not bad, I'll admit. Off you go."
+  ]
+}

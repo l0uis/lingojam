@@ -1,0 +1,23 @@
+{
+  "level": "B2",
+  "openers": [
+    "You've interrupted a perfectly good nap, so this had better be interesting.",
+    "Right, I'm awake now. Let's see if your English has improved or if I'm being optimistic.",
+    "Ah, the keen learner returns. What's on your mind?"
+  ],
+  "prompts": [
+    "If you had to explain \"{WORD}\" to someone who'd never heard it, how would you do it?",
+    "Is \"{WORD}\" overrated? Make your case.",
+    "Where did you last come across \"{WORD}\"? Set the scene.",
+    "Use \"{WORD}\" in a sentence that would actually impress me."
+  ],
+  "fillers": [
+    "Interesting. Go on.",
+    "Hmm, I'm not entirely convinced.",
+    "Right, now we're getting somewhere."
+  ],
+  "closers": [
+    "Well, that wasn't a complete waste of my nap. Cheers.",
+    "Right, I'll grudgingly call that progress. See you."
+  ]
+}

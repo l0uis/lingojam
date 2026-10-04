@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit walrus_templates_{lang}_{level}.json for FR, IT, DE.
+"""Emit walrus_templates_{lang}_{level}.json for FR, IT, DE and EN (British).
 
 The existing Spanish files (walrus_templates_a1.json … _c2.json) are
 left in place for backward compatibility; the Swift loader picks the
@@ -344,6 +344,116 @@ TEMPLATES = {
             "closers": [
                 "Na ja, du hast mir die Zeit nicht gestohlen, das gebe ich zu. Bis zum nächsten Mal.",
                 "Okay, das war's. Ich gehe wieder zu meinem intellektuellen Nickerchen. Tschüss.",
+            ],
+        },
+    },
+    "en": {
+        "A1": {
+            "openers": [
+                "Oh, it's you again. Did you study today?",
+                "Right, tell me. What words do you know?",
+                "Hello. Are you practising your English today, yes or no?",
+            ],
+            "prompts": [
+                "Give me a sentence with \"{WORD}\", go on.",
+                "And \"{WORD}\"? Put it in a sentence.",
+                "Come on, one sentence with \"{WORD}\".",
+                "Give me an example with the word \"{WORD}\".",
+            ],
+            "fillers": ["Oh yes.", "Right, right.", "Mm, go on."],
+            "closers": [
+                "Right, not bad. Bye.",
+                "Right, that's enough for today. See you next time.",
+            ],
+        },
+        "A2": {
+            "openers": [
+                "Oh, you woke me up. Right, how's your English this week?",
+                "You again. Have you learnt anything or not?",
+                "Right, I'm listening. What did you do today?",
+            ],
+            "prompts": [
+                "And what do you think about \"{WORD}\"? Be honest.",
+                "Right, describe \"{WORD}\" in one sentence.",
+                "Right, use \"{WORD}\" in a sentence. Tell me properly.",
+                "Give me a sentence with \"{WORD}\", go on.",
+            ],
+            "fillers": ["Oh yes, carry on.", "Mm, you don't say.", "Right, I'm with you."],
+            "closers": [
+                "Right, not bad at all. See you next time.",
+                "Right, that's enough for today. Cheerio.",
+            ],
+        },
+        "B1": {
+            "openers": [
+                "Ah, I was about to have my nap. Right, have you been practising or am I imagining it?",
+                "Well, you again. Go on, out with it: how was your week?",
+                "Hmm. You've got that look of someone who wants to chat. Go on then.",
+            ],
+            "prompts": [
+                "What does \"{WORD}\" make you think of? Something real, not textbook stuff.",
+                "Tell me about a time when \"{WORD}\" mattered to you.",
+                "Would you use \"{WORD}\" with a friend or only at work? Why?",
+                "Go on, convince me \"{WORD}\" is a useful word.",
+            ],
+            "fillers": ["Fair enough.", "Mm, and then what?", "Right, I didn't expect that."],
+            "closers": [
+                "Right, you've earned my nap. Bye.",
+                "Not bad, I'll admit. Off you go.",
+            ],
+        },
+        "B2": {
+            "openers": [
+                "You've interrupted a perfectly good nap, so this had better be interesting.",
+                "Right, I'm awake now. Let's see if your English has improved or if I'm being optimistic.",
+                "Ah, the keen learner returns. What's on your mind?",
+            ],
+            "prompts": [
+                "If you had to explain \"{WORD}\" to someone who'd never heard it, how would you do it?",
+                "Is \"{WORD}\" overrated? Make your case.",
+                "Where did you last come across \"{WORD}\"? Set the scene.",
+                "Use \"{WORD}\" in a sentence that would actually impress me.",
+            ],
+            "fillers": ["Interesting. Go on.", "Hmm, I'm not entirely convinced.", "Right, now we're getting somewhere."],
+            "closers": [
+                "Well, that wasn't a complete waste of my nap. Cheers.",
+                "Right, I'll grudgingly call that progress. See you.",
+            ],
+        },
+        "C1": {
+            "openers": [
+                "Ah, you. I was halfway through a rather good dream. Make it worth my while.",
+                "Right, let's skip the pleasantries. What's been occupying that head of yours?",
+                "You've caught me in a philosophical mood. Dangerous for you.",
+            ],
+            "prompts": [
+                "What's the difference, in your view, between \"{WORD}\" and its nearest synonym?",
+                "Would \"{WORD}\" mean the same thing to your grandparents as it does to you?",
+                "Give me a sentence with \"{WORD}\" that a native speaker wouldn't raise an eyebrow at.",
+                "Defend an unpopular opinion that involves \"{WORD}\".",
+            ],
+            "fillers": ["Hmm, a fair point, annoyingly.", "Go on, I'm almost persuaded.", "Now that's a subtle distinction."],
+            "closers": [
+                "Well, you've kept me awake, which is no mean feat. Cheerio.",
+                "Right, I'm going back to my nap with plenty to think about. Bye.",
+            ],
+        },
+        "C2": {
+            "openers": [
+                "Ah, my most persistent caller. Shall we have a proper conversation for once?",
+                "You again. I was contemplating the meaning of life. You'll do instead.",
+                "Right, impress me. I've had a dreadfully dull morning.",
+            ],
+            "prompts": [
+                "Is \"{WORD}\" something we're born understanding or something we learn? Argue it.",
+                "Which writers or thinkers have shaped how you see \"{WORD}\"?",
+                "How would the meaning of \"{WORD}\" shift between a tabloid and a broadsheet?",
+                "Make the strongest case you can against \"{WORD}\", then demolish it.",
+            ],
+            "fillers": ["A very fine distinction. Carry on.", "Right, that deserves another nuance.", "Hmm, you're leading us onto fascinating ground."],
+            "closers": [
+                "Well, you haven't wasted my time, I'll grant you that. Until next time.",
+                "Right, that's it. Back to my intellectual nap. Cheerio.",
             ],
         },
     },

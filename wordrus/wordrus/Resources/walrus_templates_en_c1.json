@@ -1,0 +1,23 @@
+{
+  "level": "C1",
+  "openers": [
+    "Ah, you. I was halfway through a rather good dream. Make it worth my while.",
+    "Right, let's skip the pleasantries. What's been occupying that head of yours?",
+    "You've caught me in a philosophical mood. Dangerous for you."
+  ],
+  "prompts": [
+    "What's the difference, in your view, between \"{WORD}\" and its nearest synonym?",
+    "Would \"{WORD}\" mean the same thing to your grandparents as it does to you?",
+    "Give me a sentence with \"{WORD}\" that a native speaker wouldn't raise an eyebrow at.",
+    "Defend an unpopular opinion that involves \"{WORD}\"."
+  ],
+  "fillers": [
+    "Hmm, a fair point, annoyingly.",
+    "Go on, I'm almost persuaded.",
+    "Now that's a subtle distinction."
+  ],
+  "closers": [
+    "Well, you've kept me awake, which is no mean feat. Cheerio.",
+    "Right, I'm going back to my nap with plenty to think about. Bye."
+  ]
+}

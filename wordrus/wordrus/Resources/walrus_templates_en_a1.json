@@ -1,0 +1,23 @@
+{
+  "level": "A1",
+  "openers": [
+    "Oh, it's you again. Did you study today?",
+    "Right, tell me. What words do you know?",
+    "Hello. Are you practising your English today, yes or no?"
+  ],
+  "prompts": [
+    "Give me a sentence with \"{WORD}\", go on.",
+    "And \"{WORD}\"? Put it in a sentence.",
+    "Come on, one sentence with \"{WORD}\".",
+    "Give me an example with the word \"{WORD}\"."
+  ],
+  "fillers": [
+    "Oh yes.",
+    "Right, right.",
+    "Mm, go on."
+  ],
+  "closers": [
+    "Right, not bad. Bye.",
+    "Right, that's enough for today. See you next time."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "level": "A2",
+  "openers": [
+    "Oh, you woke me up. Right, how's your English this week?",
+    "You again. Have you learnt anything or not?",
+    "Right, I'm listening. What did you do today?"
+  ],
+  "prompts": [
+    "And what do you think about \"{WORD}\"? Be honest.",
+    "Right, describe \"{WORD}\" in one sentence.",
+    "Right, use \"{WORD}\" in a sentence. Tell me properly.",
+    "Give me a sentence with \"{WORD}\", go on."
+  ],
+  "fillers": [
+    "Oh yes, carry on.",
+    "Mm, you don't say.",
+    "Right, I'm with you."
+  ],
+  "closers": [
+    "Right, not bad at all. See you next time.",
+    "Right, that's enough for today. Cheerio."
+  ]
+}
