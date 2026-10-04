@@ -194,6 +194,26 @@ OVERRIDES: dict[str, dict[str, dict[str, set[str]]]] = {
     },
 }
 
+# Per-lemma deck removals, curated by reading each deck's members — the
+# generator's tags are broad ("time" → traveling). File format, one per line:
+# `lemma: slug slug` in tools/deck_drops_{lang}.txt.
+def _load_deck_drops() -> dict[str, dict[str, set[str]]]:
+    from pathlib import Path
+    out: dict[str, dict[str, set[str]]] = {}
+    for path in Path(__file__).resolve().parent.glob("deck_drops_*.txt"):
+        lang = path.stem.removeprefix("deck_drops_")
+        table = out.setdefault(lang, {})
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.split("#", 1)[0].strip()
+            if ":" not in line:
+                continue
+            lemma, slugs = line.split(":", 1)
+            table.setdefault(lemma.strip(), set()).update(slugs.split())
+    return out
+
+
+DECK_DROPS = _load_deck_drops()
+
 # Decks whose membership this pass computes from scratch. A word's existing tag
 # for one of these is discarded and recomputed, which is how `traveling` sheds
 # its nature/animal residue and how `work-and-money` splits in two.
@@ -222,9 +242,13 @@ _COMPILED = {slug: re.compile(pat, re.I) for slug, pat in GLOSS_RULES.items()}
 
 def retag(language_code: str, lemma: str, gloss: str, slugs: list[str]) -> list[str]:
     """Return the replacement slug list for one word (always includes `common`)."""
+    # English seeds were LLM-tagged against the current taxonomy, and their
+    # "gloss" is the bare lemma, which the gloss regexes under-match — so for
+    # English the rules add to the generator's tags instead of replacing them.
+    recomputed = set() if language_code == "en" else RECOMPUTED
     kept = {
         s for s in slugs
-        if s != COMMON and s not in RECOMPUTED and s != LEGACY_WORK_MONEY
+        if s != COMMON and s not in recomputed and s != LEGACY_WORK_MONEY
     }
 
     probe = _PARENTHETICAL.sub(" ", gloss)
@@ -238,6 +262,9 @@ def retag(language_code: str, lemma: str, gloss: str, slugs: list[str]) -> list[
     matched |= ov.get("add", set())
     matched -= ov.get("drop", set())
     kept |= ov.get("addx", set())
+    kept -= ov.get("drop", set())
+    kept -= DECK_DROPS.get(language_code, {}).get(lemma, set())
+    matched -= DECK_DROPS.get(language_code, {}).get(lemma, set())
 
     if matched & TRAVELING_YIELDS_TO:
         kept.discard("traveling")

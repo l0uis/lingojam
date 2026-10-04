@@ -1,0 +1,84 @@
+# Vetting blocklist — lemmas that must never ship in the English seed.
+# Exact, case-sensitive lemma match. Same policy as the es/fr/it/de lists:
+# everyday words that happen to be rude (damn, hell, sex) stay; slurs,
+# vulgarity and explicit sexual terms go.
+cock
+fag
+faggot
+prick
+# Subtitle-corpus noise (2026-10-04): hesitation sounds and interjection
+# spellings that are transcription, not vocabulary. Real words like ah, wow,
+# oops, ouch and hooray stay.
+aaah
+aah
+agh
+ahh
+argh
+aww
+er
+erm
+ew
+ha-ha
+hah
+heh
+hm
+hmm
+lo
+mm
+mmm
+ooh
+oooh
+umm
+whoo
+whoo-hoo
+yah
+# Variant spelling of a lemma that's already in (goodbye).
+good-bye
+# American-only words whose British equivalent is already in the seed
+# (sweet, wardrobe, centre) — British English is the target.
+candy
+closet
+downtown
+# Character names from the subtitle corpus that the generator glossed as
+# obscure common nouns (perry → "pear cider", tammy → "Scottish beret",
+# tucker → "food", joey → "baby kangaroo"). Real-word homographs that
+# learners need (bill, rose, robin, grant, cliff, mac, jay) stay.
+barbie
+beck
+billy
+bobby
+charlie
+drake
+fisher
+hank
+harry
+hart
+homer
+jimmy
+joey
+josh
+lee
+magnum
+marc
+matt
+miller
+perry
+smith
+spencer
+stan
+tammy
+tom
+tony
+tucker
+turner
+woody
+# Slang/abbreviation fragments and American money slang.
+buck
+cha
+chow
+cos
+dime
+fed
+franc
+guinea
+oz

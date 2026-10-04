@@ -210,7 +210,8 @@ FUNCTION_WORDS["en"] = _words("""
     i'm you're he's she's it's we're they're i've you've we've they've
     i'd you'd he'd she'd we'd they'd i'll you'll he'll she'll it'll we'll they'll
     that's there's here's what's who's where's how's let's
-    n't 's 're 've 'd 'll 'm s t don' doesn' didn' isn' aren' wasn' weren' can' couldn'
+    oh okay ok hey
+    n't 's 're 've 'd 'll 'm s t re ve ll m d don' doesn' didn' isn' aren' wasn' weren' can' couldn'
     won' wouldn' shouldn' haven' hasn' hadn' i' you' he' she' it' we' they' that' there'
     here' what' who' let'
     zero two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen
