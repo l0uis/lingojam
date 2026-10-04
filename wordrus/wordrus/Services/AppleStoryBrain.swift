@@ -27,11 +27,29 @@ enum StoryPrompt {
         STYLE
         - \(length.words.lowerBound)-\(length.words.upperBound) words, sentences max \(length.maxSentenceWords) words, simple tenses for \(request.level.rawValue).
         - One small funny moment, end with a light cliffhanger.
-        - Previous episode: \((previous?.isEmpty ?? true) ? "none — this is the first episode" : previous!). Topic: \(request.topic).
+        - Topic: \(request.topic).
+        \(series(request, previous: previous))
 
         ALLOWED_WORDS: \(request.knownWords.prefix(knownWordLimit).map(\.lemma).joined(separator: ", "))
         NEW_WORDS: \(request.newWords.map(\.lemma).joined(separator: ", "))
         Questions must be in \(request.language.englishName) and use only allowed words.
+        """
+    }
+
+    /// Mirrors the worker's `continuitySection`: the story so far is already
+    /// told, so today's episode must move on rather than retell it.
+    private static func series(_ request: StoryRequest, previous: String?) -> String {
+        guard let previous, !previous.isEmpty else {
+            return "SERIES\n- This is the first episode of an ongoing series: introduce Dr Tusk and start a small adventure."
+        }
+        let titles = request.recentTitles.isEmpty
+            ? ""
+            : "\n- Recent titles (give today's a different one): " + request.recentTitles.map { "\"\($0)\"" }.joined(separator: ", ") + "."
+        return """
+        SERIES
+        - This is episode \(request.episodeNumber) of an ongoing series. The story so far (already told — do NOT retell it): \(previous).
+        - Start where that left off: resolve the cliffhanger in the first sentence or two, then something NEW happens — a new place, problem or discovery.
+        - Never repeat earlier events, openings or jokes.\(titles)
         """
     }
 

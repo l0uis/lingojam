@@ -626,6 +626,10 @@ export interface StoryRequest {
   topic?: string
   /** Yesterday's episode summary, so the series continues. */
   previousEpisode?: string
+  /** 1-based number of today's episode in the series. */
+  episode?: number
+  /** Titles of the last few episodes, so today's doesn't repeat one. */
+  recentTitles?: string[]
   minWords: number
   maxWords: number
   maxSentenceWords: number
@@ -704,6 +708,14 @@ export function validateStoryRequest(body: StoryRequest | null): string | null {
   }
   if (!range(body.maxSentenceWords, 4, 40)) return 'bad sentence length'
   if ((body.topic ?? '').length > 80 || (body.previousEpisode ?? '').length > 600) return 'context too long'
+  if (body.episode !== undefined && !range(body.episode, 1, 100_000)) return 'bad episode'
+  if (
+    body.recentTitles !== undefined &&
+    !(Array.isArray(body.recentTitles) && body.recentTitles.length <= 10 &&
+      body.recentTitles.every((t) => typeof t === 'string' && t.length <= 120))
+  ) {
+    return 'bad recentTitles'
+  }
   if (body.repair) {
     const r = body.repair
     if (typeof r.draft?.story !== 'string' || !lemmaList(r.unknownWords, 50) || !lemmaList(r.missingNewWords, MAX_NEW_WORDS)) {
@@ -715,8 +727,6 @@ export function validateStoryRequest(body: StoryRequest | null): string | null {
 
 export function storySystemPrompt(req: StoryRequest): string {
   const native = req.nativeLanguage || 'English'
-  // The template adds its own full stop after the summary.
-  const previous = req.previousEpisode?.trim().replace(/[.!?]+$/, '') || 'none — this is the first episode'
   const topic = req.topic?.trim() || 'everyday life'
   return `You are writing a short daily story for a language learner in the app Wordrus.
 The narrator is Dr Tusk the walrus: curious, a bit clumsy, warm and funny. He tells the story himself, in the first person.
@@ -731,9 +741,33 @@ STRICT VOCABULARY RULES
 STYLE
 - ${req.minWords}-${req.maxWords} words, sentences max ${req.maxSentenceWords} words, simple tenses for ${req.level}.
 - One small funny moment, end with a light cliffhanger.
-- Previous episode: ${previous}. Topic: ${topic}.
+- Topic: ${topic}.
+${continuitySection(req)}
 
 Questions must be in ${req.language} and use only allowed words. Submit the story with the ${STORY_TOOL_NAME} tool.`
+}
+
+/**
+ * The series part of the prompt. Without an explicit "this already
+ * happened — move on", the model treats the summary as material and retells
+ * yesterday's episode (same opening, same discovery) when the word lists
+ * haven't changed much.
+ */
+export function continuitySection(req: StoryRequest): string {
+  const previous = req.previousEpisode?.trim()
+  if (!previous) {
+    return `
+SERIES
+- This is the first episode of an ongoing series: introduce Dr Tusk and start a small adventure.`
+  }
+  const titles = (req.recentTitles ?? []).map((t) => t.trim()).filter(Boolean)
+  const avoidTitles = titles.length ? `\n- Recent titles (give today's a different one): ${titles.map((t) => `"${t}"`).join(', ')}.` : ''
+  const episode = req.episode ? `episode ${req.episode}` : 'the next episode'
+  return `
+SERIES
+- This is ${episode} of an ongoing series. The story so far (already told — do NOT retell it): ${previous}
+- Start where that left off: resolve the cliffhanger in the first sentence or two, then something NEW happens — a new place, problem or discovery.
+- Never repeat earlier events, openings or jokes.${avoidTitles}`
 }
 
 export type StoryMessage =

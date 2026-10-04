@@ -42,6 +42,8 @@ struct ClaudeStoryBrain: StoryGenerating {
         let newWords: [String]
         let topic: String
         let previousEpisode: String?
+        let episode: Int
+        let recentTitles: [String]
         let minWords: Int
         let maxWords: Int
         let maxSentenceWords: Int
@@ -57,6 +59,8 @@ struct ClaudeStoryBrain: StoryGenerating {
             newWords: request.newWords.map(\.lemma),
             topic: request.topic,
             previousEpisode: request.previousEpisodeSummary,
+            episode: request.episodeNumber,
+            recentTitles: request.recentTitles,
             minWords: request.length.words.lowerBound,
             maxWords: request.length.words.upperBound,
             maxSentenceWords: request.length.maxSentenceWords,

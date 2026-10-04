@@ -57,6 +57,10 @@ struct StoryRequest: Equatable {
     var topic: String
     /// Yesterday's `episodeSummary`, so the series continues. nil for episode one.
     var previousEpisodeSummary: String?
+    /// 1-based number of today's episode in the series.
+    var episodeNumber: Int = 1
+    /// Titles of the last few episodes, newest first, so today's is different.
+    var recentTitles: [String] = []
 
     var length: StoryLength { StoryLength.for(level) }
 }

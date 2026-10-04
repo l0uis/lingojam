@@ -42,9 +42,17 @@ enum StoryWordSelector {
             frequencyRanks: StoryLexicon.load(for: language)?.frequencyRanks() ?? [:],
             decks: decks,
             level: OnboardingStore.cefrLevel,
-            todaysSetIDs: DailyWordSet.load()?.words.map(\.wordID) ?? []
+            todaysSetIDs: DailyWordSet.load()?.words.map(\.wordID) ?? [],
+            recentNewLemmas: Set(
+                DailyStoryService.history(context: context, language: language)
+                    .prefix(recentNewWordWindow)
+                    .flatMap(\.newWords)
+            )
         )
     }
+
+    /// Stories whose new words aren't taught again while others are available.
+    static let recentNewWordWindow = 5
 
     static func select(
         words: [VocabularyWord],
@@ -53,7 +61,8 @@ enum StoryWordSelector {
         frequencyRanks: [String: Int],
         decks: [Deck],
         level: CEFRLevel,
-        todaysSetIDs: [String]
+        todaysSetIDs: [String],
+        recentNewLemmas: Set<String> = []
     ) -> Selection {
         let byID = Dictionary(words.map { ($0.id, $0) }) { first, _ in first }
         let todaysSet = todaysSetIDs.compactMap { byID[$0] }
@@ -78,22 +87,31 @@ enum StoryWordSelector {
 
         // New words: shaky words from today's stack, then other lapsed words,
         // then unseen words from the topic deck (level-anchored, by rank).
+        // Words a recent story already taught are skipped while anything
+        // else qualifies — otherwise a day without a new Deck set would get
+        // yesterday's new words (and so yesterday's story) again.
         var newWords: [VocabularyWord] = []
-        func addNew(_ candidates: [VocabularyWord]) {
-            for word in candidates where newWords.count < newWordCount && !newWords.contains(where: { $0.lemma == word.lemma }) {
-                newWords.append(word)
-            }
-        }
         let lapses = { (word: VocabularyWord) in progressByID[word.id]?.lapses ?? 0 }
-        addNew(todaysSet.filter { isLearning($0) && !knownIDs.contains($0.id) }.sorted { lapses($0) > lapses($1) })
-        addNew(learning.filter { lapses($0) > 0 && !knownIDs.contains($0.id) }.sorted { lapses($0) > lapses($1) })
+        var candidateLists: [[VocabularyWord]] = [
+            todaysSet.filter { isLearning($0) && !knownIDs.contains($0.id) }.sorted { lapses($0) > lapses($1) },
+            learning.filter { lapses($0) > 0 && !knownIDs.contains($0.id) }.sorted { lapses($0) > lapses($1) },
+        ]
         if let topicSlug {
-            addNew(LevelAnchor.anchored(
+            candidateLists.append(LevelAnchor.anchored(
                 words.filter { progressByID[$0.id] == nil && $0.deckSlugs.contains(topicSlug) }.sorted { $0.rank < $1.rank },
                 to: level
             ))
         }
-        addNew(todaysSet.filter { !knownIDs.contains($0.id) })
+        candidateLists.append(todaysSet.filter { !knownIDs.contains($0.id) })
+        for allowRecent in [false, true] {
+            for candidates in candidateLists {
+                for word in candidates where newWords.count < newWordCount
+                    && !newWords.contains(where: { $0.lemma == word.lemma })
+                    && (allowRecent || !recentNewLemmas.contains(word.lemma)) {
+                    newWords.append(word)
+                }
+            }
+        }
 
         // Known words: learning first, then known (topic first, then frequency).
         let newIDs = Set(newWords.map(\.id))

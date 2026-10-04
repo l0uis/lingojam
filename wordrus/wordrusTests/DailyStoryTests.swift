@@ -12,6 +12,7 @@ private final class ScriptedStoryBrain: StoryGenerating {
     var drafts: [GeneratedStory?]
     var repairs: [GeneratedStory?]
     private(set) var generateCalls = 0
+    private(set) var requests: [StoryRequest] = []
     private(set) var repairRequests: [(unknown: [String], missing: [String])] = []
 
     init(_ name: String, drafts: [GeneratedStory?], repairs: [GeneratedStory?] = [], isLastResort: Bool = false) {
@@ -23,6 +24,7 @@ private final class ScriptedStoryBrain: StoryGenerating {
 
     func generateStory(_ request: StoryRequest) async throws -> GeneratedStory {
         generateCalls += 1
+        requests.append(request)
         guard !drafts.isEmpty, let draft = drafts.removeFirst() else { throw StoryGenerationError.unavailable }
         return draft
     }
@@ -253,6 +255,45 @@ struct DailyStoryTests {
         #expect(lemmas.count == 150)   // every A1 word: the floor can't invent more
         #expect(lemmas.dropFirst().first == "w300")
         #expect(Set(lemmas).isDisjoint(with: words.filter { $0.cefrLevel == "B1" }.map(\.lemma)))
+    }
+
+    @Test func newWordsFromRecentStoriesAreNotTaughtAgainWhileOthersQualify() {
+        let words = (1...6).map { word("es-\($0)", "w\($0)", rank: $0, decks: ["common", "animals"]) }
+        let progress = LearningProgress(wordID: "es-1", state: .learning, lapses: 3, lastReviewedAt: .now)
+        func select(recent: Set<String>) -> [String] {
+            StoryWordSelector.select(
+                words: words, progressByID: ["es-1": progress], knownIDs: [], frequencyRanks: [:],
+                decks: [Deck(slug: "animals", displayName: "Animals")], level: .a1,
+                todaysSetIDs: ["es-1", "es-2"], recentNewLemmas: recent
+            ).newWords.map(\.lemma)
+        }
+        // Same Deck set as yesterday: yesterday's new words are skipped.
+        #expect(select(recent: []) == ["w1", "w2", "w3"])
+        #expect(select(recent: ["w1", "w2", "w3"]) == ["w4", "w5", "w6"])
+        // Nothing else left: recent words come back rather than none at all.
+        #expect(select(recent: Set(words.map(\.lemma))) == ["w1", "w2", "w3"])
+    }
+
+    @Test func episodeNumberAndRecentTitlesComeFromEarlierStories() async throws {
+        let context = try makeContext()
+        for day in 1...3 {
+            var draft = passing
+            draft.title = "Episode \(day)"
+            _ = try await DailyStoryService.generateAndSave(
+                request: request, dayKey: "2026-9-\(day)", context: context,
+                brains: [ScriptedStoryBrain("claude", drafts: [draft])], quota: .unlimited,
+                now: Date(timeIntervalSince1970: TimeInterval(day) * 86_400)
+            )
+        }
+        // Last resort, so the draft is accepted whatever the (empty) word lists.
+        let capture = ScriptedStoryBrain("mock", drafts: [passing], isLastResort: true)
+        _ = try await DailyStoryService.ensureTodayStory(
+            context: context, language: .spanish, now: .now, brains: [capture], quota: .unlimited
+        )
+        let sent = try #require(capture.requests.first)
+        #expect(sent.episodeNumber == 4)
+        #expect(sent.recentTitles == ["Episode 3", "Episode 2", "Episode 1"])
+        #expect(sent.previousEpisodeSummary == passing.episodeSummary)
     }
 
     @Test func selectionCapsKnownWordsAndFallsBackToAGenericTopic() {

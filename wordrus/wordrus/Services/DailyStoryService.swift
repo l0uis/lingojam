@@ -87,6 +87,7 @@ enum DailyStoryService {
         if let existing = story(context: context, language: language, dayKey: dayKey) { return existing }
 
         let selection = StoryWordSelector.selection(context: context, language: language, now: now)
+        let earlier = history(context: context, language: language).filter { $0.dayKey != dayKey }
         let request = StoryRequest(
             language: language,
             nativeLanguageCode: LocaleService.preferredDefinitionLocale,
@@ -94,7 +95,9 @@ enum DailyStoryService {
             knownWords: selection.knownWords,
             newWords: selection.newWords,
             topic: selection.topic,
-            previousEpisodeSummary: previousEpisodeSummary(context: context, language: language, before: dayKey)
+            previousEpisodeSummary: previousEpisodeSummary(context: context, language: language, before: dayKey),
+            episodeNumber: earlier.count + 1,
+            recentTitles: earlier.prefix(5).map(\.title)
         )
         return try await generateAndSave(
             request: request, dayKey: dayKey, context: context,

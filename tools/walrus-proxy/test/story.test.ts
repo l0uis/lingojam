@@ -25,19 +25,37 @@ function request(overrides: Partial<StoryRequest> = {}): StoryRequest {
   }
 }
 
-test('system prompt carries the rules, level, length and continuity', () => {
+test('system prompt carries the rules, level, length and topic', () => {
   const system = storySystemPrompt(request())
   assert.match(system, /Use ONLY words from ALLOWED_WORDS/)
   assert.match(system, /Use EVERY word in NEW_WORDS at least twice/)
   assert.match(system, /70-120 words, sentences max 8 words, simple tenses for A1/)
-  assert.match(system, /Previous episode: Dr Tusk found a note on the beach\. Topic: Animals\./)
+  assert.match(system, /Topic: Animals\./)
   assert.match(system, /Questions must be in Spanish/)
   assert.match(system, /Dr Tusk/)
 })
 
-test('first episode and missing topic get sensible defaults', () => {
+test('a later episode says the story so far is already told and must move on', () => {
+  const system = storySystemPrompt(request({ episode: 4, recentTitles: ['La nota', 'El viaje'] }))
+  assert.match(system, /This is episode 4 of an ongoing series/)
+  assert.match(system, /already told — do NOT retell it\): Dr Tusk found a note on the beach\./)
+  assert.match(system, /resolve the cliffhanger/)
+  assert.match(system, /something NEW happens/)
+  assert.match(system, /Never repeat earlier events/)
+  assert.match(system, /give today's a different one\): "La nota", "El viaje"/)
+})
+
+test('the first episode and a missing topic get sensible defaults', () => {
   const system = storySystemPrompt(request({ previousEpisode: undefined, topic: undefined }))
-  assert.match(system, /Previous episode: none — this is the first episode\. Topic: everyday life\./)
+  assert.match(system, /This is the first episode of an ongoing series/)
+  assert.doesNotMatch(system, /do NOT retell/)
+  assert.match(system, /Topic: everyday life\./)
+})
+
+test('older apps without episode or titles still get the continuity rules', () => {
+  const system = storySystemPrompt(request())
+  assert.match(system, /This is the next episode of an ongoing series/)
+  assert.doesNotMatch(system, /Recent titles/)
 })
 
 test('generation is a single user turn with the word lists', () => {
@@ -75,6 +93,9 @@ test('validation rejects malformed requests', () => {
   assert.equal(validateStoryRequest(request({ minWords: 200, maxWords: 100 })), 'bad length')
   assert.equal(validateStoryRequest(request({ maxSentenceWords: 100 })), 'bad sentence length')
   assert.equal(validateStoryRequest(request({ topic: 'x'.repeat(81) })), 'context too long')
+  assert.equal(validateStoryRequest(request({ episode: 0 })), 'bad episode')
+  assert.equal(validateStoryRequest(request({ recentTitles: Array(11).fill('t') })), 'bad recentTitles')
+  assert.equal(validateStoryRequest(request({ episode: 3, recentTitles: ['a', 'b'] })), null)
   assert.equal(
     validateStoryRequest(request({ repair: { draft: {} as never, unknownWords: [], missingNewWords: [] } })),
     'bad repair'

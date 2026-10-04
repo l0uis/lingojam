@@ -27,6 +27,8 @@ struct StoryGenerationTests {
         #expect(body.maxWords == StoryLength.for(.a2).words.upperBound)
         #expect(body.maxSentenceWords == StoryLength.for(.a2).maxSentenceWords)
         #expect(body.previousEpisode == "Dr Tusk found a note.")
+        #expect(body.episode == 1)
+        #expect(body.recentTitles.isEmpty)
         let json = try JSONSerialization.jsonObject(with: JSONEncoder().encode(body)) as? [String: Any]
         #expect(json?["repair"] == nil)
     }
@@ -64,7 +66,23 @@ struct StoryGenerationTests {
         #expect(prompt.contains("NEW_WORDS: pez, salir"))
         #expect(prompt.contains("w150"))
         #expect(!prompt.contains("w151"))
-        #expect(prompt.contains("Previous episode: Dr Tusk found a note. Topic: Animals."))
+        #expect(prompt.contains("Topic: Animals."))
+    }
+
+    @Test func onDevicePromptSaysTheStorySoFarIsAlreadyTold() {
+        var request = request
+        request.episodeNumber = 3
+        request.recentTitles = ["La nota", "El viaje"]
+        let prompt = StoryPrompt.instructions(for: request, knownWordLimit: 150)
+        #expect(prompt.contains("This is episode 3 of an ongoing series"))
+        #expect(prompt.contains("do NOT retell it): Dr Tusk found a note."))
+        #expect(prompt.contains("something NEW happens"))
+        #expect(prompt.contains("\"La nota\", \"El viaje\""))
+
+        request.previousEpisodeSummary = nil
+        let first = StoryPrompt.instructions(for: request, knownWordLimit: 150)
+        #expect(first.contains("This is the first episode"))
+        #expect(!first.contains("do NOT retell"))
     }
 
     @Test func repairPromptNamesTheRejectedWords() {
