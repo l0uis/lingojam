@@ -90,17 +90,17 @@ final class SpeechRecognitionService {
             try session.setCategory(.playAndRecord, mode: .measurement, options: [.duckOthers, .defaultToSpeaker])
             try session.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
-            lastErrorMessage = "Couldn't open the microphone: \(error.localizedDescription)"
+            lastErrorMessage = String(localized: "Couldn't open the microphone: \(error.localizedDescription)")
             throw error
         }
         #endif
 
         guard let r = SFSpeechRecognizer(locale: locale) else {
-            lastErrorMessage = "No speech recognizer for \(locale.identifier)."
+            lastErrorMessage = String(localized: "No speech recognizer for \(locale.identifier).")
             throw SpeechRecognitionError.recognizerUnavailable
         }
         guard r.isAvailable else {
-            lastErrorMessage = "\(locale.identifier) recognizer is offline. Check internet or download the language pack in Settings → General → Keyboard → Dictation."
+            lastErrorMessage = String(localized: "\(locale.identifier) recognizer is offline. Check internet or download the language pack in Settings → General → Keyboard → Dictation.")
             throw SpeechRecognitionError.recognizerUnavailable
         }
         recognizer = r
@@ -115,7 +115,7 @@ final class SpeechRecognitionService {
         let inputNode = audioEngine.inputNode
         let format = inputNode.outputFormat(forBus: 0)
         guard format.sampleRate > 0 else {
-            lastErrorMessage = "Microphone returned no audio format. Reset the audio session and try again."
+            lastErrorMessage = String(localized: "Microphone returned no audio format. Reset the audio session and try again.")
             throw SpeechRecognitionError.recognizerUnavailable
         }
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] buffer, _ in
@@ -127,7 +127,7 @@ final class SpeechRecognitionService {
         do {
             try audioEngine.start()
         } catch {
-            lastErrorMessage = "Microphone wouldn't start: \(error.localizedDescription)"
+            lastErrorMessage = String(localized: "Microphone wouldn't start: \(error.localizedDescription)")
             inputNode.removeTap(onBus: 0)
             throw error
         }

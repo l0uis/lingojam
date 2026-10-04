@@ -275,15 +275,15 @@ struct SettingsView: View {
     private func restorePurchases() async {
         switch await Entitlements.shared.restore() {
         case .restored:
-            restoreMessage = "Your Pro membership has been restored."
+            restoreMessage = String(localized: "Your Pro membership has been restored.")
         case .nothingToRestore:
-            restoreMessage = "No previous purchases were found for this Apple Account."
+            restoreMessage = String(localized: "No previous purchases were found for this Apple Account.")
         case .failed(let message):
             restoreMessage = message
         }
     }
 
-    private func sectionHeader(_ title: String) -> some View {
+    private func sectionHeader(_ title: LocalizedStringResource) -> some View {
         Text(title).sectionHeaderStyle()
     }
 

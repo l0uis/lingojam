@@ -81,7 +81,7 @@ struct StoryWordSheet: View {
                         .font(.sniglet(.subheadline))
                         .foregroundStyle(.secondary)
                 }
-                Text(partOfSpeech)
+                Text(PartOfSpeechLabel.localized(partOfSpeech))
                     .font(.sniglet(.subheadline))
                     .foregroundStyle(.secondary)
                 Text(definition)
@@ -106,7 +106,7 @@ struct StoryWordSheet: View {
                         systemImage: "play.fill",
                         tint: .gray,
                         action: { SpeechService.shared.speak(example) },
-                        accessibilityLabel: String(localized: "Play example sentence")
+                        accessibilityLabel: "Play example sentence"
                     )
                 }
             }

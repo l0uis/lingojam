@@ -239,6 +239,25 @@ enum LearningTopic: String, CaseIterable, Identifiable {
         case .phoneAndInternet: "iphone"
         }
     }
+    /// Localized version of the seed deck's `description`.
+    var summary: String {
+        switch self {
+        case .traveling: String(localized: "Trips, hotels, airports, tickets.")
+        case .weatherAndNature: String(localized: "Seasons, forecast, landscape, plants.")
+        case .animals: String(localized: "Pets, farm animals, birds, insects.")
+        case .foodAndDrink: String(localized: "Groceries, cooking, ingredients.")
+        case .shopping: String(localized: "Clothes, stores, prices, sizes.")
+        case .health: String(localized: "Doctor, pharmacy, body parts, symptoms.")
+        case .work: String(localized: "Jobs, office, colleagues, careers.")
+        case .money: String(localized: "Banking, salary, rent, paying up.")
+        case .feelings: String(localized: "Emotions, moods, reactions.")
+        case .home: String(localized: "Rooms, routines, household items.")
+        case .family: String(localized: "Relatives, friends, describing people.")
+        case .outAndAbout: String(localized: "Going out, music, sport, hobbies.")
+        case .studying: String(localized: "School, exams, courses, learning.")
+        case .phoneAndInternet: String(localized: "Apps, accounts, messages, devices.")
+        }
+    }
 }
 
 enum VocabularyLevel: String, CaseIterable, Identifiable {

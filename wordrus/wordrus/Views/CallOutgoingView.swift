@@ -81,9 +81,9 @@ struct CallOutgoingView: View {
         .statusBarHidden(true)
     }
 
-    private var ringingLabel: String {
+    private var ringingLabel: LocalizedStringResource {
         let dots = String(repeating: ".", count: dotPhase)
-        return "Ringing\(dots)"
+        return LocalizedStringResource("Ringing\(dots)", comment: "Outgoing call status; the argument is 0–3 animated dots.")
     }
 
     private func waitThenAnswer() async {

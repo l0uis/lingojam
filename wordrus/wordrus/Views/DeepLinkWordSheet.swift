@@ -14,7 +14,7 @@ struct DeepLinkWordSheet: View {
                     Text(word.lemma.capitalizedFirst)
                         .font(.gochiHand(size: 42))
                         .foregroundStyle(Color.whiteboardInk)
-                    Text(word.partOfSpeech)
+                    Text(PartOfSpeechLabel.localized(word.partOfSpeech))
                         .font(.sniglet(.subheadline))
                         .foregroundStyle(.secondary)
                     Text(LocaleService.definition(for: word))

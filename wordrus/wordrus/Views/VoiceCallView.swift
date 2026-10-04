@@ -162,7 +162,7 @@ struct VoiceCallView: View {
         .padding(.top, 8)
     }
 
-    private var statusLine: String {
+    private var statusLine: LocalizedStringResource {
         switch director.stage {
         case .connecting: "Connecting…"
         case .walrusSpeaking: "Speaking"
@@ -277,7 +277,8 @@ struct VoiceCallView: View {
     }
 
     /// Language-appropriate nudge shown in the empty user bubble and the
-    /// keyboard fallback.
+    /// keyboard fallback. Deliberately written in the TARGET language, so
+    /// these literals stay plain `String`s and out of the String Catalog.
     private static var promptPlaceholder: String {
         switch OnboardingStore.targetLanguage ?? .spanish {
         case .spanish: "Di algo en español…"
@@ -493,7 +494,7 @@ private struct YourBubble: View {
         }
     }
 
-    private func label(_ text: String, system: String, tint: Color) -> some View {
+    private func label(_ text: LocalizedStringResource, system: String, tint: Color) -> some View {
         HStack(spacing: 5) {
             Image(systemName: system)
                 .font(.sniglet(.caption2, weight: .bold))
@@ -546,14 +547,14 @@ private struct TalkButton: View {
         .buttonStyle(.plain)
         .disabled(isDisabled)
         .opacity(isDisabled ? 0.4 : 1)
-        .accessibilityLabel(accessibilityText)
+        .accessibilityLabel(Text(accessibilityText))
     }
 
     private var symbol: String {
         isMicEnabled ? "mic.fill" : "mic.slash.fill"
     }
 
-    private var accessibilityText: String {
+    private var accessibilityText: LocalizedStringResource {
         isMicEnabled ? "Turn the microphone off" : "Turn the microphone on"
     }
 }

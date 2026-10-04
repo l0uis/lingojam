@@ -5,6 +5,8 @@ struct DailyWordEntry: TimelineEntry {
     let date: Date
     let snapshot: DailyWordSnapshot?
 
+    /// Widget-gallery sample word. Deliberately plain `String`s (not
+    /// localized): it's target-language sample content, not UI copy.
     static let placeholder = DailyWordEntry(
         date: .now,
         snapshot: DailyWordSnapshot(
@@ -178,7 +180,7 @@ struct DailyWordWidgetView: View {
 
     private var emptyView: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("wordrus")
+            Text(verbatim: "wordrus")
                 .font(.sniglet(.headline))
             Text("Open the app to load your first word.")
                 .font(.sniglet(.caption))

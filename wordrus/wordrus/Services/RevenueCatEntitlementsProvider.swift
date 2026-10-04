@@ -111,7 +111,7 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
                 let result = try await Purchases.shared.purchase(package: pkg)
                 if result.userCancelled { return .cancelled }
                 return Self.isPro(result.customerInfo) ? .success
-                    : .failed("The purchase didn't complete. Please try again.")
+                    : .failed(String(localized: "The purchase didn't complete. Please try again."))
             }
             // Fallback: buy by raw product id (e.g. placeholder plans shown
             // before offerings loaded). An empty result means the product
@@ -119,12 +119,12 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
             // letting the CTA silently do nothing.
             let products = await Purchases.shared.products([plan.id])
             guard let product = products.first else {
-                return .failed("This subscription is temporarily unavailable. Please try again in a moment.")
+                return .failed(String(localized: "This subscription is temporarily unavailable. Please try again in a moment."))
             }
             let result = try await Purchases.shared.purchase(product: product)
             if result.userCancelled { return .cancelled }
             return Self.isPro(result.customerInfo) ? .success
-                : .failed("The purchase didn't complete. Please try again.")
+                : .failed(String(localized: "The purchase didn't complete. Please try again."))
         } catch {
             return .failed((error as NSError).localizedDescription)
         }
@@ -181,38 +181,38 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
     private static func billedSentence(for pkg: Package) -> String {
         let price = pkg.storeProduct.localizedPriceString
         switch pkg.packageType {
-        case .annual: return "Billed \(price) yearly."
-        case .sixMonth: return "Billed \(price) every 6 months."
-        case .threeMonth: return "Billed \(price) quarterly."
-        case .twoMonth: return "Billed \(price) every 2 months."
-        case .monthly: return "Billed \(price) monthly."
-        case .weekly: return "Billed \(price) weekly."
-        case .lifetime: return "\(price), one-time."
-        default: return "Billed \(price)."
+        case .annual: return String(localized: "Billed \(price) yearly.")
+        case .sixMonth: return String(localized: "Billed \(price) every 6 months.")
+        case .threeMonth: return String(localized: "Billed \(price) quarterly.")
+        case .twoMonth: return String(localized: "Billed \(price) every 2 months.")
+        case .monthly: return String(localized: "Billed \(price) monthly.")
+        case .weekly: return String(localized: "Billed \(price) weekly.")
+        case .lifetime: return String(localized: "\(price), one-time.")
+        default: return String(localized: "Billed \(price).")
         }
     }
 
     private static func title(for pkg: Package) -> String {
         switch pkg.packageType {
-        case .annual: return "Annual"
-        case .sixMonth: return "6 Months"
-        case .threeMonth: return "3 Months"
-        case .twoMonth: return "2 Months"
-        case .monthly: return "Monthly"
-        case .weekly: return "Weekly"
-        case .lifetime: return "Lifetime"
+        case .annual: return String(localized: "Annual")
+        case .sixMonth: return String(localized: "6 Months")
+        case .threeMonth: return String(localized: "3 Months")
+        case .twoMonth: return String(localized: "2 Months")
+        case .monthly: return String(localized: "Monthly")
+        case .weekly: return String(localized: "Weekly")
+        case .lifetime: return String(localized: "Lifetime")
         default:
             let t = pkg.storeProduct.localizedTitle
-            return t.isEmpty ? "Plan" : t
+            return t.isEmpty ? String(localized: "Plan") : t
         }
     }
 
     private static func priceText(for pkg: Package) -> String {
         let price = pkg.storeProduct.localizedPriceString
         switch pkg.packageType {
-        case .annual: return "\(price) / year"
-        case .monthly: return "\(price) / month"
-        case .weekly: return "\(price) / week"
+        case .annual: return String(localized: "\(price) / year")
+        case .monthly: return String(localized: "\(price) / month")
+        case .weekly: return String(localized: "\(price) / week")
         case .lifetime: return price
         default: return price
         }
@@ -229,22 +229,18 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
         guard let intro = product.introductoryDiscount,
               intro.paymentMode == .freeTrial else { return nil }
         let period = intro.subscriptionPeriod
-        var value = period.value
-        var unit: String
+        let value = period.value
         switch period.unit {
         case .day:
             if value % 7 == 0 && value >= 7 {
-                value /= 7
-                unit = "week"
-            } else {
-                unit = "day"
+                return String(localized: "\(value / 7) weeks")
             }
-        case .week: unit = "week"
-        case .month: unit = "month"
-        case .year: unit = "year"
-        @unknown default: unit = "day"
+            return String(localized: "\(value) days")
+        case .week: return String(localized: "\(value) weeks")
+        case .month: return String(localized: "\(value) months")
+        case .year: return String(localized: "\(value) years")
+        @unknown default: return String(localized: "\(value) days")
         }
-        return "\(value) \(unit)\(value == 1 ? "" : "s")"
     }
 
     /// Length of a free-trial intro offer in days. Returns nil when there's

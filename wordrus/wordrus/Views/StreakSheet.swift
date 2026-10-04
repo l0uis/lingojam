@@ -15,13 +15,13 @@ struct StreakBadge: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 28, height: 28)
-            Text("\(streak)")
+            Text(verbatim: "\(streak)")
                 .font(.sniglet(.title3, weight: .bold))
                 .foregroundStyle(streak > 0 ? StreakPalette.coralDeep : .secondary)
                 .monospacedDigit()
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Streak: \(streak) day\(streak == 1 ? "" : "s")")
+        .accessibilityLabel("Streak: \(streak) days")
     }
 }
 
@@ -46,16 +46,16 @@ struct StreakSheet: View {
                     spacing: 12
                 ) {
                     StreakStatTile(
-                        value: "\(bestStreak)",
+                        count: bestStreak,
                         label: "Best streak",
-                        unit: bestStreak == 1 ? "day" : "days",
+                        phrase: "\(bestStreak) days",
                         systemIcon: "trophy.fill",
                         tint: .orange
                     )
                     StreakStatTile(
-                        value: "\(totalSessions)",
+                        count: totalSessions,
                         label: "Total sessions",
-                        unit: totalSessions == 1 ? "call" : "calls",
+                        phrase: "\(totalSessions) calls",
                         systemIcon: "phone.fill",
                         tint: .blue
                     )
@@ -154,9 +154,10 @@ struct StreakSheet: View {
 }
 
 private struct StreakStatTile: View {
-    let value: String
-    let label: String
-    let unit: String
+    let count: Int
+    let label: LocalizedStringResource
+    /// The count with its unit ("12 days"), one plural-aware key.
+    let phrase: LocalizedStringResource
     let systemIcon: String
     let tint: Color
 
@@ -173,17 +174,13 @@ private struct StreakStatTile: View {
                     .minimumScaleFactor(0.85)
                 Spacer(minLength: 0)
             }
-            HStack(alignment: .lastTextBaseline, spacing: 4) {
-                Text(value)
-                    .font(.sniglet(size: 30, weight: .bold))
-                    .foregroundStyle(tint)
-                    .monospacedDigit()
-                Text(unit)
-                    .font(.sniglet(.caption, weight: .medium))
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.85)
-            }
+            Text(AttributedString(localized: phrase, emphasizingCount: count,
+                                  font: .sniglet(size: 30, weight: .bold), color: tint))
+                .font(.sniglet(.caption, weight: .medium))
+                .foregroundStyle(.secondary)
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
@@ -208,7 +205,11 @@ private struct StreakCard: View {
 
     @State private var celebrate = false
 
-    private let weekdayLabels = ["M", "T", "W", "T", "F", "S", "S"]
+    /// Monday-first single-letter weekday headers in the user's locale.
+    private let weekdayLabels: [String] = {
+        let symbols = Calendar.current.veryShortStandaloneWeekdaySymbols
+        return Array(symbols.dropFirst()) + symbols.prefix(1)
+    }()
     private var columns: [GridItem] {
         Array(repeating: GridItem(.flexible(), spacing: 6), count: 7)
     }
@@ -224,7 +225,7 @@ private struct StreakCard: View {
                     .scaleEffect(celebrate ? 1.2 : 1.0)
                     .animation(.spring(response: 0.4, dampingFraction: 0.5), value: celebrate)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("\(streak) day\(streak == 1 ? "" : "s")")
+                    Text("\(streak) days")
                         .font(.sniglet(size: 28, weight: .bold))
                     Text(headline)
                         .font(.sniglet(.subheadline))
@@ -288,7 +289,7 @@ private struct StreakCard: View {
         }
     }
 
-    private var headline: String {
+    private var headline: LocalizedStringResource {
         if streak == 0 { return "Start your streak today" }
         if streak == 1 { return "Nice start — keep it going!" }
         if streak < 7 { return "You're on a roll!" }

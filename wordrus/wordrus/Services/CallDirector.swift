@@ -194,7 +194,7 @@ final class CallDirector {
         return store.evaluation ?? ChatEvaluation(
             elicitedWordIDs: [],
             passed: false,
-            encouragement: "The call ended. Give Dr Tusk another ring when you're ready."
+            encouragement: String(localized: "The call ended. Give Dr Tusk another ring when you're ready.")
         )
     }
 
@@ -320,7 +320,7 @@ final class CallDirector {
 
         Task {
             guard await speech.requestPermissions() else {
-                micErrorMessage = "Wordrus needs Microphone and Speech Recognition access to hear you. Turn them on in Settings, or tap your bubble to type instead."
+                micErrorMessage = String(localized: "Wordrus needs Microphone and Speech Recognition access to hear you. Turn them on in Settings, or tap your bubble to type instead.")
                 userBubble = .empty
                 isMicEnabled = false
                 return
@@ -330,7 +330,7 @@ final class CallDirector {
                 try await speech.startRecording(locale: locale)
             } catch {
                 micErrorMessage = speech.lastErrorMessage
-                    ?? "Couldn't start the microphone. Tap your bubble to type instead."
+                    ?? String(localized: "Couldn't start the microphone. Tap your bubble to type instead.")
                 userBubble = .empty
                 isMicEnabled = false
             }

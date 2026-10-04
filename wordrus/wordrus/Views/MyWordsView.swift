@@ -4,7 +4,7 @@ import SwiftData
 private enum MyWordsFilter: String, CaseIterable, Identifiable {
     case learning, know
     var id: String { rawValue }
-    var title: String {
+    var title: LocalizedStringResource {
         switch self {
         case .learning: "Learning"
         case .know: "Know"
@@ -15,7 +15,7 @@ private enum MyWordsFilter: String, CaseIterable, Identifiable {
 private enum POSFilter: String, CaseIterable, Identifiable {
     case all, noun, verb, adjective, adverb, other
     var id: String { rawValue }
-    var title: String {
+    var title: LocalizedStringResource {
         switch self {
         case .all: "All"
         case .noun: "Nouns"
@@ -142,7 +142,7 @@ struct MyWordsView: View {
             topics: VocabularyProgress.topicFills(
                 words: scoped.filter { !$0.id.hasPrefix("custom-") }.map { ($0.id, $0.deckSlugs) },
                 learnedIDs: knownIDs,
-                decks: decks.filter { $0.slug != DeckConstants.commonSlug }.map { ($0.slug, $0.displayName, $0.iconSystemName) }
+                decks: decks.filter { $0.slug != DeckConstants.commonSlug }.map { ($0.slug, $0.localizedName, $0.iconSystemName) }
             ),
             learnedInOrder: order.compactMap { byID[$0] }
         )
@@ -232,7 +232,7 @@ struct MyWordsView: View {
                             }
                         }
                     } header: {
-                        Text("\(filtered.count) \(filtered.count == 1 ? "word" : "words")")
+                        Text("\(filtered.count) words")
                             .sectionHeaderStyle()
                     }
                     .id(topAnchorID)
@@ -371,7 +371,7 @@ struct MyWordsView: View {
         isLookingUp = false
 
         guard let result else {
-            addError = "Couldn't look that up. Check your connection and try again."
+            addError = String(localized: "Couldn't look that up. Check your connection and try again.")
             return
         }
         let word = persist(result, language: language)
@@ -458,7 +458,7 @@ private struct WordDetailView: View {
                         Text(word.lemma.capitalizedFirst)
                             .font(.gochiHand(size: 42))
                             .foregroundStyle(Color.whiteboardInk)
-                        Text(word.partOfSpeech)
+                        Text(PartOfSpeechLabel.localized(word.partOfSpeech))
                             .font(.sniglet(.subheadline))
                             .foregroundStyle(.secondary)
                         Text(LocaleService.definition(for: word))
@@ -500,7 +500,7 @@ private struct WordDetailView: View {
                     systemImage: knowsWord ? "questionmark" : "checkmark",
                     tint: knowsWord ? .blue : .green,
                     action: { onRate(knowsWord ? .again : .good) },
-                    accessibilityLabel: knowsWord ? "Move back to learning" : "Mark as known"
+                    accessibilityLabel: rateLabel
                 )
             }
             .frame(maxWidth: .infinity)
@@ -509,6 +509,11 @@ private struct WordDetailView: View {
         .presentationDetents([.medium])
         .presentationDragIndicator(.visible)
         .presentationBackground(Color(.systemBackground))
+    }
+
+    private var rateLabel: LocalizedStringResource {
+        if knowsWord { return "Move back to learning" }
+        return "Mark as known"
     }
 }
 

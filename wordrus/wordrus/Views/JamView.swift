@@ -374,7 +374,7 @@ struct JamView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
                     .foregroundStyle(Color.whiteboardInk)
-                Text(word.partOfSpeech)
+                Text(PartOfSpeechLabel.localized(word.partOfSpeech))
                     .font(.sniglet(.subheadline))
                     .foregroundStyle(.secondary)
                 Text(LocaleService.definition(for: word))
@@ -715,7 +715,7 @@ struct JamView: View {
             result.append(Deck(
                 slug: DeckConstants.myWordsSlug,
                 displayName: "My Words",
-                deckDescription: "Words you added yourself.",
+                deckDescription: String(localized: "Words you added yourself."),
                 iconSystemName: "star.fill",
                 sortOrder: 9999
             ))
@@ -1006,7 +1006,7 @@ struct JamView: View {
             VStack(spacing: 12) {
                 HStack(spacing: 10) {
                     Image(systemName: lastSetWasRevision ? "arrow.triangle.2.circlepath" : (currentTheme?.iconSystemName ?? "square.stack"))
-                    Text(lastSetWasRevision ? "Revision" : (currentTheme?.displayName ?? "Today's Set"))
+                    Text(lastSetWasRevision ? String(localized: "Revision") : (currentTheme?.localizedName ?? String(localized: "Today's Set")))
                 }
                 .font(.gochiHand(size: 30))
                 .lineLimit(1)
@@ -1018,7 +1018,7 @@ struct JamView: View {
                         .font(.sniglet(.callout))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
-                } else if let desc = currentTheme?.deckDescription, !desc.isEmpty {
+                } else if let desc = currentTheme?.localizedDescription, !desc.isEmpty {
                     Text(desc)
                         .font(.sniglet(.callout))
                         .foregroundStyle(.secondary)
@@ -1067,7 +1067,7 @@ struct JamView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             } else if let done = justCompletedTheme {
-                Text("You finished today's \(done.displayName) set.")
+                Text("You finished today's \(done.localizedName) set.")
                     .font(.sniglet(.callout))
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -1083,7 +1083,7 @@ struct JamView: View {
                                 .foregroundStyle(.secondary)
                             HStack(spacing: 8) {
                                 Image(systemName: next.iconSystemName)
-                                Text(next.displayName)
+                                Text(next.localizedName)
                             }
                             .font(.sniglet(.title3, weight: .bold))
                             .foregroundStyle(Color.whiteboardInk)

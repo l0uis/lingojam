@@ -292,7 +292,7 @@ private struct CallHistoryRow: View {
         }
     }
 
-    private var title: String {
+    private var title: LocalizedStringResource {
         switch session.status {
         case .missed: "Missed call"
         case .declined: "Declined"
@@ -306,10 +306,9 @@ private struct CallHistoryRow: View {
         session.status == .missed ? .red : .primary
     }
 
-    private var subtitle: String {
-        let directionLabel = session.wasIncoming ? "Incoming" : "Outgoing"
+    private var subtitle: LocalizedStringResource {
         let levelLabel = session.levelAtStart
-        return "\(directionLabel) · \(levelLabel)"
+        return session.wasIncoming ? "Incoming · \(levelLabel)" : "Outgoing · \(levelLabel)"
     }
 }
 
@@ -366,7 +365,7 @@ private struct ConversationDetailSheet: View {
         session.startedAt.formatted(date: .abbreviated, time: .shortened)
     }
 
-    private var emptyMessage: String {
+    private var emptyMessage: LocalizedStringResource {
         switch session.status {
         case .missed: "You missed Dr Tusk's call."
         case .declined: "You declined this call."
@@ -399,7 +398,7 @@ private struct ConversationDetailSheet: View {
         )
     }
 
-    private var statusSummary: String {
+    private var statusSummary: LocalizedStringResource {
         switch session.status {
         case .missed: "Missed"
         case .declined: "Declined"

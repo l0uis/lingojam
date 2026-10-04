@@ -68,9 +68,9 @@ struct DeckPickerSheet: View {
                 }
 
                 Section {
-                    deckRow(slug: DeckConstants.allSlug, title: "All Words")
+                    deckRow(slug: DeckConstants.allSlug, title: String(localized: "All Words"))
                     ForEach(decks, id: \.slug) { deck in
-                        deckRow(slug: deck.slug, title: deck.displayName)
+                        deckRow(slug: deck.slug, title: deck.localizedName)
                     }
                 } header: {
                     sectionHeader("Deck")
@@ -122,7 +122,7 @@ struct DeckPickerSheet: View {
         pendingChange = nil
     }
 
-    private func sectionHeader(_ title: String) -> some View {
+    private func sectionHeader(_ title: LocalizedStringResource) -> some View {
         Text(title).sectionHeaderStyle()
     }
 

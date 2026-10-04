@@ -231,19 +231,19 @@ private struct OnboardingScaffold<Content: View>: View {
     /// bubble (the default across the flow), `titled` is the plain
     /// title-plus-subtitle block still used by the language picker.
     enum Header {
-        case titled(title: String, subtitle: String?)
-        case spoken(String)
+        case titled(title: LocalizedStringResource, subtitle: LocalizedStringResource?)
+        case spoken(LocalizedStringResource)
     }
 
     let header: Header
-    let primaryTitle: String
+    let primaryTitle: LocalizedStringResource
     let primaryEnabled: Bool
     let onPrimary: () -> Void
     @ViewBuilder var content: () -> Content
 
     init(
-        line: String,
-        primaryTitle: String = "Continue",
+        line: LocalizedStringResource,
+        primaryTitle: LocalizedStringResource = "Continue",
         primaryEnabled: Bool = true,
         onPrimary: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -256,9 +256,9 @@ private struct OnboardingScaffold<Content: View>: View {
     }
 
     init(
-        title: String,
-        subtitle: String? = nil,
-        primaryTitle: String = "Continue",
+        title: LocalizedStringResource,
+        subtitle: LocalizedStringResource? = nil,
+        primaryTitle: LocalizedStringResource = "Continue",
         primaryEnabled: Bool = true,
         onPrimary: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -422,6 +422,17 @@ private struct SelectableRow: View {
 private struct WelcomeStep: View {
     let onContinue: () -> Void
 
+    /// Runs before the "I speak" picker, so go by the likely native
+    /// language: everyone but English speakers learns English. (if/else, not
+    /// a ternary — literals in a ternary aren't extracted to the catalog.)
+    private var pitch: LocalizedStringResource {
+        if NativeLanguage.onboardingDefault == .english {
+            return "Learn the most used words in Spanish, French, Italian and German"
+        } else {
+            return "Learn the most used words in English"
+        }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             OnboardingVideoPanel(dataAssetName: "scenePhoneCheck") {
@@ -433,7 +444,7 @@ private struct WelcomeStep: View {
             OnboardingBottomSheet {
                 OnboardingHeadline(
                     title: "The effortless way to learn languages",
-                    subtitle: "Learn the most used words in Spanish, French, Italian and German"
+                    subtitle: pitch
                 )
                 Button("Continue", action: onContinue)
                     .buttonStyle(.primary)
@@ -502,8 +513,8 @@ private struct OnboardingVideoPanel<Top: View>: View {
 
 /// Centred title and optional subline under an `OnboardingVideoPanel`.
 private struct OnboardingHeadline: View {
-    let title: String
-    var subtitle: String?
+    let title: LocalizedStringResource
+    var subtitle: LocalizedStringResource?
 
     var body: some View {
         VStack(spacing: 8) {
@@ -547,7 +558,7 @@ private struct StickerLogo: View {
         .compositingGroup()
         .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
         .accessibilityElement()
-        .accessibilityLabel("Wordrus")
+        .accessibilityLabel(Text(verbatim: "Wordrus"))
     }
 
     private var logo: some View {
@@ -701,7 +712,7 @@ private struct WalrusAvatar: View {
 /// Avatar plus the line he's saying — the onboarding equivalent of a chat
 /// row, shared by every step where Dr Tusk speaks.
 private struct WalrusSpeechRow: View {
-    let text: String
+    let text: LocalizedStringResource
 
     @State private var bubbleVisible = false
 
@@ -923,7 +934,7 @@ private struct CustomizeIntroStep: View {
     let name: String
     let onContinue: () -> Void
 
-    private var greeting: String {
+    private var greeting: LocalizedStringResource {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty
             ? "Let's set your learning pace."
@@ -956,15 +967,15 @@ private struct DailyGoalStep: View {
             onPrimary: onContinue
         ) {
             HStack(spacing: 16) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text("\(size)")
-                        .font(.gochiHand(size: 64, relativeTo: .largeTitle))
-                        .foregroundStyle(Color.whiteboardInk)
-                        .monospacedDigit()
-                    Text("words")
-                        .font(.sniglet(.title3))
-                        .foregroundStyle(DS.Color.charcoal)
-                }
+                Text(AttributedString(
+                    localized: "\(size) words",
+                    emphasizingCount: size,
+                    font: .gochiHand(size: 64, relativeTo: .largeTitle),
+                    color: .whiteboardInk
+                ))
+                .font(.sniglet(.title3))
+                .foregroundStyle(DS.Color.charcoal)
+                .monospacedDigit()
                 Spacer()
                 HStack(spacing: 14) {
                     stepButton("minus", enabled: size > DailySetConfig.minSize) {
@@ -1276,7 +1287,7 @@ private struct ExamplePreviewCard: View {
                     Text(example.word)
                         .font(.gochiHand(size: 48))
                         .foregroundStyle(Color.whiteboardInk)
-                    Text(example.partOfSpeech)
+                    Text(PartOfSpeechLabel.localized(example.partOfSpeech))
                         .font(.sniglet(.subheadline))
                         .foregroundStyle(.secondary)
                     Text(example.definition)
@@ -1516,7 +1527,7 @@ private struct WordPickStep: View {
         }
     }
 
-    private var line: String {
+    private var line: LocalizedStringResource {
         switch level {
         case .beginner: "Tap any of these you already know — up to 6."
         case .intermediate: "How about these?"
@@ -1558,7 +1569,7 @@ private struct WordPickChip: View {
                 Text(word.lemma.capitalizedFirst)
                     .font(.gochiHand(size: 28, relativeTo: .title3))
                     .foregroundStyle(isSelected ? Color.white : Color.whiteboardInk)
-                Text(word.partOfSpeech)
+                Text(PartOfSpeechLabel.localized(word.partOfSpeech))
                     .font(.sniglet(.caption2))
                     .foregroundStyle(isSelected ? Color.white.opacity(0.85) : .secondary)
             }

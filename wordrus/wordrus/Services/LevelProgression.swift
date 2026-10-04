@@ -70,16 +70,16 @@ enum LevelProgression {
 
         /// One-line description of the shortest remaining route to `next`.
         func summary() -> String {
-            guard let next else { return "You're at the top level." }
-            if eligible { return "Ready to move up to \(next.title)." }
+            guard let next else { return String(localized: "You're at the top level.") }
+            if eligible { return String(localized: "Ready to move up to \(next.title).") }
             let wordsLeft = max(0, knownNeeded - knownAtLevel)
             let callsLeft = max(0, passesNeeded - passes)
             let byWords = Double(knownAtLevel) / Double(knownNeeded)
             let byCalls = Double(passes) / Double(passesNeeded)
             if byCalls >= byWords, passes > 0 {
-                return "\(next.title) in \(callsLeft) more \(callsLeft == 1 ? "call" : "calls")."
+                return String(localized: "\(next.title) in \(callsLeft) more calls.")
             }
-            return "\(next.title) in \(wordsLeft) more mastered \(wordsLeft == 1 ? "word" : "words")."
+            return String(localized: "\(next.title) in \(wordsLeft) more mastered words.")
         }
     }
 

@@ -37,7 +37,7 @@ struct PaywallView: View {
     /// A user-facing message surfaced when a purchase/restore needs feedback.
     private struct PaywallAlert: Identifiable {
         let id = UUID()
-        let title: String
+        let title: LocalizedStringResource
         let message: String
     }
 
@@ -95,8 +95,8 @@ struct PaywallView: View {
     private struct TrialStep: Identifiable {
         let id = UUID()
         let icon: String
-        let title: String
-        let detail: String
+        let title: LocalizedStringResource
+        let detail: LocalizedStringResource
         var strikethrough = false
     }
 
@@ -185,8 +185,12 @@ struct PaywallView: View {
                        detail: "A short story every day, written with your words and read aloud by Dr Tusk.")
             benefitRow(icon: "text.badge.plus", title: "Add your own words",
                        detail: "Look up any word you hear or see — definition and example added instantly.")
-            benefitRow(icon: "globe", title: "Every language",
-                       detail: "Switch between all supported languages.")
+            // Only English speakers have more than one language to switch
+            // between; promising it to anyone else would be a false benefit.
+            if TargetLanguage.offered(to: NativeLanguage.current).count > 1 {
+                benefitRow(icon: "globe", title: "Every language",
+                           detail: "Switch between all supported languages.")
+            }
             benefitRow(icon: "square.grid.2x2.fill", title: "Every topic",
                        detail: "Unlock all themed decks, not just the basics.")
         }
@@ -280,8 +284,9 @@ struct PaywallView: View {
 
     /// "Try 1 week free" when a trial applies, phrased in the store's own
     /// period unit rather than converted to days.
-    private var ctaTitle: String {
-        plan.trialPeriodText.map { "Try \($0) free" } ?? "Subscribe"
+    private var ctaTitle: LocalizedStringResource {
+        guard let period = plan.trialPeriodText else { return "Subscribe" }
+        return "Try \(period) free"
     }
 
     /// Reassurance above the CTA, shown only when a trial actually applies —
@@ -304,14 +309,14 @@ struct PaywallView: View {
     /// Guideline 3.1.2(c) requires that introductory pricing not be more
     /// prominent than the price the user really pays, and this paywall has a
     /// rejection history on exactly that point.
-    private var priceSubtext: String {
+    private var priceSubtext: LocalizedStringResource {
         let billed = plan.billingText ?? "\(plan.priceText)."
         return "\(billed) Cancel anytime."
     }
 
     /// Apple's standard auto-renewal disclosure, expected in the purchase flow
     /// for auto-renewable subscriptions.
-    private let appleBillingDisclosure = "Payment is charged to your Apple ID account. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period."
+    private let appleBillingDisclosure: LocalizedStringResource = "Payment is charged to your Apple ID account. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period."
 
     /// Terms of Use (EULA) + Privacy Policy links, required in the purchase
     /// flow for auto-renewable subscriptions (Guideline 3.1.2(c)).
@@ -355,7 +360,11 @@ struct PaywallView: View {
                 onSubscribed()
                 dismiss()
             } label: {
-                Label("Simulate Pro (Debug)", systemImage: "ladybug")
+                Label {
+                    Text(verbatim: "Simulate Pro (Debug)")
+                } icon: {
+                    Image(systemName: "ladybug")
+                }
             }
             #endif
         } label: {
@@ -465,7 +474,7 @@ struct PaywallView: View {
         case .nothingToRestore:
             alert = PaywallAlert(
                 title: "Nothing to Restore",
-                message: "No previous purchases were found for this Apple Account.")
+                message: String(localized: "No previous purchases were found for this Apple Account."))
         case .failed(let message):
             alert = PaywallAlert(title: "Restore Failed", message: message)
         }

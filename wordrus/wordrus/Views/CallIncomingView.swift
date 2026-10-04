@@ -83,7 +83,7 @@ struct CallIncomingView: View {
     private func callButton(
         systemImage: String,
         background: Color,
-        label: String,
+        label: LocalizedStringResource,
         action: @escaping () -> Void
     ) -> some View {
         VStack(spacing: 8) {

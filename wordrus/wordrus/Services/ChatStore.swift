@@ -364,7 +364,7 @@ final class ChatStore {
         evaluation = ChatEvaluation(
             elicitedWordIDs: [],
             passed: false,
-            encouragement: "Dr Tusk got tired of waiting and hung up. Call back when you're ready."
+            encouragement: String(localized: "Dr Tusk got tired of waiting and hung up. Call back when you're ready.")
         )
         OnboardingStore.lastWalterCallDate = .now
     }

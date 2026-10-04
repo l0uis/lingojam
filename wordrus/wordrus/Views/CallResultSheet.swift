@@ -58,7 +58,7 @@ struct CallResultSheet: View {
     }
 
     private var statusBadge: some View {
-        let (system, color, title): (String, Color, String) = {
+        let (system, color, title): (String, Color, LocalizedStringResource) = {
             if evaluation.passed {
                 return ("checkmark.seal.fill", .green, "Conversation passed")
             }

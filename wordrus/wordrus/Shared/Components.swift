@@ -76,7 +76,7 @@ struct TintedCircleButton: View {
     let systemImage: String
     let tint: Color
     let action: () -> Void
-    var accessibilityLabel: String? = nil
+    var accessibilityLabel: LocalizedStringResource? = nil
     var size: CGFloat = 56
 
     var body: some View {
@@ -88,7 +88,22 @@ struct TintedCircleButton: View {
                 .background(Circle().fill(tint.opacity(0.15)))
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(accessibilityLabel ?? "")
+        .accessibilityLabel(accessibilityLabel.map { Text($0) } ?? Text(verbatim: ""))
+    }
+}
+
+// MARK: - Counted label
+
+extension AttributedString {
+    /// A localized counted phrase ("12 days", "3 words learned") with the
+    /// count restyled — the big-number-plus-unit look, kept as one string so
+    /// the catalog's plural rules apply to the whole phrase.
+    init(localized resource: LocalizedStringResource, emphasizingCount count: Int, font: Font, color: Color) {
+        self.init(localized: resource)
+        if let range = range(of: String(count)) {
+            self[range].font = font
+            self[range].foregroundColor = color
+        }
     }
 }
 
@@ -173,8 +188,8 @@ extension View {
     }
 
     /// Inline navigation title styled with the GochiHand display font.
-    func gochiHandNavigationTitle(_ title: String, size: CGFloat = 26) -> some View {
-        navigationTitle(title)
+    func gochiHandNavigationTitle(_ title: LocalizedStringResource, size: CGFloat = 26) -> some View {
+        navigationTitle(Text(title))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {

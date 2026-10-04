@@ -231,8 +231,8 @@ enum NotificationService {
 
                 for (index, date) in fireDates.enumerated() {
                     let content = UNMutableNotificationContent()
-                    content.title = "Dr Tusk is calling"
-                    content.body = "Tap to answer and practice your \((OnboardingStore.targetLanguage ?? .spanish).title)."
+                    content.title = String(localized: "Dr Tusk is calling")
+                    content.body = String(localized: "Tap to answer and practice your \((OnboardingStore.targetLanguage ?? .spanish).title).")
                     content.sound = .default
                     content.categoryIdentifier = walrusCallCategory
                     content.userInfo = ["kind": walrusCallCategory]
@@ -335,8 +335,8 @@ enum NotificationService {
         }
 
         let content = UNMutableNotificationContent()
-        content.title = "Your free trial is ending"
-        content.body = "Your Wordrus Pro trial ends soon. Cancel anytime if it's not for you."
+        content.title = String(localized: "Your free trial is ending")
+        content.body = String(localized: "Your Wordrus Pro trial ends soon. Cancel anytime if it's not for you.")
         content.sound = .default
 
         try? await center.add(UNNotificationRequest(

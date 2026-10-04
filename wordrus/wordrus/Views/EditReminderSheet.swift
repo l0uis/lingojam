@@ -90,18 +90,18 @@ struct EditReminderSheet: View {
         }
     }
 
-    private func sectionHeader(_ title: String) -> some View {
+    private func sectionHeader(_ title: LocalizedStringResource) -> some View {
         Text(title).sectionHeaderStyle()
     }
 
     private var wordFilterSummary: String {
         let deckName: String
         if selectedDeckSlug == DeckConstants.allSlug {
-            deckName = "All words"
+            deckName = String(localized: "All words")
         } else if let deck = decks.first(where: { $0.slug == selectedDeckSlug }) {
-            deckName = deck.displayName
+            deckName = deck.localizedName
         } else {
-            deckName = "All words"
+            deckName = String(localized: "All words")
         }
         return deckName
     }
@@ -143,9 +143,9 @@ private struct WordFilterPicker: View {
     var body: some View {
         Form {
             Section {
-                row(title: "All Words", value: DeckConstants.allSlug, binding: $selectedSlug)
+                row(title: String(localized: "All Words"), value: DeckConstants.allSlug, binding: $selectedSlug)
                 ForEach(decks, id: \.slug) { deck in
-                    row(title: deck.displayName, value: deck.slug, binding: $selectedSlug)
+                    row(title: deck.localizedName, value: deck.slug, binding: $selectedSlug)
                 }
             } header: {
                 Text("Deck").sectionHeaderStyle()
@@ -181,9 +181,11 @@ private struct WordFilterPicker: View {
 private struct DayOfWeekPicker: View {
     @Binding var selection: Set<Int>
 
-    private let labels: [(weekday: Int, short: String)] = [
-        (1, "S"), (2, "M"), (3, "T"), (4, "W"), (5, "T"), (6, "F"), (7, "S"),
-    ]
+    /// One-letter weekday initials (Sunday first, matching `Calendar`'s
+    /// weekday numbering) from the system, so they follow the app language.
+    private var labels: [(weekday: Int, short: String)] {
+        Calendar.current.veryShortStandaloneWeekdaySymbols.enumerated().map { (weekday: $0.offset + 1, short: $0.element) }
+    }
 
     var body: some View {
         HStack(spacing: 8) {

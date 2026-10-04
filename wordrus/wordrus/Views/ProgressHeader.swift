@@ -31,10 +31,10 @@ struct ProgressHeaderCard: View {
         Button(action: onTap) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(snapshot.learnedCount, format: .number)
-                        .font(.gochiHand(size: 34, relativeTo: .largeTitle))
-                        .foregroundStyle(DS.Color.ink)
-                    Text(snapshot.learnedCount == 1 ? "word learned" : "words learned")
+                    Text(AttributedString(localized: "\(snapshot.learnedCount) words learned",
+                                          emphasizingCount: snapshot.learnedCount,
+                                          font: .gochiHand(size: 34, relativeTo: .largeTitle),
+                                          color: DS.Color.ink))
                         .font(.sniglet(.headline))
                         .foregroundStyle(DS.Color.charcoal)
                     Spacer(minLength: 0)
@@ -220,7 +220,7 @@ private struct TopicRow: View {
                     .font(.sniglet(.body))
                     .foregroundStyle(DS.Color.charcoal)
                 Spacer(minLength: 8)
-                Text("\(topic.learned) / \(topic.total)")
+                Text(verbatim: "\(topic.learned) / \(topic.total)")
                     .font(.sniglet(.caption))
                     .foregroundStyle(.secondary)
                     .monospacedDigit()
@@ -244,7 +244,7 @@ private struct MilestoneWordsView: View {
             Section {
                 ForEach(Array(words.enumerated()), id: \.element.id) { index, word in
                     HStack(alignment: .firstTextBaseline, spacing: 12) {
-                        Text("\(index + 1)")
+                        Text(verbatim: "\(index + 1)")
                             .font(.sniglet(.caption))
                             .foregroundStyle(.secondary)
                             .monospacedDigit()

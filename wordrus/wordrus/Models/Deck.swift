@@ -30,6 +30,10 @@ final class Deck {
         if slug == DeckConstants.myWordsSlug { return String(localized: "My Words") }
         return LearningTopic(rawValue: slug)?.title ?? displayName
     }
+
+    var localizedDescription: String {
+        LearningTopic(rawValue: slug)?.summary ?? deckDescription
+    }
 }
 
 enum DeckConstants {

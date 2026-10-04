@@ -1,0 +1,39 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wordrus"
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wordrus listens while you speak to Walter so it can transcribe your replies in chat."
+          }
+        }
+      }
+    },
+    "NSSpeechRecognitionUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wordrus turns your speech into text so you can practice talking with Walter instead of typing."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

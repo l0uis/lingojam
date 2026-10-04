@@ -52,19 +52,19 @@ struct InstallWidgetSheet: View {
     private var mediumContent: some View {
         VStack(alignment: .leading, spacing: 8) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Hola")
+                Text(verbatim: "Hola")
                     .font(.gochiHand(size: 34, relativeTo: .title))
                     .foregroundStyle(Color.whiteboardInk)
-                Text("hello")
+                Text(verbatim: "hello")
                     .font(.sniglet(.callout))
             }
             InkDivider()
                 .padding(.vertical, 6)
             VStack(alignment: .leading, spacing: 2) {
-                Text("Hola, ¿cómo estás?")
+                Text(verbatim: "Hola, ¿cómo estás?")
                     .font(.sniglet(.subheadline).italic())
                     .lineLimit(2)
-                Text("Hello, how are you?")
+                Text(verbatim: "Hello, how are you?")
                     .font(.sniglet(.subheadline))
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
@@ -110,9 +110,9 @@ struct InstallWidgetSheet: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func step(number: Int, title: String, detail: String) -> some View {
+    private func step(number: Int, title: LocalizedStringResource, detail: LocalizedStringResource) -> some View {
         HStack(alignment: .top, spacing: 14) {
-            Text("\(number)")
+            Text(verbatim: "\(number)")
                 .font(.gochiHand(size: 24, relativeTo: .title3))
                 .foregroundStyle(Color.whiteboardInk)
                 .frame(width: 36, height: 36)

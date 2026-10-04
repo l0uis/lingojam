@@ -52,22 +52,22 @@ struct PaywallPlan: Identifiable, Hashable {
 
     /// Free-trial phrase for the CTA, e.g. "1 week free".
     /// nil → no trial (CTA reads "Subscribe").
-    var trialText: String? { trialPeriodText.map { "\($0) free" } }
+    var trialText: String? { trialPeriodText.map { String(localized: "\($0) free") } }
 
     /// Advertised per-month framing for the yearly plan. The REAL charged
     /// price (€23.99/year) + 3-day trial come from the store; this is the
     /// marketing headline the product owner chose ("just €1.99/mo, billed
     /// yearly"). NOTE: hardcoded in €, so it won't auto-localize to other
     /// currencies — revisit if non-Euro storefronts are targeted.
-    static let advertisedMonthlyPriceText = "€1.99 / mo"
+    static let advertisedMonthlyPriceText = String(localized: "\("€1.99") / mo")
 
     static let placeholderAnnual = PaywallPlan(
         id: "wordrus_pro_year",
-        title: "Yearly",
+        title: String(localized: "Yearly"),
         priceText: advertisedMonthlyPriceText,
         trialDays: nil,
         trialPeriodText: nil,
-        billingText: "Billed €22.99 yearly.",
+        billingText: String(localized: "Billed \("€22.99") yearly."),
         isBestValue: false
     )
 
