@@ -122,10 +122,15 @@ struct StoryVocabularyCheckerTests {
         #expect(report.coverage == 1)
     }
 
-    @Test func germanUnknownSeparableVerbIsReportedWhole() throws {
-        let c = try checker("de", known: ["morgen"])
+    @Test(arguments: [true, false])
+    func germanUnknownSeparableVerbIsReportedWhole(usesTaggerLemmas: Bool) throws {
+        // Without a lemma model the infinitive comes from the lexicon, not
+        // particle + surface ("anrufe").
+        let c = try checker("de", known: ["morgen"], usesTaggerLemmas: usesTaggerLemmas)
         let report = c.check(story: "Ich rufe dich morgen an.")
         #expect(report.unknownLemmas == ["anrufen"])
+        #expect(c.check(story: "Er läuft morgen weg.").unknownLemmas == ["weglaufen"])
+        #expect(c.check(story: "Sie ruft morgen zurück.").unknownLemmas == ["zurückrufen"])
     }
 
     @Test func germanSeparableNewWordCountsInBothPositions() throws {

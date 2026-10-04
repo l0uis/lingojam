@@ -74,6 +74,12 @@ nonisolated struct StoryVocabularyChecker {
     private let inflectionSuffixes: [(from: String, to: String)]
     private let cliticSuffixes: [String]
     private let separablePrefixes: Set<String>
+    /// Infinitive endings and the forms they inflect to (de: "en" → e, st, t…),
+    /// longest form first, for naming a verb the tagger gave no lemma.
+    private let infinitiveEndings: [(form: String, infinitive: String)]
+    /// Seed lemmas with a separable prefix, folded → as written, so an unknown
+    /// separable verb is reported whole ("anrufen") even without a lemma model.
+    private let separableSeedLemmas: [String: String]
     private let compoundLinkers: [String]
     private let verbStems: [String: [VerbEntry]]
     /// Allowed verbs built on an irregular base: obtener = ob + tener, so
@@ -133,6 +139,19 @@ nonisolated struct StoryVocabularyChecker {
         self.cliticSuffixes = (lexicon.cliticSuffixes ?? []).map(fold).sorted { $0.count > $1.count }
         let separablePrefixes = Set((lexicon.separablePrefixes ?? []).map(fold))
         self.separablePrefixes = separablePrefixes
+        self.infinitiveEndings = (lexicon.verbEndings ?? [:])
+            .flatMap { infinitive, forms in forms.map { (form: fold($0), infinitive: fold(infinitive)) } }
+            .sorted { ($0.form.count, $0.infinitive.count) > ($1.form.count, $1.infinitive.count) }
+        var separableSeedLemmas: [String: String] = [:]
+        if !separablePrefixes.isEmpty {
+            for lemma in lexicon.frequency where lemma.first?.isLowercase == true {
+                let key = fold(lemma)
+                if separableSeedLemmas[key] == nil, separablePrefixes.contains(where: { key.hasPrefix($0) }) {
+                    separableSeedLemmas[key] = lemma
+                }
+            }
+        }
+        self.separableSeedLemmas = separableSeedLemmas
         self.compoundLinkers = (lexicon.compoundLinkers ?? []).map(fold).sorted { $0.count > $1.count }
         self.verbStems = Self.buildVerbIndex(
             words: known + new, lexicon: lexicon, separablePrefixes: separablePrefixes
@@ -337,8 +356,9 @@ nonisolated struct StoryVocabularyChecker {
     ///
     /// A verb in the clause that, with this particle, forms an allowed
     /// separable verb wins (works without a tagger). Otherwise the nearest
-    /// tagger-identified verb is joined so an unknown is reported whole
-    /// ("anrufen", not "rufen").
+    /// tagger-identified verb — or, without POS tags, the nearest word that
+    /// forms a seed separable verb — is joined so an unknown is reported whole
+    /// ("anrufen", not "rufen" or "anrufe").
     private func joinSeparableVerbs(_ tokens: inout [Token]) {
         for i in tokens.indices {
             let particle = fold(tokens[i].surface)
@@ -364,12 +384,32 @@ nonisolated struct StoryVocabularyChecker {
                 }
             }
             guard !joined else { continue }
-            if let j = clauseIndices.first(where: { tokens[$0].lexicalClass == .verb }) {
-                let base = (tokens[j].lemma ?? tokens[j].surface).lowercased()
-                tokens[j].separableLemma = particle + base
+            let verb = clauseIndices.first { tokens[$0].lexicalClass == .verb }
+                ?? clauseIndices.first { seedSeparableVerb(particle: particle, verb: tokens[$0]) != nil }
+            if let j = verb {
+                tokens[j].separableLemma = seedSeparableVerb(particle: particle, verb: tokens[j])
+                    ?? tokens[i].surface.lowercased() + (tokens[j].lemma?.lowercased() ?? infinitiveCandidates(of: tokens[j])[0])
                 tokens[i].isConsumedParticle = true
             }
         }
+    }
+
+    /// The seed lemma `particle` + this verb's infinitive spells, if any.
+    private func seedSeparableVerb(particle: String, verb: Token) -> String? {
+        infinitiveCandidates(of: verb).lazy.compactMap { separableSeedLemmas[particle + $0] }.first
+    }
+
+    /// Infinitives a conjugated verb may belong to, most likely first: the
+    /// tagger's lemma, lexicon aliases (läuft → laufen), then regular endings
+    /// (rufe → rufen). Never empty: the surface itself is the last resort.
+    private func infinitiveCandidates(of verb: Token) -> [String] {
+        let surfaceKey = fold(verb.surface)
+        var candidates = [verb.lemma.map(fold)].compactMap { $0 } + (aliasKeys[surfaceKey] ?? [])
+        for (form, infinitive) in infinitiveEndings
+        where surfaceKey.hasSuffix(form) && surfaceKey.count - form.count >= 2 {
+            candidates.append(String(surfaceKey.dropLast(form.count)) + infinitive)
+        }
+        return candidates + [surfaceKey]
     }
 
     // MARK: - Analysis
