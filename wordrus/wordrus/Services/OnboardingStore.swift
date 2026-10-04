@@ -268,6 +268,80 @@ enum LearningTopic: String, CaseIterable, Identifiable {
     }
 }
 
+/// Real-life situations offered on the onboarding "where will you use it"
+/// step. Deliberately separate from `LearningTopic`, which names the word
+/// decks: decks are vocabulary buckets (Animals, Shopping…), while learners
+/// think in moments they need to get through.
+enum LearningSituation: String, CaseIterable, Identifiable {
+    case gettingAround = "getting-around"
+    case eatingOut = "eating-out"
+    case goingOut = "going-out"
+    case makingFriends = "making-friends"
+    case smallTalk = "small-talk"
+    case trips
+    case atWork = "at-work"
+    case health
+    case livingAbroad = "living-abroad"
+    case dating
+    case textingAndCalls = "texting-and-calls"
+    case studying
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .gettingAround: String(localized: "Getting around")
+        case .eatingOut: String(localized: "Eating out")
+        case .goingOut: String(localized: "Going out")
+        case .makingFriends: String(localized: "Making friends")
+        case .smallTalk: String(localized: "Small talk")
+        case .trips: String(localized: "Trips & hotels")
+        case .atWork: String(localized: "At work")
+        case .health: String(localized: "Health & emergencies")
+        case .livingAbroad: String(localized: "Living abroad")
+        case .dating: String(localized: "Dating")
+        case .textingAndCalls: String(localized: "Texting & calls")
+        case .studying: String(localized: "Studying")
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .gettingAround: "map.fill"
+        case .eatingOut: "fork.knife"
+        case .goingOut: "wineglass.fill"
+        case .makingFriends: "person.2.fill"
+        case .smallTalk: "bubble.left.and.bubble.right.fill"
+        case .trips: "airplane"
+        case .atWork: "briefcase.fill"
+        case .health: "cross.case.fill"
+        case .livingAbroad: "house.fill"
+        case .dating: "heart.fill"
+        case .textingAndCalls: "message.fill"
+        case .studying: "book.fill"
+        }
+    }
+
+    /// The decks whose words serve this situation — for steering word
+    /// selection toward what the learner picked.
+    var decks: [LearningTopic] {
+        switch self {
+        case .gettingAround: [.traveling, .outAndAbout]
+        case .eatingOut: [.foodAndDrink, .money]
+        case .goingOut: [.outAndAbout, .foodAndDrink]
+        case .makingFriends: [.family, .feelings, .outAndAbout]
+        case .smallTalk: [.feelings, .weatherAndNature, .home]
+        case .trips: [.traveling]
+        case .atWork: [.work]
+        case .health: [.health]
+        case .livingAbroad: [.home, .money, .shopping]
+        case .dating: [.feelings, .family, .outAndAbout]
+        case .textingAndCalls: [.phoneAndInternet]
+        case .studying: [.studying]
+        }
+    }
+}
+
 enum VocabularyLevel: String, CaseIterable, Identifiable {
     case beginner
     case intermediate
@@ -318,7 +392,7 @@ final class OnboardingState {
     var notificationStart: DateComponents = DateComponents(hour: 9, minute: 0)
     var notificationEnd: DateComponents = DateComponents(hour: 20, minute: 0)
     var notificationsAuthorized: Bool = false
-    var topics: Set<LearningTopic> = []
+    var topics: Set<LearningSituation> = []
     var cefrLevel: CEFRLevel?
     var knownWordIDs: Set<String> = []
     var targetLanguage: TargetLanguage?
@@ -507,8 +581,11 @@ enum OnboardingStore {
         set { UserDefaults.standard.set(newValue, forKey: OnboardingDefaultsKey.scheduledWalterCallDates) }
     }
 
-    static var topics: [LearningTopic] {
+    /// Situations picked during onboarding. Installs from before the
+    /// switch to situations stored deck slugs here; those don't parse and
+    /// are dropped.
+    static var topics: [LearningSituation] {
         let raws = UserDefaults.standard.stringArray(forKey: OnboardingDefaultsKey.topics) ?? []
-        return raws.compactMap { LearningTopic(rawValue: $0) }
+        return raws.compactMap { LearningSituation(rawValue: $0) }
     }
 }

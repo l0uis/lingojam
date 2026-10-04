@@ -2,14 +2,17 @@ import Foundation
 
 /// Canonical App Store links for sharing the app and leaving a review.
 ///
-/// Every app in App Store Connect is assigned a numeric Apple ID as soon as
-/// the record is created — even before the first release is approved. Fill in
-/// `appleID` below with that value (App Store Connect → App → App Information →
-/// "Apple ID"). The Share and Leave-a-Review entries in Settings both build
-/// their URLs from it.
+/// `appleID` is the app's numeric Apple ID (App Store Connect → App → App
+/// Information → "Apple ID"). The Share and Leave-a-Review entries in Settings
+/// and on the deck's end-of-day card all build their URLs from it.
 enum AppStoreLinks {
-    /// The app's numeric App Store Apple ID. TODO: replace with the real ID.
-    static let appleID = "0000000000"
+    /// The app's numeric App Store Apple ID.
+    static let appleID = "6775888601"
+
+    /// AppStorage key set once the user has opened the "Write a Review" page,
+    /// so the deck's end-of-day card stops asking. We can't see whether they
+    /// actually posted one — opening it is the best signal available.
+    static let didOpenWriteReviewKey = "appStore.didOpenWriteReview"
 
     /// Public App Store product page — used as the shareable link.
     static var productURL: URL {

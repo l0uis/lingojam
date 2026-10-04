@@ -8,9 +8,10 @@ struct CallOutgoingView: View {
     let onAnswered: () -> Void
     let onCancel: () -> Void
 
-    /// Random pickup delay in seconds. Real enough that the call feels
-    /// like it's connecting; short enough not to bore the user.
-    private static let pickupDelayRange: ClosedRange<Double> = 2.2...3.8
+    /// Fixed pickup delay in seconds, timed to the `sceneSleep` clip so the
+    /// call connects right as Dr Tusk jolts awake. Retime it if the clip
+    /// changes.
+    private static let pickupDelay: Double = 3.5
 
     @State private var ringPulse: CGFloat = 1.0
     @State private var dotPhase: Int = 0
@@ -34,16 +35,14 @@ struct CallOutgoingView: View {
                 ZStack {
                     Circle()
                         .stroke(.white.opacity(0.35), lineWidth: 2)
-                        .frame(width: 220, height: 220)
+                        .frame(width: 280, height: 280)
                         .scaleEffect(ringPulse)
                         .opacity(2 - ringPulse)
-                    Circle()
-                        .fill(.white)
-                        .frame(width: 180, height: 180)
-                    Image("walrus")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 160)
+                    // Dr Tusk dozing until he picks up. The clip carries its
+                    // own transparency, so it sits straight on the backdrop.
+                    LoopingVideoView(dataAssetName: "sceneSleep", pauseBetweenLoops: 2, dropsWhiteBackground: false)
+                        .frame(width: 320, height: 320)
+                        .accessibilityHidden(true)
                 }
                 .onAppear {
                     withAnimation(.easeOut(duration: 1.4).repeatForever(autoreverses: false)) {
@@ -87,8 +86,7 @@ struct CallOutgoingView: View {
     }
 
     private func waitThenAnswer() async {
-        let delay = Double.random(in: Self.pickupDelayRange)
-        try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+        try? await Task.sleep(nanoseconds: UInt64(Self.pickupDelay * 1_000_000_000))
         guard !hasAnswered else { return }
         hasAnswered = true
         onAnswered()

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// The Pro paywall, styled as a free-trial timeline ("How your free trial
-/// works"). Surfaced when a free user tries to *call* Dr Tusk (incoming
+/// The Pro paywall: a headline, the feature list and a sticky purchase
+/// footer. Surfaced when a free user tries to *call* Dr Tusk (incoming
 /// calls stay free).
 ///
 /// Purchases route through `Entitlements`, which hides the store backend.
@@ -49,7 +49,6 @@ struct PaywallView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         header
-                        if plan.trialDays != nil { timelineCard }
                         benefitsCard
                     }
                     .padding(.horizontal, 24)
@@ -84,92 +83,22 @@ struct PaywallView: View {
     // MARK: - Header
 
     private var header: some View {
-        Text("Unlock Wordrus Pro")
+        Text("Unlock everything")
             .font(.gochiHand(size: 38, relativeTo: .largeTitle))
             .foregroundStyle(Color.whiteboardInk)
             .multilineTextAlignment(.center)
     }
 
-    // MARK: - Timeline
+    // MARK: - Icon tints
 
-    private struct TrialStep: Identifiable {
-        let id = UUID()
-        let icon: String
-        let title: LocalizedStringResource
-        let detail: LocalizedStringResource
-        var strikethrough = false
-    }
-
-    private var trialSteps: [TrialStep] {
-        let now = Date()
-        let cal = Calendar.current
-        let days = plan.trialDays ?? 0
-        let reminder = cal.date(byAdding: .day, value: max(days - 1, 0), to: now) ?? now
-        let end = cal.date(byAdding: .day, value: days, to: now) ?? now
-        let fmt = DateFormatter()
-        fmt.setLocalizedDateFormatFromTemplate("ddMMM")
-        return [
-            TrialStep(icon: "lock.open.fill", title: "Today — Free trial starts",
-                      detail: "Everything unlocked, free."),
-            TrialStep(icon: "bell.fill", title: "\(fmt.string(from: reminder)) — Trial reminder",
-                      detail: "A heads-up before it ends."),
-            TrialStep(icon: "crown.fill", title: "\(fmt.string(from: end)) — Become member",
-                      detail: "You go Pro, unless you cancel."),
-        ]
-    }
-
-    private var timelineCard: some View {
-        let steps = trialSteps
-        return VStack(spacing: 0) {
-            ForEach(Array(steps.enumerated()), id: \.element.id) { index, step in
-                stepRow(step, isLast: index == steps.count - 1)
-            }
-        }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: DS.Radius.surface, style: .continuous)
-                .fill(.white)
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
-        )
-    }
-
-    private func stepRow(_ step: TrialStep, isLast: Bool) -> some View {
-        HStack(alignment: .top, spacing: 16) {
-            // Icon + connecting rail (rail fills the rest of the row height so
-            // it meets the next row's icon).
-            VStack(spacing: 0) {
-                ZStack {
-                    Circle().fill(DS.Color.ink)
-                    Image(systemName: step.icon)
-                        .font(.sniglet(.subheadline, weight: .bold))
-                        .foregroundStyle(.white)
-                }
-                .frame(width: 38, height: 38)
-
-                if !isLast {
-                    Rectangle()
-                        .fill(DS.Color.ink.opacity(0.35))
-                        .frame(width: 4)
-                        .frame(maxHeight: .infinity)
-                }
-            }
-            .frame(width: 38)
-
-            VStack(alignment: .leading, spacing: 3) {
-                Text(step.title)
-                    .font(.sniglet(.headline))
-                    .foregroundStyle(DS.Color.ink)
-                    .strikethrough(step.strikethrough, color: DS.Color.ink)
-                Text(step.detail)
-                    .font(.sniglet(.subheadline))
-                    .foregroundStyle(DS.Color.charcoal)
-            }
-            .padding(.bottom, isLast ? 0 : 24)
-
-            Spacer(minLength: 0)
-        }
-        .fixedSize(horizontal: false, vertical: true)
+    /// One colour per icon circle so the rows don't read as a single block of
+    /// ink. All dark enough to keep the white glyph legible.
+    private enum IconTint {
+        static let blue = DS.Color.ink
+        static let coral = Color(red: 0.93, green: 0.33, blue: 0.38)
+        static let orange = Color(red: 0.95, green: 0.55, blue: 0.15)
+        static let purple = Color(red: 0.49, green: 0.33, blue: 0.82)
+        static let teal = Color(red: 0.10, green: 0.58, blue: 0.68)
     }
 
     // MARK: - Benefits
@@ -179,19 +108,19 @@ struct PaywallView: View {
             Text("Everything in Pro")
                 .font(.sniglet(.headline))
                 .foregroundStyle(DS.Color.ink)
-            benefitRow(icon: "phone.fill", title: "Call Dr Tusk anytime",
+            benefitRow(icon: "phone.fill", tint: IconTint.blue, title: "Call Dr Tusk anytime",
                        detail: "He still calls you for free — Pro lets you call him on demand.")
-            benefitRow(icon: "book.fill", title: "Daily stories from Dr Tusk",
+            benefitRow(icon: "book.fill", tint: IconTint.orange, title: "Daily stories from Dr Tusk",
                        detail: "A short story every day, written with your words and read aloud by Dr Tusk.")
-            benefitRow(icon: "text.badge.plus", title: "Add your own words",
+            benefitRow(icon: "text.badge.plus", tint: IconTint.coral, title: "Add your own words",
                        detail: "Look up any word you hear or see — definition and example added instantly.")
             // Only English speakers have more than one language to switch
             // between; promising it to anyone else would be a false benefit.
             if TargetLanguage.offered(to: NativeLanguage.current).count > 1 {
-                benefitRow(icon: "globe", title: "Every language",
+                benefitRow(icon: "globe", tint: IconTint.teal, title: "Every language",
                            detail: "Switch between all supported languages.")
             }
-            benefitRow(icon: "square.grid.2x2.fill", title: "Every topic",
+            benefitRow(icon: "square.grid.2x2.fill", tint: IconTint.purple, title: "Every topic",
                        detail: "Unlock all themed decks, not just the basics.")
         }
         .padding(20)
@@ -203,13 +132,13 @@ struct PaywallView: View {
         )
     }
 
-    private func benefitRow(icon: String, title: LocalizedStringKey, detail: LocalizedStringKey) -> some View {
+    private func benefitRow(icon: String, tint: Color, title: LocalizedStringKey, detail: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 14) {
             Image(systemName: icon)
                 .font(.sniglet(.subheadline, weight: .bold))
                 .foregroundStyle(.white)
                 .frame(width: 34, height: 34)
-                .background(Circle().fill(DS.Color.ink))
+                .background(Circle().fill(tint))
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.sniglet(.headline))

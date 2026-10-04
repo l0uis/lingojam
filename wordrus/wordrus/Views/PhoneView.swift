@@ -175,24 +175,29 @@ struct PhoneView: View {
     // MARK: - Call card
 
     private var callCard: some View {
+        VStack(spacing: 0) {
+            // Dr Tusk on the phone, standing behind the card: the clip is
+            // cropped mid-body, so the card's top edge hides the cut.
+            LoopingVideoView(dataAssetName: "scenePhone", pauseBetweenLoops: 3)
+                .aspectRatio(1, contentMode: .fit)
+                .frame(width: 300)
+                .padding(.bottom, -54)
+                .accessibilityHidden(true)
+            cardBody
+        }
+    }
+
+    private var cardBody: some View {
         VStack(spacing: 16) {
-            ZStack {
-                Circle()
-                    .fill(.white)
-                    .frame(width: 120, height: 120)
-                    .overlay(Circle().stroke(DS.Color.ink.opacity(0.12), lineWidth: 1))
-                Image("walrus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 110)
+            VStack(spacing: 4) {
+                Text("Dr Tusk")
+                    .font(.gochiHand(size: 36, relativeTo: .title))
+                    .foregroundStyle(Color.whiteboardInk)
+                Text("Tap to start a conversation in \((OnboardingStore.targetLanguage ?? .spanish).titleInSentence).")
+                    .font(.sniglet(.callout))
+                    .foregroundStyle(DS.Color.charcoal)
+                    .multilineTextAlignment(.center)
             }
-            Text("Dr Tusk")
-                .font(.gochiHand(size: 36, relativeTo: .title))
-                .foregroundStyle(Color.whiteboardInk)
-            Text("Tap to start a conversation in \((OnboardingStore.targetLanguage ?? .spanish).titleInSentence).")
-                .font(.sniglet(.callout))
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
 
             Button {
                 callDrTusk()

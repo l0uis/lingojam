@@ -4,18 +4,23 @@ import UIKit
 
 /// Silent, endlessly looping video loaded from an asset-catalog data set.
 ///
-/// The clips are drawn on white, so the player layer multiplies onto whatever
-/// sits behind it — white drops out and the paper background shows through,
-/// the same way a transparent PNG would.
+/// Most clips are drawn on white, so by default the player layer multiplies
+/// onto whatever sits behind it — white drops out and the paper background
+/// shows through, the same way a transparent PNG would. Clips exported as
+/// HEVC with alpha already carry their own transparency and turn that off.
 struct LoopingVideoView: UIViewRepresentable {
     /// Name of the `.dataset` in Assets.xcassets holding the movie.
     let dataAssetName: String
     /// Seconds to hold on the last frame before starting again; 0 loops
     /// seamlessly.
     var pauseBetweenLoops: TimeInterval = 0
+    /// Multiply the clip onto the background to drop its white. Only works
+    /// on light backgrounds; pass false for clips with a real alpha channel.
+    var dropsWhiteBackground: Bool = true
 
     func makeUIView(context: Context) -> PlayerView {
         let view = PlayerView()
+        view.setDropsWhiteBackground(dropsWhiteBackground)
         view.load(dataAssetName: dataAssetName, pauseBetweenLoops: pauseBetweenLoops)
         return view
     }
@@ -31,6 +36,8 @@ struct LoopingVideoView: UIViewRepresentable {
         private var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
         private var looper: AVPlayerLooper?
         private var endObserver: NSObjectProtocol?
+        /// True while sitting on the last frame between loops.
+        private var isHoldingLastFrame = false
         private var readyObservation: NSKeyValueObservation?
 
         override init(frame: CGRect) {
@@ -57,6 +64,10 @@ struct LoopingVideoView: UIViewRepresentable {
 
         required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+        func setDropsWhiteBackground(_ drops: Bool) {
+            playerLayer.compositingFilter = drops ? "multiplyBlendMode" : nil
+        }
+
         func load(dataAssetName: String, pauseBetweenLoops: TimeInterval) {
             guard let url = Self.fileURL(forDataAsset: dataAssetName) else { return }
             let player = AVQueuePlayer()
@@ -73,9 +84,14 @@ struct LoopingVideoView: UIViewRepresentable {
                     object: item,
                     queue: .main
                 ) { [weak self, weak player] _ in
+                    self?.isHoldingLastFrame = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + pauseBetweenLoops) {
                         guard let self, let player, self.playerLayer.player === player else { return }
-                        player.seek(to: .zero) { _ in player.play() }
+                        self.isHoldingLastFrame = false
+                        // Off screen: rewind now, resume when it reappears.
+                        player.seek(to: .zero) { _ in
+                            if self.window != nil { player.play() }
+                        }
                     }
                 }
             } else {
@@ -83,6 +99,18 @@ struct LoopingVideoView: UIViewRepresentable {
             }
             playerLayer.player = player
             player.play()
+        }
+
+        /// Only play while on screen — a clip on a tab the user has left (the
+        /// Phone tab stays alive behind the others) shouldn't keep decoding.
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            guard let player = playerLayer.player else { return }
+            if window == nil {
+                player.pause()
+            } else if !isHoldingLastFrame {
+                player.play()
+            }
         }
 
         func stop() {

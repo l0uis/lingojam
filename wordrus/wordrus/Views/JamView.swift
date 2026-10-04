@@ -49,9 +49,10 @@ struct JamView: View {
     @AppStorage("dailySet.stateLanguage") private var dailySetStateLanguage: String = ""
     @AppStorage(DailySetConfig.defaultsKey) private var dailySetTarget: Int = DailySetConfig.defaultSize
     @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
-    /// Word IDs of the most recently built set, comma-joined, so "Practice
-    /// again" can replay the exact same words — even after an app relaunch.
-    @AppStorage("dailySet.lastSetIDs") private var lastSetIDsRaw: String = ""
+    /// Hides "Leave a Review" on the end-of-day card once the user has opened
+    /// the App Store review page (from here or Settings).
+    @AppStorage(AppStoreLinks.didOpenWriteReviewKey) private var didOpenWriteReview: Bool = false
+    @Environment(\.openURL) private var openURL
     /// Whether the set built for today is a revision set (a random shuffle of
     /// words the user is still learning) rather than a themed set. Persisted so
     /// the intro/completion copy and theme-advance logic stay correct across a
@@ -68,20 +69,10 @@ struct JamView: View {
     @State private var pendingSpeakOnFilterDismiss: Bool = false
     @State private var isSetComplete: Bool = false
     @State private var setStarted: Bool = false
-    /// Walrus image aspect (height / width) and the scale it shrinks to on the
-    /// completion screen. Used to reserve its slot and size the badge.
-    private static let walrusAspect: CGFloat = 990.0 / 543.0
-    private static let completionWalrusScale: CGFloat = 0.78
-    /// The walrus's on-screen height once shrunk for the completion screen —
-    /// the completion copy reserves exactly this much so it sits clear below.
-    private static let reservedWalrusHeight: CGFloat = 180 * completionWalrusScale * walrusAspect
-    /// True while replaying a finished set via "Practice again" — finishing a
-    /// replay returns to the completion screen instead of advancing the theme.
-    @State private var isReplaying: Bool = false
-    @State private var entitlements = Entitlements.shared
-    /// Surfaced when a free user taps "Tomorrow's topic" — jumping ahead of
-    /// the daily unlock is a Pro perk (content-breadth gate).
-    @State private var isShowingPaywall: Bool = false
+    /// Rubber-banded horizontal offset of the end-of-day card. It tugs a little
+    /// under the finger, then springs back — the day's last card can't be
+    /// swiped away.
+    @State private var doneCardDrag: CGFloat = 0
     @State private var isShowingWidgetSheet: Bool = false
 
     /// Whether the user has touched the front card since the current set began.
@@ -107,20 +98,13 @@ struct JamView: View {
         !decks.isEmpty
     }
 
-    /// Shown during the card stack and completion screen; hidden on the intro
-    /// and empty states (which supply their own art or none).
+    /// Shown during the card stack and behind the end-of-day card; hidden on
+    /// the intro and empty states (which supply their own art or none).
     private var walrusIsVisible: Bool {
-        if dailySetActive && isSetComplete { return true }              // completion
+        if dailySetActive && isSetComplete { return true }              // done card
         if dailySetActive && !setStarted && !queue.isEmpty { return false } // intro
         if queue.isEmpty && !isSetComplete { return false }            // empty
         return true                                                     // cards
-    }
-
-    /// Vertical offset from the top of the screen. Sits just under the top on
-    /// the card stack; drops to roughly a third down on completion so it reads
-    /// as centered above the "Set complete!" copy.
-    private func walrusOffset(in geo: GeometryProxy) -> CGFloat {
-        isSetComplete ? geo.size.height * 0.12 : 8
     }
 
     var body: some View {
@@ -128,26 +112,27 @@ struct JamView: View {
             ZStack {
                 DS.Color.paper.ignoresSafeArea()
 
-                // The walrus sits behind the content so it can glide from the
-                // top of the card stack down to the centre exactly as the last
-                // card is swiped away — see `walrusOffset(in:)`.
+                // The walrus peeks out from behind the card stack, and stays
+                // put behind the end-of-day card once the set is done.
                 if walrusIsVisible {
                     Image("walrus")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 180)
-                        .scaleEffect(isSetComplete ? Self.completionWalrusScale : 1, anchor: .top)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                        .offset(y: walrusOffset(in: geo))
+                        .offset(y: 8)
                         .allowsHitTesting(false)
                 }
 
-                // Content layer (no walrus). The completion copy waits for the
-                // final card to finish flying off (`!isAnimatingOut`) so the
-                // card and the walrus animate at the same time, not in sequence.
+                // Content layer (no walrus). The end-of-day card waits for the
+                // last word card to finish flying off (`!isAnimatingOut`) so it
+                // rises into the empty slot rather than under the departing card.
                 if dailySetActive && isSetComplete && !isAnimatingOut {
-                    completionState(in: geo)
-                        .transition(.opacity)
+                    doneCard
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 28)
+                        .padding(.top, 130)
+                        .transition(.opacity.combined(with: .scale(scale: 0.88, anchor: .bottom)))
                 } else if dailySetActive && !setStarted && !queue.isEmpty {
                     introCard
                 } else if queue.isEmpty && !isSetComplete {
@@ -251,11 +236,6 @@ struct JamView: View {
             let inCall = coordinator.isPresentingIncoming || coordinator.isPresentingOutgoing
             guard !inCall else { return }
             SpeechService.shared.speak(word.exampleSentence)
-        }
-        .sheet(isPresented: $isShowingPaywall) {
-            // Once subscribed, jump straight into the next theme the user
-            // tapped — no waiting for the daily unlock.
-            PaywallView(onSubscribed: { advanceToTomorrowTopic() }, source: .jamTopic)
         }
         .sheet(isPresented: $isShowingWidgetSheet) {
             InstallWidgetSheet()
@@ -384,16 +364,22 @@ struct JamView: View {
 
             InkDivider()
 
+            // fixedSize so the sentence wraps instead of being squeezed to one
+            // truncated line by the card's capped height — the Spacer below
+            // gives way first.
             VStack(alignment: .leading, spacing: 6) {
                 Text(word.exampleSentence)
                     .font(.sniglet(.title3))
                     .italic()
+                    .fixedSize(horizontal: false, vertical: true)
                 if let translation = LocaleService.exampleTranslation(for: word) {
                     Text(translation)
                         .font(.sniglet(.title3))
                         .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
+            .layoutPriority(1)
 
             Spacer()
 
@@ -552,15 +538,6 @@ struct JamView: View {
             dragOffset = CGSize(width: exitX, height: 0)
         }
 
-        // Last card: start the walrus gliding down to centre right now, so it
-        // moves in lockstep with the card flying off. The completion copy only
-        // appears once the card is gone (gated on `isAnimatingOut`).
-        if dailySetActive && queue.count == 1 {
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
-                isSetComplete = true
-            }
-        }
-
         // Icon pops slightly bigger then shrinks out.
         withAnimation(.spring(response: 0.18, dampingFraction: 0.55)) {
             releaseProgress = 1.3
@@ -586,20 +563,15 @@ struct JamView: View {
                 _ = queue.removeFirst()
                 if dailySetActive {
                     if queue.isEmpty {
-                        if isReplaying {
-                            isReplaying = false
-                            isSetComplete = true
-                        } else {
-                            completeSet()
-                            shouldCall = true
-                        }
+                        completeSet()
+                        shouldCall = true
                     }
                 } else {
                     refillQueue()
                 }
             }
             if shouldCall { triggerSetCompleteCall() }
-            // Fade the completion copy in now that the card has cleared.
+            // Bring the end-of-day card in now that the last card has cleared.
             withAnimation(.easeOut(duration: 0.25)) { isAnimatingOut = false }
             playLightHaptic()
         }
@@ -656,12 +628,11 @@ struct JamView: View {
         dailySetStateLanguage = targetLanguageRaw
         dailyThemeIndex = 0
         dailySetLastCompletedDay = ""
-        lastSetIDsRaw = ""
         isSetComplete = false
     }
 
     /// The word the card stack is currently showing, or nil when no readable
-    /// card is on screen. Mirrors the branch chain in `body`: the completion,
+    /// card is on screen. Mirrors the branch chain in `body`: the end-of-day,
     /// intro and empty states all render instead of the stack, so none of them
     /// count as showing a word. Published to `DeepLinkCoordinator` so a widget
     /// tap on this exact word doesn't open a sheet duplicating the card the
@@ -690,7 +661,6 @@ struct JamView: View {
             }
             buildDailySet()
             setStarted = false
-            lastSetIDsRaw = queue.map(\.id).joined(separator: ",")
         } else {
             refillQueue()
         }
@@ -921,64 +891,6 @@ struct JamView: View {
         }
     }
 
-    /// Words to replay. Prefers the exact most-recently-built set; falls back
-    /// to the finished theme's top words by rank when the stored IDs are
-    /// missing (e.g. set completed before this feature, or a relaunch on an
-    /// already-completed day where the build path is skipped).
-    private func lastSetWords() -> [VocabularyWord] {
-        let ids = lastSetIDsRaw.split(separator: ",").map(String.init)
-        if !ids.isEmpty {
-            let byID = Dictionary(uniqueKeysWithValues: currentWords.map { ($0.id, $0) })
-            let words = ids.compactMap { byID[$0] }
-            if !words.isEmpty { return words }
-        }
-        guard let theme = justCompletedTheme else { return [] }
-        let target = DailySetConfig.clamp(dailySetTarget)
-        return Array(
-            currentWords
-                .filter { $0.deckSlugs.contains(theme.slug) }
-                .sorted { $0.rank < $1.rank }
-                .prefix(target)
-        )
-    }
-
-    /// Replay the finished set without advancing the theme or ringing Walter.
-    /// Goes straight to the cards (intro already seen).
-    private func replaySet() {
-        let words = lastSetWords()
-        guard !words.isEmpty else { return }
-        isReplaying = true
-        isSetComplete = false
-        setStarted = true
-        // Setting `queue` fires the `queue.first` change handler, which speaks
-        // the front card (setStarted is already true) — no explicit speak here.
-        withAnimation { queue = words }
-    }
-
-    /// "Tomorrow's topic" tapped on the completion screen. Jumping ahead of the
-    /// daily unlock is a Pro perk — free users see the paywall first.
-    private func tomorrowTopicTapped() {
-        if entitlements.isPro {
-            playLightHaptic()
-            advanceToTomorrowTopic()
-        } else {
-            isShowingPaywall = true
-        }
-    }
-
-    /// Start the next theme's set immediately, without waiting for the day to
-    /// roll over. `dailyThemeIndex` already points at the next theme (advanced
-    /// in `completeSet`), so clearing the lock and rebuilding lands on it and
-    /// shows its intro card.
-    private func advanceToTomorrowTopic() {
-        dailySetLastCompletedDay = ""
-        isReplaying = false
-        isSetComplete = false
-        setStarted = false
-        queue = []
-        rebuildQueueIfNeeded()
-    }
-
     /// Walter rings as the set's climax. Mirrors the engagement-call haptic so
     /// the call feels earned. The chat screen is presented by `RootView`.
     private func triggerSetCompleteCall() {
@@ -1052,82 +964,88 @@ struct JamView: View {
         .padding(.horizontal, 24)
     }
 
-    private func completionState(in geo: GeometryProxy) -> some View {
-        VStack(spacing: 18) {
-            // Reserve the walrus's slot (it's drawn in the body overlay so it can
-            // glide down from the card stack), plus a little breathing room, so
-            // the copy and its badge sit clear below it.
-            Color.clear
-                .frame(height: Self.reservedWalrusHeight + 12)
-            Text("Set complete!")
-                .font(.sniglet(.title, weight: .bold))
-            if lastSetWasRevision {
-                Text("You finished today's revision set.")
+    /// The day's last card: sits where the word cards were, with Dr Tusk
+    /// peeking out behind it, and can't be swiped away — it tugs and springs
+    /// back. Asks for a review (until the user has opened the review page) and
+    /// offers to share the app.
+    private var doneCard: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Set complete!")
+                    .font(.gochiHand(size: 30))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .foregroundStyle(Color.whiteboardInk)
+                if lastSetWasRevision {
+                    Text("You finished today's revision set.")
+                        .font(.sniglet(.title3))
+                } else if let done = justCompletedTheme {
+                    Text("You finished today's \(done.localizedName) set.")
+                        .font(.sniglet(.title3))
+                }
+                Text("Come back tomorrow for more practice.")
                     .font(.sniglet(.callout))
                     .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            } else if let done = justCompletedTheme {
-                Text("You finished today's \(done.localizedName) set.")
-                    .font(.sniglet(.callout))
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
             }
-            if let next = currentTheme {
-                Button {
-                    tomorrowTopicTapped()
-                } label: {
-                    HStack(spacing: 12) {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("TOMORROW'S TOPIC")
-                                .font(.sniglet(.caption2, weight: .bold))
-                                .foregroundStyle(.secondary)
-                            HStack(spacing: 8) {
-                                Image(systemName: next.iconSystemName)
-                                Text(next.localizedName)
-                            }
-                            .font(.sniglet(.title3, weight: .bold))
-                            .foregroundStyle(Color.whiteboardInk)
-                        }
-                        Spacer(minLength: 0)
-                        Image(systemName: entitlements.isPro ? "arrow.right.circle.fill" : "lock.fill")
-                            .font(.sniglet(.title3, weight: .bold))
-                            .foregroundStyle(DS.Color.ink)
+
+            InkDivider()
+
+            if !didOpenWriteReview {
+                Text("Enjoying Wordrus? A quick review helps other learners find it.")
+                    .font(.sniglet(.callout))
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer(minLength: 0)
+
+            VStack(spacing: 12) {
+                if !didOpenWriteReview {
+                    Button {
+                        playLightHaptic()
+                        didOpenWriteReview = true
+                        openURL(AppStoreLinks.writeReviewURL)
+                    } label: {
+                        Label("Leave a Review", systemImage: "star.fill")
                     }
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
-                    .background(
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
-                            .fill(.background)
-                            .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
-                    )
+                    .buttonStyle(.primary)
+                }
+
+                ShareLink(item: AppStoreLinks.productURL,
+                          message: Text("I've been learning words with Wordrus — thought you might like it too.")) {
+                    Label("Share with a friend", systemImage: "square.and.arrow.up")
+                        .font(.sniglet(.body, weight: .bold))
+                        .foregroundStyle(DS.Color.ink)
+                        .frame(maxWidth: .infinity, minHeight: DS.Size.buttonMinHeight)
+                        .background(Capsule(style: .continuous).fill(DS.Color.ink.opacity(0.12)))
                 }
                 .buttonStyle(.plain)
             }
-            Button {
-                playLightHaptic()
-                replaySet()
-            } label: {
-                Label("Practice again", systemImage: "arrow.counterclockwise")
-                    .font(.sniglet(.body, weight: .bold))
-                    .foregroundStyle(DS.Color.ink)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 22)
-                    .background(
-                        Capsule().fill(DS.Color.ink.opacity(0.12))
-                    )
-            }
-            .buttonStyle(.plain)
-            .padding(.top, 4)
-
-            if !entitlements.isPro {
-                Label("Unlock tomorrow's topic today with Pro", systemImage: "lock.fill")
-                    .font(.sniglet(.footnote))
-                    .foregroundStyle(.secondary)
-            }
+            .frame(maxWidth: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding(.horizontal, 28)
-        .padding(.top, walrusOffset(in: geo))
+        .padding(30)
+        .frame(maxWidth: .infinity, maxHeight: 520, alignment: .topLeading)
+        .background(
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(.background)
+                .shadow(color: .black.opacity(0.12), radius: 16, y: 6)
+        )
+        .offset(x: doneCardDrag)
+        .rotationEffect(.degrees(Double(doneCardDrag / 20)))
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    // Rubber band: follows the finger at first, then stiffens
+                    // towards a ~60pt ceiling so it never looks swipeable.
+                    let x = value.translation.width
+                    doneCardDrag = x / (1 + abs(x) / 60)
+                }
+                .onEnded { _ in
+                    playLightHaptic()
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.55)) {
+                        doneCardDrag = 0
+                    }
+                }
+        )
     }
 
     private func refillQueue() {

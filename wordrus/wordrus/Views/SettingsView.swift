@@ -12,6 +12,7 @@ struct SettingsView: View {
     @AppStorage(DailySetConfig.defaultsKey) private var dailySetSize: Int = DailySetConfig.defaultSize
     @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
     @AppStorage(OnboardingDefaultsKey.liveActivityEnabled) private var liveActivityEnabled: Bool = false
+    @AppStorage(AppStoreLinks.didOpenWriteReviewKey) private var didOpenWriteReview: Bool = false
 
     @State private var analyticsEnabled = Analytics.isEnabled
     @State private var isEditingReminder: Bool = false
@@ -182,6 +183,7 @@ struct SettingsView: View {
                 }
 
                 Button {
+                    didOpenWriteReview = true
                     openURL(AppStoreLinks.writeReviewURL)
                 } label: {
                     Label("Leave a Review", systemImage: "star.fill")

@@ -348,12 +348,16 @@ private struct SelectableRow: View {
     /// Put the subtitle on the same line as the title. Used by the CEFR
     /// levels, where the code is short enough that stacking wastes a line.
     let inlineSubtitle: Bool
+    /// Set the title large in the hand-drawn display face — for short codes
+    /// (A1, B2…) that are the row's badge.
+    let prominentTitle: Bool
 
     init(
         title: String,
         subtitle: String? = nil,
         systemImage: String? = nil,
         inlineSubtitle: Bool = false,
+        prominentTitle: Bool = false,
         isSelected: Bool,
         action: @escaping () -> Void
     ) {
@@ -361,14 +365,25 @@ private struct SelectableRow: View {
         self.subtitle = subtitle
         self.systemImage = systemImage
         self.inlineSubtitle = inlineSubtitle
+        self.prominentTitle = prominentTitle
         self.isSelected = isSelected
         self.action = action
     }
 
-    private var titleText: some View {
-        Text(title)
-            .font(.sniglet(.headline))
-            .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
+    @ViewBuilder private var titleText: some View {
+        if prominentTitle {
+            // Sniglet ships in Regular only, so weight can't make it bolder;
+            // Gochi Hand at size gives the code the presence instead. The
+            // min width keeps the subtitles lined up across rows.
+            Text(title)
+                .font(.gochiHand(size: 32, relativeTo: .title))
+                .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
+                .frame(minWidth: 44, alignment: .leading)
+        } else {
+            Text(title)
+                .font(.sniglet(.headline))
+                .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
+        }
     }
 
     @ViewBuilder private var subtitleText: some View {
@@ -439,10 +454,12 @@ private struct WelcomeStep: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            OnboardingVideoPanel(dataAssetName: "scenePhoneCheck") {
-                Spacer(minLength: 16)
+            OnboardingVideoPanel(dataAssetName: "scenePhoneCheck", videoWidth: 360) {
+                // Logo pinned near the top; the free space goes between it
+                // and Dr Tusk rather than above it.
                 StickerLogo()
                     .frame(maxWidth: 200)
+                    .padding(.top, 12)
                 Spacer(minLength: 16)
             }
             OnboardingBottomSheet {
@@ -496,22 +513,48 @@ private struct OnboardingVideoPanel<Top: View>: View {
     /// Dr Tusk off higher up his body.
     var bottomCrop: CGFloat = 0
     var pauseBetweenLoops: TimeInterval = 2
+    /// Asset-catalog image filling the panel instead of the plain tint.
+    var backgroundImage: String?
     @ViewBuilder let top: Top
 
     var body: some View {
         VStack(spacing: 0) {
             top
-            LoopingVideoView(dataAssetName: dataAssetName, pauseBetweenLoops: pauseBetweenLoops)
+            // Over a picture the multiply trick would let the scene show
+            // through Dr Tusk himself, so lean on the clip's own alpha.
+            LoopingVideoView(
+                dataAssetName: dataAssetName,
+                pauseBetweenLoops: pauseBetweenLoops,
+                dropsWhiteBackground: backgroundImage == nil
+            )
                 .aspectRatio(1, contentMode: .fit)
                 .frame(maxWidth: videoWidth)
                 .padding(.bottom, -bottomCrop)
                 .clipped()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(DS.Color.paperShade.ignoresSafeArea(edges: .top))
+        .background { backdrop }
         // Tuck the bottom under the rounded sheet that follows, so the
-        // sheet's corners show the panel's tint behind them.
+        // sheet's corners show the panel's backdrop behind them.
         .padding(.bottom, -onboardingSheetRadius)
+    }
+
+    @ViewBuilder private var backdrop: some View {
+        if let backgroundImage {
+            // Clip first, then extend: clipping after ignoresSafeArea cuts
+            // the picture back to the safe area and leaves a strip under
+            // the status bar.
+            Color.clear
+                .overlay {
+                    Image(backgroundImage)
+                        .resizable()
+                        .scaledToFill()
+                }
+                .clipped()
+                .ignoresSafeArea(edges: .top)
+        } else {
+            DS.Color.paperShade.ignoresSafeArea(edges: .top)
+        }
     }
 }
 
@@ -1131,7 +1174,7 @@ private struct GoalSetupStep: View {
 // MARK: - Topics
 
 private struct TopicsStep: View {
-    @Binding var selection: Set<LearningTopic>
+    @Binding var selection: Set<LearningSituation>
     let onContinue: () -> Void
 
     private let columns = [
@@ -1141,12 +1184,12 @@ private struct TopicsStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            line: "Pick the topics that matter to you — as many as you like.",
+            line: "Where do you want to use it? Pick as many as you like.",
             primaryEnabled: !selection.isEmpty,
             onPrimary: onContinue
         ) {
             LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(LearningTopic.allCases) { topic in
+                ForEach(LearningSituation.allCases) { topic in
                     TopicChip(topic: topic, isSelected: selection.contains(topic)) {
                         if selection.contains(topic) {
                             selection.remove(topic)
@@ -1161,7 +1204,7 @@ private struct TopicsStep: View {
 }
 
 private struct TopicChip: View {
-    let topic: LearningTopic
+    let topic: LearningSituation
     let isSelected: Bool
     let action: () -> Void
 
@@ -1344,6 +1387,14 @@ private struct ExamplePreviewCard: View {
                 .fill(.background)
                 .shadow(color: .black.opacity(0.10), radius: 14, y: 4)
         )
+        .task {
+            // Play it once on arrival, after the slide-in settles, so the
+            // learner hears the feature rather than being told about it.
+            try? await Task.sleep(for: .milliseconds(600))
+            guard !Task.isCancelled else { return }
+            SpeechService.shared.speak(example.sentence, languageCode: language.bcp47)
+        }
+        .onDisappear { SpeechService.shared.stop() }
     }
 }
 
@@ -1368,6 +1419,7 @@ private struct VocabularyLevelStep: View {
                         title: level.title,
                         subtitle: level.subtitle,
                         inlineSubtitle: true,
+                        prominentTitle: true,
                         isSelected: selection == level
                     ) {
                         selection = level
