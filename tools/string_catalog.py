@@ -66,9 +66,11 @@ def save(path: Path, catalog: dict) -> None:
     path.write_text(_xcode_json(catalog), encoding="utf-8")  # Xcode omits the final newline
 
 
-def extracted_keys(derived_data: Path, target_dir: str) -> dict[str, str]:
-    """key → comment from every .stringsdata of one target (Localizable table)."""
-    keys: dict[str, str] = {}
+def extracted_keys(derived_data: Path, target_dir: str) -> dict[str, tuple[str, str | None]]:
+    """key → (comment, default value) from every .stringsdata of one target
+    (Localizable table). The default value is set for identifier-style keys
+    declared with `defaultValue:`; for ordinary keys it's None."""
+    keys: dict[str, tuple[str, str | None]] = {}
     pattern = f"Build/Intermediates.noindex/**/{target_dir}/**/*.stringsdata"
     for path in derived_data.glob(pattern):
         try:
@@ -78,7 +80,8 @@ def extracted_keys(derived_data: Path, target_dir: str) -> dict[str, str]:
         for entry in data.get("tables", {}).get("Localizable", []):
             key = entry.get("key")
             if key is not None:
-                keys.setdefault(key, entry.get("comment") or "")
+                value = entry.get("value")
+                keys.setdefault(key, (entry.get("comment") or "", value if value != key else None))
     return keys
 
 
@@ -94,19 +97,24 @@ def cmd_sync(args: argparse.Namespace) -> None:
             print(f"{catalog_path.name} ({target_dir}): no .stringsdata found — build first", file=sys.stderr)
             continue
         added = stale = revived = 0
-        for key, comment in found.items():
+        for key, (comment, default) in found.items():
             entry = strings.get(key)
             if entry is None:
-                strings[key] = {"comment": comment} if comment else {}
+                entry = strings[key] = {"comment": comment} if comment else {}
                 added += 1
-            else:
-                if entry.get("extractionState") == "stale":
-                    del entry["extractionState"]
-                    revived += 1
-                if comment and not entry.get("comment"):
-                    entry["comment"] = comment
+            if default is not None:
+                # Identifier key with `defaultValue:` — the English text must
+                # be stored as the source localization, or English shows the key.
+                entry["extractionState"] = "extracted_with_value"
+                en = entry.setdefault("localizations", {}).setdefault("en", {})
+                en.setdefault("stringUnit", {"state": "new", "value": default})
+            elif entry.get("extractionState") == "stale":
+                del entry["extractionState"]
+                revived += 1
+            if comment and not entry.get("comment"):
+                entry["comment"] = comment
         for key, entry in strings.items():
-            if key not in found and entry.get("extractionState") not in ("manual", "stale"):
+            if key not in found and entry.get("extractionState") not in ("manual", "stale", "extracted_with_value"):
                 entry["extractionState"] = "stale"
                 stale += 1
         save(catalog_path, catalog)

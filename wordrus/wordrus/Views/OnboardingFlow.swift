@@ -93,6 +93,10 @@ struct OnboardingFlow: View {
         }
         .animation(.easeInOut(duration: 0.28), value: step)
         .tint(DS.Color.ink)
+        // Lets UI tests (LocalizationTourTests) scope queries to onboarding;
+        // the tab bar underneath the cover is otherwise still in the tree.
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("onboarding")
     }
 
     /// Reseed the SwiftData store for the picked language so later steps

@@ -49,8 +49,11 @@ struct ProgressHeaderCard: View {
                         HStack(spacing: 6) {
                             Image(systemName: next.systemImage)
                                 .accessibilityHidden(true)
+                            // Two lines: translated milestone names run long
+                            // ("Als Nächstes: Deine ersten 50 Wörter").
                             Text("Next: \(String(localized: next.title))")
-                                .lineLimit(1)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.85)
                             Spacer(minLength: 8)
                             Text("\(snapshot.status.remaining) to go")
                                 .foregroundStyle(.secondary)

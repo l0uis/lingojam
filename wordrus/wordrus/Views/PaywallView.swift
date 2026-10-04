@@ -398,7 +398,7 @@ struct PaywallView: View {
             title: PaywallPlan.placeholderAnnual.title,
             priceText: PaywallPlan.advertisedMonthlyPriceText,
             trialDays: 7,
-            trialPeriodText: "1 week",
+            trialPeriodText: String(localized: "\(1) weeks"),
             billingText: PaywallPlan.placeholderAnnual.billingText,
             isBestValue: false
         )

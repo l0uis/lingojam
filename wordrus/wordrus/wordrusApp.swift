@@ -24,6 +24,10 @@ struct wordrusApp: App {
         }
         #endif
         #if DEBUG
+        // UI tests (LocalizationTourTests) start every run at onboarding.
+        if ProcessInfo.processInfo.arguments.contains("-uiResetOnboarding") {
+            OnboardingStore.reset()
+        }
         // The `-uiPreviewPaywall` scene renders PaywallView outside
         // `rootScene`, so it never reached rootScene's bootstrap and fell back
         // to `FreeEntitlementsProvider` — the preview then showed hardcoded

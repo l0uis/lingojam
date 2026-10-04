@@ -4,6 +4,12 @@
     "CFBundleDisplayName" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wordrus"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11,12 +17,6 @@
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wordrus"
-          }
-        },
-        "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wordrus"
@@ -36,9 +36,28 @@
         }
       }
     },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "wordrus"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
     "NSMicrophoneUsageDescription" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wordrus hört zu, während du mit Walter sprichst, damit deine Antworten im Chat transkribiert werden können."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -49,12 +68,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wordrus te escucha mientras hablas con Walter para transcribir tus respuestas en el chat."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wordrus hört zu, während du mit Walter sprichst, damit deine Antworten im Chat transkribiert werden können."
           }
         },
         "fr" : {
@@ -74,6 +87,12 @@
     "NSSpeechRecognitionUsageDescription" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wordrus wandelt deine Sprache in Text um, damit du mit Walter sprechen üben kannst, statt zu tippen."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -84,12 +103,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wordrus convierte tu voz en texto para que puedas practicar hablando con Walter en vez de escribir."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wordrus wandelt deine Sprache in Text um, damit du mit Walter sprechen üben kannst, statt zu tippen."
           }
         },
         "fr" : {

@@ -166,7 +166,7 @@ struct SettingsView: View {
                     if on { LiveActivityService.start() } else { LiveActivityService.end() }
                 }
             } header: {
-                sectionHeader("Learning")
+                sectionHeader(LocalizedStringResource("settings.section.learning", defaultValue: "Learning", comment: "Settings section header for learning preferences (level, words per day, reminders)."))
             } footer: {
                 Text("New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing aren't affected.")
                     .font(.sniglet(.caption))
