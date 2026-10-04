@@ -13,6 +13,22 @@ enum DailySetConfig {
     static func clamp(_ value: Int) -> Int {
         min(maxSize, max(minSize, value))
     }
+
+    /// AppStorage key holding the `dayKey` of the last completed daily set.
+    /// Shared so both `JamView` and the tab bar can read completion state.
+    static let lastCompletedDayKey = "dailySet.lastCompletedDay"
+
+    /// Stable per-day identifier used to lock the daily set to one set per day.
+    static func dayKey(_ date: Date) -> String {
+        let c = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        return "\(c.year ?? 0)-\(c.month ?? 0)-\(c.day ?? 0)"
+    }
+
+    /// Whether today's daily set has already been finished. Drives the tray
+    /// tab icon (full = words waiting, empty = done for the day).
+    static func isDoneToday(lastCompletedDay: String, now: Date = .now) -> Bool {
+        lastCompletedDay == dayKey(now)
+    }
 }
 
 struct JamView: View {
@@ -36,6 +52,12 @@ struct JamView: View {
     /// Word IDs of the most recently built set, comma-joined, so "Practice
     /// again" can replay the exact same words — even after an app relaunch.
     @AppStorage("dailySet.lastSetIDs") private var lastSetIDsRaw: String = ""
+    /// Whether the set built for today is a revision set (a random shuffle of
+    /// words the user is still learning) rather than a themed set. Persisted so
+    /// the intro/completion copy and theme-advance logic stay correct across a
+    /// relaunch — including a relaunch on an already-completed day, where the
+    /// set is never rebuilt.
+    @AppStorage("dailySet.lastWasRevision") private var lastSetWasRevision: Bool = false
 
     @State private var queue: [VocabularyWord] = []
     @State private var dragOffset: CGSize = .zero
@@ -46,6 +68,13 @@ struct JamView: View {
     @State private var pendingSpeakOnFilterDismiss: Bool = false
     @State private var isSetComplete: Bool = false
     @State private var setStarted: Bool = false
+    /// Walrus image aspect (height / width) and the scale it shrinks to on the
+    /// completion screen. Used to reserve its slot and size the badge.
+    private static let walrusAspect: CGFloat = 990.0 / 543.0
+    private static let completionWalrusScale: CGFloat = 0.78
+    /// The walrus's on-screen height once shrunk for the completion screen —
+    /// the completion copy reserves exactly this much so it sits clear below.
+    private static let reservedWalrusHeight: CGFloat = 180 * completionWalrusScale * walrusAspect
     /// True while replaying a finished set via "Practice again" — finishing a
     /// replay returns to the completion screen instead of advancing the theme.
     @State private var isReplaying: Bool = false
@@ -54,6 +83,14 @@ struct JamView: View {
     /// the daily unlock is a Pro perk (content-breadth gate).
     @State private var isShowingPaywall: Bool = false
     @State private var isShowingWidgetSheet: Bool = false
+
+    /// Whether the user has touched the front card since the current set began.
+    /// Gates the swipe-hint nudge so it stops the instant they start swiping.
+    @State private var didInteractWithCard: Bool = false
+    /// How many times the swipe hint has nudged the current set's first card,
+    /// capped so an idle user isn't nagged indefinitely.
+    @State private var swipeHintsShown: Int = 0
+    private let maxSwipeHints = 3
 
     /// First-run nudge to install the Home Screen widget, shown above the card
     /// stack until the user taps it or dismisses it. Persists once dismissed.
@@ -70,29 +107,54 @@ struct JamView: View {
         !decks.isEmpty
     }
 
+    /// Shown during the card stack and completion screen; hidden on the intro
+    /// and empty states (which supply their own art or none).
+    private var walrusIsVisible: Bool {
+        if dailySetActive && isSetComplete { return true }              // completion
+        if dailySetActive && !setStarted && !queue.isEmpty { return false } // intro
+        if queue.isEmpty && !isSetComplete { return false }            // empty
+        return true                                                     // cards
+    }
+
+    /// Vertical offset from the top of the screen. Sits just under the top on
+    /// the card stack; drops to roughly a third down on completion so it reads
+    /// as centered above the "Set complete!" copy.
+    private func walrusOffset(in geo: GeometryProxy) -> CGFloat {
+        isSetComplete ? geo.size.height * 0.12 : 8
+    }
+
     var body: some View {
         GeometryReader { geo in
             ZStack {
                 DS.Color.paper.ignoresSafeArea()
 
-                if dailySetActive && isSetComplete {
-                    completionState
+                // The walrus sits behind the content so it can glide from the
+                // top of the card stack down to the centre exactly as the last
+                // card is swiped away — see `walrusOffset(in:)`.
+                if walrusIsVisible {
+                    Image("walrus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 180)
+                        .scaleEffect(isSetComplete ? Self.completionWalrusScale : 1, anchor: .top)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                        .offset(y: walrusOffset(in: geo))
+                        .allowsHitTesting(false)
+                }
+
+                // Content layer (no walrus). The completion copy waits for the
+                // final card to finish flying off (`!isAnimatingOut`) so the
+                // card and the walrus animate at the same time, not in sequence.
+                if dailySetActive && isSetComplete && !isAnimatingOut {
+                    completionState(in: geo)
+                        .transition(.opacity)
                 } else if dailySetActive && !setStarted && !queue.isEmpty {
                     introCard
-                } else if queue.isEmpty {
+                } else if queue.isEmpty && !isSetComplete {
                     emptyState
                 } else {
-                    ZStack(alignment: .top) {
-                        Image("walrus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 180)
-                            .padding(.top, 8)
-                            .allowsHitTesting(false)
-
-                        cardStack(in: geo.size)
-                            .padding(.top, 130)
-                    }
+                    cardStack(in: geo.size)
+                        .padding(.top, 130)
                 }
             }
             .safeAreaInset(edge: .top) {
@@ -116,7 +178,6 @@ struct JamView: View {
                 queue = []
             }
             rebuildQueueIfNeeded()
-            applyPendingDeepLink()
         }
         .onChange(of: allWords.count) { _, _ in
             // Reseed / language switch: drop set state and rebuild the daily set
@@ -194,10 +255,17 @@ struct JamView: View {
         .sheet(isPresented: $isShowingPaywall) {
             // Once subscribed, jump straight into the next theme the user
             // tapped — no waiting for the daily unlock.
-            PaywallView(onSubscribed: { advanceToTomorrowTopic() })
+            PaywallView(onSubscribed: { advanceToTomorrowTopic() }, source: .jamTopic)
         }
         .sheet(isPresented: $isShowingWidgetSheet) {
             InstallWidgetSheet()
+        }
+
+        .onChange(of: visibleCardWordID, initial: true) { _, wordID in
+            DeepLinkCoordinator.shared.visibleWordID = wordID
+        }
+        .onDisappear {
+            DeepLinkCoordinator.shared.visibleWordID = nil
         }
     }
 
@@ -329,8 +397,28 @@ struct JamView: View {
 
             Spacer()
 
-            HStack {
+            HStack(spacing: 20) {
                 Spacer()
+
+                // Replay the example on demand. Independent of the mute toggle
+                // below — an explicit tap always speaks, even when auto-play is
+                // off — and unmutes so the user isn't left wondering why nothing
+                // played after they asked for it.
+                Button {
+                    playLightHaptic()
+                    if !soundEnabled { soundEnabled = true }
+                    SpeechService.shared.speak(word.exampleSentence)
+                } label: {
+                    Image(systemName: "play.fill")
+                        .font(.sniglet(.title3))
+                        .foregroundStyle(DS.Color.ink)
+                        .frame(width: 56, height: 56)
+                        .background(Circle().fill(DS.Color.ink.opacity(0.15)))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Replay sentence")
+
+                // Mute toggle — controls whether each new card auto-speaks.
                 Button {
                     soundEnabled.toggle()
                     playSoundToggleHaptic()
@@ -355,6 +443,7 @@ struct JamView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(soundEnabled ? "Mute audio" : "Unmute audio")
+
                 Spacer()
             }
         }
@@ -417,14 +506,21 @@ struct JamView: View {
         DragGesture()
             .onChanged { value in
                 guard !isAnimatingOut else { return }
+                didInteractWithCard = true
                 dragOffset = CGSize(width: value.translation.width, height: 0)
             }
             .onEnded { value in
                 guard !isAnimatingOut else { return }
-                if value.translation.width < -swipeThreshold {
-                    commit(rating: .good, toLeftBy: cardWidth)
-                } else if value.translation.width > swipeThreshold {
-                    commit(rating: .again, toLeftBy: -cardWidth)
+                // Project where the swipe would land if the finger kept its
+                // release velocity, so a quick flick commits even when the
+                // finger itself didn't cross the threshold.
+                let translation = value.translation.width
+                let projected = value.predictedEndTranslation.width
+                let flickSpeed = abs(projected - translation)
+                if translation < -swipeThreshold || projected < -swipeThreshold * 1.5 {
+                    commit(rating: .good, direction: -1, cardWidth: cardWidth, flickSpeed: flickSpeed)
+                } else if translation > swipeThreshold || projected > swipeThreshold * 1.5 {
+                    commit(rating: .again, direction: 1, cardWidth: cardWidth, flickSpeed: flickSpeed)
                 } else {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
                         dragOffset = .zero
@@ -433,7 +529,7 @@ struct JamView: View {
             }
     }
 
-    private func commit(rating: ReviewRating, toLeftBy travel: CGFloat) {
+    private func commit(rating: ReviewRating, direction: CGFloat, cardWidth: CGFloat, flickSpeed: CGFloat) {
         guard let word = queue.first else { return }
         isAnimatingOut = true
 
@@ -446,9 +542,23 @@ struct JamView: View {
             releaseProgress = 1.0
         }
 
-        // Card flies off.
-        withAnimation(.easeOut(duration: 0.25)) {
-            dragOffset = CGSize(width: -travel * 1.6, height: 0)
+        // Fly the card off in the swipe direction, continuing the finger's
+        // motion. Target just past the screen edge (rather than far off) and
+        // use a longer easeOut so the exit reads as a smooth glide instead of
+        // vanishing. A hard flick shaves the duration so fast swipes feel snappy.
+        let exitDuration = flickSpeed > 320 ? 0.30 : 0.44
+        let exitX = direction * (cardWidth * 1.15 + 80)
+        withAnimation(.easeOut(duration: exitDuration)) {
+            dragOffset = CGSize(width: exitX, height: 0)
+        }
+
+        // Last card: start the walrus gliding down to centre right now, so it
+        // moves in lockstep with the card flying off. The completion copy only
+        // appears once the card is gone (gated on `isAnimatingOut`).
+        if dailySetActive && queue.count == 1 {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
+                isSetComplete = true
+            }
         }
 
         // Icon pops slightly bigger then shrinks out.
@@ -461,7 +571,9 @@ struct JamView: View {
 
         record(rating: rating, for: word)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.36) {
+        // Swap in the next card only once the current one has cleared the
+        // screen, so the flown-off card is offscreen when it's removed.
+        DispatchQueue.main.asyncAfter(deadline: .now() + exitDuration + 0.02) {
             var instant = Transaction()
             instant.disablesAnimations = true
             withTransaction(instant) {
@@ -487,7 +599,8 @@ struct JamView: View {
                 }
             }
             if shouldCall { triggerSetCompleteCall() }
-            isAnimatingOut = false
+            // Fade the completion copy in now that the card has cleared.
+            withAnimation(.easeOut(duration: 0.25)) { isAnimatingOut = false }
             playLightHaptic()
         }
     }
@@ -510,6 +623,7 @@ struct JamView: View {
         if existing == nil { context.insert(progress) }
         let intervalBefore = progress.intervalDays
         let result = SRSScheduler.next(progress: progress, rating: rating)
+        Analytics.capture(.cardReviewed, ["rating": "\(rating)", "source": "jam"])
         progress.state = result.state
         progress.easeFactor = result.easeFactor
         progress.intervalDays = result.intervalDays
@@ -546,12 +660,24 @@ struct JamView: View {
         isSetComplete = false
     }
 
+    /// The word the card stack is currently showing, or nil when no readable
+    /// card is on screen. Mirrors the branch chain in `body`: the completion,
+    /// intro and empty states all render instead of the stack, so none of them
+    /// count as showing a word. Published to `DeepLinkCoordinator` so a widget
+    /// tap on this exact word doesn't open a sheet duplicating the card the
+    /// user is already looking at.
+    private var visibleCardWordID: String? {
+        guard !queue.isEmpty else { return nil }
+        if dailySetActive, isSetComplete || !setStarted { return nil }
+        return queue.first?.id
+    }
+
     /// Push the current stack (front card first, then upcoming) to the App
     /// Group so the widget can rotate through today's words over the day and
     /// re-sync whenever the user swipes.
     private func publishWidgetSet() {
         let progressByID = Dictionary(allProgress.map { ($0.wordID, $0) }) { first, _ in first }
-        DailyWordService.publishSet(queue, progressByID: progressByID)
+        DailyWordService.publishSet(queue, progressByID: progressByID, context: context)
     }
 
     private func rebuildQueueIfNeeded() {
@@ -563,12 +689,10 @@ struct JamView: View {
                 return
             }
             buildDailySet()
-            applyPendingDeepLink()
             setStarted = false
             lastSetIDsRaw = queue.map(\.id).joined(separator: ",")
         } else {
             refillQueue()
-            applyPendingDeepLink()
         }
         // Publish directly here too: the `queue.first?.id` change handler misses
         // a same-day relaunch that rebuilds a set starting on the same word, so
@@ -621,10 +745,18 @@ struct JamView: View {
         allWords.scoped(to: (TargetLanguage(rawValue: targetLanguageRaw) ?? .spanish).languageCode)
     }
 
-    /// Build the frozen daily set: due reviews (any theme — the hybrid pool)
-    /// first, then new words from today's theme by frequency rank. Capped at
-    /// `dailySetTarget`.
+    /// Build the frozen daily set. On a revision day it's a random shuffle of
+    /// words the user is still learning (any theme); otherwise it's a themed
+    /// set drawn *only* from today's theme — due reviews first, then new words
+    /// by frequency rank. Capped at `dailySetTarget`.
     private func buildDailySet() {
+        if shouldBuildRevisionToday() {
+            lastSetWasRevision = true
+            buildRevisionSet()
+            return
+        }
+        lastSetWasRevision = false
+
         guard let theme = currentTheme else { queue = []; return }
         let now = Date.now
         let progressByID = Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
@@ -644,9 +776,12 @@ struct JamView: View {
         }
 
         // Every other theme is seeded vocabulary only — custom words are
-        // excluded so they don't flood the front of the themed set.
+        // excluded so they don't flood the front of the themed set. Due reviews
+        // are scoped to this theme too: a themed set holds words from its own
+        // category only (revision of other themes' due words happens on a
+        // dedicated revision day instead).
         let dueReviews = currentWords
-            .filter { !$0.id.hasPrefix("custom-") }
+            .filter { !$0.id.hasPrefix("custom-") && $0.deckSlugs.contains(theme.slug) }
             .compactMap { word -> (VocabularyWord, Date)? in
                 guard let progress = progressByID[word.id], progress.dueDate <= now else { return nil }
                 return (word, progress.dueDate)
@@ -671,16 +806,16 @@ struct JamView: View {
             if set.count >= target { break }
         }
 
-        // Backfill when the theme can't fill the set on its own — without this
-        // the set would dead-end empty and never reach the climax call. Pulls
-        // any remaining unlearned word by frequency rank within the same
-        // level-anchored pool (including `common`-only words, which otherwise
-        // never surface in a themed set). `allWords` is already rank-sorted.
+        // Backfill when new + due can't fill the set on its own — without this
+        // a set could dead-end short of the climax call. Stays *within the
+        // theme* (category-only), relaxing only the level anchor as a last
+        // resort: any remaining theme word by frequency rank, including ones
+        // the user has already seen. If the theme is too small to reach the
+        // target the set is simply shorter — it still ends with Walter's call.
         if set.count < target {
-            let backfill = LevelAnchor.anchored(
-                currentWords.filter { !$0.id.hasPrefix("custom-") && progressByID[$0.id] == nil },
-                to: level
-            )
+            let backfill = currentWords
+                .filter { !$0.id.hasPrefix("custom-") && $0.deckSlugs.contains(theme.slug) }
+                .sorted { $0.rank < $1.rank }
             for word in backfill {
                 guard seen.insert(word.id).inserted else { continue }
                 set.append(word)
@@ -688,6 +823,42 @@ struct JamView: View {
             }
         }
         queue = set
+    }
+
+    /// The user's "learning list": seeded words they've started but not yet
+    /// mastered — anything lapsed or still in the `learning`/`review` state.
+    /// Custom words are excluded so revision stays focused on core vocabulary.
+    private func learningWords() -> [VocabularyWord] {
+        let progressByID = Dictionary(uniqueKeysWithValues: allProgress.map { ($0.wordID, $0) })
+        return currentWords.filter { word in
+            guard !word.id.hasPrefix("custom-"), let p = progressByID[word.id] else { return false }
+            return p.lapses > 0 || p.state == .learning || p.state == .review
+        }
+    }
+
+    /// Minimum learning-list size before a revision day can occur — below this
+    /// there isn't a meaningful pool to revise, so we stay on themed sets.
+    private static let revisionMinPool = 5
+
+    /// Whether today's set should be a revision set. Deterministic per day and
+    /// language (so it survives relaunch/rebuild), firing on roughly one day in
+    /// four — but only once the learning list is big enough to be worth it.
+    private func shouldBuildRevisionToday() -> Bool {
+        let key = "revision|\(targetLanguageRaw)|\(Self.dayKey(.now))"
+        guard Self.stableHash(key) % 4 == 0 else { return false }
+        return learningWords().count >= Self.revisionMinPool
+    }
+
+    /// Build a revision set: a stable-per-day random shuffle of the learning
+    /// list. Day-seeded (like the "My Words" theme) so it's identical all day
+    /// but picks a fresh mix on the next revision day.
+    private func buildRevisionSet() {
+        let dayKey = Self.dayKey(.now)
+        queue = Array(
+            learningWords()
+                .sorted { Self.stableHash("\(dayKey)|rev|\($0.id)") < Self.stableHash("\(dayKey)|rev|\($1.id)") }
+                .prefix(DailySetConfig.clamp(dailySetTarget))
+        )
     }
 
     /// Deterministic FNV-1a hash — stable across launches (unlike
@@ -703,15 +874,51 @@ struct JamView: View {
 
     private func completeSet() {
         dailySetLastCompletedDay = Self.dayKey(.now)
-        dailyThemeIndex += 1
+        // A revision day is a detour, not a theme — don't advance the rotation,
+        // so the theme it interrupted still comes up next.
+        if !lastSetWasRevision {
+            dailyThemeIndex += 1
+        }
         isSetComplete = true
     }
 
     /// Begin today's set: reveal the cards and speak the first example.
     private func startSet() {
         setStarted = true
+        // Arm the swipe hint so an idle user gets a teased nudge showing the
+        // card can be swiped.
+        didInteractWithCard = false
+        swipeHintsShown = 0
+        scheduleSwipeHint(after: 3.5)
         guard soundEnabled, let word = queue.first else { return }
         SpeechService.shared.speak(word.exampleSentence)
+    }
+
+    /// Nudge the front card slightly to the right and back to hint that it's
+    /// swipeable. Fires a beat after the set starts and repeats while the user
+    /// stays idle, stopping the moment they touch the card or the cap is hit.
+    private func scheduleSwipeHint(after delay: Double) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            guard !didInteractWithCard,
+                  !isAnimatingOut,
+                  dragOffset == .zero,
+                  swipeHintsShown < maxSwipeHints,
+                  !isSetComplete,
+                  queue.first != nil,
+                  !(dailySetActive && !setStarted)
+            else { return }
+            swipeHintsShown += 1
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                dragOffset = CGSize(width: 46, height: 0)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) {
+                guard !didInteractWithCard, !isAnimatingOut else { return }
+                withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                    dragOffset = .zero
+                }
+                scheduleSwipeHint(after: 3.2)
+            }
+        }
     }
 
     /// Words to replay. Prefers the exact most-recently-built set; falls back
@@ -783,9 +990,9 @@ struct JamView: View {
     }
 
     private static func dayKey(_ date: Date) -> String {
-        let c = Calendar.current.dateComponents([.year, .month, .day], from: date)
-        return "\(c.year ?? 0)-\(c.month ?? 0)-\(c.day ?? 0)"
+        DailySetConfig.dayKey(date)
     }
+
 
     private var introCard: some View {
         let count = queue.count
@@ -798,15 +1005,20 @@ struct JamView: View {
 
             VStack(spacing: 12) {
                 HStack(spacing: 10) {
-                    Image(systemName: currentTheme?.iconSystemName ?? "square.stack")
-                    Text(currentTheme?.displayName ?? "Today's Set")
+                    Image(systemName: lastSetWasRevision ? "arrow.triangle.2.circlepath" : (currentTheme?.iconSystemName ?? "square.stack"))
+                    Text(lastSetWasRevision ? "Revision" : (currentTheme?.displayName ?? "Today's Set"))
                 }
                 .font(.gochiHand(size: 30))
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
                 .foregroundStyle(Color.whiteboardInk)
 
-                if let desc = currentTheme?.deckDescription, !desc.isEmpty {
+                if lastSetWasRevision {
+                    Text("A mix of words you're still learning.")
+                        .font(.sniglet(.callout))
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                } else if let desc = currentTheme?.deckDescription, !desc.isEmpty {
                     Text(desc)
                         .font(.sniglet(.callout))
                         .foregroundStyle(.secondary)
@@ -840,14 +1052,21 @@ struct JamView: View {
         .padding(.horizontal, 24)
     }
 
-    private var completionState: some View {
+    private func completionState(in geo: GeometryProxy) -> some View {
         VStack(spacing: 18) {
-            Image(systemName: "checkmark.seal.fill")
-                .font(.sniglet(size: 56))
-                .foregroundStyle(.green)
+            // Reserve the walrus's slot (it's drawn in the body overlay so it can
+            // glide down from the card stack), plus a little breathing room, so
+            // the copy and its badge sit clear below it.
+            Color.clear
+                .frame(height: Self.reservedWalrusHeight + 12)
             Text("Set complete!")
                 .font(.sniglet(.title, weight: .bold))
-            if let done = justCompletedTheme {
+            if lastSetWasRevision {
+                Text("You finished today's revision set.")
+                    .font(.sniglet(.callout))
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            } else if let done = justCompletedTheme {
                 Text("You finished today's \(done.displayName) set.")
                     .font(.sniglet(.callout))
                     .foregroundStyle(.secondary)
@@ -906,7 +1125,9 @@ struct JamView: View {
                     .foregroundStyle(.secondary)
             }
         }
-        .padding(28)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .padding(.horizontal, 28)
+        .padding(.top, walrusOffset(in: geo))
     }
 
     private func refillQueue() {
@@ -916,17 +1137,6 @@ struct JamView: View {
         let candidates = nextWords(excluding: presentIDs, limit: targetSize - working.count)
         working.append(contentsOf: candidates)
         queue = working
-    }
-
-    private func applyPendingDeepLink() {
-        guard let pendingID = DeepLink.consumePendingWordID() else { return }
-        if queue.first?.id == pendingID { return }
-        if let index = queue.firstIndex(where: { $0.id == pendingID }) {
-            let word = queue.remove(at: index)
-            queue.insert(word, at: 0)
-        } else if let word = currentWords.first(where: { $0.id == pendingID }) {
-            queue.insert(word, at: 0)
-        }
     }
 
     private func nextWords(excluding excluded: Set<String>, limit: Int) -> [VocabularyWord] {

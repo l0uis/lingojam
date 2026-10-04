@@ -3,11 +3,25 @@ import Foundation
 import FoundationModels
 #endif
 
+/// The verdict on one of the learner's sentences.
+///
+/// `unavailable` is deliberately distinct from `clean`: Apple Foundation
+/// Models isn't present on every device, and on those the check never runs
+/// at all. Collapsing the two would have the app tell a learner their
+/// sentence was correct when nothing ever looked at it.
+enum GrammarCheckOutcome {
+    /// No check happened — model missing, errored, or the text was too
+    /// short to be worth judging. Vouches for nothing.
+    case unavailable
+    /// Checked, and there was nothing worth teaching.
+    case clean
+    /// Checked, with the full corrected sentence.
+    case corrected(String)
+}
+
 /// Checks a user's chat reply for grammar, conjugation, or spelling
-/// errors via Apple Foundation Models. Returns the full corrected
-/// sentence if Walter would have written it differently, or nil if the
-/// reply is already correct (or the model is unavailable). Conservative
-/// by design — only flags real errors, not stylistic choices.
+/// errors via Apple Foundation Models. Conservative by design — only
+/// flags real errors, not stylistic choices or dictation punctuation.
 @MainActor
 final class GrammarService {
     static let shared = GrammarService()
@@ -21,14 +35,14 @@ final class GrammarService {
     func check(
         _ text: String,
         language: TargetLanguage
-    ) async -> String? {
+    ) async -> GrammarCheckOutcome {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         // Don't waste a model call on trivial replies.
-        guard trimmed.count >= 3 else { return nil }
+        guard trimmed.count >= 3 else { return .unavailable }
 
         let key = "\(language.rawValue)|\(trimmed)"
         if let cached = cache[key] {
-            return cached.isEmpty ? nil : cached
+            return cached.isEmpty ? .clean : .corrected(cached)
         }
 
         #if canImport(FoundationModels)
@@ -44,6 +58,11 @@ final class GrammarService {
                   or only differs from "standard" in casual/informal style.
                 - Set `hasError = true` and write the FULL corrected sentence in `corrected` \
                   only when there is a real error worth teaching.
+                - The text is DICTATED SPEECH. Missing full stops, commas, question marks, \
+                  or a lowercase first word are the transcriber's doing, not the learner's — \
+                  they are NOT errors. Never set `hasError` for punctuation or sentence-opening \
+                  capitalisation alone. Accents and mid-sentence capitals DO count \
+                  (esta/está, haus/Haus).
                 - Do NOT translate, do NOT add commentary, do NOT quote.
                 - Keep the user's meaning and tone — only fix mistakes.
                 """
@@ -60,20 +79,21 @@ final class GrammarService {
                     if !corrected.isEmpty,
                        corrected.caseInsensitiveCompare(trimmed) != .orderedSame {
                         cache[key] = corrected
-                        return corrected
+                        return .corrected(corrected)
                     }
                 }
                 cache[key] = ""  // sentinel: checked, nothing to fix
-                return nil
+                return .clean
             } catch {
                 #if DEBUG
                 print("GrammarService failed: \(error)")
                 #endif
-                return nil
+                return .unavailable
             }
         }
         #endif
-        return nil
+        // No Foundation Models on this device — nothing checked this.
+        return .unavailable
     }
 }
 

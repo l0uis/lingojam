@@ -3,12 +3,16 @@ import SwiftUI
 struct SettingsView: View {
     let onRestartOnboarding: () -> Void
 
+    @Environment(\.openURL) private var openURL
+
     @AppStorage(OnboardingDefaultsKey.displayName) private var displayName: String = ""
     @AppStorage(OnboardingDefaultsKey.notificationsEnabled) private var notificationsEnabled: Bool = false
     @AppStorage(OnboardingDefaultsKey.notificationsPerDay) private var notificationsPerDay: Int = 10
     @AppStorage(DailySetConfig.defaultsKey) private var dailySetSize: Int = DailySetConfig.defaultSize
     @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
+    @AppStorage(OnboardingDefaultsKey.liveActivityEnabled) private var liveActivityEnabled: Bool = false
 
+    @State private var analyticsEnabled = Analytics.isEnabled
     @State private var isEditingReminder: Bool = false
     @State private var isShowingWidgetSheet: Bool = false
     @State private var isShowingPaywall: Bool = false
@@ -29,7 +33,7 @@ struct SettingsView: View {
                     } label: {
                         Label("Wordrus Pro", systemImage: "key.fill")
                             .font(.sniglet(.body))
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(DS.Color.ink)
                     }
                 } else {
                     HStack {
@@ -131,12 +135,55 @@ struct SettingsView: View {
                 .onTapGesture {
                     isShowingWidgetSheet = true
                 }
+
+                Toggle(isOn: $liveActivityEnabled) {
+                    Text("Live words on Lock Screen")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                }
+                .tint(DS.Color.ink)
+                .onChange(of: liveActivityEnabled) { _, on in
+                    if on { LiveActivityService.start() } else { LiveActivityService.end() }
+                }
             } header: {
                 sectionHeader("Learning")
             } footer: {
                 Text("New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing aren't affected.")
                     .font(.sniglet(.caption))
                     .foregroundStyle(.secondary)
+            }
+
+            Section {
+                ShareLink(item: AppStoreLinks.productURL,
+                          message: Text("I've been learning words with Wordrus — thought you might like it too.")) {
+                    Label("Share Wordrus", systemImage: "square.and.arrow.up")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                }
+
+                Button {
+                    openURL(AppStoreLinks.writeReviewURL)
+                } label: {
+                    Label("Leave a Review", systemImage: "star.fill")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                }
+            } header: {
+                sectionHeader("Spread the Word")
+            }
+
+            Section {
+                Toggle(isOn: $analyticsEnabled) {
+                    Text("Share anonymous usage stats")
+                        .font(.sniglet(.body))
+                        .foregroundStyle(.primary)
+                }
+                .tint(DS.Color.ink)
+                .onChange(of: analyticsEnabled) { _, on in Analytics.isEnabled = on }
+            } header: {
+                sectionHeader("Privacy")
+            } footer: {
+                Text("Helps improve Wordrus. Nothing you type or say is ever sent.")
             }
 
             #if DEBUG
@@ -179,7 +226,7 @@ struct SettingsView: View {
             InstallWidgetSheet()
         }
         .sheet(isPresented: $isShowingPaywall) {
-            PaywallView()
+            PaywallView(source: .settings)
         }
         .alert("Restore Purchases",
                isPresented: Binding(get: { restoreMessage != nil },

@@ -21,9 +21,15 @@ final class IncomingCallCoordinator {
     /// view (no ringer).
     var isPresentingOutgoing: Bool = false
 
+    /// What to talk about on the next outgoing call, when it isn't the usual
+    /// recent-words call — e.g. retelling today's story. Consumed by
+    /// `RootView` when it presents the call.
+    var pendingSeed: CallSeed?
+
     private init() {}
 
     func requestIncoming() {
+        Analytics.capture(.callStarted, ["direction": "incoming"])
         // Kill any card-stack pronunciation (or other in-flight TTS) so
         // the example sentence behind the call screen doesn't bleed
         // through the ringer.
@@ -31,10 +37,20 @@ final class IncomingCallCoordinator {
         isPresentingIncoming = true
     }
 
-    func requestOutgoing() {
+    func requestOutgoing(seed: CallSeed? = nil) {
+        Analytics.capture(.callStarted, ["direction": "outgoing"])
         SpeechService.shared.stop()
+        pendingSeed = seed
         isPresentingOutgoing = true
     }
+}
+
+/// A call built around something specific instead of recent review words.
+struct CallSeed: Equatable {
+    /// Words Dr Tusk tries to get the learner to use.
+    let wordIDs: [String]
+    /// Background the brain gets with its instructions (in English).
+    let storyContext: String
 }
 
 /// Foreground/launched notification handler. Routes walrus call taps to
@@ -61,10 +77,24 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
-        let kind = response.notification.request.content.userInfo["kind"] as? String
+        let userInfo = response.notification.request.content.userInfo
+        let kind = userInfo["kind"] as? String
         if kind == NotificationService.walrusCallCategory {
             Task { @MainActor in
                 IncomingCallCoordinator.shared.requestIncoming()
+            }
+        } else if kind == "DAILY_STORY",
+                  let raw = userInfo["storyID"] as? String, let storyID = UUID(uuidString: raw) {
+            // Matches `StoryScheduler.notificationKind`.
+            Task { @MainActor in
+                DeepLinkCoordinator.shared.request(storyID: storyID)
+            }
+        } else if let wordID = userInfo["wordID"] as? String {
+            // A tapped daily-word reminder: surface that exact word over
+            // whatever the user lands on. Routed the same as a widget/Live
+            // Activity tap so all three entry points behave identically.
+            Task { @MainActor in
+                DeepLinkCoordinator.shared.request(wordID: wordID)
             }
         }
         completionHandler()

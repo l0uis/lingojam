@@ -7,6 +7,14 @@ final class SpeechService {
 
     private let synthesizer = AVSpeechSynthesizer()
 
+    /// Retained delegate box for the Apple-synth fallback. `AVSpeechSynthesizer`
+    /// holds its delegate weakly, so this has to outlive the utterance.
+    private lazy var synthDelegate: SynthesizerCompletionBox = {
+        let box = SynthesizerCompletionBox()
+        synthesizer.delegate = box
+        return box
+    }()
+
     /// Preferred male voices per BCP-47 language. The Eloquence/novelty voices
     /// ("Rocko", "Reed", "Eddy") are more characterful but only available if
     /// the user has downloaded them via Settings → Accessibility → Spoken
@@ -46,6 +54,49 @@ final class SpeechService {
         speakViaOpenAI(text, languageCode: code, instructions: Self.walterInstructions(for: code))
     }
 
+    /// Speak `text` as Walter and suspend until the audio has finished
+    /// playing. This is what lets the voice call reveal one speech bubble
+    /// per sentence in time with his voice instead of dumping a paragraph
+    /// on screen and talking over it.
+    ///
+    /// Returns early — without waiting — if the surrounding task is
+    /// cancelled (the user hung up mid-sentence).
+    func speakAsWalterAndWait(_ text: String, languageCode: String? = nil) async {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        stop()
+        let code = languageCode ?? defaultLanguageCode()
+
+        do {
+            let data = try await OpenAITTSClient.shared.fetchAudio(
+                text: trimmed,
+                voice: "onyx",
+                instructions: Self.walterInstructions(for: code)
+            )
+            if Task.isCancelled { return }
+            await WalrusAudioPlayer.shared.playAndWait(data)
+        } catch {
+            if Task.isCancelled { return }
+            await speakViaAppleAndWait(trimmed, languageCode: code)
+        }
+    }
+
+    /// Warm the TTS disk cache for a line we're about to need. Fired for
+    /// sentence N+1 while sentence N is still playing, so the pause between
+    /// Walter's speech bubbles is silence-length, not network-length.
+    func prefetchAsWalter(_ text: String, languageCode: String? = nil) {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        let code = languageCode ?? defaultLanguageCode()
+        Task {
+            _ = try? await OpenAITTSClient.shared.fetchAudio(
+                text: trimmed,
+                voice: "onyx",
+                instructions: Self.walterInstructions(for: code)
+            )
+        }
+    }
+
     func stop() {
         openAITask?.cancel()
         openAITask = nil
@@ -53,6 +104,7 @@ final class SpeechService {
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .immediate)
         }
+        synthDelegate.finish()
     }
 
     private func defaultLanguageCode() -> String {
@@ -60,12 +112,30 @@ final class SpeechService {
     }
 
     private func speakViaApple(_ text: String, languageCode: String) {
+        synthesizer.speak(utterance(for: text, languageCode: languageCode))
+    }
+
+    /// Apple-synth twin of `speakAsWalterAndWait`, used when the TTS proxy
+    /// is unreachable. Waits on the synthesizer's delegate, with a
+    /// generous character-count-derived backstop in case the callback
+    /// never lands.
+    private func speakViaAppleAndWait(_ text: String, languageCode: String) async {
+        let utterance = utterance(for: text, languageCode: languageCode)
+        // ~13 characters/second at our 0.88 rate, plus the pre-utterance
+        // delay and slack. Only ever used if the delegate goes missing.
+        let backstop = 1.5 + Double(text.count) / 13.0
+        await synthDelegate.wait(backstop: backstop) { [synthesizer] in
+            synthesizer.speak(utterance)
+        }
+    }
+
+    private func utterance(for text: String, languageCode: String) -> AVSpeechUtterance {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = resolvedVoice(for: languageCode)
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.88
         utterance.pitchMultiplier = 0.78
         utterance.preUtteranceDelay = 0.4
-        synthesizer.speak(utterance)
+        return utterance
     }
 
     private func speakViaOpenAI(_ text: String, languageCode: String, instructions: String) {
@@ -152,6 +222,52 @@ final class SpeechService {
         default:
             return ("Spanish", "Spain accent, not Latin American.")
         }
+    }
+}
+
+// MARK: - Apple synthesizer completion bridge
+
+/// Turns `AVSpeechSynthesizer`'s delegate callbacks into an awaitable
+/// call. Kept as a separate object because the synthesizer holds its
+/// delegate weakly and because the callbacks arrive off the main actor.
+@MainActor
+private final class SynthesizerCompletionBox: NSObject {
+    private var continuation: CheckedContinuation<Void, Never>?
+    private var backstopTask: Task<Void, Never>?
+
+    /// Runs `speak`, then suspends until the synthesizer reports the
+    /// utterance finished or cancelled — or until `backstop` seconds pass.
+    func wait(backstop: Double, speak: @escaping () -> Void) async {
+        finish()
+        await withCheckedContinuation { (cont: CheckedContinuation<Void, Never>) in
+            continuation = cont
+            backstopTask = Task { [weak self] in
+                try? await Task.sleep(nanoseconds: UInt64(backstop * 1_000_000_000))
+                guard !Task.isCancelled else { return }
+                self?.finish()
+            }
+            speak()
+        }
+    }
+
+    /// Resume any pending waiter. Idempotent — safe to call from `stop()`
+    /// whether or not anything is waiting.
+    func finish() {
+        backstopTask?.cancel()
+        backstopTask = nil
+        let cont = continuation
+        continuation = nil
+        cont?.resume()
+    }
+}
+
+extension SynthesizerCompletionBox: AVSpeechSynthesizerDelegate {
+    nonisolated func speechSynthesizer(_: AVSpeechSynthesizer, didFinish _: AVSpeechUtterance) {
+        Task { @MainActor in self.finish() }
+    }
+
+    nonisolated func speechSynthesizer(_: AVSpeechSynthesizer, didCancel _: AVSpeechUtterance) {
+        Task { @MainActor in self.finish() }
     }
 }
 

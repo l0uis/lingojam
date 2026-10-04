@@ -16,5 +16,6 @@ struct WordrusWidgetBundle: WidgetBundle {
 
     var body: some Widget {
         DailyWordWidget()
+        WordLiveActivity()
     }
 }

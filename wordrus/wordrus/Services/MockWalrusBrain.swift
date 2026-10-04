@@ -66,6 +66,8 @@ struct MockWalrusBrain: WalrusBrain {
             ? (templates.fillers.randomElement().map { $0 + " " } ?? "")
             : ""
 
+        // No correction: a template brain has no way to judge the learner's
+        // grammar, and guessing would be worse than staying quiet.
         return WalrusTurn(text: lead + prompt, endsConversation: false)
     }
 

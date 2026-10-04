@@ -32,4 +32,4 @@ EXPECTED_BUNDLE_ID = "com.louiscurrie.wordrus"
 
 # Secrets — set with `wrangler secret put`. Never commit values here.
 # OPENAI_API_KEY: your OpenAI API key (sk-...) — used by /v1/walrus/tts
-# ANTHROPIC_API_KEY: your Anthropic API key (sk-ant-...) — used by /v1/walrus/enrich
+# ANTHROPIC_API_KEY: your Anthropic API key (sk-ant-...) — used by /enrich, /turn and /story

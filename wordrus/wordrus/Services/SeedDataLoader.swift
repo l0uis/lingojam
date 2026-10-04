@@ -71,18 +71,25 @@ enum SeedDataLoader {
     /// Bumped whenever the bundled seeds' deck taxonomy changes. On launch,
     /// installs with a lower stored version run `migrateDeckTaxonomy` to
     /// remap word tags and refresh the Deck records without wiping progress.
-    static let currentDeckTaxonomyVersion = 3
+    static let currentDeckTaxonomyVersion = 4
 
     /// Old slugs that need to be renamed in existing word data when migrating
     /// from an earlier deck taxonomy. Keep entries here forever (or until you
     /// stop supporting upgrades from that older version).
+    ///
+    /// A rename is only enough when the mapping is one-to-one. The v4 taxonomy
+    /// (2026-07-29) also *splits* decks — `work-and-money` into Work + Money,
+    /// and weather/nature/animals back out of `traveling` — which is per-word,
+    /// not per-slug. `migrateDeckTaxonomy` therefore reseeds seeded words'
+    /// tags from the bundled JSON, and this table only covers slugs that no
+    /// longer appear in the seed at all (so a stale user selection resolves).
     private static let deckSlugRemap: [String: String] = [
         "travel": "traveling",
         "food": "food-and-drink",
-        "work": "work-and-money",
+        "work-and-money": "work",
         "money_shopping": "shopping",
         "body_health": "health",
-        "nature_weather": "traveling",
+        "nature_weather": "weather-and-nature",
     ]
 
     /// Old slugs to remove entirely when migrating. Words remain (they still
@@ -150,10 +157,31 @@ enum SeedDataLoader {
             }
         }
 
+        // Seeded words take their membership straight from the bundled seed,
+        // which is authoritative for the current taxonomy. This has to be a
+        // REPLACE, not a merge: `DeckSyncMigrator` merges (so a later additive
+        // tag still propagates), but a merge can never move a word *out* of a
+        // deck — and moving words out is the whole point of a split. Without
+        // this, `playa` would keep `traveling` alongside its new
+        // `weather-and-nature` tag forever on upgraded installs.
+        //
+        // Custom (non-seeded) words have no seed row and fall through to the
+        // remap/drop path below, which is all their user-authored tags need.
+        let seedSlugsByID: [String: [String]] = loadSeed().map { seed in
+            Dictionary(
+                seed.words.map { ($0.id, $0.decks ?? [DeckConstants.commonSlug]) },
+                uniquingKeysWith: { first, _ in first }
+            )
+        } ?? [:]
+
         let wordDescriptor = FetchDescriptor<VocabularyWord>()
         if let words = try? context.fetch(wordDescriptor) {
             for word in words {
                 let old = word.deckSlugs
+                if let fromSeed = seedSlugsByID[word.id] {
+                    if fromSeed != old { word.setDeckSlugs(fromSeed) }
+                    continue
+                }
                 var new: [String] = []
                 for slug in old {
                     if deckSlugDrop.contains(slug) { continue }

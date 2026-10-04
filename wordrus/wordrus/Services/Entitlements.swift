@@ -38,15 +38,21 @@ struct PaywallPlan: Identifiable, Hashable {
     let title: String
     let priceText: String
     /// Length of the free trial in days, when the plan has one. Drives the
-    /// CTA copy and the trial-timeline dates.
+    /// trial-timeline dates and the trial-ending reminder.
     let trialDays: Int?
-    /// Real billing line (e.g. "€23.99/year"), rendered bold.
+    /// The trial length as the store expresses it — "1 week", "3 days" — used
+    /// for user-facing copy so a one-week offer reads "1 week free" rather
+    /// than "7 days free". nil when the plan has no trial.
+    var trialPeriodText: String?
+    /// The billed-amount sentence shown under the CTA, e.g.
+    /// "Billed €22.99 yearly." — the real charged price and its cadence, built
+    /// from the store product so it stays localized.
     let billingText: String?
     let isBestValue: Bool
 
-    /// Free-trial phrase derived from `trialDays`, e.g. "3-day free trial".
+    /// Free-trial phrase for the CTA, e.g. "1 week free".
     /// nil → no trial (CTA reads "Subscribe").
-    var trialText: String? { trialDays.map { "\($0)-day free trial" } }
+    var trialText: String? { trialPeriodText.map { "\($0) free" } }
 
     /// Advertised per-month framing for the yearly plan. The REAL charged
     /// price (€23.99/year) + 3-day trial come from the store; this is the
@@ -60,7 +66,8 @@ struct PaywallPlan: Identifiable, Hashable {
         title: "Yearly",
         priceText: advertisedMonthlyPriceText,
         trialDays: nil,
-        billingText: "€22.99/year",
+        trialPeriodText: nil,
+        billingText: "Billed €22.99 yearly.",
         isBestValue: false
     )
 

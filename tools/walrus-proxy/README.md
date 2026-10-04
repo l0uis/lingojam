@@ -9,7 +9,69 @@ Exposes:
 
 - `GET|POST /v1/walrus/words` → per-device backup of user-added words (with review progress), so they survive an app delete/reinstall (see [`WordBackupClient.swift`](../../wordrus/wordrus/Services/WordBackupClient.swift)).
 
-A future revision will add `/v1/walrus/turn` and `/v1/walrus/evaluate` for the Claude chat brain (see [`ClaudeWalrusBrain.swift`](../../wordrus/wordrus/Services/ClaudeWalrusBrain.swift)).
+- `POST /v1/walrus/turn` → Dr Tusk's next line in a voice call, from Claude. Backs [`ClaudeWalrusBrain.swift`](../../wordrus/wordrus/Services/ClaudeWalrusBrain.swift) and is what makes Walter respond to what the learner actually said instead of reciting a template.
+
+- `POST /v1/walrus/story` → Dr Tusk's daily story, from Claude Haiku 4.5 via a forced `submit_story` tool. Backs [`ClaudeStoryBrain.swift`](../../wordrus/wordrus/Services/ClaudeStoryBrain.swift).
+
+Grading stays on-device — `ChatStore.finalize` recomputes target-word hits with the deterministic lemma matcher no matter what any brain claims — so there's no `/evaluate` endpoint to deploy.
+
+### Conversation — `POST /v1/walrus/turn`
+
+Same required headers as the others; rate-limited under its own `turn:` bucket. Body:
+
+```jsonc
+{
+  "language": "Spanish",   // English name of the language being learned
+  "level": "A2",           // CEFR — controls how hard Walter's language is
+  "phase": "open",         // "open" | "reply" | "wrapUp"
+  "shouldWrapUp": false,   // true once the call has run its natural length
+  "targetWords": ["café", "playa"],          // a steer, never a script
+  "history": [ { "role": "walrus" | "user", "text": "…" } ]  // oldest first
+}
+```
+
+→ `{ "text": "…", "endsConversation": false }`
+
+The history is replayed as real assistant/user message turns rather than a
+flattened transcript, which is most of why replies land on what was said.
+Two invariants the Messages API enforces are handled in `buildTurnMessages`
+and pinned by `test/messages.test.ts`: the conversation must open on a user
+turn (ours opens with Walter, so a stage direction stands in), and roles must
+alternate (so same-role runs merge and the phase instruction folds into the
+trailing user turn). Run them with `npm test`.
+
+Walter's persona lives in `walterSystemPrompt` — that's the file to edit if he
+should sound different.
+
+### Models
+
+Every Claude route (`/enrich`, `/turn`, `/story`) uses one model list,
+`CONTENT_MODELS` in `src/index.ts`: Claude Haiku 4.5, falling back to Sonnet
+4.6 when Haiku is overloaded or unavailable. One model, one bill — change it
+there to change it everywhere. All calls go through `callClaude()` (retry
+once on 429/5xx/529, fail over on that or a 404, stop on other errors).
+
+### Daily story — `POST /v1/walrus/story`
+
+The app chooses the words and checks every draft on device
+(`StoryVocabularyChecker`); the worker only writes. Body:
+
+```json
+{ "language": "Spanish", "nativeLanguage": "English", "level": "A2",
+  "knownWords": ["ir", "playa", …], "newWords": ["pez", "salir"],
+  "topic": "Animals", "previousEpisode": "Dr Tusk found a note…",
+  "minWords": 90, "maxWords": 150, "maxSentenceWords": 10 }
+```
+
+Returns the `submit_story` tool input: `{title, story, new_word_sentences,
+questions, episode_summary}`. A repair adds `"repair": {"draft": <that
+object>, "unknownWords": [...], "missingNewWords": [...]}`; the draft is
+replayed as the model's previous tool call and the rejected words come back
+as its tool result. Rate limited separately (30/day per device). Nothing is
+cached — each story is built from one learner's word list.
+
+`/turn` also accepts an optional `storyContext` (English) for the "retell
+today's story" call; it's appended to Dr Tusk's system prompt.
 
 ### Word backup — `/v1/walrus/words`
 
@@ -46,7 +108,7 @@ npx wrangler kv namespace create ENRICH_CACHE
 npx wrangler secret put OPENAI_API_KEY
 # (paste your sk-... key when prompted)
 
-# Store the Anthropic key (for /v1/walrus/enrich)
+# Store the Anthropic key (for /v1/walrus/enrich, /turn and /story)
 npx wrangler secret put ANTHROPIC_API_KEY
 # (paste your sk-ant-... key when prompted)
 

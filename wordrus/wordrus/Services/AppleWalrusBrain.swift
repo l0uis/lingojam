@@ -14,6 +14,10 @@ import FoundationModels
 /// simplicity; cost on-device is zero either way.
 @available(iOS 26.0, macOS 26.0, *)
 struct AppleWalrusBrain: WalrusBrain {
+    /// Background for a call about something specific (`CallSeed`),
+    /// appended to the instructions.
+    var storyContext: String? = nil
+
     static var isAvailable: Bool {
         #if canImport(FoundationModels)
         switch SystemLanguageModel.default.availability {
@@ -36,7 +40,7 @@ struct AppleWalrusBrain: WalrusBrain {
         #if canImport(FoundationModels)
         do {
             let session = LanguageModelSession(
-                instructions: Self.instructions(level: level, targetWords: targetWords, language: language)
+                instructions: Self.instructions(level: level, targetWords: targetWords, language: language, storyContext: storyContext)
             )
             let prompt = copy.openerPrompt(freshestWord: freshestWord, recentWordsList: recentWordsList)
             let response = try await session.respond(to: Prompt(prompt), generating: ReplyOutput.self)
@@ -60,7 +64,7 @@ struct AppleWalrusBrain: WalrusBrain {
         #if canImport(FoundationModels)
         do {
             let session = LanguageModelSession(
-                instructions: Self.instructions(level: level, targetWords: targetWords, language: language)
+                instructions: Self.instructions(level: level, targetWords: targetWords, language: language, storyContext: storyContext)
             )
             let walrusTurnsSoFar = history.filter { $0.role == .walrus }.count
             let isLateInConversation = walrusTurnsSoFar >= MockWalrusBrain.promptTurnCount
@@ -87,7 +91,7 @@ struct AppleWalrusBrain: WalrusBrain {
         #if canImport(FoundationModels)
         do {
             let session = LanguageModelSession(
-                instructions: Self.instructions(level: level, targetWords: targetWords, language: language)
+                instructions: Self.instructions(level: level, targetWords: targetWords, language: language, storyContext: storyContext)
             )
             let response = try await session.respond(
                 to: Prompt(copy.wrapUpPrompt()),
@@ -161,10 +165,17 @@ struct AppleWalrusBrain: WalrusBrain {
 
     // MARK: - Prompt building
 
-    private static func instructions(level: CEFRLevel, targetWords: [VocabularyWord], language: TargetLanguage) -> String {
+    private static func instructions(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        language: TargetLanguage,
+        storyContext: String?
+    ) -> String {
         let copy = WalterCopy.forLanguage(language)
         let wordList = targetWords.map { "- \($0.lemma) (\($0.partOfSpeech))" }.joined(separator: "\n")
-        return copy.systemInstructions(level: level, wordList: wordList)
+        let base = copy.systemInstructions(level: level, wordList: wordList)
+        guard let storyContext else { return base }
+        return base + "\n\n" + storyContext
     }
 
     private static func formatTranscript(_ turns: [ChatTurn], copy: WalterCopy) -> String {
@@ -243,19 +254,23 @@ struct WalterCopy {
             "¿Estás?",
         ],
         hangUpPhrase: "Vale, me voy. Llámame cuando estés.",
-        openerPromptBuilder: { freshestWord, recentWordsList in
+        openerPromptBuilder: { _, recentWordsList in
             """
             Abre la llamada en español como lo haría el Dr Tusk: un poco gruñón porque acaban de despertarte, \
-            pero sin perder el tiempo. Una o dos frases máximo.
+            pero con curiosidad genuina. Una o dos frases como máximo.
 
-            CONTEXTO IMPORTANTE: el usuario acaba de estudiar estas palabras hace un momento: \(recentWordsList). \
-            DEBES mencionar la palabra "\(freshestWord)" explícitamente en tu pregunta inicial, como si \
-            hubieras visto al usuario practicarla y le pidieras que la use en una frase real.
+            El usuario acaba de repasar estas palabras: \(recentWordsList). Elige UNA de ellas (la que dé pie \
+            a la pregunta más natural, no necesariamente la primera) y arranca una conversación real sobre ese \
+            tema, como haría un conocido con ganas de charlar. NO digas que has visto al usuario estudiar, ni \
+            le pidas que "use la palabra en una frase" — eso suena a ejercicio. Haz una pregunta normal y \
+            cotidiana sobre el tema de la palabra.
 
-            OBLIGATORIO: tu mensaje DEBE terminar con una pregunta directa con signo de interrogación, \
-            algo que el usuario pueda responder de inmediato (por ejemplo: \
-            "Vi que estabas con '\(freshestWord)' — ¿la usas en alguna frase?"). \
-            No empieces con "¡Hola!" — eso suena demasiado dulce. Sé breve y vete al grano.
+            Por ejemplo, si la palabra es "café" pregunta algo como "¿A ti te gusta el café?"; si es "playa", \
+            "¿Hace mucho que no vas a la playa?"; si es "perro", "¿Tienes perro?". Varía la forma: ¿te gusta…?, \
+            ¿has estado en…?, ¿tienes…?, ¿cuándo fue la última vez que…?, ¿cuál es tu… favorito?
+
+            OBLIGATORIO: termina con una pregunta directa con signo de interrogación que el usuario pueda \
+            responder de inmediato. No empieces con "¡Hola!" — eso suena demasiado dulce. Vete al grano.
             """
         },
         openerFallbackBuilder: { freshestWord in
@@ -298,8 +313,12 @@ struct WalterCopy {
             Conversación hasta ahora:
             \(transcript)
 
-            Responde al último mensaje del usuario en español, manteniéndote en el nivel \(level) y \
-            usando o invitando al usuario a usar una de las palabras objetivo cuando sea natural. \
+            PRIORIDAD: responde de verdad a lo último que ha dicho. Si te ha hecho una pregunta, \
+            contéstala tú primero, con una opinión propia o un detalle de tu vida de morsa. Nunca la \
+            esquives ni sueltes otra pregunta sin relación. Las palabras objetivo son secundarias: si \
+            no encajan solas, olvídalas — es mucho peor cambiar de tema a la fuerza.
+
+            Responde en español, manteniéndote en el nivel \(level). \
             \(isLate ? "Ya has hecho varias preguntas — termina la conversación con una despedida cálida y marca endsConversation = true." : "Mantén la conversación fluyendo con una nueva pregunta.")
             """
         },
@@ -333,19 +352,25 @@ struct WalterCopy {
             "Tu es là ?",
         ],
         hangUpPhrase: "Bon, je m'en vais. Rappelle quand tu es prêt.",
-        openerPromptBuilder: { freshestWord, recentWordsList in
+        openerPromptBuilder: { _, recentWordsList in
             """
             Ouvre la conversation en français comme le Dr Tusk le ferait : un peu grognon parce qu'on vient de te \
-            réveiller, mais sans perdre de temps. Une ou deux phrases maximum.
+            réveiller, mais avec une vraie curiosité. Une ou deux phrases maximum.
 
-            CONTEXTE IMPORTANT : l'utilisateur vient juste d'étudier ces mots : \(recentWordsList). \
-            Tu DOIS mentionner explicitement le mot « \(freshestWord) » dans ta question d'ouverture, comme si \
-            tu venais de voir l'utilisateur le pratiquer et lui demandais de l'utiliser dans une vraie phrase.
+            L'utilisateur vient de réviser ces mots : \(recentWordsList). Choisis-en UN (celui qui amène la \
+            question la plus naturelle, pas forcément le premier) et lance une vraie conversation sur ce sujet, \
+            comme le ferait une connaissance qui a envie de bavarder. NE dis PAS que tu as vu l'utilisateur \
+            étudier, et ne lui demande pas d'« utiliser le mot dans une phrase » — ça fait exercice. Pose une \
+            question normale et quotidienne sur le thème du mot.
 
-            OBLIGATOIRE : ton message DOIT se terminer par une question directe avec un point d'interrogation, \
-            quelque chose que l'utilisateur peut répondre tout de suite (par exemple : \
-            « J'ai vu que tu travaillais '\(freshestWord)' — tu peux l'utiliser dans une phrase ? »). \
-            Ne commence pas par « Bonjour ! » — c'est trop mielleux. Sois bref et va droit au but.
+            Par exemple, si le mot est « café », demande quelque chose comme « Tu aimes le café, toi ? » ; si \
+            c'est « plage », « Ça fait longtemps que tu n'es pas allé à la plage ? » ; si c'est « chien », « Tu \
+            as un chien ? ». Varie la forme : tu aimes… ?, tu es déjà allé à… ?, tu as… ?, c'est quand la \
+            dernière fois que… ?, c'est quoi ton/ta… préféré(e) ?
+
+            OBLIGATOIRE : termine par une question directe avec un point d'interrogation à laquelle \
+            l'utilisateur peut répondre tout de suite. Ne commence pas par « Bonjour ! » — c'est trop mielleux. \
+            Va droit au but.
             """
         },
         openerFallbackBuilder: { freshestWord in
@@ -388,8 +413,12 @@ struct WalterCopy {
             Conversation jusqu'ici :
             \(transcript)
 
-            Réponds au dernier message de l'utilisateur en français, en restant au niveau \(level) et \
-            en utilisant ou en invitant l'utilisateur à utiliser un des mots cibles quand c'est naturel. \
+            PRIORITÉ : réponds vraiment à ce qu'il vient de dire. S'il t'a posé une question, réponds-y \
+            d'abord, avec ton propre avis ou un détail de ta vie de morse. Ne l'esquive jamais et ne \
+            enchaîne pas sur une question sans rapport. Les mots cibles sont secondaires : s'ils ne \
+            viennent pas naturellement, oublie-les — forcer un changement de sujet est bien pire.
+
+            Réponds en français, en restant au niveau \(level). \
             \(isLate ? "Tu as déjà posé plusieurs questions — termine la conversation par un au revoir chaleureux et marque endsConversation = true." : "Garde la conversation fluide avec une nouvelle question.")
             """
         },
@@ -424,19 +453,23 @@ struct WalterCopy {
             "Ci sei?",
         ],
         hangUpPhrase: "Va bene, me ne vado. Chiamami quando sei pronto.",
-        openerPromptBuilder: { freshestWord, recentWordsList in
+        openerPromptBuilder: { _, recentWordsList in
             """
             Apri la conversazione in italiano come farebbe il Dr Tusk: un po' brontolone perché ti hanno appena \
-            svegliato, ma senza perdere tempo. Una o due frasi al massimo.
+            svegliato, ma con genuina curiosità. Una o due frasi al massimo.
 
-            CONTESTO IMPORTANTE: l'utente ha appena studiato queste parole: \(recentWordsList). \
-            DEVI menzionare esplicitamente la parola "\(freshestWord)" nella tua domanda iniziale, come se \
-            avessi appena visto l'utente praticarla e gli chiedessi di usarla in una frase vera.
+            L'utente ha appena ripassato queste parole: \(recentWordsList). Scegline UNA (quella che porta alla \
+            domanda più naturale, non per forza la prima) e avvia una vera conversazione su quel tema, come \
+            farebbe un conoscente con voglia di chiacchierare. NON dire che hai visto l'utente studiare, e non \
+            chiedergli di "usare la parola in una frase" — sa di esercizio. Fai una domanda normale e quotidiana \
+            sul tema della parola.
 
-            OBBLIGATORIO: il tuo messaggio DEVE finire con una domanda diretta con un punto interrogativo, \
-            qualcosa a cui l'utente possa rispondere subito (per esempio: \
-            "Ti ho visto con '\(freshestWord)' — la usi in una frase?"). \
-            Non iniziare con "Ciao!" — suona troppo dolce. Sii breve e vai al sodo.
+            Per esempio, se la parola è "caffè" chiedi qualcosa come "Ti piace il caffè?"; se è "spiaggia", \
+            "È da un po' che non vai in spiaggia?"; se è "cane", "Hai un cane?". Varia la forma: ti piace…?, sei \
+            mai stato a…?, hai…?, quand'è stata l'ultima volta che…?, qual è il tuo… preferito?
+
+            OBBLIGATORIO: termina con una domanda diretta con un punto interrogativo a cui l'utente possa \
+            rispondere subito. Non iniziare con "Ciao!" — suona troppo dolce. Vai al sodo.
             """
         },
         openerFallbackBuilder: { freshestWord in
@@ -479,8 +512,13 @@ struct WalterCopy {
             Conversazione finora:
             \(transcript)
 
-            Rispondi all'ultimo messaggio dell'utente in italiano, rimanendo al livello \(level) e \
-            usando o invitando l'utente a usare una delle parole bersaglio quando è naturale. \
+            PRIORITÀ: rispondi davvero a quello che ha appena detto. Se ti ha fatto una domanda, \
+            rispondi prima tu, con un'opinione tua o un dettaglio della tua vita da tricheco. Non \
+            schivarla mai e non ripartire con una domanda scollegata. Le parole bersaglio sono \
+            secondarie: se non entrano da sole, lasciale perdere — forzare un cambio di argomento è \
+            molto peggio.
+
+            Rispondi in italiano, rimanendo al livello \(level). \
             \(isLate ? "Hai già fatto diverse domande — chiudi la conversazione con un saluto caloroso e imposta endsConversation = true." : "Mantieni la conversazione viva con una nuova domanda.")
             """
         },
@@ -515,19 +553,24 @@ struct WalterCopy {
             "Bist du da?",
         ],
         hangUpPhrase: "Gut, ich gehe. Ruf mich an, wenn du bereit bist.",
-        openerPromptBuilder: { freshestWord, recentWordsList in
+        openerPromptBuilder: { _, recentWordsList in
             """
             Eröffne das Gespräch auf Deutsch, wie Dr Tusk es tun würde: ein bisschen mürrisch, weil du gerade \
-            geweckt wurdest, aber ohne Zeit zu verschwenden. Höchstens ein oder zwei Sätze.
+            geweckt wurdest, aber mit echter Neugier. Höchstens ein oder zwei Sätze.
 
-            WICHTIGER KONTEXT: Der Nutzer hat gerade diese Wörter gelernt: \(recentWordsList). \
-            Du MUSST das Wort „\(freshestWord)" ausdrücklich in deiner Eröffnungsfrage erwähnen, als hättest \
-            du den Nutzer beim Üben gesehen und ihn aufgefordert, es in einem echten Satz zu verwenden.
+            Der Nutzer hat gerade diese Wörter wiederholt: \(recentWordsList). Wähle EINES davon (das, das zur \
+            natürlichsten Frage führt, nicht unbedingt das erste) und beginne ein echtes Gespräch über dieses \
+            Thema, wie es ein Bekannter täte, der Lust auf einen Plausch hat. Sag NICHT, dass du den Nutzer beim \
+            Lernen gesehen hast, und fordere ihn nicht auf, „das Wort in einem Satz zu verwenden" — das klingt \
+            nach Übung. Stell eine normale, alltägliche Frage zum Thema des Wortes.
 
-            PFLICHT: Deine Nachricht MUSS mit einer direkten Frage mit einem Fragezeichen enden, \
-            etwas, worauf der Nutzer sofort antworten kann (zum Beispiel: \
-            „Ich hab dich gerade mit '\(freshestWord)' gesehen — kannst du es in einem Satz verwenden?"). \
-            Fang nicht mit „Hallo!" an — das klingt zu süß. Sei kurz und komm zur Sache.
+            Zum Beispiel, wenn das Wort „Kaffee" ist, frag etwas wie „Magst du eigentlich Kaffee?"; bei \
+            „Strand", „Warst du in letzter Zeit mal am Strand?"; bei „Hund", „Hast du einen Hund?". Variiere die \
+            Form: magst du… ?, warst du schon mal in… ?, hast du… ?, wann warst du das letzte Mal… ?, was ist \
+            dein/e Lieblings… ?
+
+            PFLICHT: Beende mit einer direkten Frage mit einem Fragezeichen, auf die der Nutzer sofort antworten \
+            kann. Fang nicht mit „Hallo!" an — das klingt zu süß. Komm zur Sache.
             """
         },
         openerFallbackBuilder: { freshestWord in
@@ -570,8 +613,13 @@ struct WalterCopy {
             Gespräch bisher:
             \(transcript)
 
-            Antworte auf die letzte Nachricht des Nutzers auf Deutsch, bleib auf Niveau \(level) und \
-            verwende oder lade den Nutzer ein, eines der Zielwörter zu verwenden, wenn es natürlich passt. \
+            PRIORITÄT: Antworte wirklich auf das, was er gerade gesagt hat. Wenn er dir eine Frage \
+            gestellt hat, beantworte sie zuerst, mit einer eigenen Meinung oder einem Detail aus deinem \
+            Walrossleben. Weiche ihr nie aus und stell nicht einfach eine unzusammenhängende Gegenfrage. \
+            Die Zielwörter sind zweitrangig: Wenn sie nicht von selbst passen, lass sie weg — ein \
+            erzwungener Themenwechsel ist viel schlimmer.
+
+            Antworte auf Deutsch, bleib auf Niveau \(level). \
             \(isLate ? "Du hast schon mehrere Fragen gestellt — beende das Gespräch mit einer warmen Verabschiedung und setze endsConversation = true." : "Halte das Gespräch mit einer neuen Frage am Laufen.")
             """
         },

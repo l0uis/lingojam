@@ -46,6 +46,8 @@ struct MyWordsView: View {
     @Query(sort: \VocabularyWord.rank) private var words: [VocabularyWord]
     @Query private var progress: [LearningProgress]
     @Query(sort: \ReviewLog.reviewedAt, order: .reverse) private var reviewLogs: [ReviewLog]
+    @Query(sort: \Deck.sortOrder) private var decks: [Deck]
+    @State private var isShowingProgress = false
     @AppStorage(OnboardingDefaultsKey.targetLanguage) private var targetLanguageRaw = TargetLanguage.spanish.rawValue
 
     @State private var filter: MyWordsFilter = .learning
@@ -77,33 +79,17 @@ struct MyWordsView: View {
         return map
     }
 
-    /// Bucket a word into the Know / Learning tab based on the user's most
-    /// recent rating for it. Unreviewed words belong to neither tab so they
-    /// don't flood "Learning" with thousands of seeded entries.
-    ///
-    /// We consult the latest `ReviewLog` first (most precise — reflects the
-    /// user's most recent swipe), then fall back to `LearningProgress` so
-    /// words the user has swiped don't-know still surface in Learning even
-    /// if the log query is briefly stale or older data is missing logs.
+    /// Bucket a word into the Know / Learning tab — the rule lives in
+    /// `VocabularyProgress` so the progress header counts exactly what the
+    /// Know tab shows. Unreviewed words belong to neither tab so they don't
+    /// flood "Learning" with thousands of seeded entries.
     private func bucket(
         for wordID: String,
         ratings: [String: ReviewRating],
         progressByID: [String: LearningProgress]
     ) -> MyWordsFilter? {
-        if let rating = ratings[wordID] {
-            switch rating {
-            case .good, .easy: return .know
-            case .again, .hard: return .learning
-            }
-        }
-        // Fallback signal: any word that's been actively swiped will have
-        // lapses > 0 (a don't-know was recorded at some point) or a non-new
-        // SRS state. Without a ReviewLog we can't tell if the *latest* swipe
-        // was know/don't-know, so we conservatively put it in Learning —
-        // anything the user has explicitly marked Known will have a log.
-        if let p = progressByID[wordID], p.lapses > 0 || p.state == .learning || p.state == .review {
-            return .learning
-        }
+        if VocabularyProgress.isKnown(wordID, ratings: ratings) { return .know }
+        if VocabularyProgress.isLearning(wordID, ratings: ratings, progress: progressByID[wordID]) { return .learning }
         return nil
     }
 
@@ -136,8 +122,38 @@ struct MyWordsView: View {
             }
     }
 
+    /// Progress header numbers, from the same data and Know rule as the list.
+    private var snapshot: VocabularySnapshot {
+        let ratings = latestRatingByID
+        let language = currentLanguageCode
+        let scoped = words.filter { $0.languageCode == language }
+        let known = scoped.filter { VocabularyProgress.isKnown($0.id, ratings: ratings) }
+        let knownIDs = Set(known.map(\.id))
+        let ranks = StoryLexicon.cachedFrequencyRanks(for: TargetLanguage(rawValue: targetLanguageRaw) ?? .spanish)
+        let order = VocabularyProgress.learnedOrder(
+            knownIDs: knownIDs,
+            logs: reviewLogs.map { ($0.wordID, $0.reviewedAt, $0.rating) }
+        )
+        let byID = Dictionary(known.map { ($0.id, $0) }) { first, _ in first }
+        return VocabularySnapshot(
+            learnedCount: known.count,
+            status: VocabularyProgress.milestoneStatus(learned: known.count),
+            coverage: VocabularyProgress.coverage(learnedLemmas: Set(known.map(\.lemma)), ranks: ranks),
+            topics: VocabularyProgress.topicFills(
+                words: scoped.filter { !$0.id.hasPrefix("custom-") }.map { ($0.id, $0.deckSlugs) },
+                learnedIDs: knownIDs,
+                decks: decks.filter { $0.slug != DeckConstants.commonSlug }.map { ($0.slug, $0.displayName, $0.iconSystemName) }
+            ),
+            learnedInOrder: order.compactMap { byID[$0] }
+        )
+    }
+
     var body: some View {
         VStack(spacing: 0) {
+            ProgressHeaderCard(snapshot: snapshot) { isShowingProgress = true }
+                .padding(.horizontal, 24)
+                .padding(.top, 12)
+
             Picker("Filter", selection: $filter) {
                 ForEach(MyWordsFilter.allCases) { f in
                     Text(f.title).tag(f)
@@ -248,7 +264,10 @@ struct MyWordsView: View {
             }
         }
         .sheet(isPresented: $isShowingPaywall) {
-            PaywallView(onSubscribed: openComposer)
+            PaywallView(onSubscribed: openComposer, source: .myWords)
+        }
+        .sheet(isPresented: $isShowingProgress) {
+            ProgressSheet(snapshot: snapshot)
         }
         .sheet(item: $selectedWord) { word in
             WordDetailView(
@@ -355,7 +374,7 @@ struct MyWordsView: View {
             addError = "Couldn't look that up. Check your connection and try again."
             return
         }
-        persist(result, language: language)
+        let word = persist(result, language: language)
         // Back up so the word survives an app delete/reinstall.
         Task { await CustomWordSync.pushAll(context: context) }
         newWord = ""
@@ -370,42 +389,11 @@ struct MyWordsView: View {
         selectedWord = word
     }
 
-    /// Persists an enriched word and seeds it into the Learning tab. The
-    /// definition and example translation are stored under the user's
-    /// definition locale so `LocaleService` reads them straight back; a fresh
-    /// `LearningProgress` in the `.learning` state makes the word show up
-    /// immediately at the top of Learning instead of falling into the
-    /// unreviewed limbo that `bucket(for:)` leaves seeded words in.
+    /// Persists an enriched word and seeds it into the Learning tab — see
+    /// `WordStack.persistCustomWord`, shared with the story word sheet.
     @discardableResult
     private func persist(_ enrichment: WordEnrichmentService.Enrichment, language: TargetLanguage) -> VocabularyWord {
-        let localeKey = LocaleService.preferredDefinitionLocale
-        let encoder = JSONEncoder()
-        func encode(_ map: [String: String]) -> String {
-            (try? encoder.encode(map))
-                .flatMap { String(data: $0, encoding: .utf8) } ?? "{}"
-        }
-
-        let id = "custom-\(language.languageCode)-\(UUID().uuidString)"
-        let nextRank = (words.map(\.rank).max() ?? 1000) + 1
-
-        let word = VocabularyWord(
-            id: id,
-            rank: nextRank,
-            lemma: enrichment.lemma,
-            partOfSpeech: enrichment.partOfSpeech,
-            definitionsJSON: encode([localeKey: enrichment.definition]),
-            exampleSentence: enrichment.exampleSentence,
-            exampleTranslationsJSON: enrichment.exampleTranslation.isEmpty
-                ? "{}"
-                : encode([localeKey: enrichment.exampleTranslation])
-        )
-        word.setDeckSlugs([DeckConstants.myWordsSlug])
-        context.insert(word)
-
-        let p = LearningProgress(wordID: id, state: .learning, lastReviewedAt: .now)
-        context.insert(p)
-        try? context.save()
-        return word
+        WordStack.persistCustomWord(enrichment, language: language, context: context)
     }
 
     private func delete(word: VocabularyWord) {
@@ -431,6 +419,7 @@ struct MyWordsView: View {
         if existing == nil { context.insert(p) }
         let intervalBefore = p.intervalDays
         let result = SRSScheduler.next(progress: p, rating: rating)
+        Analytics.capture(.cardReviewed, ["rating": "\(rating)", "source": "my_words"])
         p.state = result.state
         p.easeFactor = result.easeFactor
         p.intervalDays = result.intervalDays
@@ -447,6 +436,10 @@ struct MyWordsView: View {
         )
         context.insert(log)
         try? context.save()
+        // Rating a word here can retire it as known while today's set is still
+        // frozen around it — re-publish so the widget, Live Activity and
+        // reminders drop it instead of carrying it for the rest of the day.
+        DailyWordService.refresh(context: context)
     }
 
 }
@@ -498,7 +491,7 @@ private struct WordDetailView: View {
                     accessibilityLabel: "Delete word"
                 )
                 TintedCircleButton(
-                    systemImage: "speaker.wave.2.fill",
+                    systemImage: "play.fill",
                     tint: .gray,
                     action: { SpeechService.shared.speak(word.exampleSentence) },
                     accessibilityLabel: "Play example sentence"

@@ -24,6 +24,10 @@ enum DS {
         /// notebook paper behind handwritten ink. (#F8F2E9)
         static let paper = SwiftUI.Color(red: 0xF8 / 255.0, green: 0xF2 / 255.0, blue: 0xE9 / 255.0)
 
+        /// A shade darker than `paper`, same warm hue — a backdrop panel that
+        /// still reads as part of the page. (#EDE4D6)
+        static let paperShade = SwiftUI.Color(red: 0xED / 255.0, green: 0xE4 / 255.0, blue: 0xD6 / 255.0)
+
         /// Near-black charcoal for secondary descriptive copy (sublines under
         /// titles) that should read as high-contrast body text, not muted gray.
         static let charcoal = SwiftUI.Color(red: 0.13, green: 0.13, blue: 0.15)

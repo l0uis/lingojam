@@ -28,6 +28,8 @@ import json
 from pathlib import Path
 from typing import Iterable
 
+import deck_rules
+
 # The visible deck taxonomy that ships in the seed JSON.
 # `common` is intentionally NOT in this list: it stays as a hidden catch-all
 # tag on words (every frequency-list word gets it by default) so they're
@@ -41,6 +43,20 @@ DEFAULT_DECKS = [
         "description": "Trips, hotels, airports, tickets.",
         "icon": "airplane",
         "sortOrder": 10,
+    },
+    {
+        "slug": "weather-and-nature",
+        "displayName": "Weather & Nature",
+        "description": "Seasons, forecast, landscape, plants.",
+        "icon": "cloud.sun.fill",
+        "sortOrder": 15,
+    },
+    {
+        "slug": "animals",
+        "displayName": "Animals",
+        "description": "Pets, farm animals, birds, insects.",
+        "icon": "pawprint.fill",
+        "sortOrder": 18,
     },
     {
         "slug": "food-and-drink",
@@ -64,11 +80,18 @@ DEFAULT_DECKS = [
         "sortOrder": 40,
     },
     {
-        "slug": "work-and-money",
-        "displayName": "Work & Money",
-        "description": "Jobs, banking, paying, business.",
+        "slug": "work",
+        "displayName": "Work",
+        "description": "Jobs, office, colleagues, careers.",
         "icon": "briefcase.fill",
         "sortOrder": 50,
+    },
+    {
+        "slug": "money",
+        "displayName": "Money & Bills",
+        "description": "Banking, salary, rent, paying up.",
+        "icon": "creditcard.fill",
+        "sortOrder": 55,
     },
     {
         "slug": "feelings",
@@ -91,18 +114,46 @@ DEFAULT_DECKS = [
         "icon": "person.2.fill",
         "sortOrder": 80,
     },
+    {
+        "slug": "out-and-about",
+        "displayName": "Out & About",
+        "description": "Going out, music, sport, hobbies.",
+        "icon": "figure.walk",
+        "sortOrder": 85,
+    },
+    {
+        "slug": "studying",
+        "displayName": "Studying",
+        "description": "School, exams, courses, learning.",
+        "icon": "book.fill",
+        "sortOrder": 90,
+    },
+    {
+        "slug": "phone-and-internet",
+        "displayName": "Phone & Internet",
+        "description": "Apps, accounts, messages, devices.",
+        "icon": "iphone",
+        "sortOrder": 95,
+    },
 ]
 
 # Old slug -> new slug remap, applied to any deck tags found in legacy
 # generator caches (generated_entries*.json) or hand-authored TOPIC_DECKS
 # entries still using the pre-2026 taxonomy.
+# NOTE: `work-and-money` is deliberately absent — it is not remapped here but
+# passed through to `deck_rules.retag`, which splits it into `work`/`money` per
+# word. And `work` no longer maps to anything: as of the 2026-07-29 taxonomy it
+# is a real slug in its own right, so the old `"work": "work-and-money"` entry
+# would have corrupted it.
 LEGACY_SLUG_REMAP = {
     "travel": "traveling",
     "food": "food-and-drink",
-    "work": "work-and-money",
     "money_shopping": "shopping",
     "body_health": "health",
-    "nature_weather": "traveling",
+    # Restored: the pre-2026 taxonomy had a nature deck, it was folded into
+    # `traveling`, and the 2026-07-29 pass splits it back out. That merge is
+    # why `traveling` accumulated playa/montaña/lluvia/perro in the first place.
+    "nature_weather": "weather-and-nature",
 }
 LEGACY_SLUG_DROP = {"time_numbers"}
 
@@ -288,6 +339,14 @@ def build_dataset(
             continue
         entry_data = word_index[lemma]
         normalized = normalize_slugs(entry_data["decks"])
+        # Recompute deck membership from the 2026-07-29 rules before filtering.
+        # This runs on every build, including over `preserve_existing` words —
+        # deck tags are the one field a rebuild is allowed to rewrite on a
+        # shipped word (id, rank and content stay frozen), because the taxonomy
+        # itself changed underneath them.
+        normalized = deck_rules.retag(
+            language_code, entry_data["lemma"], entry_data["gloss"], normalized
+        )
         # Drop slugs that aren't part of the published taxonomy or the hidden
         # 'common' bucket. This catches stale slugs from legacy generator
         # caches that don't match any current deck.

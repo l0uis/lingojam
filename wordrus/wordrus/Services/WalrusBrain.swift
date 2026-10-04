@@ -7,6 +7,20 @@ struct WalrusTurn {
     /// True on Walter's final closing message, after which the chat UI
     /// triggers evaluation.
     let endsConversation: Bool
+    /// The learner's previous message written out correctly, when Walter
+    /// spotted a real mistake in it. nil when it was fine — or when the
+    /// brain can't judge, which is every brain but the cloud one.
+    ///
+    /// Having Walter do this means corrections work on every device;
+    /// `GrammarService` needs Apple Intelligence and silently does nothing
+    /// without it.
+    let correction: String?
+
+    init(text: String, endsConversation: Bool, correction: String? = nil) {
+        self.text = text
+        self.endsConversation = endsConversation
+        self.correction = correction
+    }
 }
 
 /// Result of grading a finished transcript.
@@ -69,24 +83,43 @@ protocol WalrusBrain {
 @MainActor
 enum WalrusBrainFactory {
     /// Returns the active brain implementation. Preference order:
-    ///   1. Claude (cloud) — only when the proxy is built and the flag is on
+    ///   1. Claude (cloud) — the only one that truly converses
     ///   2. Apple Foundation Models — on-device, when the device supports it
     ///   3. Mock — scripted fallback for simulator / older devices
-    static func makeCurrent() -> WalrusBrain {
+    ///
+    /// The cloud brain wraps the best on-device brain as its own fallback,
+    /// so a failed request drops to (2) or (3) mid-call rather than
+    /// stranding the learner.
+    ///
+    /// `storyContext` is background for a call about something specific
+    /// (retelling today's story); nil for the usual recent-words call.
+    static func makeCurrent(storyContext: String? = nil) -> WalrusBrain {
         if FeatureFlags.useRealWalrus {
-            return ClaudeWalrusBrain()
+            return ClaudeWalrusBrain(fallback: makeOnDevice(storyContext: storyContext), storyContext: storyContext)
         }
+        return makeOnDevice(storyContext: storyContext)
+    }
+
+    /// The best brain that needs no network. The scripted mock can't use
+    /// `storyContext`.
+    static func makeOnDevice(storyContext: String? = nil) -> WalrusBrain {
         if #available(iOS 26.0, macOS 26.0, *), AppleWalrusBrain.isAvailable {
-            return AppleWalrusBrain()
+            return AppleWalrusBrain(storyContext: storyContext)
         }
         return MockWalrusBrain()
     }
 }
 
 enum FeatureFlags {
-    /// Flip to true ONLY once the Cloudflare proxy is deployed and the
-    /// app has a configured proxy URL. See tools/walrus-proxy/README.md.
-    static let useRealWalrus = false
+    /// Route Walter's conversation through Claude on the proxy
+    /// (`/v1/walrus/turn`). This is what makes him respond to what you
+    /// actually said rather than reciting a template.
+    ///
+    /// Safe to leave on: `ClaudeWalrusBrain` falls back to the on-device
+    /// brain on any failure, so an undeployed or unreachable proxy costs a
+    /// couple of seconds, not a broken call. Requires the worker to be
+    /// deployed with `ANTHROPIC_API_KEY` set — see tools/walrus-proxy/README.md.
+    static let useRealWalrus = true
 
     /// Route Add-a-Word vocabulary lookups through the Claude proxy
     /// (`/v1/walrus/enrich`) for accuracy. Requires the `ANTHROPIC_API_KEY`

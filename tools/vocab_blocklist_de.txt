@@ -103,3 +103,152 @@ gottverdammt
 verfickt
 Prostituierte
 Prostitution
+# ---------------------------------------------------------------------------
+# C1/C2 tail cull, 2026-07-29. The advanced band was ~50% OpenSubtitles
+# residue: an English-speaking learner reaching C1 gets crime-procedural and
+# war-film nouns instead of the vocabulary they'd actually use. Only the
+# frequency-derived C1/C2 words are touched — the 2026-07-06 themed batch
+# (Beipackzettel, Nebenkostenabrechnung, Widerrufsrecht) is the good half and
+# stays. See also the FR/IT/ES blocklists, culled in the same pass.
+
+# Lemmatizer artifacts: capitalised plural nouns that the frequency list
+# lowercased into "verbs". "Tagen" (days) → tagen, "Federn" → federn, and so
+# on. Each has a real but rare verb homograph, which is why the vetting LLM
+# glossed them straight-faced instead of skipping them.
+eiern
+engen
+erden
+federn
+fetten
+fingern
+flammen
+geistern
+gesetzt
+heiligen
+kranken
+mauern
+narren
+quellen
+schnellen
+tagen
+weiten
+weißen
+# Set-phrase-only or wrong-sense entries — not standalone lemmas.
+bass
+doll
+Enge
+Fraß
+Jade
+Kitt
+Lake
+Pike
+Plane
+Sol
+Winde
+Wisch
+# Subtitle SFX captions that leaked in as vocabulary.
+Affengeräusche
+Durcheinandergerede
+Stimmengewirr
+# Vulgar / derogatory survivors of the family-friendly passes.
+Klugscheißer
+Krüppel
+Köter
+schiffen
+türken
+vögeln
+# Crime procedural. Geschworene is the tell: German law has no jury — the
+# word is here purely because US courtroom dramas were dubbed into German.
+Aufenthaltsort
+Autopsie
+Beweisstück
+Bewährung
+Bewährungshelfer
+Durchsuchungsbefehl
+Einzelhaft
+Fahndung
+Gerichtsmediziner
+Geschworene
+Gewahrsam
+Knarre
+Leichenhalle
+Leichenschauhaus
+Mandant
+Mordkommission
+Notwehr
+Spitzel
+Spurensicherung
+Staatsanwaltschaft
+Vorstrafen
+Zielperson
+abknallen
+beschlagnahmt
+lebenslänglich
+suspendiert
+zurückverfolgen
+Alarmstufe
+Körperverletzung
+# Military and weapons.
+Beschuss
+Dolch
+Fähnrich
+Feldwebel
+Hinterhalt
+Kaliber
+Kavallerie
+Maschinenraum
+Patrouille
+Scharfschützen
+Söldner
+Spezialeinheit
+Steuerbord
+Vergeltung
+Visier
+Werft
+Zünder
+anschießen
+erstechen
+stationieren
+umzingeln
+# Violence and grim register.
+Abschaum
+Bestie
+Ermordung
+Sarg
+Vergewaltiger
+Vergewaltigung
+Vernichtung
+gedemütigt
+morden
+# Sci-fi and fantasy (Star Trek dubs are heavily represented in the corpus).
+Apokalypse
+Bann
+Föderation
+Hellseher
+Märtyrer
+Orbit
+Prophezeiung
+Sichtkontakt
+Unsterblichkeit
+Wurmloch
+beamen
+hexen
+# Aristocracy, clergy, and archaic honorifics — period-drama register.
+Angesicht
+Beichte
+Butler
+Eminenz
+Exzellenz
+Gnade
+Gräfin
+Heiligkeit
+Herzog
+Kardinal
+Lordschaft
+Maestro
+Pascha
+Schuft
+beichten
+gnädig
+hergebracht
+wahrlich

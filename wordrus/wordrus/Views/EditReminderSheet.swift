@@ -8,7 +8,6 @@ struct EditReminderSheet: View {
     @AppStorage(OnboardingDefaultsKey.notificationsEnabled) private var notificationsEnabled: Bool = false
     @AppStorage(OnboardingDefaultsKey.notificationsPerDay) private var notificationsPerDay: Int = 10
     @AppStorage(DeckConstants.selectedDeckDefaultsKey) private var selectedDeckSlug: String = DeckConstants.allSlug
-    @AppStorage(DeckConstants.selectedCEFRLevelDefaultsKey) private var selectedCEFRLevel: String = DeckConstants.defaultCEFRLevel
 
     @State private var startDate: Date = .now
     @State private var endDate: Date = .now
@@ -33,8 +32,7 @@ struct EditReminderSheet: View {
                     NavigationLink {
                         WordFilterPicker(
                             decks: decks,
-                            selectedSlug: $selectedDeckSlug,
-                            selectedLevel: $selectedCEFRLevel
+                            selectedSlug: $selectedDeckSlug
                         )
                     } label: {
                         LabeledContent {
@@ -105,10 +103,7 @@ struct EditReminderSheet: View {
         } else {
             deckName = "All words"
         }
-        if selectedCEFRLevel == DeckConstants.allLevelsValue {
-            return deckName
-        }
-        return "\(deckName) · \(selectedCEFRLevel)"
+        return deckName
     }
 
     private func save() {
@@ -116,15 +111,15 @@ struct EditReminderSheet: View {
         OnboardingStore.setNotificationEnd(components(from: endDate))
         OnboardingStore.notificationDaysOfWeek = daysOfWeek
 
-        if notificationsEnabled, let snapshot = DailyWordSnapshot.load() {
+        if notificationsEnabled {
             NotificationService.scheduleReminders(
-                using: snapshot,
+                using: NotificationService.reminderStack(fallback: DailyWordSnapshot.load()),
                 perDay: notificationsPerDay,
                 start: components(from: startDate),
                 end: components(from: endDate),
                 daysOfWeek: daysOfWeek
             )
-        } else if !notificationsEnabled {
+        } else {
             NotificationService.cancelAllReminders()
         }
         dismiss()
@@ -144,18 +139,9 @@ struct EditReminderSheet: View {
 private struct WordFilterPicker: View {
     let decks: [Deck]
     @Binding var selectedSlug: String
-    @Binding var selectedLevel: String
 
     var body: some View {
         Form {
-            Section {
-                ForEach(DeckConstants.cefrLevels, id: \.self) { level in
-                    row(title: level, value: level, binding: $selectedLevel)
-                }
-            } header: {
-                Text("Level").sectionHeaderStyle()
-            }
-
             Section {
                 row(title: "All Words", value: DeckConstants.allSlug, binding: $selectedSlug)
                 ForEach(decks, id: \.slug) { deck in

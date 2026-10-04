@@ -4,6 +4,15 @@ import SwiftData
 import UIKit
 #endif
 
+private extension Font {
+    /// Shared title font for every onboarding step. Kept in one place so the
+    /// whole flow stays visually consistent and the size is trivial to tune.
+    /// Deliberately smaller than a hero largeTitle so long prompts (e.g.
+    /// "Which topics are you interested in?") don't sprawl to three lines or
+    /// truncate on smaller screens.
+    static let onboardingTitle = Font.gochiHand(size: 34, relativeTo: .title)
+}
+
 private enum OnboardingStep: Int, CaseIterable {
     case welcome
     case language
@@ -14,7 +23,6 @@ private enum OnboardingStep: Int, CaseIterable {
     case notifications
     case goalSetup
     case topics
-    case learningReason
     case exampleCard
     case vocabularyLevel
     case testIntro
@@ -30,14 +38,20 @@ struct OnboardingFlow: View {
 
     @State private var state = OnboardingState()
     @State private var step: OnboardingStep = .welcome
+    /// Which way the step transition slides; flipped just before stepping
+    /// back so the outgoing screen leaves to the right.
+    @State private var isGoingBack = false
 
     var body: some View {
         ZStack {
             background
             VStack(spacing: 0) {
-                if step != .welcome && step != .walrusIntro {
+                // Hidden on the screens with a full-bleed panel at the top.
+                if ![.welcome, .walrusIntro, .testIntro, .finalPitch].contains(step) {
                     progressBar
-                        .padding(.horizontal, 24)
+                        // Clears the back button overlaid on the leading edge.
+                        .padding(.leading, 64)
+                        .padding(.trailing, 24)
                         .padding(.top, 16)
                 }
 
@@ -52,33 +66,38 @@ struct OnboardingFlow: View {
                     case .notifications: NotificationsStep(state: state, onContinue: advance)
                     case .goalSetup: GoalSetupStep(onContinue: advance)
                     case .topics: TopicsStep(selection: $state.topics, onContinue: advance)
-                    case .learningReason: LearningReasonStep(targetLanguage: state.targetLanguage, selection: $state.learningReason, onContinue: advance)
-                    case .exampleCard: ExampleCardStep(onContinue: advance)
+                    case .exampleCard: ExampleCardStep(targetLanguage: state.targetLanguage, onContinue: advance)
                     case .vocabularyLevel: VocabularyLevelStep(targetLanguage: state.targetLanguage, selection: $state.cefrLevel, onContinue: advance)
                     case .testIntro: TestIntroStep(onContinue: advance)
                     case .beginnerWords: WordPickStep(level: .beginner, selected: $state.knownWordIDs, onContinue: advance)
                     case .intermediateWords: WordPickStep(level: .intermediate, selected: $state.knownWordIDs, onContinue: advance)
                     case .advancedWords: WordPickStep(level: .advanced, selected: $state.knownWordIDs, onContinue: advance)
-                    case .finalPitch: FinalPitchStep(onContinue: finish)
+                    case .finalPitch: FinalPitchStep(
+                        targetLanguage: state.targetLanguage ?? .spanish,
+                        level: state.cefrLevel ?? .a1,
+                        dailySetSize: state.dailySetSize,
+                        onContinue: finish
+                    )
                     }
                 }
                 .transition(.asymmetric(
-                    insertion: .move(edge: .trailing).combined(with: .opacity),
-                    removal: .move(edge: .leading).combined(with: .opacity)
+                    insertion: .move(edge: isGoingBack ? .leading : .trailing).combined(with: .opacity),
+                    removal: .move(edge: isGoingBack ? .trailing : .leading).combined(with: .opacity)
                 ))
+            }
+        }
+        .overlay(alignment: .topLeading) {
+            if step != .welcome {
+                backButton
             }
         }
         .animation(.easeInOut(duration: 0.28), value: step)
         .tint(DS.Color.ink)
-        .onChange(of: state.targetLanguage) { _, newValue in
-            syncSeededLanguage(to: newValue)
-        }
     }
 
-    /// Reseed the SwiftData store the moment the user picks a language so
-    /// subsequent onboarding steps (vocabulary level, word-pick steps) see
-    /// the right vocabulary. No-op when the picked language already matches
-    /// what's loaded.
+    /// Reseed the SwiftData store for the picked language so later steps
+    /// (vocabulary level, word-pick steps) see the right vocabulary. No-op
+    /// when the picked language already matches what's loaded.
     private func syncSeededLanguage(to newValue: TargetLanguage?) {
         guard let language = newValue else { return }
         let seeded = UserDefaults.standard.string(forKey: OnboardingDefaultsKey.seededLanguage)
@@ -87,12 +106,7 @@ struct OnboardingFlow: View {
     }
 
     private var background: some View {
-        LinearGradient(
-            colors: [Color(.systemBackground), DS.Color.ink.opacity(0.08)],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
+        DS.Color.paper.ignoresSafeArea()
     }
 
     private var progressBar: some View {
@@ -111,19 +125,53 @@ struct OnboardingFlow: View {
         .frame(height: 6)
     }
 
+    /// Sits level with the progress bar; on the full-bleed panel screens it
+    /// floats over the panel instead.
+    private var backButton: some View {
+        Button(action: goBack) {
+            Image(systemName: "chevron.left")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(DS.Color.ink)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .padding(.leading, 12)
+        .padding(.top, -3)
+        .accessibilityLabel("Back")
+    }
+
     private func advance() {
         guard let next = OnboardingStep(rawValue: step.rawValue + 1) else { return }
         playHaptic()
+        isGoingBack = false
+        let leaving = step
         step = next
+        if leaving == .language {
+            // Swapping the vocabulary is a ~1s main-thread job, so it runs
+            // once on leaving the picker — not on every row tap — and only
+            // after the slide to the next screen has finished.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                syncSeededLanguage(to: state.targetLanguage)
+            }
+        }
+    }
+
+    private func goBack() {
+        guard let previous = OnboardingStep(rawValue: step.rawValue - 1) else { return }
+        playHaptic()
+        // Flip the slide direction first and change step on the next pass,
+        // so the outgoing screen has picked up the reversed transition.
+        isGoingBack = true
+        DispatchQueue.main.async { step = previous }
     }
 
     private func finish() {
         OnboardingStore.persist(state)
         markKnownWords()
-        if state.notificationsAuthorized,
-           let snapshot = DailyWordSnapshot.load() {
+        if state.notificationsAuthorized {
             NotificationService.scheduleReminders(
-                using: snapshot,
+                using: NotificationService.reminderStack(fallback: DailyWordSnapshot.load()),
                 perDay: state.notificationsPerDay,
                 start: state.notificationStart,
                 end: state.notificationEnd,
@@ -179,26 +227,43 @@ struct OnboardingFlow: View {
 // MARK: - Shared building blocks
 
 private struct OnboardingScaffold<Content: View>: View {
-    let title: String
-    let subtitle: String?
-    let subtitleFont: Font
+    /// How a step introduces itself: `spoken` is Dr Tusk saying one line in a
+    /// bubble (the default across the flow), `titled` is the plain
+    /// title-plus-subtitle block still used by the language picker.
+    enum Header {
+        case titled(title: String, subtitle: String?)
+        case spoken(String)
+    }
+
+    let header: Header
     let primaryTitle: String
     let primaryEnabled: Bool
     let onPrimary: () -> Void
     @ViewBuilder var content: () -> Content
 
     init(
-        title: String,
-        subtitle: String? = nil,
-        subtitleFont: Font = .sniglet(.title3),
+        line: String,
         primaryTitle: String = "Continue",
         primaryEnabled: Bool = true,
         onPrimary: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.title = title
-        self.subtitle = subtitle
-        self.subtitleFont = subtitleFont
+        self.header = .spoken(line)
+        self.primaryTitle = primaryTitle
+        self.primaryEnabled = primaryEnabled
+        self.onPrimary = onPrimary
+        self.content = content
+    }
+
+    init(
+        title: String,
+        subtitle: String? = nil,
+        primaryTitle: String = "Continue",
+        primaryEnabled: Bool = true,
+        onPrimary: @escaping () -> Void,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.header = .titled(title: title, subtitle: subtitle)
         self.primaryTitle = primaryTitle
         self.primaryEnabled = primaryEnabled
         self.onPrimary = onPrimary
@@ -209,28 +274,39 @@ private struct OnboardingScaffold<Content: View>: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(title)
-                            .font(.gochiHand(size: 44, relativeTo: .largeTitle))
-                            .foregroundStyle(Color.whiteboardInk)
-                            .padding(.top, 12)
-                        if let subtitle {
-                            Text(subtitle)
-                                .font(subtitleFont)
-                                .foregroundStyle(DS.Color.charcoal)
-                        }
-                    }
+                    headerView
                     content()
+                        .padding(.horizontal, 24)
                         .padding(.top, 8)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 24)
                 .padding(.bottom, 24)
             }
 
             primaryButton
                 .padding(.horizontal, 24)
                 .padding(.bottom, 16)
+        }
+    }
+
+    @ViewBuilder private var headerView: some View {
+        switch header {
+        case let .titled(title, subtitle):
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title)
+                    .font(.onboardingTitle)
+                    .foregroundStyle(Color.whiteboardInk)
+                    .padding(.top, 12)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.sniglet(.title3))
+                        .foregroundStyle(DS.Color.charcoal)
+                }
+            }
+            .padding(.horizontal, 24)
+        case let .spoken(line):
+            WalrusSpeechRow(text: line)
+                .padding(.top, 8)
         }
     }
 
@@ -241,6 +317,23 @@ private struct OnboardingScaffold<Content: View>: View {
     }
 }
 
+private extension View {
+    /// Every surface in onboarding — rows, chips, steppers, fields — is a
+    /// raised white card, or ink-filled when it's the chosen one. No grey
+    /// boxes anywhere in the flow.
+    func onboardingCard(isSelected: Bool = false) -> some View {
+        background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(isSelected ? DS.Color.ink : Color.white)
+                .shadow(
+                    color: DS.Color.ink.opacity(isSelected ? 0.22 : 0.10),
+                    radius: 8,
+                    y: 3
+                )
+        )
+    }
+}
+
 private struct SelectableRow: View {
     let title: String
     let subtitle: String?
@@ -248,18 +341,45 @@ private struct SelectableRow: View {
     let isSelected: Bool
     let action: () -> Void
 
+    /// Put the subtitle on the same line as the title. Used by the CEFR
+    /// levels, where the code is short enough that stacking wastes a line.
+    let inlineSubtitle: Bool
+
     init(
         title: String,
         subtitle: String? = nil,
         systemImage: String? = nil,
+        inlineSubtitle: Bool = false,
         isSelected: Bool,
         action: @escaping () -> Void
     ) {
         self.title = title
         self.subtitle = subtitle
         self.systemImage = systemImage
+        self.inlineSubtitle = inlineSubtitle
         self.isSelected = isSelected
         self.action = action
+    }
+
+    private var titleText: some View {
+        Text(title)
+            .font(.sniglet(.headline))
+            .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
+    }
+
+    @ViewBuilder private var subtitleText: some View {
+        if let subtitle {
+            // Inline subtitles carry the whole meaning of the row (the level
+            // code alone says little), so they read at full size in ink
+            // rather than as small grey supporting text.
+            Text(subtitle)
+                .font(.sniglet(inlineSubtitle ? .subheadline : .caption))
+                .foregroundStyle(
+                    isSelected
+                        ? Color.white.opacity(0.9)
+                        : (inlineSubtitle ? DS.Color.ink : Color.secondary)
+                )
+        }
     }
 
     var body: some View {
@@ -271,14 +391,15 @@ private struct SelectableRow: View {
                         .frame(width: 32)
                         .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
                 }
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
-                        .font(.sniglet(.headline))
-                        .foregroundStyle(isSelected ? Color.white : .primary)
-                    if let subtitle {
-                        Text(subtitle)
-                            .font(.sniglet(.caption))
-                            .foregroundStyle(isSelected ? Color.white.opacity(0.85) : .secondary)
+                if inlineSubtitle {
+                    HStack(alignment: .firstTextBaseline, spacing: 10) {
+                        titleText
+                        subtitleText
+                    }
+                } else {
+                    VStack(alignment: .leading, spacing: 2) {
+                        titleText
+                        subtitleText
                     }
                 }
                 Spacer()
@@ -290,10 +411,7 @@ private struct SelectableRow: View {
             }
             .padding(.vertical, 14)
             .padding(.horizontal, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(isSelected ? DS.Color.ink : Color.secondary.opacity(0.12))
-            )
+            .onboardingCard(isSelected: isSelected)
         }
         .buttonStyle(.plain)
     }
@@ -305,64 +423,338 @@ private struct WelcomeStep: View {
     let onContinue: () -> Void
 
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
-            Image("walrus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 160)
-            VStack(spacing: 8) {
-                Text("A new language. Tiny habit.")
-                    .font(.gochiHand(size: 44, relativeTo: .largeTitle))
-                    .foregroundStyle(Color.whiteboardInk)
-                    .multilineTextAlignment(.center)
-                Text("Learn 10,000+ words a minute at a time")
-                    .font(.sniglet(.title3))
-                    .foregroundStyle(DS.Color.charcoal)
-                    .multilineTextAlignment(.center)
+        VStack(spacing: 0) {
+            OnboardingVideoPanel(dataAssetName: "scenePhoneCheck") {
+                Spacer(minLength: 16)
+                StickerLogo()
+                    .frame(maxWidth: 200)
+                Spacer(minLength: 16)
             }
-            .padding(.horizontal, 24)
-            Spacer()
-            Button("Get started", action: onContinue)
-                .buttonStyle(.primary)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
+            OnboardingBottomSheet {
+                OnboardingHeadline(
+                    title: "The effortless way to learn languages",
+                    subtitle: "Learn the most used words in Spanish, French, Italian and German"
+                )
+                Button("Continue", action: onContinue)
+                    .buttonStyle(.primary)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 24)
+            }
         }
     }
 }
 
+/// How far the bottom sheet rises over the video panel — its corner radius,
+/// so the rounded corners sit over the panel's tint rather than a gap.
+private let onboardingSheetRadius: CGFloat = 32
+
+/// The paper-coloured lower half of the video screens, drawn as a sheet with
+/// rounded top corners lifted over the panel so the walrus disappears behind
+/// a soft edge instead of a hard horizontal cut.
+private struct OnboardingBottomSheet<Content: View>: View {
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        VStack(spacing: 0) {
+            content
+        }
+        .background(
+            UnevenRoundedRectangle(
+                topLeadingRadius: onboardingSheetRadius,
+                topTrailingRadius: onboardingSheetRadius,
+                style: .continuous
+            )
+            .fill(DS.Color.paper)
+            .shadow(color: Color.black.opacity(0.08), radius: 10, y: -2)
+            .ignoresSafeArea(edges: .bottom)
+        )
+    }
+}
+
+/// Shaded top panel with a looping Dr Tusk clip sat on its bottom edge. The
+/// clips are cropped mid-body, so the crop reads as the panel's edge rather
+/// than the walrus being cut off. `top` fills the space above his head.
+private struct OnboardingVideoPanel<Top: View>: View {
+    let dataAssetName: String
+    var videoWidth: CGFloat = 280
+    /// Points trimmed off the bottom of the clip, so the panel edge cuts
+    /// Dr Tusk off higher up his body.
+    var bottomCrop: CGFloat = 0
+    var pauseBetweenLoops: TimeInterval = 2
+    @ViewBuilder let top: Top
+
+    var body: some View {
+        VStack(spacing: 0) {
+            top
+            LoopingVideoView(dataAssetName: dataAssetName, pauseBetweenLoops: pauseBetweenLoops)
+                .aspectRatio(1, contentMode: .fit)
+                .frame(maxWidth: videoWidth)
+                .padding(.bottom, -bottomCrop)
+                .clipped()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(DS.Color.paperShade.ignoresSafeArea(edges: .top))
+        // Tuck the bottom under the rounded sheet that follows, so the
+        // sheet's corners show the panel's tint behind them.
+        .padding(.bottom, -onboardingSheetRadius)
+    }
+}
+
+/// Centred title and optional subline under an `OnboardingVideoPanel`.
+private struct OnboardingHeadline: View {
+    let title: String
+    var subtitle: String?
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Text(title)
+                .font(.onboardingTitle)
+                .foregroundStyle(Color.whiteboardInk)
+                .multilineTextAlignment(.center)
+            if let subtitle {
+                Text(subtitle)
+                    .font(.sniglet(.title3))
+                    .foregroundStyle(DS.Color.charcoal)
+                    .multilineTextAlignment(.center)
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 56)
+        .padding(.bottom, 64)
+    }
+}
+
+/// The wordmark with a white sticker border and a soft lift. The border is
+/// drawn by stamping a white silhouette of the logo in a ring around it, so
+/// it follows whatever artwork is in the `wordrusLogo` asset.
+private struct StickerLogo: View {
+    var borderWidth: CGFloat = 4
+
+    var body: some View {
+        ZStack {
+            ForEach(0..<16, id: \.self) { i in
+                let angle = Double(i) / 16 * 2 * .pi
+                logo
+                    .foregroundStyle(.white)
+                    .offset(x: borderWidth * cos(angle), y: borderWidth * sin(angle))
+            }
+            // Tinted rather than using the SVG's own blue so it matches
+            // the title ink exactly.
+            logo
+                .foregroundStyle(Color.whiteboardInk)
+        }
+        .padding(borderWidth)
+        .compositingGroup()
+        .shadow(color: .black.opacity(0.15), radius: 6, y: 3)
+        .accessibilityElement()
+        .accessibilityLabel("Wordrus")
+    }
+
+    private var logo: some View {
+        Image("wordrusLogo")
+            .resizable()
+            .renderingMode(.template)
+            .aspectRatio(contentMode: .fit)
+    }
+}
+
+/// Tail size shared by the bubble shape and the padding that clears it.
+private let speechTailSize: CGFloat = 10
+
+/// Which edge the bubble's tail sits on: `.leading` points sideways at the
+/// avatar beside it, `.bottom` points down at the full-size walrus below.
+private enum SpeechTailEdge {
+    case leading
+    case bottom
+}
+
+/// Speech bubble outline, drawn as one continuous path so the stroke never
+/// shows a seam where the tail meets the body.
+private struct SpeechBubbleShape: Shape {
+    var tailEdge: SpeechTailEdge = .leading
+    var cornerRadius: CGFloat = 18
+    var tailLength: CGFloat = speechTailSize
+    var tailSpread: CGFloat = 20
+
+    func path(in rect: CGRect) -> Path {
+        switch tailEdge {
+        case .leading: leadingTailPath(in: rect)
+        case .bottom: bottomTailPath(in: rect)
+        }
+    }
+
+    private func leadingTailPath(in rect: CGRect) -> Path {
+        let left = rect.minX + tailLength
+        let r = min(cornerRadius, min(rect.width - tailLength, rect.height) / 2)
+        let halfTail = min(tailSpread / 2, max(0, rect.height / 2 - r))
+        let tipY = rect.midY
+
+        var path = Path()
+        path.move(to: CGPoint(x: left + r, y: rect.minY))
+        path.addArc(
+            tangent1End: CGPoint(x: rect.maxX, y: rect.minY),
+            tangent2End: CGPoint(x: rect.maxX, y: rect.minY + r),
+            radius: r
+        )
+        path.addArc(
+            tangent1End: CGPoint(x: rect.maxX, y: rect.maxY),
+            tangent2End: CGPoint(x: rect.maxX - r, y: rect.maxY),
+            radius: r
+        )
+        path.addArc(
+            tangent1End: CGPoint(x: left, y: rect.maxY),
+            tangent2End: CGPoint(x: left, y: rect.maxY - r),
+            radius: r
+        )
+        path.addLine(to: CGPoint(x: left, y: tipY + halfTail))
+        path.addLine(to: CGPoint(x: rect.minX, y: tipY))
+        path.addLine(to: CGPoint(x: left, y: tipY - halfTail))
+        path.addArc(
+            tangent1End: CGPoint(x: left, y: rect.minY),
+            tangent2End: CGPoint(x: left + r, y: rect.minY),
+            radius: r
+        )
+        path.closeSubpath()
+        return path
+    }
+
+    private func bottomTailPath(in rect: CGRect) -> Path {
+        let bottom = rect.maxY - tailLength
+        let r = min(cornerRadius, min(rect.width, bottom - rect.minY) / 2)
+        let halfTail = min(tailSpread / 2, max(0, rect.width / 2 - r))
+
+        var path = Path()
+        path.move(to: CGPoint(x: rect.minX + r, y: rect.minY))
+        path.addArc(
+            tangent1End: CGPoint(x: rect.maxX, y: rect.minY),
+            tangent2End: CGPoint(x: rect.maxX, y: rect.minY + r),
+            radius: r
+        )
+        path.addArc(
+            tangent1End: CGPoint(x: rect.maxX, y: bottom),
+            tangent2End: CGPoint(x: rect.maxX - r, y: bottom),
+            radius: r
+        )
+        path.addLine(to: CGPoint(x: rect.midX + halfTail, y: bottom))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.midX - halfTail, y: bottom))
+        path.addArc(
+            tangent1End: CGPoint(x: rect.minX, y: bottom),
+            tangent2End: CGPoint(x: rect.minX, y: bottom - r),
+            radius: r
+        )
+        path.addArc(
+            tangent1End: CGPoint(x: rect.minX, y: rect.minY),
+            tangent2End: CGPoint(x: rect.minX + r, y: rect.minY),
+            radius: r
+        )
+        path.closeSubpath()
+        return path
+    }
+}
+
+private extension View {
+    /// Flat white bubble — Dr Tusk's onboarding voice. Deliberately plainer
+    /// than the chat `walrusBubbleStyle` liquid gradient so the copy reads
+    /// first. Padding on the tail's edge leaves room for the tail itself.
+    func onboardingSpeechBubble(tailEdge: SpeechTailEdge = .leading) -> some View {
+        let shape = SpeechBubbleShape(tailEdge: tailEdge)
+        return self
+            // Held well short of the screen width so longer lines wrap
+            // into a compact block rather than one edge-to-edge run.
+            .frame(maxWidth: 220, alignment: .leading)
+            .foregroundStyle(DS.Color.ink)
+            .padding(.leading, tailEdge == .leading ? 14 + speechTailSize : 14)
+            .padding(.trailing, 14)
+            .padding(.top, 12)
+            .padding(.bottom, tailEdge == .bottom ? 12 + speechTailSize : 12)
+            .background(shape.fill(Color.white))
+            .overlay(shape.stroke(DS.Color.ink.opacity(0.12), lineWidth: 0.5))
+            .shadow(color: Color.black.opacity(0.08), radius: 4, y: 2)
+    }
+}
+
+/// Dr Tusk's head in a circle — his stand-in wherever he speaks in
+/// onboarding without taking over the screen.
+private struct WalrusAvatar: View {
+    var size: CGFloat = 76
+
+    var body: some View {
+        // The art is a full-body walrus; zoom in from the top so the circle
+        // frames his face rather than the whole animal.
+        Image("walrus")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size, height: size)
+            .scaleEffect(1.5, anchor: .top)
+            // Drop him a little so there's headroom above his head.
+            .offset(y: size * 0.1)
+            .frame(width: size, height: size)
+            // Same warm shade as the panels behind the full-size clips.
+            .background(Circle().fill(DS.Color.paperShade))
+            .clipShape(Circle())
+            .overlay(Circle().strokeBorder(Color.white, lineWidth: 5))
+            .shadow(color: Color.black.opacity(0.12), radius: 4, y: 2)
+    }
+}
+
+/// Avatar plus the line he's saying — the onboarding equivalent of a chat
+/// row, shared by every step where Dr Tusk speaks.
+private struct WalrusSpeechRow: View {
+    let text: String
+
+    @State private var bubbleVisible = false
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 10) {
+            WalrusAvatar()
+            Text(text)
+                .font(.sniglet(.title3))
+                .multilineTextAlignment(.leading)
+                .onboardingSpeechBubble()
+                // A gentle fade-and-settle in place, rather than sliding
+                // out from behind the avatar.
+                .opacity(bubbleVisible ? 1 : 0)
+                .offset(y: bubbleVisible ? 0 : 4)
+        }
+        .padding(.horizontal, 24)
+        // Breathing room so the row never sits tight against the progress
+        // bar above or the first card below.
+        .padding(.vertical, 12)
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.35).delay(0.15)) {
+                bubbleVisible = true
+            }
+        }
+    }
+}
+
+/// Dr Tusk's own introduction — he waves from the video panel rather than
+/// appearing as a chat-style avatar, with the bubble above him.
 private struct WalrusIntroStep: View {
     let onContinue: () -> Void
 
     @State private var bubbleVisible = false
 
     var body: some View {
-        VStack(spacing: 16) {
-            Spacer()
-
-            Text("Hi, I'm Dr Tusk. A few quick questions before we begin.")
-                .font(.sniglet(.title3))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 10)
-                .walrusBubbleStyle()
-                .opacity(bubbleVisible ? 1 : 0)
-                .offset(y: bubbleVisible ? 0 : 12)
-                .padding(.horizontal, 24)
-
-            Image("walrus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 160)
-                .padding(.top, 4)
-
-            Spacer()
-
-            Button("Continue", action: onContinue)
-                .buttonStyle(.primary)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
+        VStack(spacing: 0) {
+            OnboardingVideoPanel(dataAssetName: "sceneWave", videoWidth: 390, bottomCrop: 70) {
+                Spacer(minLength: 56)
+                Text("Hi, I'm Dr Tusk. A few quick questions before we begin.")
+                    .font(.sniglet(.title3))
+                    .multilineTextAlignment(.leading)
+                    .onboardingSpeechBubble(tailEdge: .bottom)
+                    .opacity(bubbleVisible ? 1 : 0)
+                    .offset(y: bubbleVisible ? 0 : 12)
+                    .padding(.bottom, 8)
+            }
+            OnboardingBottomSheet {
+                Button("Continue", action: onContinue)
+                    .buttonStyle(.primary)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 32)
+                    .padding(.bottom, 24)
+            }
         }
         .onAppear {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.15)) {
@@ -378,8 +770,8 @@ private struct LanguageStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            title: "Pick a language",
-            subtitle: "You can change language anytime",
+            title: "What do you want to learn?",
+            subtitle: "You can switch languages later.",
             primaryEnabled: selection != nil,
             onPrimary: onContinue
         ) {
@@ -417,7 +809,7 @@ private struct LanguageRow: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(language.title)
                         .font(.sniglet(.headline))
-                        .foregroundStyle(isSelected ? Color.white : .primary)
+                        .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
                     Text(language.subtitle)
                         .font(.sniglet(.caption))
                         .foregroundStyle(isSelected ? Color.white.opacity(0.85) : .secondary)
@@ -431,10 +823,7 @@ private struct LanguageRow: View {
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(isSelected ? DS.Color.ink : Color.secondary.opacity(0.12))
-            )
+            .onboardingCard(isSelected: isSelected)
         }
         .buttonStyle(.plain)
     }
@@ -448,30 +837,36 @@ private struct NameStep: View {
     var trimmed: String { name.trimmingCharacters(in: .whitespacesAndNewlines) }
 
     var body: some View {
-        OnboardingScaffold(
-            title: "What's your name?",
-            subtitle: "Dr Tusk will call you this way",
-            primaryEnabled: !trimmed.isEmpty,
-            onPrimary: onContinue
-        ) {
+        VStack(spacing: 0) {
+            Spacer()
+
+            WalrusSpeechRow(text: "How should I call you?")
+
             TextField("Your name", text: $name)
                 .textContentType(.givenName)
                 .autocorrectionDisabled()
                 .submitLabel(.continue)
                 .focused($isFocused)
-                .padding(14)
-                .background(
-                    RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .fill(Color.secondary.opacity(0.12))
-                )
+                .padding(16)
+                .onboardingCard()
+                .padding(.horizontal, 24)
+                .padding(.top, 16)
                 .onSubmit {
                     if !trimmed.isEmpty { onContinue() }
                 }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                        isFocused = true
-                    }
-                }
+
+            Spacer()
+
+            Button("Continue", action: onContinue)
+                .buttonStyle(.primary)
+                .disabled(trimmed.isEmpty)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 16)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                isFocused = true
+            }
         }
     }
 }
@@ -479,8 +874,6 @@ private struct NameStep: View {
 private struct CustomizeIntroStep: View {
     let name: String
     let onContinue: () -> Void
-
-    @State private var bubbleVisible = false
 
     private var greeting: String {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -490,25 +883,10 @@ private struct CustomizeIntroStep: View {
     }
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
             Spacer()
 
-            Text(greeting)
-                .font(.sniglet(.title3))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 10)
-                .walrusBubbleStyle()
-                .opacity(bubbleVisible ? 1 : 0)
-                .offset(y: bubbleVisible ? 0 : 12)
-                .padding(.horizontal, 24)
-
-            Image("walrus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 160)
-                .padding(.top, 4)
+            WalrusSpeechRow(text: greeting)
 
             Spacer()
 
@@ -516,11 +894,6 @@ private struct CustomizeIntroStep: View {
                 .buttonStyle(.primary)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
-        }
-        .onAppear {
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.15)) {
-                bubbleVisible = true
-            }
         }
     }
 }
@@ -531,8 +904,7 @@ private struct DailyGoalStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            title: "Words per day",
-            subtitle: "Set the number of words you'd like to practise per day",
+            line: "How many new words shall we do each day?",
             onPrimary: onContinue
         ) {
             HStack(spacing: 16) {
@@ -556,10 +928,7 @@ private struct DailyGoalStep: View {
                 }
             }
             .padding(16)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(Color.secondary.opacity(0.12))
-            )
+            .onboardingCard()
         }
     }
 
@@ -589,14 +958,7 @@ private struct NotificationsStep: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("Get words throughout the day")
-                            .font(.gochiHand(size: 40, relativeTo: .title))
-                            .foregroundStyle(Color.whiteboardInk)
-                        Text("Allow notifications and set the frequency")
-                            .font(.sniglet(.title3))
-                            .foregroundStyle(DS.Color.charcoal)
-                    }
+                    WalrusSpeechRow(text: "When shall I send you words through the day?")
 
                     VStack(spacing: 12) {
                         DatePicker(
@@ -617,13 +979,12 @@ private struct NotificationsStep: View {
                         }
                     }
                     .padding(16)
-                    .background(
-                        RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .fill(Color.secondary.opacity(0.12))
-                    )
+                    .onboardingCard()
+                    // The speech row brings its own horizontal inset, so the
+                    // card is padded on its own rather than with the stack.
+                    .padding(.horizontal, 24)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 24)
                 .padding(.top, 12)
                 .padding(.bottom, 24)
             }
@@ -682,28 +1043,11 @@ private struct NotificationsStep: View {
 private struct GoalSetupStep: View {
     let onContinue: () -> Void
 
-    @State private var bubbleVisible = false
-
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
             Spacer()
 
-            Text("Now tell me what matters to you, and I'll teach those words first.")
-                .font(.sniglet(.title3))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 10)
-                .walrusBubbleStyle()
-                .opacity(bubbleVisible ? 1 : 0)
-                .offset(y: bubbleVisible ? 0 : 12)
-                .padding(.horizontal, 24)
-
-            Image("walrus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 160)
-                .padding(.top, 4)
+            WalrusSpeechRow(text: "Now tell me what matters to you, and I'll teach those words first.")
 
             Spacer()
 
@@ -711,11 +1055,6 @@ private struct GoalSetupStep: View {
                 .buttonStyle(.primary)
                 .padding(.horizontal, 24)
                 .padding(.bottom, 24)
-        }
-        .onAppear {
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.15)) {
-                bubbleVisible = true
-            }
         }
     }
 }
@@ -733,8 +1072,7 @@ private struct TopicsStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            title: "Which topics are you interested in?",
-            subtitle: "Pick as many as you like.",
+            line: "Pick the topics that matter to you — as many as you like.",
             primaryEnabled: !selection.isEmpty,
             onPrimary: onContinue
         ) {
@@ -766,67 +1104,33 @@ private struct TopicChip: View {
                     .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
                 Text(topic.title)
                     .font(.sniglet(.subheadline, weight: .medium))
-                    .foregroundStyle(isSelected ? Color.white : .primary)
+                    .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity, minHeight: 96)
             .padding(12)
-            .background(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .fill(isSelected ? DS.Color.ink : Color.secondary.opacity(0.12))
-            )
+            .onboardingCard(isSelected: isSelected)
         }
         .buttonStyle(.plain)
-    }
-}
-
-// MARK: - Learning reason
-
-private struct LearningReasonStep: View {
-    let targetLanguage: TargetLanguage?
-    @Binding var selection: LearningReason?
-    let onContinue: () -> Void
-
-    var body: some View {
-        OnboardingScaffold(
-            title: "Why do you want to learn \((targetLanguage ?? .spanish).englishName)?",
-            subtitle: "We'll surface examples that match.",
-            primaryEnabled: selection != nil,
-            onPrimary: onContinue
-        ) {
-            VStack(spacing: 10) {
-                ForEach(LearningReason.allCases) { reason in
-                    SelectableRow(
-                        title: reason.title,
-                        subtitle: reason.subtitle,
-                        systemImage: reason.systemImage,
-                        isSelected: selection == reason
-                    ) {
-                        selection = reason
-                    }
-                }
-            }
-        }
     }
 }
 
 // MARK: - Example card preview
 
 private struct ExampleCardStep: View {
+    let targetLanguage: TargetLanguage?
     let onContinue: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text("Get deeper insight into each word")
-                        .font(.gochiHand(size: 40, relativeTo: .title))
-                        .foregroundStyle(Color.whiteboardInk)
+                    WalrusSpeechRow(text: "Every word comes with an example you can hear out loud.")
                         .padding(.top, 12)
 
-                    ExamplePreviewCard()
+                    ExamplePreviewCard(language: targetLanguage ?? .spanish)
+                        .padding(.horizontal, 24)
                 }
-                .padding(.horizontal, 24)
                 .padding(.bottom, 24)
             }
 
@@ -838,36 +1142,94 @@ private struct ExampleCardStep: View {
     }
 }
 
+/// A short, hand-picked demo word per language for the onboarding preview so
+/// the card the learner first sees is in the language they just chose rather
+/// than always Spanish.
+private struct OnboardingExample {
+    let word: String
+    let partOfSpeech: String
+    let definition: String
+    let sentence: String
+    let translation: String
+
+    static func forLanguage(_ language: TargetLanguage) -> OnboardingExample {
+        switch language {
+        case .spanish:
+            OnboardingExample(
+                word: "conocer",
+                partOfSpeech: "verb",
+                definition: "to know (a person or place)",
+                sentence: "Quiero conocer Madrid algún día.",
+                translation: "I want to visit Madrid one day."
+            )
+        case .french:
+            OnboardingExample(
+                word: "connaître",
+                partOfSpeech: "verb",
+                definition: "to know (a person or place)",
+                sentence: "Je veux connaître Paris un jour.",
+                translation: "I want to get to know Paris one day."
+            )
+        case .italian:
+            OnboardingExample(
+                word: "conoscere",
+                partOfSpeech: "verb",
+                definition: "to know (a person or place)",
+                sentence: "Voglio conoscere Roma un giorno.",
+                translation: "I want to get to know Rome one day."
+            )
+        case .german:
+            OnboardingExample(
+                word: "kennenlernen",
+                partOfSpeech: "verb",
+                definition: "to get to know (a person or place)",
+                sentence: "Ich möchte Berlin eines Tages kennenlernen.",
+                translation: "I want to get to know Berlin one day."
+            )
+        }
+    }
+}
+
 private struct ExamplePreviewCard: View {
+    let language: TargetLanguage
+
+    private var example: OnboardingExample { .forLanguage(language) }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("conocer")
+                    Text(example.word)
                         .font(.gochiHand(size: 48))
                         .foregroundStyle(Color.whiteboardInk)
-                    Text("verb")
+                    Text(example.partOfSpeech)
                         .font(.sniglet(.subheadline))
                         .foregroundStyle(.secondary)
-                    Text("to know (a person or place)")
+                    Text(example.definition)
                         .font(.sniglet(.title3))
                         .padding(.top, 2)
                 }
                 Spacer()
-                Image(systemName: "speaker.wave.2.fill")
-                    .font(.sniglet(.title3))
-                    .foregroundStyle(.secondary)
-                    .padding(10)
-                    .background(.gray.opacity(0.15), in: Circle())
+                Button {
+                    SpeechService.shared.speak(example.sentence, languageCode: language.bcp47)
+                } label: {
+                    Image(systemName: "play.fill")
+                        .font(.sniglet(.title3))
+                        .foregroundStyle(.white)
+                        .padding(12)
+                        .background(DS.Color.ink, in: Circle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Hear it spoken aloud")
             }
 
             InkDivider()
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("Quiero conocer Madrid algún día.")
+                Text(example.sentence)
                     .font(.sniglet(.title3))
                     .italic()
-                Text("I want to visit Madrid one day.")
+                Text(example.translation)
                     .font(.sniglet(.callout))
                     .foregroundStyle(.secondary)
             }
@@ -878,6 +1240,10 @@ private struct ExamplePreviewCard: View {
         }
         .padding(24)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            SpeechService.shared.speak(example.sentence, languageCode: language.bcp47)
+        }
         .background(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .fill(.background)
@@ -895,18 +1261,18 @@ private struct VocabularyLevelStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            title: "What's your \((targetLanguage ?? .spanish).englishName) level?",
-            subtitle: "We use the CEFR scale (A1 is brand new, C2 is near-native).",
-            subtitleFont: .sniglet(.title2),
+            line: "Where are you with \((targetLanguage ?? .spanish).englishName) — A1 is brand new, C2 is near-native.",
             primaryEnabled: selection != nil,
             onPrimary: onContinue
         ) {
             VStack(spacing: 10) {
                 ForEach(CEFRLevel.allCases) { level in
+                    // No icon here — the level code is the badge, and the
+                    // leaf/flame/bolt set read as arbitrary next to it.
                     SelectableRow(
                         title: level.title,
                         subtitle: level.subtitle,
-                        systemImage: level.systemImage,
+                        inlineSubtitle: true,
                         isSelected: selection == level
                     ) {
                         selection = level
@@ -922,29 +1288,32 @@ private struct VocabularyLevelStep: View {
 private struct TestIntroStep: View {
     let onContinue: () -> Void
 
+    @State private var bubbleVisible = false
+
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
-            Image("walrus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 220)
-            VStack(spacing: 8) {
-                Text("Let's test how many words you know")
-                    .font(.gochiHand(size: 40, relativeTo: .title))
-                    .foregroundStyle(Color.whiteboardInk)
-                    .multilineTextAlignment(.center)
-                Text("Tap the words you already know. Pick up to 6 at each level.")
+        VStack(spacing: 0) {
+            OnboardingVideoPanel(dataAssetName: "sceneTest", videoWidth: 390, bottomCrop: 70) {
+                Spacer(minLength: 56)
+                Text("Now let's see how many words you already know.")
                     .font(.sniglet(.title3))
-                    .foregroundStyle(DS.Color.charcoal)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
+                    .onboardingSpeechBubble(tailEdge: .bottom)
+                    .opacity(bubbleVisible ? 1 : 0)
+                    .offset(y: bubbleVisible ? 0 : 12)
+                    .padding(.bottom, 8)
             }
-            .padding(.horizontal, 24)
-            Spacer()
-            Button("Continue", action: onContinue)
-                .buttonStyle(.primary)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
+            OnboardingBottomSheet {
+                Button("Continue", action: onContinue)
+                    .buttonStyle(.primary)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 32)
+                    .padding(.bottom, 24)
+            }
+        }
+        .onAppear {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.15)) {
+                bubbleVisible = true
+            }
         }
     }
 }
@@ -956,22 +1325,14 @@ private struct WordPickStep: View {
     @Binding var selected: Set<String>
     let onContinue: () -> Void
 
-    @Query private var allWords: [VocabularyWord]
+    @Environment(\.modelContext) private var context
+
+    /// The six words on screen. Built once when the step appears — deriving
+    /// it means filtering and sorting the whole catalogue, which made every
+    /// chip tap stall while the body recomputed it several times over.
+    @State private var sample: [VocabularyWord] = []
 
     private static let maxPicks = sampleSize
-
-    init(level: VocabularyLevel, selected: Binding<Set<String>>, onContinue: @escaping () -> Void) {
-        self.level = level
-        self._selected = selected
-        self.onContinue = onContinue
-
-        let lower = level.rankRange.lowerBound
-        let upper = level.rankRange.upperBound
-        let predicate = #Predicate<VocabularyWord> { word in
-            word.rank >= lower && word.rank <= upper
-        }
-        _allWords = Query(filter: predicate, sort: \VocabularyWord.rank)
-    }
 
     private static let sampleSize = 6
     nonisolated private static let contentPOSPrefixes = ["noun", "verb", "adjective", "adverb"]
@@ -979,21 +1340,37 @@ private struct WordPickStep: View {
 
     /// Pick a sample with POS variety — round-robin across verb/noun/
     /// adjective/adverb buckets so the user doesn't see six of the same kind.
-    /// Within each bucket, words come out in rank order.
-    private var sample: [VocabularyWord] {
-        let candidates = allWords.filter(Self.isContentful)
-        let buckets = Self.posOrder.map { category in
-            candidates.filter { Self.primaryPOS(of: $0.partOfSpeech) == category }
+    /// Words in this level's rank band come first; if the band is too thin to
+    /// fill the sample (some languages' datasets are sparse), we backfill from
+    /// the nearest ranks outside the band so the screen is never empty.
+    private static func makeSample(level: VocabularyLevel, context: ModelContext) -> [VocabularyWord] {
+        let range = level.rankRange
+        let all = (try? context.fetch(FetchDescriptor<VocabularyWord>(sortBy: [SortDescriptor(\.rank)]))) ?? []
+        // Read each persisted property once up front; SwiftData property
+        // access is slow enough to matter inside a sort comparator.
+        let candidates = all
+            .map { (word: $0, rank: $0.rank, pos: primaryPOS(of: $0.partOfSpeech)) }
+            .filter { isContentful($0.word) }
+            .sorted { lhs, rhs in
+                let lIn = range.contains(lhs.rank)
+                let rIn = range.contains(rhs.rank)
+                if lIn != rIn { return lIn }                 // in-band first
+                if lIn { return lhs.rank < rhs.rank }         // within band, by rank
+                return distance(lhs.rank, to: range)          // outside band, nearest first
+                    < distance(rhs.rank, to: range)
+            }
+        let buckets = posOrder.map { category in
+            candidates.filter { $0.pos == category }.map(\.word)
         }
         var picks: [VocabularyWord] = []
         var index = 0
-        while picks.count < Self.sampleSize {
+        while picks.count < sampleSize {
             var addedThisRound = false
             for bucket in buckets {
                 guard index < bucket.count else { continue }
                 picks.append(bucket[index])
                 addedThisRound = true
-                if picks.count >= Self.sampleSize { break }
+                if picks.count >= sampleSize { break }
             }
             if !addedThisRound { break }
             index += 1
@@ -1007,6 +1384,14 @@ private struct WordPickStep: View {
         return contentPOSPrefixes.contains { pos.hasPrefix($0) }
     }
 
+    /// How far `rank` sits outside `range` (0 when inside). Used to order the
+    /// backfill so words just past the band are preferred over distant ones.
+    nonisolated private static func distance(_ rank: Int, to range: ClosedRange<Int>) -> Int {
+        if rank < range.lowerBound { return range.lowerBound - rank }
+        if rank > range.upperBound { return rank - range.upperBound }
+        return 0
+    }
+
     nonisolated private static func primaryPOS(of partOfSpeech: String) -> String {
         let p = partOfSpeech.lowercased()
         if p.contains("verb"), !p.contains("adverb") { return "verb" }
@@ -1017,7 +1402,7 @@ private struct WordPickStep: View {
     }
 
     private var pickedAtThisLevel: Int {
-        sample.filter { selected.contains($0.id) }.count
+        sample.reduce(0) { $0 + (selected.contains($1.id) ? 1 : 0) }
     }
 
     private let columns = [
@@ -1026,15 +1411,15 @@ private struct WordPickStep: View {
     ]
 
     var body: some View {
+        let picked = pickedAtThisLevel
         OnboardingScaffold(
-            title: title,
-            subtitle: "Tap any you already know — up to 6.",
-            primaryTitle: pickedAtThisLevel == 0 ? "Skip" : "Continue",
+            line: line,
+            primaryTitle: picked == 0 ? "Skip" : "Continue",
             onPrimary: onContinue
         ) {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("\(pickedAtThisLevel) / \(Self.maxPicks) selected")
+                    Text("\(picked) / \(Self.maxPicks) selected")
                         .font(.sniglet(.subheadline))
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -1044,7 +1429,7 @@ private struct WordPickStep: View {
                         WordPickChip(
                             word: word,
                             isSelected: selected.contains(word.id),
-                            isDisabled: !selected.contains(word.id) && pickedAtThisLevel >= Self.maxPicks
+                            isDisabled: !selected.contains(word.id) && picked >= Self.maxPicks
                         ) {
                             toggle(word)
                         }
@@ -1052,11 +1437,14 @@ private struct WordPickStep: View {
                 }
             }
         }
+        .onAppear {
+            if sample.isEmpty { sample = Self.makeSample(level: level, context: context) }
+        }
     }
 
-    private var title: String {
+    private var line: String {
         switch level {
-        case .beginner: "Which of these do you know?"
+        case .beginner: "Tap any of these you already know — up to 6."
         case .intermediate: "How about these?"
         case .advanced: "And these tricky ones?"
         }
@@ -1068,6 +1456,19 @@ private struct WordPickStep: View {
         } else if pickedAtThisLevel < Self.maxPicks {
             selected.insert(word.id)
         }
+    }
+}
+
+/// Squashes on press and springs back past its resting size, so tapping a
+/// word feels like it answers back.
+private struct BounceButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.92 : 1)
+            .animation(
+                .spring(response: 0.3, dampingFraction: 0.45),
+                value: configuration.isPressed
+            )
     }
 }
 
@@ -1089,13 +1490,10 @@ private struct WordPickChip: View {
             }
             .frame(maxWidth: .infinity, minHeight: 72)
             .padding(.vertical, 10)
-            .background(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(isSelected ? DS.Color.ink : Color.secondary.opacity(0.12))
-            )
+            .onboardingCard(isSelected: isSelected)
             .opacity(isDisabled ? 0.45 : 1.0)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(BounceButtonStyle())
         .disabled(isDisabled)
     }
 }
@@ -1103,31 +1501,40 @@ private struct WordPickChip: View {
 // MARK: - Final pitch
 
 private struct FinalPitchStep: View {
+    let targetLanguage: TargetLanguage
+    let level: CEFRLevel
+    let dailySetSize: Int
     let onContinue: () -> Void
 
+    @State private var bubbleVisible = false
+
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
-            Image("walrus")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 220)
-            VStack(spacing: 8) {
-                Text("You're all set, become articulate in just 1 minute a day")
-                    .font(.gochiHand(size: 40, relativeTo: .title))
-                    .foregroundStyle(Color.whiteboardInk)
-                    .multilineTextAlignment(.center)
-                Text("Your words are tailored to your level, and arrive even without opening the app")
+        VStack(spacing: 0) {
+            OnboardingVideoPanel(dataAssetName: "sceneCoffee", videoWidth: 390, bottomCrop: 70) {
+                Spacer(minLength: 16)
+                Text("Give me a minute a day and I'll do the rest.")
                     .font(.sniglet(.title3))
-                    .foregroundStyle(DS.Color.charcoal)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
+                    .onboardingSpeechBubble(tailEdge: .bottom)
+                    .opacity(bubbleVisible ? 1 : 0)
+                    .offset(y: bubbleVisible ? 0 : 12)
+                    .padding(.bottom, 8)
             }
-            .padding(.horizontal, 24)
-            Spacer()
-            Button("Start learning", action: onContinue)
-                .buttonStyle(.primary)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 24)
+            OnboardingBottomSheet {
+                OnboardingHeadline(
+                    title: "You're all set",
+                    subtitle: "Let's start learning \(targetLanguage.englishName) at \(level.title),\n\(dailySetSize) new words a day."
+                )
+                Button("Start learning", action: onContinue)
+                    .buttonStyle(.primary)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 24)
+            }
+        }
+        .onAppear {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.7).delay(0.15)) {
+                bubbleVisible = true
+            }
         }
     }
 }

@@ -23,6 +23,25 @@ final class ChatStore {
         let text: String
     }
 
+    /// One thing Walter says, handed to `onWalrusUtterance` the instant
+    /// it's decided. Covers every source — opener, reply, wrap-up, silence
+    /// nudge, and the "fine, I'm hanging up" line — so a UI that voices
+    /// Walter itself never misses one.
+    struct WalrusUtterance {
+        let id: UUID
+        let text: String
+        let endsConversation: Bool
+        /// The learner's previous line, corrected by Walter. Travels with
+        /// his reply so the UI can show the fix at the moment he answers.
+        let correction: String?
+    }
+
+    /// Installed by the voice-call UI. When set, the store stops speaking
+    /// Walter's lines itself and hands them over instead, so the caller can
+    /// reveal them one speech bubble at a time in step with the audio.
+    /// Left nil, the store speaks each line immediately as it always has.
+    var onWalrusUtterance: ((WalrusUtterance) -> Void)?
+
     private(set) var phase: Phase = .idle
     private(set) var displayMessages: [DisplayMessage] = []
     private(set) var evaluation: ChatEvaluation?
@@ -38,6 +57,13 @@ final class ChatStore {
     /// Messages with no entry have either not been checked yet or
     /// passed the check cleanly.
     private(set) var corrections: [UUID: String] = [:]
+
+    /// Grammar verdicts per user message id, recorded as each check
+    /// settles. Absent means "still running": the voice UI waits on this
+    /// before letting Walter reply, so a correction never lands after he's
+    /// already talking over it. Note `.unavailable` is a real outcome, not
+    /// a missing one — see `GrammarCheckOutcome`.
+    private(set) var checkOutcomes: [UUID: GrammarCheckOutcome] = [:]
 
     let brain: WalrusBrain
     let context: ModelContext
@@ -93,21 +119,42 @@ final class ChatStore {
         session = newSession
 
         let opener = await brain.openCall(level: level, targetWords: targetWords)
-        appendWalrus(opener.text)
-        try? context.save()
+        emitWalrus(opener.text, endsConversation: opener.endsConversation)
         phase = opener.endsConversation ? .finished : .awaitingUser
 
         if opener.endsConversation {
             await finalize()
         } else {
-            SpeechService.shared.speakAsWalter(opener.text)
             startInactivityTimer()
         }
     }
 
+    /// Called by the view whenever the user is actively composing — typing
+    /// a character or dictating into the draft. Resets the silence clock so
+    /// Walter never nudges or hangs up while the user is mid-message. No-op
+    /// unless it's the user's turn with a timer already armed, so stray
+    /// `draft` changes (e.g. clearing it on send) don't restart the clock.
+    func noteUserActivity() {
+        guard phase == .awaitingUser, inactivityTask != nil else { return }
+        startInactivityTimer()
+    }
+
     func send(_ userText: String) async {
+        guard registerUserTurn(userText) != nil else { return }
+        await advance()
+    }
+
+    /// Record the user's turn: persist it, cross off any target words it
+    /// used, and kick off its grammar check. Returns the new message's id
+    /// so the caller can await that check via `correction(for:)`, or nil if
+    /// it wasn't the user's turn to speak.
+    ///
+    /// Split out from `send` so the voice UI can show the user's own line
+    /// (and its correction) before Walter starts talking back.
+    @discardableResult
+    func registerUserTurn(_ userText: String) -> UUID? {
         let trimmed = userText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty, phase == .awaitingUser else { return }
+        guard !trimmed.isEmpty, phase == .awaitingUser else { return nil }
 
         cancelInactivityTimer()
         hasNudged = false
@@ -116,6 +163,13 @@ final class ChatStore {
         detectNewlyUsedWords(in: trimmed)
         kickOffGrammarCheck(for: userMessageID, text: trimmed)
         phase = .walrusThinking
+        return userMessageID
+    }
+
+    /// Ask Walter for his next line and emit it. Only valid straight after
+    /// `registerUserTurn`.
+    func advance() async {
+        guard phase == .walrusThinking else { return }
 
         // Early completion: every target word has now been used. Walter
         // wraps up with a celebratory closing instead of asking another
@@ -124,9 +178,7 @@ final class ChatStore {
            usedTargetWordIDs.count >= targetWords.count {
             let history = displayMessages.map { ChatTurn(role: $0.role, text: $0.text) }
             let closer = await brain.wrapUp(level: level, targetWords: targetWords, history: history)
-            appendWalrus(closer.text)
-            try? context.save()
-            SpeechService.shared.speakAsWalter(closer.text)
+            emitWalrus(closer.text, endsConversation: true)
             phase = .finished
             await finalize()
             return
@@ -134,17 +186,41 @@ final class ChatStore {
 
         let history = displayMessages.map { ChatTurn(role: $0.role, text: $0.text) }
         let next = await brain.reply(history: history, level: level, targetWords: targetWords)
-        appendWalrus(next.text)
-        try? context.save()
-        SpeechService.shared.speakAsWalter(next.text)
+        emitWalrus(
+            next.text,
+            endsConversation: next.endsConversation,
+            correction: next.correction
+        )
 
         if next.endsConversation {
             phase = .finished
             await finalize()
         } else {
             phase = .awaitingUser
-            startInactivityTimer()
+            if !isExternallyVoiced { startInactivityTimer() }
         }
+    }
+
+    /// Restart the silence clock. Callers that voice Walter themselves own
+    /// this: the clock must start when the user can actually reply, not
+    /// while Walter is still working through his sentences.
+    func armSilenceClock() {
+        guard phase == .awaitingUser else { return }
+        startInactivityTimer()
+    }
+
+    /// Wait for a user message's grammar check to settle, giving up after
+    /// `timeout` seconds so a slow or stalled model can't hold up the
+    /// conversation. A timeout reports `.unavailable` — the same as no
+    /// checker at all, because in both cases nothing vouched for the
+    /// sentence.
+    func checkOutcome(for messageID: UUID, timeout: TimeInterval) async -> GrammarCheckOutcome {
+        let deadline = Date.now.addingTimeInterval(timeout)
+        while checkOutcomes[messageID] == nil, Date.now < deadline {
+            try? await Task.sleep(nanoseconds: 100_000_000)
+            if Task.isCancelled { break }
+        }
+        return checkOutcomes[messageID] ?? .unavailable
     }
 
     /// Cross off any target words the user just mentioned. Uses the same
@@ -265,16 +341,11 @@ final class ChatStore {
         if !hasNudged {
             hasNudged = true
             let nudge = localizedNudgePhrases.randomElement() ?? "¿Sigues ahí?"
-            appendWalrus(nudge)
-            try? context.save()
-            SpeechService.shared.speakAsWalter(nudge)
+            emitWalrus(nudge)
             startInactivityTimer()
         } else {
             // Walter gives up.
-            let hangUp = localizedHangUpPhrase
-            appendWalrus(hangUp)
-            try? context.save()
-            SpeechService.shared.speakAsWalter(hangUp)
+            emitWalrus(localizedHangUpPhrase, endsConversation: true)
             phase = .finished
             await finalizeAbandoned()
         }
@@ -298,11 +369,39 @@ final class ChatStore {
         OnboardingStore.lastWalterCallDate = .now
     }
 
-    private func appendWalrus(_ text: String) {
+    /// True when someone else is voicing Walter — see `onWalrusUtterance`.
+    private var isExternallyVoiced: Bool { onWalrusUtterance != nil }
+
+    /// The one way Walter says anything: append, persist, and either speak
+    /// it here or hand it to whoever installed `onWalrusUtterance`. Funnels
+    /// every source through a single path so a new utterance site can't
+    /// forget to notify the voice UI.
+    private func emitWalrus(
+        _ text: String,
+        endsConversation: Bool = false,
+        correction: String? = nil
+    ) {
+        let id = appendWalrus(text)
+        try? context.save()
+        if let onWalrusUtterance {
+            onWalrusUtterance(WalrusUtterance(
+                id: id,
+                text: text,
+                endsConversation: endsConversation,
+                correction: correction
+            ))
+        } else {
+            SpeechService.shared.speakAsWalter(text)
+        }
+    }
+
+    @discardableResult
+    private func appendWalrus(_ text: String) -> UUID {
         let id = UUID()
         displayMessages.append(DisplayMessage(id: id, role: .walrus, text: text))
         let stored = ChatMessage(id: id, role: .walrus, text: text, session: session)
         context.insert(stored)
+        return id
     }
 
     @discardableResult
@@ -321,8 +420,11 @@ final class ChatStore {
     private func kickOffGrammarCheck(for messageID: UUID, text: String) {
         let language = OnboardingStore.targetLanguage ?? .spanish
         Task { [weak self] in
-            guard let correction = await GrammarService.shared.check(text, language: language) else { return }
-            self?.corrections[messageID] = correction
+            let outcome = await GrammarService.shared.check(text, language: language)
+            if case .corrected(let corrected) = outcome {
+                self?.corrections[messageID] = corrected
+            }
+            self?.checkOutcomes[messageID] = outcome
         }
     }
 }

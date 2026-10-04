@@ -1,9 +1,41 @@
 import SwiftUI
 import CoreText
+import UIKit
 
 extension Font {
+    /// Big display font. Currently Shantell Sans (variable font), pinned to weight 450.
+    /// Shantell's default instance is Light (300); we drive the `wght` axis directly so
+    /// `.weight()` / synthetic bolding aren't needed to get a true 450.
     static func gochiHand(size: CGFloat, relativeTo style: Font.TextStyle = .body) -> Font {
-        .custom("GochiHand-Regular", size: size, relativeTo: style)
+        Font(shantellUIFont(size: size, weight: 550, relativeTo: style))
+    }
+
+    /// Builds Shantell Sans at a chosen point on its `wght` axis, scaled for Dynamic Type.
+    private static func shantellUIFont(size: CGFloat, weight: CGFloat, relativeTo style: Font.TextStyle) -> UIFont {
+        let wghtAxis = 0x77676874 // 'wght'
+        let descriptor = UIFontDescriptor(fontAttributes: [
+            .name: "ShantellSans-Light",
+            UIFontDescriptor.AttributeName(rawValue: kCTFontVariationAttribute as String): [wghtAxis: weight],
+        ])
+        let base = UIFont(descriptor: descriptor, size: size)
+        return UIFontMetrics(forTextStyle: uiTextStyle(for: style)).scaledFont(for: base)
+    }
+
+    private static func uiTextStyle(for style: Font.TextStyle) -> UIFont.TextStyle {
+        switch style {
+        case .largeTitle: return .largeTitle
+        case .title: return .title1
+        case .title2: return .title2
+        case .title3: return .title3
+        case .headline: return .headline
+        case .subheadline: return .subheadline
+        case .callout: return .callout
+        case .footnote: return .footnote
+        case .caption: return .caption1
+        case .caption2: return .caption2
+        case .body: return .body
+        @unknown default: return .body
+        }
     }
 
     static func sniglet(size: CGFloat, weight: Font.Weight = .regular, relativeTo style: Font.TextStyle? = nil) -> Font {
@@ -36,7 +68,7 @@ extension Font {
 
 enum FontRegistrar {
     private static let fontFileNames = [
-        "GochiHand-Regular",
+        "ShantellSans-VariableFont_BNCE,INFM,SPAC,wght",
         "Sniglet-Regular",
     ]
     private static var didRegister = false

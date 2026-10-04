@@ -27,9 +27,7 @@ https://github.com/hermitdave/FrequencyWords (MIT). Example sentences and
 translations were authored from scratch for this project.
 """
 
-import json
-from pathlib import Path
-from vocab_pipeline import DEFAULT_DECKS, normalize_slugs
+from vocab_pipeline import DEFAULT_DECKS, build_dataset
 
 # (lemma, part_of_speech, english_gloss, spanish_example, english_translation)
 ENTRIES = [
@@ -1043,147 +1041,29 @@ TOPIC_DECKS = {
 }
 
 
-def slugify(text: str, idx: int) -> str:
-    return f"es-{idx:04d}"
-
-
-def cefr_for_rank(rank: int) -> str:
-    """Map a frequency rank in the hand-curated ENTRIES list to a CEFR level.
-
-    Bands follow the standard frequency-to-proficiency calibration used in
-    Spanish-as-foreign-language pedagogy: top-of-list words are A1 essentials,
-    then A2 everyday vocab, then B1+ for the long tail.
-    """
-    if rank <= 150:
-        return "A1"
-    if rank <= 350:
-        return "A2"
-    return "B1"
-
-
 def main() -> None:
-    project_root = Path(__file__).resolve().parent.parent
-    output_path = project_root / "wordrus" / "wordrus" / "Resources" / "spanish_top1000.json"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+    """Build spanish_top1000.json through the shared pipeline.
 
-    # Collect all entries with their deck memberships. Main ENTRIES → "common".
-    # Topic decks can tag existing lemmas and add new ones.
-    word_index: dict[str, dict] = {}
-    order: list[str] = []
+    Spanish used to have its own hand-rolled writer here, which predated the
+    blocklist and frozen-id support in vocab_pipeline and had drifted out of
+    sync with the shipped seed — re-running it would have renumbered every
+    rank/id (user learning progress binds to those) and re-added the words the
+    2026-07-06 vetting pass removed. It also globbed `generated_entries*.json`,
+    which matched the German, French, and Italian generator caches; the
+    Spanish ones are now `generated_entries_es*.json` to match the other
+    languages' convention and keep the glob language-scoped.
 
-    def add_entry(lemma, pos, gloss, example_es, example_en, deck, cefr_level=None):
-        if lemma in word_index:
-            if deck not in word_index[lemma]["decks"]:
-                word_index[lemma]["decks"].append(deck)
-            # Fill in cefrLevel if it wasn't set on first add (e.g., topic deck
-            # tagged it before a generated entry provided the level).
-            if cefr_level and not word_index[lemma].get("cefrLevel"):
-                word_index[lemma]["cefrLevel"] = cefr_level
-            return
-        word_index[lemma] = {
-            "lemma": lemma,
-            "partOfSpeech": pos,
-            "gloss": gloss,
-            "example_es": example_es,
-            "example_en": example_en,
-            "decks": [deck],
-            "cefrLevel": cefr_level,
-        }
-        order.append(lemma)
-
-    for rank, (lemma, pos, gloss, example_es, example_en) in enumerate(ENTRIES, start=1):
-        add_entry(lemma, pos, gloss, example_es, example_en, "common", cefr_for_rank(rank))
-
-    for deck_slug, deck_data in TOPIC_DECKS.items():
-        for lemma in deck_data.get("lemmas", []):
-            if lemma in word_index:
-                if deck_slug not in word_index[lemma]["decks"]:
-                    word_index[lemma]["decks"].append(deck_slug)
-            else:
-                print(f"Warning: topic '{deck_slug}' references unknown lemma '{lemma}'")
-        for lemma, pos, gloss, example_es, example_en in deck_data.get("new_entries", []):
-            # Topic-deck new_entries don't have a meaningful frequency rank —
-            # leave cefrLevel unset until an LLM backfill pass provides one.
-            add_entry(lemma, pos, gloss, example_es, example_en, deck_slug)
-
-    # Merge LLM-generated and curated-batch entries, if any. Files matching
-    # generated_entries*.json are read in sorted order; each entry brings its
-    # own deck slugs and CEFR level.
-    import glob
-    tools_dir = Path(__file__).resolve().parent
-    generated_paths = sorted(glob.glob(str(tools_dir / "generated_entries*.json")))
-    all_generated_entries: list[dict] = []
-    for path_str in generated_paths:
-        gen_data = json.loads(Path(path_str).read_text(encoding="utf-8"))
-        all_generated_entries.extend(gen_data.get("entries", []))
-    if all_generated_entries:
-        n_added = n_merged = 0
-        for entry in all_generated_entries:
-            lemma = entry["lemma"]
-            explicit_slugs = entry.get("decks")
-            if lemma in word_index:
-                # Only add deck membership if explicitly specified — a minimal
-                # backfill entry like {"lemma": "...", "cefrLevel": "..."} must
-                # not silently add "common" to a topic-only word.
-                if explicit_slugs:
-                    for slug in explicit_slugs:
-                        if slug not in word_index[lemma]["decks"]:
-                            word_index[lemma]["decks"].append(slug)
-                if entry.get("cefrLevel") and not word_index[lemma].get("cefrLevel"):
-                    word_index[lemma]["cefrLevel"] = entry["cefrLevel"]
-                n_merged += 1
-            else:
-                word_index[lemma] = {
-                    "lemma": lemma,
-                    "partOfSpeech": entry["partOfSpeech"],
-                    "gloss": entry["gloss"],
-                    "example_es": entry["exampleSpanish"],
-                    "example_en": entry["exampleEnglish"],
-                    "decks": list(explicit_slugs or ["common"]),
-                    "cefrLevel": entry.get("cefrLevel"),
-                }
-                order.append(lemma)
-                n_added += 1
-        if n_added or n_merged:
-            names = ", ".join(Path(p).name for p in generated_paths)
-            print(f"Merged {n_added} new + {n_merged} existing entries from {names}")
-
-    valid_slugs = {d["slug"] for d in DECKS} | {"common"}
-
-    words = []
-    for rank, lemma in enumerate(order, start=1):
-        e = word_index[lemma]
-        # Apply legacy remap (travel→traveling, food→food-and-drink, …) and
-        # drop slugs that aren't part of the current published taxonomy.
-        normalized = normalize_slugs(e["decks"])
-        final_slugs = [s for s in normalized if s in valid_slugs]
-        if not final_slugs:
-            final_slugs = ["common"]
-        entry = {
-            "id": slugify(lemma, rank),
-            "rank": rank,
-            "lemma": lemma,
-            "partOfSpeech": e["partOfSpeech"],
-            "definitions": {"en": e["gloss"]},
-            "example": {
-                "es": e["example_es"],
-                "translations": {"en": e["example_en"]},
-            },
-            "decks": final_slugs,
-        }
-        if e.get("cefrLevel"):
-            entry["cefrLevel"] = e["cefrLevel"]
-        words.append(entry)
-
-    payload = {
-        "version": 4,
-        "language": "es",
-        "decks": DECKS,
-        "words": words,
-    }
-
-    output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {len(words)} words and {len(DECKS)} decks to {output_path}")
+    CEFR bands are the pipeline default (A1 <=150, A2 <=350, B1 beyond), which
+    is the same calibration Spanish was already using.
+    """
+    build_dataset(
+        language_code="es",
+        output_filename="spanish_top1000.json",
+        entries=ENTRIES,
+        topic_decks=TOPIC_DECKS,
+        deck_definitions=DECKS,
+        generated_glob="generated_entries_es*.json",
+    )
 
 
 if __name__ == "__main__":

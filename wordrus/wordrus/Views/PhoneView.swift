@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 /// Phone tab — outgoing call entry point plus a recents-style list of
-/// past chats and missed calls.
+/// past chats, missed calls and Dr Tusk's stories.
 struct PhoneView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \ChatSession.startedAt, order: .reverse) private var allSessions: [ChatSession]
@@ -10,11 +10,35 @@ struct PhoneView: View {
     @State private var selectedSession: ChatSession?
     @State private var entitlements = Entitlements.shared
     @State private var isShowingPaywall = false
+    @Query(sort: \DailyStory.createdAt, order: .reverse) private var allStories: [DailyStory]
+    @State private var openedStory: StoryDestination?
+    @State private var isShowingStoryPaywall = false
+    @AppStorage(OnboardingDefaultsKey.hasCompleted) private var hasCompletedOnboarding = false
 
     /// Calls practised in the currently selected language. Mirrors how the
     /// Vocabulary tab scopes to the active language.
     private var sessions: [ChatSession] {
         allSessions.filter { $0.languageRaw == targetLanguageRaw }
+    }
+
+    /// Stories are Pro: free users see `StoryLockedRow` instead.
+    private var stories: [DailyStory] {
+        guard entitlements.isPro else { return [] }
+        return allStories.filter { $0.languageRaw == targetLanguageRaw }
+    }
+
+    private var recents: [RecentItem] {
+        RecentItem.merged(calls: sessions, stories: stories)
+    }
+
+    /// Until today's story exists, a row that writes it on tap.
+    private var showsTodayPlaceholder: Bool {
+        let today = DailySetConfig.dayKey(.now)
+        return entitlements.isPro && hasCompletedOnboarding && !stories.contains { $0.dayKey == today }
+    }
+
+    private var showsLockedStories: Bool {
+        !entitlements.isPro && hasCompletedOnboarding
     }
 
     var body: some View {
@@ -26,7 +50,7 @@ struct PhoneView: View {
                     .listRowSeparator(.hidden)
             }
 
-            if sessions.isEmpty {
+            if recents.isEmpty && !showsTodayPlaceholder && !showsLockedStories {
                 Section {
                     emptyHistory
                         .listRowInsets(EdgeInsets())
@@ -35,20 +59,54 @@ struct PhoneView: View {
                 }
             } else {
                 Section {
-                    ForEach(sessions) { session in
-                        Button {
-                            selectedSession = session
-                        } label: {
-                            CallHistoryRow(session: session)
-                        }
-                        .buttonStyle(.plain)
-                        .listRowSeparator(.hidden)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button(role: .destructive) {
-                                delete(session)
+                    if showsLockedStories {
+                        Button { isShowingStoryPaywall = true } label: { StoryLockedRow() }
+                            .buttonStyle(.plain)
+                            .listRowSeparator(.hidden)
+                    }
+                    if showsTodayPlaceholder {
+                        Button { openedStory = .today } label: { TodayStoryPlaceholderRow() }
+                            .buttonStyle(.plain)
+                            .listRowSeparator(.hidden)
+                    }
+                    ForEach(recents) { item in
+                        switch item {
+                        case .call(let session):
+                            Button {
+                                selectedSession = session
                             } label: {
-                                Label("Delete", systemImage: "trash")
+                                CallHistoryRow(session: session)
                             }
+                            .buttonStyle(.plain)
+                            .listRowSeparator(.hidden)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    delete(session)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                        case .story(let story):
+                            Button {
+                                openedStory = .story(story)
+                            } label: {
+                                StoryRow(story: story)
+                            }
+                            .buttonStyle(.plain)
+                            .listRowSeparator(.hidden)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button(role: .destructive) {
+                                    delete(story)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
+                            #if DEBUG
+                            .contextMenu {
+                                Button(role: .destructive) { delete(story) } label: { Text(verbatim: "Regenerate (delete)") }
+                                Button { story.openedAt = nil; story.completedAt = nil } label: { Text(verbatim: "Mark unread") }
+                            }
+                            #endif
                         }
                     }
                 } header: {
@@ -72,8 +130,29 @@ struct PhoneView: View {
         }
         .sheet(isPresented: $isShowingPaywall) {
             // Once subscribed, place the call the user originally tapped.
-            PaywallView(onSubscribed: { IncomingCallCoordinator.shared.requestOutgoing() })
+            PaywallView(onSubscribed: { IncomingCallCoordinator.shared.requestOutgoing() }, source: .call)
         }
+        .sheet(isPresented: $isShowingStoryPaywall) {
+            // Once subscribed, open today's story straight away.
+            PaywallView(onSubscribed: { openedStory = .today }, source: .story)
+        }
+        .sheet(item: $openedStory) { destination in
+            switch destination {
+            case .today:
+                TodayStoryScreen(language: TargetLanguage(rawValue: targetLanguageRaw) ?? .spanish)
+            case .story(let story):
+                StoryView(story: story)
+            }
+        }
+    }
+
+    private func delete(_ story: DailyStory) {
+        if let folder = story.audioFileName {
+            try? FileManager.default.removeItem(at: DailyStoryService.storyAudioDirectory.appendingPathComponent(folder))
+        }
+        StoryScheduler.cancelNotification(for: story)
+        context.delete(story)
+        try? context.save()
     }
 
     /// Calling Dr Tusk is a Pro feature — incoming calls stay free. Pro
@@ -151,6 +230,19 @@ struct PhoneView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 24)
+    }
+}
+
+/// What the story sheet shows: today's (written on demand) or a saved one.
+private enum StoryDestination: Identifiable {
+    case today
+    case story(DailyStory)
+
+    var id: String {
+        switch self {
+        case .today: "today"
+        case .story(let story): story.id.uuidString
+        }
     }
 }
 

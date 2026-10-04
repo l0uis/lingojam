@@ -31,6 +31,35 @@ python3 tools/build_italian.py
 python3 tools/build_german.py
 ```
 
+## Story lexicons (`tools/build_story_lexicon.py`)
+
+Walter's daily story checks every generated story on device
+(`StoryVocabularyChecker.swift`) against the learner's known words. That check
+needs per-language data, written to `Resources/story_lexicon_{es,fr,de,it}.json`
+(~115 KB each):
+
+- `frequency`: seed lemmas ordered by corpus frequency (doozan for Spanish,
+  hermitdave form counts aggregated over a regular paradigm for FR/DE/IT).
+  Used for coverage stats and for picking which known words a story may use.
+- `functionWords`: articles, pronouns, prepositions, conjunctions, auxiliaries,
+  negation and numbers — always allowed in a story.
+- `aliases`: NLTagger lemma quirks (puede → "podar" → poder) plus irregular
+  forms of the most frequent verbs (dijo → decir, gestanden → stehen).
+- Morphology hints: noun/adjective endings, verb ending classes and stem
+  alternations (for when NLTagger has no lemma model — the iOS simulator has
+  none for Spanish), Spanish/Italian clitics, German separable prefixes and
+  compound linkers.
+
+Stdlib only. Re-run after any seed rebuild:
+
+```
+python3 tools/build_story_lexicon.py            # all four languages
+python3 tools/build_story_lexicon.py de --report  # also list frequent forms the lexicon can't explain
+```
+
+The Swift tests in `wordrusTests/StoryVocabularyCheckerTests.swift` run the real
+NLTagger against these files, with and without its lemma model.
+
 ## LLM-driven generation (`tools/generate_vocab.py`)
 
 Pulls a frequency list, filters out lemmas already covered, and asks Claude

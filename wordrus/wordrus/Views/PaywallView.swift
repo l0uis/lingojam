@@ -11,8 +11,14 @@ struct PaywallView: View {
     /// Invoked once the user becomes Pro (purchase, restore, or DEBUG
     /// simulate) — lets the presenter continue what the user was doing.
     var onSubscribed: () -> Void = {}
+    /// What the user tapped to get here. Reported with `paywall_shown` / `paywall_dismissed`.
+    var source: Analytics.PaywallSource = .unknown
 
     @Environment(\.dismiss) private var dismiss
+    // One shown / dismissed pair per presentation; `onAppear` can run twice.
+    @State private var analyticsShown = false
+    @State private var analyticsOutcome: Analytics.PaywallOutcome = .closed
+    @State private var shownAt = Date()
     @State private var entitlements = Entitlements.shared
     @State private var plan: PaywallPlan = .placeholderAnnual
     @State private var isLoadingPlan = true
@@ -57,6 +63,17 @@ struct PaywallView: View {
         .overlay(alignment: .topTrailing) { closeButton }
         .interactiveDismissDisabled(isWorking)
         .task { await loadPlan() }
+        .onAppear {
+            guard !analyticsShown else { return }
+            analyticsShown = true
+            shownAt = Date()
+            Analytics.paywallShown(source)
+        }
+        .onDisappear {
+            guard analyticsShown else { return }
+            analyticsShown = false
+            Analytics.paywallDismissed(source: source, outcome: analyticsOutcome, shownAt: shownAt)
+        }
         .alert(item: $alert) { alert in
             Alert(title: Text(alert.title),
                   message: Text(alert.message),
@@ -164,6 +181,8 @@ struct PaywallView: View {
                 .foregroundStyle(DS.Color.ink)
             benefitRow(icon: "phone.fill", title: "Call Dr Tusk anytime",
                        detail: "He still calls you for free — Pro lets you call him on demand.")
+            benefitRow(icon: "book.fill", title: "Daily stories from Dr Tusk",
+                       detail: "A short story every day, written with your words and read aloud by Dr Tusk.")
             benefitRow(icon: "text.badge.plus", title: "Add your own words",
                        detail: "Look up any word you hear or see — definition and example added instantly.")
             benefitRow(icon: "globe", title: "Every language",
@@ -180,7 +199,7 @@ struct PaywallView: View {
         )
     }
 
-    private func benefitRow(icon: String, title: String, detail: String) -> some View {
+    private func benefitRow(icon: String, title: LocalizedStringKey, detail: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 14) {
             Image(systemName: icon)
                 .font(.sniglet(.subheadline, weight: .bold))
@@ -221,7 +240,7 @@ struct PaywallView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             } else {
-                priceBlock
+                if plan.trialDays != nil { noPaymentDueNow }
 
                 Button {
                     Task { await subscribe() }
@@ -235,10 +254,16 @@ struct PaywallView: View {
                 .buttonStyle(.primary)
                 .disabled(isWorking || isLoadingPlan)
 
-                Text(billingNote)
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(DS.Color.charcoal)
+                Text(priceSubtext)
+                    .font(.sniglet(.subheadline))
+                    .foregroundStyle(DS.Color.ink)
                     .multilineTextAlignment(.center)
+
+                Text(appleBillingDisclosure)
+                    .font(.sniglet(.caption2))
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 8)
             }
 
             legalLinks
@@ -253,52 +278,47 @@ struct PaywallView: View {
         )
     }
 
+    /// "Try 1 week free" when a trial applies, phrased in the store's own
+    /// period unit rather than converted to days.
     private var ctaTitle: String {
-        plan.trialDays.map { "Start \($0)-day free trial" } ?? "Subscribe"
+        plan.trialPeriodText.map { "Try \($0) free" } ?? "Subscribe"
     }
 
-    /// Small print under the CTA. Clarifies the billing cadence.
-    private var billingNote: String {
-        plan.billingText != nil ? "Billed annually. Cancel anytime." : "Cancel anytime."
-    }
-
-    /// Pricing block: the total billed amount is the most clear and
-    /// conspicuous element (large, in our blue), with the free-trial and
-    /// calculated per-month framing in a subordinate size and colour beneath
-    /// it. Required by Guideline 3.1.2(c) — introductory/calculated pricing
-    /// must not be more prominent than the amount the user is actually billed.
-    private var priceBlock: some View {
-        VStack(spacing: 3) {
-            Text(plan.billingText ?? plan.priceText)
-                .font(.sniglet(.title, weight: .bold))
-                .foregroundStyle(DS.Color.ink)
-            if let subtitle = priceSubtitle {
-                Text(subtitle)
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(DS.Color.charcoal)
-            }
+    /// Reassurance above the CTA, shown only when a trial actually applies —
+    /// without one there *is* a payment due now, and saying otherwise would
+    /// contradict the App Store payment sheet.
+    private var noPaymentDueNow: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "checkmark.circle.fill")
+            Text("No payment due now")
         }
-        .multilineTextAlignment(.center)
-        .frame(maxWidth: .infinity)
+        .font(.sniglet(.subheadline, weight: .bold))
+        .foregroundStyle(DS.Color.charcoal)
     }
 
-    /// Subordinate pricing line — trial length + the calculated per-month
-    /// figure, both kept smaller than the billed amount above.
-    private var priceSubtitle: String? {
-        guard let days = plan.trialDays else { return nil }
-        if plan.billingText != nil {
-            // Annual: surface the calculated per-month figure, subordinate.
-            return "\(days) days free, then only \(plan.priceText)"
-        }
-        return "\(days) days free"
+    /// The pricing statement directly under the CTA: what the user is actually
+    /// charged and how often. The trial is carried by the CTA and the "No
+    /// payment due now" line above, so it isn't repeated here.
+    ///
+    /// This line is deliberately full-weight rather than fine print —
+    /// Guideline 3.1.2(c) requires that introductory pricing not be more
+    /// prominent than the price the user really pays, and this paywall has a
+    /// rejection history on exactly that point.
+    private var priceSubtext: String {
+        let billed = plan.billingText ?? "\(plan.priceText)."
+        return "\(billed) Cancel anytime."
     }
+
+    /// Apple's standard auto-renewal disclosure, expected in the purchase flow
+    /// for auto-renewable subscriptions.
+    private let appleBillingDisclosure = "Payment is charged to your Apple ID account. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period."
 
     /// Terms of Use (EULA) + Privacy Policy links, required in the purchase
     /// flow for auto-renewable subscriptions (Guideline 3.1.2(c)).
     private var legalLinks: some View {
-        HStack(spacing: 6) {
+        HStack(spacing: 4) {
             Link("Terms of Use", destination: LegalLinks.termsOfUse)
-            Text("•")
+            Text("and")
             Link("Privacy Policy", destination: LegalLinks.privacyPolicy)
         }
         .font(.sniglet(.caption))
@@ -350,9 +370,51 @@ struct PaywallView: View {
 
     // MARK: - Actions
 
+    /// Stand-in yearly-plus-trial plan for visual QA of the trial layout:
+    ///
+    ///     xcrun simctl launch <udid> <bundle> -uiPreviewPaywall -uiPreviewTrial
+    ///
+    /// Needed because the trial copy and timeline only render when the *store*
+    /// reports an introductory offer the account is eligible for, which can't
+    /// be arranged on a plain simulator. Applies ONLY with the explicit
+    /// `-uiPreviewTrial` flag — a plain `-uiPreviewPaywall` launch must keep
+    /// showing whatever the store really returns (including the failure
+    /// state), or the preview goes back to flattering us. DEBUG-only and gated
+    /// on a launch argument, so it can never reach a user or App Review.
+    private static var previewTrialPlan: PaywallPlan? {
+        #if DEBUG
+        guard ProcessInfo.processInfo.arguments.contains("-uiPreviewTrial") else { return nil }
+        return PaywallPlan(
+            id: PaywallPlan.placeholderAnnual.id,
+            title: PaywallPlan.placeholderAnnual.title,
+            priceText: PaywallPlan.advertisedMonthlyPriceText,
+            trialDays: 7,
+            trialPeriodText: "1 week",
+            billingText: PaywallPlan.placeholderAnnual.billingText,
+            isBestValue: false
+        )
+        #else
+        return nil
+        #endif
+    }
+
+    /// Whether the DEBUG preview plan should replace a real one rather than
+    /// merely stand in for a missing one.
+    private static var forcesPreviewTrial: Bool {
+        #if DEBUG
+        return ProcessInfo.processInfo.arguments.contains("-uiPreviewTrial")
+        #else
+        return false
+        #endif
+    }
+
     private func loadPlan() async {
         let fetched = await entitlements.availablePlans()
-        if let best = fetched.first(where: { $0.isBestValue }) ?? fetched.first {
+        if let preview = Self.previewTrialPlan, Self.forcesPreviewTrial {
+            // DEBUG visual-QA launch only (see `previewTrialPlan`).
+            plan = preview
+            planLoadFailed = false
+        } else if let best = fetched.first(where: { $0.isBestValue }) ?? fetched.first {
             plan = best
             planLoadFailed = false
         } else {
@@ -380,6 +442,8 @@ struct PaywallView: View {
                 await NotificationService.scheduleTrialEndingReminder(trialDays: days)
             }
             onSubscribed()
+            analyticsOutcome = .purchased
+            Analytics.capture(.purchaseCompleted)
             dismiss()
         case .cancelled:
             break
@@ -395,6 +459,8 @@ struct PaywallView: View {
         switch result {
         case .restored:
             onSubscribed()
+            analyticsOutcome = .restored
+            Analytics.capture(.purchaseRestored)
             dismiss()
         case .nothingToRestore:
             alert = PaywallAlert(

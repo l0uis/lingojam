@@ -132,15 +132,57 @@ private final class AudioCache {
 /// Tiny AVAudioPlayer wrapper used to play OpenAI MP3 audio. Replaces
 /// the previous utterance when a new one starts, mirroring
 /// `AVSpeechSynthesizer.stopSpeaking(at: .immediate)` behavior.
+///
+/// `playAndWait` is the variant the voice-call UI uses: it suspends until
+/// the clip actually finishes, which is what keeps one speech bubble per
+/// sentence in step with Walter's voice.
 @MainActor
 final class WalrusAudioPlayer: NSObject {
     static let shared = WalrusAudioPlayer()
 
     private var player: AVAudioPlayer?
+    /// Resumed exactly once per `playAndWait` — on natural end, on
+    /// interruption by a newer clip, or by the watchdog. Always route
+    /// resumes through `finishPlayback()` so that stays true.
+    private var finishContinuation: CheckedContinuation<Void, Never>?
+    /// Backstop timer. `AVAudioPlayer`'s delegate callback can be lost if
+    /// the audio session is yanked out from under us (a phone call, the
+    /// mic taking over); without this the caller would hang forever
+    /// mid-conversation.
+    private var watchdog: Task<Void, Never>?
 
     private override init() { super.init() }
 
     func play(_ data: Data) {
+        _ = start(data)
+    }
+
+    /// Play `data` and suspend until playback ends. Returns immediately if
+    /// the clip can't be decoded, so a bad payload never stalls a turn.
+    func playAndWait(_ data: Data) async {
+        guard let duration = start(data) else { return }
+        await withCheckedContinuation { (cont: CheckedContinuation<Void, Never>) in
+            // `start` stopped any previous clip (resuming its continuation),
+            // and we haven't suspended since, so nothing is outstanding here.
+            finishContinuation = cont
+            watchdog = Task { [weak self] in
+                try? await Task.sleep(nanoseconds: UInt64((duration + 1.0) * 1_000_000_000))
+                guard !Task.isCancelled else { return }
+                self?.finishPlayback()
+            }
+        }
+    }
+
+    func stop() {
+        player?.stop()
+        player = nil
+        finishPlayback()
+    }
+
+    /// Starts playback and returns the clip's wall-clock duration, or nil
+    /// if the data couldn't be decoded.
+    @discardableResult
+    private func start(_ data: Data) -> Double? {
         stop()
         do {
             // Set the audio session so playback goes to speaker even on silent mode.
@@ -157,19 +199,28 @@ final class WalrusAudioPlayer: NSObject {
             player.prepareToPlay()
             player.play()
             self.player = player
+            // Playing below 1.0 rate stretches the clip — the watchdog has
+            // to budget for the real elapsed time, not the encoded length.
+            return player.duration / Double(player.rate)
         } catch {
             self.player = nil
+            return nil
         }
     }
 
-    func stop() {
-        player?.stop()
-        player = nil
+    private func finishPlayback() {
+        watchdog?.cancel()
+        watchdog = nil
+        let cont = finishContinuation
+        finishContinuation = nil
+        cont?.resume()
     }
 }
 
 extension WalrusAudioPlayer: @preconcurrency AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully _: Bool) {
-        if player === self.player { self.player = nil }
+        guard player === self.player else { return }
+        self.player = nil
+        finishPlayback()
     }
 }

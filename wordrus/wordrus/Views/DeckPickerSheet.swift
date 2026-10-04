@@ -51,16 +51,12 @@ struct DeckPickerSheet: View {
                     .padding(.vertical, 12)
                     .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
 
-                    if let status = levelStatus, !status.isMaxLevel {
+                    if let status = levelStatus, !status.isMaxLevel, status.eligible {
                         progressRow(status)
                             .listRowInsets(EdgeInsets(top: 4, leading: 20, bottom: 12, trailing: 20))
                     }
                 } header: {
                     sectionHeader("Level")
-                } footer: {
-                    Text("New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing stay in rotation. Level up by mastering \(LevelProgression.knownWordsToLevelUp) words at your level or passing \(LevelProgression.passingCallsToLevelUp) calls with Walter.")
-                        .font(.sniglet(.caption))
-                        .foregroundStyle(.secondary)
                 }
 
                 Section {
@@ -101,7 +97,7 @@ struct DeckPickerSheet: View {
             }
             .sheet(isPresented: $isShowingPaywall, onDismiss: { pendingChange = nil }) {
                 // Once subscribed, replay the change the user attempted.
-                PaywallView(onSubscribed: applyPendingChange)
+                PaywallView(onSubscribed: applyPendingChange, source: .deckPicker)
             }
         }
     }
@@ -180,12 +176,6 @@ struct DeckPickerSheet: View {
                     )
                 }
                 .buttonStyle(.plain)
-            } else {
-                ProgressView(value: status.fraction)
-                    .tint(DS.Color.ink)
-                Text(status.summary())
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(.secondary)
             }
         }
     }

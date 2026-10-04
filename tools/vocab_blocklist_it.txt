@@ -91,3 +91,90 @@ orgasmo
 stronzata
 prostituta
 prostituzione
+# ---------------------------------------------------------------------------
+# C1/C2 tail cull, 2026-07-29. Same pass as the DE/FR/ES blocklists. Like
+# French, Italian's advanced band is mostly carried by the 2026-07-06 themed
+# batch, so this is a narrow cull of the frequency residue.
+
+# Slurs and vulgarity the 2026-07-06 family-friendly rounds missed.
+figa
+frocio
+pompino
+troia
+spogliarellista
+pervertito
+dannatamente
+maledettamente
+# Sexual violence.
+stuprare
+stupratore
+violentare
+# Crime procedural, weapons, and courtroom.
+cecchino
+cauzione
+ergastolo
+imputato
+indagato
+informatore
+movente
+perquisizione
+plotone
+procura
+procuratore
+pugnalare
+soffiata
+vigilato
+modus operandi
+distrettuale
+giudiziario
+# Drugs and hospital-drama medicine.
+bong
+morfina
+narcotico
+steroide
+plasma
+allucinazione
+tossicologico
+erezione
+midollo
+dorsale
+operatoria
+strizzacervelli
+psicopatico
+# Sci-fi, fantasy, and period-drama register.
+apocalisse
+ave
+cassandra
+damigella
+giuda
+onnipotente
+signoria
+sire
+stellare
+teletrasporto
+confraternita
+# Wrong-sense, archaic, or set-phrase-only entries.
+ancor
+beccata
+cavata
+cerasa
+colà
+dì
+esservi
+galla
+ione
+mastro
+particella
+riporto
+rush
+sostenuto
+tabulato
+toccata
+tornata
+voluta
+picchiata
+feccia
+decesso
+defunto
+veglia
+scia

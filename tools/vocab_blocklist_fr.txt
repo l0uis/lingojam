@@ -94,3 +94,105 @@ mac
 orgasme
 prostitution
 prostituée
+# ---------------------------------------------------------------------------
+# C1/C2 tail cull, 2026-07-29. Same pass as the DE/IT/ES blocklists. French
+# was in better shape than German — its 2026-07-06 themed batch covers most of
+# the advanced band — so this is a narrower cull of the frequency residue.
+
+# Slurs and vulgarity the 2026-07-06 family-friendly rounds missed (they only
+# covered German thoroughly).
+connasse
+merdeux
+merdier
+merdique
+nichon
+nègre
+foutaise
+morveux
+satané
+défonce
+héro
+# Crime procedural and weapons.
+balistique
+battue
+bourreau
+cavale
+détonateur
+effraction
+embuscade
+inculpé
+inculper
+indic
+légiste
+mouchard
+perquisition
+poignard
+probation
+stups
+traquer
+autopsie
+armement
+artillerie
+prévenu
+meurtrière
+# Sci-fi, fantasy, and period-drama register.
+graal
+majordome
+messire
+monseigneur
+pope
+révérend
+sieur
+sire
+stellaire
+téléportation
+vortex
+châtiment
+maléfique
+sainteté
+jadis
+tribord
+# Wrong-sense or set-phrase-only entries, and slang not worth a flashcard.
+blair
+brick
+came
+charlotte
+çà
+encontre
+fi
+froc
+gus
+if
+lie
+mater
+minus
+mollo
+piper
+pige
+planqué
+baratin
+mauviette
+val
+tanner
+river
+lester
+effraie
+dot
+# Anatomy/medical oddities from hospital dramas.
+entrailles
+tripes
+moelle
+érection
+hémorragie
+stéroïde
+sédatif
+opératoire
+plasma
+cortex
+psychopathe
+ivrogne
+vermine
+jade
+sierra
+picard
+sas

@@ -19,6 +19,13 @@ enum NotificationService {
     /// feels like a treat, not spam.
     static let walrusCallsPerWeek = 3
 
+    /// How many days ahead daily reminders are scheduled in one batch.
+    /// Reminders are re-randomized on every launch (see
+    /// `DailyWordService.refresh`), so this only needs to cover a stretch of
+    /// days the user might not open the app. Kept at a week so the total
+    /// pending count stays well under iOS's 64-notification limit.
+    static let reminderHorizonDays = 7
+
     static func requestAuthorizationIfNeeded() async {
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
@@ -44,7 +51,7 @@ enum NotificationService {
 
     static func scheduleDailyReminder(using snapshot: DailyWordSnapshot) {
         scheduleReminders(
-            using: snapshot,
+            using: reminderStack(fallback: snapshot),
             perDay: OnboardingStore.notificationsPerDay,
             start: OnboardingStore.notificationStart,
             end: OnboardingStore.notificationEnd,
@@ -52,24 +59,47 @@ enum NotificationService {
         )
     }
 
+    /// Today's ordered word stack for reminders, so consecutive notifications
+    /// rotate through different words instead of repeating one. Falls back to
+    /// the single stored snapshot before the first set has been built.
+    static func reminderStack(fallback snapshot: DailyWordSnapshot?) -> [DailyWordSnapshot] {
+        let stack = DailyWordSet.load()?.words ?? []
+        if !stack.isEmpty { return stack }
+        return snapshot.map { [$0] } ?? []
+    }
+
     static func scheduleReminders(
-        using snapshot: DailyWordSnapshot,
+        using words: [DailyWordSnapshot],
         perDay: Int,
         start: DateComponents,
         end: DateComponents,
         daysOfWeek: Set<Int>
     ) {
+        guard !words.isEmpty else {
+            cancelAllReminders()
+            return
+        }
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
             clearAllPending(center: center) {
                 let days = daysOfWeek.isEmpty ? Set(1...7) : daysOfWeek
-                let safePerDay = max(1, min(perDay, 64 / max(days.count, 1)))
-                let fireTimes = dailyFireTimes(perDay: safePerDay, start: start, end: end)
-                for weekday in days.sorted() {
-                    for (index, time) in fireTimes.enumerated() {
-                        schedule(snapshot: snapshot, weekday: weekday, at: time, index: index, center: center)
-                    }
+                // Cap the per-day count so a full week's batch stays well under
+                // iOS's 64-notification limit, leaving headroom for walrus calls.
+                let safePerDay = max(1, min(perDay, 50 / max(days.count, 1)))
+                let fireDates = dailyReminderDates(
+                    perDay: safePerDay,
+                    start: start,
+                    end: end,
+                    daysOfWeek: days,
+                    from: .now
+                )
+                // Walk one cursor across every fire slot so the reminders step
+                // through the stack in order and never repeat back-to-back
+                // (until the stack is exhausted and cycles), mirroring the widget.
+                for (index, date) in fireDates.enumerated() {
+                    let snapshot = words[index % words.count]
+                    schedule(snapshot: snapshot, at: date, index: index, center: center)
                 }
             }
         }
@@ -93,51 +123,87 @@ enum NotificationService {
 
     private static func schedule(
         snapshot: DailyWordSnapshot,
-        weekday: Int,
-        at time: DateComponents,
+        at date: Date,
         index: Int,
         center: UNUserNotificationCenter
     ) {
         let content = UNMutableNotificationContent()
-        content.title = "Today's word: \(snapshot.lemma)"
+        content.title = snapshot.lemma
         var body = snapshot.definition
         if !snapshot.exampleSentence.isEmpty {
             body += "\n" + snapshot.exampleSentence
         }
         content.body = body
         content.sound = .default
+        // Carry the word id so a tap can surface this exact word (see
+        // `NotificationDelegate.didReceive` → `DeepLinkCoordinator`).
+        content.userInfo = ["wordID": snapshot.wordID]
 
-        var components = time
-        components.weekday = weekday
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        let identifier = "\(dailyIdentifierPrefix)\(weekday).\(index)"
+        let components = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute],
+            from: date
+        )
+        // Non-repeating so each day's fire times can be re-randomized on the
+        // next launch instead of locking to a fixed weekly clock time.
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let identifier = "\(dailyIdentifierPrefix)\(index)"
         center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
     }
 
-    static func dailyFireTimes(perDay: Int, start: DateComponents, end: DateComponents) -> [DateComponents] {
+    /// Build concrete future fire dates for the daily reminders across the next
+    /// `reminderHorizonDays`. Each allowed day gets `perDay` times chosen at
+    /// random within the notification window (see `randomFireMinutes`), so the
+    /// reminders land at different clock times each day and are freshly
+    /// randomized every time this runs — no more predictable "rings at 9" slot.
+    /// Times that have already passed today are dropped. Exposed as `internal`
+    /// for unit testing.
+    static func dailyReminderDates(
+        perDay: Int,
+        start: DateComponents,
+        end: DateComponents,
+        daysOfWeek: Set<Int>,
+        from anchor: Date
+    ) -> [Date] {
+        let days = daysOfWeek.isEmpty ? Set(1...7) : daysOfWeek
+        let cal = Calendar.current
         let count = max(1, min(perDay, 24))
         let startMinutes = (start.hour ?? 9) * 60 + (start.minute ?? 0)
         let rawEnd = (end.hour ?? 20) * 60 + (end.minute ?? 0)
         let endMinutes = max(rawEnd, startMinutes)
         let span = endMinutes - startMinutes
 
-        guard count > 1 else {
-            return [normalizedComponents(fromMinutes: startMinutes)]
+        var dates: [Date] = []
+        for dayOffset in 0..<reminderHorizonDays {
+            guard let day = cal.date(byAdding: .day, value: dayOffset, to: anchor) else { continue }
+            guard days.contains(cal.component(.weekday, from: day)) else { continue }
+            for minutes in randomFireMinutes(count: count, startMinutes: startMinutes, span: span) {
+                guard let fire = cal.date(
+                    bySettingHour: minutes / 60,
+                    minute: minutes % 60,
+                    second: 0,
+                    of: day
+                ), fire > anchor else { continue }
+                dates.append(fire)
+            }
         }
-        guard span > 0 else {
-            return Array(repeating: normalizedComponents(fromMinutes: startMinutes), count: count)
-        }
-
-        let step = Double(span) / Double(count - 1)
-        return (0..<count).map { i in
-            let offset = Int((Double(i) * step).rounded())
-            return normalizedComponents(fromMinutes: startMinutes + offset)
-        }
+        return dates.sorted()
     }
 
-    private static func normalizedComponents(fromMinutes total: Int) -> DateComponents {
-        let clamped = max(0, min(total, 24 * 60 - 1))
-        return DateComponents(hour: clamped / 60, minute: clamped % 60)
+    /// Pick `count` minute-of-day values within `[startMinutes, startMinutes +
+    /// span]`. The window is split into `count` equal buckets and one random
+    /// minute is drawn from each, so the times stay spread across the window
+    /// (never clustered) while still varying run to run. Returned sorted.
+    /// Exposed as `internal` for unit testing.
+    static func randomFireMinutes(count: Int, startMinutes: Int, span: Int) -> [Int] {
+        guard count > 0 else { return [] }
+        guard span > 0 else { return Array(repeating: startMinutes, count: count) }
+        let bucket = Double(span) / Double(count)
+        return (0..<count).map { i in
+            let lo = Int((Double(i) * bucket).rounded(.down))
+            let hi = Int((Double(i + 1) * bucket).rounded(.down))
+            let offset = hi > lo ? Int.random(in: lo..<hi) : lo
+            return startMinutes + min(offset, span)
+        }
     }
 
     // MARK: - Walrus calls

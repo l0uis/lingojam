@@ -12,10 +12,11 @@ enum OnboardingDefaultsKey {
     static let notificationEndMinute = "wordrus.onboarding.notificationEndMinute"
     static let notificationDaysOfWeek = "wordrus.onboarding.notificationDaysOfWeek"
     static let topics = "wordrus.onboarding.topics"
-    static let learningReason = "wordrus.onboarding.learningReason"
     static let vocabularyLevel = "wordrus.onboarding.vocabularyLevel"
     static let cefrLevel = "wordrus.onboarding.cefrLevel"
     static let cefrPassesAtCurrentLevel = "wordrus.onboarding.cefrPassesAtCurrentLevel"
+    /// Whether the rotating-word Live Activity is switched on (Settings toggle).
+    static let liveActivityEnabled = "wordrus.liveActivity.enabled"
     static let lastWalterCallDate = "wordrus.walter.lastCallDate"
     static let scheduledWalterCallDates = "wordrus.walter.scheduledCallDates"
     static let targetLanguage = "wordrus.onboarding.targetLanguage"
@@ -144,13 +145,19 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
 /// a `Deck`. Keep in sync with the `decks` array in the `*_top1000.json` seeds.
 enum LearningTopic: String, CaseIterable, Identifiable {
     case traveling
+    case weatherAndNature = "weather-and-nature"
+    case animals
     case foodAndDrink = "food-and-drink"
     case shopping
     case health
-    case workAndMoney = "work-and-money"
+    case work
+    case money
     case feelings
     case home
     case family
+    case outAndAbout = "out-and-about"
+    case studying
+    case phoneAndInternet = "phone-and-internet"
 
     var id: String { rawValue }
 
@@ -160,66 +167,38 @@ enum LearningTopic: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .traveling: "Traveling"
+        case .weatherAndNature: "Weather & Nature"
+        case .animals: "Animals"
         case .foodAndDrink: "Food & Drink"
         case .shopping: "Shopping"
         case .health: "Health & Body"
-        case .workAndMoney: "Work & Money"
+        case .work: "Work"
+        case .money: "Money & Bills"
         case .feelings: "Feelings"
         case .home: "Home & Daily Life"
         case .family: "Family & People"
+        case .outAndAbout: "Out & About"
+        case .studying: "Studying"
+        case .phoneAndInternet: "Phone & Internet"
         }
     }
 
     var systemImage: String {
         switch self {
         case .traveling: "airplane"
+        case .weatherAndNature: "cloud.sun.fill"
+        case .animals: "pawprint.fill"
         case .foodAndDrink: "fork.knife"
-        case .shopping: "cart.fill"
+        case .shopping: "bag.fill"
         case .health: "heart.fill"
-        case .workAndMoney: "briefcase.fill"
-        case .feelings: "face.smiling.fill"
+        case .work: "briefcase.fill"
+        case .money: "creditcard.fill"
+        case .feelings: "face.smiling"
         case .home: "house.fill"
         case .family: "person.2.fill"
-        }
-    }
-}
-
-enum LearningReason: String, CaseIterable, Identifiable {
-    case travel
-    case work
-    case family
-    case study
-    case curiosity
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .travel: "Travel"
-        case .work: "Career & work"
-        case .family: "Connect with family"
-        case .study: "School or study"
-        case .curiosity: "Personal interest"
-        }
-    }
-
-    var subtitle: String {
-        switch self {
-        case .travel: "Get by — and beyond — on trips."
-        case .work: "Communicate confidently at work."
-        case .family: "Chat with friends and relatives."
-        case .study: "Pass classes, exams, or research."
-        case .curiosity: "Just love languages."
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .travel: "airplane"
-        case .work: "briefcase.fill"
-        case .family: "person.2.fill"
-        case .study: "graduationcap.fill"
-        case .curiosity: "sparkles"
+        case .outAndAbout: "figure.walk"
+        case .studying: "book.fill"
+        case .phoneAndInternet: "iphone"
         }
     }
 }
@@ -275,7 +254,6 @@ final class OnboardingState {
     var notificationEnd: DateComponents = DateComponents(hour: 20, minute: 0)
     var notificationsAuthorized: Bool = false
     var topics: Set<LearningTopic> = []
-    var learningReason: LearningReason?
     var cefrLevel: CEFRLevel?
     var knownWordIDs: Set<String> = []
     var targetLanguage: TargetLanguage?
@@ -299,7 +277,6 @@ enum OnboardingStore {
             OnboardingDefaultsKey.notificationEndHour,
             OnboardingDefaultsKey.notificationEndMinute,
             OnboardingDefaultsKey.topics,
-            OnboardingDefaultsKey.learningReason,
             OnboardingDefaultsKey.vocabularyLevel,
             OnboardingDefaultsKey.cefrLevel,
             OnboardingDefaultsKey.cefrPassesAtCurrentLevel,
@@ -323,9 +300,6 @@ enum OnboardingStore {
         defaults.set(state.notificationEnd.hour ?? 20, forKey: OnboardingDefaultsKey.notificationEndHour)
         defaults.set(state.notificationEnd.minute ?? 0, forKey: OnboardingDefaultsKey.notificationEndMinute)
         defaults.set(state.topics.map(\.rawValue), forKey: OnboardingDefaultsKey.topics)
-        if let reason = state.learningReason {
-            defaults.set(reason.rawValue, forKey: OnboardingDefaultsKey.learningReason)
-        }
         if let level = state.cefrLevel {
             defaults.set(level.rawValue, forKey: OnboardingDefaultsKey.cefrLevel)
         }

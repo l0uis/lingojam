@@ -85,16 +85,17 @@ final class WordEnrichmentService {
             )
             let lemma = Self.clean(entry.lemma)
             guard !lemma.isEmpty else { return nil }
-            // Trust but verify: even with Claude, blank an example that
-            // somehow doesn't contain the word rather than show a wrong one.
-            let sentence = Self.clean(entry.exampleSentence)
-            let exampleOK = !sentence.isEmpty && Self.sentence(sentence, contains: lemma)
+            // Trust Claude's example as-is. The on-device path keeps a
+            // containment check (that model hallucinates), but applying it here
+            // false-negatives on legitimate sentences — e.g. German separable
+            // verbs ("ankommen" → "Der Zug kommt um acht an") or strong verbs
+            // ("gehen" → "ging") — and wrongly blanks a good example.
             return Enrichment(
                 lemma: lemma,
                 partOfSpeech: Self.clean(entry.partOfSpeech).lowercased(),
                 definition: Self.clean(entry.definition),
-                exampleSentence: exampleOK ? sentence : "",
-                exampleTranslation: exampleOK ? Self.clean(entry.exampleTranslation) : ""
+                exampleSentence: Self.clean(entry.exampleSentence),
+                exampleTranslation: Self.clean(entry.exampleTranslation)
             )
         } catch {
             #if DEBUG

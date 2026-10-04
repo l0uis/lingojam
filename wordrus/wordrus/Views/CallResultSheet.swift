@@ -30,12 +30,17 @@ struct CallResultSheet: View {
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 16)
 
-            HStack(spacing: 6) {
-                Image(systemName: evaluation.passed ? "checkmark.circle.fill" : "circle.dashed")
-                    .foregroundStyle(evaluation.passed ? .green : .secondary)
-                Text("\(evaluation.elicitedWordIDs.count) of \(targetWordCount) words used")
-                    .font(.sniglet(.subheadline, weight: .medium))
-                    .foregroundStyle(.secondary)
+            // Nothing to report when the call had no target words — a
+            // learner with no reviewed vocabulary yet shouldn't be shown
+            // "0 of 0 words used".
+            if targetWordCount > 0 {
+                HStack(spacing: 6) {
+                    Image(systemName: evaluation.passed ? "checkmark.circle.fill" : "circle.dashed")
+                        .foregroundStyle(evaluation.passed ? .green : .secondary)
+                    Text("\(evaluation.elicitedWordIDs.count) of \(targetWordCount) words used")
+                        .font(.sniglet(.subheadline, weight: .medium))
+                        .foregroundStyle(.secondary)
+                }
             }
 
             if isEligibleForLevelUp, let next = OnboardingStore.cefrLevel.next {

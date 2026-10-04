@@ -33,6 +33,26 @@ struct DailyWordProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DailyWordEntry>) -> Void) {
         let now = Date()
+
+        // Preferred path: rotate through today's whole stack so the widget
+        // changes throughout the day on its own, even while the app is closed.
+        if let set = DailyWordSet.load(), !set.words.isEmpty {
+            let words = set.words
+            // Spread the set across the waking day, clamped so a tiny set still
+            // changes a few times and a large one doesn't flip too fast. Shared
+            // with the Live Activity so both agree on the rotation cadence.
+            let interval = DailyWordRotation.interval(count: words.count)
+            // Cover a full 24h of entries, cycling the list, then ask again.
+            let entryCount = min(64, Int((24 * 3600) / interval) + 1)
+            let entries = (0..<entryCount).map { i -> DailyWordEntry in
+                let date = now.addingTimeInterval(Double(i) * interval)
+                return DailyWordEntry(date: date, snapshot: words[i % words.count])
+            }
+            completion(Timeline(entries: entries, policy: .atEnd))
+            return
+        }
+
+        // Fallback: single stored snapshot (e.g. before the first set is built).
         let entry = DailyWordEntry(date: now, snapshot: DailyWordSnapshot.load())
         let nextRefresh = Calendar.current.date(byAdding: .hour, value: 6, to: now) ?? now.addingTimeInterval(6 * 3600)
         completion(Timeline(entries: [entry], policy: .after(nextRefresh)))
@@ -55,7 +75,16 @@ struct DailyWordWidget: Widget {
 
 struct DailyWordWidgetView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.colorScheme) private var colorScheme
     let entry: DailyWordEntry
+
+    /// The widget sits on the system's tertiary fill, which goes dark in dark
+    /// mode — the ink navy is unreadable against it. `DS.Color.ink` stays
+    /// right in the app itself, which always renders on cream paper, so this
+    /// override belongs here rather than in the shared token.
+    private var titleColor: Color {
+        colorScheme == .dark ? .white : DS.Color.ink
+    }
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -101,7 +130,7 @@ struct DailyWordWidgetView: View {
         VStack(alignment: .leading, spacing: 0) {
             Text(snapshot.lemma.capitalizedFirst)
                 .font(.gochiHand(size: 28, relativeTo: .title2))
-                .foregroundStyle(Color.whiteboardInk)
+                .foregroundStyle(titleColor)
                 .minimumScaleFactor(0.6)
                 .lineLimit(2)
             Text(snapshot.definition)
@@ -118,7 +147,7 @@ struct DailyWordWidgetView: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(snapshot.lemma.capitalizedFirst)
                     .font(.gochiHand(size: 34, relativeTo: .title))
-                    .foregroundStyle(Color.whiteboardInk)
+                    .foregroundStyle(titleColor)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
                 Text(snapshot.definition)

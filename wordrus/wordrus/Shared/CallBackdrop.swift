@@ -1,8 +1,11 @@
 import SwiftUI
 
-/// Full-bleed background used by the incoming and outgoing call screens.
-/// Deep navy gradient + ambient rising bubbles + a thin material veil
-/// for the frosted-glass quality. Reused so both screens look identical.
+/// Full-bleed background used by the incoming and outgoing call screens
+/// and the call itself. Deep navy gradient + a thin material veil for the
+/// frosted-glass quality. Reused so all three look identical.
+///
+/// Deliberately plain: the ambient rising bubbles this used to carry
+/// competed with the speech bubbles in front of it.
 ///
 /// The backdrop is rendered as an overlay (not a sheet), so it owns its
 /// own ultra-thin-material layer to blur whatever app UI sits behind it.
@@ -41,18 +44,6 @@ struct CallBackdrop: View {
             )
             .ignoresSafeArea()
             .blendMode(.multiply)
-
-            // Ambient rising bubbles — bigger and slower than the chat-
-            // bubble version so they read as atmosphere rather than busy.
-            BubbleParticleField(
-                count: 22,
-                tint: .white,
-                radiusScale: 2.2,
-                speedScale: 0.55
-            )
-            .opacity(0.45)
-            .blur(radius: 0.6)
-            .ignoresSafeArea()
         }
     }
 }
