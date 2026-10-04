@@ -170,7 +170,7 @@ struct VoiceCallView: View {
             if speech.isRecording { "Listening to you" }
             else if !director.isMicEnabled { "Microphone off" }
             else { "Your turn" }
-        case .checking: "Checking your \((OnboardingStore.targetLanguage ?? .spanish).title)…"
+        case .checking: "Checking your \((OnboardingStore.targetLanguage ?? .spanish).titleInSentence)…"
         case .ended: "Call ended"
         }
     }

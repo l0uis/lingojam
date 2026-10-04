@@ -522,6 +522,9 @@ private struct OnboardingHeadline: View {
                 .font(.onboardingTitle)
                 .foregroundStyle(Color.whiteboardInk)
                 .multilineTextAlignment(.center)
+                // Translations run longer than the English; shrink rather
+                // than truncate inside the fixed-height sheet.
+                .minimumScaleFactor(0.7)
             if let subtitle {
                 Text(subtitle)
                     .font(.sniglet(.title3))
@@ -869,9 +872,12 @@ private struct LanguageRow: View {
                     Text(language.title)
                         .font(.sniglet(.headline))
                         .foregroundStyle(isSelected ? Color.white : DS.Color.ink)
-                    Text(language.subtitle)
-                        .font(.sniglet(.caption))
-                        .foregroundStyle(isSelected ? Color.white.opacity(0.85) : .secondary)
+                    // In that language's own UI the endonym repeats the title.
+                    if language.subtitle != language.title {
+                        Text(language.subtitle)
+                            .font(.sniglet(.caption))
+                            .foregroundStyle(isSelected ? Color.white.opacity(0.85) : .secondary)
+                    }
                 }
                 Spacer()
                 if isSelected {
@@ -1346,7 +1352,7 @@ private struct VocabularyLevelStep: View {
 
     var body: some View {
         OnboardingScaffold(
-            line: "Where are you with \((targetLanguage ?? .spanish).title) — A1 is brand new, C2 is near-native.",
+            line: "Where are you with \((targetLanguage ?? .spanish).titleInSentence) — A1 is brand new, C2 is near-native.",
             primaryEnabled: selection != nil,
             onPrimary: onContinue
         ) {
@@ -1608,7 +1614,7 @@ private struct FinalPitchStep: View {
             OnboardingBottomSheet {
                 OnboardingHeadline(
                     title: "You're all set",
-                    subtitle: "Let's start learning \(targetLanguage.title) at \(level.title),\n\(dailySetSize) new words a day."
+                    subtitle: "Let's start learning \(targetLanguage.titleInSentence) at \(level.title),\n\(dailySetSize) new words a day."
                 )
                 Button("Start learning", action: onContinue)
                     .buttonStyle(.primary)

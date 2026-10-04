@@ -14,7 +14,7 @@ into them (only the IDE does), so this mirrors that step from the compiler's
     # 3. Merge translations back (same JSON shape, values filled in):
     python3 tools/string_catalog.py import --lang es /tmp/es.json
 
-Export/import JSON: {catalog_path: {key: {"comment": str, "plural": bool,
+Export/import JSON: {catalog_path: {key: {"source": English text, "comment": str, "plural": bool,
 "value": str | {"one": str, "other": str, ...}}}}. `plural` keys (those with
 an integer format specifier) take a dict of CLDR categories; at minimum
 "one" and "other". `en` plural variations are generated from the import too,
@@ -35,6 +35,8 @@ CATALOGS = {
     ROOT / "wordrus" / "wordrus" / "Localizable.xcstrings": "wordrus.build",
     ROOT / "wordrus" / "WordrusWidget" / "Localizable.xcstrings": "WordrusWidgetExtension.build",
 }
+# Hand-maintained catalogs (no compiler extraction): exported/imported only.
+MANUAL_CATALOGS = [ROOT / "wordrus" / "wordrus" / "InfoPlist.xcstrings"]
 INT_SPECIFIER = re.compile(r"%(?:\d+\$)?(?:lld|ld|d|lu|llu|u)")
 
 
@@ -127,7 +129,7 @@ def has_translation(entry: dict, lang: str) -> bool:
 
 def cmd_export(args: argparse.Namespace) -> None:
     out: dict = {}
-    for catalog_path in CATALOGS:
+    for catalog_path in [*CATALOGS, *MANUAL_CATALOGS]:
         if not catalog_path.exists():
             continue
         strings = load(catalog_path).get("strings", {})
@@ -139,7 +141,9 @@ def cmd_export(args: argparse.Namespace) -> None:
                 continue  # the key is the English text
             if has_translation(entry, args.lang):
                 continue
-            pending[key] = {"comment": entry.get("comment", ""), "plural": is_plural(key), "value": None}
+            en = entry.get("localizations", {}).get("en", {}).get("stringUnit", {}).get("value")
+            pending[key] = {"source": en or key, "comment": entry.get("comment", ""),
+                            "plural": is_plural(key), "value": None}
         if pending:
             out[str(catalog_path.relative_to(ROOT))] = pending
     json.dump(out, sys.stdout, ensure_ascii=False, indent=2)
@@ -164,6 +168,11 @@ def cmd_import(args: argparse.Namespace) -> None:
             if key not in strings or value in (None, "", {}):
                 continue
             expected = specifiers(key)
+            if isinstance(value, dict) and len(expected) > 1:
+                # String-level plural variations only work with a single
+                # argument (multi-argument keys need per-argument
+                # substitutions); fall back to the general form.
+                value = value.get("other") or next(iter(value.values()))
             forms = value if isinstance(value, dict) else {"other": value}
             bad = [f for f, text in forms.items() if specifiers(text) != expected
                    and not (f == "one" and specifiers(text) == [s for s in expected if not INT_SPECIFIER.fullmatch(s)])]

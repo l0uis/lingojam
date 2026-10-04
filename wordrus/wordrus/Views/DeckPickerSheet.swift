@@ -87,7 +87,7 @@ struct DeckPickerSheet: View {
                 }
             }
             .alert(
-                "Switch to \(pendingLanguage?.title ?? "")?",
+                "Switch to \(pendingLanguage?.titleInSentence ?? "")?",
                 isPresented: Binding(
                     get: { pendingLanguage != nil },
                     set: { if !$0 { pendingLanguage = nil } }
@@ -101,7 +101,7 @@ struct DeckPickerSheet: View {
                 }
                 Button("Cancel", role: .cancel) { pendingLanguage = nil }
             } message: { language in
-                Text("Your current words and progress are kept — they come back if you switch back to them. You'll now see \(language.title).")
+                Text("Your current words and progress are kept — they come back if you switch back to them. You'll now see \(language.titleInSentence).")
             }
             .sheet(isPresented: $isShowingPaywall, onDismiss: { pendingChange = nil }) {
                 // Once subscribed, replay the change the user attempted.

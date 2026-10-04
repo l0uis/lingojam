@@ -249,7 +249,7 @@ struct SettingsView: View {
             PaywallView(source: .settings)
         }
         .alert(
-            "Switch to \(pendingNativeLanguage.flatMap { TargetLanguage.offered(to: $0).first }?.title ?? "")?",
+            "Switch to \(pendingNativeLanguage.flatMap { TargetLanguage.offered(to: $0).first }?.titleInSentence ?? "")?",
             isPresented: Binding(
                 get: { pendingNativeLanguage != nil },
                 set: { if !$0 { pendingNativeLanguage = nil } }
@@ -259,7 +259,7 @@ struct SettingsView: View {
             Button("Switch") { applyNativeLanguage(native) }
             Button("Cancel", role: .cancel) { pendingNativeLanguage = nil }
         } message: { native in
-            let target = TargetLanguage.offered(to: native).first?.title ?? ""
+            let target = TargetLanguage.offered(to: native).first?.titleInSentence ?? ""
             Text("\(native.endonym) speakers learn \(target) in Wordrus. Your current words and progress are kept and come back if you switch back.")
         }
         .alert("Restore Purchases",

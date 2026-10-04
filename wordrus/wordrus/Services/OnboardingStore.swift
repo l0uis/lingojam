@@ -143,6 +143,14 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         }
     }
 
+    /// `title` for use mid-sentence ("practise your español" → "tu
+    /// español"): Romance languages lowercase language names; German and
+    /// English capitalise them.
+    var titleInSentence: String {
+        let ui = Bundle.main.preferredLocalizations.first ?? "en"
+        return ["es", "fr", "it"].contains(ui) ? title.lowercased() : title
+    }
+
     /// English name for LLM prompts and proxy payloads ("learn Spanish").
     /// Never shown to the user — UI copy uses the localized `title`.
     var englishName: String {
