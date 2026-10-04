@@ -4,6 +4,7 @@ struct SettingsView: View {
     let onRestartOnboarding: () -> Void
 
     @Environment(\.openURL) private var openURL
+    @Environment(\.modelContext) private var context
 
     @AppStorage(OnboardingDefaultsKey.displayName) private var displayName: String = ""
     @AppStorage(OnboardingDefaultsKey.notificationsEnabled) private var notificationsEnabled: Bool = false
@@ -18,6 +19,10 @@ struct SettingsView: View {
     @State private var isShowingPaywall: Bool = false
     @State private var entitlements = Entitlements.shared
     @State private var restoreMessage: String?
+    @State private var nativeLanguage = NativeLanguage.current
+    /// A native-language change that rules out the current target, held
+    /// until the learner confirms the target switch it implies.
+    @State private var pendingNativeLanguage: NativeLanguage?
 
     var body: some View {
         Form {
@@ -73,6 +78,21 @@ struct SettingsView: View {
             }
 
             Section {
+                // Hidden until a second native language has something to learn
+                // (i.e. until the English seed ships).
+                if NativeLanguage.selectable.count > 1 {
+                    Picker(selection: nativeLanguageBinding) {
+                        ForEach(NativeLanguage.selectable) { language in
+                            Text(verbatim: language.endonym).tag(language)
+                        }
+                    } label: {
+                        Text("I speak")
+                            .font(.sniglet(.body))
+                            .foregroundStyle(.primary)
+                    }
+                    .font(.sniglet(.body))
+                }
+
                 Picker(selection: $cefrLevelRaw) {
                     ForEach(CEFRLevel.allCases) { level in
                         Text("\(level.title) · \(level.subtitle)")
@@ -228,6 +248,20 @@ struct SettingsView: View {
         .sheet(isPresented: $isShowingPaywall) {
             PaywallView(source: .settings)
         }
+        .alert(
+            "Switch to \(pendingNativeLanguage.flatMap { TargetLanguage.offered(to: $0).first }?.title ?? "")?",
+            isPresented: Binding(
+                get: { pendingNativeLanguage != nil },
+                set: { if !$0 { pendingNativeLanguage = nil } }
+            ),
+            presenting: pendingNativeLanguage
+        ) { native in
+            Button("Switch") { applyNativeLanguage(native) }
+            Button("Cancel", role: .cancel) { pendingNativeLanguage = nil }
+        } message: { native in
+            let target = TargetLanguage.offered(to: native).first?.title ?? ""
+            Text("\(native.endonym) speakers learn \(target) in Wordrus. Your current words and progress are kept and come back if you switch back.")
+        }
         .alert("Restore Purchases",
                isPresented: Binding(get: { restoreMessage != nil },
                                     set: { if !$0 { restoreMessage = nil } }),
@@ -251,6 +285,40 @@ struct SettingsView: View {
 
     private func sectionHeader(_ title: String) -> some View {
         Text(title).sectionHeaderStyle()
+    }
+
+    /// Changing native language only changes glosses while the current target
+    /// is still one that language learns; otherwise it implies a target switch,
+    /// which is confirmed first.
+    private var nativeLanguageBinding: Binding<NativeLanguage> {
+        Binding(
+            get: { nativeLanguage },
+            set: { newValue in
+                guard newValue != nativeLanguage else { return }
+                let current = OnboardingStore.targetLanguage ?? .spanish
+                if TargetLanguage.offered(to: newValue).contains(current) {
+                    applyNativeLanguage(newValue)
+                } else {
+                    pendingNativeLanguage = newValue
+                }
+            }
+        )
+    }
+
+    /// Not paywalled like the deck picker's language switch: correcting who
+    /// you are isn't choosing extra content, and the target that follows is
+    /// forced by the pairing rule rather than picked.
+    private func applyNativeLanguage(_ native: NativeLanguage) {
+        NativeLanguage.current = native
+        nativeLanguage = native
+        pendingNativeLanguage = nil
+        let current = OnboardingStore.targetLanguage ?? .spanish
+        let offered = TargetLanguage.offered(to: native)
+        if !offered.contains(current), let target = offered.first {
+            SeedDataLoader.switchLanguage(to: target, context: context)
+        } else {
+            DailyWordService.refresh(context: context)
+        }
     }
 
     #if DEBUG
