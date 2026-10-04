@@ -2,8 +2,8 @@ import SwiftUI
 import SwiftData
 
 private enum StreakPalette {
-    static let coralLight = Color(red: 0xFB / 255.0, green: 0x78 / 255.0, blue: 0xA8 / 255.0)
-    static let coralDeep = Color(red: 0xFE / 255.0, green: 0x47 / 255.0, blue: 0x61 / 255.0)
+    static let coralLight = DS.Color.coralLight
+    static let coralDeep = DS.Color.coralDeep
 }
 
 struct StreakBadge: View {

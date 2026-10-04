@@ -10,7 +10,10 @@ private struct UnreadDot: ViewModifier {
         content.overlay(alignment: .leading) {
             if isUnread {
                 Circle()
-                    .fill(Color.red)
+                    .fill(LinearGradient(
+                        colors: [DS.Color.coralLight, DS.Color.coralDeep],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    ))
                     .frame(width: 10, height: 10)
                     .offset(x: -16)
                     .accessibilityHidden(true)
@@ -52,7 +55,8 @@ struct StoryRow: View {
 }
 
 /// What free users see instead of stories: Dr Tusk's stories are Pro.
-/// Unread (with a dot) until it's been tapped once.
+/// Keeps its unread dot — opening the paywall doesn't count as reading; it
+/// gives way to real story rows once the learner can play them.
 struct StoryLockedRow: View {
     var isUnread: Bool = false
 

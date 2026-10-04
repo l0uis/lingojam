@@ -31,6 +31,10 @@ enum DS {
         /// Near-black charcoal for secondary descriptive copy (sublines under
         /// titles) that should read as high-contrast body text, not muted gray.
         static let charcoal = SwiftUI.Color(red: 0.13, green: 0.13, blue: 0.15)
+        /// The coral of the streak icon: pink at the tip, deep coral at the
+        /// base. Also the unread-story dot.
+        static let coralLight = SwiftUI.Color(red: 0xFB / 255.0, green: 0x78 / 255.0, blue: 0xA8 / 255.0)
+        static let coralDeep = SwiftUI.Color(red: 0xFE / 255.0, green: 0x47 / 255.0, blue: 0x61 / 255.0)
     }
 
     enum Radius {

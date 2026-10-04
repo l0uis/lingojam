@@ -13,8 +13,6 @@ struct PhoneView: View {
     @Query(sort: \DailyStory.createdAt, order: .reverse) private var allStories: [DailyStory]
     @State private var openedStory: StoryDestination?
     @State private var isShowingStoryPaywall = false
-    /// The locked stories row shows as unread until a free user first taps it.
-    @AppStorage("wordrus.story.lockedRowSeen") private var hasSeenLockedStories = false
     @AppStorage(OnboardingDefaultsKey.hasCompleted) private var hasCompletedOnboarding = false
 
     /// Calls practised in the currently selected language. Mirrors how the
@@ -63,10 +61,9 @@ struct PhoneView: View {
                 Section {
                     if showsLockedStories {
                         Button {
-                            hasSeenLockedStories = true
                             isShowingStoryPaywall = true
                         } label: {
-                            StoryLockedRow(isUnread: !hasSeenLockedStories)
+                            StoryLockedRow(isUnread: true)
                         }
                         .buttonStyle(.plain)
                         .listRowSeparator(.hidden)
