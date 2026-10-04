@@ -55,31 +55,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus hört zu, während du mit Walter sprichst, damit deine Antworten im Chat transkribiert werden können."
+            "value" : "Wordrus hört zu, während du mit Dr Tusk sprichst, damit deine Antworten im Chat transkribiert werden können."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus listens while you speak to Walter so it can transcribe your replies in chat."
+            "value" : "Wordrus listens while you speak to Dr Tusk so it can transcribe your replies in chat."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus te escucha mientras hablas con Walter para transcribir tus respuestas en el chat."
+            "value" : "Wordrus te escucha mientras hablas con Dr Tusk para transcribir tus respuestas en el chat."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus écoute quand tu parles à Walter afin de transcrire tes réponses dans le chat."
+            "value" : "Wordrus écoute quand tu parles à Dr Tusk afin de transcrire tes réponses dans le chat."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus ti ascolta mentre parli con Walter per trascrivere le tue risposte nella chat."
+            "value" : "Wordrus ti ascolta mentre parli con Dr Tusk per trascrivere le tue risposte nella chat."
           }
         }
       }
@@ -90,31 +90,31 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus wandelt deine Sprache in Text um, damit du mit Walter sprechen üben kannst, statt zu tippen."
+            "value" : "Wordrus wandelt deine Sprache in Text um, damit du mit Dr Tusk sprechen üben kannst, statt zu tippen."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus turns your speech into text so you can practice talking with Walter instead of typing."
+            "value" : "Wordrus turns your speech into text so you can practice talking with Dr Tusk instead of typing."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus convierte tu voz en texto para que puedas practicar hablando con Walter en vez de escribir."
+            "value" : "Wordrus convierte tu voz en texto para que puedas practicar hablando con Dr Tusk en vez de escribir."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus transforme ta voix en texte pour que tu puisses t'entraîner à parler avec Walter au lieu d'écrire."
+            "value" : "Wordrus transforme ta voix en texte pour que tu puisses t'entraîner à parler avec Dr Tusk au lieu d'écrire."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wordrus trasforma la tua voce in testo così puoi esercitarti a parlare con Walter invece di scrivere."
+            "value" : "Wordrus trasforma la tua voce in testo così puoi esercitarti a parlare con Dr Tusk invece di scrivere."
           }
         }
       }

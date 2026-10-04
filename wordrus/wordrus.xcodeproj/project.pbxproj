@@ -641,8 +641,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = wordrus/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wordrus;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Wordrus listens while you speak to Walter so it can transcribe your replies in chat.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Wordrus turns your speech into text so you can practice talking with Walter instead of typing.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Wordrus listens while you speak to Dr Tusk so it can transcribe your replies in chat.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Wordrus turns your speech into text so you can practice talking with Dr Tusk instead of typing.";
 				INFOPLIST_KEY_UIAppFonts = "ShantellSans-VariableFont_BNCE,INFM,SPAC,wght.ttf";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -693,8 +693,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = wordrus/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wordrus;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Wordrus listens while you speak to Walter so it can transcribe your replies in chat.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Wordrus turns your speech into text so you can practice talking with Walter instead of typing.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Wordrus listens while you speak to Dr Tusk so it can transcribe your replies in chat.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Wordrus turns your speech into text so you can practice talking with Dr Tusk instead of typing.";
 				INFOPLIST_KEY_UIAppFonts = "ShantellSans-VariableFont_BNCE,INFM,SPAC,wght.ttf";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

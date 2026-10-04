@@ -1025,7 +1025,7 @@ struct JamView: View {
                         .multilineTextAlignment(.center)
                 }
 
-                Text("\(count) words · ~\(minutes) min · ends with a call from Walter")
+                Text("\(count) words · ~\(minutes) min · ends with a call from Dr Tusk")
                     .font(.sniglet(.subheadline, weight: .medium))
                     .foregroundStyle(Color.whiteboardInk)
                     .multilineTextAlignment(.center)
