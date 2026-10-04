@@ -601,6 +601,10 @@ def load_cache(cfg: LangConfig) -> dict[str, dict[str, Any]]:
         # Cache by lowercased lemma so resume-dedup works for DE nouns too.
         cache[entry["lemma"].lower()] = entry
     for skipped in data.get("skipped", []):
+        # Artefacts of malformed responses, not decisions about the word —
+        # drop them so the input is retried.
+        if skipped["reason"] == "non-object entry":
+            continue
         cache[skipped["input"].lower()] = {"_skip": skipped["reason"], "input": skipped["input"]}
     return cache
 
@@ -653,7 +657,15 @@ def call_claude(client: Any, model: str, lemmas: list[str], cfg: LangConfig) -> 
 
     for block in message.content:
         if block.type == "tool_use" and block.name == "save_entries":
-            return block.input.get("entries", []), message.usage
+            entries = block.input.get("entries", [])
+            # The model occasionally serialises the array as a JSON string;
+            # zipping a string against the batch would pair each input with
+            # one character and cache every input as a bogus skip.
+            if isinstance(entries, str):
+                entries = json.loads(entries)
+            if not isinstance(entries, list):
+                raise RuntimeError(f"entries is {type(entries).__name__}, not a list")
+            return entries, message.usage
     raise RuntimeError(f"No tool_use block in response: stop_reason={message.stop_reason}")
 
 
@@ -786,7 +798,9 @@ def main() -> None:
         print("Install it with: pip install anthropic", file=sys.stderr)
         sys.exit(1)
 
-    client = anthropic.Anthropic()
+    # The SDK backs off on 429/529 itself; two retries isn't enough with
+    # several workers each generating ~8K tokens.
+    client = anthropic.Anthropic(max_retries=8)
 
     batches = [pending[i: i + args.batch_size]
                for i in range(0, len(pending), args.batch_size)]
@@ -828,6 +842,12 @@ def main() -> None:
                 skip += 1
         return ok, skip
 
+    def is_fatal(err: Exception) -> bool:
+        """Errors every later batch would hit too: bad key, no access, no credit."""
+        if isinstance(err, (anthropic.AuthenticationError, anthropic.PermissionDeniedError)):
+            return True
+        return isinstance(err, anthropic.BadRequestError) and "credit balance" in str(err).lower()
+
     def process_batch(batch_idx: int, batch: list[str]) -> tuple[int, list[str], list[dict[str, Any]] | None, Any, Exception | None]:
         try:
             entries, usage = call_claude(client, args.model, batch, cfg)
@@ -841,11 +861,11 @@ def main() -> None:
     if batches:
         print(f"\nWarming cache with batch 1/{len(batches)}...")
         _, _, entries, usage, err = process_batch(0, batches[0])
-        if isinstance(err, (anthropic.AuthenticationError, anthropic.PermissionDeniedError)):
+        if err and is_fatal(err):
             # Every other batch would fail the same way — stop instead of
             # firing the remaining hundreds of requests.
-            print(f"\nERROR: the API rejected the key ({err.status_code}). "
-                  "Check ANTHROPIC_API_KEY and re-run; nothing was cached.", file=sys.stderr)
+            print(f"\nERROR: {err}\nCheck the API key / billing and re-run; "
+                  "nothing was cached for this batch.", file=sys.stderr)
             sys.exit(1)
         if err:
             print(f"  WARN: first batch failed: {err}", file=sys.stderr)
@@ -870,6 +890,12 @@ def main() -> None:
             ]
             for fut in concurrent.futures.as_completed(futures):
                 batch_idx, batch, entries, usage, err = fut.result()
+                if err and is_fatal(err):
+                    print(f"\nERROR: stopping — {err}", file=sys.stderr)
+                    for pending_fut in futures:
+                        pending_fut.cancel()
+                    n_err += len(batch)
+                    break
                 if err:
                     print(f"  batch {batch_idx + 1}/{len(batches)}: ERROR {err}", file=sys.stderr)
                     n_err += len(batch)
