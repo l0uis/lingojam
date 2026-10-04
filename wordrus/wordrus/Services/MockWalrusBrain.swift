@@ -172,6 +172,7 @@ private extension TargetLanguage {
         case .french: "et"
         case .italian: "e"
         case .german: "und"
+        case .english: "and"
         }
     }
 }
@@ -234,6 +235,7 @@ enum LemmaMatcher {
         case .french: endings = ["er", "ir", "re", "oir"]
         case .italian: endings = ["are", "ere", "ire", "rsi"]
         case .german: endings = ["en", "ern", "eln"]
+        case .english: return englishVerbStems(from: lemma)
         }
         for ending in endings where lemma.hasSuffix(ending) {
             let stem = String(lemma.dropLast(ending.count))
@@ -272,9 +274,113 @@ enum LemmaMatcher {
             out.append(lemma + "en")
             out.append(lemma + "er")
             out.append(lemma + "s")
+        case .english:
+            // -s, -es after sibilants, consonant + y → -ies; irregular
+            // plurals (mice, children) are left to the LLM evaluator.
+            if lemma.hasSuffix("y"), let before = lemma.dropLast().last, !"aeiou".contains(before) {
+                out.append(String(lemma.dropLast()) + "ies")
+            } else if ["s", "x", "z", "ch", "sh"].contains(where: lemma.hasSuffix) {
+                out.append(lemma + "es")
+            } else {
+                out.append(lemma + "s")
+            }
         }
         return out
     }
+
+    /// English verbs have no infinitive ending to strip, so the stems are
+    /// the forms a prefix match can't reach on its own: e-drop ("make" →
+    /// "mak" covers making), y → i ("try" → "tri" covers tried/tries) and
+    /// the common irregular past forms. "go" already prefix-matches goes
+    /// and going via the lemma itself.
+    private static func englishVerbStems(from lemma: String) -> [String] {
+        var stems = [lemma]
+        if lemma.hasSuffix("e"), lemma.count >= 3 {
+            stems.append(String(lemma.dropLast()))
+        }
+        if lemma.hasSuffix("y"), let before = lemma.dropLast().last, !"aeiou".contains(before) {
+            stems.append(String(lemma.dropLast()) + "i")
+        }
+        stems.append(contentsOf: englishIrregularForms[lemma] ?? [])
+        return stems.filter { $0.count >= 2 }
+    }
+
+    private static let englishIrregularForms: [String: [String]] = [
+        "be": ["am", "is", "are", "was", "were", "been"],
+        "have": ["has", "had"],
+        "do": ["does", "did", "done"],
+        "go": ["went", "gone"],
+        "say": ["said"],
+        "get": ["got", "gotten"],
+        "make": ["made"],
+        "know": ["knew", "known"],
+        "think": ["thought"],
+        "take": ["took", "taken"],
+        "see": ["saw", "seen"],
+        "come": ["came"],
+        "give": ["gave", "given"],
+        "find": ["found"],
+        "tell": ["told"],
+        "feel": ["felt"],
+        "leave": ["left"],
+        "bring": ["brought"],
+        "buy": ["bought"],
+        "begin": ["began", "begun"],
+        "keep": ["kept"],
+        "hold": ["held"],
+        "write": ["wrote", "written"],
+        "stand": ["stood"],
+        "hear": ["heard"],
+        "let": ["let"],
+        "mean": ["meant"],
+        "meet": ["met"],
+        "run": ["ran"],
+        "pay": ["paid"],
+        "sit": ["sat"],
+        "speak": ["spoke", "spoken"],
+        "lie": ["lay", "lain"],
+        "lead": ["led"],
+        "read": ["read"],
+        "grow": ["grew", "grown"],
+        "lose": ["lost"],
+        "fall": ["fell", "fallen"],
+        "send": ["sent"],
+        "build": ["built"],
+        "understand": ["understood"],
+        "draw": ["drew", "drawn"],
+        "break": ["broke", "broken"],
+        "spend": ["spent"],
+        "cut": ["cut"],
+        "rise": ["rose", "risen"],
+        "drive": ["drove", "driven"],
+        "wear": ["wore", "worn"],
+        "choose": ["chose", "chosen"],
+        "eat": ["ate", "eaten"],
+        "drink": ["drank", "drunk"],
+        "sleep": ["slept"],
+        "swim": ["swam", "swum"],
+        "sing": ["sang", "sung"],
+        "fly": ["flew", "flown", "flies"],
+        "forget": ["forgot", "forgotten"],
+        "teach": ["taught"],
+        "catch": ["caught"],
+        "fight": ["fought"],
+        "sell": ["sold"],
+        "win": ["won"],
+        "throw": ["threw", "thrown"],
+        "wake": ["woke", "woken"],
+        "ride": ["rode", "ridden"],
+        "hide": ["hid", "hidden"],
+        "steal": ["stole", "stolen"],
+        "shake": ["shook", "shaken"],
+        "feed": ["fed"],
+        "light": ["lit"],
+        "learn": ["learnt"],
+        "dream": ["dreamt"],
+        "smell": ["smelt"],
+        "spell": ["spelt"],
+        "burn": ["burnt"],
+    ]
 }
 
 // MARK: - Back-compat shim

@@ -26,6 +26,7 @@ final class SpeechService {
         .french: ["Rocko", "Reed", "Eddy", "Thomas"],
         .italian: ["Rocko", "Reed", "Eddy", "Luca"],
         .german: ["Rocko", "Reed", "Eddy", "Markus"],
+        .english: ["Rocko", "Reed", "Eddy", "Daniel", "Arthur"],
     ]
 
     private init() {}
@@ -219,6 +220,8 @@ final class SpeechService {
             return ("Italian", "Standard Italian accent, not regional.")
         case "de-DE":
             return ("German", "Standard High German (Hochdeutsch) accent, not Austrian or Swiss.")
+        case "en-GB":
+            return ("English", "Standard British English accent (Received Pronunciation), not American.")
         default:
             return ("Spanish", "Spain accent, not Latin American.")
         }

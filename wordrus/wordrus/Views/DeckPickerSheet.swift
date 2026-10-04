@@ -17,6 +17,10 @@ struct DeckPickerSheet: View {
     @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
     @State private var levelStatus: LevelProgression.Status?
 
+    private var offeredLanguages: [TargetLanguage] {
+        TargetLanguage.offered(to: NativeLanguage.current)
+    }
+
     /// A filter change a free user attempted; applied after they go Pro.
     private enum PendingChange {
         case deck(String)
@@ -26,19 +30,23 @@ struct DeckPickerSheet: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
-                    LazyVGrid(
-                        columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4),
-                        spacing: 20
-                    ) {
-                        ForEach(TargetLanguage.allCases) { language in
-                            languageTile(language: language)
+                // Non-English speakers have exactly one target (English), so
+                // there's nothing to switch between.
+                if offeredLanguages.count > 1 {
+                    Section {
+                        LazyVGrid(
+                            columns: Array(repeating: GridItem(.flexible(), spacing: 16), count: 4),
+                            spacing: 20
+                        ) {
+                            ForEach(offeredLanguages) { language in
+                                languageTile(language: language)
+                            }
                         }
+                        .padding(.vertical, 20)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
+                    } header: {
+                        sectionHeader("Language")
                     }
-                    .padding(.vertical, 20)
-                    .listRowInsets(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-                } header: {
-                    sectionHeader("Language")
                 }
 
                 Section {

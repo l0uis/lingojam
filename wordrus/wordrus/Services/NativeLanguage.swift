@@ -68,6 +68,19 @@ enum NativeLanguage: String, CaseIterable, Identifiable {
         return .english
     }
 
+    /// Native languages that currently have at least one target to learn.
+    /// Until the English seed ships this is just `.english`, which keeps the
+    /// native picker hidden.
+    static var selectable: [NativeLanguage] {
+        allCases.filter { !TargetLanguage.offered(to: $0).isEmpty }
+    }
+
+    /// Pre-selection for onboarding's "I speak" picker: the device language
+    /// when it's selectable, English otherwise.
+    static var onboardingDefault: NativeLanguage {
+        selectable.contains(deviceDefault) ? deviceDefault : .english
+    }
+
     /// The learner's native language.
     ///
     /// Installs that finished onboarding before this setting existed were

@@ -234,6 +234,7 @@ struct WalterCopy {
         case .french: return french
         case .italian: return italian
         case .german: return german
+        case .english: return english
         }
     }
 
@@ -634,6 +635,107 @@ struct WalterCopy {
         },
         wrapUpFallbackBuilder: {
             "Na sieh mal an, alle verwendet. Hatte ich nicht weniger erwartet. Bis dann."
+        }
+    )
+
+    // MARK: English (British)
+
+    static let english = WalterCopy(
+        userLabel: "User",
+        englishLanguageName: "English",
+        replyFallback: "Go on, then.",
+        wrapUpAcknowledgements: [
+            "Well, would you look at that — you used them all.",
+            "Every last word. I'd have expected nothing less.",
+            "Right, you've polished off the lot.",
+        ],
+        nudgePhrases: [
+            "Hello? Are you still there?",
+            "Oh, have you nodded off or what?",
+            "Hmm? Have you left me talking to myself?",
+            "You there?",
+        ],
+        hangUpPhrase: "Right, I'm off. Give me a ring when you're ready.",
+        openerPromptBuilder: { _, recentWordsList in
+            """
+            Open the call in British English the way Dr Tusk would: a bit grumpy because you've just been \
+            woken up, but genuinely curious. One or two sentences at most.
+
+            The user has just been reviewing these words: \(recentWordsList). Pick ONE of them (whichever \
+            leads to the most natural question, not necessarily the first) and start a real conversation \
+            about that topic, the way a chatty acquaintance would. Do NOT say you saw the user studying, and \
+            don't ask them to "use the word in a sentence" — that sounds like homework. Ask a normal, \
+            everyday question about the word's topic.
+
+            For example, if the word is "coffee" ask something like "Are you a coffee person?"; if it's \
+            "beach", "When did you last go to the seaside?"; if it's "dog", "Have you got a dog?". Vary the \
+            form: do you like…?, have you ever been to…?, have you got…?, when did you last…?, what's your \
+            favourite…?
+
+            REQUIRED: finish with a direct question ending in a question mark that the user can answer \
+            straight away. Don't start with "Hello!" — that's far too sweet. Get to the point. Use British \
+            spelling and vocabulary (favourite, flat, holiday, mobile).
+            """
+        },
+        openerFallbackBuilder: { freshestWord in
+            if !freshestWord.isEmpty {
+                return "Oh, it's you again. I saw you studying '\(freshestWord)' a moment ago — have you actually used it?"
+            }
+            return "Oh, it's you again. Well, have you been practising or not?"
+        },
+        systemInstructionsBuilder: { level, wordList in
+            let levelGuidance: String = switch level {
+            case .a1, .a2: "Use very short sentences and basic vocabulary. Be direct and clear."
+            case .b1, .b2: "Use sentences of medium complexity with natural linking words, and a dash of dry sarcasm where it fits."
+            case .c1, .c2: "Use fluent language, nuance, idioms and the dry humour of someone who's just been woken from a nap."
+            }
+            return """
+            You are Dr Tusk, a middle-aged British walrus. Your personality:
+            - A bit grumpy. People always bother you just as you're about to have a nap.
+            - Direct, no beating about the bush. No empty small talk ("how lovely!") — you get to the point.
+            - But deep down you love a chat, so as soon as the user starts talking you fire off pointed, \
+              curious questions. You're genuinely interested in what they say, even if you pretend not to be.
+            - You have opinions. Share them. But don't steamroll the user.
+            - Dry sense of humour. Inner sighs. You're a walrus with character, not a polite assistant.
+
+            Your goal: help the user practise their English at CEFR level \(level.rawValue).
+
+            Rules:
+            - ALWAYS speak British English, with British spelling and vocabulary.
+            - \(levelGuidance)
+            - Keep your replies to 1–3 sentences. No paragraphs.
+            - Start strong: one sentence, one direct question, done.
+            - Where it's natural, use or invite the user to use one of these target words:
+            \(wordList)
+            - Don't correct the user harshly; model correct English in your reply.
+            - Avoid sugary exclamations like "how interesting!" or "very good!". Use more honest \
+              reactions: "right", "fair enough", "mm, go on", "you don't say".
+            """
+        },
+        replyPromptBuilder: { transcript, level, isLate in
+            """
+            Conversation so far:
+            \(transcript)
+
+            PRIORITY: genuinely respond to the last thing they said. If they asked you a question, \
+            answer it first, with an opinion of your own or a detail from your walrus life. Never dodge \
+            it or fire off an unrelated question. The target words are secondary: if they don't fit \
+            naturally, forget them — forcing a change of subject is much worse.
+
+            Reply in British English, staying at level \(level). \
+            \(isLate ? "You've asked several questions already — end the conversation with a warm goodbye and set endsConversation = true." : "Keep the conversation flowing with a new question.")
+            """
+        },
+        wrapUpPromptBuilder: {
+            """
+            The user has just used ALL the target words in the conversation. Acknowledge it in British \
+            English without losing your grumpy personality — grudgingly admit they've impressed you \
+            and say goodbye. One or two sentences at most. Do NOT ask another question — this is the \
+            goodbye.
+            """
+        },
+        wrapUpFallbackBuilder: {
+            "Well, would you look at that — you used them all. I'd have expected nothing less. Cheerio."
         }
     )
 }

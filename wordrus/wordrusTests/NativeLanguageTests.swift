@@ -75,6 +75,27 @@ struct NativeLanguageTests {
         }
     }
 
+    @Test func englishSpeakersAreOfferedTheFourEuropeanLanguages() {
+        #expect(TargetLanguage.offered(to: .english) == [.spanish, .french, .italian, .german])
+    }
+
+    @Test func nobodyIsOfferedTheirOwnLanguage() {
+        for native in NativeLanguage.allCases {
+            #expect(!TargetLanguage.offered(to: native).map(\.languageCode).contains(native.code))
+        }
+    }
+
+    @Test func otherSpeakersLearnEnglishOnceItShips() {
+        for native in NativeLanguage.allCases where native != .english {
+            let expected: [TargetLanguage] = TargetLanguage.english.isBundled ? [.english] : []
+            #expect(TargetLanguage.offered(to: native) == expected)
+        }
+        // The picker must never offer a native language with nothing to learn.
+        for native in NativeLanguage.selectable {
+            #expect(!TargetLanguage.offered(to: native).isEmpty)
+        }
+    }
+
     @Test func codesRoundTrip() {
         for language in NativeLanguage.allCases {
             #expect(NativeLanguage(code: language.code) == language)

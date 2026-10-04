@@ -284,6 +284,7 @@ struct VoiceCallView: View {
         case .french: "Dis quelque chose en français…"
         case .italian: "Di' qualcosa in italiano…"
         case .german: "Sag etwas auf Deutsch…"
+        case .english: "Say something in English…"
         }
     }
 }

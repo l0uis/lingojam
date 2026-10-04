@@ -137,6 +137,25 @@ struct MockStoryBrain: StoryGenerating {
                     summary: "Dr Tusk ha trovato biglietti misteriosi sulla spiaggia con le parole {N1}, {N2} e {N3}.",
                     fallbackWord: "mare"
                 )
+            case .english:
+                Template(
+                    title: "Dr Tusk and the Mystery Note",
+                    story: """
+                    Today Dr Tusk wakes up very early. On the beach there is a bottle with a note in it. \
+                    The note says just one word: "{N1}". Dr Tusk reads the note again. "{N1}," he says out loud. \
+                    A fish jumps out of the water and looks at him. "Do you know what {N2} means?" asks the fish. \
+                    Dr Tusk thinks and thinks. Then he says: "{N2} is my favourite word." \
+                    The fish laughs so much that it falls back into the water. Dr Tusk laughs too, but he slips on a rock. \
+                    Splash! Now they are both in the water. \
+                    In the end, Dr Tusk finds another note: "{N3}… and tomorrow, {N3} again." Who is writing these notes?
+                    """,
+                    questions: [
+                        StoryQuestion(question: "Where is the bottle?", options: ["On the beach", "In the house", "In a tree"], answerIndex: 0),
+                        StoryQuestion(question: "Who jumps out of the water?", options: ["A cat", "A fish", "A child"], answerIndex: 1),
+                    ],
+                    summary: "Dr Tusk found mystery notes on the beach with the words {N1}, {N2} and {N3}.",
+                    fallbackWord: "sea"
+                )
             }
         }
     }

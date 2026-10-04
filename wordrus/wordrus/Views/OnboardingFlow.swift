@@ -58,7 +58,7 @@ struct OnboardingFlow: View {
                 Group {
                     switch step {
                     case .welcome: WelcomeStep(onContinue: advance)
-                    case .language: LanguageStep(selection: $state.targetLanguage, onContinue: advance)
+                    case .language: LanguageStep(native: $state.nativeLanguage, selection: $state.targetLanguage, onContinue: advance)
                     case .walrusIntro: WalrusIntroStep(onContinue: advance)
                     case .name: NameStep(name: $state.displayName, onContinue: advance)
                     case .customizeIntro: CustomizeIntroStep(name: state.displayName, onContinue: advance)
@@ -66,7 +66,7 @@ struct OnboardingFlow: View {
                     case .notifications: NotificationsStep(state: state, onContinue: advance)
                     case .goalSetup: GoalSetupStep(onContinue: advance)
                     case .topics: TopicsStep(selection: $state.topics, onContinue: advance)
-                    case .exampleCard: ExampleCardStep(targetLanguage: state.targetLanguage, onContinue: advance)
+                    case .exampleCard: ExampleCardStep(targetLanguage: state.targetLanguage, nativeLanguage: state.nativeLanguage, onContinue: advance)
                     case .vocabularyLevel: VocabularyLevelStep(targetLanguage: state.targetLanguage, selection: $state.cefrLevel, onContinue: advance)
                     case .testIntro: TestIntroStep(onContinue: advance)
                     case .beginnerWords: WordPickStep(level: .beginner, selected: $state.knownWordIDs, onContinue: advance)
@@ -765,18 +765,25 @@ private struct WalrusIntroStep: View {
 }
 
 private struct LanguageStep: View {
+    @Binding var native: NativeLanguage
     @Binding var selection: TargetLanguage?
     let onContinue: () -> Void
+
+    private var offered: [TargetLanguage] { TargetLanguage.offered(to: native) }
 
     var body: some View {
         OnboardingScaffold(
             title: "What do you want to learn?",
             subtitle: "You can switch languages later.",
-            primaryEnabled: selection != nil,
+            primaryEnabled: selection.map(offered.contains) ?? false,
             onPrimary: onContinue
         ) {
             VStack(spacing: 10) {
-                ForEach(TargetLanguage.allCases) { language in
+                if NativeLanguage.selectable.count > 1 {
+                    NativeLanguageMenu(selection: $native)
+                        .padding(.bottom, 6)
+                }
+                ForEach(offered) { language in
                     LanguageRow(
                         language: language,
                         isSelected: selection == language
@@ -785,6 +792,47 @@ private struct LanguageStep: View {
                     }
                 }
             }
+        }
+        .onAppear(perform: reconcileSelection)
+        .onChange(of: native) { reconcileSelection() }
+    }
+
+    /// Drop a target the new native language can't learn, and pre-pick the
+    /// only option when there is just one (every non-English speaker).
+    private func reconcileSelection() {
+        if let current = selection, !offered.contains(current) {
+            selection = nil
+        }
+        if selection == nil, offered.count == 1 {
+            selection = offered.first
+        }
+    }
+}
+
+/// "I speak …" selector shown above the target list once more than one
+/// native language has something to learn.
+private struct NativeLanguageMenu: View {
+    @Binding var selection: NativeLanguage
+
+    var body: some View {
+        Menu {
+            Picker("I speak", selection: $selection) {
+                ForEach(NativeLanguage.selectable) { language in
+                    Text(verbatim: language.endonym).tag(language)
+                }
+            }
+        } label: {
+            HStack(spacing: 6) {
+                Text("I speak")
+                    .foregroundStyle(.secondary)
+                Text(verbatim: selection.endonym)
+                    .foregroundStyle(DS.Color.ink)
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(.secondary)
+            }
+            .font(.sniglet(.headline))
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
@@ -1119,6 +1167,7 @@ private struct TopicChip: View {
 
 private struct ExampleCardStep: View {
     let targetLanguage: TargetLanguage?
+    let nativeLanguage: NativeLanguage
     let onContinue: () -> Void
 
     var body: some View {
@@ -1128,7 +1177,7 @@ private struct ExampleCardStep: View {
                     WalrusSpeechRow(text: "Every word comes with an example you can hear out loud.")
                         .padding(.top, 12)
 
-                    ExamplePreviewCard(language: targetLanguage ?? .spanish)
+                    ExamplePreviewCard(language: targetLanguage ?? .spanish, native: nativeLanguage)
                         .padding(.horizontal, 24)
                 }
                 .padding(.bottom, 24)
@@ -1144,7 +1193,9 @@ private struct ExampleCardStep: View {
 
 /// A short, hand-picked demo word per language for the onboarding preview so
 /// the card the learner first sees is in the language they just chose rather
-/// than always Spanish.
+/// than always Spanish. The definition and translation are in the learner's
+/// native language — English for the four European targets, which are only
+/// offered to English speakers.
 private struct OnboardingExample {
     let word: String
     let partOfSpeech: String
@@ -1152,7 +1203,7 @@ private struct OnboardingExample {
     let sentence: String
     let translation: String
 
-    static func forLanguage(_ language: TargetLanguage) -> OnboardingExample {
+    static func forLanguage(_ language: TargetLanguage, native: NativeLanguage) -> OnboardingExample {
         switch language {
         case .spanish:
             OnboardingExample(
@@ -1186,14 +1237,37 @@ private struct OnboardingExample {
                 sentence: "Ich möchte Berlin eines Tages kennenlernen.",
                 translation: "I want to get to know Berlin one day."
             )
+        case .english:
+            OnboardingExample(
+                word: "meet",
+                partOfSpeech: "verb",
+                definition: englishMeetDefinition[native] ?? "to see someone for the first time",
+                sentence: "I'd love to meet your family one day.",
+                translation: englishMeetTranslation[native] ?? "I'd love to meet your family one day."
+            )
         }
     }
+
+    private static let englishMeetDefinition: [NativeLanguage: String] = [
+        .spanish: "conocer (a alguien)",
+        .french: "rencontrer (quelqu'un)",
+        .italian: "conoscere (qualcuno)",
+        .german: "kennenlernen (jemanden)",
+    ]
+
+    private static let englishMeetTranslation: [NativeLanguage: String] = [
+        .spanish: "Me encantaría conocer a tu familia algún día.",
+        .french: "J'aimerais beaucoup rencontrer ta famille un jour.",
+        .italian: "Mi piacerebbe conoscere la tua famiglia un giorno.",
+        .german: "Ich würde gern eines Tages deine Familie kennenlernen.",
+    ]
 }
 
 private struct ExamplePreviewCard: View {
     let language: TargetLanguage
+    let native: NativeLanguage
 
-    private var example: OnboardingExample { .forLanguage(language) }
+    private var example: OnboardingExample { .forLanguage(language, native: native) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {

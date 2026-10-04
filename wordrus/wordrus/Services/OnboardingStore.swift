@@ -44,8 +44,26 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
     case french
     case italian
     case german
+    /// British English, for es/fr/it/de speakers. Only offered once its seed
+    /// ships (see `isBundled`) so a missing file can't fall back to Spanish.
+    case english
 
     var id: String { rawValue }
+
+    /// Targets a speaker of `native` can pick: English speakers learn the
+    /// four European languages, everyone else learns English. Never the
+    /// learner's own language, and never a language whose seed isn't bundled.
+    static func offered(to native: NativeLanguage) -> [TargetLanguage] {
+        let candidates: [TargetLanguage] = native == .english
+            ? [.spanish, .french, .italian, .german]
+            : [.english]
+        return candidates.filter(\.isBundled)
+    }
+
+    /// Whether this language's vocabulary seed is in the app bundle.
+    var isBundled: Bool {
+        Bundle.main.url(forResource: seedResourceName, withExtension: "json") != nil
+    }
 
     var title: String {
         switch self {
@@ -53,6 +71,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "French"
         case .italian: "Italian"
         case .german: "German"
+        case .english: "English"
         }
     }
 
@@ -63,6 +82,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "Français"
         case .italian: "Italiano"
         case .german: "Deutsch"
+        case .english: "British English"
         }
     }
 
@@ -72,6 +92,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "🇫🇷"
         case .italian: "🇮🇹"
         case .german: "🇩🇪"
+        case .english: "🇬🇧"
         }
     }
 
@@ -82,6 +103,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "FR - France"
         case .italian: "IT - Italy"
         case .german: "DE - Germany"
+        case .english: "GB - United Kingdom"
         }
     }
 
@@ -93,6 +115,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "fr"
         case .italian: "it"
         case .german: "de"
+        case .english: "en"
         }
     }
 
@@ -103,6 +126,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "fr-FR"
         case .italian: "it-IT"
         case .german: "de-DE"
+        case .english: "en-GB"
         }
     }
 
@@ -113,6 +137,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "french_top1000"
         case .italian: "italian_top1000"
         case .german: "german_top1000"
+        case .english: "english_top1000"
         }
     }
 
@@ -128,6 +153,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "français"
         case .italian: "italiano"
         case .german: "Deutsch"
+        case .english: "English"
         }
     }
 
@@ -138,6 +164,7 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
         case .french: "en français"
         case .italian: "in italiano"
         case .german: "auf Deutsch"
+        case .english: "in English"
         }
     }
 }
@@ -259,11 +286,10 @@ final class OnboardingState {
     var cefrLevel: CEFRLevel?
     var knownWordIDs: Set<String> = []
     var targetLanguage: TargetLanguage?
-    /// English until onboarding offers a native-language picker alongside
-    /// English as a target; defaulting to the device language before then
-    /// would mark e.g. a Spanish-locale user learning French as a Spanish
-    /// speaker, a pairing the app doesn't support.
-    var nativeLanguage: NativeLanguage = .english
+    /// Only defaults to the device language when that language has something
+    /// to learn (see `NativeLanguage.onboardingDefault`); otherwise a
+    /// Spanish-locale user would be offered no targets at all.
+    var nativeLanguage: NativeLanguage = .onboardingDefault
 }
 
 enum OnboardingStore {
