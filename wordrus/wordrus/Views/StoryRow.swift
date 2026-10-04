@@ -1,8 +1,27 @@
 import SwiftUI
 
+/// The unread marker for story rows, like an unread message: a dot to the
+/// left of the avatar, in the row's margin so the avatar stays aligned with
+/// the call icons below it.
+private struct UnreadDot: ViewModifier {
+    let isUnread: Bool
+
+    func body(content: Content) -> some View {
+        content.overlay(alignment: .leading) {
+            if isUnread {
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: 10, height: 10)
+                    .offset(x: -16)
+                    .accessibilityHidden(true)
+            }
+        }
+    }
+}
+
 /// A story in the Phone tab's Recents, styled like a message from Dr Tusk:
-/// his avatar, the story's title, and when it arrived. Unread stories look
-/// like missed calls — red title plus a dot, so it doesn't rely on colour.
+/// his avatar, the story's title, and when it arrived. Unread stories get a
+/// dot before the avatar and a red title, so it doesn't rely on colour alone.
 struct StoryRow: View {
     let story: DailyStory
 
@@ -10,6 +29,7 @@ struct StoryRow: View {
         let unread = !story.isOpened
         HStack(spacing: 12) {
             DrTuskAvatar(size: 40)
+                .modifier(UnreadDot(isUnread: unread))
             VStack(alignment: .leading, spacing: 2) {
                 Text(story.title)
                     .font(.sniglet(.headline))
@@ -20,12 +40,6 @@ struct StoryRow: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            if unread {
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: 10, height: 10)
-                    .accessibilityHidden(true)
-            }
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())
@@ -38,10 +52,14 @@ struct StoryRow: View {
 }
 
 /// What free users see instead of stories: Dr Tusk's stories are Pro.
+/// Unread (with a dot) until it's been tapped once.
 struct StoryLockedRow: View {
+    var isUnread: Bool = false
+
     var body: some View {
         HStack(spacing: 12) {
             DrTuskAvatar(size: 40)
+                .modifier(UnreadDot(isUnread: isUnread))
             VStack(alignment: .leading, spacing: 2) {
                 Text("Daily stories from Dr Tusk")
                     .font(.sniglet(.headline))
@@ -57,6 +75,7 @@ struct StoryLockedRow: View {
         .padding(.vertical, 4)
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
+        .accessibilityValue(isUnread ? Text("Unread") : Text(verbatim: ""))
         .accessibilityAddTraits(.isButton)
     }
 }
