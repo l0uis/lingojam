@@ -178,14 +178,17 @@ struct PhoneView: View {
 
     // MARK: - Call card
 
+    private static let sceneWidth: CGFloat = 340
+
     private var callCard: some View {
         VStack(spacing: 0) {
             // Dr Tusk on the phone, standing behind the card: the clip is
             // cropped mid-body, so the card's top edge hides the cut.
+            // The overlap is 18% of the width, so the cut stays hidden at any size.
             LoopingVideoView(dataAssetName: "scenePhone", pauseBetweenLoops: 3)
                 .aspectRatio(1, contentMode: .fit)
-                .frame(width: 300)
-                .padding(.bottom, -54)
+                .frame(width: Self.sceneWidth)
+                .padding(.bottom, -Self.sceneWidth * 0.18)
                 .accessibilityHidden(true)
             cardBody
         }
