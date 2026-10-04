@@ -20,6 +20,8 @@ enum OnboardingDefaultsKey {
     static let lastWalterCallDate = "wordrus.walter.lastCallDate"
     static let scheduledWalterCallDates = "wordrus.walter.scheduledCallDates"
     static let targetLanguage = "wordrus.onboarding.targetLanguage"
+    /// The learner's own language — see `NativeLanguage.current`.
+    static let nativeLanguage = "wordrus.onboarding.nativeLanguage"
     /// Language whose vocabulary was last loaded into SwiftData. Tracked
     /// separately from `targetLanguage` so we can detect mismatches (e.g. user
     /// reset onboarding) and avoid wiping data when no swap is needed.
@@ -257,6 +259,11 @@ final class OnboardingState {
     var cefrLevel: CEFRLevel?
     var knownWordIDs: Set<String> = []
     var targetLanguage: TargetLanguage?
+    /// English until onboarding offers a native-language picker alongside
+    /// English as a target; defaulting to the device language before then
+    /// would mark e.g. a Spanish-locale user learning French as a Spanish
+    /// speaker, a pairing the app doesn't support.
+    var nativeLanguage: NativeLanguage = .english
 }
 
 enum OnboardingStore {
@@ -282,6 +289,7 @@ enum OnboardingStore {
             OnboardingDefaultsKey.cefrPassesAtCurrentLevel,
             OnboardingDefaultsKey.lastWalterCallDate,
             OnboardingDefaultsKey.targetLanguage,
+            OnboardingDefaultsKey.nativeLanguage,
         ]
         for key in keys { defaults.removeObject(forKey: key) }
     }
@@ -306,6 +314,7 @@ enum OnboardingStore {
         if let language = state.targetLanguage {
             defaults.set(language.rawValue, forKey: OnboardingDefaultsKey.targetLanguage)
         }
+        defaults.set(state.nativeLanguage.rawValue, forKey: OnboardingDefaultsKey.nativeLanguage)
         defaults.set(true, forKey: OnboardingDefaultsKey.hasCompleted)
     }
 

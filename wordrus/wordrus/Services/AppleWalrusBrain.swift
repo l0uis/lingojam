@@ -113,13 +113,14 @@ struct AppleWalrusBrain: WalrusBrain {
     ) async -> ChatEvaluation {
         let language = OnboardingStore.targetLanguage ?? .spanish
         let copy = WalterCopy.forLanguage(language)
+        let native = NativeLanguage.current.englishName
         #if canImport(FoundationModels)
         let validIDs = Set(targetWords.map(\.id))
         do {
             let instructions = """
             You are a \(copy.englishLanguageName) language tutor evaluating whether a student used target words during a conversation. \
             Count any inflected form (conjugation, plural, gender swap) as a valid use. \
-            The 'encouragement' field MUST be written in English — it is shown directly to an English-speaking user \
+            The 'encouragement' field MUST be written in \(native) — it is shown directly to a \(native)-speaking user \
             outside the role-play.
             """
             let session = LanguageModelSession(instructions: instructions)
@@ -134,8 +135,8 @@ struct AppleWalrusBrain: WalrusBrain {
 
             Identify the IDs of target words the user actually used (in any inflected form). \
             Set passed=true only if the user used at least 3 target words. \
-            Write a brief encouragement message in ENGLISH (one or two sentences) congratulating or \
-            encouraging the user based on the result. Do not write in \(copy.englishLanguageName).
+            Write a brief encouragement message in \(native.uppercased()) (one or two sentences) congratulating or \
+            encouraging the user based on the result.\(native == copy.englishLanguageName ? "" : " Do not write in \(copy.englishLanguageName).")
             """
             let response = try await session.respond(to: Prompt(prompt), generating: EvaluationOutput.self)
             let result = response.content
@@ -659,7 +660,7 @@ struct EvaluationOutput {
     @Guide(description: "True if the user used at least 3 target words during the conversation.")
     var passed: Bool
 
-    @Guide(description: "A brief encouragement message in ENGLISH (one or two sentences) congratulating or encouraging the user. Must be English, not the target language.")
+    @Guide(description: "A brief encouragement message (one or two sentences) congratulating or encouraging the user, in the language the instructions name — the user's native language.")
     var encouragement: String
 }
 #endif

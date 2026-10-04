@@ -1,8 +1,10 @@
 import Foundation
 
 enum LocaleService {
+    /// Locale key glosses are read from and written under — the learner's
+    /// stored native language, not the device locale (see `NativeLanguage`).
     static var preferredDefinitionLocale: String {
-        Locale.current.language.languageCode?.identifier ?? "en"
+        NativeLanguage.current.code
     }
 
     static func definition(for word: VocabularyWord) -> String {

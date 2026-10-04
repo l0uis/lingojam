@@ -29,10 +29,10 @@ struct ChatEvaluation: Identifiable {
     let elicitedWordIDs: [String]
     /// Whether the user cleared the bar for this call (≥ 3 of 5 targets).
     let passed: Bool
-    /// English message shown directly to the user in the result sheet.
-    /// Despite living next to Spanish-language brain output, this field
-    /// is intentionally English — see the prompts in AppleWalrusBrain
-    /// and the canned strings in MockWalrusBrain.
+    /// Message shown directly to the user in the result sheet. Unlike the
+    /// rest of the brain output it is in the learner's *native* language
+    /// (`NativeLanguage.current`), not the target — see the prompts in
+    /// AppleWalrusBrain and the localized canned strings in MockWalrusBrain.
     let encouragement: String
 
     /// Stable per-instance identity so SwiftUI `.sheet(item:)` can

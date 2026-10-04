@@ -255,7 +255,7 @@ final class ChatStore {
         let userMessages = displayMessages.filter { $0.role == .user }
 
         // No real conversation happened — skip evaluation, mark as hung up,
-        // and show a plain English message instead of fake encouragement.
+        // and show a plain message instead of fake encouragement.
         if userMessages.isEmpty {
             if let session {
                 session.endedAt = .now
@@ -265,7 +265,7 @@ final class ChatStore {
             evaluation = ChatEvaluation(
                 elicitedWordIDs: [],
                 passed: false,
-                encouragement: "The call ended before you said anything. Give it another go when you're ready."
+                encouragement: String(localized: "The call ended before you said anything. Give it another go when you're ready.")
             )
             OnboardingStore.lastWalterCallDate = .now
             return

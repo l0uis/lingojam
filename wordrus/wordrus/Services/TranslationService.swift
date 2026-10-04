@@ -22,7 +22,7 @@ final class TranslationService {
     func translate(
         _ text: String,
         from sourceLanguage: String? = nil,
-        to targetLanguage: String = "English"
+        to targetLanguage: String = NativeLanguage.current.englishName
     ) async -> String? {
         let sourceLanguage = sourceLanguage ?? (OnboardingStore.targetLanguage ?? .spanish).englishName
         let key = "\(sourceLanguage)|\(targetLanguage)|\(text)"

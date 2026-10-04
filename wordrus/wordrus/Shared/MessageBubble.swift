@@ -64,7 +64,7 @@ struct MessageBubble: View {
                 .frame(width: 22, height: 22)
                 .background(Capsule().fill(Color.black.opacity(0.55)))
         } else {
-            Text("EN")
+            Text(verbatim: NativeLanguage.current.code.uppercased())
                 .font(.sniglet(.caption2, weight: .bold))
                 .foregroundStyle(.white)
                 .padding(.horizontal, 6)
@@ -80,7 +80,7 @@ struct MessageBubble: View {
         playHaptic()
 
         if isShowingTranslation {
-            // Already showing English — flip back to the original.
+            // Already showing the translation — flip back to the original.
             isShowingTranslation = false
             return
         }
@@ -93,7 +93,7 @@ struct MessageBubble: View {
         isLoading = true
         Task {
             let result = await TranslationService.shared.translate(text)
-            translation = result ?? "Translation unavailable."
+            translation = result ?? String(localized: "Translation unavailable.")
             isLoading = false
             isShowingTranslation = true
         }

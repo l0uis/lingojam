@@ -51,8 +51,9 @@ final class WordEnrichmentService {
         guard !trimmed.isEmpty else { return nil }
 
         let target = targetLanguage.englishName
-        let nativeName = Locale.current
-            .localizedString(forLanguageCode: nativeLanguageCode) ?? "English"
+        let nativeName = NativeLanguage(code: nativeLanguageCode)?.englishName
+            ?? Locale(identifier: "en").localizedString(forLanguageCode: nativeLanguageCode)
+            ?? "English"
 
         // 1. Cloud (Claude) — accurate, no hallucinated vocabulary. Preferred.
         if FeatureFlags.useCloudEnrichment,

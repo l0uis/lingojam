@@ -107,8 +107,8 @@ struct MockWalrusBrain: WalrusBrain {
         }
         let passed = hits.count >= Self.passingThreshold
         let encouragement = passed
-            ? "Nice work — you used \(hits.count) of the words you've been studying."
-            : "Good chat. Next time, try to weave in more of the vocabulary you've learned."
+            ? String(localized: "Nice work — you used \(hits.count) of the words you've been studying.")
+            : String(localized: "Good chat. Next time, try to weave in more of the vocabulary you've learned.")
         return ChatEvaluation(
             elicitedWordIDs: hits,
             passed: passed,
