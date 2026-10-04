@@ -11,7 +11,7 @@ enum AnalyticsConstants {
     /// Project Settings → Project API key (safe to ship, like the RevenueCat
     /// key). Leave empty to disable analytics entirely — `Analytics.configure()`
     /// is a no-op without a token.
-    static let projectToken = ""
+    static let projectToken = "phc_wjG5FYm4cFCQSgtjapuZNBNvybahL5WvvyVVUx5ACzt3"
 
     /// EU ingestion endpoint (the project lives on PostHog Cloud EU).
     static let host = "https://eu.i.posthog.com"
