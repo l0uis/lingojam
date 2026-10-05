@@ -24,7 +24,7 @@ private struct UnreadDot: ViewModifier {
 
 /// A story in the Phone tab's Recents, styled like a message from Dr Tusk:
 /// his avatar, the story's title, and when it arrived. Unread stories get a
-/// dot before the avatar and a red title, so it doesn't rely on colour alone.
+/// dot before the avatar and an ink title.
 struct StoryRow: View {
     let story: DailyStory
 
@@ -36,7 +36,7 @@ struct StoryRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(story.title)
                     .font(.sniglet(.headline))
-                    .foregroundStyle(unread ? Color.red : Color.primary)
+                    .foregroundStyle(unread ? DS.Color.ink : Color.primary)
                     .lineLimit(2)
                 Text(StoryTimestamp.string(for: story.createdAt))
                     .font(.sniglet(.caption))
