@@ -1,57 +1,6 @@
 import SwiftUI
 import SwiftData
 
-/// Today's story for `language`, generated on demand if the background run
-/// hasn't already written it.
-struct TodayStoryScreen: View {
-    let language: TargetLanguage
-
-    @Environment(\.modelContext) private var context
-    @Environment(\.dismiss) private var dismiss
-    @State private var story: DailyStory?
-    @State private var didFail = false
-
-    var body: some View {
-        Group {
-            if let story {
-                StoryView(story: story)
-            } else {
-                NavigationStack {
-                    VStack(spacing: 16) {
-                        if didFail {
-                            Text("Dr Tusk couldn't finish today's story.")
-                                .font(.sniglet(.headline))
-                                .multilineTextAlignment(.center)
-                            Button("Try again") { Task { await load() } }
-                                .buttonStyle(.primary)
-                                .frame(maxWidth: 240)
-                        } else {
-                            ProgressView()
-                            Text("Dr Tusk is writing your story…")
-                                .font(.sniglet(.headline))
-                        }
-                    }
-                    .padding(32)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(DS.Color.paper.ignoresSafeArea())
-                    .toolbar {
-                        ToolbarItem(placement: .confirmationAction) {
-                            Button("Done") { dismiss() }
-                        }
-                    }
-                }
-            }
-        }
-        .task { await load() }
-    }
-
-    private func load() async {
-        didFail = false
-        story = try? await DailyStoryService.ensureTodayStory(context: context, language: language)
-        didFail = story == nil
-    }
-}
-
 /// One of Dr Tusk's stories: narration with a sentence highlight, tappable
 /// words, the new words highlighted, a couple of questions, and an end
 /// screen that leads into a retell call.

@@ -11,7 +11,7 @@ struct PhoneView: View {
     @State private var entitlements = Entitlements.shared
     @State private var isShowingPaywall = false
     @Query(sort: \DailyStory.createdAt, order: .reverse) private var allStories: [DailyStory]
-    @State private var openedStory: StoryDestination?
+    @State private var openedStory: DailyStory?
     @State private var isShowingStoryPaywall = false
     @AppStorage(OnboardingDefaultsKey.hasCompleted) private var hasCompletedOnboarding = false
 
@@ -31,12 +31,6 @@ struct PhoneView: View {
         RecentItem.merged(calls: sessions, stories: stories)
     }
 
-    /// Until today's story exists, a row that writes it on tap.
-    private var showsTodayPlaceholder: Bool {
-        let today = DailySetConfig.dayKey(.now)
-        return entitlements.isPro && hasCompletedOnboarding && !stories.contains { $0.dayKey == today }
-    }
-
     private var showsLockedStories: Bool {
         !entitlements.isPro && hasCompletedOnboarding
     }
@@ -50,7 +44,7 @@ struct PhoneView: View {
                     .listRowSeparator(.hidden)
             }
 
-            if recents.isEmpty && !showsTodayPlaceholder && !showsLockedStories {
+            if recents.isEmpty && !showsLockedStories {
                 Section {
                     emptyHistory
                         .listRowInsets(EdgeInsets())
@@ -67,11 +61,6 @@ struct PhoneView: View {
                         }
                         .buttonStyle(.plain)
                         .listRowSeparator(.hidden)
-                    }
-                    if showsTodayPlaceholder {
-                        Button { openedStory = .today } label: { TodayStoryPlaceholderRow() }
-                            .buttonStyle(.plain)
-                            .listRowSeparator(.hidden)
                     }
                     ForEach(recents) { item in
                         switch item {
@@ -92,7 +81,7 @@ struct PhoneView: View {
                             }
                         case .story(let story):
                             Button {
-                                openedStory = .story(story)
+                                openedStory = story
                             } label: {
                                 StoryRow(story: story)
                             }
@@ -137,16 +126,14 @@ struct PhoneView: View {
             PaywallView(onSubscribed: { IncomingCallCoordinator.shared.requestOutgoing() }, source: .call)
         }
         .sheet(isPresented: $isShowingStoryPaywall) {
-            // Once subscribed, open today's story straight away.
-            PaywallView(onSubscribed: { openedStory = .today }, source: .story)
+            // Once subscribed, write today's story out of sight; it lands in
+            // Recents as unread, with the new-story notification.
+            PaywallView(onSubscribed: {
+                Task { await StoryScheduler.prepareTodayStory(context: context) }
+            }, source: .story)
         }
-        .sheet(item: $openedStory) { destination in
-            switch destination {
-            case .today:
-                TodayStoryScreen(language: TargetLanguage(rawValue: targetLanguageRaw) ?? .spanish)
-            case .story(let story):
-                StoryView(story: story)
-            }
+        .sheet(item: $openedStory) { story in
+            StoryView(story: story)
         }
     }
 
@@ -242,19 +229,6 @@ struct PhoneView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 24)
-    }
-}
-
-/// What the story sheet shows: today's (written on demand) or a saved one.
-private enum StoryDestination: Identifiable {
-    case today
-    case story(DailyStory)
-
-    var id: String {
-        switch self {
-        case .today: "today"
-        case .story(let story): story.id.uuidString
-        }
     }
 }
 

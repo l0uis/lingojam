@@ -5,15 +5,16 @@ import UserNotifications
 import BackgroundTasks
 #endif
 
-/// Gets today's story written before the learner asks for it, and tells them
-/// when a new one is waiting.
+/// Writes today's story out of sight and tells the learner when it's ready.
+/// The Phone tab never shows a story being written: it's either there
+/// (unread, with a dot) or not there yet.
 ///
 /// - Background: a daily `BGAppRefreshTask` writes the story overnight /
-///   early morning and schedules a "new story" notification.
+///   early morning.
 /// - Foreground: coming back to the app writes today's story if it's still
-///   missing (no notification — the Phone tab shows it as unread).
-/// - Opening the story generates it on demand as the last resort
-///   (`TodayStoryScreen`).
+///   missing.
+///
+/// Either way, a newly written story schedules the "new story" notification.
 @MainActor
 enum StoryScheduler {
     /// Must match `BGTaskSchedulerPermittedIdentifiers` in the app Info.plist.
@@ -33,11 +34,10 @@ enum StoryScheduler {
 
     // MARK: - Foreground
 
-    /// Writes today's story ahead of time if it's missing. Quiet: failures
-    /// are retried on the next foreground or when the story is opened.
+    /// Writes today's story if it's missing. Quiet on failure: the next
+    /// foreground or background refresh tries again.
     static func prepareTodayStory(context: ModelContext) async {
-        guard isReady, let language = OnboardingStore.targetLanguage else { return }
-        _ = try? await DailyStoryService.ensureTodayStory(context: context, language: language)
+        _ = await writeTodayStory(context: context)
     }
 
     // MARK: - Background
@@ -77,14 +77,21 @@ enum StoryScheduler {
         #endif
     }
 
-    private static func runBackgroundRefresh(context: ModelContext, now: Date = .now) async -> Bool {
+    private static func runBackgroundRefresh(context: ModelContext) async -> Bool {
+        await writeTodayStory(context: context)
+    }
+
+    /// Writes today's story if it's missing and announces it. false when
+    /// writing failed.
+    private static func writeTodayStory(context: ModelContext, now: Date = .now) async -> Bool {
         guard isReady, let language = OnboardingStore.targetLanguage else { return true }
         let alreadyHad = DailyStoryService.todayStory(context: context, language: language, now: now) != nil
         guard let story = try? await DailyStoryService.ensureTodayStory(context: context, language: language, now: now) else {
             return false
         }
         if !alreadyHad, !story.isOpened {
-            await notifyNewStory(story, now: now)
+            // Writing can take a while: pick the slot from when it finished.
+            await notifyNewStory(story)
         }
         return true
     }

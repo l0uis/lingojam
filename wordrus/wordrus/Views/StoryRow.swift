@@ -84,27 +84,6 @@ struct StoryLockedRow: View {
     }
 }
 
-/// Stands in for today's story until it's written (or if writing it failed).
-struct TodayStoryPlaceholderRow: View {
-    var body: some View {
-        HStack(spacing: 12) {
-            DrTuskAvatar(size: 40)
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Today's story")
-                    .font(.sniglet(.headline))
-                Text("Dr Tusk is writing it…")
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(.secondary)
-            }
-            Spacer()
-        }
-        .padding(.vertical, 4)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isButton)
-    }
-}
-
 /// The Phone tab's badge: unread stories in the active language. Stories are
 /// Pro, so free users never see one.
 enum StoryBadge {

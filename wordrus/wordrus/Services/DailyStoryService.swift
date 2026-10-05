@@ -23,8 +23,8 @@ nonisolated enum StoryQuota: Equatable, Sendable {
     }
 }
 
-/// Owns `DailyStory` rows: one per day per language, generated on demand (and
-/// later ahead of time in the background), with a short episode history so
+/// Owns `DailyStory` rows: one per day per language, written out of sight
+/// by `StoryScheduler`, with a short episode history so
 /// each story continues yesterday's.
 @MainActor
 enum DailyStoryService {

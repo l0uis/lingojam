@@ -127,8 +127,8 @@ enum StoryBrainFactory {
     ///
     /// The mock is DEBUG-only here: a canned story that ignores the learner's
     /// vocabulary is fine for the simulator and previews, but in a release
-    /// build no story beats a nonsense one. The story is generated on demand
-    /// again when the learner opens it.
+    /// build no story beats a nonsense one. `StoryScheduler` tries again on
+    /// the next foreground or background refresh.
     static func makeChain() -> [StoryGenerating] {
         var chain: [StoryGenerating] = []
         if FeatureFlags.useRealWalrus {

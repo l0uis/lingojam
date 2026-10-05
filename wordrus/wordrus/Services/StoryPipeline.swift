@@ -37,9 +37,21 @@ struct StoryPipeline {
         for brain in brains {
             for _ in 0..<generationsPerBrain {
                 attempts += 1
-                guard var draft = try? await brain.generateStory(request) else { break }
+                let generated: GeneratedStory
+                do {
+                    generated = try await brain.generateStory(request)
+                } catch {
+                    #if DEBUG
+                    print("[StoryPipeline] \(brain.brainName) failed: \(error)")
+                    #endif
+                    break
+                }
+                var draft = generated
                 draft.questions = draft.questions.filter(\.isWellFormed)
                 var report = Self.check(draft, with: checker)
+                #if DEBUG
+                print("[StoryPipeline] \(brain.brainName) draft unknown=\(report.unknownLemmas) underused=\(report.underusedNewWords)")
+                #endif
                 if report.passed || brain.isLastResort {
                     return Outcome(story: draft, report: report, brainName: brain.brainName, attempts: attempts, extraWords: extraWords(report, checker))
                 }
