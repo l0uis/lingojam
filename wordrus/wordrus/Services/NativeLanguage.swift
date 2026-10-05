@@ -81,7 +81,14 @@ enum NativeLanguage: String, CaseIterable, Identifiable {
         selectable.contains(deviceDefault) ? deviceDefault : .english
     }
 
-    /// The learner's native language.
+    /// The learner's native language — always English while
+    /// `FeatureFlags.offersEnglishTarget` is off (the app is English-only).
+    static var current: NativeLanguage {
+        get { FeatureFlags.offersEnglishTarget ? stored : .english }
+        set { stored = newValue }
+    }
+
+    /// The persisted native language, ignoring the feature flag.
     ///
     /// Installs that finished onboarding before this setting existed were
     /// all English speakers by construction (English was the only gloss and
@@ -89,7 +96,7 @@ enum NativeLanguage: String, CaseIterable, Identifiable {
     /// which would reclassify e.g. a Spanish-locale user learning French as
     /// a Spanish speaker. The value is persisted on first read so it can't
     /// drift if the device language changes later.
-    static var current: NativeLanguage {
+    static var stored: NativeLanguage {
         get {
             let defaults = UserDefaults.standard
             if let raw = defaults.string(forKey: OnboardingDefaultsKey.nativeLanguage),

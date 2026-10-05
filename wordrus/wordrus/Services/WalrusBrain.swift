@@ -134,4 +134,13 @@ enum FeatureFlags {
     /// showing nothing for a feature whose whole point is accuracy. Turn on
     /// only if you want a best-effort offline guess and accept the risk.
     static let useOnDeviceEnrichmentFallback = false
+
+    /// Offer British English as a target to Spanish/French/Italian/German
+    /// speakers (with glosses in their language), plus the "I speak" pickers
+    /// that lead to it. OFF while the app ships English-only (interface and
+    /// App Store listing, decided 2026-10-05): with it off everyone is an
+    /// English speaker learning es/fr/it/de, exactly as before. The English
+    /// seed stays bundled; the es/fr/it/de interface translations are parked
+    /// in tools/translations/ (restore with tools/string_catalog.py import).
+    static let offersEnglishTarget = false
 }

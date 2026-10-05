@@ -17,7 +17,10 @@ import XCTest
 /// bottom-most wide button when enabled, and otherwise picks the first
 /// option on screen.
 final class LocalizationTourTests: XCTestCase {
-    private let defaultLanguages = ["en", "es", "fr", "it", "de"]
+    /// The app ships English-only for now; es/fr/it/de translations are
+    /// parked in tools/translations/ (see tools/translations/README.md).
+    /// Pass TOUR_LANGUAGES after restoring one.
+    private let defaultLanguages = ["en"]
 
     override func setUpWithError() throws {
         continueAfterFailure = true

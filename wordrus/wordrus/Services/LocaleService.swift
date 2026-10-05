@@ -7,9 +7,9 @@ enum LocaleService {
         NativeLanguage.current.code
     }
 
-    static func definition(for word: VocabularyWord) -> String {
+    static func definition(for word: VocabularyWord, locale: String = preferredDefinitionLocale) -> String {
         let map = word.definitions
-        if let value = map[preferredDefinitionLocale], !value.isEmpty {
+        if let value = map[locale], !value.isEmpty {
             return value
         }
         if let fallback = map["en"], !fallback.isEmpty {
@@ -18,9 +18,9 @@ enum LocaleService {
         return map.values.first ?? ""
     }
 
-    static func exampleTranslation(for word: VocabularyWord) -> String? {
+    static func exampleTranslation(for word: VocabularyWord, locale: String = preferredDefinitionLocale) -> String? {
         let map = word.exampleTranslations
-        if let value = map[preferredDefinitionLocale], !value.isEmpty {
+        if let value = map[locale], !value.isEmpty {
             return value
         }
         return map["en"]

@@ -36,14 +36,14 @@ struct NativeLanguageTests {
     @Test func existingInstallsResolveToEnglishAndPersistIt() {
         withCleanDefaults {
             defaults.set(true, forKey: completedKey)
-            #expect(NativeLanguage.current == .english)
+            #expect(NativeLanguage.stored == .english)
             #expect(defaults.string(forKey: nativeKey) == NativeLanguage.english.rawValue)
         }
     }
 
     @Test func freshInstallsFollowTheDeviceWithoutPersisting() {
         withCleanDefaults {
-            #expect(NativeLanguage.current == NativeLanguage.deviceDefault)
+            #expect(NativeLanguage.stored == NativeLanguage.deviceDefault)
             #expect(defaults.string(forKey: nativeKey) == nil)
         }
     }
@@ -51,27 +51,27 @@ struct NativeLanguageTests {
     @Test func storedValueWins() {
         withCleanDefaults {
             defaults.set(true, forKey: completedKey)
-            NativeLanguage.current = .spanish
-            #expect(NativeLanguage.current == .spanish)
-            #expect(LocaleService.preferredDefinitionLocale == "es")
+            NativeLanguage.stored = .spanish
+            #expect(NativeLanguage.stored == .spanish)
+            // With the English target switched off the app treats everyone
+            // as an English speaker, whatever was stored.
+            #expect(NativeLanguage.current == (FeatureFlags.offersEnglishTarget ? .spanish : .english))
         }
     }
 
     @Test func glossesFollowNativeLanguageThenFallBackToEnglish() {
         withCleanDefaults {
-            NativeLanguage.current = .spanish
             let both = word(
                 definitions: #"{"en":"house","es":"casa"}"#,
                 translations: #"{"en":"I'm going home.","es":"Voy a casa."}"#
             )
-            #expect(LocaleService.definition(for: both) == "casa")
-            #expect(LocaleService.exampleTranslation(for: both) == "Voy a casa.")
+            #expect(LocaleService.definition(for: both, locale: "es") == "casa")
+            #expect(LocaleService.exampleTranslation(for: both, locale: "es") == "Voy a casa.")
 
             let englishOnly = word(definitions: #"{"en":"house"}"#)
-            #expect(LocaleService.definition(for: englishOnly) == "house")
+            #expect(LocaleService.definition(for: englishOnly, locale: "es") == "house")
 
-            NativeLanguage.current = .english
-            #expect(LocaleService.definition(for: both) == "house")
+            #expect(LocaleService.definition(for: both, locale: "en") == "house")
         }
     }
 
@@ -85,15 +85,23 @@ struct NativeLanguageTests {
         }
     }
 
-    @Test func otherSpeakersLearnEnglishOnceItShips() {
+    @Test func otherSpeakersLearnEnglishWhenEnabled() {
         for native in NativeLanguage.allCases where native != .english {
             let expected: [TargetLanguage] = TargetLanguage.english.isBundled ? [.english] : []
-            #expect(TargetLanguage.offered(to: native) == expected)
+            #expect(TargetLanguage.offered(to: native, englishTargetEnabled: true) == expected)
+            #expect(TargetLanguage.offered(to: native, englishTargetEnabled: false) == [])
         }
         // The picker must never offer a native language with nothing to learn.
         for native in NativeLanguage.selectable {
             #expect(!TargetLanguage.offered(to: native).isEmpty)
         }
+    }
+
+    @Test func englishOnlyBuildHidesTheNativePicker() {
+        guard !FeatureFlags.offersEnglishTarget else { return }
+        #expect(NativeLanguage.selectable == [.english])
+        #expect(NativeLanguage.onboardingDefault == .english)
+        #expect(NativeLanguage.current == .english)
     }
 
     @Test func codesRoundTrip() {

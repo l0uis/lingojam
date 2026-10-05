@@ -14,6 +14,11 @@ into them (only the IDE does), so this mirrors that step from the compiler's
     # 3. Merge translations back (same JSON shape, values filled in):
     python3 tools/string_catalog.py import --lang es /tmp/es.json
 
+    # Park a language: write its translations to a file in the import format
+    # and remove them from the catalogs, so the app stops shipping it.
+    # Restore later with `import` on the same file.
+    python3 tools/string_catalog.py stash --lang es --out tools/translations/es.json
+
 Export/import JSON: {catalog_path: {key: {"source": English text, "comment": str, "plural": bool,
 "value": str | {"one": str, "other": str, ...}}}}. `plural` keys (those with
 an integer format specifier) take a dict of CLDR categories; at minimum
@@ -203,6 +208,40 @@ def cmd_import(args: argparse.Namespace) -> None:
         sys.exit(1)
 
 
+def cmd_stash(args: argparse.Namespace) -> None:
+    out: dict = {}
+    total = 0
+    for catalog_path in [*CATALOGS, *MANUAL_CATALOGS]:
+        if not catalog_path.exists():
+            continue
+        catalog = load(catalog_path)
+        parked = {}
+        for key, entry in catalog.get("strings", {}).items():
+            loc = entry.get("localizations", {}).pop(args.lang, None)
+            if loc is None:
+                continue
+            if "stringUnit" in loc:
+                value = loc["stringUnit"]["value"]
+            else:
+                value = {cat: v["stringUnit"]["value"] for cat, v in loc["variations"]["plural"].items()}
+            en = entry.get("localizations", {}).get("en", {}).get("stringUnit", {}).get("value")
+            parked[key] = {"source": en or key, "comment": entry.get("comment", ""),
+                           "plural": is_plural(key), "value": value}
+            if not entry["localizations"]:
+                del entry["localizations"]
+        if parked:
+            out[str(catalog_path.relative_to(ROOT))] = parked
+            total += len(parked)
+            if catalog_path in MANUAL_CATALOGS:
+                catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2, separators=(",", " : ")), encoding="utf-8")
+            else:
+                save(catalog_path, catalog)
+    target = Path(args.out)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"stashed {total} {args.lang} translations → {target}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -216,6 +255,10 @@ def main() -> None:
     i.add_argument("--lang", required=True)
     i.add_argument("file")
     i.set_defaults(func=cmd_import)
+    st = sub.add_parser("stash")
+    st.add_argument("--lang", required=True)
+    st.add_argument("--out", required=True)
+    st.set_defaults(func=cmd_stash)
     args = ap.parse_args()
     args.func(args)
 

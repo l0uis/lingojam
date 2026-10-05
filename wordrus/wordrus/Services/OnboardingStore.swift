@@ -53,10 +53,13 @@ enum TargetLanguage: String, CaseIterable, Identifiable {
     /// Targets a speaker of `native` can pick: English speakers learn the
     /// four European languages, everyone else learns English. Never the
     /// learner's own language, and never a language whose seed isn't bundled.
-    static func offered(to native: NativeLanguage) -> [TargetLanguage] {
+    static func offered(
+        to native: NativeLanguage,
+        englishTargetEnabled: Bool = FeatureFlags.offersEnglishTarget
+    ) -> [TargetLanguage] {
         let candidates: [TargetLanguage] = native == .english
             ? [.spanish, .french, .italian, .german]
-            : [.english]
+            : (englishTargetEnabled ? [.english] : [])
         return candidates.filter(\.isBundled)
     }
 

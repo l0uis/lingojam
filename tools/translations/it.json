@@ -1,0 +1,2638 @@
+{
+ "wordrus/wordrus/Localizable.xcstrings": {
+  "“%@” — tap to listen.": {
+   "source": "“%@” — tap to listen.",
+   "comment": "Notification body. %@ is the story's title (in the language being learned).",
+   "plural": false,
+   "value": "“%@” — tocca per ascoltare."
+  },
+  "%@ · %@": {
+   "source": "%1$@ · %2$@",
+   "comment": "",
+   "plural": false,
+   "value": "%1$@ · %2$@"
+  },
+  "%@ / mo": {
+   "source": "%@ / mo",
+   "comment": "",
+   "plural": false,
+   "value": "%@ / mese"
+  },
+  "%@ / month": {
+   "source": "%@ / month",
+   "comment": "",
+   "plural": false,
+   "value": "%@ / mese"
+  },
+  "%@ / week": {
+   "source": "%@ / week",
+   "comment": "",
+   "plural": false,
+   "value": "%@ / settimana"
+  },
+  "%@ / year": {
+   "source": "%@ / year",
+   "comment": "",
+   "plural": false,
+   "value": "%@ / anno"
+  },
+  "%@ Cancel anytime.": {
+   "source": "%@ Cancel anytime.",
+   "comment": "",
+   "plural": false,
+   "value": "%@ Disdici quando vuoi."
+  },
+  "%@ free": {
+   "source": "%@ free",
+   "comment": "",
+   "plural": false,
+   "value": "%@ gratis"
+  },
+  "%@ in %lld more calls.": {
+   "source": "%@ in %lld more calls.",
+   "comment": "",
+   "plural": true,
+   "value": "%@ tra altre %lld chiamate."
+  },
+  "%@ in %lld more mastered words.": {
+   "source": "%@ in %lld more mastered words.",
+   "comment": "",
+   "plural": true,
+   "value": "%@ tra altre %lld parole padroneggiate."
+  },
+  "%@ recognizer is offline. Check internet or download the language pack in Settings → General → Keyboard → Dictation.": {
+   "source": "%@ recognizer is offline. Check internet or download the language pack in Settings → General → Keyboard → Dictation.",
+   "comment": "",
+   "plural": false,
+   "value": "Il riconoscimento vocale per %@ è offline. Controlla la connessione o scarica il pacchetto lingua in Impostazioni → Generali → Tastiera → Dettatura."
+  },
+  "%@ speakers learn %@ in Wordrus. Your current words and progress are kept and come back if you switch back.": {
+   "source": "%@ speakers learn %@ in Wordrus. Your current words and progress are kept and come back if you switch back.",
+   "comment": "",
+   "plural": false,
+   "value": "Chi parla %@ impara %@ con Wordrus. Le tue parole e i tuoi progressi attuali restano salvati e ritornano se torni indietro."
+  },
+  "%@, correct answer": {
+   "source": "%@, correct answer",
+   "comment": "VoiceOver label for a quiz option. %@ is the option text.",
+   "plural": false,
+   "value": "%@, risposta corretta"
+  },
+  "%@, one-time.": {
+   "source": "%@, one-time.",
+   "comment": "",
+   "plural": false,
+   "value": "%@, una tantum."
+  },
+  "%@, your answer, wrong": {
+   "source": "%@, your answer, wrong",
+   "comment": "VoiceOver label for the learner's wrong quiz option. %@ is the option text.",
+   "plural": false,
+   "value": "%@, la tua risposta, sbagliata"
+  },
+  "%@: %@": {
+   "source": "%1$@: %2$@",
+   "comment": "A label that describes the accessibility of the level.",
+   "plural": false,
+   "value": "%1$@: %2$@"
+  },
+  "%@: %lld of %lld words learned": {
+   "source": "%@: %lld of %lld words learned",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": "%@: %lld di %lld parole imparate"
+  },
+  "%lld": {
+   "source": "%lld",
+   "comment": "A step indicator. The argument is the step number.",
+   "plural": true,
+   "value": "%lld"
+  },
+  "%lld / %lld selected": {
+   "source": "%1$lld / %2$lld selected",
+   "comment": "A label showing the number of words selected so far. The argument is the number of selected words.",
+   "plural": true,
+   "value": "%1$lld / %2$lld selezionate"
+  },
+  "%lld / day": {
+   "source": "%lld / day",
+   "comment": "",
+   "plural": true,
+   "value": "%lld / giorno"
+  },
+  "%lld calls": {
+   "source": "%lld calls",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "%lld chiamate",
+    "one": "%lld chiamata",
+    "other": "%lld chiamate"
+   }
+  },
+  "%lld days": {
+   "source": "%lld days",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "%lld giorni",
+    "one": "%lld giorno",
+    "other": "%lld giorni"
+   }
+  },
+  "%lld months": {
+   "source": "%lld months",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "%lld mesi",
+    "one": "%lld mese",
+    "other": "%lld mesi"
+   }
+  },
+  "%lld of %lld questions right": {
+   "source": "%lld of %lld questions right",
+   "comment": "End card: quiz score, e.g. 1 of 2 questions right.",
+   "plural": true,
+   "value": "Risposte giuste: %lld su %lld"
+  },
+  "%lld of %lld words used": {
+   "source": "%1$lld of %2$lld words used",
+   "comment": "A label showing the number of words the user has used out of the target count. The first argument is the count of words the user has used. The second argument is the target count of words.",
+   "plural": true,
+   "value": "%1$lld di %2$lld parole usate"
+  },
+  "%lld to go": {
+   "source": "%lld to go",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": "ancora %lld"
+  },
+  "%lld weeks": {
+   "source": "%lld weeks",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "%lld settimane",
+    "one": "%lld settimana",
+    "other": "%lld settimane"
+   }
+  },
+  "%lld words": {
+   "source": "%lld words",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": {
+    "many": "%lld parole",
+    "one": "%lld parola",
+    "other": "%lld parole"
+   }
+  },
+  "%lld words · %lld to go": {
+   "source": "%lld words · %lld to go",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": "%lld parole · ancora %lld"
+  },
+  "%lld words · ~%lld min · ends with a call from Dr Tusk": {
+   "source": "%1$lld words · ~%2$lld min · ends with a call from Dr Tusk",
+   "comment": "A description of the daily set, including the number of words, estimated time, and a call-to-action to start the set.",
+   "plural": true,
+   "value": "%1$lld parole · ~%2$lld min · si chiude con una chiamata di Dr Tusk"
+  },
+  "%lld words · reached": {
+   "source": "%lld words · reached",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": {
+    "many": "%lld parole · raggiunto",
+    "one": "%lld parola · raggiunto",
+    "other": "%lld parole · raggiunto"
+   }
+  },
+  "%lld words learned": {
+   "source": "%lld words learned",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "%lld parole imparate",
+    "one": "%lld parola imparata",
+    "other": "%lld parole imparate"
+   }
+  },
+  "%lld words learned. Every milestone reached. You know about %@ of everyday words.": {
+   "source": "%lld words learned. Every milestone reached. You know about %@ of everyday words.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": "%lld parole imparate. Tutti i traguardi raggiunti. Conosci circa il %@ delle parole quotidiane."
+  },
+  "%lld words learned. Next milestone: %@, %lld to go. You know about %@ of everyday words.": {
+   "source": "%lld words learned. Next milestone: %@, %lld to go. You know about %@ of everyday words.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": true,
+   "value": "Parole imparate: %lld. Prossimo traguardo: %@, ancora %lld. Conosci circa il %@ delle parole quotidiane."
+  },
+  "%lld years": {
+   "source": "%lld years",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "%lld anni",
+    "one": "%lld anno",
+    "other": "%lld anni"
+   }
+  },
+  "%lld/%lld": {
+   "source": "%lld/%lld",
+   "comment": "",
+   "plural": true,
+   "value": "%lld/%lld"
+  },
+  "%lldx": {
+   "source": "%lldx",
+   "comment": "A label that shows the number of times the user wants to be reminded.",
+   "plural": true,
+   "value": "%lldx"
+  },
+  "2 Months": {
+   "source": "2 Months",
+   "comment": "",
+   "plural": false,
+   "value": "2 mesi"
+  },
+  "3 Months": {
+   "source": "3 Months",
+   "comment": "",
+   "plural": false,
+   "value": "3 mesi"
+  },
+  "6 Months": {
+   "source": "6 Months",
+   "comment": "",
+   "plural": false,
+   "value": "6 mesi"
+  },
+  "A mix of words you're still learning.": {
+   "source": "A mix of words you're still learning.",
+   "comment": "A description of the revision mode.",
+   "plural": false,
+   "value": "Un mix di parole che stai ancora imparando."
+  },
+  "A real start — greetings and the basics are yours.": {
+   "source": "A real start — greetings and the basics are yours.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Un vero inizio — saluti e basi ormai sono tuoi."
+  },
+  "A short story every day, written with your words and read aloud by Dr Tusk.": {
+   "source": "A short story every day, written with your words and read aloud by Dr Tusk.",
+   "comment": "Paywall benefit detail for daily stories.",
+   "plural": false,
+   "value": "Una breve storia ogni giorno, scritta con le tue parole e letta ad alta voce da Dr Tusk."
+  },
+  "A short story with your words every day. Unlock with Pro.": {
+   "source": "A short story with your words every day. Unlock with Pro.",
+   "comment": "Subtitle of the locked stories row; tapping it opens the paywall.",
+   "plural": false,
+   "value": "Una breve storia con le tue parole ogni giorno. Sbloccala con Pro."
+  },
+  "Active": {
+   "source": "Active",
+   "comment": "",
+   "plural": false,
+   "value": "Attivo"
+  },
+  "Add a word": {
+   "source": "Add a word",
+   "comment": "A button that adds a word to the user's vocabulary.",
+   "plural": false,
+   "value": "Aggiungi una parola"
+  },
+  "Add a word you heard or saw": {
+   "source": "Add a word you heard or saw",
+   "comment": "A placeholder for a word to add to the list.",
+   "plural": false,
+   "value": "Aggiungi una parola che hai sentito o visto"
+  },
+  "Add the wordrus widget": {
+   "source": "Add the wordrus widget",
+   "comment": "A description of a widget that adds a word to your",
+   "plural": false,
+   "value": "Aggiungi il widget di wordrus"
+  },
+  "Add to stack": {
+   "source": "Add to stack",
+   "comment": "Word sheet button: add the word to the learner's card stack.",
+   "plural": false,
+   "value": "Aggiungi al mazzo"
+  },
+  "Add widget": {
+   "source": "Add widget",
+   "comment": "A button that adds a widget to the home screen.",
+   "plural": false,
+   "value": "Aggiungi widget"
+  },
+  "Add word": {
+   "source": "Add word",
+   "comment": "A button that adds a word to the user's vocabulary.",
+   "plural": false,
+   "value": "Aggiungi parola"
+  },
+  "Add your own words": {
+   "source": "Add your own words",
+   "comment": "Paywall benefit title.",
+   "plural": false,
+   "value": "Aggiungi le tue parole"
+  },
+  "adjective": {
+   "source": "adjective",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "aggettivo"
+  },
+  "Adjectives": {
+   "source": "Adjectives",
+   "comment": "",
+   "plural": false,
+   "value": "Aggettivi"
+  },
+  "Advanced": {
+   "source": "Advanced",
+   "comment": "",
+   "plural": false,
+   "value": "Avanzato"
+  },
+  "adverb": {
+   "source": "adverb",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "avverbio"
+  },
+  "Adverbs": {
+   "source": "Adverbs",
+   "comment": "",
+   "plural": false,
+   "value": "Avverbi"
+  },
+  "All": {
+   "source": "All",
+   "comment": "",
+   "plural": false,
+   "value": "Tutte"
+  },
+  "All caught up": {
+   "source": "All caught up",
+   "comment": "A title displayed when all words have been reviewed.",
+   "plural": false,
+   "value": "Sei in pari"
+  },
+  "All words": {
+   "source": "All words",
+   "comment": "",
+   "plural": false,
+   "value": "Tutte le parole"
+  },
+  "All Words": {
+   "source": "All Words",
+   "comment": "",
+   "plural": false,
+   "value": "Tutte le parole"
+  },
+  "Allow and save": {
+   "source": "Allow and save",
+   "comment": "",
+   "plural": false,
+   "value": "Consenti e salva"
+  },
+  "and": {
+   "source": "and",
+   "comment": "A conjunction.",
+   "plural": false,
+   "value": "e"
+  },
+  "And these tricky ones?": {
+   "source": "And these tricky ones?",
+   "comment": "",
+   "plural": false,
+   "value": "E queste più difficili?"
+  },
+  "Animals": {
+   "source": "Animals",
+   "comment": "",
+   "plural": false,
+   "value": "Animali"
+  },
+  "Annual": {
+   "source": "Annual",
+   "comment": "",
+   "plural": false,
+   "value": "Annuale"
+  },
+  "Answer": {
+   "source": "Answer",
+   "comment": "",
+   "plural": false,
+   "value": "Rispondi"
+  },
+  "Apps, accounts, messages, devices.": {
+   "source": "Apps, accounts, messages, devices.",
+   "comment": "",
+   "plural": false,
+   "value": "App, account, messaggi, dispositivi."
+  },
+  "At work": {
+   "source": "At work",
+   "comment": "A learning situation that involves work.",
+   "plural": false,
+   "value": "Al lavoro"
+  },
+  "Back": {
+   "source": "Back",
+   "comment": "A label for the back button.",
+   "plural": false,
+   "value": "Indietro"
+  },
+  "Banking, salary, rent, paying up.": {
+   "source": "Banking, salary, rent, paying up.",
+   "comment": "",
+   "plural": false,
+   "value": "Banca, stipendio, affitto, pagamenti."
+  },
+  "Basic phrases and everyday questions": {
+   "source": "Basic phrases and everyday questions",
+   "comment": "",
+   "plural": false,
+   "value": "Frasi base e domande quotidiane"
+  },
+  "Beginner": {
+   "source": "Beginner",
+   "comment": "",
+   "plural": false,
+   "value": "Principiante"
+  },
+  "Best streak": {
+   "source": "Best streak",
+   "comment": "",
+   "plural": false,
+   "value": "Serie migliore"
+  },
+  "Billed %@ every 2 months.": {
+   "source": "Billed %@ every 2 months.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@ ogni 2 mesi."
+  },
+  "Billed %@ every 6 months.": {
+   "source": "Billed %@ every 6 months.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@ ogni 6 mesi."
+  },
+  "Billed %@ monthly.": {
+   "source": "Billed %@ monthly.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@ al mese."
+  },
+  "Billed %@ quarterly.": {
+   "source": "Billed %@ quarterly.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@ ogni 3 mesi."
+  },
+  "Billed %@ weekly.": {
+   "source": "Billed %@ weekly.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@ a settimana."
+  },
+  "Billed %@ yearly.": {
+   "source": "Billed %@ yearly.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@ all'anno."
+  },
+  "Billed %@.": {
+   "source": "Billed %@.",
+   "comment": "",
+   "plural": false,
+   "value": "Addebito di %@."
+  },
+  "British English": {
+   "source": "British English",
+   "comment": "",
+   "plural": false,
+   "value": "Inglese britannico"
+  },
+  "Call Dr Tusk": {
+   "source": "Call Dr Tusk",
+   "comment": "A button label.",
+   "plural": false,
+   "value": "Chiama Dr Tusk"
+  },
+  "Call Dr Tusk anytime": {
+   "source": "Call Dr Tusk anytime",
+   "comment": "Paywall benefit title.",
+   "plural": false,
+   "value": "Chiama Dr Tusk quando vuoi"
+  },
+  "Call ended": {
+   "source": "Call ended",
+   "comment": "",
+   "plural": false,
+   "value": "Chiamata terminata"
+  },
+  "Calling": {
+   "source": "Calling",
+   "comment": "A title for the \"Calling\" screen.",
+   "plural": false,
+   "value": "Chiamata in corso"
+  },
+  "Cancel": {
+   "source": "Cancel",
+   "comment": "A label for a button that cancels a call.",
+   "plural": false,
+   "value": "Annulla"
+  },
+  "Cancel adding word": {
+   "source": "Cancel adding word",
+   "comment": "A label for a button that cancels adding a word.",
+   "plural": false,
+   "value": "Annulla l'aggiunta della parola"
+  },
+  "Checking your %@…": {
+   "source": "Checking your %@…",
+   "comment": "",
+   "plural": false,
+   "value": "Controllo il tuo %@…"
+  },
+  "Checking…": {
+   "source": "Checking…",
+   "comment": "A label displayed when the assistant is checking",
+   "plural": false,
+   "value": "Controllo…"
+  },
+  "Choose deck and language": {
+   "source": "Choose deck and language",
+   "comment": "A label for a button that opens a sheet for choosing a deck and language.",
+   "plural": false,
+   "value": "Scegli mazzo e lingua"
+  },
+  "Close": {
+   "source": "Close",
+   "comment": "A label for the \"Close\" button in the paywall.",
+   "plural": false,
+   "value": "Chiudi"
+  },
+  "Clothes, stores, prices, sizes.": {
+   "source": "Clothes, stores, prices, sizes.",
+   "comment": "",
+   "plural": false,
+   "value": "Vestiti, negozi, prezzi, taglie."
+  },
+  "Come back tomorrow for more practice.": {
+   "source": "Come back tomorrow for more practice.",
+   "comment": "A message displayed when there are no more words to review.",
+   "plural": false,
+   "value": "Torna domani per esercitarti ancora."
+  },
+  "Comfortable in most situations": {
+   "source": "Comfortable in most situations",
+   "comment": "",
+   "plural": false,
+   "value": "A tuo agio nella maggior parte delle situazioni"
+  },
+  "Completed": {
+   "source": "Completed",
+   "comment": "",
+   "plural": false,
+   "value": "Completata"
+  },
+  "conjunction": {
+   "source": "conjunction",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "congiunzione"
+  },
+  "Connecting…": {
+   "source": "Connecting…",
+   "comment": "",
+   "plural": false,
+   "value": "Connessione…"
+  },
+  "Continue": {
+   "source": "Continue",
+   "comment": "A button that says \"Continue\" and triggers the next step in the onboarding flow.",
+   "plural": false,
+   "value": "Continua"
+  },
+  "Conversation": {
+   "source": "Conversation",
+   "comment": "",
+   "plural": false,
+   "value": "Conversazione"
+  },
+  "Conversation passed": {
+   "source": "Conversation passed",
+   "comment": "",
+   "plural": false,
+   "value": "Conversazione superata"
+  },
+  "Correct!": {
+   "source": "Correct!",
+   "comment": "Quiz feedback: right answer.",
+   "plural": false,
+   "value": "Giusto!"
+  },
+  "Couldn't load Dr Tusk's voice. Tap to try again.": {
+   "source": "Couldn't load Dr Tusk's voice. Tap to try again.",
+   "comment": "Story screen: narration audio failed to load.",
+   "plural": false,
+   "value": "Impossibile caricare la voce di Dr Tusk. Tocca per riprovare."
+  },
+  "Couldn't load subscription details. Check your connection and try again.": {
+   "source": "Couldn't load subscription details. Check your connection and try again.",
+   "comment": "A message that appears when the paywall can't load",
+   "plural": false,
+   "value": "Impossibile caricare i dettagli dell'abbonamento. Controlla la connessione e riprova."
+  },
+  "Couldn't look that up. Check your connection and try again.": {
+   "source": "Couldn't look that up. Check your connection and try again.",
+   "comment": "",
+   "plural": false,
+   "value": "Impossibile completare la ricerca. Controlla la connessione e riprova."
+  },
+  "Couldn't look this word up. Check your connection and try again.": {
+   "source": "Couldn't look this word up. Check your connection and try again.",
+   "comment": "Word sheet: looking a word up failed.",
+   "plural": false,
+   "value": "Impossibile cercare questa parola. Controlla la connessione e riprova."
+  },
+  "Couldn't open the microphone: %@": {
+   "source": "Couldn't open the microphone: %@",
+   "comment": "",
+   "plural": false,
+   "value": "Impossibile aprire il microfono: %@"
+  },
+  "Couldn't start the microphone. Tap your bubble to type instead.": {
+   "source": "Couldn't start the microphone. Tap your bubble to type instead.",
+   "comment": "",
+   "plural": false,
+   "value": "Impossibile avviare il microfono. Tocca la tua nuvoletta per scrivere."
+  },
+  "Daily stories from Dr Tusk": {
+   "source": "Daily stories from Dr Tusk",
+   "comment": "Paywall benefit title; also the locked stories row in the Phone tab.",
+   "plural": false,
+   "value": "Storie quotidiane di Dr Tusk"
+  },
+  "Daily Word": {
+   "source": "Daily Word",
+   "comment": "",
+   "plural": false,
+   "value": "Parola del giorno"
+  },
+  "Dating": {
+   "source": "Dating",
+   "comment": "",
+   "plural": false,
+   "value": "Appuntamenti"
+  },
+  "Debug": {
+   "source": "Debug",
+   "comment": "",
+   "plural": false,
+   "value": "Debug"
+  },
+  "Deck": {
+   "source": "Deck",
+   "comment": "A section header for the decks in the word filter picker.",
+   "plural": false,
+   "value": "Mazzo"
+  },
+  "Decline": {
+   "source": "Decline",
+   "comment": "",
+   "plural": false,
+   "value": "Rifiuta"
+  },
+  "Declined": {
+   "source": "Declined",
+   "comment": "",
+   "plural": false,
+   "value": "Rifiutata"
+  },
+  "Delete": {
+   "source": "Delete",
+   "comment": "A label for a button that deletes a word.",
+   "plural": false,
+   "value": "Elimina"
+  },
+  "Delete conversation": {
+   "source": "Delete conversation",
+   "comment": "A label for a button that deletes a conversation.",
+   "plural": false,
+   "value": "Elimina conversazione"
+  },
+  "Delete word": {
+   "source": "Delete word",
+   "comment": "",
+   "plural": false,
+   "value": "Elimina parola"
+  },
+  "Did you follow?": {
+   "source": "Did you follow?",
+   "comment": "Story screen: header above the comprehension questions.",
+   "plural": false,
+   "value": "Hai seguito?"
+  },
+  "Dismiss widget tip": {
+   "source": "Dismiss widget tip",
+   "comment": "A button that dismisses a widget tip.",
+   "plural": false,
+   "value": "Chiudi il suggerimento sul widget"
+  },
+  "Doctor, pharmacy, body parts, symptoms.": {
+   "source": "Doctor, pharmacy, body parts, symptoms.",
+   "comment": "",
+   "plural": false,
+   "value": "Medico, farmacia, parti del corpo, sintomi."
+  },
+  "Done": {
+   "source": "Done",
+   "comment": "Button: close the screen.",
+   "plural": false,
+   "value": "Fine"
+  },
+  "Dr Tusk": {
+   "source": "Dr Tusk",
+   "comment": "The walrus character's name. Keep as is unless the character has a localized name.",
+   "plural": false,
+   "value": "Dr Tusk"
+  },
+  "Dr Tusk · %@": {
+   "source": "Dr Tusk · %@",
+   "comment": "A label displaying the name of a user and their level. The first argument is the user's name. The second argument is the user's level.",
+   "plural": false,
+   "value": "Dr Tusk · %@"
+  },
+  "Dr Tusk couldn't finish today's story.": {
+   "source": "Dr Tusk couldn't finish today's story.",
+   "comment": "Story screen: generating today's story failed.",
+   "plural": false,
+   "value": "Dr Tusk non è riuscito a finire la storia di oggi."
+  },
+  "Dr Tusk gave up": {
+   "source": "Dr Tusk gave up",
+   "comment": "",
+   "plural": false,
+   "value": "Dr Tusk ha rinunciato"
+  },
+  "Dr Tusk gave up waiting.": {
+   "source": "Dr Tusk gave up waiting.",
+   "comment": "",
+   "plural": false,
+   "value": "Dr Tusk si è stancato di aspettare."
+  },
+  "Dr Tusk got tired of waiting and hung up. Call back when you're ready.": {
+   "source": "Dr Tusk got tired of waiting and hung up. Call back when you're ready.",
+   "comment": "",
+   "plural": false,
+   "value": "Dr Tusk si è stancato di aspettare e ha riattaccato. Richiamalo quando vuoi."
+  },
+  "Dr Tusk has a new story": {
+   "source": "Dr Tusk has a new story",
+   "comment": "Notification title when today's story is ready.",
+   "plural": false,
+   "value": "Dr Tusk ha una nuova storia"
+  },
+  "Dr Tusk hung up after you went silent": {
+   "source": "Dr Tusk hung up after you went silent",
+   "comment": "",
+   "plural": false,
+   "value": "Dr Tusk ha riattaccato dopo il tuo silenzio"
+  },
+  "Dr Tusk is calling": {
+   "source": "Dr Tusk is calling",
+   "comment": "",
+   "plural": false,
+   "value": "Dr Tusk ti sta chiamando"
+  },
+  "Dr Tusk is reading": {
+   "source": "Dr Tusk is reading",
+   "comment": "Story screen: narration is playing.",
+   "plural": false,
+   "value": "Dr Tusk sta leggendo"
+  },
+  "Dr Tusk is writing it…": {
+   "source": "Dr Tusk is writing it…",
+   "comment": "Phone tab row subtitle while today's story is being written.",
+   "plural": false,
+   "value": "Dr Tusk la sta scrivendo…"
+  },
+  "Dr Tusk is writing your story…": {
+   "source": "Dr Tusk is writing your story…",
+   "comment": "Story screen: shown while today's story is generated.",
+   "plural": false,
+   "value": "Dr Tusk sta scrivendo la tua storia…"
+  },
+  "Eating out": {
+   "source": "Eating out",
+   "comment": "Display name for the \"Eating out\" learning situation.",
+   "plural": false,
+   "value": "Mangiare fuori"
+  },
+  "Edit reminder": {
+   "source": "Edit reminder",
+   "comment": "",
+   "plural": false,
+   "value": "Modifica promemoria"
+  },
+  "Emotions, moods, reactions.": {
+   "source": "Emotions, moods, reactions.",
+   "comment": "",
+   "plural": false,
+   "value": "Emozioni, stati d'animo, reazioni."
+  },
+  "End": {
+   "source": "End",
+   "comment": "A label for the end time of a notification.",
+   "plural": false,
+   "value": "Fine"
+  },
+  "End at": {
+   "source": "End at",
+   "comment": "A label displayed for the end time of a notification.",
+   "plural": false,
+   "value": "Fine alle"
+  },
+  "End call": {
+   "source": "End call",
+   "comment": "A button that ends a call.",
+   "plural": false,
+   "value": "Termina chiamata"
+  },
+  "English": {
+   "source": "English",
+   "comment": "",
+   "plural": false,
+   "value": "Inglese"
+  },
+  "Enjoying Wordrus? A quick review helps other learners find it.": {
+   "source": "Enjoying Wordrus? A quick review helps other learners find it.",
+   "comment": "Shown above the Leave a Review button on the deck's end-of-day card.",
+   "plural": false,
+   "value": "Ti piace Wordrus? Una breve recensione aiuta altri studenti a trovarla."
+  },
+  "Enough to try chatting about the weather, family and your day.": {
+   "source": "Enough to try chatting about the weather, family and your day.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Abbastanza per provare a chiacchierare di meteo, famiglia e della tua giornata."
+  },
+  "Every language": {
+   "source": "Every language",
+   "comment": "Paywall benefit title.",
+   "plural": false,
+   "value": "Tutte le lingue"
+  },
+  "Every milestone reached!": {
+   "source": "Every milestone reached!",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Tutti i traguardi raggiunti!"
+  },
+  "Every topic": {
+   "source": "Every topic",
+   "comment": "Paywall benefit title.",
+   "plural": false,
+   "value": "Tutti i temi"
+  },
+  "Every word comes with an example you can hear out loud.": {
+   "source": "Every word comes with an example you can hear out loud.",
+   "comment": "",
+   "plural": false,
+   "value": "Ogni parola ha un esempio che puoi ascoltare ad alta voce."
+  },
+  "Everyday situations": {
+   "source": "Everyday situations",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Situazioni quotidiane"
+  },
+  "Everyday words": {
+   "source": "Everyday words",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Parole quotidiane"
+  },
+  "Everything in Pro": {
+   "source": "Everything in Pro",
+   "comment": "A heading for the benefits of Pro.",
+   "plural": false,
+   "value": "Tutto ciò che include Pro"
+  },
+  "Family & People": {
+   "source": "Family & People",
+   "comment": "",
+   "plural": false,
+   "value": "Famiglia e persone"
+  },
+  "Feelings": {
+   "source": "Feelings",
+   "comment": "",
+   "plural": false,
+   "value": "Emozioni"
+  },
+  "fem.": {
+   "source": "fem.",
+   "comment": "Grammatical gender abbreviation: feminine",
+   "plural": false,
+   "value": "f."
+  },
+  "Filter": {
+   "source": "Filter",
+   "comment": "A label for the filter picker.",
+   "plural": false,
+   "value": "Filtro"
+  },
+  "Find your way": {
+   "source": "Find your way",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Orientarsi"
+  },
+  "Finish story": {
+   "source": "Finish story",
+   "comment": "Story screen: button after the questions; opens the end card.",
+   "plural": false,
+   "value": "Termina la storia"
+  },
+  "Flip Pro on to walk through paid flows without buying. Force free overrides a real sandbox purchase so you can test the free/paywall experience. Restarting onboarding resets all answers. Debug builds only.": {
+   "source": "Flip Pro on to walk through paid flows without buying. Force free overrides a real sandbox purchase so you can test the free/paywall experience. Restarting onboarding resets all answers. Debug builds only.",
+   "comment": "",
+   "plural": false,
+   "value": "Attiva Pro per provare i flussi a pagamento senza acquistare. Forza gratis ignora un acquisto sandbox reale, così puoi testare l'esperienza gratuita/paywall. Riavviare l'onboarding azzera tutte le risposte. Solo nelle build di debug."
+  },
+  "Fluent on complex topics": {
+   "source": "Fluent on complex topics",
+   "comment": "",
+   "plural": false,
+   "value": "Fluente su temi complessi"
+  },
+  "Follow a simple podcast": {
+   "source": "Follow a simple podcast",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Seguire un podcast semplice"
+  },
+  "Food & Drink": {
+   "source": "Food & Drink",
+   "comment": "",
+   "plural": false,
+   "value": "Cibo e bevande"
+  },
+  "Force free (ignore real purchase)": {
+   "source": "Force free (ignore real purchase)",
+   "comment": "",
+   "plural": false,
+   "value": "Forza gratis (ignora acquisto reale)"
+  },
+  "French": {
+   "source": "French",
+   "comment": "",
+   "plural": false,
+   "value": "Francese"
+  },
+  "German": {
+   "source": "German",
+   "comment": "",
+   "plural": false,
+   "value": "Tedesco"
+  },
+  "Getting around": {
+   "source": "Getting around",
+   "comment": "Title for the \"Getting around\" learning situation.",
+   "plural": false,
+   "value": "Spostarsi"
+  },
+  "Getting Dr Tusk's voice ready…": {
+   "source": "Getting Dr Tusk's voice ready…",
+   "comment": "Story screen: narration audio is loading.",
+   "plural": false,
+   "value": "Preparo la voce di Dr Tusk…"
+  },
+  "Give me a minute a day and I'll do the rest.": {
+   "source": "Give me a minute a day and I'll do the rest.",
+   "comment": "A description of the final pitch step.",
+   "plural": false,
+   "value": "Dammi un minuto al giorno e al resto penso io."
+  },
+  "Going out": {
+   "source": "Going out",
+   "comment": "A learning situation where the user is going out.",
+   "plural": false,
+   "value": "Uscire"
+  },
+  "Going out, music, sport, hobbies.": {
+   "source": "Going out, music, sport, hobbies.",
+   "comment": "",
+   "plural": false,
+   "value": "Uscite, musica, sport, hobby."
+  },
+  "Good chat. Next time, try to weave in more of the vocabulary you've learned.": {
+   "source": "Good chat. Next time, try to weave in more of the vocabulary you've learned.",
+   "comment": "",
+   "plural": false,
+   "value": "Bella chiacchierata. La prossima volta prova a usare più parole tra quelle che hai imparato."
+  },
+  "Groceries, cooking, ingredients.": {
+   "source": "Groceries, cooking, ingredients.",
+   "comment": "",
+   "plural": false,
+   "value": "Spesa, cucina, ingredienti."
+  },
+  "He still calls you for free — Pro lets you call him on demand.": {
+   "source": "He still calls you for free — Pro lets you call him on demand.",
+   "comment": "Paywall benefit detail for calls. 'He' is Dr Tusk, the walrus.",
+   "plural": false,
+   "value": "Lui ti chiama comunque gratis — con Pro puoi chiamarlo tu quando vuoi."
+  },
+  "Health & Body": {
+   "source": "Health & Body",
+   "comment": "",
+   "plural": false,
+   "value": "Salute e corpo"
+  },
+  "Health & emergencies": {
+   "source": "Health & emergencies",
+   "comment": "Learning situation for health and emergency-related topics.",
+   "plural": false,
+   "value": "Salute ed emergenze"
+  },
+  "Hear it spoken aloud": {
+   "source": "Hear it spoken aloud",
+   "comment": "A button that plays a sentence aloud.",
+   "plural": false,
+   "value": "Ascoltala ad alta voce"
+  },
+  "Helps improve Wordrus. Nothing you type or say is ever sent.": {
+   "source": "Helps improve Wordrus. Nothing you type or say is ever sent.",
+   "comment": "",
+   "plural": false,
+   "value": "Aiuta a migliorare Wordrus. Niente di ciò che scrivi o dici viene mai inviato."
+  },
+  "Hi, I'm Dr Tusk. A few quick questions before we begin.": {
+   "source": "Hi, I'm Dr Tusk. A few quick questions before we begin.",
+   "comment": "A welcome message at the start of the onboarding flow.",
+   "plural": false,
+   "value": "Ciao, sono Dr Tusk. Qualche domanda veloce prima di iniziare."
+  },
+  "Home & Daily Life": {
+   "source": "Home & Daily Life",
+   "comment": "",
+   "plural": false,
+   "value": "Casa e vita quotidiana"
+  },
+  "How about these?": {
+   "source": "How about these?",
+   "comment": "",
+   "plural": false,
+   "value": "E queste?"
+  },
+  "How many": {
+   "source": "How many",
+   "comment": "A label displayed under a stepper that lets the user select how many times they want to be notified.",
+   "plural": false,
+   "value": "Quante volte"
+  },
+  "How many new words shall we do each day?": {
+   "source": "How many new words shall we do each day?",
+   "comment": "",
+   "plural": false,
+   "value": "Quante parole nuove facciamo ogni giorno?"
+  },
+  "How should I call you?": {
+   "source": "How should I call you?",
+   "comment": "",
+   "plural": false,
+   "value": "Come ti chiamo?"
+  },
+  "Hung up": {
+   "source": "Hung up",
+   "comment": "",
+   "plural": false,
+   "value": "Interrotta"
+  },
+  "I can hold short conversations": {
+   "source": "I can hold short conversations",
+   "comment": "",
+   "plural": false,
+   "value": "Riesco a sostenere brevi conversazioni"
+  },
+  "I speak": {
+   "source": "I speak",
+   "comment": "",
+   "plural": false,
+   "value": "Parlo"
+  },
+  "I'm comfortable in most situations": {
+   "source": "I'm comfortable in most situations",
+   "comment": "",
+   "plural": false,
+   "value": "Me la cavo nella maggior parte delle situazioni"
+  },
+  "I've been learning words with Wordrus — thought you might like it too.": {
+   "source": "I've been learning words with Wordrus — thought you might like it too.",
+   "comment": "",
+   "plural": false,
+   "value": "Sto imparando parole con Wordrus — ho pensato che potesse piacere anche a te."
+  },
+  "In the story: “%@”": {
+   "source": "In the story: “%@”",
+   "comment": "Word sheet: the form of the word as it appears in the story.",
+   "plural": false,
+   "value": "Nella storia: “%@”"
+  },
+  "In your stack": {
+   "source": "In your stack",
+   "comment": "Word sheet: the word is already in the learner's card stack.",
+   "plural": false,
+   "value": "Nel tuo mazzo"
+  },
+  "Incoming · %@": {
+   "source": "Incoming · %@",
+   "comment": "",
+   "plural": false,
+   "value": "In arrivo · %@"
+  },
+  "Incoming call": {
+   "source": "Incoming call",
+   "comment": "A label displayed above the name of the incoming call.",
+   "plural": false,
+   "value": "Chiamata in arrivo"
+  },
+  "Incredible momentum!": {
+   "source": "Incredible momentum!",
+   "comment": "",
+   "plural": false,
+   "value": "Che slancio incredibile!"
+  },
+  "interjection": {
+   "source": "interjection",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "interiezione"
+  },
+  "Intermediate": {
+   "source": "Intermediate",
+   "comment": "",
+   "plural": false,
+   "value": "Intermedio"
+  },
+  "Italian": {
+   "source": "Italian",
+   "comment": "",
+   "plural": false,
+   "value": "Italiano"
+  },
+  "Jobs, office, colleagues, careers.": {
+   "source": "Jobs, office, colleagues, careers.",
+   "comment": "",
+   "plural": false,
+   "value": "Impieghi, ufficio, colleghi, carriera."
+  },
+  "Just getting started": {
+   "source": "Just getting started",
+   "comment": "",
+   "plural": false,
+   "value": "Sto appena iniziando"
+  },
+  "Keep today's word on your Home Screen.": {
+   "source": "Keep today's word on your Home Screen.",
+   "comment": "A description of the widget feature.",
+   "plural": false,
+   "value": "Tieni la parola di oggi sulla schermata Home."
+  },
+  "Know": {
+   "source": "Know",
+   "comment": "",
+   "plural": false,
+   "value": "Conosciute"
+  },
+  "Language": {
+   "source": "Language",
+   "comment": "",
+   "plural": false,
+   "value": "Lingua"
+  },
+  "Learn the most used words in English": {
+   "source": "Learn the most used words in English",
+   "comment": "",
+   "plural": false,
+   "value": "Impara le parole più usate in inglese"
+  },
+  "Learn the most used words in Spanish, French, Italian and German": {
+   "source": "Learn the most used words in Spanish, French, Italian and German",
+   "comment": "",
+   "plural": false,
+   "value": "Impara le parole più usate in spagnolo, francese, italiano e tedesco"
+  },
+  "Learning": {
+   "source": "Learning",
+   "comment": "",
+   "plural": false,
+   "value": "Apprendimento"
+  },
+  "Leave a Review": {
+   "source": "Leave a Review",
+   "comment": "",
+   "plural": false,
+   "value": "Lascia una recensione"
+  },
+  "Legendary streak!": {
+   "source": "Legendary streak!",
+   "comment": "",
+   "plural": false,
+   "value": "Serie leggendaria!"
+  },
+  "Let's set your learning pace.": {
+   "source": "Let's set your learning pace.",
+   "comment": "",
+   "plural": false,
+   "value": "Impostiamo il tuo ritmo di apprendimento."
+  },
+  "Let's start learning %@ at %@,\n%lld new words a day.": {
+   "source": "Let's start learning %@ at %@,\n%lld new words a day.",
+   "comment": "",
+   "plural": true,
+   "value": "Iniziamo con %@ dal livello %@,\n%lld parole nuove al giorno."
+  },
+  "Level": {
+   "source": "Level",
+   "comment": "",
+   "plural": false,
+   "value": "Livello"
+  },
+  "Lifetime": {
+   "source": "Lifetime",
+   "comment": "",
+   "plural": false,
+   "value": "A vita"
+  },
+  "Listen to Dr Tusk": {
+   "source": "Listen to Dr Tusk",
+   "comment": "Story screen: narration bar before playing.",
+   "plural": false,
+   "value": "Ascolta Dr Tusk"
+  },
+  "Listening to you": {
+   "source": "Listening to you",
+   "comment": "",
+   "plural": false,
+   "value": "Ti sto ascoltando"
+  },
+  "Listening…": {
+   "source": "Listening…",
+   "comment": "",
+   "plural": false,
+   "value": "In ascolto…"
+  },
+  "Live words on Lock Screen": {
+   "source": "Live words on Lock Screen",
+   "comment": "",
+   "plural": false,
+   "value": "Parole live sulla schermata di blocco"
+  },
+  "Living abroad": {
+   "source": "Living abroad",
+   "comment": "",
+   "plural": false,
+   "value": "Vivere all'estero"
+  },
+  "Long-press your Home Screen": {
+   "source": "Long-press your Home Screen",
+   "comment": "",
+   "plural": false,
+   "value": "Tieni premuto sulla schermata Home"
+  },
+  "Look up any word you hear or see — definition and example added instantly.": {
+   "source": "Look up any word you hear or see — definition and example added instantly.",
+   "comment": "Paywall benefit detail for adding words.",
+   "plural": false,
+   "value": "Cerca qualsiasi parola che senti o vedi — definizione ed esempio aggiunti all'istante."
+  },
+  "Looking up “%@”…": {
+   "source": "Looking up “%@”…",
+   "comment": "Word sheet: loading. %@ is the word tapped in the story.",
+   "plural": false,
+   "value": "Cerco “%@”…"
+  },
+  "Making friends": {
+   "source": "Making friends",
+   "comment": "Display name for a learning situation.",
+   "plural": false,
+   "value": "Fare amicizia"
+  },
+  "Mark as known": {
+   "source": "Mark as known",
+   "comment": "",
+   "plural": false,
+   "value": "Segna come conosciuta"
+  },
+  "masc.": {
+   "source": "masc.",
+   "comment": "Grammatical gender abbreviation: masculine",
+   "plural": false,
+   "value": "m."
+  },
+  "Microphone off": {
+   "source": "Microphone off",
+   "comment": "",
+   "plural": false,
+   "value": "Microfono disattivato"
+  },
+  "Microphone returned no audio format. Reset the audio session and try again.": {
+   "source": "Microphone returned no audio format. Reset the audio session and try again.",
+   "comment": "",
+   "plural": false,
+   "value": "Il microfono non ha restituito alcun formato audio. Reimposta la sessione audio e riprova."
+  },
+  "Microphone wouldn't start: %@": {
+   "source": "Microphone wouldn't start: %@",
+   "comment": "",
+   "plural": false,
+   "value": "Il microfono non si è avviato: %@"
+  },
+  "Milestones": {
+   "source": "Milestones",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Traguardi"
+  },
+  "Missed": {
+   "source": "Missed",
+   "comment": "",
+   "plural": false,
+   "value": "Persa"
+  },
+  "Missed call": {
+   "source": "Missed call",
+   "comment": "",
+   "plural": false,
+   "value": "Chiamata persa"
+  },
+  "Money & Bills": {
+   "source": "Money & Bills",
+   "comment": "",
+   "plural": false,
+   "value": "Soldi e bollette"
+  },
+  "Monthly": {
+   "source": "Monthly",
+   "comment": "",
+   "plural": false,
+   "value": "Mensile"
+  },
+  "More options": {
+   "source": "More options",
+   "comment": "A button that presents a menu of more options.",
+   "plural": false,
+   "value": "Altre opzioni"
+  },
+  "Move back to learning": {
+   "source": "Move back to learning",
+   "comment": "",
+   "plural": false,
+   "value": "Riporta in apprendimento"
+  },
+  "Move me up to %@": {
+   "source": "Move me up to %@",
+   "comment": "A button that moves the user to the next level.",
+   "plural": false,
+   "value": "Portami al livello %@"
+  },
+  "Move up to %@": {
+   "source": "Move up to %@",
+   "comment": "A button that lets the user upgrade to a higher level of the language course. The argument is the name of the next level.",
+   "plural": false,
+   "value": "Passa al livello %@"
+  },
+  "Mute audio": {
+   "source": "Mute audio",
+   "comment": "A button that mutes audio.",
+   "plural": false,
+   "value": "Disattiva audio"
+  },
+  "My level": {
+   "source": "My level",
+   "comment": "",
+   "plural": false,
+   "value": "Il mio livello"
+  },
+  "My Words": {
+   "source": "My Words",
+   "comment": "",
+   "plural": false,
+   "value": "Le mie parole"
+  },
+  "Name": {
+   "source": "Name",
+   "comment": "",
+   "plural": false,
+   "value": "Nome"
+  },
+  "Near-native — anything goes": {
+   "source": "Near-native — anything goes",
+   "comment": "",
+   "plural": false,
+   "value": "Quasi madrelingua — posso parlare di tutto"
+  },
+  "New words": {
+   "source": "New words",
+   "comment": "End card: header above the story's new words.",
+   "plural": false,
+   "value": "Parole nuove"
+  },
+  "New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing aren't affected.": {
+   "source": "New words start at your level; easier ones only appear once your level runs out. Words you're already reviewing aren't affected.",
+   "comment": "",
+   "plural": false,
+   "value": "Le parole nuove partono dal tuo livello; quelle più facili compaiono solo quando il tuo livello è esaurito. Le parole che stai già ripassando non cambiano."
+  },
+  "Next review %@": {
+   "source": "Next review %@",
+   "comment": "A label showing the next review date. The argument is a date, the second is a date formatter.",
+   "plural": false,
+   "value": "Prossimo ripasso %@"
+  },
+  "Next: %@": {
+   "source": "Next: %@",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Prossimo: %@"
+  },
+  "Nice start — keep it going!": {
+   "source": "Nice start — keep it going!",
+   "comment": "",
+   "plural": false,
+   "value": "Bell'inizio — continua così!"
+  },
+  "Nice work — you used %lld of the words you've been studying.": {
+   "source": "Nice work — you used %lld of the words you've been studying.",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "Ottimo lavoro — hai usato %lld parole tra quelle che stai studiando.",
+    "one": "Ottimo lavoro — hai usato %lld parola tra quelle che stai studiando.",
+    "other": "Ottimo lavoro — hai usato %lld parole tra quelle che stai studiando."
+   }
+  },
+  "Nicely said": {
+   "source": "Nicely said",
+   "comment": "",
+   "plural": false,
+   "value": "Ben detto"
+  },
+  "No calls yet": {
+   "source": "No calls yet",
+   "comment": "A label displayed when there are no past calls.",
+   "plural": false,
+   "value": "Ancora nessuna chiamata"
+  },
+  "No payment due now": {
+   "source": "No payment due now",
+   "comment": "",
+   "plural": false,
+   "value": "Nessun pagamento dovuto ora"
+  },
+  "No previous purchases were found for this Apple Account.": {
+   "source": "No previous purchases were found for this Apple Account.",
+   "comment": "",
+   "plural": false,
+   "value": "Nessun acquisto precedente trovato per questo account Apple."
+  },
+  "No speech recognizer for %@.": {
+   "source": "No speech recognizer for %@.",
+   "comment": "",
+   "plural": false,
+   "value": "Nessun riconoscimento vocale per %@."
+  },
+  "No transcript.": {
+   "source": "No transcript.",
+   "comment": "",
+   "plural": false,
+   "value": "Nessuna trascrizione."
+  },
+  "Not now": {
+   "source": "Not now",
+   "comment": "A button that dismisses a step without allowing notifications.",
+   "plural": false,
+   "value": "Non ora"
+  },
+  "Not quite — it was “%@”.": {
+   "source": "Not quite — it was “%@”.",
+   "comment": "Quiz feedback: wrong answer. %@ is the correct option.",
+   "plural": false,
+   "value": "Non proprio — era “%@”."
+  },
+  "Nothing to Restore": {
+   "source": "Nothing to Restore",
+   "comment": "",
+   "plural": false,
+   "value": "Niente da ripristinare"
+  },
+  "noun": {
+   "source": "noun",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "sostantivo"
+  },
+  "Nouns": {
+   "source": "Nouns",
+   "comment": "",
+   "plural": false,
+   "value": "Sostantivi"
+  },
+  "Now let's see how many words you already know.": {
+   "source": "Now let's see how many words you already know.",
+   "comment": "",
+   "plural": false,
+   "value": "Ora vediamo quante parole conosci già."
+  },
+  "Now tell me what matters to you, and I'll teach those words first.": {
+   "source": "Now tell me what matters to you, and I'll teach those words first.",
+   "comment": "",
+   "plural": false,
+   "value": "Ora dimmi cosa ti interessa e ti insegnerò prima quelle parole."
+  },
+  "number": {
+   "source": "number",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "numero"
+  },
+  "of everyday words — common words count for more, so the first few hundred go a long way.": {
+   "source": "of everyday words — common words count for more, so the first few hundred go a long way.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "delle parole quotidiane — le parole comuni contano di più, quindi le prime centinaia fanno già tanta strada."
+  },
+  "Off": {
+   "source": "Off",
+   "comment": "",
+   "plural": false,
+   "value": "Disattivato"
+  },
+  "OK": {
+   "source": "OK",
+   "comment": "The OK button on an alert.",
+   "plural": false,
+   "value": "OK"
+  },
+  "OK %@, let's set your learning pace.": {
+   "source": "OK %@, let's set your learning pace.",
+   "comment": "",
+   "plural": false,
+   "value": "OK %@, impostiamo il tuo ritmo di apprendimento."
+  },
+  "Open the app to load your first word.": {
+   "source": "Open the app to load your first word.",
+   "comment": "",
+   "plural": false,
+   "value": "Apri l'app per caricare la tua prima parola."
+  },
+  "Open the widget gallery from the edit screen.": {
+   "source": "Open the widget gallery from the edit screen.",
+   "comment": "",
+   "plural": false,
+   "value": "Apri la galleria dei widget dalla schermata di modifica."
+  },
+  "Order at a café": {
+   "source": "Order at a café",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Ordinare al bar"
+  },
+  "ordinal": {
+   "source": "ordinal",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "ordinale"
+  },
+  "Other": {
+   "source": "Other",
+   "comment": "",
+   "plural": false,
+   "value": "Altro"
+  },
+  "Out & About": {
+   "source": "Out & About",
+   "comment": "",
+   "plural": false,
+   "value": "Uscite e svago"
+  },
+  "Outgoing · %@": {
+   "source": "Outgoing · %@",
+   "comment": "",
+   "plural": false,
+   "value": "In uscita · %@"
+  },
+  "Passed · used %lld target words": {
+   "source": "Passed · used %lld target words",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "Superata · usate %lld parole obiettivo",
+    "one": "Superata · usata %lld parola obiettivo",
+    "other": "Superata · usate %lld parole obiettivo"
+   }
+  },
+  "Pause story": {
+   "source": "Pause story",
+   "comment": "VoiceOver label: pause the story narration.",
+   "plural": false,
+   "value": "Metti in pausa la storia"
+  },
+  "Paused": {
+   "source": "Paused",
+   "comment": "Story screen: narration is paused.",
+   "plural": false,
+   "value": "In pausa"
+  },
+  "Payment is charged to your Apple ID account. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period.": {
+   "source": "Payment is charged to your Apple ID account. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period.",
+   "comment": "",
+   "plural": false,
+   "value": "Il pagamento viene addebitato sul tuo account ID Apple. L'abbonamento si rinnova automaticamente, a meno che non venga disdetto almeno 24 ore prima della fine del periodo in corso."
+  },
+  "Pets, farm animals, birds, insects.": {
+   "source": "Pets, farm animals, birds, insects.",
+   "comment": "",
+   "plural": false,
+   "value": "Animali domestici, da fattoria, uccelli, insetti."
+  },
+  "Phone": {
+   "source": "Phone",
+   "comment": "",
+   "plural": false,
+   "value": "Telefono"
+  },
+  "Phone & Internet": {
+   "source": "Phone & Internet",
+   "comment": "",
+   "plural": false,
+   "value": "Telefono e Internet"
+  },
+  "phrase": {
+   "source": "phrase",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "espressione"
+  },
+  "Pick Daily Word and place it on the Home Screen.": {
+   "source": "Pick Daily Word and place it on the Home Screen.",
+   "comment": "",
+   "plural": false,
+   "value": "Scegli Parola del giorno e posizionala sulla schermata Home."
+  },
+  "Pick the topics that matter to you — as many as you like.": {
+   "source": "Pick the topics that matter to you — as many as you like.",
+   "comment": "",
+   "plural": false,
+   "value": "Scegli i temi che ti interessano — quanti ne vuoi."
+  },
+  "pl.": {
+   "source": "pl.",
+   "comment": "Grammatical number abbreviation: plural",
+   "plural": false,
+   "value": "pl."
+  },
+  "Plan": {
+   "source": "Plan",
+   "comment": "",
+   "plural": false,
+   "value": "Piano"
+  },
+  "Play example sentence": {
+   "source": "Play example sentence",
+   "comment": "VoiceOver label: play the example sentence.",
+   "plural": false,
+   "value": "Riproduci la frase di esempio"
+  },
+  "Play story": {
+   "source": "Play story",
+   "comment": "VoiceOver label: play the story narration.",
+   "plural": false,
+   "value": "Riproduci la storia"
+  },
+  "Practice again": {
+   "source": "Practice again",
+   "comment": "A button that triggers the replay of a set.",
+   "plural": false,
+   "value": "Esercitati ancora"
+  },
+  "Practise again": {
+   "source": "Practise again",
+   "comment": "Word sheet button: put a known word back into the stack.",
+   "plural": false,
+   "value": "Esercitati ancora"
+  },
+  "preposition": {
+   "source": "preposition",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "preposizione"
+  },
+  "Press and hold an empty area until the apps start to jiggle.": {
+   "source": "Press and hold an empty area until the apps start to jiggle.",
+   "comment": "",
+   "plural": false,
+   "value": "Tieni premuto su un'area vuota finché le app non iniziano a muoversi."
+  },
+  "Privacy": {
+   "source": "Privacy",
+   "comment": "",
+   "plural": false,
+   "value": "Privacy"
+  },
+  "Privacy Policy": {
+   "source": "Privacy Policy",
+   "comment": "A link to the app's privacy policy.",
+   "plural": false,
+   "value": "Informativa sulla privacy"
+  },
+  "Pro features unlocked": {
+   "source": "Pro features unlocked",
+   "comment": "",
+   "plural": false,
+   "value": "Funzioni Pro sbloccate"
+  },
+  "pronoun": {
+   "source": "pronoun",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "pronome"
+  },
+  "Purchase Failed": {
+   "source": "Purchase Failed",
+   "comment": "",
+   "plural": false,
+   "value": "Acquisto non riuscito"
+  },
+  "Read a simple book": {
+   "source": "Read a simple book",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Leggere un libro semplice"
+  },
+  "Ready for **%@**": {
+   "source": "Ready for **%@**",
+   "comment": "A call-to-action button that lets the user upgrade their CEFR level to the next level.",
+   "plural": false,
+   "value": "Pronti per **%@**"
+  },
+  "Ready to move up to %@.": {
+   "source": "Ready to move up to %@.",
+   "comment": "",
+   "plural": false,
+   "value": "Pronti per passare a %@."
+  },
+  "Ready to try a graded reader from cover to cover.": {
+   "source": "Ready to try a graded reader from cover to cover.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Ora puoi provare a leggere un libro graduato da cima a fondo."
+  },
+  "Ready to try a slow podcast made for learners.": {
+   "source": "Ready to try a slow podcast made for learners.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Ora puoi provare un podcast lento pensato per chi impara."
+  },
+  "Ready to try asking for directions — and following the answer.": {
+   "source": "Ready to try asking for directions — and following the answer.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Ora puoi provare a chiedere indicazioni — e a capire la risposta."
+  },
+  "Ready to try conversations that wander anywhere.": {
+   "source": "Ready to try conversations that wander anywhere.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Ora puoi provare conversazioni che spaziano ovunque."
+  },
+  "Recents": {
+   "source": "Recents",
+   "comment": "A section header for the list of recent calls.",
+   "plural": false,
+   "value": "Recenti"
+  },
+  "Relatives, friends, describing people.": {
+   "source": "Relatives, friends, describing people.",
+   "comment": "",
+   "plural": false,
+   "value": "Parenti, amici, descrivere le persone."
+  },
+  "Reminders": {
+   "source": "Reminders",
+   "comment": "A label displayed in a toggle that enables or disables notifications.",
+   "plural": false,
+   "value": "Promemoria"
+  },
+  "Repeat": {
+   "source": "Repeat",
+   "comment": "",
+   "plural": false,
+   "value": "Ripeti"
+  },
+  "Replay sentence": {
+   "source": "Replay sentence",
+   "comment": "A button that plays the example sentence aloud.",
+   "plural": false,
+   "value": "Riascolta la frase"
+  },
+  "Restart onboarding": {
+   "source": "Restart onboarding",
+   "comment": "",
+   "plural": false,
+   "value": "Riavvia l'onboarding"
+  },
+  "Restore Failed": {
+   "source": "Restore Failed",
+   "comment": "",
+   "plural": false,
+   "value": "Ripristino non riuscito"
+  },
+  "Restore Purchases": {
+   "source": "Restore Purchases",
+   "comment": "A button that restores purchases.",
+   "plural": false,
+   "value": "Ripristina acquisti"
+  },
+  "Retell it to Dr Tusk": {
+   "source": "Retell it to Dr Tusk",
+   "comment": "End card: button that starts a call to retell the story.",
+   "plural": false,
+   "value": "Raccontala a Dr Tusk"
+  },
+  "Retry": {
+   "source": "Retry",
+   "comment": "A button to retry loading the subscription details.",
+   "plural": false,
+   "value": "Riprova"
+  },
+  "Revision": {
+   "source": "Revision",
+   "comment": "",
+   "plural": false,
+   "value": "Ripasso"
+  },
+  "Ringing%@": {
+   "source": "Ringing%@",
+   "comment": "Outgoing call status; the argument is 0–3 animated dots.",
+   "plural": false,
+   "value": "Squilla%@"
+  },
+  "Rooms, routines, household items.": {
+   "source": "Rooms, routines, household items.",
+   "comment": "",
+   "plural": false,
+   "value": "Stanze, routine, oggetti di casa."
+  },
+  "Save": {
+   "source": "Save",
+   "comment": "A button that saves changes to a reminder.",
+   "plural": false,
+   "value": "Salva"
+  },
+  "Say that again": {
+   "source": "Say that again",
+   "comment": "A button that plays the text aloud again.",
+   "plural": false,
+   "value": "Ripetilo"
+  },
+  "School, exams, courses, learning.": {
+   "source": "School, exams, courses, learning.",
+   "comment": "",
+   "plural": false,
+   "value": "Scuola, esami, corsi, apprendimento."
+  },
+  "Search wordrus, then Add Widget": {
+   "source": "Search wordrus, then Add Widget",
+   "comment": "",
+   "plural": false,
+   "value": "Cerca wordrus, poi tocca Aggiungi widget"
+  },
+  "Seasons, forecast, landscape, plants.": {
+   "source": "Seasons, forecast, landscape, plants.",
+   "comment": "",
+   "plural": false,
+   "value": "Stagioni, previsioni, paesaggi, piante."
+  },
+  "Send": {
+   "source": "Send",
+   "comment": "A button that sends the current message.",
+   "plural": false,
+   "value": "Invia"
+  },
+  "Set complete!": {
+   "source": "Set complete!",
+   "comment": "",
+   "plural": false,
+   "value": "Set completato!"
+  },
+  "Settings": {
+   "source": "Settings",
+   "comment": "A label for a settings icon.",
+   "plural": false,
+   "value": "Impostazioni"
+  },
+  "settings.section.learning": {
+   "source": "Learning",
+   "comment": "Settings section header for learning preferences (level, words per day, reminders).",
+   "plural": false,
+   "value": "Apprendimento"
+  },
+  "Share anonymous usage stats": {
+   "source": "Share anonymous usage stats",
+   "comment": "",
+   "plural": false,
+   "value": "Condividi statistiche d'uso anonime"
+  },
+  "Share with a friend": {
+   "source": "Share with a friend",
+   "comment": "Button on the deck's end-of-day card that opens the share sheet with the App Store link.",
+   "plural": false,
+   "value": "Condividi con un amico"
+  },
+  "Share Wordrus": {
+   "source": "Share Wordrus",
+   "comment": "",
+   "plural": false,
+   "value": "Condividi Wordrus"
+  },
+  "Shopping": {
+   "source": "Shopping",
+   "comment": "",
+   "plural": false,
+   "value": "Shopping"
+  },
+  "Shops, trains, the doctor — you're ready to try most daily errands.": {
+   "source": "Shops, trains, the doctor — you're ready to try most daily errands.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Negozi, treni, medico — ora puoi provare quasi tutte le commissioni quotidiane."
+  },
+  "Short conversations on familiar topics": {
+   "source": "Short conversations on familiar topics",
+   "comment": "",
+   "plural": false,
+   "value": "Brevi conversazioni su temi familiari"
+  },
+  "Show transcript": {
+   "source": "Show transcript",
+   "comment": "A button that shows a transcript of a voice call.",
+   "plural": false,
+   "value": "Mostra trascrizione"
+  },
+  "Shows your milestones and topics.": {
+   "source": "Shows your milestones and topics.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Mostra i tuoi traguardi e temi."
+  },
+  "Skip": {
+   "source": "Skip",
+   "comment": "",
+   "plural": false,
+   "value": "Salta"
+  },
+  "Small talk": {
+   "source": "Small talk",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Due chiacchiere"
+  },
+  "Spanish": {
+   "source": "Spanish",
+   "comment": "",
+   "plural": false,
+   "value": "Spagnolo"
+  },
+  "Speaking": {
+   "source": "Speaking",
+   "comment": "",
+   "plural": false,
+   "value": "Sta parlando"
+  },
+  "Spread the Word": {
+   "source": "Spread the Word",
+   "comment": "",
+   "plural": false,
+   "value": "Passaparola"
+  },
+  "Start": {
+   "source": "Start",
+   "comment": "A button label.",
+   "plural": false,
+   "value": "Inizia"
+  },
+  "Start at": {
+   "source": "Start at",
+   "comment": "",
+   "plural": false,
+   "value": "Inizio alle"
+  },
+  "Start learning": {
+   "source": "Start learning",
+   "comment": "A button that starts the app.",
+   "plural": false,
+   "value": "Inizia a imparare"
+  },
+  "Start your streak today": {
+   "source": "Start your streak today",
+   "comment": "",
+   "plural": false,
+   "value": "Inizia la tua serie oggi"
+  },
+  "Story from Dr Tusk: %@. %@": {
+   "source": "Story from Dr Tusk: %@. %@",
+   "comment": "VoiceOver label for a read story row. First %@ is the title, second is when it arrived (e.g. Today, 16:24).",
+   "plural": false,
+   "value": "Storia di Dr Tusk: %@. %@"
+  },
+  "Streak: %lld days": {
+   "source": "Streak: %lld days",
+   "comment": "",
+   "plural": true,
+   "value": {
+    "many": "Serie: %lld giorni",
+    "one": "Serie: %lld giorno",
+    "other": "Serie: %lld giorni"
+   }
+  },
+  "Studying": {
+   "source": "Studying",
+   "comment": "",
+   "plural": false,
+   "value": "Studio"
+  },
+  "Subscribe": {
+   "source": "Subscribe",
+   "comment": "",
+   "plural": false,
+   "value": "Abbonati"
+  },
+  "Switch": {
+   "source": "Switch",
+   "comment": "A button that switches to a different language.",
+   "plural": false,
+   "value": "Cambia"
+  },
+  "Switch between all supported languages.": {
+   "source": "Switch between all supported languages.",
+   "comment": "Paywall benefit detail.",
+   "plural": false,
+   "value": "Passa da una lingua supportata all'altra."
+  },
+  "Switch to %@?": {
+   "source": "Switch to %@?",
+   "comment": "A confirmation dialog that lets the user switch to a different language.",
+   "plural": false,
+   "value": "Vuoi studiare %@?"
+  },
+  "Talk about almost anything": {
+   "source": "Talk about almost anything",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Parlare di quasi tutto"
+  },
+  "Tap **Call Dr Tusk** above to start your first conversation.": {
+   "source": "Tap **Call Dr Tusk** above to start your first conversation.",
+   "comment": "A description of the call button.",
+   "plural": false,
+   "value": "Tocca **Chiama Dr Tusk** qui sopra per iniziare la tua prima conversazione."
+  },
+  "Tap a milestone you've reached to see the words that got you there.": {
+   "source": "Tap a milestone you've reached to see the words that got you there.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Tocca un traguardo raggiunto per vedere le parole che ti ci hanno portato."
+  },
+  "Tap any of these you already know — up to 6.": {
+   "source": "Tap any of these you already know — up to 6.",
+   "comment": "",
+   "plural": false,
+   "value": "Tocca quelle che conosci già — fino a 6."
+  },
+  "Tap the + in the top-left": {
+   "source": "Tap the + in the top-left",
+   "comment": "",
+   "plural": false,
+   "value": "Tocca + in alto a sinistra"
+  },
+  "Tap to answer and practice your %@.": {
+   "source": "Tap to answer and practice your %@.",
+   "comment": "",
+   "plural": false,
+   "value": "Tocca per rispondere ed esercitarti in %@."
+  },
+  "Tap to hear it spoken aloud": {
+   "source": "Tap to hear it spoken aloud",
+   "comment": "A label that describes a button that plays a sentence aloud.",
+   "plural": false,
+   "value": "Tocca per ascoltarla ad alta voce"
+  },
+  "Tap to start a conversation in %@.": {
+   "source": "Tap to start a conversation in %@.",
+   "comment": "A call-to-action label that lets users initiate a conversation with Dr Tusk.",
+   "plural": false,
+   "value": "Tocca per iniziare una conversazione in %@."
+  },
+  "Tell him the story in your own words. He'll listen for the new ones.": {
+   "source": "Tell him the story in your own words. He'll listen for the new ones.",
+   "comment": "End card: explains the retell call. 'He' is Dr Tusk.",
+   "plural": false,
+   "value": "Raccontagli la storia con parole tue. Lui farà attenzione a quelle nuove."
+  },
+  "Terms of Use": {
+   "source": "Terms of Use",
+   "comment": "A link to the app's Terms of Use.",
+   "plural": false,
+   "value": "Termini di utilizzo"
+  },
+  "Texting & calls": {
+   "source": "Texting & calls",
+   "comment": "",
+   "plural": false,
+   "value": "Messaggi e chiamate"
+  },
+  "The call ended before you said anything. Give it another go when you're ready.": {
+   "source": "The call ended before you said anything. Give it another go when you're ready.",
+   "comment": "",
+   "plural": false,
+   "value": "La chiamata è finita prima che dicessi qualcosa. Riprova quando vuoi."
+  },
+  "The call ended. Give Dr Tusk another ring when you're ready.": {
+   "source": "The call ended. Give Dr Tusk another ring when you're ready.",
+   "comment": "",
+   "plural": false,
+   "value": "La chiamata è terminata. Richiama Dr Tusk quando vuoi."
+  },
+  "The effortless way to learn languages": {
+   "source": "The effortless way to learn languages",
+   "comment": "",
+   "plural": false,
+   "value": "Il modo più semplice per imparare le lingue"
+  },
+  "The purchase didn't complete. Please try again.": {
+   "source": "The purchase didn't complete. Please try again.",
+   "comment": "",
+   "plural": false,
+   "value": "L'acquisto non è stato completato. Riprova."
+  },
+  "This subscription is temporarily unavailable. Please try again in a moment.": {
+   "source": "This subscription is temporarily unavailable. Please try again in a moment.",
+   "comment": "",
+   "plural": false,
+   "value": "Questo abbonamento non è temporaneamente disponibile. Riprova tra un momento."
+  },
+  "Today, %@": {
+   "source": "Today, %@",
+   "comment": "Message timestamp. %@ is a time, e.g. 16:24.",
+   "plural": false,
+   "value": "Oggi, %@"
+  },
+  "Today's Set": {
+   "source": "Today's Set",
+   "comment": "",
+   "plural": false,
+   "value": "Il set di oggi"
+  },
+  "Today's story": {
+   "source": "Today's story",
+   "comment": "Phone tab row shown until today's story has been written.",
+   "plural": false,
+   "value": "La storia di oggi"
+  },
+  "TOMORROW'S TOPIC": {
+   "source": "TOMORROW'S TOPIC",
+   "comment": "A label displayed under the button that lets users",
+   "plural": false,
+   "value": "IL TEMA DI DOMANI"
+  },
+  "Topic map": {
+   "source": "Topic map",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Mappa dei temi"
+  },
+  "Total sessions": {
+   "source": "Total sessions",
+   "comment": "",
+   "plural": false,
+   "value": "Sessioni totali"
+  },
+  "Transcript": {
+   "source": "Transcript",
+   "comment": "A title for a view that shows a transcript of a call.",
+   "plural": false,
+   "value": "Trascrizione"
+  },
+  "Translation unavailable.": {
+   "source": "Translation unavailable.",
+   "comment": "",
+   "plural": false,
+   "value": "Traduzione non disponibile."
+  },
+  "Traveling": {
+   "source": "Traveling",
+   "comment": "",
+   "plural": false,
+   "value": "Viaggi"
+  },
+  "Trips & hotels": {
+   "source": "Trips & hotels",
+   "comment": "Learning situation for trips and hotels.",
+   "plural": false,
+   "value": "Viaggi e hotel"
+  },
+  "Trips, hotels, airports, tickets.": {
+   "source": "Trips, hotels, airports, tickets.",
+   "comment": "",
+   "plural": false,
+   "value": "Viaggi, hotel, aeroporti, biglietti."
+  },
+  "Try %@ free": {
+   "source": "Try %@ free",
+   "comment": "",
+   "plural": false,
+   "value": "Prova %@ gratis"
+  },
+  "Try again": {
+   "source": "Try again",
+   "comment": "Button: retry a failed action.",
+   "plural": false,
+   "value": "Riprova"
+  },
+  "Turn the microphone off": {
+   "source": "Turn the microphone off",
+   "comment": "",
+   "plural": false,
+   "value": "Disattiva il microfono"
+  },
+  "Turn the microphone on": {
+   "source": "Turn the microphone on",
+   "comment": "",
+   "plural": false,
+   "value": "Attiva il microfono"
+  },
+  "Type instead of speaking": {
+   "source": "Type instead of speaking",
+   "comment": "A button that lets you type instead of speaking.",
+   "plural": false,
+   "value": "Scrivi invece di parlare"
+  },
+  "Type of words": {
+   "source": "Type of words",
+   "comment": "A label displayed above the word filter picker.",
+   "plural": false,
+   "value": "Tipo di parole"
+  },
+  "Unlock all themed decks, not just the basics.": {
+   "source": "Unlock all themed decks, not just the basics.",
+   "comment": "Paywall benefit detail.",
+   "plural": false,
+   "value": "Sblocca tutti i mazzi a tema, non solo quelli base."
+  },
+  "Unlock everything": {
+   "source": "Unlock everything",
+   "comment": "A title of the paywall.",
+   "plural": false,
+   "value": "Sblocca tutto"
+  },
+  "Unlock tomorrow's topic today with Pro": {
+   "source": "Unlock tomorrow's topic today with Pro",
+   "comment": "A label that unlocks tomorrow's topic with Pro.",
+   "plural": false,
+   "value": "Sblocca oggi il tema di domani con Pro"
+  },
+  "Unmute audio": {
+   "source": "Unmute audio",
+   "comment": "A label for a button that unmutes audio.",
+   "plural": false,
+   "value": "Riattiva audio"
+  },
+  "Unread story from Dr Tusk: %@. %@": {
+   "source": "Unread story from Dr Tusk: %@. %@",
+   "comment": "VoiceOver label for an unread story row. First %@ is the title, second is when it arrived.",
+   "plural": false,
+   "value": "Storia non letta di Dr Tusk: %@. %@"
+  },
+  "Upgrade to Wordrus Pro": {
+   "source": "Upgrade to Wordrus Pro",
+   "comment": "",
+   "plural": false,
+   "value": "Passa a Wordrus Pro"
+  },
+  "verb": {
+   "source": "verb",
+   "comment": "Part of speech label",
+   "plural": false,
+   "value": "verbo"
+  },
+  "Verbs": {
+   "source": "Verbs",
+   "comment": "",
+   "plural": false,
+   "value": "Verbi"
+  },
+  "Wants to practice with you": {
+   "source": "Wants to practice with you",
+   "comment": "A description of the call.",
+   "plural": false,
+   "value": "Vuole esercitarsi con te"
+  },
+  "Weather & Nature": {
+   "source": "Weather & Nature",
+   "comment": "",
+   "plural": false,
+   "value": "Meteo e natura"
+  },
+  "Weekly": {
+   "source": "Weekly",
+   "comment": "",
+   "plural": false,
+   "value": "Settimanale"
+  },
+  "What do you want to learn?": {
+   "source": "What do you want to learn?",
+   "comment": "",
+   "plural": false,
+   "value": "Cosa vuoi imparare?"
+  },
+  "When shall I send you words through the day?": {
+   "source": "When shall I send you words through the day?",
+   "comment": "",
+   "plural": false,
+   "value": "Quando ti mando le parole durante il giorno?"
+  },
+  "Where are you with %@ — A1 is brand new, C2 is near-native.": {
+   "source": "Where are you with %@ — A1 is brand new, C2 is near-native.",
+   "comment": "",
+   "plural": false,
+   "value": "A che punto sei con %@? A1 è da zero, C2 è quasi madrelingua."
+  },
+  "Where do you want to use it? Pick as many as you like.": {
+   "source": "Where do you want to use it? Pick as many as you like.",
+   "comment": "Title for the screen where the user can select which topics they want to use the app for.",
+   "plural": false,
+   "value": "Dove vuoi usarlo? Scegline quanti vuoi."
+  },
+  "Widget": {
+   "source": "Widget",
+   "comment": "",
+   "plural": false,
+   "value": "Widget"
+  },
+  "Wordrus needs Microphone and Speech Recognition access to hear you. Turn them on in Settings, or tap your bubble to type instead.": {
+   "source": "Wordrus needs Microphone and Speech Recognition access to hear you. Turn them on in Settings, or tap your bubble to type instead.",
+   "comment": "",
+   "plural": false,
+   "value": "Wordrus ha bisogno dell'accesso al microfono e al riconoscimento vocale per sentirti. Attivali in Impostazioni oppure tocca la tua nuvoletta per scrivere."
+  },
+  "Wordrus Pro": {
+   "source": "Wordrus Pro",
+   "comment": "",
+   "plural": false,
+   "value": "Wordrus Pro"
+  },
+  "Words": {
+   "source": "Words",
+   "comment": "",
+   "plural": false,
+   "value": "Parole"
+  },
+  "Words are links. Use the Links rotor to look one up.": {
+   "source": "Words are links. Use the Links rotor to look one up.",
+   "comment": "VoiceOver hint on the story text.",
+   "plural": false,
+   "value": "Le parole sono link. Usa il rotore Link per cercarne una."
+  },
+  "Words per day": {
+   "source": "Words per day",
+   "comment": "",
+   "plural": false,
+   "value": "Parole al giorno"
+  },
+  "Words you added yourself.": {
+   "source": "Words you added yourself.",
+   "comment": "",
+   "plural": false,
+   "value": "Parole che hai aggiunto tu."
+  },
+  "Work": {
+   "source": "Work",
+   "comment": "",
+   "plural": false,
+   "value": "Lavoro"
+  },
+  "Yearly": {
+   "source": "Yearly",
+   "comment": "",
+   "plural": false,
+   "value": "Annuale"
+  },
+  "Yesterday, %@": {
+   "source": "Yesterday, %@",
+   "comment": "Message timestamp. %@ is a time, e.g. 08:10.",
+   "plural": false,
+   "value": "Ieri, %@"
+  },
+  "You": {
+   "source": "You",
+   "comment": "",
+   "plural": false,
+   "value": "Tu"
+  },
+  "You already know this one.": {
+   "source": "You already know this one.",
+   "comment": "Word sheet: the learner already knows the word.",
+   "plural": false,
+   "value": "Questa la conosci già."
+  },
+  "You can switch languages later.": {
+   "source": "You can switch languages later.",
+   "comment": "",
+   "plural": false,
+   "value": "Puoi cambiare lingua più tardi."
+  },
+  "You declined this call.": {
+   "source": "You declined this call.",
+   "comment": "",
+   "plural": false,
+   "value": "Hai rifiutato questa chiamata."
+  },
+  "You ended the call early": {
+   "source": "You ended the call early",
+   "comment": "",
+   "plural": false,
+   "value": "Hai chiuso la chiamata in anticipo"
+  },
+  "You finished today's %@ set.": {
+   "source": "You finished today's %@ set.",
+   "comment": "A label at the bottom of the checkout view that congratulates the user on finishing a set. The argument is the name of the set.",
+   "plural": false,
+   "value": "Hai finito il set di oggi: %@."
+  },
+  "You finished today's revision set.": {
+   "source": "You finished today's revision set.",
+   "comment": "",
+   "plural": false,
+   "value": "Hai finito il set di ripasso di oggi."
+  },
+  "You know %@ of everyday words": {
+   "source": "You know %@ of everyday words",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Conosci il %@ delle parole quotidiane"
+  },
+  "You missed Dr Tusk's call.": {
+   "source": "You missed Dr Tusk's call.",
+   "comment": "",
+   "plural": false,
+   "value": "Hai perso la chiamata di Dr Tusk."
+  },
+  "You understood %@ of this story": {
+   "source": "You understood %@ of this story",
+   "comment": "End card. %@ is a percentage, e.g. 92%.",
+   "plural": false,
+   "value": "Hai capito il %@ di questa storia"
+  },
+  "You're all set": {
+   "source": "You're all set",
+   "comment": "",
+   "plural": false,
+   "value": "È tutto pronto"
+  },
+  "You're at the top level.": {
+   "source": "You're at the top level.",
+   "comment": "",
+   "plural": false,
+   "value": "Sei al livello massimo."
+  },
+  "You're on a roll!": {
+   "source": "You're on a roll!",
+   "comment": "",
+   "plural": false,
+   "value": "Sei inarrestabile!"
+  },
+  "You're ready to try ordering a coffee and a snack.": {
+   "source": "You're ready to try ordering a coffee and a snack.",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Ora puoi provare a ordinare un caffè e uno spuntino."
+  },
+  "Your current words and progress are kept — they come back if you switch back to them. You'll now see %@.": {
+   "source": "Your current words and progress are kept — they come back if you switch back to them. You'll now see %@.",
+   "comment": "A message in the alert that appears when a user tries to change their deck or language while on a free trial.",
+   "plural": false,
+   "value": "Le tue parole e i tuoi progressi attuali restano salvati — ritornano se ci torni. Ora vedrai %@."
+  },
+  "Your first 50 words": {
+   "source": "Your first 50 words",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "Le tue prime 50 parole"
+  },
+  "Your free trial is ending": {
+   "source": "Your free trial is ending",
+   "comment": "",
+   "plural": false,
+   "value": "La tua prova gratuita sta per finire"
+  },
+  "Your name": {
+   "source": "Your name",
+   "comment": "A label for the user's name.",
+   "plural": false,
+   "value": "Il tuo nome"
+  },
+  "Your next word to review.": {
+   "source": "Your next word to review.",
+   "comment": "",
+   "plural": false,
+   "value": "La prossima parola da ripassare."
+  },
+  "Your Pro membership has been restored.": {
+   "source": "Your Pro membership has been restored.",
+   "comment": "",
+   "plural": false,
+   "value": "Il tuo abbonamento Pro è stato ripristinato."
+  },
+  "Your progress": {
+   "source": "Your progress",
+   "comment": "Vocabulary progress (Words tab header / Your progress sheet).",
+   "plural": false,
+   "value": "I tuoi progressi"
+  },
+  "Your turn": {
+   "source": "Your turn",
+   "comment": "",
+   "plural": false,
+   "value": "Tocca a te"
+  },
+  "Your Wordrus Pro trial ends soon. Cancel anytime if it's not for you.": {
+   "source": "Your Wordrus Pro trial ends soon. Cancel anytime if it's not for you.",
+   "comment": "",
+   "plural": false,
+   "value": "La tua prova di Wordrus Pro sta per finire. Disdici quando vuoi se non fa per te."
+  }
+ },
+ "wordrus/WordrusWidget/Localizable.xcstrings": {
+  "Daily Word": {
+   "source": "Daily Word",
+   "comment": "",
+   "plural": false,
+   "value": "Parola del giorno"
+  },
+  "Your next word to review.": {
+   "source": "Your next word to review.",
+   "comment": "",
+   "plural": false,
+   "value": "La prossima parola da ripassare."
+  },
+  "Open the app to load your first word.": {
+   "source": "Open the app to load your first word.",
+   "comment": "",
+   "plural": false,
+   "value": "Apri l'app per caricare la tua prima parola."
+  },
+  "%lld/%lld": {
+   "source": "%lld/%lld",
+   "comment": "",
+   "plural": true,
+   "value": "%lld/%lld"
+  }
+ },
+ "wordrus/wordrus/InfoPlist.xcstrings": {
+  "CFBundleDisplayName": {
+   "source": "Wordrus",
+   "comment": "",
+   "plural": false,
+   "value": "Wordrus"
+  },
+  "NSMicrophoneUsageDescription": {
+   "source": "Wordrus listens while you speak to Dr Tusk so it can transcribe your replies in chat.",
+   "comment": "",
+   "plural": false,
+   "value": "Wordrus ti ascolta mentre parli con Dr Tusk per trascrivere le tue risposte nella chat."
+  },
+  "NSSpeechRecognitionUsageDescription": {
+   "source": "Wordrus turns your speech into text so you can practice talking with Dr Tusk instead of typing.",
+   "comment": "",
+   "plural": false,
+   "value": "Wordrus trasforma la tua voce in testo così puoi esercitarti a parlare con Dr Tusk invece di scrivere."
+  }
+ }
+}
