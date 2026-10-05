@@ -92,10 +92,10 @@ struct StoryGenerationTests {
         #expect(prompt.contains("same plot"))
     }
 
-    @Test func claudeLeadsTheChainAndTheMockIsLastInDebug() {
+    @Test func claudeLeadsTheChainAndTheMockIsNeverInIt() {
         let names = StoryBrainFactory.makeChain().map(\.brainName)
         #expect(names.first == "claude")
-        #expect(names.last == "mock")
+        #expect(!names.contains("mock"))
     }
 
     // MARK: Notification timing

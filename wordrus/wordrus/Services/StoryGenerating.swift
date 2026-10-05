@@ -125,10 +125,9 @@ enum StoryBrainFactory {
     /// Brains in the order `StoryPipeline` tries them — the same preference
     /// as `WalrusBrainFactory`: Claude, then Apple Foundation Models.
     ///
-    /// The mock is DEBUG-only here: a canned story that ignores the learner's
-    /// vocabulary is fine for the simulator and previews, but in a release
-    /// build no story beats a nonsense one. `StoryScheduler` tries again on
-    /// the next foreground or background refresh.
+    /// No mock, not even in DEBUG: a canned story is the same every day, and
+    /// no story beats a repeated one. `StoryScheduler` tries again on the
+    /// next foreground or background refresh.
     static func makeChain() -> [StoryGenerating] {
         var chain: [StoryGenerating] = []
         if FeatureFlags.useRealWalrus {
@@ -137,9 +136,6 @@ enum StoryBrainFactory {
         if #available(iOS 26.0, macOS 26.0, *), AppleStoryBrain.isAvailable {
             chain.append(AppleStoryBrain())
         }
-        #if DEBUG
-        chain.append(MockStoryBrain())
-        #endif
         return chain
     }
 }

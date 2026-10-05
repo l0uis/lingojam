@@ -56,6 +56,14 @@ nonisolated struct StoryLexicon: Decodable, Sendable {
         }
         return ranks
     }
+
+    /// The language's content words, most frequent first: `frequency`
+    /// without function words (a story may use those anyway) or repeats.
+    func coreLemmas() -> [String] {
+        let free = Set(functionWords)
+        var seen: Set<String> = []
+        return frequency.filter { !free.contains($0) && seen.insert($0).inserted }
+    }
 }
 
 extension StoryLexicon {

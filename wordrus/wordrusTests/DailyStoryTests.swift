@@ -192,9 +192,9 @@ struct DailyStoryTests {
 
     // MARK: Word selection
 
-    private func word(_ id: String, _ lemma: String, rank: Int, decks: [String] = ["common"], level: String = "A1") -> VocabularyWord {
+    private func word(_ id: String, _ lemma: String, rank: Int, decks: [String] = ["common"], level: String = "A1", pos: String = "noun") -> VocabularyWord {
         VocabularyWord(
-            id: id, rank: rank, lemma: lemma, partOfSpeech: "noun",
+            id: id, rank: rank, lemma: lemma, partOfSpeech: pos,
             definitionsJSON: "{}", exampleSentence: "", exampleTranslationsJSON: "{}",
             deckSlugsJSON: String(decoding: try! JSONEncoder().encode(decks), as: UTF8.self),
             cefrLevel: level
@@ -237,24 +237,37 @@ struct DailyStoryTests {
         #expect(selection.knownWords.map(\.lemma) == ["silla", "mesa", "gato", "perro", "casa"])
     }
 
-    @Test func beginnersGetTheirMostFrequentLevelWordsAsAFloor() {
-        let words = (1...300).map { word("es-\($0)", "w\($0)", rank: $0, level: $0 % 2 == 0 ? "A1" : "B1") }
-        let progress = LearningProgress(wordID: "es-2", state: .learning, lastReviewedAt: .now)
+    @Test func theMostFrequentCoreWordsComeAfterTheLearnersOwn() {
+        let words = [word("es-1", "playa", rank: 1), word("es-2", "grande", rank: 2, pos: "adjective")]
+        // "grande" has been seen but isn't known yet: it only gets in as a core word.
+        let progress = [
+            "es-1": LearningProgress(wordID: "es-1", state: .learning, lastReviewedAt: .now),
+            "es-2": LearningProgress(wordID: "es-2", state: .known),
+        ]
+        let core = (1...1000).map { "c\($0)" }
+        func select(_ level: CEFRLevel) -> [StoryWord] {
+            StoryWordSelector.select(
+                words: words, progressByID: progress, knownIDs: [], frequencyRanks: [:],
+                coreLemmas: ["playa", "grande"] + core, decks: [], level: level, todaysSetIDs: []
+            ).knownWords
+        }
+        let a1 = select(.a1)
+        // The learning word first, then core words by frequency — no repeats,
+        // and with the seed's part of speech where it has one.
+        #expect(a1.map(\.lemma).prefix(3) == ["playa", "grande", "c1"])
+        #expect(a1[1].partOfSpeech == "adjective")
+        #expect(a1.count == 1 + StoryWordSelector.coreVocabularySize(for: .a1))
+        // Higher levels get more, up to the cap.
+        #expect(select(.b2).count == StoryWordSelector.knownWordCap)
+    }
+
+    @Test func withNothingShakyTheNextUnseenWordsAreTaught() {
+        let words = (1...5).map { word("es-\($0)", "w\($0)", rank: $0) }
         let selection = StoryWordSelector.select(
-            words: words,
-            progressByID: ["es-2": progress],
-            knownIDs: [],
-            frequencyRanks: Dictionary(uniqueKeysWithValues: words.map { ($0.lemma, 1000 - $0.rank) }),
-            decks: [],
-            level: .a1,
-            todaysSetIDs: []
+            words: words, progressByID: ["es-1": LearningProgress(wordID: "es-1", state: .known)],
+            knownIDs: ["es-1"], frequencyRanks: [:], decks: [], level: .a1, todaysSetIDs: []
         )
-        let lemmas = selection.knownWords.map(\.lemma)
-        // The learning word first, then A1 words only, most frequent first.
-        #expect(lemmas.first == "w2")
-        #expect(lemmas.count == 150)   // every A1 word: the floor can't invent more
-        #expect(lemmas.dropFirst().first == "w300")
-        #expect(Set(lemmas).isDisjoint(with: words.filter { $0.cefrLevel == "B1" }.map(\.lemma)))
+        #expect(selection.newWords.map(\.lemma) == ["w2", "w3", "w4"])
     }
 
     @Test func newWordsFromRecentStoriesAreNotTaughtAgainWhileOthersQualify() {
@@ -303,11 +316,15 @@ struct DailyStoryTests {
             progressByID: [:],
             knownIDs: Set(words.map(\.id)),
             frequencyRanks: [:],
+            coreLemmas: (1...1000).map { "c\($0)" },
             decks: [],
-            level: .a1,
+            level: .b1,
             todaysSetIDs: []
         )
+        // The learner's own words stop at their cap; core words fill the rest.
         #expect(selection.knownWords.count == StoryWordSelector.knownWordCap)
+        #expect(selection.knownWords[StoryWordSelector.personalWordCap - 1].lemma == "w\(StoryWordSelector.personalWordCap)")
+        #expect(selection.knownWords[StoryWordSelector.personalWordCap].lemma == "c1")
         #expect(selection.knownWords.first?.lemma == "w1")
         #expect(selection.topic == StoryWordSelector.fallbackTopic)
         #expect(selection.newWords.isEmpty)
@@ -350,7 +367,8 @@ struct DailyStoryTests {
         let story = try await DailyStoryService.ensureTodayStory(context: context, language: .spanish, now: now, brains: [MockStoryBrain()], quota: .unlimited)
         #expect(story.dayKey == DailySetConfig.dayKey(now))
         #expect(story.brainRaw == "mock")
-        #expect(story.newWords == ["pez"])
+        // The shaky word first, then the unseen one.
+        #expect(story.newWords == ["pez", "playa"])
         #expect(story.text.contains("«pez»"))
         let again = try await DailyStoryService.ensureTodayStory(context: context, language: .spanish, now: now, brains: [], quota: .unlimited)
         #expect(again.id == story.id)

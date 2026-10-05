@@ -3,26 +3,39 @@ import SwiftData
 
 /// Picks the words a daily story is built from.
 ///
-/// - Known words (what the story may use): every learning word first, most
-///   recently reviewed first, then words the learner knows — today's topic
-///   first, then by corpus frequency. Capped at `knownWordCap` so the prompt
-///   stays small.
+/// - Known words (what the story may use): the learner's own words first —
+///   learning words, most recently reviewed first, then words they know,
+///   today's topic first, then by corpus frequency — up to `personalWordCap`.
+///   Then the language's most frequent content words (`coreVocabularySize`
+///   for the level), up to `knownWordCap` in all.
 /// - New words (what the story teaches, 2–3): shaky words from today's card
 ///   stack first, then other words the learner keeps missing, then unseen
-///   words from today's topic.
+///   words from today's topic, then any unseen words at their level.
 /// - Topic: the theme of today's card stack.
 ///
 /// A "learning word" uses the card stack's definition (`JamView.learningWords`):
 /// it has lapses or is in the learning/review state.
 ///
-/// Beginners know too few words to write anything with, so the known list is
-/// topped up to `coreVocabularyFloor` with the most frequent seed words at or
-/// below the learner's level — the words they meet first.
+/// The core words are always there, however many words the learner has:
+/// without basics like "grande" or "pequeño" no story passes the check, and
+/// a learner's own list is mostly the words they're still struggling with.
 @MainActor
 enum StoryWordSelector {
-    static let knownWordCap = 400
-    static let coreVocabularyFloor = 250
+    /// The worker accepts up to 500 (`MAX_KNOWN_WORDS`).
+    static let knownWordCap = 500
+    static let personalWordCap = 300
     static let newWordCount = 3
+
+    /// How many of the language's most frequent content words a story may
+    /// use at `level`, on top of the learner's own.
+    static func coreVocabularySize(for level: CEFRLevel) -> Int {
+        switch level {
+        case .a1: 300
+        case .a2: 400
+        default: knownWordCap
+        }
+    }
+
     static let fallbackTopic = "Everyday life"
 
     struct Selection: Equatable {
@@ -35,11 +48,13 @@ enum StoryWordSelector {
         let words = ((try? context.fetch(FetchDescriptor<VocabularyWord>())) ?? []).scoped(to: language.languageCode)
         let progress = (try? context.fetch(FetchDescriptor<LearningProgress>())) ?? []
         let decks = (try? context.fetch(FetchDescriptor<Deck>())) ?? []
+        let lexicon = StoryLexicon.load(for: language)
         return select(
             words: words,
             progressByID: Dictionary(progress.map { ($0.wordID, $0) }) { first, _ in first },
             knownIDs: DailyWordService.knownWordIDs(context: context, now: now),
-            frequencyRanks: StoryLexicon.load(for: language)?.frequencyRanks() ?? [:],
+            frequencyRanks: lexicon?.frequencyRanks() ?? [:],
+            coreLemmas: lexicon?.coreLemmas() ?? [],
             decks: decks,
             level: OnboardingStore.cefrLevel,
             todaysSetIDs: DailyWordSet.load()?.words.map(\.wordID) ?? [],
@@ -59,6 +74,7 @@ enum StoryWordSelector {
         progressByID: [String: LearningProgress],
         knownIDs: Set<String>,
         frequencyRanks: [String: Int],
+        coreLemmas: [String] = [],
         decks: [Deck],
         level: CEFRLevel,
         todaysSetIDs: [String],
@@ -103,6 +119,13 @@ enum StoryWordSelector {
             ))
         }
         candidateLists.append(todaysSet.filter { !knownIDs.contains($0.id) })
+        // No Deck set today and nothing shaky: the next unseen words at their
+        // level, so there's always something new to teach.
+        candidateLists.append(LevelAnchor.anchored(
+            words.filter { progressByID[$0.id] == nil && !knownIDs.contains($0.id) && !$0.id.hasPrefix("custom-") }
+                .sorted { $0.rank < $1.rank },
+            to: level
+        ))
         for allowRecent in [false, true] {
             for candidates in candidateLists {
                 for word in candidates where newWords.count < newWordCount
@@ -127,23 +150,18 @@ enum StoryWordSelector {
             }
         var seenLemmas = newLemmas
         var knownWords: [StoryWord] = []
-        for word in learning + known where !newIDs.contains(word.id) && knownWords.count < knownWordCap {
+        for word in learning + known where !newIDs.contains(word.id) && knownWords.count < personalWordCap {
             guard seenLemmas.insert(word.lemma).inserted else { continue }
             knownWords.append(StoryWord(lemma: word.lemma, partOfSpeech: word.partOfSpeech))
         }
 
-        if knownWords.count < coreVocabularyFloor {
-            let core = words
-                .filter { word in
-                    guard !word.id.hasPrefix("custom-"), !newIDs.contains(word.id),
-                          let raw = word.cefrLevel, let wordLevel = CEFRLevel(rawValue: raw) else { return false }
-                    return wordLevel <= level
-                }
-                .sorted { frequencyRank($0) < frequencyRank($1) }
-            for word in core where knownWords.count < coreVocabularyFloor {
-                guard seenLemmas.insert(word.lemma).inserted else { continue }
-                knownWords.append(StoryWord(lemma: word.lemma, partOfSpeech: word.partOfSpeech))
-            }
+        // Core words carry the seed's part of speech when there is one.
+        let partOfSpeechByLemma = Dictionary(words.map { ($0.lemma, $0.partOfSpeech) }) { first, _ in first }
+        var coreAdded = 0
+        for lemma in coreLemmas where coreAdded < coreVocabularySize(for: level) && knownWords.count < knownWordCap {
+            guard seenLemmas.insert(lemma).inserted else { continue }
+            knownWords.append(StoryWord(lemma: lemma, partOfSpeech: partOfSpeechByLemma[lemma]))
+            coreAdded += 1
         }
 
         return Selection(
