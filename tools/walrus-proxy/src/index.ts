@@ -233,11 +233,6 @@ async function handleEnrich(request: Request, env: Env): Promise<Response> {
     return json({ error: 'invalid bundle' }, 403)
   }
 
-  const allowed = await checkRateLimit(env, deviceID, 'enrich')
-  if (!allowed.ok) {
-    return json({ error: 'rate limited', resetAt: allowed.resetAt }, 429)
-  }
-
   const body = (await request.json().catch(() => null)) as EnrichRequest | null
   const word = body?.word?.trim()
   const targetLanguage = body?.targetLanguage?.trim()
@@ -264,6 +259,13 @@ async function handleEnrich(request: Request, env: Env): Promise<Response> {
       status: 200,
       headers: { 'content-type': 'application/json', 'x-walrus-cache': 'hit' },
     })
+  }
+
+  // Rate-limit only cache misses: hits cost nothing upstream, and counting
+  // them would spend a KV write (1,000/day on the free plan) for free work.
+  const allowed = await checkRateLimit(env, deviceID, 'enrich')
+  if (!allowed.ok) {
+    return json({ error: 'rate limited', resetAt: allowed.resetAt }, 429)
   }
 
   // Force structured output with a single tool the model must call, so we
@@ -350,8 +352,14 @@ spelled ${targetLanguage} words.`
 
   // Store for everyone else. waitUntil isn't used so we await — the write is
   // fast and we'd rather guarantee the entry lands than shave a few ms.
+  // A failed write (e.g. KV daily cap) only costs the cache entry — still
+  // return the result we already paid for.
   const resultJson = JSON.stringify(toolUse.input)
-  await env.ENRICH_CACHE.put(cacheKey, resultJson)
+  try {
+    await env.ENRICH_CACHE.put(cacheKey, resultJson)
+  } catch (err) {
+    console.error('enrich cache write failed', err)
+  }
 
   return new Response(resultJson, {
     status: 200,
@@ -935,12 +943,25 @@ async function checkRateLimit(
   tomorrow.setUTCHours(0, 0, 0, 0)
   const expiration = Math.floor(tomorrow.getTime() / 1000)
 
-  const raw = await env.RATE_LIMIT.get(key)
-  const count = raw ? parseInt(raw, 10) || 0 : 0
+  // Fail open: KV errors (notably the free plan's 1,000 writes/day cap) must
+  // not take every endpoint down — losing abuse protection for the rest of
+  // the UTC day beats returning 500s to real users.
+  let count = 0
+  try {
+    const raw = await env.RATE_LIMIT.get(key)
+    count = raw ? parseInt(raw, 10) || 0 : 0
+  } catch (err) {
+    console.error('rate limit read failed, allowing', err)
+    return { ok: true }
+  }
   if (count >= dailyLimit) {
     return { ok: false, resetAt: expiration }
   }
-  await env.RATE_LIMIT.put(key, String(count + 1), { expiration })
+  try {
+    await env.RATE_LIMIT.put(key, String(count + 1), { expiration })
+  } catch (err) {
+    console.error('rate limit write failed, allowing', err)
+  }
   return { ok: true }
 }
 
