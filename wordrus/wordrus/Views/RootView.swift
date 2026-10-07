@@ -1,13 +1,11 @@
 import SwiftUI
 import SwiftData
-import StoreKit
 
 private enum AppTab: Hashable { case myWords, jam, phone }
 
 struct RootView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.scenePhase) private var scenePhase
-    @Environment(\.requestReview) private var requestReview
     @Query private var allWords: [VocabularyWord]
     @Query private var allProgress: [LearningProgress]
     @Query private var allStories: [DailyStory]
@@ -35,6 +33,9 @@ struct RootView: View {
     @State private var chatIsIncoming: Bool = false
     @State private var isPresentingOutgoingRinger: Bool = false
     @State private var pendingResult: ChatEvaluation?
+    /// Whether the call behind `pendingResult` passed — read once its sheet
+    /// is gone, to decide on a rating prompt.
+    @State private var lastCallPassed: Bool = false
     /// Bumped whenever the user re-taps the Vocabulary tab while already
     /// on it — `MyWordsView` reads this to scroll its list back to the top.
     @State private var vocabularyScrollToTopSignal: Int = 0
@@ -154,6 +155,7 @@ struct RootView: View {
                 // And tomorrow's story.
                 StoryScheduler.scheduleNextRefresh()
             } else if phase == .active {
+                ReviewPromptManager.noteAppActive()
                 // Snap the Live Activity to the word for the current time.
                 LiveActivityService.refresh()
                 // A new day may have started while we were away.
@@ -161,15 +163,9 @@ struct RootView: View {
             }
         }
         .fullScreenCover(isPresented: $isShowingOnboarding, onDismiss: {
-            // Ask for the rating once onboarding is behind them, so the
-            // system prompt lands over the deck rather than on a screen of
-            // its own. Delayed a beat to let the cover finish dismissing.
+            // No rating prompt here — they haven't used the app yet.
+            // `ReviewPromptManager` asks after a call instead.
             Analytics.capture(.onboardingCompleted)
-            Task { @MainActor in
-                try? await Task.sleep(for: .milliseconds(900))
-                Analytics.reviewPromptRequested(.afterOnboarding)
-                requestReview()
-            }
         }) {
             OnboardingFlow()
                 .interactiveDismissDisabled()
@@ -213,12 +209,15 @@ struct RootView: View {
                 wasIncoming: chatIsIncoming,
                 storyContext: chatStoryContext,
                 onFinished: { eval in
+                    lastCallPassed = eval.passed
                     pendingResult = eval
                     isPresentingChat = false
                 }
             )
         }
-        .sheet(item: $pendingResult) { eval in
+        .sheet(item: $pendingResult, onDismiss: {
+            ReviewPromptManager.callResultDismissed(passed: lastCallPassed)
+        }) { eval in
             CallResultSheet(
                 evaluation: eval,
                 // The words actually set for this call. It used to read

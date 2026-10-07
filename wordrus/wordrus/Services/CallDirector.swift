@@ -175,11 +175,17 @@ final class CallDirector {
         guard stage != .ended else { return }
         teardown()
         stage = .ended
+        captureCallEnded(by: "user")
+        Task { await store.endCall() }
+    }
+
+    /// `call_ended` for either side hanging up. Through 1.1.7 only the red
+    /// button reported, so calls Dr Tusk wrapped up went uncounted.
+    private func captureCallEnded(by endedBy: String) {
         Analytics.capture(.callEnded, [
-            "ended_by": "user",
+            "ended_by": endedBy,
             "duration_bucket": Analytics.durationBucket(Date().timeIntervalSince(callStartedAt ?? Date()))
         ])
-        Task { await store.endCall() }
     }
 
     /// The final grade, once `finalize` has produced one. Polls briefly
@@ -262,6 +268,7 @@ final class CallDirector {
             if utterance.endsConversation {
                 teardown()
                 stage = .ended
+                captureCallEnded(by: "walrus")
                 return
             }
         }

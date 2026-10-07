@@ -420,6 +420,7 @@ struct MyWordsView: View {
         let intervalBefore = p.intervalDays
         let result = SRSScheduler.next(progress: p, rating: rating)
         Analytics.capture(.cardReviewed, ["rating": "\(rating)", "source": "my_words"])
+        ReviewPromptManager.noteCardReviewed()
         p.state = result.state
         p.easeFactor = result.easeFactor
         p.intervalDays = result.intervalDays

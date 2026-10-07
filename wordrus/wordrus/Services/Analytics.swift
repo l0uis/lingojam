@@ -63,8 +63,11 @@ enum Analytics {
         case closed
     }
 
+    /// `after_onboarding` (1.1.7 only) is retired: it asked before people had
+    /// used the app. See `ReviewPromptManager`.
     enum ReviewTrigger: String {
-        case afterOnboarding = "after_onboarding"
+        case goodCall = "good_call"
+        case returningUser = "returning_user"
     }
 
     // MARK: Opt-out

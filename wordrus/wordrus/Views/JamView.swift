@@ -596,6 +596,7 @@ struct JamView: View {
         let intervalBefore = progress.intervalDays
         let result = SRSScheduler.next(progress: progress, rating: rating)
         Analytics.capture(.cardReviewed, ["rating": "\(rating)", "source": "jam"])
+        ReviewPromptManager.noteCardReviewed()
         progress.state = result.state
         progress.easeFactor = result.easeFactor
         progress.intervalDays = result.intervalDays
