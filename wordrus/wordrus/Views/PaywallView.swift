@@ -266,7 +266,7 @@ struct PaywallView: View {
         Button { dismiss() } label: {
             Image(systemName: "xmark.circle.fill")
                 .font(.title2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.secondary)
                 .padding(16)
         }
         .disabled(isWorking)
@@ -299,7 +299,7 @@ struct PaywallView: View {
         } label: {
             Image(systemName: "ellipsis.circle.fill")
                 .font(.title2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.secondary)
                 .padding(16)
         }
         .disabled(isWorking)
