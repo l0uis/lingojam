@@ -41,6 +41,8 @@ struct OnboardingFlow: View {
     /// Which way the step transition slides; flipped just before stepping
     /// back so the outgoing screen leaves to the right.
     @State private var isGoingBack = false
+    /// The Pro paywall, shown once over "You're all set" before the app opens.
+    @State private var isShowingPaywall = false
 
     var body: some View {
         ZStack {
@@ -76,7 +78,7 @@ struct OnboardingFlow: View {
                         targetLanguage: state.targetLanguage ?? .spanish,
                         level: state.cefrLevel ?? .a1,
                         dailySetSize: state.dailySetSize,
-                        onContinue: finish
+                        onContinue: showPaywallThenFinish
                     )
                     }
                 }
@@ -93,6 +95,11 @@ struct OnboardingFlow: View {
         }
         .animation(.easeInOut(duration: 0.28), value: step)
         .tint(DS.Color.ink)
+        // Whatever they choose — trial, restore or ✕ — onboarding ends when
+        // the paywall goes away, so they land on the deck, not back here.
+        .fullScreenCover(isPresented: $isShowingPaywall, onDismiss: finish) {
+            PaywallView(source: .onboarding)
+        }
         // Lets UI tests (LocalizationTourTests) scope queries to onboarding;
         // the tab bar underneath the cover is otherwise still in the tree.
         .accessibilityElement(children: .contain)
@@ -168,6 +175,17 @@ struct OnboardingFlow: View {
         // so the outgoing screen has picked up the reversed transition.
         isGoingBack = true
         DispatchQueue.main.async { step = previous }
+    }
+
+    /// "Start learning": pitch Pro once while intent is highest — before the
+    /// first card, not on a later lock. Skipped for someone already Pro
+    /// (e.g. a reinstall that restored).
+    private func showPaywallThenFinish() {
+        if Entitlements.shared.isPro {
+            finish()
+        } else {
+            isShowingPaywall = true
+        }
     }
 
     private func finish() {
