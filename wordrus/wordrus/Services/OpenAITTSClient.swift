@@ -193,9 +193,10 @@ final class WalrusAudioPlayer: NSObject {
             let player = try AVAudioPlayer(data: data)
             player.delegate = self
             // Match the slow-grumpy delivery of the tuned Apple TTS so
-            // OpenAI's voice doesn't suddenly sound chipper.
+            // OpenAI's voice doesn't suddenly sound chipper. The learner's
+            // voice-speed setting scales from there.
             player.enableRate = true
-            player.rate = 0.95
+            player.rate = 0.95 * VoiceSpeed.effective.multiplier
             player.prepareToPlay()
             player.play()
             self.player = player

@@ -1278,7 +1278,9 @@ private struct ExampleCardStep: View {
 /// than always Spanish. The definition and translation are in the learner's
 /// native language — English for the four European targets, which are only
 /// offered to English speakers.
-private struct OnboardingExample {
+///
+/// Also played as the voice-speed preview in Settings.
+struct OnboardingExample {
     let word: String
     let partOfSpeech: String
     let definition: String

@@ -122,9 +122,10 @@ final class SpeechService {
     /// never lands.
     private func speakViaAppleAndWait(_ text: String, languageCode: String) async {
         let utterance = utterance(for: text, languageCode: languageCode)
-        // ~13 characters/second at our 0.88 rate, plus the pre-utterance
-        // delay and slack. Only ever used if the delegate goes missing.
-        let backstop = 1.5 + Double(text.count) / 13.0
+        // ~13 characters/second at our 0.88 rate (scaled by the voice-speed
+        // setting), plus the pre-utterance delay and slack. Only ever used if
+        // the delegate goes missing.
+        let backstop = 1.5 + Double(text.count) / (13.0 * Double(VoiceSpeed.effective.multiplier))
         await synthDelegate.wait(backstop: backstop) { [synthesizer] in
             synthesizer.speak(utterance)
         }
@@ -133,7 +134,10 @@ final class SpeechService {
     private func utterance(for text: String, languageCode: String) -> AVSpeechUtterance {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = resolvedVoice(for: languageCode)
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.88
+        utterance.rate = min(
+            AVSpeechUtteranceDefaultSpeechRate * 0.88 * VoiceSpeed.effective.multiplier,
+            AVSpeechUtteranceMaximumSpeechRate
+        )
         utterance.pitchMultiplier = 0.78
         utterance.preUtteranceDelay = 0.4
         return utterance

@@ -108,6 +108,8 @@ struct PaywallView: View {
             Text("Everything in Pro")
                 .font(.sniglet(.headline))
                 .foregroundStyle(DS.Color.ink)
+            // Lead with what the user just reached for.
+            if source == .voiceSpeed { voiceSpeedBenefit }
             benefitRow(icon: "phone.fill", tint: IconTint.blue, title: "Call Dr Tusk anytime",
                        detail: "He still calls you for free — Pro lets you call him on demand.")
             benefitRow(icon: "book.fill", tint: IconTint.orange, title: "Daily stories from Dr Tusk",
@@ -122,6 +124,7 @@ struct PaywallView: View {
             }
             benefitRow(icon: "square.grid.2x2.fill", tint: IconTint.purple, title: "Every topic",
                        detail: "Unlock all themed decks, not just the basics.")
+            if source != .voiceSpeed { voiceSpeedBenefit }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -130,6 +133,11 @@ struct PaywallView: View {
                 .fill(.white)
                 .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
         )
+    }
+
+    private var voiceSpeedBenefit: some View {
+        benefitRow(icon: "gauge.with.dots.needle.67percent", tint: IconTint.teal, title: "Set Dr Tusk's speaking speed",
+                   detail: "Slow him down while you're learning, or speed him up once you're fluent.")
     }
 
     private func benefitRow(icon: String, tint: Color, title: LocalizedStringKey, detail: LocalizedStringKey) -> some View {

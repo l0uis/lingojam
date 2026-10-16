@@ -42,6 +42,9 @@ enum Analytics {
         case purchaseRestored = "purchase_restored"
         case reviewPromptRequested = "review_prompt_requested"
         case analyticsDisabled = "analytics_disabled"
+        /// A Pro learner changed Dr Tusk's speaking speed in Settings
+        /// (`speed`: slow / normal / fast / faster). Added after 1.1.9.
+        case voiceSpeedChanged = "voice_speed_changed"
     }
 
     /// What the user tapped to reach the paywall. `unknown` means a presenter
@@ -54,6 +57,8 @@ enum Analytics {
         case myWords = "my_words"
         case deckPicker = "deck_picker"
         case story
+        /// The voice-speed row in Settings. Added after 1.1.9.
+        case voiceSpeed = "voice_speed"
         case unknown
     }
 

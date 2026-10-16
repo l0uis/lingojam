@@ -13,11 +13,13 @@ struct SettingsView: View {
     @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
     @AppStorage(OnboardingDefaultsKey.liveActivityEnabled) private var liveActivityEnabled: Bool = false
     @AppStorage(AppStoreLinks.didOpenWriteReviewKey) private var didOpenWriteReview: Bool = false
+    @AppStorage(VoiceSpeed.defaultsKey) private var voiceSpeedRaw: String = VoiceSpeed.normal.rawValue
 
     @State private var analyticsEnabled = Analytics.isEnabled
     @State private var isEditingReminder: Bool = false
     @State private var isShowingWidgetSheet: Bool = false
     @State private var isShowingPaywall: Bool = false
+    @State private var paywallSource: Analytics.PaywallSource = .settings
     @State private var entitlements = Entitlements.shared
     @State private var restoreMessage: String?
     @State private var nativeLanguage = NativeLanguage.current
@@ -52,7 +54,7 @@ struct SettingsView: View {
                             .foregroundStyle(.tertiary)
                     }
                     .contentShape(Rectangle())
-                    .onTapGesture { isShowingPaywall = true }
+                    .onTapGesture { showPaywall(from: .settings) }
                 }
 
                 Button {
@@ -125,6 +127,8 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
+
+                voiceSpeedRow
 
                 HStack {
                     Text("Reminders")
@@ -248,7 +252,7 @@ struct SettingsView: View {
             InstallWidgetSheet()
         }
         .sheet(isPresented: $isShowingPaywall) {
-            PaywallView(source: .settings)
+            PaywallView(source: paywallSource)
         }
         .alert(
             "Switch to \(pendingNativeLanguage.flatMap { TargetLanguage.offered(to: $0).first }?.titleInSentence ?? "")?",
@@ -272,6 +276,53 @@ struct SettingsView: View {
         } message: { message in
             Text(message)
         }
+    }
+
+    /// Pro: a picker that plays a sample at the new speed. Free: the same
+    /// row with a Pro tag, opening the paywall.
+    @ViewBuilder
+    private var voiceSpeedRow: some View {
+        if entitlements.isPro {
+            Picker(selection: $voiceSpeedRaw) {
+                ForEach(VoiceSpeed.allCases) { speed in
+                    Text(speed.title).tag(speed.rawValue)
+                }
+            } label: {
+                Text("Voice speed")
+                    .font(.sniglet(.body))
+                    .foregroundStyle(.primary)
+            }
+            .font(.sniglet(.body))
+            .onChange(of: voiceSpeedRaw) {
+                Analytics.capture(.voiceSpeedChanged, ["speed": voiceSpeedRaw])
+                let language = OnboardingStore.targetLanguage ?? .spanish
+                let sample = OnboardingExample.forLanguage(language, native: nativeLanguage).sentence
+                SpeechService.shared.speak(sample, languageCode: language.bcp47)
+            }
+        } else {
+            HStack {
+                Text("Voice speed")
+                    .font(.sniglet(.body))
+                    .foregroundStyle(.primary)
+                Spacer()
+                Text("Pro")
+                    .font(.sniglet(.caption, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(Capsule().fill(DS.Color.ink))
+                Image(systemName: "chevron.right")
+                    .font(.sniglet(.caption, weight: .semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            .contentShape(Rectangle())
+            .onTapGesture { showPaywall(from: .voiceSpeed) }
+        }
+    }
+
+    private func showPaywall(from source: Analytics.PaywallSource) {
+        paywallSource = source
+        isShowingPaywall = true
     }
 
     private func restorePurchases() async {

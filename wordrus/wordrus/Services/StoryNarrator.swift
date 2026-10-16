@@ -125,6 +125,8 @@ final class StoryNarrator {
             }
             self.player = player
             currentSentence = position == 0 ? nil : position - 1
+            player.enableRate = true
+            player.rate = VoiceSpeed.effective.multiplier
             player.prepareToPlay()
             player.play()
             state = .playing
