@@ -294,7 +294,7 @@ struct SettingsView: View {
             }
             .font(.sniglet(.body))
             .onChange(of: voiceSpeedRaw) {
-                Analytics.capture(.voiceSpeedChanged, ["speed": voiceSpeedRaw])
+                Analytics.capture(.voiceSpeedChanged, ["speed": voiceSpeedRaw, "from": "settings"])
                 let language = OnboardingStore.targetLanguage ?? .spanish
                 let sample = OnboardingExample.forLanguage(language, native: nativeLanguage).sentence
                 SpeechService.shared.speak(sample, languageCode: language.bcp47)

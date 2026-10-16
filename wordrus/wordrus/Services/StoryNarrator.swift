@@ -92,6 +92,12 @@ final class StoryNarrator {
         state = .playing
     }
 
+    /// Re-reads the voice-speed setting into the clip that's playing, so a
+    /// change lands mid-sentence instead of from the next one.
+    func applyVoiceSpeed() {
+        player?.rate = VoiceSpeed.effective.multiplier
+    }
+
     func stop() {
         playback?.cancel()
         playback = nil

@@ -74,6 +74,7 @@ struct JamView: View {
     /// swiped away.
     @State private var doneCardDrag: CGFloat = 0
     @State private var isShowingWidgetSheet: Bool = false
+    @State private var isShowingSpeedPaywall: Bool = false
 
     /// Whether the user has touched the front card since the current set began.
     /// Gates the swipe-hint nudge so it stops the instant they start swiping.
@@ -237,6 +238,9 @@ struct JamView: View {
             guard !inCall else { return }
             SpeechService.shared.speak(word.exampleSentence)
         }
+        .sheet(isPresented: $isShowingSpeedPaywall) {
+            PaywallView(source: .voiceSpeed)
+        }
         .sheet(isPresented: $isShowingWidgetSheet) {
             InstallWidgetSheet()
         }
@@ -386,24 +390,6 @@ struct JamView: View {
             HStack(spacing: 20) {
                 Spacer()
 
-                // Replay the example on demand. Independent of the mute toggle
-                // below — an explicit tap always speaks, even when auto-play is
-                // off — and unmutes so the user isn't left wondering why nothing
-                // played after they asked for it.
-                Button {
-                    playLightHaptic()
-                    if !soundEnabled { soundEnabled = true }
-                    SpeechService.shared.speak(word.exampleSentence)
-                } label: {
-                    Image(systemName: "play.fill")
-                        .font(.sniglet(.title3))
-                        .foregroundStyle(DS.Color.ink)
-                        .frame(width: 56, height: 56)
-                        .background(Circle().fill(DS.Color.ink.opacity(0.15)))
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Replay sentence")
-
                 // Mute toggle — controls whether each new card auto-speaks.
                 Button {
                     soundEnabled.toggle()
@@ -429,6 +415,41 @@ struct JamView: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(soundEnabled ? "Mute audio" : "Unmute audio")
+
+                // Replay the example on demand. Independent of the mute toggle
+                // beside it — an explicit tap always speaks, even when auto-play is
+                // off — and unmutes so the user isn't left wondering why nothing
+                // played after they asked for it.
+                Button {
+                    playLightHaptic()
+                    if !soundEnabled { soundEnabled = true }
+                    SpeechService.shared.speak(word.exampleSentence)
+                } label: {
+                    Image(systemName: "play.fill")
+                        .font(.sniglet(.title3))
+                        .foregroundStyle(DS.Color.ink)
+                        .frame(width: 56, height: 56)
+                        .background(Circle().fill(DS.Color.ink.opacity(0.15)))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Replay sentence")
+
+                // Voice speed (Pro; free learners get the paywall). A pick
+                // replays the sentence at the new speed.
+                VoiceSpeedMenu(source: "card", onChange: { _ in
+                    if !soundEnabled { soundEnabled = true }
+                    SpeechService.shared.speak(word.exampleSentence)
+                }, onLocked: {
+                    isShowingSpeedPaywall = true
+                }) {
+                    // Outline symbol: a heavier weight sits level with the
+                    // filled play and speaker glyphs beside it.
+                    Image(systemName: "speedometer")
+                        .font(.system(.title3, weight: .semibold))
+                        .foregroundStyle(DS.Color.ink)
+                        .frame(width: 56, height: 56)
+                        .background(Circle().fill(DS.Color.ink.opacity(0.15)))
+                }
 
                 Spacer()
             }

@@ -46,3 +46,57 @@ enum VoiceSpeed: String, CaseIterable, Identifiable {
         Entitlements.shared.isPro ? stored : .normal
     }
 }
+
+/// The speed options (Slow … Faster) behind a tap, used beside the play
+/// buttons on word cards and stories. Saves the pick for Pro learners and
+/// then calls `onChange` (replay at the new speed, retime a clip…); a free
+/// learner picking anything but Normal gets `onLocked` (show the paywall).
+struct VoiceSpeedMenu<Content: View>: View {
+    /// `from` on `voice_speed_changed`.
+    let source: String
+    var onChange: (VoiceSpeed) -> Void = { _ in }
+    var onLocked: () -> Void = {}
+    @ViewBuilder let label: () -> Content
+
+    @State private var entitlements = Entitlements.shared
+    @AppStorage(VoiceSpeed.defaultsKey) private var voiceSpeedRaw: String = VoiceSpeed.normal.rawValue
+
+    /// The speed actually in use, so free learners see Normal ticked.
+    private var current: VoiceSpeed {
+        entitlements.isPro ? (VoiceSpeed(rawValue: voiceSpeedRaw) ?? .normal) : .normal
+    }
+
+    var body: some View {
+        Menu {
+            Section(entitlements.isPro ? "Voice speed" : "Voice speed (Pro)") {
+                ForEach(VoiceSpeed.allCases) { speed in
+                    Button {
+                        pick(speed)
+                    } label: {
+                        if speed == current {
+                            Label(speed.title, systemImage: "checkmark")
+                        } else {
+                            Text(speed.title)
+                        }
+                    }
+                }
+            }
+        } label: {
+            label()
+        }
+        .menuStyle(.button)
+        .buttonStyle(.plain)
+        .accessibilityLabel("Voice speed")
+        .accessibilityValue(Text(current.title))
+    }
+
+    private func pick(_ speed: VoiceSpeed) {
+        guard entitlements.isPro else {
+            if speed != .normal { onLocked() }
+            return
+        }
+        voiceSpeedRaw = speed.rawValue
+        Analytics.capture(.voiceSpeedChanged, ["speed": speed.rawValue, "from": source])
+        onChange(speed)
+    }
+}

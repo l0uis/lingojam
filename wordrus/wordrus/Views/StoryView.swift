@@ -10,6 +10,7 @@ struct StoryView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     @State private var narrator = StoryNarrator()
+    @State private var entitlements = Entitlements.shared
     @State private var reading: StoryReading?
     @State private var selectedWord: SelectedWord?
     @State private var lookedUpKeys: Set<String> = []
@@ -121,6 +122,18 @@ struct StoryView: View {
                 ProgressView(value: narrator.progress)
                     .tint(DS.Color.ink)
                     .accessibilityHidden(true)
+            }
+
+            // Speed options behind a speedometer, like the word cards; a
+            // pick retimes the sentence being read straight away.
+            if entitlements.isPro {
+                VoiceSpeedMenu(source: "story", onChange: { _ in narrator.applyVoiceSpeed() }) {
+                    Image(systemName: "speedometer")
+                        .font(.system(.title3, weight: .semibold))
+                        .foregroundStyle(DS.Color.ink)
+                        .frame(width: 44, height: 44)
+                        .background(Circle().fill(DS.Color.ink.opacity(0.15)))
+                }
             }
         }
         .padding(14)

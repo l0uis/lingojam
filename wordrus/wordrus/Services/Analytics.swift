@@ -42,8 +42,8 @@ enum Analytics {
         case purchaseRestored = "purchase_restored"
         case reviewPromptRequested = "review_prompt_requested"
         case analyticsDisabled = "analytics_disabled"
-        /// A Pro learner changed Dr Tusk's speaking speed in Settings
-        /// (`speed`: slow / normal / fast / faster). Added after 1.1.9.
+        /// A Pro learner changed Dr Tusk's speaking speed (`speed`: slow /
+        /// normal / fast / faster; `from`: settings / story / card). Added after 1.1.9.
         case voiceSpeedChanged = "voice_speed_changed"
     }
 
