@@ -140,6 +140,8 @@ HERMITDAVE_URL = (
 
 # Top function words / pronouns / very-common closed-class items that
 # would just get skipped by the LLM. Pre-filtering saves API spend.
+# The prepositions and conjunctions in here are NOT junk — they're hand-authored
+# in `building_blocks_{lang}.json` instead, which the build merges.
 HERMITDAVE_STOPLISTS: dict[str, set[str]] = {
     "fr": {
         "le", "la", "les", "un", "une", "des", "de", "du", "au", "aux",
@@ -395,8 +397,8 @@ entry per input. Process all inputs in the order they were given.
 Each entry must include:
 - lemma: the dictionary form. {cfg.notes}
 - partOfSpeech: one of "noun", "noun (masc.)", "noun (fem.)", "noun (der)",
-  "noun (die)", "noun (das)", "verb", "adjective", "adverb", "interjection",
-  "number", or "phrase". Use the gender-tagged noun form for {cfg.name} where
+  "noun (die)", "noun (das)", "verb", "adjective", "adverb", "preposition",
+  "conjunction", "pronoun", "interjection", "number", or "phrase". Use the gender-tagged noun form for {cfg.name} where
   gender is part of the language.
 - gloss: concise English translation, 1-6 words. Use commas for alternatives.
 - {cfg.endonym_field}: one short natural {cfg.name} sentence using the lemma
@@ -413,7 +415,9 @@ Each entry must include:
     {cefr_lines}
 
 Skip rules — set the "skip" field instead of producing other fields if input is:
-- A pure function word: "function word"
+- An article, personal/possessive pronoun or contraction: "function word"
+  (prepositions and conjunctions are NOT skipped — "with", "towards",
+  "because" are core vocabulary)
 - A proper noun: "proper noun"
 - An inflected form of a more basic lemma you've already produced: "inflection"
 - An obscure technical term that's not flashcard-worthy: "obscure"
@@ -440,8 +444,9 @@ entry per input. Process all inputs in the order they were given.
 
 Each entry must include:
 - lemma: the dictionary form. {cfg.notes}
-- partOfSpeech: one of "noun", "verb", "adjective", "adverb",
-  "interjection", "number", or "phrase" (written in English).
+- partOfSpeech: one of "noun", "verb", "adjective", "adverb", "preposition",
+  "conjunction", "pronoun", "interjection", "number", or "phrase" (written
+  in English).
 - glosses: an object with exactly these keys: {langs}. Each value is the
   concise translation of the lemma into that language, 1-6 words, commas
   for alternatives. Give the word a native speaker would actually use, with
@@ -463,7 +468,9 @@ Each entry must include:
     {cefr_lines}
 
 Skip rules — set the "skip" field instead of producing other fields if input is:
-- A pure function word: "function word"
+- An article, personal/possessive pronoun or contraction: "function word"
+  (prepositions and conjunctions are NOT skipped — "with", "towards",
+  "because" are core vocabulary)
 - A proper noun: "proper noun"
 - An inflected form of a more basic lemma you've already produced: "inflection"
 - An obscure technical term that's not flashcard-worthy: "obscure"

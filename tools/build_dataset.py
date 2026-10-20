@@ -15,9 +15,10 @@ Each entry contains:
   - example.translations.en: English translation of the example
 
 The list focuses on CONTENT WORDS (verbs, nouns, adjectives, meaningful
-adverbs) rather than pure grammatical particles. Function words like
-articles, prepositions, and conjunctions are not great flashcard material
-— learners acquire those through reading and example sentences.
+adverbs). Prepositions, conjunctions and the other "building blocks" (con,
+hacia, durante, porque…) live in `building_blocks_es.json`, which
+`build_dataset` merges — they turned out to be some of the most useful words
+to speak with, and leaving them out filled the daily sets with nature nouns.
 
 To extend toward 1000 words: append new entries to ENTRIES (in roughly
 frequency or pedagogical order) and re-run this script.

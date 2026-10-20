@@ -528,6 +528,7 @@ IRREGULAR_FORMS: dict[str, dict[str, str]] = {
         "morir": "muero muere murió muerto",
         "volver": "vuelvo vuelve vuelto",
         "escribir": "escrito",
+        "freír": "frito frita fritos fritas friendo frieron fríe fríen",
         "abrir": "abierto",
         "romper": "roto",
         "conocer": "conozco conozca",

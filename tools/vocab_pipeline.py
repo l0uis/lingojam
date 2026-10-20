@@ -42,48 +42,69 @@ import deck_rules
 # visible under "All Words" without polluting the picker. The Swift app
 # iterates this `decks` array to build the gallery, so anything here shows
 # up as a filter chip.
+# Hidden tag (like `common`, never a picker deck) on the building-block words.
+# Mirrors `DeckConstants.buildingBlocksSlug` in the app.
+BUILDING_BLOCKS_SLUG = "building-blocks"
+
+# `sortOrder` is also the daily theme path (JamView walks it one theme a day),
+# so the everyday themes lead and the niche ones — Weather & Nature, Animals —
+# come later, rather than handing a beginner clouds and leaves on day two.
 DEFAULT_DECKS = [
-    {
-        "slug": "traveling",
-        "displayName": "Traveling",
-        "description": "Trips, hotels, airports, tickets.",
-        "icon": "airplane",
-        "sortOrder": 10,
-    },
-    {
-        "slug": "weather-and-nature",
-        "displayName": "Weather & Nature",
-        "description": "Seasons, forecast, landscape, plants.",
-        "icon": "cloud.sun.fill",
-        "sortOrder": 15,
-    },
-    {
-        "slug": "animals",
-        "displayName": "Animals",
-        "description": "Pets, farm animals, birds, insects.",
-        "icon": "pawprint.fill",
-        "sortOrder": 18,
-    },
     {
         "slug": "food-and-drink",
         "displayName": "Food & Drink",
         "description": "Groceries, cooking, ingredients.",
         "icon": "fork.knife",
+        "sortOrder": 10,
+    },
+    {
+        "slug": "family",
+        "displayName": "Family & People",
+        "description": "Relatives, friends, describing people.",
+        "icon": "person.2.fill",
+        "sortOrder": 15,
+    },
+    {
+        "slug": "home",
+        "displayName": "Home & Daily Life",
+        "description": "Rooms, routines, household items.",
+        "icon": "house.fill",
         "sortOrder": 20,
+    },
+    {
+        "slug": "out-and-about",
+        "displayName": "Out & About",
+        "description": "Going out, music, sport, hobbies.",
+        "icon": "figure.walk",
+        "sortOrder": 25,
+    },
+    {
+        "slug": "traveling",
+        "displayName": "Traveling",
+        "description": "Trips, hotels, airports, tickets.",
+        "icon": "airplane",
+        "sortOrder": 30,
+    },
+    {
+        "slug": "feelings",
+        "displayName": "Feelings",
+        "description": "Emotions, moods, reactions.",
+        "icon": "face.smiling",
+        "sortOrder": 35,
     },
     {
         "slug": "shopping",
         "displayName": "Shopping",
         "description": "Clothes, stores, prices, sizes.",
         "icon": "bag.fill",
-        "sortOrder": 30,
+        "sortOrder": 40,
     },
     {
         "slug": "health",
         "displayName": "Health & Body",
         "description": "Doctor, pharmacy, body parts, symptoms.",
         "icon": "heart.fill",
-        "sortOrder": 40,
+        "sortOrder": 45,
     },
     {
         "slug": "work",
@@ -93,53 +114,39 @@ DEFAULT_DECKS = [
         "sortOrder": 50,
     },
     {
-        "slug": "money",
-        "displayName": "Money & Bills",
-        "description": "Banking, salary, rent, paying up.",
-        "icon": "creditcard.fill",
+        "slug": "weather-and-nature",
+        "displayName": "Weather & Nature",
+        "description": "Seasons, forecast, landscape, plants.",
+        "icon": "cloud.sun.fill",
         "sortOrder": 55,
-    },
-    {
-        "slug": "feelings",
-        "displayName": "Feelings",
-        "description": "Emotions, moods, reactions.",
-        "icon": "face.smiling",
-        "sortOrder": 60,
-    },
-    {
-        "slug": "home",
-        "displayName": "Home & Daily Life",
-        "description": "Rooms, routines, household items.",
-        "icon": "house.fill",
-        "sortOrder": 70,
-    },
-    {
-        "slug": "family",
-        "displayName": "Family & People",
-        "description": "Relatives, friends, describing people.",
-        "icon": "person.2.fill",
-        "sortOrder": 80,
-    },
-    {
-        "slug": "out-and-about",
-        "displayName": "Out & About",
-        "description": "Going out, music, sport, hobbies.",
-        "icon": "figure.walk",
-        "sortOrder": 85,
     },
     {
         "slug": "studying",
         "displayName": "Studying",
         "description": "School, exams, courses, learning.",
         "icon": "book.fill",
-        "sortOrder": 90,
+        "sortOrder": 60,
+    },
+    {
+        "slug": "money",
+        "displayName": "Money & Bills",
+        "description": "Banking, salary, rent, paying up.",
+        "icon": "creditcard.fill",
+        "sortOrder": 65,
+    },
+    {
+        "slug": "animals",
+        "displayName": "Animals",
+        "description": "Pets, farm animals, birds, insects.",
+        "icon": "pawprint.fill",
+        "sortOrder": 70,
     },
     {
         "slug": "phone-and-internet",
         "displayName": "Phone & Internet",
         "description": "Apps, accounts, messages, devices.",
         "icon": "iphone",
-        "sortOrder": 95,
+        "sortOrder": 75,
     },
 ]
 
@@ -347,7 +354,56 @@ def build_dataset(
                     }
                     order.append(lemma)
 
-    valid_slugs = {d["slug"] for d in decks} | {"common"}
+    # Building blocks: prepositions, connectors and time/place/quantity words
+    # (`building_blocks_{lang}.json`). The original generator skipped function
+    # words as "not flashcard material", which left the seeds with ~0
+    # prepositions and the daily sets full of nature nouns. Every listed word
+    # gets the hidden `building-blocks` tag, which JamView mixes into each
+    # daily set. A word the seed already ships keeps its id/rank, but the file
+    # may correct its `partOfSpeech` / `cefrLevel` — many of these were
+    # mislabelled "adverb" (Italian durante, German während) — and its
+    # `gloss` / example, where the shipped entry missed the function-word
+    # sense entirely (Italian verso "verse", German zu "too"). The only
+    # sanctioned exception to frozen content; DeckSyncMigrator syncs it.
+    blocks_path = Path(__file__).resolve().parent / f"building_blocks_{language_code}.json"
+    blocks_order: list[str] = []
+    if blocks_path.exists():
+        payload = json.loads(blocks_path.read_text(encoding="utf-8"))
+        for entry in payload.get("entries", []):
+            lemma = entry["lemma"]
+            if lemma in word_index:
+                word = word_index[lemma]
+                if entry.get("partOfSpeech"):
+                    word["partOfSpeech"] = entry["partOfSpeech"]
+                if entry.get("cefrLevel"):
+                    word["cefrLevel"] = entry["cefrLevel"]
+                if entry.get("gloss"):
+                    word["definitions"]["en"] = entry["gloss"]
+                if entry.get("example"):
+                    if not entry.get("exampleEnglish"):
+                        raise ValueError(f"{blocks_path.name}: '{lemma}' replaces its example without exampleEnglish")
+                    word["example_native"] = entry["example"]
+                    word["translations"]["en"] = entry["exampleEnglish"]
+            else:
+                missing = [k for k in ("partOfSpeech", "gloss", "example", "exampleEnglish", "cefrLevel") if not entry.get(k)]
+                if missing:
+                    raise ValueError(f"{blocks_path.name}: new word '{lemma}' is missing {missing}")
+                word_index[lemma] = {
+                    "lemma": lemma,
+                    "partOfSpeech": entry["partOfSpeech"],
+                    "definitions": {"en": entry["gloss"]},
+                    "example_native": entry["example"],
+                    "translations": {"en": entry["exampleEnglish"]},
+                    "decks": ["common"],
+                    "cefrLevel": entry["cefrLevel"],
+                }
+                order.append(lemma)
+                word = word_index[lemma]
+            if BUILDING_BLOCKS_SLUG not in word["decks"]:
+                word["decks"].append(BUILDING_BLOCKS_SLUG)
+            blocks_order.append(lemma)
+
+    valid_slugs = {d["slug"] for d in decks} | {"common", BUILDING_BLOCKS_SLUG}
 
     # Vetting blocklist: lemmas that must not ship (subtitle-corpus junk like
     # "Bourbon" or "KGB"). Removal never renumbers survivors — shipped words
@@ -421,6 +477,12 @@ def build_dataset(
         "decks": decks,
         "words": words,
     }
+    # Teaching order of the building blocks (file order), as word ids. Ranks
+    # can't carry it: new words are numbered after every shipped one, which
+    # would put "mit"/"und" behind "seit"/"zwischen".
+    if blocks_order:
+        id_by_lemma = {w["lemma"]: w["id"] for w in words}
+        payload["buildingBlocks"] = [id_by_lemma[l] for l in blocks_order if l in id_by_lemma]
 
     output_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {len(words)} words and {len(decks)} decks to {output_path}")

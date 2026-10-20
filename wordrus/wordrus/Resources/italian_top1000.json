@@ -3,46 +3,60 @@
   "language": "it",
   "decks": [
     {
-      "slug": "traveling",
-      "displayName": "Traveling",
-      "description": "Trips, hotels, airports, tickets.",
-      "icon": "airplane",
-      "sortOrder": 10
-    },
-    {
-      "slug": "weather-and-nature",
-      "displayName": "Weather & Nature",
-      "description": "Seasons, forecast, landscape, plants.",
-      "icon": "cloud.sun.fill",
-      "sortOrder": 15
-    },
-    {
-      "slug": "animals",
-      "displayName": "Animals",
-      "description": "Pets, farm animals, birds, insects.",
-      "icon": "pawprint.fill",
-      "sortOrder": 18
-    },
-    {
       "slug": "food-and-drink",
       "displayName": "Food & Drink",
       "description": "Groceries, cooking, ingredients.",
       "icon": "fork.knife",
+      "sortOrder": 10
+    },
+    {
+      "slug": "family",
+      "displayName": "Family & People",
+      "description": "Relatives, friends, describing people.",
+      "icon": "person.2.fill",
+      "sortOrder": 15
+    },
+    {
+      "slug": "home",
+      "displayName": "Home & Daily Life",
+      "description": "Rooms, routines, household items.",
+      "icon": "house.fill",
       "sortOrder": 20
+    },
+    {
+      "slug": "out-and-about",
+      "displayName": "Out & About",
+      "description": "Going out, music, sport, hobbies.",
+      "icon": "figure.walk",
+      "sortOrder": 25
+    },
+    {
+      "slug": "traveling",
+      "displayName": "Traveling",
+      "description": "Trips, hotels, airports, tickets.",
+      "icon": "airplane",
+      "sortOrder": 30
+    },
+    {
+      "slug": "feelings",
+      "displayName": "Feelings",
+      "description": "Emotions, moods, reactions.",
+      "icon": "face.smiling",
+      "sortOrder": 35
     },
     {
       "slug": "shopping",
       "displayName": "Shopping",
       "description": "Clothes, stores, prices, sizes.",
       "icon": "bag.fill",
-      "sortOrder": 30
+      "sortOrder": 40
     },
     {
       "slug": "health",
       "displayName": "Health & Body",
       "description": "Doctor, pharmacy, body parts, symptoms.",
       "icon": "heart.fill",
-      "sortOrder": 40
+      "sortOrder": 45
     },
     {
       "slug": "work",
@@ -52,53 +66,39 @@
       "sortOrder": 50
     },
     {
-      "slug": "money",
-      "displayName": "Money & Bills",
-      "description": "Banking, salary, rent, paying up.",
-      "icon": "creditcard.fill",
+      "slug": "weather-and-nature",
+      "displayName": "Weather & Nature",
+      "description": "Seasons, forecast, landscape, plants.",
+      "icon": "cloud.sun.fill",
       "sortOrder": 55
-    },
-    {
-      "slug": "feelings",
-      "displayName": "Feelings",
-      "description": "Emotions, moods, reactions.",
-      "icon": "face.smiling",
-      "sortOrder": 60
-    },
-    {
-      "slug": "home",
-      "displayName": "Home & Daily Life",
-      "description": "Rooms, routines, household items.",
-      "icon": "house.fill",
-      "sortOrder": 70
-    },
-    {
-      "slug": "family",
-      "displayName": "Family & People",
-      "description": "Relatives, friends, describing people.",
-      "icon": "person.2.fill",
-      "sortOrder": 80
-    },
-    {
-      "slug": "out-and-about",
-      "displayName": "Out & About",
-      "description": "Going out, music, sport, hobbies.",
-      "icon": "figure.walk",
-      "sortOrder": 85
     },
     {
       "slug": "studying",
       "displayName": "Studying",
       "description": "School, exams, courses, learning.",
       "icon": "book.fill",
-      "sortOrder": 90
+      "sortOrder": 60
+    },
+    {
+      "slug": "money",
+      "displayName": "Money & Bills",
+      "description": "Banking, salary, rent, paying up.",
+      "icon": "creditcard.fill",
+      "sortOrder": 65
+    },
+    {
+      "slug": "animals",
+      "displayName": "Animals",
+      "description": "Pets, farm animals, birds, insects.",
+      "icon": "pawprint.fill",
+      "sortOrder": 70
     },
     {
       "slug": "phone-and-internet",
       "displayName": "Phone & Internet",
       "description": "Apps, accounts, messages, devices.",
       "icon": "iphone",
-      "sortOrder": 95
+      "sortOrder": 75
     }
   ],
   "words": [
@@ -2799,7 +2799,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -3188,9 +3189,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0159",
@@ -3226,7 +3228,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -3245,7 +3248,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -3264,7 +3268,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -3283,9 +3288,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0164",
@@ -3302,9 +3308,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0165",
@@ -3340,9 +3347,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0167",
@@ -3378,9 +3386,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0169",
@@ -3454,7 +3463,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -3492,9 +3502,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0175",
@@ -3511,9 +3522,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0176",
@@ -3530,15 +3542,16 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0177",
       "rank": 177,
       "lemma": "perché",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "why; because"
       },
@@ -3549,9 +3562,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0178",
@@ -3568,9 +3582,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "it-0179",
@@ -6935,7 +6950,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7030,7 +7046,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7068,7 +7085,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7106,7 +7124,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7144,7 +7163,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7152,7 +7172,7 @@
       "id": "it-0358",
       "rank": 358,
       "lemma": "niente",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "pronoun",
       "definitions": {
         "en": "nothing, not anything"
       },
@@ -7163,7 +7183,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7171,7 +7192,7 @@
       "id": "it-0359",
       "rank": 359,
       "lemma": "qualcosa",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "pronoun",
       "definitions": {
         "en": "something, anything"
       },
@@ -7182,7 +7203,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7239,7 +7261,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -7277,7 +7300,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -7353,7 +7377,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7566,6 +7591,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "home"
       ],
       "cefrLevel": "A2"
@@ -7642,7 +7668,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7718,7 +7745,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7813,7 +7841,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7851,7 +7880,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7859,7 +7889,7 @@
       "id": "it-0396",
       "rank": 396,
       "lemma": "qualcuno",
-      "partOfSpeech": "noun (masc.)",
+      "partOfSpeech": "pronoun",
       "definitions": {
         "en": "someone, somebody, anyone"
       },
@@ -7870,7 +7900,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -7927,7 +7958,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7946,7 +7978,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8041,7 +8074,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8049,7 +8083,7 @@
       "id": "it-0406",
       "rank": 406,
       "lemma": "mentre",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "while, whereas, as"
       },
@@ -8060,7 +8094,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8079,7 +8114,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8136,7 +8172,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8376,7 +8413,7 @@
       "id": "it-0424",
       "rank": 424,
       "lemma": "sotto",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "under, below, beneath"
       },
@@ -8387,7 +8424,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8619,7 +8657,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8734,7 +8773,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8742,7 +8782,7 @@
       "id": "it-0444",
       "rank": 444,
       "lemma": "contro",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "against, versus"
       },
@@ -8753,7 +8793,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8811,7 +8852,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8830,7 +8872,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -9518,20 +9561,21 @@
       "id": "it-0484",
       "rank": 484,
       "lemma": "verso",
-      "partOfSpeech": "noun (masc.)",
+      "partOfSpeech": "preposition",
       "definitions": {
-        "en": "verse, line (of poetry); sound, cry (of animal)"
+        "en": "towards; verse, line (of poetry)"
       },
       "example": {
-        "text": "Ha recitato alcuni versi di una poesia famosa.",
+        "text": "Camminiamo verso la stazione.",
         "translations": {
-          "en": "He recited a few lines from a famous poem."
+          "en": "Let's walk towards the station."
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "B1"
+      "cefrLevel": "A2"
     },
     {
       "id": "it-0485",
@@ -9672,7 +9716,7 @@
       "id": "it-0492",
       "rank": 492,
       "lemma": "dietro",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "behind, at the back"
       },
@@ -9683,7 +9727,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -10042,7 +10087,7 @@
       "id": "it-0511",
       "rank": 511,
       "lemma": "sopra",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "above, on top, over"
       },
@@ -10053,7 +10098,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -10343,7 +10389,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -10624,7 +10671,7 @@
       "id": "it-0541",
       "rank": 541,
       "lemma": "durante",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "during, throughout"
       },
@@ -10636,6 +10683,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A2"
@@ -11029,7 +11077,7 @@
       "id": "it-0564",
       "rank": 564,
       "lemma": "però",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "however, but, yet"
       },
@@ -11040,7 +11088,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -11463,6 +11512,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A1"
@@ -11896,7 +11946,7 @@
       "id": "it-0609",
       "rank": 609,
       "lemma": "finché",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "until, as long as"
       },
@@ -11907,7 +11957,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -12025,7 +12076,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -12159,7 +12211,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -12460,7 +12513,7 @@
       "id": "it-0639",
       "rank": 639,
       "lemma": "oppure",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "or, or else, otherwise"
       },
@@ -12471,7 +12524,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -13624,7 +13678,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -15954,7 +16009,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -16314,7 +16370,7 @@
       "id": "it-0841",
       "rank": 841,
       "lemma": "attraverso",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "through, across, via"
       },
@@ -16325,7 +16381,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -17750,7 +17807,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -18682,7 +18740,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -18992,7 +19051,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -21007,7 +21067,7 @@
       "id": "it-1087",
       "rank": 1087,
       "lemma": "nonostante",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "despite, nevertheless, in spite of"
       },
@@ -21018,7 +21078,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -27132,7 +27193,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -36988,7 +37050,7 @@
       "id": "it-1920",
       "rank": 1920,
       "lemma": "tramite",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "through, by means of, via"
       },
@@ -36999,7 +37061,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -42011,7 +42074,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -46018,7 +46082,7 @@
       "id": "it-2392",
       "rank": 2392,
       "lemma": "sebbene",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "although, even though"
       },
@@ -46029,9 +46093,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "B2"
+      "cefrLevel": "B1"
     },
     {
       "id": "it-2393",
@@ -126762,6 +126827,577 @@
         "work"
       ],
       "cefrLevel": "B2"
+    },
+    {
+      "id": "it-6628",
+      "rank": 6628,
+      "lemma": "di",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "of, from"
+      },
+      "example": {
+        "text": "Sono di Roma, ma vivo a Milano.",
+        "translations": {
+          "en": "I'm from Rome, but I live in Milan."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6629",
+      "rank": 6629,
+      "lemma": "a",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "to, at, in"
+      },
+      "example": {
+        "text": "Domani vado a Napoli con mia sorella.",
+        "translations": {
+          "en": "Tomorrow I'm going to Naples with my sister."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6630",
+      "rank": 6630,
+      "lemma": "da",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "from, since, at (someone's), by"
+      },
+      "example": {
+        "text": "Vivo qui da tre anni.",
+        "translations": {
+          "en": "I've lived here for three years."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6631",
+      "rank": 6631,
+      "lemma": "in",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "in, to, by (transport)"
+      },
+      "example": {
+        "text": "Vado in ufficio in bicicletta.",
+        "translations": {
+          "en": "I go to the office by bike."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6632",
+      "rank": 6632,
+      "lemma": "con",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "with"
+      },
+      "example": {
+        "text": "Stasera esco con i miei amici.",
+        "translations": {
+          "en": "I'm going out with my friends tonight."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6633",
+      "rank": 6633,
+      "lemma": "per",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "for, in order to, through"
+      },
+      "example": {
+        "text": "Questo regalo è per te.",
+        "translations": {
+          "en": "This present is for you."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6634",
+      "rank": 6634,
+      "lemma": "su",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "on, about"
+      },
+      "example": {
+        "text": "Ho letto un libro su Leonardo da Vinci.",
+        "translations": {
+          "en": "I read a book about Leonardo da Vinci."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6635",
+      "rank": 6635,
+      "lemma": "e",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "and"
+      },
+      "example": {
+        "text": "Ho un fratello e una sorella.",
+        "translations": {
+          "en": "I have a brother and a sister."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6636",
+      "rank": 6636,
+      "lemma": "ma",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "but"
+      },
+      "example": {
+        "text": "È caro, ma è molto buono.",
+        "translations": {
+          "en": "It's expensive, but it's very good."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6637",
+      "rank": 6637,
+      "lemma": "o",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "or"
+      },
+      "example": {
+        "text": "Preferisci il tè o il caffè?",
+        "translations": {
+          "en": "Do you prefer tea or coffee?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6638",
+      "rank": 6638,
+      "lemma": "che",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "that, than"
+      },
+      "example": {
+        "text": "Penso che tu abbia ragione.",
+        "translations": {
+          "en": "I think that you're right."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6639",
+      "rank": 6639,
+      "lemma": "se",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "if, whether"
+      },
+      "example": {
+        "text": "Se hai tempo stasera, chiamami.",
+        "translations": {
+          "en": "If you've got time tonight, call me."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6640",
+      "rank": 6640,
+      "lemma": "senza",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "without"
+      },
+      "example": {
+        "text": "Prendo un caffè senza zucchero, grazie.",
+        "translations": {
+          "en": "I'll have a coffee without sugar, thanks."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6641",
+      "rank": 6641,
+      "lemma": "vicino a",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "near, close to"
+      },
+      "example": {
+        "text": "C'è un supermercato vicino a casa mia.",
+        "translations": {
+          "en": "There's a supermarket near my house."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6642",
+      "rank": 6642,
+      "lemma": "a volte",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "sometimes"
+      },
+      "example": {
+        "text": "A volte pranzo in ufficio con i colleghi.",
+        "translations": {
+          "en": "Sometimes I have lunch at the office with my colleagues."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6643",
+      "rank": 6643,
+      "lemma": "di nuovo",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "again"
+      },
+      "example": {
+        "text": "Scusa, puoi dirlo di nuovo?",
+        "translations": {
+          "en": "Sorry, can you say it again?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6644",
+      "rank": 6644,
+      "lemma": "chi",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "who, whoever"
+      },
+      "example": {
+        "text": "Chi viene alla festa stasera?",
+        "translations": {
+          "en": "Who's coming to the party tonight?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6645",
+      "rank": 6645,
+      "lemma": "che cosa",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "what"
+      },
+      "example": {
+        "text": "Che cosa fai questo fine settimana?",
+        "translations": {
+          "en": "What are you doing this weekend?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "it-6646",
+      "rank": 6646,
+      "lemma": "tra",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "between, among, in (time)"
+      },
+      "example": {
+        "text": "Il treno parte tra dieci minuti.",
+        "translations": {
+          "en": "The train leaves in ten minutes."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "it-6647",
+      "rank": 6647,
+      "lemma": "anche se",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "even if, although"
+      },
+      "example": {
+        "text": "Esco lo stesso, anche se piove.",
+        "translations": {
+          "en": "I'm going out anyway, even if it rains."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "it-6648",
+      "rank": 6648,
+      "lemma": "di fronte a",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "opposite, in front of"
+      },
+      "example": {
+        "text": "Il bar è di fronte a casa mia.",
+        "translations": {
+          "en": "The café is opposite my house."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "it-6649",
+      "rank": 6649,
+      "lemma": "secondo me",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "in my opinion, I think"
+      },
+      "example": {
+        "text": "Secondo me, questo film è troppo lungo.",
+        "translations": {
+          "en": "In my opinion, this film is too long."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "it-6650",
+      "rank": 6650,
+      "lemma": "a causa di",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "because of, due to"
+      },
+      "example": {
+        "text": "Il volo è in ritardo a causa di uno sciopero.",
+        "translations": {
+          "en": "The flight is delayed because of a strike."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "it-6651",
+      "rank": 6651,
+      "lemma": "bensì",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "but (rather)"
+      },
+      "example": {
+        "text": "Non è mia sorella, bensì mia cugina.",
+        "translations": {
+          "en": "She isn't my sister but my cousin."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
     }
+  ],
+  "buildingBlocks": [
+    "it-6628",
+    "it-6629",
+    "it-6630",
+    "it-6631",
+    "it-6632",
+    "it-6633",
+    "it-6634",
+    "it-6635",
+    "it-6636",
+    "it-6637",
+    "it-6638",
+    "it-6639",
+    "it-6640",
+    "it-6641",
+    "it-6642",
+    "it-6643",
+    "it-6644",
+    "it-6645",
+    "it-0177",
+    "it-0175",
+    "it-0176",
+    "it-0174",
+    "it-0178",
+    "it-0447",
+    "it-0158",
+    "it-0359",
+    "it-0358",
+    "it-0346",
+    "it-0138",
+    "it-0369",
+    "it-0357",
+    "it-0399",
+    "it-0393",
+    "it-0355",
+    "it-0351",
+    "it-0168",
+    "it-0166",
+    "it-0405",
+    "it-0424",
+    "it-0511",
+    "it-0492",
+    "it-0395",
+    "it-0407",
+    "it-0586",
+    "it-0388",
+    "it-0353",
+    "it-0400",
+    "it-2180",
+    "it-0384",
+    "it-0163",
+    "it-0164",
+    "it-6646",
+    "it-0484",
+    "it-6647",
+    "it-6648",
+    "it-6649",
+    "it-0541",
+    "it-0406",
+    "it-0444",
+    "it-0564",
+    "it-0639",
+    "it-0362",
+    "it-0822",
+    "it-0396",
+    "it-0364",
+    "it-0526",
+    "it-0980",
+    "it-0380",
+    "it-0699",
+    "it-0841",
+    "it-0448",
+    "it-0162",
+    "it-0161",
+    "it-0172",
+    "it-0437",
+    "it-0622",
+    "it-0160",
+    "it-0410",
+    "it-0443",
+    "it-0615",
+    "it-6650",
+    "it-6651",
+    "it-1087",
+    "it-1407",
+    "it-2392",
+    "it-0609",
+    "it-1920",
+    "it-0915",
+    "it-0964"
   ]
 }

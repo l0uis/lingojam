@@ -237,11 +237,32 @@ TRAVELING_YIELDS_TO = {"weather-and-nature", "animals"}
 LEGACY_WORK_MONEY = "work-and-money"
 LEGACY_WORK_MONEY_FALLBACK = "work"
 
+
+def _load_work_fallback() -> dict[str, set[str]]:
+    """Lemmas whose `work` tag is frozen fallback provenance, per language
+    (`deck_work_fallback_<lang>.txt`). `retag` treats them as still carrying
+    the legacy `work-and-money` slug, so rebuilds stay no-ops."""
+    from pathlib import Path
+    out: dict[str, set[str]] = {}
+    for path in Path(__file__).resolve().parent.glob("deck_work_fallback_*.txt"):
+        lang = path.stem.removeprefix("deck_work_fallback_")
+        out[lang] = {
+            line.strip()
+            for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+    return out
+
+
+WORK_FALLBACK = _load_work_fallback()
+
 _COMPILED = {slug: re.compile(pat, re.I) for slug, pat in GLOSS_RULES.items()}
 
 
 def retag(language_code: str, lemma: str, gloss: str, slugs: list[str]) -> list[str]:
     """Return the replacement slug list for one word (always includes `common`)."""
+    if lemma in WORK_FALLBACK.get(language_code, ()):
+        slugs = [*slugs, LEGACY_WORK_MONEY]
     # English seeds were LLM-tagged against the current taxonomy, and their
     # "gloss" is the bare lemma, which the gloss regexes under-match — so for
     # English the rules add to the generator's tags instead of replacing them.

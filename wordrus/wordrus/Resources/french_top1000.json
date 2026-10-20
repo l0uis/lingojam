@@ -3,46 +3,60 @@
   "language": "fr",
   "decks": [
     {
-      "slug": "traveling",
-      "displayName": "Traveling",
-      "description": "Trips, hotels, airports, tickets.",
-      "icon": "airplane",
-      "sortOrder": 10
-    },
-    {
-      "slug": "weather-and-nature",
-      "displayName": "Weather & Nature",
-      "description": "Seasons, forecast, landscape, plants.",
-      "icon": "cloud.sun.fill",
-      "sortOrder": 15
-    },
-    {
-      "slug": "animals",
-      "displayName": "Animals",
-      "description": "Pets, farm animals, birds, insects.",
-      "icon": "pawprint.fill",
-      "sortOrder": 18
-    },
-    {
       "slug": "food-and-drink",
       "displayName": "Food & Drink",
       "description": "Groceries, cooking, ingredients.",
       "icon": "fork.knife",
+      "sortOrder": 10
+    },
+    {
+      "slug": "family",
+      "displayName": "Family & People",
+      "description": "Relatives, friends, describing people.",
+      "icon": "person.2.fill",
+      "sortOrder": 15
+    },
+    {
+      "slug": "home",
+      "displayName": "Home & Daily Life",
+      "description": "Rooms, routines, household items.",
+      "icon": "house.fill",
       "sortOrder": 20
+    },
+    {
+      "slug": "out-and-about",
+      "displayName": "Out & About",
+      "description": "Going out, music, sport, hobbies.",
+      "icon": "figure.walk",
+      "sortOrder": 25
+    },
+    {
+      "slug": "traveling",
+      "displayName": "Traveling",
+      "description": "Trips, hotels, airports, tickets.",
+      "icon": "airplane",
+      "sortOrder": 30
+    },
+    {
+      "slug": "feelings",
+      "displayName": "Feelings",
+      "description": "Emotions, moods, reactions.",
+      "icon": "face.smiling",
+      "sortOrder": 35
     },
     {
       "slug": "shopping",
       "displayName": "Shopping",
       "description": "Clothes, stores, prices, sizes.",
       "icon": "bag.fill",
-      "sortOrder": 30
+      "sortOrder": 40
     },
     {
       "slug": "health",
       "displayName": "Health & Body",
       "description": "Doctor, pharmacy, body parts, symptoms.",
       "icon": "heart.fill",
-      "sortOrder": 40
+      "sortOrder": 45
     },
     {
       "slug": "work",
@@ -52,53 +66,39 @@
       "sortOrder": 50
     },
     {
-      "slug": "money",
-      "displayName": "Money & Bills",
-      "description": "Banking, salary, rent, paying up.",
-      "icon": "creditcard.fill",
+      "slug": "weather-and-nature",
+      "displayName": "Weather & Nature",
+      "description": "Seasons, forecast, landscape, plants.",
+      "icon": "cloud.sun.fill",
       "sortOrder": 55
-    },
-    {
-      "slug": "feelings",
-      "displayName": "Feelings",
-      "description": "Emotions, moods, reactions.",
-      "icon": "face.smiling",
-      "sortOrder": 60
-    },
-    {
-      "slug": "home",
-      "displayName": "Home & Daily Life",
-      "description": "Rooms, routines, household items.",
-      "icon": "house.fill",
-      "sortOrder": 70
-    },
-    {
-      "slug": "family",
-      "displayName": "Family & People",
-      "description": "Relatives, friends, describing people.",
-      "icon": "person.2.fill",
-      "sortOrder": 80
-    },
-    {
-      "slug": "out-and-about",
-      "displayName": "Out & About",
-      "description": "Going out, music, sport, hobbies.",
-      "icon": "figure.walk",
-      "sortOrder": 85
     },
     {
       "slug": "studying",
       "displayName": "Studying",
       "description": "School, exams, courses, learning.",
       "icon": "book.fill",
-      "sortOrder": 90
+      "sortOrder": 60
+    },
+    {
+      "slug": "money",
+      "displayName": "Money & Bills",
+      "description": "Banking, salary, rent, paying up.",
+      "icon": "creditcard.fill",
+      "sortOrder": 65
+    },
+    {
+      "slug": "animals",
+      "displayName": "Animals",
+      "description": "Pets, farm animals, birds, insects.",
+      "icon": "pawprint.fill",
+      "sortOrder": 70
     },
     {
       "slug": "phone-and-internet",
       "displayName": "Phone & Internet",
       "description": "Apps, accounts, messages, devices.",
       "icon": "iphone",
-      "sortOrder": 95
+      "sortOrder": 75
     }
   ],
   "words": [
@@ -1888,7 +1888,7 @@
       "lemma": "personne",
       "partOfSpeech": "noun (fem.)",
       "definitions": {
-        "en": "person"
+        "en": "person; nobody (ne … personne)"
       },
       "example": {
         "text": "C'est une bonne personne.",
@@ -1898,6 +1898,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "family"
       ],
       "cefrLevel": "A1"
@@ -2736,7 +2737,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -2746,7 +2748,7 @@
       "lemma": "même",
       "partOfSpeech": "adjective",
       "definitions": {
-        "en": "same"
+        "en": "same; even"
       },
       "example": {
         "text": "Le même problème.",
@@ -2755,7 +2757,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -3127,9 +3130,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0156",
@@ -3146,9 +3150,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0157",
@@ -3184,7 +3189,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -3203,9 +3209,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0160",
@@ -3222,7 +3229,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -3241,9 +3249,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0162",
@@ -3260,9 +3269,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0163",
@@ -3298,9 +3308,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0165",
@@ -3317,9 +3328,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0166",
@@ -3336,9 +3348,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0167",
@@ -3431,15 +3444,16 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0172",
       "rank": 172,
       "lemma": "quand",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "when"
       },
@@ -3450,9 +3464,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0173",
@@ -3469,9 +3484,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0174",
@@ -3488,9 +3504,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0175",
@@ -3507,7 +3524,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -6799,7 +6817,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -6894,7 +6913,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -6952,7 +6972,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7105,7 +7126,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7295,7 +7317,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -7660,7 +7683,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -7717,7 +7741,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8139,7 +8164,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8196,7 +8222,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -8299,7 +8326,7 @@
       "id": "fr-0420",
       "rank": 420,
       "lemma": "devant",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "in front, ahead"
       },
@@ -8310,7 +8337,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -8581,7 +8609,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -8641,6 +8670,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A1"
@@ -8718,7 +8748,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -9073,7 +9104,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -9284,7 +9316,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -9292,7 +9325,7 @@
       "id": "fr-0471",
       "rank": 471,
       "lemma": "derrière",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "behind, at the back"
       },
@@ -9303,7 +9336,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -9361,6 +9395,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "home"
       ],
       "cefrLevel": "A1"
@@ -9538,6 +9573,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A1"
@@ -9828,9 +9864,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "fr-0500",
@@ -10343,7 +10380,7 @@
       "id": "fr-0526",
       "rank": 526,
       "lemma": "dès",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "from, as soon as, since"
       },
@@ -10354,7 +10391,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -12845,7 +12883,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -13234,7 +13273,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -14345,7 +14385,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -15712,7 +15753,7 @@
       "id": "fr-0805",
       "rank": 805,
       "lemma": "lequel",
-      "partOfSpeech": "phrase",
+      "partOfSpeech": "pronoun",
       "definitions": {
         "en": "which one, who, whom (relative/interrogative pronoun)"
       },
@@ -15723,7 +15764,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -18694,7 +18736,7 @@
       "id": "fr-0960",
       "rank": 960,
       "lemma": "envers",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "towards, with regard to"
       },
@@ -18705,7 +18747,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -19140,7 +19183,7 @@
       "id": "fr-0984",
       "rank": 984,
       "lemma": "durant",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "during, throughout"
       },
@@ -19151,7 +19194,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -19666,7 +19710,7 @@
       "id": "fr-1011",
       "rank": 1011,
       "lemma": "parmi",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "among, amongst"
       },
@@ -19677,7 +19721,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -21945,7 +21990,7 @@
       "id": "fr-1132",
       "rank": 1132,
       "lemma": "malgré",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "despite, in spite of"
       },
@@ -21956,7 +22001,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -22705,7 +22751,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -28441,7 +28488,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -43574,7 +43622,7 @@
       "id": "fr-2254",
       "rank": 2254,
       "lemma": "jusque",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "until, up to, as far as"
       },
@@ -43585,7 +43633,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -45147,7 +45196,7 @@
       "id": "fr-2337",
       "rank": 2337,
       "lemma": "quoique",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "conjunction",
       "definitions": {
         "en": "although, even though"
       },
@@ -45158,9 +45207,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "B2"
+      "cefrLevel": "B1"
     },
     {
       "id": "fr-2338",
@@ -58593,7 +58643,7 @@
       "id": "fr-3051",
       "rank": 3051,
       "lemma": "après",
-      "partOfSpeech": "adverb",
+      "partOfSpeech": "preposition",
       "definitions": {
         "en": "after, afterwards"
       },
@@ -58604,7 +58654,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -127145,6 +127196,962 @@
         "work"
       ],
       "cefrLevel": "B2"
+    },
+    {
+      "id": "fr-6660",
+      "rank": 6660,
+      "lemma": "de",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "of, from"
+      },
+      "example": {
+        "text": "Je suis de Lyon, mais j'habite à Paris.",
+        "translations": {
+          "en": "I'm from Lyon, but I live in Paris."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6661",
+      "rank": 6661,
+      "lemma": "à",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "to, at, in"
+      },
+      "example": {
+        "text": "Demain, je vais à la plage avec mes amis.",
+        "translations": {
+          "en": "Tomorrow I'm going to the beach with my friends."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6662",
+      "rank": 6662,
+      "lemma": "dans",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "in, inside, into"
+      },
+      "example": {
+        "text": "Les clés sont dans mon sac.",
+        "translations": {
+          "en": "The keys are in my bag."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6663",
+      "rank": 6663,
+      "lemma": "en",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "in, to, by (transport)"
+      },
+      "example": {
+        "text": "Cet été, on part en Italie en voiture.",
+        "translations": {
+          "en": "This summer we're going to Italy by car."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6664",
+      "rank": 6664,
+      "lemma": "avec",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "with"
+      },
+      "example": {
+        "text": "Tu veux un café avec du lait ?",
+        "translations": {
+          "en": "Do you want a coffee with milk?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6665",
+      "rank": 6665,
+      "lemma": "pour",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "for, in order to"
+      },
+      "example": {
+        "text": "Ce cadeau est pour toi.",
+        "translations": {
+          "en": "This present is for you."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6666",
+      "rank": 6666,
+      "lemma": "sans",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "without"
+      },
+      "example": {
+        "text": "Je bois mon café sans sucre.",
+        "translations": {
+          "en": "I take my coffee without sugar."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6667",
+      "rank": 6667,
+      "lemma": "par",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "by, through, per"
+      },
+      "example": {
+        "text": "Je fais du sport trois fois par semaine.",
+        "translations": {
+          "en": "I do sport three times a week."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6668",
+      "rank": 6668,
+      "lemma": "sur",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "on, about"
+      },
+      "example": {
+        "text": "Le livre est sur la table.",
+        "translations": {
+          "en": "The book is on the table."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6669",
+      "rank": 6669,
+      "lemma": "sous",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "under, beneath"
+      },
+      "example": {
+        "text": "Le chat dort sous le lit.",
+        "translations": {
+          "en": "The cat is sleeping under the bed."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6670",
+      "rank": 6670,
+      "lemma": "chez",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "at (someone's) place, to (someone's) home"
+      },
+      "example": {
+        "text": "Ce soir, on dîne chez mes parents.",
+        "translations": {
+          "en": "Tonight we're having dinner at my parents'."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6671",
+      "rank": 6671,
+      "lemma": "avant",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "before"
+      },
+      "example": {
+        "text": "Je bois toujours un café avant le travail.",
+        "translations": {
+          "en": "I always have a coffee before work."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6672",
+      "rank": 6672,
+      "lemma": "pendant",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "during, for"
+      },
+      "example": {
+        "text": "J'ai dormi pendant tout le voyage.",
+        "translations": {
+          "en": "I slept during the whole journey."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6673",
+      "rank": 6673,
+      "lemma": "depuis",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "since, for (time)"
+      },
+      "example": {
+        "text": "J'habite à Paris depuis trois ans.",
+        "translations": {
+          "en": "I've lived in Paris for three years."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6674",
+      "rank": 6674,
+      "lemma": "à côté de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "next to, beside"
+      },
+      "example": {
+        "text": "La banque est à côté de la pharmacie.",
+        "translations": {
+          "en": "The bank is next to the chemist's."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6675",
+      "rank": 6675,
+      "lemma": "et",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "and"
+      },
+      "example": {
+        "text": "J'ai un frère et une sœur.",
+        "translations": {
+          "en": "I have a brother and a sister."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6676",
+      "rank": 6676,
+      "lemma": "mais",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "but"
+      },
+      "example": {
+        "text": "C'est cher, mais c'est très bon.",
+        "translations": {
+          "en": "It's expensive, but it's very good."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6677",
+      "rank": 6677,
+      "lemma": "ou",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "or"
+      },
+      "example": {
+        "text": "Tu préfères du thé ou du café ?",
+        "translations": {
+          "en": "Would you prefer tea or coffee?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6678",
+      "rank": 6678,
+      "lemma": "que",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "that, than"
+      },
+      "example": {
+        "text": "Je pense que tu as raison.",
+        "translations": {
+          "en": "I think that you're right."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6679",
+      "rank": 6679,
+      "lemma": "si",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "if, whether, so"
+      },
+      "example": {
+        "text": "Si tu as le temps, appelle-moi.",
+        "translations": {
+          "en": "If you have time, give me a call."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6680",
+      "rank": 6680,
+      "lemma": "comme",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "like, as"
+      },
+      "example": {
+        "text": "Il parle comme son père.",
+        "translations": {
+          "en": "He talks like his father."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6681",
+      "rank": 6681,
+      "lemma": "plus",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "more"
+      },
+      "example": {
+        "text": "Parle plus lentement, s'il te plaît.",
+        "translations": {
+          "en": "Speak more slowly, please."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6682",
+      "rank": 6682,
+      "lemma": "un peu",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "a little, a bit"
+      },
+      "example": {
+        "text": "Je parle un peu français.",
+        "translations": {
+          "en": "I speak a little French."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6683",
+      "rank": 6683,
+      "lemma": "plus tard",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "later"
+      },
+      "example": {
+        "text": "On en parle plus tard ?",
+        "translations": {
+          "en": "Shall we talk about it later?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6684",
+      "rank": 6684,
+      "lemma": "quelque chose",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "something, anything"
+      },
+      "example": {
+        "text": "Tu veux boire quelque chose ?",
+        "translations": {
+          "en": "Would you like something to drink?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6685",
+      "rank": 6685,
+      "lemma": "rien",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "nothing, anything"
+      },
+      "example": {
+        "text": "Je n'ai rien à faire aujourd'hui.",
+        "translations": {
+          "en": "I've got nothing to do today."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6686",
+      "rank": 6686,
+      "lemma": "qui",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "who, which, that"
+      },
+      "example": {
+        "text": "Qui veut encore du café ?",
+        "translations": {
+          "en": "Who wants more coffee?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6687",
+      "rank": 6687,
+      "lemma": "quoi",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "what"
+      },
+      "example": {
+        "text": "Tu fais quoi ce week-end ?",
+        "translations": {
+          "en": "What are you up to this weekend?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "fr-6688",
+      "rank": 6688,
+      "lemma": "entre",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "between, among"
+      },
+      "example": {
+        "text": "La pharmacie est entre le bar et la banque.",
+        "translations": {
+          "en": "The chemist's is between the bar and the bank."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6689",
+      "rank": 6689,
+      "lemma": "vers",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "towards, around (time)"
+      },
+      "example": {
+        "text": "Il marche vers la gare.",
+        "translations": {
+          "en": "He's walking towards the station."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6690",
+      "rank": 6690,
+      "lemma": "en face de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "opposite, across from"
+      },
+      "example": {
+        "text": "J'habite en face de la boulangerie.",
+        "translations": {
+          "en": "I live opposite the bakery."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6691",
+      "rank": 6691,
+      "lemma": "à cause de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "because of, due to"
+      },
+      "example": {
+        "text": "Le train est en retard à cause de la neige.",
+        "translations": {
+          "en": "The train is late because of the snow."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6692",
+      "rank": 6692,
+      "lemma": "même si",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "even if, even though"
+      },
+      "example": {
+        "text": "On sort ce soir, même si on est fatigués.",
+        "translations": {
+          "en": "We're going out tonight, even if we're tired."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6693",
+      "rank": 6693,
+      "lemma": "pendant que",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "while"
+      },
+      "example": {
+        "text": "J'écoute de la musique pendant que je cuisine.",
+        "translations": {
+          "en": "I listen to music while I cook."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6694",
+      "rank": 6694,
+      "lemma": "donc",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "so, therefore"
+      },
+      "example": {
+        "text": "J'étais fatigué, donc je suis parti tôt.",
+        "translations": {
+          "en": "I was tired, so I left early."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6695",
+      "rank": 6695,
+      "lemma": "quand même",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "anyway, all the same, still"
+      },
+      "example": {
+        "text": "Il pleuvait, mais on est sortis quand même.",
+        "translations": {
+          "en": "It was raining, but we went out anyway."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6696",
+      "rank": 6696,
+      "lemma": "en plus",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "besides, what's more, on top of that"
+      },
+      "example": {
+        "text": "C'est loin, et en plus il pleut.",
+        "translations": {
+          "en": "It's far, and on top of that it's raining."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6697",
+      "rank": 6697,
+      "lemma": "quelqu'un",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "someone, anyone"
+      },
+      "example": {
+        "text": "Il y a quelqu'un à la maison ?",
+        "translations": {
+          "en": "Is anyone home?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6698",
+      "rank": 6698,
+      "lemma": "non plus",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "either, neither"
+      },
+      "example": {
+        "text": "Je n'aime pas ça non plus.",
+        "translations": {
+          "en": "I don't like that either."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "fr-6699",
+      "rank": 6699,
+      "lemma": "contre",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "against"
+      },
+      "example": {
+        "text": "Beaucoup de gens ont voté contre la loi.",
+        "translations": {
+          "en": "A lot of people voted against the law."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "fr-6700",
+      "rank": 6700,
+      "lemma": "selon",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "according to, depending on"
+      },
+      "example": {
+        "text": "Selon la météo, il va pleuvoir demain.",
+        "translations": {
+          "en": "According to the forecast, it's going to rain tomorrow."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "fr-6701",
+      "rank": 6701,
+      "lemma": "bien que",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "although, even though"
+      },
+      "example": {
+        "text": "Bien que ce soit difficile, ça vaut la peine.",
+        "translations": {
+          "en": "Although it's hard, it's worth it."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "fr-6702",
+      "rank": 6702,
+      "lemma": "au lieu de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "instead of"
+      },
+      "example": {
+        "text": "Lis un livre au lieu de regarder la télé.",
+        "translations": {
+          "en": "Read a book instead of watching TV."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
     }
+  ],
+  "buildingBlocks": [
+    "fr-6660",
+    "fr-6661",
+    "fr-6662",
+    "fr-6663",
+    "fr-6664",
+    "fr-6665",
+    "fr-6666",
+    "fr-6667",
+    "fr-6668",
+    "fr-6669",
+    "fr-6670",
+    "fr-6671",
+    "fr-6672",
+    "fr-6673",
+    "fr-6674",
+    "fr-6675",
+    "fr-6676",
+    "fr-6677",
+    "fr-6678",
+    "fr-6679",
+    "fr-6680",
+    "fr-6681",
+    "fr-6682",
+    "fr-6683",
+    "fr-6684",
+    "fr-6685",
+    "fr-6686",
+    "fr-6687",
+    "fr-3051",
+    "fr-0471",
+    "fr-0420",
+    "fr-0484",
+    "fr-0437",
+    "fr-0474",
+    "fr-0355",
+    "fr-0172",
+    "fr-0344",
+    "fr-0347",
+    "fr-0155",
+    "fr-0499",
+    "fr-0159",
+    "fr-0339",
+    "fr-0135",
+    "fr-0166",
+    "fr-0459",
+    "fr-0161",
+    "fr-0162",
+    "fr-0164",
+    "fr-0165",
+    "fr-0156",
+    "fr-0365",
+    "fr-0171",
+    "fr-0173",
+    "fr-0174",
+    "fr-0388",
+    "fr-6688",
+    "fr-6689",
+    "fr-6690",
+    "fr-6691",
+    "fr-6692",
+    "fr-6693",
+    "fr-6694",
+    "fr-6695",
+    "fr-6696",
+    "fr-6697",
+    "fr-0092",
+    "fr-0136",
+    "fr-6698",
+    "fr-2254",
+    "fr-0984",
+    "fr-1170",
+    "fr-0677",
+    "fr-0657",
+    "fr-0441",
+    "fr-0413",
+    "fr-0410",
+    "fr-0160",
+    "fr-0158",
+    "fr-0385",
+    "fr-0470",
+    "fr-0175",
+    "fr-6699",
+    "fr-6700",
+    "fr-6701",
+    "fr-6702",
+    "fr-1132",
+    "fr-1011",
+    "fr-0960",
+    "fr-0526",
+    "fr-0805",
+    "fr-1468",
+    "fr-0734",
+    "fr-0434",
+    "fr-2337"
   ]
 }

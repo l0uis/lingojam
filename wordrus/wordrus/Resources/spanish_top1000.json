@@ -3,46 +3,60 @@
   "language": "es",
   "decks": [
     {
-      "slug": "traveling",
-      "displayName": "Traveling",
-      "description": "Trips, hotels, airports, tickets.",
-      "icon": "airplane",
-      "sortOrder": 10
-    },
-    {
-      "slug": "weather-and-nature",
-      "displayName": "Weather & Nature",
-      "description": "Seasons, forecast, landscape, plants.",
-      "icon": "cloud.sun.fill",
-      "sortOrder": 15
-    },
-    {
-      "slug": "animals",
-      "displayName": "Animals",
-      "description": "Pets, farm animals, birds, insects.",
-      "icon": "pawprint.fill",
-      "sortOrder": 18
-    },
-    {
       "slug": "food-and-drink",
       "displayName": "Food & Drink",
       "description": "Groceries, cooking, ingredients.",
       "icon": "fork.knife",
+      "sortOrder": 10
+    },
+    {
+      "slug": "family",
+      "displayName": "Family & People",
+      "description": "Relatives, friends, describing people.",
+      "icon": "person.2.fill",
+      "sortOrder": 15
+    },
+    {
+      "slug": "home",
+      "displayName": "Home & Daily Life",
+      "description": "Rooms, routines, household items.",
+      "icon": "house.fill",
       "sortOrder": 20
+    },
+    {
+      "slug": "out-and-about",
+      "displayName": "Out & About",
+      "description": "Going out, music, sport, hobbies.",
+      "icon": "figure.walk",
+      "sortOrder": 25
+    },
+    {
+      "slug": "traveling",
+      "displayName": "Traveling",
+      "description": "Trips, hotels, airports, tickets.",
+      "icon": "airplane",
+      "sortOrder": 30
+    },
+    {
+      "slug": "feelings",
+      "displayName": "Feelings",
+      "description": "Emotions, moods, reactions.",
+      "icon": "face.smiling",
+      "sortOrder": 35
     },
     {
       "slug": "shopping",
       "displayName": "Shopping",
       "description": "Clothes, stores, prices, sizes.",
       "icon": "bag.fill",
-      "sortOrder": 30
+      "sortOrder": 40
     },
     {
       "slug": "health",
       "displayName": "Health & Body",
       "description": "Doctor, pharmacy, body parts, symptoms.",
       "icon": "heart.fill",
-      "sortOrder": 40
+      "sortOrder": 45
     },
     {
       "slug": "work",
@@ -52,53 +66,39 @@
       "sortOrder": 50
     },
     {
-      "slug": "money",
-      "displayName": "Money & Bills",
-      "description": "Banking, salary, rent, paying up.",
-      "icon": "creditcard.fill",
+      "slug": "weather-and-nature",
+      "displayName": "Weather & Nature",
+      "description": "Seasons, forecast, landscape, plants.",
+      "icon": "cloud.sun.fill",
       "sortOrder": 55
-    },
-    {
-      "slug": "feelings",
-      "displayName": "Feelings",
-      "description": "Emotions, moods, reactions.",
-      "icon": "face.smiling",
-      "sortOrder": 60
-    },
-    {
-      "slug": "home",
-      "displayName": "Home & Daily Life",
-      "description": "Rooms, routines, household items.",
-      "icon": "house.fill",
-      "sortOrder": 70
-    },
-    {
-      "slug": "family",
-      "displayName": "Family & People",
-      "description": "Relatives, friends, describing people.",
-      "icon": "person.2.fill",
-      "sortOrder": 80
-    },
-    {
-      "slug": "out-and-about",
-      "displayName": "Out & About",
-      "description": "Going out, music, sport, hobbies.",
-      "icon": "figure.walk",
-      "sortOrder": 85
     },
     {
       "slug": "studying",
       "displayName": "Studying",
       "description": "School, exams, courses, learning.",
       "icon": "book.fill",
-      "sortOrder": 90
+      "sortOrder": 60
+    },
+    {
+      "slug": "money",
+      "displayName": "Money & Bills",
+      "description": "Banking, salary, rent, paying up.",
+      "icon": "creditcard.fill",
+      "sortOrder": 65
+    },
+    {
+      "slug": "animals",
+      "displayName": "Animals",
+      "description": "Pets, farm animals, birds, insects.",
+      "icon": "pawprint.fill",
+      "sortOrder": 70
     },
     {
       "slug": "phone-and-internet",
       "displayName": "Phone & Internet",
       "description": "Apps, accounts, messages, devices.",
       "icon": "iphone",
-      "sortOrder": 95
+      "sortOrder": 75
     }
   ],
   "words": [
@@ -5575,9 +5575,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0282",
@@ -5594,9 +5595,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0283",
@@ -5652,6 +5654,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A2"
@@ -5672,6 +5675,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A2"
@@ -5729,7 +5733,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -5748,7 +5753,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -5920,9 +5926,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0300",
@@ -5939,9 +5946,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0301",
@@ -5958,9 +5966,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0302",
@@ -5977,9 +5986,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0303",
@@ -5996,9 +6006,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0304",
@@ -6015,7 +6026,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -6034,7 +6046,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -6053,9 +6066,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "A2"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0307",
@@ -10761,9 +10775,10 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
-      "cefrLevel": "B1"
+      "cefrLevel": "A1"
     },
     {
       "id": "es-0549",
@@ -10780,7 +10795,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -14045,7 +14061,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -14064,7 +14081,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -14083,7 +14101,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -14102,7 +14121,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -20190,7 +20210,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20209,7 +20230,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20228,7 +20250,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20247,7 +20270,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20266,7 +20290,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20285,7 +20310,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20324,7 +20350,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20362,7 +20389,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20381,7 +20409,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20477,7 +20506,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20554,7 +20584,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -20615,6 +20646,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A1"
@@ -20634,7 +20666,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -20980,7 +21013,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -21176,7 +21210,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -21195,7 +21230,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -21233,7 +21269,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -21482,7 +21519,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "B1"
     },
@@ -22277,7 +22315,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -23064,7 +23103,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -23557,6 +23597,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "home"
       ],
       "cefrLevel": "A2"
@@ -23636,6 +23677,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "home"
       ],
       "cefrLevel": "A1"
@@ -24833,7 +24875,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A2"
     },
@@ -27798,6 +27841,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A1"
@@ -29808,6 +29852,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "home"
       ],
       "cefrLevel": "A1"
@@ -54662,6 +54707,7 @@
       },
       "decks": [
         "common",
+        "building-blocks",
         "traveling"
       ],
       "cefrLevel": "A2"
@@ -120273,7 +120319,8 @@
         }
       },
       "decks": [
-        "common"
+        "common",
+        "building-blocks"
       ],
       "cefrLevel": "A1"
     },
@@ -129669,6 +129716,874 @@
         "family"
       ],
       "cefrLevel": "C1"
+    },
+    {
+      "id": "es-6872",
+      "rank": 6872,
+      "lemma": "de",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "of, from"
+      },
+      "example": {
+        "text": "Soy de Madrid, pero vivo en Sevilla.",
+        "translations": {
+          "en": "I'm from Madrid, but I live in Seville."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6873",
+      "rank": 6873,
+      "lemma": "a",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "to, at"
+      },
+      "example": {
+        "text": "Mañana voy a la playa con mis amigos.",
+        "translations": {
+          "en": "Tomorrow I'm going to the beach with my friends."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6874",
+      "rank": 6874,
+      "lemma": "en",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "in, on, at"
+      },
+      "example": {
+        "text": "Las llaves están en la mesa.",
+        "translations": {
+          "en": "The keys are on the table."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6875",
+      "rank": 6875,
+      "lemma": "con",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "with"
+      },
+      "example": {
+        "text": "¿Quieres un café con leche?",
+        "translations": {
+          "en": "Do you want a coffee with milk?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6876",
+      "rank": 6876,
+      "lemma": "para",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "for, in order to"
+      },
+      "example": {
+        "text": "Este regalo es para ti.",
+        "translations": {
+          "en": "This present is for you."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6877",
+      "rank": 6877,
+      "lemma": "por",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "for, by, through, because of"
+      },
+      "example": {
+        "text": "Gracias por tu ayuda.",
+        "translations": {
+          "en": "Thanks for your help."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6878",
+      "rank": 6878,
+      "lemma": "y",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "and"
+      },
+      "example": {
+        "text": "Tengo un hermano y una hermana.",
+        "translations": {
+          "en": "I have a brother and a sister."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6879",
+      "rank": 6879,
+      "lemma": "pero",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "but"
+      },
+      "example": {
+        "text": "Es caro, pero es muy bueno.",
+        "translations": {
+          "en": "It's expensive, but it's very good."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6880",
+      "rank": 6880,
+      "lemma": "porque",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "because"
+      },
+      "example": {
+        "text": "No salgo porque está lloviendo.",
+        "translations": {
+          "en": "I'm not going out because it's raining."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6881",
+      "rank": 6881,
+      "lemma": "o",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "or"
+      },
+      "example": {
+        "text": "¿Prefieres té o café?",
+        "translations": {
+          "en": "Do you prefer tea or coffee?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6882",
+      "rank": 6882,
+      "lemma": "que",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "that, than"
+      },
+      "example": {
+        "text": "Creo que tienes razón.",
+        "translations": {
+          "en": "I think that you're right."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6883",
+      "rank": 6883,
+      "lemma": "si",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "if, whether"
+      },
+      "example": {
+        "text": "Si tienes tiempo, llámame.",
+        "translations": {
+          "en": "If you have time, call me."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6884",
+      "rank": 6884,
+      "lemma": "cuando",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "when, whenever"
+      },
+      "example": {
+        "text": "Cuando llego a casa, me ducho.",
+        "translations": {
+          "en": "When I get home, I have a shower."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6885",
+      "rank": 6885,
+      "lemma": "como",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "like, as"
+      },
+      "example": {
+        "text": "Habla como su padre.",
+        "translations": {
+          "en": "He talks like his father."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6886",
+      "rank": 6886,
+      "lemma": "desde",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "from, since"
+      },
+      "example": {
+        "text": "Vivo aquí desde 2020.",
+        "translations": {
+          "en": "I've lived here since 2020."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6887",
+      "rank": 6887,
+      "lemma": "hasta",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "until, up to, as far as"
+      },
+      "example": {
+        "text": "Trabajo hasta las seis.",
+        "translations": {
+          "en": "I work until six."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6888",
+      "rank": 6888,
+      "lemma": "al lado de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "next to, beside"
+      },
+      "example": {
+        "text": "El banco está al lado de la farmacia.",
+        "translations": {
+          "en": "The bank is next to the chemist's."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6889",
+      "rank": 6889,
+      "lemma": "muy",
+      "partOfSpeech": "adverb",
+      "definitions": {
+        "en": "very"
+      },
+      "example": {
+        "text": "La comida está muy rica.",
+        "translations": {
+          "en": "The food is very tasty."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6890",
+      "rank": 6890,
+      "lemma": "a veces",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "sometimes"
+      },
+      "example": {
+        "text": "A veces como en la oficina.",
+        "translations": {
+          "en": "Sometimes I eat at the office."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6891",
+      "rank": 6891,
+      "lemma": "otra vez",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "again"
+      },
+      "example": {
+        "text": "¿Puedes repetirlo otra vez?",
+        "translations": {
+          "en": "Can you say it again?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6892",
+      "rank": 6892,
+      "lemma": "algo",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "something, anything"
+      },
+      "example": {
+        "text": "¿Quieres algo de beber?",
+        "translations": {
+          "en": "Would you like something to drink?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6893",
+      "rank": 6893,
+      "lemma": "nada",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "nothing, anything"
+      },
+      "example": {
+        "text": "No tengo nada que hacer hoy.",
+        "translations": {
+          "en": "I've got nothing to do today."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6894",
+      "rank": 6894,
+      "lemma": "todo",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "everything, all"
+      },
+      "example": {
+        "text": "Todo está listo para la fiesta.",
+        "translations": {
+          "en": "Everything is ready for the party."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6895",
+      "rank": 6895,
+      "lemma": "otro",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "other, another"
+      },
+      "example": {
+        "text": "¿Me pones otro vaso de agua?",
+        "translations": {
+          "en": "Could I have another glass of water?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A1"
+    },
+    {
+      "id": "es-6896",
+      "rank": 6896,
+      "lemma": "entre",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "between, among"
+      },
+      "example": {
+        "text": "La farmacia está entre el bar y el banco.",
+        "translations": {
+          "en": "The chemist's is between the bar and the bank."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6897",
+      "rank": 6897,
+      "lemma": "hacia",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "towards"
+      },
+      "example": {
+        "text": "Camina hacia la estación.",
+        "translations": {
+          "en": "Walk towards the station."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6898",
+      "rank": 6898,
+      "lemma": "durante",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "during, for"
+      },
+      "example": {
+        "text": "Dormí durante todo el viaje.",
+        "translations": {
+          "en": "I slept during the whole trip."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6899",
+      "rank": 6899,
+      "lemma": "sobre",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "on, over, about"
+      },
+      "example": {
+        "text": "Es un libro sobre la historia de España.",
+        "translations": {
+          "en": "It's a book about the history of Spain."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6900",
+      "rank": 6900,
+      "lemma": "aunque",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "although, even if"
+      },
+      "example": {
+        "text": "Voy a salir aunque llueva.",
+        "translations": {
+          "en": "I'm going out even if it rains."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6901",
+      "rank": 6901,
+      "lemma": "mientras",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "while"
+      },
+      "example": {
+        "text": "Escucho música mientras cocino.",
+        "translations": {
+          "en": "I listen to music while I cook."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6902",
+      "rank": 6902,
+      "lemma": "por eso",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "that's why, so"
+      },
+      "example": {
+        "text": "Estaba cansado, por eso me fui pronto.",
+        "translations": {
+          "en": "I was tired, that's why I left early."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6903",
+      "rank": 6903,
+      "lemma": "alguien",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "someone, anyone"
+      },
+      "example": {
+        "text": "¿Hay alguien en casa?",
+        "translations": {
+          "en": "Is anyone home?"
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6904",
+      "rank": 6904,
+      "lemma": "nadie",
+      "partOfSpeech": "pronoun",
+      "definitions": {
+        "en": "nobody, anyone"
+      },
+      "example": {
+        "text": "No hay nadie en la calle.",
+        "translations": {
+          "en": "There's nobody in the street."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6905",
+      "rank": 6905,
+      "lemma": "cada",
+      "partOfSpeech": "adjective",
+      "definitions": {
+        "en": "each, every"
+      },
+      "example": {
+        "text": "Voy al gimnasio cada mañana.",
+        "translations": {
+          "en": "I go to the gym every morning."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "A2"
+    },
+    {
+      "id": "es-6906",
+      "rank": 6906,
+      "lemma": "contra",
+      "partOfSpeech": "preposition",
+      "definitions": {
+        "en": "against"
+      },
+      "example": {
+        "text": "Mucha gente votó contra la ley.",
+        "translations": {
+          "en": "A lot of people voted against the law."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "es-6907",
+      "rank": 6907,
+      "lemma": "sino",
+      "partOfSpeech": "conjunction",
+      "definitions": {
+        "en": "but (rather)"
+      },
+      "example": {
+        "text": "No es mi hermana, sino mi prima.",
+        "translations": {
+          "en": "She isn't my sister but my cousin."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "es-6908",
+      "rank": 6908,
+      "lemma": "sin embargo",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "however, nevertheless"
+      },
+      "example": {
+        "text": "Es difícil; sin embargo, vale la pena.",
+        "translations": {
+          "en": "It's hard; however, it's worth it."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "es-6909",
+      "rank": 6909,
+      "lemma": "en vez de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "instead of"
+      },
+      "example": {
+        "text": "Toma agua en vez de refresco.",
+        "translations": {
+          "en": "Have water instead of a fizzy drink."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
+    },
+    {
+      "id": "es-6910",
+      "rank": 6910,
+      "lemma": "a pesar de",
+      "partOfSpeech": "phrase",
+      "definitions": {
+        "en": "despite, in spite of"
+      },
+      "example": {
+        "text": "Salimos a pesar de la lluvia.",
+        "translations": {
+          "en": "We went out despite the rain."
+        }
+      },
+      "decks": [
+        "common",
+        "building-blocks"
+      ],
+      "cefrLevel": "B1"
     }
+  ],
+  "buildingBlocks": [
+    "es-6872",
+    "es-6873",
+    "es-6874",
+    "es-6875",
+    "es-6876",
+    "es-6877",
+    "es-6878",
+    "es-6879",
+    "es-6880",
+    "es-6881",
+    "es-6882",
+    "es-6883",
+    "es-6884",
+    "es-6885",
+    "es-6886",
+    "es-6887",
+    "es-0548",
+    "es-6888",
+    "es-6889",
+    "es-6890",
+    "es-6891",
+    "es-6892",
+    "es-6893",
+    "es-6894",
+    "es-6895",
+    "es-0712",
+    "es-0713",
+    "es-1440",
+    "es-1225",
+    "es-1544",
+    "es-1055",
+    "es-1052",
+    "es-1050",
+    "es-1047",
+    "es-6375",
+    "es-1046",
+    "es-1067",
+    "es-1049",
+    "es-1048",
+    "es-1060",
+    "es-1045",
+    "es-1064",
+    "es-1054",
+    "es-0299",
+    "es-0300",
+    "es-0301",
+    "es-0302",
+    "es-0303",
+    "es-0306",
+    "es-0281",
+    "es-0282",
+    "es-6896",
+    "es-6897",
+    "es-6898",
+    "es-6899",
+    "es-6900",
+    "es-6901",
+    "es-6902",
+    "es-6903",
+    "es-6904",
+    "es-6905",
+    "es-1221",
+    "es-0289",
+    "es-0290",
+    "es-0285",
+    "es-0286",
+    "es-2817",
+    "es-1288",
+    "es-1155",
+    "es-1097",
+    "es-0715",
+    "es-0714",
+    "es-1100",
+    "es-1195",
+    "es-1098",
+    "es-1087",
+    "es-1068",
+    "es-0304",
+    "es-0305",
+    "es-6906",
+    "es-6907",
+    "es-6908",
+    "es-6909",
+    "es-6910",
+    "es-0549",
+    "es-1113"
   ]
 }
