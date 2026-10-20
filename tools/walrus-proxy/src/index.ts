@@ -379,7 +379,11 @@ export interface TurnRequest {
   language: string
   /** CEFR level, e.g. "A2". Controls how hard Walter's language is. */
   level: string
-  /** 'open' | 'reply' | 'wrapUp'. */
+  /**
+   * 'open' | 'reply' | 'lastReply' | 'wrapUp' | 'goodbye'. `lastReply` is
+   * his final reply before the sign-off; `goodbye` is the learner choosing
+   * to end the call. Apps before these phases existed never send them.
+   */
   phase?: string
   /** Words the learner has been studying — a steer, never a script. */
   targetWords?: string[]
@@ -414,14 +418,20 @@ export function walterSystemPrompt(req: TurnRequest): string {
   const language = req.language
   const words = (req.targetWords ?? []).filter(Boolean)
 
+  // The app sends only the words still to use, and a call passes once the
+  // learner has said enough of them — so Walter has to make room for them.
+  // The old "ignore this if it doesn't fit" steer meant he almost never did,
+  // and full-length calls ended with 0–1 words used (2026-10-19).
   const steering = words.length
     ? `
-LOOSE STEERING
+GIVE THEM THE WORDS
 Your friend has been learning these words lately: ${words.join(', ')}.
-If the conversation drifts anywhere near one of those topics, lean into it so
-they get a chance to use the word naturally. If it doesn't fit, ignore this
-completely. A forced topic change is far worse than an unused word, and you
-must never mention the words, the list, or the fact that they're learning.`
+They want to say them on this call, so make it easy:
+- Each time you ask a question, build it around one of these words, and say the word yourself in the question, so the natural answer repeats it. Asking "¿Te gusta cocinar?" for "cocinar" invites "Sí, me gusta cocinar".
+- One word per turn. Pick whichever fits the conversation most easily, and get to a new one each turn rather than lingering.
+- Still answer what they just said first. Bridge to the word with a real reason a nosy walrus would have ("that reminds me…", something from your own day), never a jarring topic change.
+- Use the words in the form that reads naturally in your sentence, but keep it obvious which word you mean.
+- Never mention the list, never say they're learning the words, and never ask them to use a word.`
     : ''
 
   const context = req.storyContext?.trim().slice(0, MAX_STORY_CONTEXT_LENGTH)
@@ -467,6 +477,19 @@ You're a friend, not a teacher. If they get something properly wrong you may fix
 export type TurnMessage = { role: 'user' | 'assistant'; content: string }
 
 /**
+ * Names the one target word for this turn's question, or '' when there are
+ * none. Rotates through the remaining words by the learner's turn count, so
+ * a word they keep missing doesn't get asked about every single turn.
+ */
+export function wordNudge(body: TurnRequest): string {
+  const words = (body.targetWords ?? []).filter(Boolean)
+  if (!words.length) return ''
+  const learnerTurns = (body.history ?? []).filter((t) => t.role !== 'walrus').length
+  const word = words[learnerTurns % words.length]
+  return ` Your question must contain the word "${word}" (any natural form), said by you, so their natural answer uses it too.`
+}
+
+/**
  * Turn the call so far into Anthropic message turns.
  *
  * Two invariants the Messages API enforces and this has to respect:
@@ -495,12 +518,22 @@ export function buildTurnMessages(body: TurnRequest): TurnMessage[] {
   }
 
   // A stage direction only where the app needs to steer the shape of the
-  // turn — never on an ordinary reply, where it would just get in the way
-  // of Walter answering what was said.
+  // turn. Ordinary replies get one only to name the word to work in: the
+  // system-prompt steer alone lost to "answer what they said" and he used
+  // a target word in about 1 reply in 5 (2026-10-20).
+  const nudge = wordNudge(body)
   let closing = ''
   if (phase === 'open') {
     closing =
-      'Open the call. You just picked up, half asleep. One or two sentences, then a question that gives them something easy to answer.'
+      `Open the call. You just picked up, half asleep. One or two sentences, then a question that gives them something easy to answer.${nudge}`
+  } else if (phase === 'lastReply') {
+    closing =
+      `You'll have to go after their next answer. Reply as usual, but mention in passing that you need to go in a minute (a nap, Bernardo, the tide — your call), and still end with one last question.${nudge}`
+  } else if (phase === 'reply' && nudge) {
+    closing = `React to what they said, then ask your question.${nudge}`
+  } else if (phase === 'goodbye') {
+    closing =
+      'Your friend has to go now. Say goodbye in your own grumpy way, with a nod to something from this call. Two short sentences at most. Do not ask another question.'
   } else if (phase === 'wrapUp' || body.shouldWrapUp) {
     closing =
       'Wind the call down now: react to what they just said, then say goodbye in your own grumpy way. Do not ask another question.'
@@ -589,12 +622,18 @@ async function handleTurn(request: Request, env: Env): Promise<Response> {
   }
 
   // Only meaningful in reply to something the learner said.
-  const correction = phase === 'reply' ? input?.correction?.trim() : ''
+  const correction = phase === 'reply' || phase === 'lastReply' ? input?.correction?.trim() : ''
 
   return json(
     {
       text,
-      endsConversation: input?.endsConversation === true || phase === 'wrapUp',
+      // A wind-down turn was told to say goodbye and ask nothing, so it ends
+      // the call whatever the model flags. Apps up to 1.1.9 send
+      // `shouldWrapUp` and relied on the flag, which left calls running on.
+      // `lastReply` must leave room for one more exchange, whatever the model flags.
+      endsConversation:
+        phase !== 'lastReply' &&
+        (input?.endsConversation === true || phase === 'wrapUp' || phase === 'goodbye' || body.shouldWrapUp === true),
       correction: correction || null,
     },
     200
@@ -651,7 +690,9 @@ export interface StoryRequest {
 
 /** Generation + one repair, a retry, and a second brain attempt fit easily. */
 const STORY_DAILY_LIMIT = 30
-const MAX_KNOWN_WORDS = 500
+/** The learner's own words (≤300) plus the language's most frequent ones
+ *  for their level. Apps up to 1.1.9 send at most 500. */
+export const MAX_KNOWN_WORDS = 1200
 const MAX_NEW_WORDS = 5
 const MAX_LEMMA_LENGTH = 60
 const STORY_TOOL_NAME = 'submit_story'

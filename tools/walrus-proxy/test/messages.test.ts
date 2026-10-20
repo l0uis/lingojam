@@ -142,3 +142,54 @@ test('history is capped so a long call cannot grow unbounded', () => {
   assertValidShape(messages)
   assert.ok(messages.length <= 26, `expected a capped history, got ${messages.length}`)
 })
+
+test("the last reply warns he'll have to go, and still asks", () => {
+  const messages = buildTurnMessages({
+    ...base,
+    phase: 'lastReply',
+    history: [
+      { role: 'walrus', text: '¿Qué tal?' },
+      { role: 'user', text: 'Bien, gracias' },
+    ],
+  })
+  assertValidShape(messages)
+  const last = messages[messages.length - 1]
+  assert.match(last.content, /^Bien, gracias\n\n\[You'll have to go after their next answer\./)
+  assert.match(last.content, /still end with one last question/)
+})
+
+test('a learner goodbye on their own turn is still a valid conversation', () => {
+  // They tap "Say goodbye" with Walter's question unanswered, so the
+  // history ends on his line and the instruction has to be its own turn.
+  const messages = buildTurnMessages({
+    ...base,
+    phase: 'goodbye',
+    history: [
+      { role: 'walrus', text: '¿Qué tal?' },
+      { role: 'user', text: 'Bien, gracias' },
+      { role: 'walrus', text: '¿Y qué has comido hoy?' },
+    ],
+  })
+  assertValidShape(messages)
+  const last = messages[messages.length - 1]
+  assert.equal(last.role, 'user')
+  assert.match(last.content, /^\[Your friend has to go now\./)
+})
+
+test('a reply names one target word to ask about, rotating by turn', () => {
+  const history = [
+    { role: 'walrus', text: '¿Qué tal?' },
+    { role: 'user', text: 'Bien, gracias' },
+  ]
+  const first = buildTurnMessages({ ...base, phase: 'reply', targetWords: ['cocinar', 'playa'], history })
+  assertValidShape(first)
+  assert.match(first[first.length - 1].content, /must contain the word "playa"/)
+
+  const later = buildTurnMessages({
+    ...base,
+    phase: 'reply',
+    targetWords: ['cocinar', 'playa'],
+    history: [...history, { role: 'walrus', text: '¿Y tú?' }, { role: 'user', text: 'Nada' }],
+  })
+  assert.match(later[later.length - 1].content, /must contain the word "cocinar"/)
+})

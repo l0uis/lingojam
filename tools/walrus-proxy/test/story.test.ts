@@ -1,6 +1,7 @@
 import { strict as assert } from 'node:assert'
 import { test } from 'node:test'
 import {
+  MAX_KNOWN_WORDS,
   STORY_TOOL,
   buildStoryMessages,
   storySystemPrompt,
@@ -88,7 +89,8 @@ test('repair replays the draft as a tool call and answers it with the rejected w
 test('validation rejects malformed requests', () => {
   assert.equal(validateStoryRequest(request()), null)
   assert.equal(validateStoryRequest(null), 'missing language or level')
-  assert.equal(validateStoryRequest(request({ knownWords: Array(501).fill('x') })), 'bad knownWords')
+  assert.equal(validateStoryRequest(request({ knownWords: Array(MAX_KNOWN_WORDS).fill('x') })), null)
+  assert.equal(validateStoryRequest(request({ knownWords: Array(MAX_KNOWN_WORDS + 1).fill('x') })), 'bad knownWords')
   assert.equal(validateStoryRequest(request({ newWords: ['a', 'b', 'c', 'd', 'e', 'f'] })), 'bad newWords')
   assert.equal(validateStoryRequest(request({ minWords: 200, maxWords: 100 })), 'bad length')
   assert.equal(validateStoryRequest(request({ maxSentenceWords: 100 })), 'bad sentence length')
@@ -116,4 +118,13 @@ test('a retell call gets the story context; a normal call does not', () => {
   assert.match(retell, /WHAT THIS CALL IS ABOUT\nAsk them to retell "La nota"\./)
   const normal = walterSystemPrompt({ language: 'Spanish', level: 'A1' })
   assert.doesNotMatch(normal, /WHAT THIS CALL IS ABOUT/)
+})
+
+test('target words are actively steered toward, not left to chance', () => {
+  const prompt = walterSystemPrompt({ language: 'French', level: 'A2', targetWords: ['cuisiner', 'plage'] })
+  assert.match(prompt, /GIVE THEM THE WORDS\nYour friend has been learning these words lately: cuisiner, plage\./)
+  assert.match(prompt, /say the word yourself in the question/)
+  assert.doesNotMatch(prompt, /ignore this/)
+  const none = walterSystemPrompt({ language: 'French', level: 'A2', targetWords: [] })
+  assert.doesNotMatch(none, /GIVE THEM THE WORDS/)
 })
