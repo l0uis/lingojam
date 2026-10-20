@@ -110,4 +110,19 @@ struct DailyWordServiceTests {
         #expect(DailyWordService.pruning(set, known: ["z"]).map(\.wordID) == ["a", "b", "c"])
         #expect(DailyWordService.pruning(set, known: ["a", "b", "c"]).isEmpty)
     }
+
+    @Test func reminderPoolKeepsLearningWordsBehindTheLastCard() {
+        // Down to the last card of the set: reminders must still rotate.
+        let pool = DailyWordService.reminderPool(
+            set: [snapshot("hacia")],
+            learning: [snapshot("casa"), snapshot("hacia"), snapshot("perro")]
+        )
+        #expect(pool.map(\.wordID) == ["hacia", "casa", "perro"])
+        let capped = DailyWordService.reminderPool(
+            set: [snapshot("a"), snapshot("b")],
+            learning: [snapshot("c"), snapshot("d")],
+            limit: 3
+        )
+        #expect(capped.map(\.wordID) == ["a", "b", "c"])
+    }
 }

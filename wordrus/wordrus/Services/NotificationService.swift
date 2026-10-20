@@ -59,10 +59,12 @@ enum NotificationService {
         )
     }
 
-    /// Today's ordered word stack for reminders, so consecutive notifications
-    /// rotate through different words instead of repeating one. Falls back to
+    /// The ordered word pool for reminders, so consecutive notifications rotate
+    /// through different words instead of repeating one. Prefers the
+    /// `ReminderPool` (today's set plus learning words), then today's set, then
     /// the single stored snapshot before the first set has been built.
     static func reminderStack(fallback snapshot: DailyWordSnapshot?) -> [DailyWordSnapshot] {
+        if let pool = ReminderPool.load()?.words, !pool.isEmpty { return pool }
         let stack = DailyWordSet.load()?.words ?? []
         if !stack.isEmpty { return stack }
         return snapshot.map { [$0] } ?? []

@@ -8,6 +8,12 @@ enum DailyWordService {
     @MainActor
     static func refresh(context: ModelContext, now: Date = .now) {
         let pruned = pruneKnownFromSet(context: context, now: now)
+        let poolChanged = saveReminderPool(
+            set: DailyWordSet.load()?.words ?? [],
+            context: context,
+            known: knownWordIDs(context: context, now: now),
+            now: now
+        )
         guard let snapshot = makeSnapshot(context: context, now: now) else {
             // Nothing left to learn or review — never leave a stale (possibly
             // already-known) word on the widget. Drop the single snapshot so
@@ -22,7 +28,60 @@ enum DailyWordService {
             if pruned { NotificationService.cancelAllReminders() }
             return
         }
-        publish(snapshot, force: pruned)
+        publish(snapshot, force: pruned || poolChanged)
+    }
+
+    /// Most words the reminder pool holds — matches the scheduler's cap on
+    /// slots per batch, so a full week can go without repeating a word.
+    static let reminderPoolLimit = 50
+
+    /// Today's remaining set first, then the other learning words in the order
+    /// given (soonest due first), without duplicates and capped at `limit`.
+    /// Exposed as `internal` for unit testing.
+    static func reminderPool(
+        set: [DailyWordSnapshot],
+        learning: [DailyWordSnapshot],
+        limit: Int = reminderPoolLimit
+    ) -> [DailyWordSnapshot] {
+        var seen = Set<String>()
+        return Array((set + learning).filter { seen.insert($0.wordID).inserted }.prefix(limit))
+    }
+
+    /// Rebuild and save the reminder pool from `set` plus the active language's
+    /// learning words. Returns whether the pool's words changed.
+    @MainActor
+    @discardableResult
+    private static func saveReminderPool(
+        set: [DailyWordSnapshot],
+        context: ModelContext,
+        known: Set<String>,
+        now: Date
+    ) -> Bool {
+        let setIDs = Set(set.map(\.wordID))
+        let progress = (try? context.fetch(FetchDescriptor<LearningProgress>())) ?? []
+        // Over-fetch so words from other languages can be scoped out below.
+        let candidates = progress
+            .filter { $0.state != .known && !known.contains($0.wordID) && !setIDs.contains($0.wordID) }
+            .sorted { $0.dueDate < $1.dueDate }
+            .prefix(reminderPoolLimit * 4)
+        let ids = candidates.map(\.wordID)
+        let languageCode = (OnboardingStore.targetLanguage ?? .spanish).languageCode
+        let words = ((try? context.fetch(
+            FetchDescriptor<VocabularyWord>(predicate: #Predicate { ids.contains($0.id) })
+        )) ?? []).scoped(to: languageCode)
+        let wordByID = Dictionary(words.map { ($0.id, $0) }) { first, _ in first }
+        let learning = candidates.compactMap { progress in
+            wordByID[progress.wordID].map { snapshot(for: $0, progress: progress, now: now) }
+        }
+
+        let pool = reminderPool(set: set, learning: learning)
+        let changed = ReminderPool.load()?.words.map(\.wordID) != pool.map(\.wordID)
+        if pool.isEmpty {
+            ReminderPool.clear()
+        } else {
+            ReminderPool(words: pool).save()
+        }
+        return changed
     }
 
     /// Drop words the user has since marked as known from the published set.
@@ -130,6 +189,7 @@ enum DailyWordService {
         let unknown = publishable(words, known: known)
 
         guard !unknown.isEmpty else {
+            saveReminderPool(set: [], context: context, known: known, now: now)
             var needsReload = false
             if DailyWordSet.load() != nil {
                 DailyWordSet.clear()
@@ -152,6 +212,7 @@ enum DailyWordService {
         let unchanged = existing?.words.map(\.wordID) == snapshots.map(\.wordID)
 
         DailyWordSet(words: snapshots, computedAt: now).save()
+        saveReminderPool(set: snapshots, context: context, known: known, now: now)
         // Keep the single snapshot + notification aligned with the front card.
         if let front = snapshots.first {
             front.save()

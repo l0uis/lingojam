@@ -54,6 +54,30 @@ struct DailyWordSet: Codable, Equatable {
     }
 }
 
+/// The words daily reminders draw from: what's left of today's set first, then
+/// the other words the user is still learning. Kept apart from `DailyWordSet`
+/// because that set shrinks with every swipe — a week of reminders scheduled
+/// from it on the last card all carried that one word.
+struct ReminderPool: Codable, Equatable {
+    let words: [DailyWordSnapshot]
+
+    static let storageKey = "reminderPool.v1"
+
+    static func load(from defaults: UserDefaults? = AppGroup.sharedDefaults) -> ReminderPool? {
+        guard let data = defaults?.data(forKey: storageKey) else { return nil }
+        return try? JSONDecoder.snapshot.decode(ReminderPool.self, from: data)
+    }
+
+    func save(to defaults: UserDefaults? = AppGroup.sharedDefaults) {
+        guard let defaults, let data = try? JSONEncoder.snapshot.encode(self) else { return }
+        defaults.set(data, forKey: Self.storageKey)
+    }
+
+    static func clear(from defaults: UserDefaults? = AppGroup.sharedDefaults) {
+        defaults?.removeObject(forKey: storageKey)
+    }
+}
+
 /// Deterministic clock-driven rotation over today's word set, shared by the
 /// home-screen widget timeline, the Live Activity, and the background refresh
 /// task so they all agree on "which word is current right now" regardless of
