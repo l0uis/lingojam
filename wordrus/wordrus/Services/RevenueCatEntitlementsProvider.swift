@@ -34,7 +34,14 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
         self.onChange = onChange
         Purchases.shared.delegate = self
         Task {
-            if let info = try? await Purchases.shared.customerInfo() {
+            // Ask the server first: the cache can still hold a trial that has
+            // since converted, and reading that as "not Pro" recorded a lapse
+            // and showed a paying subscriber the trial-ended paywall
+            // (2026-10-20). The cache is only the offline fallback.
+            let fresh = try? await Purchases.shared.customerInfo(fetchPolicy: .fetchCurrent)
+            let cachedIfOffline: CustomerInfo? = if fresh == nil { try? await Purchases.shared.customerInfo() } else { nil }
+            if let info = fresh ?? cachedIfOffline {
+                Self.notePeriodType(info)
                 onChange(Self.isPro(info))
                 Analytics.setIsPro(Self.isPro(info))
             }
@@ -141,11 +148,20 @@ final class RevenueCatEntitlementsProvider: NSObject, EntitlementsProvider, Purc
 
     // Live updates: renewals, expiries, family-sharing changes, etc.
     func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
+        Self.notePeriodType(customerInfo)
         onChange?(Self.isPro(customerInfo))
         Analytics.setIsPro(Self.isPro(customerInfo))
     }
 
     // MARK: - Mapping RevenueCat → PaywallPlan
+
+    /// Cache whether the active entitlement is a trial, for the "trial ended"
+    /// screen — once it lapses the store no longer reports it as one.
+    private static func notePeriodType(_ info: CustomerInfo) {
+        guard let active = info.entitlements[ProEntitlement.identifier] ?? info.entitlements.active.values.first,
+              active.isActive else { return }
+        UserDefaults.standard.set(active.periodType == .trial, forKey: ProEntitlement.lastPeriodWasTrialKey)
+    }
 
     private static func isPro(_ info: CustomerInfo) -> Bool {
         // Prefer the named entitlement, but fall back to "any active

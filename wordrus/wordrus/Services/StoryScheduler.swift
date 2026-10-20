@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import UIKit
 import UserNotifications
 #if canImport(BackgroundTasks)
 import BackgroundTasks
@@ -36,8 +37,12 @@ enum StoryScheduler {
 
     /// Writes today's story if it's missing. Quiet on failure: the next
     /// foreground or background refresh tries again.
-    static func prepareTodayStory(context: ModelContext) async {
-        _ = await writeTodayStory(context: context)
+    ///
+    /// `announce: false` skips the "new story" notification — for when the
+    /// learner is in the app and will see the story land in the Phone tab
+    /// (e.g. straight after switching language).
+    static func prepareTodayStory(context: ModelContext, announce: Bool = true) async {
+        _ = await writeTodayStory(context: context, announce: announce)
     }
 
     // MARK: - Background
@@ -83,15 +88,26 @@ enum StoryScheduler {
 
     /// Writes today's story if it's missing and announces it. false when
     /// writing failed.
-    private static func writeTodayStory(context: ModelContext, now: Date = .now) async -> Bool {
+    private static func writeTodayStory(context: ModelContext, announce: Bool = true, now: Date = .now) async -> Bool {
         guard isReady, let language = OnboardingStore.targetLanguage else { return true }
         let alreadyHad = DailyStoryService.todayStory(context: context, language: language, now: now) != nil
+        let isFirstStory = ((try? context.fetchCount(FetchDescriptor<DailyStory>())) ?? 0) == 0
         guard let story = try? await DailyStoryService.ensureTodayStory(context: context, language: language, now: now) else {
             return false
         }
-        if !alreadyHad, !story.isOpened {
-            // Writing can take a while: pick the slot from when it finished.
-            await notifyNewStory(story)
+        if announce, !alreadyHad, !story.isOpened {
+            if isFirstStory {
+                // The first one gets introduced, not just announced: a sheet
+                // if they're in the app, a push straight away if they've left
+                // (the sheet then waits for their return).
+                FirstStoryIntro.shared.offer(story)
+                if UIApplication.shared.applicationState != .active {
+                    await notifyFirstStory(story)
+                }
+            } else {
+                // Writing can take a while: pick the slot from when it finished.
+                await notifyNewStory(story)
+            }
         }
         return true
     }
@@ -138,14 +154,38 @@ enum StoryScheduler {
 
         let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fireDate)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let identifier = notificationIdentifierPrefix + story.dayKey
+        let identifier = notificationIdentifier(for: story)
         try? await center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+
+    /// The first story's push: sent now rather than in the reminder window,
+    /// because it follows straight on from them starting Pro.
+    private static func notifyFirstStory(_ story: DailyStory) async {
+        let center = UNUserNotificationCenter.current()
+        let settings = await center.notificationSettings()
+        guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+
+        let content = UNMutableNotificationContent()
+        content.title = String(localized: "Dr Tusk wrote you a story")
+        content.body = String(localized: "“\(story.title)” — your first one. Tap to listen.")
+        content.sound = .default
+        content.userInfo = ["kind": notificationKind, "storyID": story.id.uuidString]
+
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let identifier = notificationIdentifier(for: story)
+        try? await center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+
+    /// One per story: language and day, so two languages' stories on the
+    /// same day don't replace or cancel each other's notification.
+    private static func notificationIdentifier(for story: DailyStory) -> String {
+        "\(notificationIdentifierPrefix)\(story.languageRaw).\(story.dayKey)"
     }
 
     /// Removes a story's pending notification once it has been opened.
     static func cancelNotification(for story: DailyStory) {
         UNUserNotificationCenter.current()
-            .removePendingNotificationRequests(withIdentifiers: [notificationIdentifierPrefix + story.dayKey])
+            .removePendingNotificationRequests(withIdentifiers: [notificationIdentifier(for: story)])
     }
 
     /// The first moment today, at or after `now`, inside the reminder window

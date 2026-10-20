@@ -9,6 +9,9 @@ import Foundation
 ///    with those words highlighted as extra new words.
 /// 4. Otherwise generate again (up to `generationsPerBrain`), then move to the
 ///    next brain. A last-resort brain's draft is accepted as-is.
+/// 5. Nothing acceptable from any brain → the closest draft seen (fewest
+///    unknown words). A story a little above their level beats no story;
+///    only a chain that produced nothing at all throws.
 @MainActor
 struct StoryPipeline {
     struct Outcome {
@@ -33,6 +36,11 @@ struct StoryPipeline {
             policy: .init(wordCount: request.length.words)
         )
         var attempts = 0
+        var closest: (draft: GeneratedStory, report: StoryCoverageReport, brainName: String)?
+        func consider(_ draft: GeneratedStory, _ report: StoryCoverageReport, from brain: StoryGenerating) {
+            if let current = closest, !Self.isCloser(report, than: current.report) { return }
+            closest = (draft, report, brain.brainName)
+        }
 
         for brain in brains {
             for _ in 0..<generationsPerBrain {
@@ -75,9 +83,22 @@ struct StoryPipeline {
                 if report.passed || report.unknownLemmas.count <= checker.policy.maximumUnknownLemmas {
                     return Outcome(story: draft, report: report, brainName: brain.brainName, attempts: attempts, extraWords: extraWords(report, checker))
                 }
+                consider(draft, report, from: brain)
             }
         }
-        throw StoryGenerationError.noAcceptableStory
+        guard let closest else { throw StoryGenerationError.noAcceptableStory }
+        return Outcome(
+            story: closest.draft, report: closest.report, brainName: closest.brainName,
+            attempts: attempts, extraWords: extraWords(closest.report, checker)
+        )
+    }
+
+    /// Fewer unknown words wins; on a tie, fewer underused new words.
+    private static func isCloser(_ report: StoryCoverageReport, than other: StoryCoverageReport) -> Bool {
+        if report.unknownLemmas.count != other.unknownLemmas.count {
+            return report.unknownLemmas.count < other.unknownLemmas.count
+        }
+        return report.underusedNewWords.count < other.underusedNewWords.count
     }
 
     /// Unknown words get highlighted as extra new words only when there are

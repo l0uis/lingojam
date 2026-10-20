@@ -28,6 +28,7 @@ private enum POSFilter: String, CaseIterable, Identifiable {
 
     static func primary(of partOfSpeech: String) -> POSFilter {
         let p = partOfSpeech.lowercased()
+        if p.contains("pronoun") { return .other }
         if p.contains("noun") { return .noun }
         if p.contains("verb") && !p.contains("adverb") { return .verb }
         if p.contains("adjective") { return .adjective }
@@ -41,6 +42,8 @@ struct MyWordsView: View {
     /// tab while already on it — used as a signal to scroll the list back
     /// to the top.
     var scrollToTopSignal: Int = 0
+    /// Switches to the Deck tab — the empty state's way in.
+    var onOpenDeck: () -> Void = {}
 
     @Environment(\.modelContext) private var context
     @Query(sort: \VocabularyWord.rank) private var words: [VocabularyWord]
@@ -49,6 +52,9 @@ struct MyWordsView: View {
     @Query(sort: \Deck.sortOrder) private var decks: [Deck]
     @State private var isShowingProgress = false
     @AppStorage(OnboardingDefaultsKey.targetLanguage) private var targetLanguageRaw = TargetLanguage.spanish.rawValue
+    @AppStorage(DailyThemePath.themeIndexKey) private var dailyThemeIndex = 0
+    @AppStorage(DailySetConfig.lastCompletedDayKey) private var dailySetLastCompletedDay = ""
+    @AppStorage(DailyThemePath.lastWasRevisionKey) private var lastSetWasRevision = false
 
     @State private var filter: MyWordsFilter = .learning
     @State private var posFilter: POSFilter = .all
@@ -148,9 +154,27 @@ struct MyWordsView: View {
         )
     }
 
+    /// The pack the daily set is on (today's, or the one just finished today)
+    /// and the one after it — same rotation as the Deck tab.
+    private var packs: (current: Deck?, next: Deck?) {
+        let language = currentLanguageCode
+        let hasCustomWords = words.contains { $0.languageCode == language && $0.id.hasPrefix("custom-") }
+        let themes = DailyThemePath.themes(decks, includeMyWords: hasCustomWords)
+        // Finishing a themed set advances the index straight away, so once
+        // today's is done the pack the user just learned sits one behind it.
+        let finishedToday = DailySetConfig.isDoneToday(lastCompletedDay: dailySetLastCompletedDay) && !lastSetWasRevision
+        let index = finishedToday ? dailyThemeIndex - 1 : dailyThemeIndex
+        return (DailyThemePath.theme(themes, at: index), DailyThemePath.theme(themes, at: index + 1))
+    }
+
     var body: some View {
         VStack(spacing: 0) {
-            ProgressHeaderCard(snapshot: snapshot) { isShowingProgress = true }
+            let packs = packs
+            ProgressHeaderCard(
+                snapshot: snapshot,
+                pack: packs.current?.localizedName,
+                nextPack: packs.next?.localizedName
+            ) { isShowingProgress = true }
                 .padding(.horizontal, 24)
                 .padding(.top, 12)
 
@@ -186,6 +210,20 @@ struct MyWordsView: View {
                         Section {
                             addComposerRow
                         }
+                    }
+
+                    if filtered.isEmpty && !isComposing {
+                        Section {
+                            if posFilter == .all {
+                                emptyStateCard
+                            } else {
+                                Text("Nothing under this filter yet.")
+                                    .font(.sniglet(.subheadline))
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .listRowBackground(posFilter == .all ? Color.clear : nil)
+                        .listRowInsets(posFilter == .all ? EdgeInsets() : nil)
                     }
 
                     Section {
@@ -232,8 +270,10 @@ struct MyWordsView: View {
                             }
                         }
                     } header: {
-                        Text("\(filtered.count) words")
-                            .sectionHeaderStyle()
+                        if !filtered.isEmpty {
+                            Text("\(filtered.count) words")
+                                .sectionHeaderStyle()
+                        }
                     }
                     .id(topAnchorID)
                 }
@@ -283,6 +323,77 @@ struct MyWordsView: View {
                 }
             )
         }
+    }
+
+    // MARK: - Empty state
+
+    /// No words in this tab yet: point the way to the deck, where words come
+    /// from, with adding your own as the alternative.
+    private var emptyStateCard: some View {
+        let hasAnyWords = words.contains { word in
+            word.languageCode == currentLanguageCode
+                && bucket(for: word.id, ratings: latestRatingByID, progressByID: progressByID) != nil
+        }
+        let title: LocalizedStringKey
+        let message: LocalizedStringKey
+        switch filter {
+        case .learning where !hasAnyWords:
+            title = "Your words will live here"
+            message = "Swipe through today's deck and every word you meet lands in this list."
+        case .learning:
+            title = "Nothing to practise right now"
+            message = "Words you swipe as still learning show up here."
+        case .know:
+            title = "No known words yet"
+            message = "Swipe right on a card when you know the word, and it lands here."
+        }
+        let doneToday = DailySetConfig.isDoneToday(lastCompletedDay: dailySetLastCompletedDay)
+
+        return VStack(spacing: 16) {
+            Image("cards")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150)
+                .accessibilityHidden(true)
+
+            VStack(spacing: 6) {
+                Text(title)
+                    .font(.gochiHand(size: 26, relativeTo: .title))
+                    .foregroundStyle(Color.whiteboardInk)
+                Text(message)
+                    .font(.sniglet(.callout))
+                    .foregroundStyle(.secondary)
+            }
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+
+            VStack(spacing: 8) {
+                Button(action: onOpenDeck) {
+                    Label(doneToday ? "Open the deck" : "Start today's deck", systemImage: "rectangle.stack.fill")
+                }
+                .buttonStyle(.primary)
+
+                Button {
+                    if entitlements.isPro {
+                        openComposer()
+                    } else {
+                        isShowingPaywall = true
+                    }
+                } label: {
+                    Text("Or add a word you've heard")
+                        .font(.sniglet(.body, weight: .semibold))
+                        .foregroundStyle(DS.Color.ink)
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .padding(24)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(.background)
+        )
     }
 
     /// Scrolls the list back to the top — anchored on the word-list section

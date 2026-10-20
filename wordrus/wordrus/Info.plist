@@ -7,8 +7,6 @@
 		<string>com.louiscurrie.wordrus.liveactivity.refresh</string>
 		<string>com.louiscurrie.wordrus.story.refresh</string>
 	</array>
-	<key>NSSupportsLiveActivities</key>
-	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

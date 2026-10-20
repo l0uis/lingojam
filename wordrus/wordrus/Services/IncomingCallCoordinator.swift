@@ -39,6 +39,7 @@ final class IncomingCallCoordinator {
 
     func requestOutgoing(seed: CallSeed? = nil) {
         Analytics.capture(.callStarted, ["direction": "outgoing"])
+        Analytics.capture(.callAnswered, ["direction": "outgoing"])
         SpeechService.shared.stop()
         pendingSeed = seed
         isPresentingOutgoing = true
@@ -51,6 +52,8 @@ struct CallSeed: Equatable {
     let wordIDs: [String]
     /// Background the brain gets with its instructions (in English).
     let storyContext: String
+    /// One line shown under Dr Tusk's name during the call.
+    var topic: String? = nil
 }
 
 /// Foreground/launched notification handler. Routes walrus call taps to

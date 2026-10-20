@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 /// Compact bottom sheet shown after a call with Walter ends. Replaces
 /// the old in-chat "finished footer" so the chat itself can close
@@ -93,8 +94,7 @@ struct CallResultSheet: View {
                 levelUpAccepted = true
                 finish()
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.regular)
+            .buttonStyle(.primary)
         }
         .padding(14)
         .frame(maxWidth: .infinity)

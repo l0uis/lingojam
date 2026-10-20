@@ -15,6 +15,11 @@ enum ProEntitlement {
     /// (before any async store check finishes) and remains correct offline.
     static let cacheKey = "wordrus.entitlements.isPro"
 
+    /// Whether the last active Pro period the store reported was the free
+    /// trial. Cached alongside `cacheKey` because by the time Pro lapses the
+    /// store no longer says what kind of period it was.
+    static let lastPeriodWasTrialKey = "wordrus.entitlements.lastPeriodWasTrial"
+
     #if DEBUG
     /// DEBUG-only override so the paid flows can be exercised without a real
     /// purchase. Persisted so it survives relaunches while testing.
@@ -217,8 +222,17 @@ final class Entitlements {
 
     /// Fold a fresh store reading into `isPro`, cache it, and keep the DEBUG
     /// simulate override layered on top.
+    ///
+    /// A reading of not-Pro after a cached Pro is the moment Pro ran out;
+    /// `ProLapse` keeps it for the "trial ended" paywall.
     private func apply(storeIsPro: Bool) {
+        let wasPro = UserDefaults.standard.bool(forKey: ProEntitlement.cacheKey)
         UserDefaults.standard.set(storeIsPro, forKey: ProEntitlement.cacheKey)
+        if storeIsPro {
+            ProLapse.shared.clear()
+        } else if wasPro {
+            ProLapse.shared.record(wasTrial: UserDefaults.standard.bool(forKey: ProEntitlement.lastPeriodWasTrialKey))
+        }
         isPro = Self.effectiveIsPro(storeIsPro: storeIsPro)
     }
 

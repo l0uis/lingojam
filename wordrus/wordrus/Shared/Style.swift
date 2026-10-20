@@ -12,6 +12,11 @@ enum DS {
         /// surfaces to give a more vibrant, dimensional feel.
         static let inkHighlight = SwiftUI.Color(red: 0.32, green: 0.46, blue: 0.78)
 
+        /// Top and bottom of the glossy fill on blue buttons (`GlossyInkFill`)
+        /// — the ink hue, lifted a little so filled controls feel vibrant.
+        static let inkButtonTop = SwiftUI.Color(red: 0.19, green: 0.36, blue: 0.74)
+        static let inkButtonBottom = SwiftUI.Color(red: 0.11, green: 0.25, blue: 0.58)
+
         /// Quiet light-blue surface tint — used as the background for
         /// unselected pills, tinted stat cards, and other low-emphasis
         /// surfaces that still need to read as part of the ink palette.
@@ -51,9 +56,9 @@ enum DS {
     enum Shadow {
         /// Soft elevation tinted with ink so the shadow feels part of the
         /// blue, not a generic gray drop.
-        static let buttonColor = DS.Color.ink.opacity(0.28)
-        static let buttonRadius: CGFloat = 8
-        static let buttonY: CGFloat = 3
+        static let buttonColor = DS.Color.inkButtonBottom.opacity(0.35)
+        static let buttonRadius: CGFloat = 10
+        static let buttonY: CGFloat = 5
     }
 }
 

@@ -560,6 +560,12 @@ enum OnboardingStore {
         defaults.set(cefrPassesAtCurrentLevel, forKey: passesKey(for: language))
     }
 
+    /// The level last used for `language`, or nil if the learner has never
+    /// studied it. For the active language the live `cefrLevel` is newer.
+    static func storedLevel(for language: TargetLanguage) -> CEFRLevel? {
+        UserDefaults.standard.string(forKey: levelKey(for: language)).flatMap(CEFRLevel.init(rawValue:))
+    }
+
     /// Load `language`'s stored level + promotion progress into the active
     /// keys. A language never used before starts at A1 with zero passes —
     /// the level chips in the filter sheet are right there to correct it.

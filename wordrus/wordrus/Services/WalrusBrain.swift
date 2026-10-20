@@ -63,10 +63,37 @@ protocol WalrusBrain {
         targetWords: [VocabularyWord]
     ) async -> WalrusTurn
 
+    /// Walter's last reply before his goodbye: answers like any reply, but
+    /// mentions he'll have to go soon, so the sign-off that follows doesn't
+    /// come out of nowhere.
+    func lastReply(
+        history: [ChatTurn],
+        level: CEFRLevel,
+        targetWords: [VocabularyWord]
+    ) async -> WalrusTurn
+
+    /// Walter's goodbye when the learner chose to end the call ("Say
+    /// goodbye"). Their last line may be unanswered — they're the one
+    /// leaving. Always ends the conversation.
+    func farewell(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn
+
     /// Walter's celebratory closing line, fired when the user has used
     /// every target word ahead of the normal turn budget. Should set
     /// `endsConversation: true` so the chat finalizes immediately.
     func wrapUp(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn
+
+    /// Walter's goodbye when the call has run its length without every word
+    /// being used. Must not congratulate them on using the words. Always
+    /// ends the conversation.
+    func signOff(
         level: CEFRLevel,
         targetWords: [VocabularyWord],
         history: [ChatTurn]
@@ -78,6 +105,36 @@ protocol WalrusBrain {
         targetWords: [VocabularyWord],
         level: CEFRLevel
     ) async -> ChatEvaluation
+}
+
+extension WalrusBrain {
+    /// A neutral scripted goodbye from the level's templates. Brains that can
+    /// talk for real override it with something that answers the last line.
+    func signOff(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn {
+        await MockWalrusBrain().signOff(level: level, targetWords: targetWords, history: history)
+    }
+
+    /// Scripted brains can't weave "I'll have to go soon" into a reply, so
+    /// they answer normally and the goodbye stays a surprise.
+    func lastReply(
+        history: [ChatTurn],
+        level: CEFRLevel,
+        targetWords: [VocabularyWord]
+    ) async -> WalrusTurn {
+        await reply(history: history, level: level, targetWords: targetWords)
+    }
+
+    func farewell(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn {
+        await signOff(level: level, targetWords: targetWords, history: history)
+    }
 }
 
 @MainActor

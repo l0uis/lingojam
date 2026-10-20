@@ -85,7 +85,7 @@ struct StoryLength: Equatable {
 enum StoryGenerationError: Error, Equatable {
     /// The brain couldn't produce anything (network, model unavailable, bad output).
     case unavailable
-    /// Every brain was tried and no story passed or was close enough to accept.
+    /// No brain produced a draft at all (otherwise the closest one is used).
     case noAcceptableStory
     /// The learner has used up their stories for the week (`StoryQuota`).
     case quotaReached

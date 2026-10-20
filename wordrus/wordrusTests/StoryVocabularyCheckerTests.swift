@@ -33,7 +33,9 @@ struct StoryVocabularyCheckerTests {
         #expect(!lexicon.aliases.isEmpty)
         let ranks = lexicon.frequencyRanks()
         let topVerb = ["es": "ser", "fr": "être", "de": "sein", "it": "essere"][code]!
-        #expect(try #require(ranks[topVerb]) <= 3)
+        // Top 10, not top 3: the seeds now carry the building blocks (di, e,
+        // che…), which legitimately outrank even "essere".
+        #expect(try #require(ranks[topVerb]) <= 10)
     }
 
     @Test func languageSpecificMorphologyShipsOnlyWhereNeeded() throws {

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Filled primary action button — dark ink blue, full-width, with a soft
-/// shadow and an inset highlight stroke for a vibrant, raised look.
+/// Filled primary action button — glossy ink blue (`GlossyInkFill`),
+/// full-width, with a soft blue shadow for a raised look.
 ///
 /// Usage:
 /// ```
@@ -14,17 +14,14 @@ struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         let pressed = configuration.isPressed
         return configuration.label
-            .font(.sniglet(.headline))
+            // 19pt rather than the headline's 17: button labels read small
+            // in Sniglet next to the 56pt-tall capsule.
+            .font(.sniglet(size: 19, relativeTo: .headline))
             .foregroundStyle(.white)
+            .shadow(color: .black.opacity(0.18), radius: 0, y: 1)
             .frame(maxWidth: .infinity, minHeight: DS.Size.buttonMinHeight)
             .padding(.horizontal, DS.Size.buttonHorizontalPadding)
-            .background(Capsule(style: .continuous).fill(DS.Color.ink))
-            .overlay(
-                // Inset highlight stroke — sits inside the capsule so
-                // edges read crisp and the button feels dimensional.
-                Capsule(style: .continuous)
-                    .strokeBorder(DS.Color.inkHighlight.opacity(0.55), lineWidth: 1)
-            )
+            .background(GlossyInkFill(shape: Capsule(style: .continuous)))
             .shadow(
                 color: isEnabled ? DS.Shadow.buttonColor : .clear,
                 radius: pressed ? 2 : DS.Shadow.buttonRadius,
@@ -40,6 +37,43 @@ extension ButtonStyle where Self == PrimaryButtonStyle {
     static var primary: PrimaryButtonStyle { PrimaryButtonStyle() }
 }
 
+// MARK: - Glossy ink fill
+
+/// The fill shared by every blue button: an ink gradient with a light inner
+/// rim along the top and a dark one along the bottom, so it reads as a
+/// raised key. Takes any insettable shape — capsule, circle, rounded rect.
+///
+/// ```
+/// Image(systemName: "play.fill")
+///     .frame(width: 52, height: 52)
+///     .background(GlossyInkFill(shape: Circle()))
+/// ```
+struct GlossyInkFill<S: InsettableShape>: View {
+    let shape: S
+
+    var body: some View {
+        shape
+            .fill(LinearGradient(colors: [DS.Color.inkButtonTop, DS.Color.inkButtonBottom],
+                                 startPoint: .top, endPoint: .bottom))
+            .overlay(
+                // Top inner highlight, fading out before the middle.
+                shape.strokeBorder(
+                    LinearGradient(stops: [.init(color: .white.opacity(0.5), location: 0),
+                                           .init(color: .white.opacity(0), location: 0.45)],
+                                   startPoint: .top, endPoint: .bottom),
+                    lineWidth: 2)
+            )
+            .overlay(
+                // Bottom inner shade, mirroring the highlight.
+                shape.strokeBorder(
+                    LinearGradient(stops: [.init(color: .black.opacity(0), location: 0.55),
+                                           .init(color: .black.opacity(0.3), location: 1)],
+                                   startPoint: .top, endPoint: .bottom),
+                    lineWidth: 2.5)
+            )
+    }
+}
+
 // MARK: - Pill button
 
 /// Filter-pill button style. Selected pills are filled ink with white
@@ -50,7 +84,7 @@ struct PillButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.sniglet(.subheadline, weight: .medium))
+            .font(.sniglet(size: 16, relativeTo: .subheadline))
             .padding(.horizontal, 18)
             .padding(.vertical, 10)
             .background(

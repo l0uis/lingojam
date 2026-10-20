@@ -9,9 +9,10 @@ struct DeckPickerSheet: View {
     @Environment(\.modelContext) private var context
     @State private var pendingLanguage: TargetLanguage?
     @State private var entitlements = Entitlements.shared
-    /// Surfaced when a free user tries to change deck or language — choosing
-    /// your own content is a Pro perk (content-breadth gate). The pending
-    /// change is replayed once they subscribe.
+    /// Surfaced when a free user tries to change deck — choosing your own
+    /// content is a Pro perk (content-breadth gate). The pending change is
+    /// replayed once they subscribe. Switching language is free; what's
+    /// behind the paywall is the extra content, the same in every language.
     @State private var isShowingPaywall: Bool = false
     @State private var pendingChange: PendingChange?
     @AppStorage(OnboardingDefaultsKey.cefrLevel) private var cefrLevelRaw: String = CEFRLevel.a1.rawValue
@@ -24,7 +25,6 @@ struct DeckPickerSheet: View {
     /// A filter change a free user attempted; applied after they go Pro.
     private enum PendingChange {
         case deck(String)
-        case language(TargetLanguage)
     }
 
     var body: some View {
@@ -86,22 +86,11 @@ struct DeckPickerSheet: View {
                     Button("Done") { dismiss() }
                 }
             }
-            .alert(
-                "Switch to \(pendingLanguage?.titleInSentence ?? "")?",
-                isPresented: Binding(
-                    get: { pendingLanguage != nil },
-                    set: { if !$0 { pendingLanguage = nil } }
-                ),
-                presenting: pendingLanguage
-            ) { language in
-                Button("Switch") {
-                    SeedDataLoader.switchLanguage(to: language, context: context)
-                    pendingLanguage = nil
+            .sheet(item: $pendingLanguage) { language in
+                LanguageSwitchSheet(language: language) { level in
+                    LanguageSwitcher.switchLanguage(to: language, level: level, context: context)
                     dismiss()
                 }
-                Button("Cancel", role: .cancel) { pendingLanguage = nil }
-            } message: { language in
-                Text("Your current words and progress are kept — they come back if you switch back to them. You'll now see \(language.titleInSentence).")
             }
             .sheet(isPresented: $isShowingPaywall, onDismiss: { pendingChange = nil }) {
                 // Once subscribed, replay the change the user attempted.
@@ -110,13 +99,10 @@ struct DeckPickerSheet: View {
         }
     }
 
-    /// Apply the deck/level/language change a free user tapped before the
-    /// paywall intervened. Language routes through `pendingLanguage` so the
-    /// destructive "resets your progress" confirmation still shows.
+    /// Apply the deck change a free user tapped before the paywall intervened.
     private func applyPendingChange() {
         switch pendingChange {
         case .deck(let slug): selectedSlug = slug
-        case .language(let language): pendingLanguage = language
         case nil: break
         }
         pendingChange = nil
@@ -131,11 +117,6 @@ struct DeckPickerSheet: View {
         let isSelected = selectedLanguageRaw == language.rawValue
         Button {
             guard !isSelected else { return }
-            guard entitlements.isPro else {
-                pendingChange = .language(language)
-                isShowingPaywall = true
-                return
-            }
             pendingLanguage = language
         } label: {
             VStack(spacing: 8) {
@@ -179,8 +160,7 @@ struct DeckPickerSheet: View {
                     .padding(.horizontal, 14)
                     .frame(maxWidth: .infinity)
                     .background(
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .fill(DS.Color.ink)
+                        GlossyInkFill(shape: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     )
                 }
                 .buttonStyle(.plain)

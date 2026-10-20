@@ -15,11 +15,16 @@ struct VoiceCallView: View {
     @State private var director: CallDirector
     @State private var speech = SpeechRecognitionService.shared
     @State private var isShowingTranscript: Bool = false
+    @Environment(\.scenePhase) private var scenePhase
     /// Focus on the input inside the learner's own bubble — there is no
     /// separate text bar; the bubble you speak into is the bubble you type
     /// into.
     @FocusState private var isComposing: Bool
 
+    /// What this call is about, shown under Dr Tusk's name — e.g. the
+    /// story being retold. Nil for an everyday call, which shows his name
+    /// alone.
+    let topic: String?
     let onFinished: (ChatEvaluation) -> Void
 
     /// Beat between the last thing said and the result sheet, so the call
@@ -32,6 +37,7 @@ struct VoiceCallView: View {
         context: ModelContext,
         wasIncoming: Bool = false,
         storyContext: String? = nil,
+        topic: String? = nil,
         onFinished: @escaping (ChatEvaluation) -> Void
     ) {
         _director = State(initialValue: CallDirector(
@@ -41,6 +47,7 @@ struct VoiceCallView: View {
             wasIncoming: wasIncoming,
             storyContext: storyContext
         ))
+        self.topic = topic
         self.onFinished = onFinished
     }
 
@@ -73,7 +80,7 @@ struct VoiceCallView: View {
                     isMyTurn: director.stage == .yourTurn,
                     isComposing: $isComposing,
                     onTap: {
-                        if director.beginComposing() { isComposing = true }
+                        startComposing()
                     },
                     onSubmit: submitFromKeyboard
                 )
@@ -82,21 +89,43 @@ struct VoiceCallView: View {
                     micErrorNote(message)
                 }
 
+                if director.canSayGoodbye {
+                    goodbyeButton
+                        .transition(.scale(scale: 0.9).combined(with: .opacity))
+                }
+
                 controls
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 12)
+            // On the whole stack, not on your bubble: the state often
+            // changes in the same beat as the keyboard (sending closes it),
+            // and animating just one bubble put it on a different curve
+            // from its neighbour, so they overlapped mid-resize.
+            .animation(.easeOut(duration: 0.25), value: director.userBubble)
+            .animation(.spring(response: 0.35, dampingFraction: 0.75), value: director.canSayGoodbye)
         }
         .statusBarHidden(true)
         .task { await director.start() }
         .onChange(of: speech.transcript) { _, new in
             director.updateLiveTranscript(new)
         }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background { director.noteBackgrounded() }
+        }
         .onChange(of: director.stage) { _, stage in
+            // The text field stays mounted between turns (so it rides the
+            // keyboard animation), which means losing the turn no longer
+            // drops the keyboard by itself — do it here. Typing is ignored
+            // off-turn anyway, and an open keyboard outliving the call
+            // stuck over the result sheet.
+            if stage != .yourTurn { dismissKeyboard() }
             guard stage == .ended else { return }
-            isComposing = false
             Task {
                 try? await Task.sleep(nanoseconds: UInt64(Self.closingLinger * 1_000_000_000))
+                // Again on the way out, in case anything took focus
+                // during the linger.
+                dismissKeyboard()
                 onFinished(await director.finalEvaluation())
             }
         }
@@ -124,10 +153,12 @@ struct VoiceCallView: View {
                 Text("Dr Tusk")
                     .font(.sniglet(.headline))
                     .foregroundStyle(.white)
-                Text(statusLine)
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(.white.opacity(0.65))
-                    .contentTransition(.opacity)
+                if let topic {
+                    Text(topic)
+                        .font(.sniglet(.caption))
+                        .foregroundStyle(.white.opacity(0.65))
+                        .lineLimit(1)
+                }
             }
 
             Spacer()
@@ -160,19 +191,6 @@ struct VoiceCallView: View {
             .accessibilityLabel("End call")
         }
         .padding(.top, 8)
-    }
-
-    private var statusLine: LocalizedStringResource {
-        switch director.stage {
-        case .connecting: "Connecting…"
-        case .walrusSpeaking: "Speaking"
-        case .yourTurn:
-            if speech.isRecording { "Listening to you" }
-            else if !director.isMicEnabled { "Microphone off" }
-            else { "Your turn" }
-        case .checking: "Checking your \((OnboardingStore.targetLanguage ?? .spanish).titleInSentence)…"
-        case .ended: "Call ended"
-        }
     }
 
     // MARK: - Target words
@@ -213,16 +231,21 @@ struct VoiceCallView: View {
     private var controls: some View {
         HStack(spacing: 0) {
             Button {
-                if director.beginComposing() { isComposing = true }
+                if isComposing {
+                    isComposing = false
+                } else {
+                    startComposing()
+                }
             } label: {
-                Image(systemName: "keyboard")
+                Image(systemName: isComposing ? "keyboard.chevron.compact.down" : "keyboard")
                     .font(.sniglet(.body, weight: .bold))
                     .foregroundStyle(.white)
                     .frame(width: 50, height: 50)
                     .background(Circle().fill(.white.opacity(0.14)))
+                    .contentTransition(.symbolEffect(.replace))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Type instead of speaking")
+            .accessibilityLabel(isComposing ? "Hide keyboard" : "Type instead of speaking")
 
             Spacer()
 
@@ -239,18 +262,70 @@ struct VoiceCallView: View {
             Button(action: submitFromKeyboard) {
                 Image(systemName: "arrow.up")
                     .font(.sniglet(.body, weight: .bold))
-                    .foregroundStyle(DS.Color.ink)
+                    .foregroundStyle(.white)
+                    .animation(.easeOut(duration: 0.2)) {
+                        $0.opacity(director.canSubmit ? 1 : 0.4)
+                    }
                     .frame(width: 50, height: 50)
-                    .background(Circle().fill(.white))
+                    .background {
+                        // Blue CTA when there's something to send; until
+                        // then the same see-through disc as the keyboard
+                        // button, so it recedes instead of looking broken.
+                        // Both discs are always there and only fade: sending
+                        // also closes the keyboard, and a disc swapped out
+                        // mid-move was left behind while the arrow slid down.
+                        ZStack {
+                            Circle().fill(.white.opacity(0.14))
+                            GlossyInkFill(shape: Circle())
+                                .shadow(color: DS.Shadow.buttonColor, radius: 8, y: 4)
+                                .animation(.easeOut(duration: 0.2)) {
+                                    $0.opacity(director.canSubmit ? 1 : 0)
+                                }
+                        }
+                    }
             }
             .buttonStyle(.plain)
             .disabled(!director.canSubmit)
-            .opacity(director.canSubmit ? 1 : 0.35)
-            .animation(.easeOut(duration: 0.2), value: director.canSubmit)
             .accessibilityLabel("Send")
         }
         .padding(.horizontal, 8)
         .padding(.top, 4)
+    }
+
+    /// Appears once they've used enough words to pass: a way out that lets
+    /// Dr Tusk say goodbye, where the red button just cuts him off.
+    private var goodbyeButton: some View {
+        Button {
+            dismissKeyboard()
+            director.sayGoodbye()
+        } label: {
+            Label("Say goodbye", systemImage: "hand.wave.fill")
+                .font(.sniglet(size: 16, relativeTo: .subheadline))
+                .foregroundStyle(DS.Color.ink)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 10)
+                .background(Capsule().fill(.white))
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint("Dr Tusk says goodbye and the call ends")
+    }
+
+    /// Take the turn (cutting Walter off if need be) and open the keyboard.
+    /// Focus waits a tick: the field is disabled until it's the learner's
+    /// turn, and focusing it in the same update that enables it is dropped.
+    private func startComposing() {
+        guard director.beginComposing() else { return }
+        Task { @MainActor in isComposing = true }
+    }
+
+    /// Drop the keyboard for certain. Clearing `isComposing` alone isn't
+    /// enough once the turn is lost: the field is disabled in that same
+    /// update, SwiftUI ignores focus changes on a disabled field, and
+    /// UIKit's first responder survives — keyboard and all — floating over
+    /// the result sheet after the call closes.
+    private func dismissKeyboard() {
+        isComposing = false
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
     /// The mic switch, nothing else — sending has its own button now.
@@ -357,18 +432,29 @@ private struct YourBubble: View {
 
             if let correction, state == .corrected {
                 correctedContent(correction)
-            } else if isMyTurn {
-                inputField
             } else {
-                // Not their turn: the last thing they said stays put, but
-                // it isn't editable while Walter is talking.
-                Text(text.isEmpty ? placeholder : text)
-                    .font(.sniglet(size: text.isEmpty ? 21 : 23, relativeTo: .title3))
-                    .italic(text.isEmpty)
-                    .foregroundStyle(.white.opacity(text.isEmpty ? 0.35 : 1))
-                    .multilineTextAlignment(.center)
-                    .minimumScaleFactor(0.6)
-                    .frame(maxWidth: .infinity)
+                // One field for the whole call, rather than swapping to a
+                // static label once they've sent. Swapping it out on send
+                // left the old view stranded where it was while the bubble
+                // grew back from under the keyboard; keeping the same view
+                // lets the text ride the resize and stay centred. Out of
+                // turn it just stops taking touches.
+                inputField
+                    // Off-turn: taps fall through to the bubble (so tapping
+                    // it can still barge in on Walter), and disabling is
+                    // what actually makes the field let go of the keyboard
+                    // — clearing focus alone left it up through the check.
+                    .allowsHitTesting(isMyTurn)
+                    .disabled(!isMyTurn)
+                    // Shimmers while the grammar check is out, then settles
+                    // to plain white — the "checking" signal lives on the
+                    // words themselves rather than in a spinner below them.
+                    //
+                    // The shimmer runs on a copy of the words laid over the
+                    // field, never on the field itself: masking the field
+                    // re-parents its text view mid-send, and UIKit answers
+                    // that by handing it the keyboard straight back.
+                    .overlay { shimmeringCopy }
             }
 
             Spacer(minLength: 0)
@@ -382,7 +468,6 @@ private struct YourBubble: View {
         .callBubble(.user, isActive: state == .listening || isComposing)
         .contentShape(Rectangle())
         .onTapGesture(perform: onTap)
-        .animation(.easeOut(duration: 0.25), value: state)
     }
 
     /// The text view is always a field while it's their turn, so tapping
@@ -397,7 +482,8 @@ private struct YourBubble: View {
             axis: .vertical
         )
         .font(.sniglet(size: 23, relativeTo: .title3))
-        .foregroundStyle(.white)
+        // Hidden (not removed) while the shimmering copy stands in for it.
+        .foregroundStyle(.white.opacity(isChecking ? 0 : 1))
         .tint(.white)
         .multilineTextAlignment(.center)
         .lineLimit(1...5)
@@ -412,6 +498,27 @@ private struct YourBubble: View {
         .submitLabel(.send)
         .onSubmit(onSubmit)
         .frame(maxWidth: .infinity)
+    }
+
+    private var isChecking: Bool { state == .checking }
+
+    /// Stand-in for the field's text while it's being checked. Always in
+    /// the hierarchy so switching it on changes nothing structural.
+    private var shimmeringCopy: some View {
+        Text(text)
+            .font(.sniglet(size: 23, relativeTo: .title3))
+            .foregroundStyle(.white)
+            .multilineTextAlignment(.center)
+            .lineLimit(1...5)
+            .frame(maxWidth: .infinity)
+            .modifier(Shimmer(isActive: isChecking))
+            // Swap in a single frame, in step with the field's own text,
+            // which UIKit hides instantly. Fading the copy in left the
+            // bubble blank for the length of the keyboard animation.
+            // Scoped to opacity so the copy still rides the resize.
+            .animation(nil) { $0.opacity(isChecking ? 1 : 0) }
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
     }
 
     /// The correction, inside the same bubble: the fixed sentence up top
@@ -476,20 +583,11 @@ private struct YourBubble: View {
         switch state {
         case .listening:
             label("Listening…", system: "waveform", tint: .white.opacity(0.75))
-        case .checking:
-            HStack(spacing: 6) {
-                ProgressView()
-                    .controlSize(.mini)
-                    .tint(.white)
-                Text("Checking…")
-                    .font(.sniglet(.caption))
-                    .foregroundStyle(.white.opacity(0.75))
-            }
         case .clean:
             label("Nicely said", system: "checkmark.seal.fill", tint: Color(red: 0.55, green: 1.0, blue: 0.78))
         // No label for a correction — the highlighted words and the
         // struck-through original say it better than a counter can.
-        case .corrected, .sent, .empty:
+        case .corrected, .sent, .empty, .checking:
             EmptyView()
         }
     }
@@ -517,10 +615,23 @@ private struct TalkButton: View {
     let isDisabled: Bool
     let onTap: () -> Void
 
+    /// Drives the steady "I'm listening" breath, so the button visibly
+    /// pulses even in silence — the level rings only move when there's
+    /// sound to react to.
+    @State private var isBreathing = false
+
     var body: some View {
         Button(action: onTap) {
             ZStack {
                 if isRecording {
+                    Circle()
+                        .fill(.white.opacity(0.18))
+                        .frame(width: 84, height: 84)
+                        .scaleEffect(isBreathing ? 1.32 : 1.0)
+                        .opacity(isBreathing ? 0 : 1)
+                        .animation(.easeOut(duration: 1.3).repeatForever(autoreverses: false), value: isBreathing)
+                        .onAppear { isBreathing = true }
+                        .onDisappear { isBreathing = false }
                     Circle()
                         .stroke(.white.opacity(0.28), lineWidth: 3)
                         .frame(width: 84, height: 84)
@@ -556,6 +667,43 @@ private struct TalkButton: View {
 
     private var accessibilityText: LocalizedStringResource {
         isMicEnabled ? "Turn the microphone off" : "Turn the microphone on"
+    }
+}
+
+// MARK: - Shimmer
+
+/// A bright band sweeping across dimmed content, on a loop.
+///
+/// The mask is always applied and only its stops change, so turning the
+/// shimmer on or off never swaps out the view it's on — that view is the
+/// learner's text field, and replacing it mid-call loses its position in
+/// the keyboard animation.
+private struct Shimmer: ViewModifier {
+    let isActive: Bool
+
+    private static let period: Double = 1.4
+    /// Width of the bright band, as a fraction of the content's width.
+    private static let band: CGFloat = 0.6
+
+    func body(content: Content) -> some View {
+        content.mask {
+            TimelineView(.animation(paused: !isActive)) { context in
+                let t = context.date.timeIntervalSinceReferenceDate
+                let phase = t.truncatingRemainder(dividingBy: Self.period) / Self.period
+                // Start fully off the leading edge, end fully off the trailing.
+                let x = -Self.band + CGFloat(phase) * (1 + Self.band)
+                let dim = isActive ? 0.35 : 1
+                LinearGradient(
+                    stops: [
+                        .init(color: .black.opacity(dim), location: 0),
+                        .init(color: .black, location: 0.5),
+                        .init(color: .black.opacity(dim), location: 1)
+                    ],
+                    startPoint: UnitPoint(x: x, y: 0.5),
+                    endPoint: UnitPoint(x: x + Self.band, y: 0.5)
+                )
+            }
+        }
     }
 }
 
@@ -717,29 +865,37 @@ private struct CallBubbleModifier: ViewModifier {
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous)
         content
-            .background(shape.fill(fill))
-            .overlay(shape.stroke(strokeColor, lineWidth: isActive ? 2 : 1))
+            .background { fillLayer(shape) }
+            .overlay(shape.stroke(strokeColor(active: false), lineWidth: 1))
+            .overlay {
+                // The active rim fades in on its own. Scoped to opacity so
+                // the fade never animates the bubble's frame: `isActive`
+                // flips in the same beat as the keyboard, and a whole-bubble
+                // animation put this bubble on a different curve from the
+                // other one, so they overlapped mid-resize.
+                shape.stroke(strokeColor(active: true), lineWidth: 2)
+                    .animation(.easeInOut(duration: 0.3)) {
+                        $0.opacity(isActive ? 1 : 0)
+                    }
+            }
             .shadow(color: .black.opacity(0.25), radius: 12, y: 6)
-            .animation(.easeInOut(duration: 0.3), value: isActive)
     }
 
-    private var fill: AnyShapeStyle {
+    /// Solid fills only. The keyboard's resize animation moves plain
+    /// shapes smoothly, but gradients (and clip masks) jump to their final
+    /// size while the outline is still moving — which read as Walter's
+    /// bubble running ahead of, or overlapping, the learner's.
+    private func fillLayer(_ shape: RoundedRectangle) -> some View {
         switch role {
-        case .walrus:
-            AnyShapeStyle(LinearGradient(
-                colors: [.white, Color(red: 0.90, green: 0.94, blue: 0.99)],
-                startPoint: .top,
-                endPoint: .bottom
-            ))
-        case .user:
-            AnyShapeStyle(Color.white.opacity(0.12))
+        case .walrus: shape.fill(Color.white)
+        case .user: shape.fill(Color.white.opacity(0.12))
         }
     }
 
-    private var strokeColor: Color {
+    private func strokeColor(active: Bool) -> Color {
         switch role {
-        case .walrus: .white.opacity(isActive ? 0.55 : 0.12)
-        case .user: .white.opacity(isActive ? 0.55 : 0.25)
+        case .walrus: .white.opacity(active ? 0.55 : 0.12)
+        case .user: .white.opacity(active ? 0.55 : 0.25)
         }
     }
 }
@@ -790,3 +946,4 @@ private struct CallTranscriptSheet: View {
         }
     }
 }
+

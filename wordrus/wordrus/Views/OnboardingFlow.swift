@@ -30,6 +30,29 @@ private enum OnboardingStep: Int, CaseIterable {
     case intermediateWords
     case advancedWords
     case finalPitch
+
+    /// `step` property on `onboarding_step_viewed` — the dashboard's
+    /// contract, so keep these stable when cases are renamed or reordered.
+    var analyticsName: String {
+        switch self {
+        case .welcome: "welcome"
+        case .language: "language"
+        case .walrusIntro: "walrus_intro"
+        case .name: "name"
+        case .customizeIntro: "customize_intro"
+        case .dailyGoal: "daily_goal"
+        case .notifications: "notifications"
+        case .goalSetup: "goal_setup"
+        case .topics: "topics"
+        case .exampleCard: "example_card"
+        case .vocabularyLevel: "vocabulary_level"
+        case .testIntro: "test_intro"
+        case .beginnerWords: "beginner_words"
+        case .intermediateWords: "intermediate_words"
+        case .advancedWords: "advanced_words"
+        case .finalPitch: "final_pitch"
+        }
+    }
 }
 
 struct OnboardingFlow: View {
@@ -43,6 +66,9 @@ struct OnboardingFlow: View {
     @State private var isGoingBack = false
     /// The Pro paywall, shown once over "You're all set" before the app opens.
     @State private var isShowingPaywall = false
+    /// Furthest step reported to analytics, so stepping back and forward
+    /// again doesn't count a screen twice.
+    @State private var furthestTrackedStep: OnboardingStep?
 
     var body: some View {
         ZStack {
@@ -94,6 +120,9 @@ struct OnboardingFlow: View {
             }
         }
         .animation(.easeInOut(duration: 0.28), value: step)
+        .onChange(of: step, initial: true) { _, newStep in
+            trackStepIfNew(newStep)
+        }
         .tint(DS.Color.ink)
         // Whatever they choose — trial, restore or ✕ — onboarding ends when
         // the paywall goes away, so they land on the deck, not back here.
@@ -166,6 +195,15 @@ struct OnboardingFlow: View {
                 syncSeededLanguage(to: state.targetLanguage)
             }
         }
+    }
+
+    private func trackStepIfNew(_ newStep: OnboardingStep) {
+        if let furthest = furthestTrackedStep, newStep.rawValue <= furthest.rawValue { return }
+        furthestTrackedStep = newStep
+        Analytics.capture(.onboardingStepViewed, [
+            "step": newStep.analyticsName,
+            "step_number": newStep.rawValue + 1
+        ])
     }
 
     private func goBack() {
@@ -356,7 +394,7 @@ private extension View {
     }
 }
 
-private struct SelectableRow: View {
+struct SelectableRow: View {
     let title: String
     let subtitle: String?
     let systemImage: String?
@@ -459,6 +497,18 @@ private struct SelectableRow: View {
 private struct WelcomeStep: View {
     let onContinue: () -> Void
 
+    /// Status-bar height. The panel's content starts below it, so the logo
+    /// is nudged up by half of it to sit centred against the real screen
+    /// top rather than the safe area.
+    @State private var topInset: CGFloat = 0
+
+    private let videoWidth: CGFloat = 320
+
+    /// Transparent headroom at the top of the `scenePhoneCheck` frame above
+    /// Dr Tusk's head (46px of the 720px frame), counted as gap so the logo
+    /// centres on his head, not the clip's invisible edge.
+    private var clipHeadroom: CGFloat { videoWidth * 46 / 720 }
+
     /// Runs before the "I speak" picker, so go by the likely native
     /// language: everyone but English speakers learns English. (if/else, not
     /// a ternary — literals in a ternary aren't extracted to the catalog.)
@@ -472,13 +522,14 @@ private struct WelcomeStep: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            OnboardingVideoPanel(dataAssetName: "scenePhoneCheck", videoWidth: 360) {
-                // Logo pinned near the top; the free space goes between it
-                // and Dr Tusk rather than above it.
+            OnboardingVideoPanel(dataAssetName: "scenePhoneCheck", videoWidth: videoWidth) {
+                // Logo centred between the top of the screen and the top of
+                // Dr Tusk's head.
+                Spacer(minLength: 8)
                 StickerLogo()
                     .frame(maxWidth: 200)
-                    .padding(.top, 12)
-                Spacer(minLength: 16)
+                    .offset(y: (clipHeadroom - topInset) / 2)
+                Spacer(minLength: 8)
             }
             OnboardingBottomSheet {
                 OnboardingHeadline(
@@ -489,6 +540,13 @@ private struct WelcomeStep: View {
                     .buttonStyle(.primary)
                     .padding(.horizontal, 24)
                     .padding(.bottom, 24)
+            }
+        }
+        .background {
+            GeometryReader { proxy in
+                Color.clear
+                    .onAppear { topInset = proxy.safeAreaInsets.top }
+                    .onChange(of: proxy.safeAreaInsets.top) { _, top in topInset = top }
             }
         }
     }
@@ -1068,7 +1126,7 @@ private struct DailyGoalStep: View {
                 .font(.sniglet(.title2, weight: .bold))
                 .foregroundStyle(.white)
                 .frame(width: 52, height: 52)
-                .background(Circle().fill(DS.Color.ink))
+                .background(GlossyInkFill(shape: Circle()))
         }
         .buttonStyle(.plain)
         .disabled(!enabled)
@@ -1375,7 +1433,7 @@ private struct ExamplePreviewCard: View {
                         .font(.sniglet(.title3))
                         .foregroundStyle(.white)
                         .padding(12)
-                        .background(DS.Color.ink, in: Circle())
+                        .background(GlossyInkFill(shape: Circle()))
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("Hear it spoken aloud")

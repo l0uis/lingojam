@@ -21,6 +21,14 @@ struct WalrusBrainTests {
         #expect(SpanishLemmaMatcher.userText("¿Tú cocinas mucho?", mentions: "cocinar", partOfSpeech: "verb"))
     }
 
+    @Test func irregularVerbFormsMatchViaLexiconAliases() {
+        // No stem reaches these: "fritas" isn't fre-, "dijo" isn't dec-.
+        #expect(SpanishLemmaMatcher.userText("Patatas fritas por favor", mentions: "freír", partOfSpeech: "verb"))
+        #expect(SpanishLemmaMatcher.userText("Me lo dijo ayer", mentions: "decir", partOfSpeech: "verb"))
+        #expect(SpanishLemmaMatcher.userText("Ya está hecha", mentions: "hacer", partOfSpeech: "verb"))
+        #expect(!SpanishLemmaMatcher.userText("Hace mucho frío", mentions: "freír", partOfSpeech: "verb"))
+    }
+
     @Test func pluralNounMatches() {
         #expect(SpanishLemmaMatcher.userText("Tengo dos gatos", mentions: "gato", partOfSpeech: "noun"))
         #expect(SpanishLemmaMatcher.userText("Vimos los árboles", mentions: "árbol", partOfSpeech: "noun"))

@@ -32,15 +32,45 @@ enum Analytics {
     // MARK: Events (snake_case raw values are the dashboard's contract — never rename)
 
     enum Event: String {
+        /// An onboarding screen appeared for the first time this run
+        /// (`step`, `step_number`); going back doesn't re-fire it, so distinct
+        /// users per step is the drop-off funnel. Added after 1.1.9.
+        case onboardingStepViewed = "onboarding_step_viewed"
         case onboardingCompleted = "onboarding_completed"
         case cardReviewed = "card_reviewed"
+        /// Incoming: the phone started ringing (not answered yet).
+        /// Outgoing: the learner dialled.
         case callStarted = "call_started"
+        /// The call connected: an incoming ring was answered, or an outgoing
+        /// call was placed (those connect immediately). Added after 1.1.9.
+        case callAnswered = "call_answered"
+        /// An incoming ring was declined. Added after 1.1.9.
+        case callDeclined = "call_declined"
+        /// The app went to the background mid-call, once per call. Added after 1.1.9.
+        case callBackgrounded = "call_backgrounded"
         case callEnded = "call_ended"
+        /// A Home Screen widget appeared since the app was last opened. Added after 1.1.9.
+        case widgetAdded = "widget_added"
+        case widgetRemoved = "widget_removed"
+        /// The learner confirmed a switch of target language. Added after 1.1.9.
+        case languageSwitched = "language_switched"
         case paywallShown = "paywall_shown"
         case paywallDismissed = "paywall_dismissed"
         case purchaseCompleted = "purchase_completed"
+        /// A Pro user started an extra stack after finishing the daily set
+        /// (`deck`). From 1.1.9.
+        case bonusStackStarted = "bonus_stack_started"
+        case bonusStackCompleted = "bonus_stack_completed"
         case purchaseRestored = "purchase_restored"
         case reviewPromptRequested = "review_prompt_requested"
+        /// A curiosity card was dealt in as the daily set's last card
+        /// (`curiosity`, `kind`, `language`). Added after 1.1.9.
+        case curiosityShown = "curiosity_shown"
+        /// The learner tapped Share on a curiosity card (`curiosity`). The
+        /// share sheet doesn't say whether they went through with it. Added after 1.1.9.
+        case curiosityShareTapped = "curiosity_share_tapped"
+        /// The curiosity card was swiped away (`curiosity`). Added after 1.1.9.
+        case curiosityDismissed = "curiosity_dismissed"
         case analyticsDisabled = "analytics_disabled"
         /// A Pro learner changed Dr Tusk's speaking speed (`speed`: slow /
         /// normal / fast / faster; `from`: settings / story / card). Added after 1.1.9.
@@ -56,6 +86,10 @@ enum Analytics {
         case jamTopic = "jam_topic"
         case myWords = "my_words"
         case deckPicker = "deck_picker"
+        /// "Start another stack" on the end-of-day card.
+        case anotherStack = "another_stack"
+        /// Shown once on the first launch after a trial or subscription ran out.
+        case lapsed
         case story
         /// The voice-speed row in Settings. Added after 1.1.9.
         case voiceSpeed = "voice_speed"
@@ -187,6 +221,14 @@ enum Analytics {
         #if canImport(PostHog)
         guard isConfigured else { return }
         PostHogSDK.shared.register(["is_pro": isPro])
+        #endif
+    }
+
+    /// Super property so every event can be split by widget users vs not.
+    static func setHasWidget(_ hasWidget: Bool) {
+        #if canImport(PostHog)
+        guard isConfigured else { return }
+        PostHogSDK.shared.register(["has_widget": hasWidget])
         #endif
     }
 

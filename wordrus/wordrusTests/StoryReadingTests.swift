@@ -151,18 +151,4 @@ struct StoryReadingTests {
         let plain = try #require(WalrusBrainFactory.makeCurrent() as? ClaudeWalrusBrain)
         #expect(plain.storyContext == nil)
     }
-
-    @Test func retellContextNamesTheStoryAndItsWords() {
-        let story = DailyStory(
-            dayKey: "d", language: .spanish, level: .a1, topic: "Animals",
-            story: GeneratedStory(title: "La nota", story: "…", newWordSentences: [], questions: [], episodeSummary: "Dr Tusk encontró una nota."),
-            newWords: ["llegar", "salir"], extraWords: ["roca"],
-            report: StoryCoverageReport(coverage: 1, contentTokenCount: 0, unknownTokenCount: 0, unknownLemmas: [], newWordUses: [:], wordCount: 0, failures: []),
-            brain: "mock", attempts: 1
-        )
-        let context = StoryRetell.context(for: story)
-        #expect(context.contains("\"La nota\""))
-        #expect(context.contains("Dr Tusk encontró una nota."))
-        #expect(context.contains("llegar, salir, roca"))
-    }
 }

@@ -161,8 +161,22 @@ struct DailyStoryTests {
         #expect(mock.repairRequests.isEmpty)
     }
 
-    @Test func noAcceptableStoryThrows() async throws {
+    @Test func withNothingAcceptableTheClosestDraftIsUsed() async throws {
+        /// Even further off than `farOff`.
+        let worse = story("Dr Tusk compra peras, uvas, manzanas, naranjas, limones y fresas en la playa grande.")
         let claude = ScriptedStoryBrain("claude", drafts: [farOff, farOff], repairs: [farOff, farOff])
+        let apple = ScriptedStoryBrain("apple", drafts: [worse, worse], repairs: [worse, worse])
+        let outcome = try await pipeline([claude, apple]).run(request)
+        // The closest draft, not the last one.
+        #expect(outcome.brainName == "claude")
+        #expect(outcome.story == farOff)
+        #expect(!outcome.report.passed)
+        #expect(outcome.extraWords.isEmpty)   // too many unknowns to highlight
+        #expect(outcome.attempts == 8)
+    }
+
+    @Test func noDraftAtAllThrows() async throws {
+        let claude = ScriptedStoryBrain("claude", drafts: [nil])
         await #expect(throws: StoryGenerationError.noAcceptableStory) {
             try await pipeline([claude]).run(request)
         }
@@ -244,7 +258,7 @@ struct DailyStoryTests {
             "es-1": LearningProgress(wordID: "es-1", state: .learning, lastReviewedAt: .now),
             "es-2": LearningProgress(wordID: "es-2", state: .known),
         ]
-        let core = (1...1000).map { "c\($0)" }
+        let core = (1...2000).map { "c\($0)" }
         func select(_ level: CEFRLevel) -> [StoryWord] {
             StoryWordSelector.select(
                 words: words, progressByID: progress, knownIDs: [], frequencyRanks: [:],
@@ -285,6 +299,22 @@ struct DailyStoryTests {
         #expect(select(recent: ["w1", "w2", "w3"]) == ["w4", "w5", "w6"])
         // Nothing else left: recent words come back rather than none at all.
         #expect(select(recent: Set(words.map(\.lemma))) == ["w1", "w2", "w3"])
+    }
+
+    @Test func rareNewWordsWaitWhileCommonerOnesQualify() {
+        let words = (1...4).map { word("es-\($0)", "w\($0)", rank: $0) }
+        func select(_ level: CEFRLevel, unseen: ArraySlice<VocabularyWord>) -> [String] {
+            StoryWordSelector.select(
+                words: Array(unseen), progressByID: [:], knownIDs: [],
+                frequencyRanks: ["w1": 6535, "w2": 100, "w3": 200, "w4": 300],
+                decks: [], level: level, todaysSetIDs: []
+            ).newWords.map(\.lemma)
+        }
+        #expect(select(.a2, unseen: words[...]) == ["w2", "w3", "w4"])
+        // Nothing commoner left: the rare word is taught rather than none.
+        #expect(select(.a2, unseen: words[..<2]) == ["w2", "w1"])
+        // No ceiling from B2 up.
+        #expect(select(.b2, unseen: words[...]) == ["w1", "w2", "w3"])
     }
 
     @Test func episodeNumberAndRecentTitlesComeFromEarlierStories() async throws {

@@ -21,60 +21,56 @@ struct VocabularySnapshot {
     }
 }
 
-/// The card at the top of the Words tab: how many words, the next milestone,
-/// and how much everyday language that covers. Tapping opens the full view.
+/// The card at the top of the Words tab: how many words (in a ring that
+/// fills towards the next milestone), the learning pack the daily set is on
+/// and the one after it, and how much everyday language the words cover.
+/// Tapping opens the full view.
 struct ProgressHeaderCard: View {
     let snapshot: VocabularySnapshot
+    /// Localized name of the daily set's current pack, and the next one.
+    let pack: String?
+    let nextPack: String?
     let onTap: () -> Void
 
     var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(AttributedString(localized: "\(snapshot.learnedCount) words learned",
-                                          emphasizingCount: snapshot.learnedCount,
-                                          font: .gochiHand(size: 34, relativeTo: .largeTitle),
-                                          color: DS.Color.ink))
-                        .font(.sniglet(.headline))
-                        .foregroundStyle(DS.Color.charcoal)
-                    Spacer(minLength: 0)
-                    Image(systemName: "chevron.right")
-                        .font(.sniglet(.subheadline, weight: .bold))
-                        .foregroundStyle(.secondary)
-                        .accessibilityHidden(true)
-                }
+            HStack(spacing: 18) {
+                MilestoneRing(count: snapshot.learnedCount, fraction: snapshot.status.fraction)
 
-                if let next = snapshot.status.next {
-                    VStack(alignment: .leading, spacing: 6) {
-                        HStack(spacing: 6) {
-                            Image(systemName: next.systemImage)
-                                .accessibilityHidden(true)
-                            // Two lines: translated milestone names run long
-                            // ("Als Nächstes: Deine ersten 50 Wörter").
-                            Text("Next: \(String(localized: next.title))")
-                                .lineLimit(2)
-                                .minimumScaleFactor(0.85)
-                            Spacer(minLength: 8)
-                            Text("\(snapshot.status.remaining) to go")
-                                .foregroundStyle(.secondary)
-                        }
-                        .font(.sniglet(.subheadline))
-                        .foregroundStyle(DS.Color.charcoal)
-                        ProgressView(value: snapshot.status.fraction)
-                            .tint(DS.Color.ink)
-                            .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 4) {
+                    if let pack {
+                        Text(pack)
+                            .font(.sniglet(.title3, weight: .bold))
+                            .foregroundStyle(DS.Color.charcoal)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.85)
                     }
-                } else {
-                    Label("Every milestone reached!", systemImage: "sparkles")
-                        .font(.sniglet(.subheadline))
-                        .foregroundStyle(DS.Color.charcoal)
+                    if let nextPack, nextPack != pack {
+                        Text("Next: \(nextPack)")
+                            .font(.sniglet(.subheadline))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
+
+                    Text("You know \(snapshot.coverageText) of everyday words")
+                        .font(.sniglet(.caption))
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 4)
                 }
 
-                Text("You know \(snapshot.coverageText) of everyday words")
-                    .font(.sniglet(.caption))
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(.sniglet(.subheadline, weight: .bold))
                     .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
             }
-            .tintedSurface()
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: DS.Radius.surface, style: .continuous)
+                    .fill(.background)
+            )
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -85,10 +81,69 @@ struct ProgressHeaderCard: View {
     }
 
     private var accessibilityText: Text {
+        var text = Text(verbatim: "")
+        if let pack { text = text + Text(verbatim: "\(pack). ") }
+        if let nextPack, nextPack != pack { text = text + Text("Next: \(nextPack)") + Text(verbatim: ". ") }
+        return text + milestoneAccessibilityText
+    }
+
+    private var milestoneAccessibilityText: Text {
         if let next = snapshot.status.next {
             return Text("\(snapshot.learnedCount) words learned. Next milestone: \(String(localized: next.title)), \(snapshot.status.remaining) to go. You know about \(snapshot.coverageText) of everyday words.")
         }
         return Text("\(snapshot.learnedCount) words learned. Every milestone reached. You know about \(snapshot.coverageText) of everyday words.")
+    }
+}
+
+/// An almost-closed ring (gap at the bottom) filling towards the next
+/// milestone, with the word count in the middle and its unit underneath.
+private struct MilestoneRing: View {
+    let count: Int
+    let fraction: Double
+
+    /// How much of a full circle the ring spans; the rest is the gap.
+    private static let span = 0.8
+    private static let lineWidth: CGFloat = 9
+
+    var body: some View {
+        ZStack {
+            arc(to: Self.span)
+                .stroke(DS.Color.inkTint, style: StrokeStyle(lineWidth: Self.lineWidth, lineCap: .round))
+            arc(to: Self.span * min(max(fraction, 0), 1))
+                .stroke(DS.Color.ink, style: StrokeStyle(lineWidth: Self.lineWidth, lineCap: .round))
+
+            VStack(spacing: -4) {
+                Text(count, format: .number)
+                    .font(.gochiHand(size: 34, relativeTo: .largeTitle))
+                    .foregroundStyle(DS.Color.ink)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+                Text(unit)
+                    .font(.sniglet(.caption))
+                    .foregroundStyle(DS.Color.charcoal)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .padding(.horizontal, 14)
+        }
+        .frame(width: 96, height: 96)
+        .animation(.easeOut(duration: 0.4), value: fraction)
+        .accessibilityHidden(true)
+    }
+
+    /// Starts at the lower left of the gap and runs clockwise.
+    private func arc(to end: Double) -> some Shape {
+        Circle()
+            .trim(from: 0, to: end)
+            .rotation(.degrees(90 + (1 - Self.span) / 2 * 360))
+    }
+
+    /// "words" / "Wörter" / "mots" — the catalog's plural-aware "%lld words"
+    /// with the number taken out, so the unit agrees with the count.
+    private var unit: String {
+        String(localized: "\(count) words")
+            .replacingOccurrences(of: count.formatted(), with: "")
+            .trimmingCharacters(in: .whitespaces)
     }
 }
 

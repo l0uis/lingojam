@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
     let onRestartOnboarding: () -> Void
@@ -368,7 +369,7 @@ struct SettingsView: View {
         let current = OnboardingStore.targetLanguage ?? .spanish
         let offered = TargetLanguage.offered(to: native)
         if !offered.contains(current), let target = offered.first {
-            SeedDataLoader.switchLanguage(to: target, context: context)
+            LanguageSwitcher.switchLanguage(to: target, context: context)
         } else {
             DailyWordService.refresh(context: context)
         }

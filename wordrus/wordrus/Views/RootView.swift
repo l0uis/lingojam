@@ -26,9 +26,18 @@ struct RootView: View {
     @State private var deepLinkedWord: VocabularyWord?
     /// A story opened from its "new story" notification.
     @State private var deepLinkedStory: DailyStory?
+    @State private var firstStoryIntro = FirstStoryIntro.shared
+    /// The first story while its introduction is on screen.
+    @State private var introducedStory: DailyStory?
+    @State private var proLapse = ProLapse.shared
+    /// The "trial ended" paywall, while it's on screen.
+    @State private var lapseSummary: LapseSummary?
+    /// Set by "Read it now" on the first-story sheet; opened once it's gone.
+    @State private var storyToOpenAfterIntro: DailyStory?
     @State private var chatTargetWords: [VocabularyWord] = []
     /// Set when the current call retells a story (`CallSeed`).
     @State private var chatStoryContext: String?
+    @State private var chatTopic: String?
     @State private var isPresentingChat: Bool = false
     @State private var chatIsIncoming: Bool = false
     @State private var isPresentingOutgoingRinger: Bool = false
@@ -54,6 +63,59 @@ struct RootView: View {
         )
     }
 
+    /// The first-story sheet waits for a quiet moment: not over onboarding,
+    /// a call, a result or another sheet, and not once the story's been read
+    /// some other way (say, from its notification). Only gates the sheet
+    /// appearing — once up, it stays until dismissed.
+    private var isFirstStoryIntroDue: Bool {
+        guard let story = firstStoryIntro.story, !story.isOpened else { return false }
+        return isQuietMoment
+    }
+
+    /// Pro ran out since they last looked: show what they'd keep, once.
+    private var isLapseNoticeDue: Bool {
+        proLapse.isPending && !entitlements.isPro && hasCompletedOnboarding && isQuietMoment
+    }
+
+    /// Nothing this view knows of is on screen: no onboarding, call, call
+    /// result or deep-linked sheet. See `presentWhenClear` for the rest.
+    private var isQuietMoment: Bool {
+        scenePhase == .active && !isShowingOnboarding
+            && !isPresentingChat && !isPresentingOutgoingRinger
+            && !coordinator.isPresentingIncoming && pendingResult == nil
+            && deepLinkedStory == nil && deepLinkedWord == nil
+            && introducedStory == nil && lapseSummary == nil
+    }
+
+    /// Runs `present` once `isDue` holds and nothing is on screen. Sheets
+    /// opened inside a tab (deck picker, paywalls) are invisible to this
+    /// view's state, so UIKit is asked too, and checked again shortly.
+    private func presentWhenClear(isDue: @escaping () -> Bool, present: @escaping () -> Void) {
+        guard isDue() else { return }
+        guard !UIApplication.shared.isShowingModal else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                presentWhenClear(isDue: isDue, present: present)
+            }
+            return
+        }
+        present()
+    }
+
+    private func makeLapseSummary() -> LapseSummary {
+        let missed = ChatSessionStatus.missed.rawValue
+        let declined = ChatSessionStatus.declined.rawValue
+        let outgoingCalls = FetchDescriptor<ChatSession>(predicate: #Predicate {
+            !$0.wasIncoming && $0.statusRaw != missed && $0.statusRaw != declined
+        })
+        let customWords = FetchDescriptor<VocabularyWord>(predicate: #Predicate { $0.id.starts(with: "custom-") })
+        return LapseSummary(
+            wasTrial: proLapse.wasTrial,
+            storyCount: (try? context.fetchCount(FetchDescriptor<DailyStory>())) ?? 0,
+            customWordCount: (try? context.fetchCount(customWords)) ?? 0,
+            outgoingCallCount: (try? context.fetchCount(outgoingCalls)) ?? 0
+        )
+    }
+
     var body: some View {
         ZStack {
             TabView(selection: tabSelection) {
@@ -64,7 +126,10 @@ struct RootView: View {
                 Tab("Words", systemImage: "text.book.closed", value: AppTab.myWords) {
                     NavigationStack {
                         // Trailing + (add a word) lives in MyWordsView.
-                        MyWordsView(scrollToTopSignal: vocabularyScrollToTopSignal)
+                        MyWordsView(
+                            scrollToTopSignal: vocabularyScrollToTopSignal,
+                            onOpenDeck: { selection = .jam }
+                        )
                     }
                 }
                 Tab("Deck", systemImage: deckTabIcon, value: AppTab.jam) {
@@ -93,8 +158,10 @@ struct RootView: View {
             if coordinator.isPresentingIncoming {
                 CallIncomingView(
                     onAnswer: {
+                        Analytics.capture(.callAnswered, ["direction": "incoming"])
                         chatTargetWords = pickTargetWords()
                         chatStoryContext = nil
+                        chatTopic = nil
                         chatIsIncoming = true
                         withAnimation(Self.callTransitionAnimation) {
                             coordinator.isPresentingIncoming = false
@@ -102,6 +169,7 @@ struct RootView: View {
                         isPresentingChat = true
                     },
                     onDecline: {
+                        Analytics.capture(.callDeclined)
                         ChatStore.recordTerminalSession(
                             context: context,
                             status: .declined,
@@ -156,6 +224,7 @@ struct RootView: View {
                 StoryScheduler.scheduleNextRefresh()
             } else if phase == .active {
                 ReviewPromptManager.noteAppActive()
+                WidgetTracker.check()
                 // Snap the Live Activity to the word for the current time.
                 LiveActivityService.refresh()
                 // A new day may have started while we were away.
@@ -166,6 +235,9 @@ struct RootView: View {
             // No rating prompt here — they haven't used the app yet.
             // `ReviewPromptManager` asks after a call instead.
             Analytics.capture(.onboardingCompleted)
+            // A trial started on the onboarding paywall couldn't write a
+            // story yet (onboarding wasn't finished); now it can.
+            Task { await StoryScheduler.prepareTodayStory(context: context) }
         }) {
             OnboardingFlow()
                 .interactiveDismissDisabled()
@@ -177,10 +249,12 @@ struct RootView: View {
                 let ids = Set(seed.wordIDs)
                 chatTargetWords = allWords.filter { ids.contains($0.id) }
                 chatStoryContext = seed.storyContext
+                chatTopic = seed.topic
                 coordinator.pendingSeed = nil
             } else {
                 chatTargetWords = pickTargetWords()
                 chatStoryContext = nil
+                chatTopic = nil
             }
             chatIsIncoming = false
             coordinator.isPresentingOutgoing = false
@@ -208,6 +282,7 @@ struct RootView: View {
                 context: context,
                 wasIncoming: chatIsIncoming,
                 storyContext: chatStoryContext,
+                topic: chatTopic,
                 onFinished: { eval in
                     lastCallPassed = eval.passed
                     pendingResult = eval
@@ -231,8 +306,46 @@ struct RootView: View {
         .sheet(item: $deepLinkedWord) { word in
             DeepLinkWordSheet(word: word)
         }
-        .sheet(item: $deepLinkedStory) { story in
-            StoryView(story: story)
+        .storySheet(item: $deepLinkedStory)
+        .onChange(of: isFirstStoryIntroDue, initial: true) { _, due in
+            guard due else { return }
+            presentWhenClear(isDue: { isFirstStoryIntroDue }) {
+                introducedStory = firstStoryIntro.story
+            }
+        }
+        .onChange(of: isLapseNoticeDue, initial: true) { _, due in
+            guard due else { return }
+            presentWhenClear(isDue: { isLapseNoticeDue }) {
+                lapseSummary = makeLapseSummary()
+                proLapse.clear()
+            }
+        }
+        .sheet(item: $lapseSummary) { summary in
+            PaywallView(source: .lapsed, lapse: summary)
+        }
+        // A late store reading can show Pro is still active after all (a
+        // trial that converted while the app was closed) — take the
+        // trial-ended paywall back down rather than leave it over a payer.
+        .onChange(of: entitlements.isPro) { _, isPro in
+            if isPro, lapseSummary != nil { lapseSummary = nil }
+        }
+        .sheet(item: $introducedStory, onDismiss: {
+            firstStoryIntro.story = nil
+            guard let story = storyToOpenAfterIntro else { return }
+            storyToOpenAfterIntro = nil
+            deepLinkedStory = story
+        }) { story in
+            FirstStorySheet(story: story, onRead: {
+                storyToOpenAfterIntro = story
+                introducedStory = nil
+            })
+            .onAppear { firstStoryIntro.markShown() }
+        }
+        .onChange(of: entitlements.isPro) { _, isPro in
+            // Trial or purchase from any paywall: write today's story now
+            // rather than on the next launch, so the first one is waiting.
+            guard isPro else { return }
+            Task { await StoryScheduler.prepareTodayStory(context: context) }
         }
         .onChange(of: deepLink.pendingStoryID, initial: true) { _, id in
             guard let id else { return }
@@ -303,4 +416,14 @@ struct RootView: View {
 #Preview {
     RootView()
         .modelContainer(for: [VocabularyWord.self, LearningProgress.self, ReviewLog.self], inMemory: true)
+}
+
+private extension UIApplication {
+    /// Whether the key window already has something presented over it.
+    var isShowingModal: Bool {
+        connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .contains { $0.isKeyWindow && $0.rootViewController?.presentedViewController != nil }
+    }
 }

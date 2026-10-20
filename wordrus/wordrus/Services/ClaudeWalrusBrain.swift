@@ -43,20 +43,36 @@ struct ClaudeWalrusBrain: WalrusBrain {
         level: CEFRLevel,
         targetWords: [VocabularyWord]
     ) async -> WalrusTurn {
-        // Walter starts winding down once the call has run its natural
-        // length. The model still picks the words; this only tells it when.
-        let walrusTurns = history.filter { $0.role == .walrus }.count
-        let shouldWrapUp = walrusTurns >= MockWalrusBrain.promptTurnCount
-        if let turn = await turn(
-            phase: "reply",
-            history: history,
-            level: level,
-            targetWords: targetWords,
-            shouldWrapUp: shouldWrapUp
-        ) {
+        // When the call ends is `ChatStore`'s call (see `signOff`); left to
+        // the model, a goodbye without the end flag kept calls going forever.
+        if let turn = await turn(phase: "reply", history: history, level: level, targetWords: targetWords) {
             return turn
         }
         return await fallback.reply(history: history, level: level, targetWords: targetWords)
+    }
+
+    func lastReply(
+        history: [ChatTurn],
+        level: CEFRLevel,
+        targetWords: [VocabularyWord]
+    ) async -> WalrusTurn {
+        if let turn = await turn(phase: "lastReply", history: history, level: level, targetWords: targetWords) {
+            return WalrusTurn(text: turn.text, endsConversation: false, correction: turn.correction)
+        }
+        return await fallback.lastReply(history: history, level: level, targetWords: targetWords)
+    }
+
+    /// The learner is leaving, so Walter says goodbye without needing to
+    /// answer them. Forced to end whatever the model flags.
+    func farewell(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn {
+        if let turn = await turn(phase: "goodbye", history: history, level: level, targetWords: targetWords) {
+            return WalrusTurn(text: turn.text, endsConversation: true)
+        }
+        return await fallback.farewell(level: level, targetWords: targetWords, history: history)
     }
 
     func wrapUp(
@@ -68,6 +84,20 @@ struct ClaudeWalrusBrain: WalrusBrain {
             return turn
         }
         return await fallback.wrapUp(level: level, targetWords: targetWords, history: history)
+    }
+
+    /// The proxy's wrap-up phase is a plain goodbye — react to the last line,
+    /// sign off, no questions — so it serves both endings. Forced to end
+    /// whatever the model flags.
+    func signOff(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn {
+        if let turn = await turn(phase: "wrapUp", history: history, level: level, targetWords: targetWords) {
+            return WalrusTurn(text: turn.text, endsConversation: true)
+        }
+        return await fallback.signOff(level: level, targetWords: targetWords, history: history)
     }
 
     /// Grading stays on-device. `ChatStore.finalize` recomputes the word
@@ -88,8 +118,7 @@ struct ClaudeWalrusBrain: WalrusBrain {
         phase: String,
         history: [ChatTurn],
         level: CEFRLevel,
-        targetWords: [VocabularyWord],
-        shouldWrapUp: Bool = false
+        targetWords: [VocabularyWord]
     ) async -> WalrusTurn? {
         let language = OnboardingStore.targetLanguage ?? .spanish
         guard let endpoint = URL(string: WalrusProxyConfig.proxyURL)?
@@ -106,7 +135,6 @@ struct ClaudeWalrusBrain: WalrusBrain {
             "language": language.englishName,
             "level": level.rawValue,
             "phase": phase,
-            "shouldWrapUp": shouldWrapUp,
             "targetWords": targetWords.map(\.lemma),
             "history": history.map { ["role": $0.role.rawValue, "text": $0.text] },
         ]

@@ -21,18 +21,20 @@ struct PhoneView: View {
         allSessions.filter { $0.languageRaw == targetLanguageRaw }
     }
 
-    /// Stories are Pro: free users see `StoryLockedRow` instead.
+    /// Listed whether or not the learner is Pro: once a trial or
+    /// subscription lapses their stories stay, locked, rather than vanishing.
     private var stories: [DailyStory] {
-        guard entitlements.isPro else { return [] }
-        return allStories.filter { $0.languageRaw == targetLanguageRaw }
+        allStories.filter { $0.languageRaw == targetLanguageRaw }
     }
 
     private var recents: [RecentItem] {
         RecentItem.merged(calls: sessions, stories: stories)
     }
 
+    /// The "Daily stories" teaser, for free users with no stories of their
+    /// own yet. Lapsed users see their locked stories instead.
     private var showsLockedStories: Bool {
-        !entitlements.isPro && hasCompletedOnboarding
+        !entitlements.isPro && hasCompletedOnboarding && stories.isEmpty
     }
 
     var body: some View {
@@ -81,9 +83,13 @@ struct PhoneView: View {
                             }
                         case .story(let story):
                             Button {
-                                openedStory = story
+                                if entitlements.isPro {
+                                    openedStory = story
+                                } else {
+                                    isShowingStoryPaywall = true
+                                }
                             } label: {
-                                StoryRow(story: story)
+                                StoryRow(story: story, isLocked: !entitlements.isPro)
                             }
                             .buttonStyle(.plain)
                             .listRowSeparator(.hidden)
@@ -126,15 +132,11 @@ struct PhoneView: View {
             PaywallView(onSubscribed: { IncomingCallCoordinator.shared.requestOutgoing() }, source: .call)
         }
         .sheet(isPresented: $isShowingStoryPaywall) {
-            // Once subscribed, write today's story out of sight; it lands in
-            // Recents as unread, with the new-story notification.
-            PaywallView(onSubscribed: {
-                Task { await StoryScheduler.prepareTodayStory(context: context) }
-            }, source: .story)
+            // Going Pro writes today's story out of sight (`RootView`); it
+            // lands in Recents as unread, with the new-story notification.
+            PaywallView(source: .story)
         }
-        .sheet(item: $openedStory) { story in
-            StoryView(story: story)
-        }
+        .storySheet(item: $openedStory)
     }
 
     private func delete(_ story: DailyStory) {

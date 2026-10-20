@@ -6,12 +6,16 @@ import Foundation
 /// prompt drawn from the level's template JSON, and detects whether the
 /// user's reply used the word in some inflected form.
 struct MockWalrusBrain: WalrusBrain {
-    /// Number of walrus prompt turns before the closer. Total walrus turns
-    /// = 1 opener + `promptTurnCount` prompts + 1 closer.
-    static let promptTurnCount = 5
+    /// Walter's lines before his goodbye, opener included. `ChatStore`
+    /// enforces it for every brain (`walrusTurnBudget`); `reply` below keeps
+    /// its own closer only for callers driving this brain directly. At 5 a
+    /// call was 4 learner turns for 5 words, so he hung up on almost
+    /// everyone with a word still to go.
+    static let promptTurnCount = 8
 
-    /// Minimum target words used for the user to pass the call.
-    static let passingThreshold = 3
+    /// Minimum target words used for the user to pass the call. Was 3: on
+    /// 1.1.10 only 1 of 12 calls passed, so 2 of 5 is the bar for now.
+    static let passingThreshold = 2
 
     func openCall(level: CEFRLevel, targetWords: [VocabularyWord]) async -> WalrusTurn {
         let templates = Self.loadTemplates(for: level)
@@ -87,6 +91,15 @@ struct MockWalrusBrain: WalrusBrain {
             ?? copy.wrapUpAcknowledgements.first
             ?? "Las has usado todas."
         return WalrusTurn(text: "\(acknowledgement) \(closer)", endsConversation: true)
+    }
+
+    func signOff(
+        level: CEFRLevel,
+        targetWords: [VocabularyWord],
+        history: [ChatTurn]
+    ) async -> WalrusTurn {
+        let closer = Self.loadTemplates(for: level).closers.randomElement() ?? Self.fallbackCloser
+        return WalrusTurn(text: closer, endsConversation: true)
     }
 
     func evaluate(
@@ -207,7 +220,49 @@ enum LemmaMatcher {
             if containsWord(normText, variant) { return true }
         }
 
+        return mentionsIrregularForm(normText, of: normLemma, language: language)
+    }
+
+    /// Irregular forms no stem can reach — dijo → decir, fritas → freír —
+    /// looked up in the story lexicon's aliases, after undoing gender and
+    /// number with its inflection suffixes.
+    private static func mentionsIrregularForm(_ text: String, of lemma: String, language: TargetLanguage) -> Bool {
+        guard let morphology = morphology(for: language) else { return false }
+        let separators = CharacterSet.alphanumerics.inverted
+        for token in text.unicodeScalars.split(whereSeparator: { separators.contains($0) }).map(String.init) {
+            var candidates = [token]
+            for (suffix, replacement) in morphology.suffixes
+            where token.hasSuffix(suffix) && token.count > suffix.count + 1 {
+                candidates.append(String(token.dropLast(suffix.count)) + replacement)
+            }
+            if candidates.contains(where: { morphology.aliases[$0]?.contains(lemma) == true }) {
+                return true
+            }
+        }
         return false
+    }
+
+    private struct Morphology {
+        let aliases: [String: Set<String>]
+        let suffixes: [(String, String)]
+    }
+
+    private static var morphologyCache: [TargetLanguage: Morphology?] = [:]
+
+    private static func morphology(for language: TargetLanguage) -> Morphology? {
+        if let cached = morphologyCache[language] { return cached }
+        let morphology = StoryLexicon.load(for: language).map { lexicon in
+            Morphology(
+                aliases: lexicon.aliases.reduce(into: [:]) { map, entry in
+                    map[normalize(entry.key), default: []].formUnion(entry.value.map(normalize))
+                },
+                suffixes: lexicon.inflectionSuffixes.compactMap { pair in
+                    pair.count == 2 ? (normalize(pair[0]), normalize(pair[1])) : nil
+                }
+            )
+        }
+        morphologyCache[language] = morphology
+        return morphology
     }
 
     /// Lowercase + strip diacritics. The folding handles every diacritic

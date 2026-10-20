@@ -3,10 +3,16 @@ import SwiftData
 
 /// Keeps the on-device database in sync with the bundled seed for decks and
 /// words. Runs every launch; all operations are idempotent.
-///   - Inserts any deck that isn't already in the database.
+///   - Inserts any deck that isn't already in the database, and keeps
+///     existing decks' `sortOrder` in step with the seed (it is the daily
+///     theme path, so a reorder has to reach installed apps).
 ///   - Inserts any new vocabulary word that wasn't in a prior seed.
 ///   - Updates deck membership for existing words (so adding a tag in the
 ///     seed propagates to already-seeded installs).
+///   - Keeps seeded words' `partOfSpeech`, `cefrLevel`, glosses and example
+///     equal to the seed, so a correction there lands (a preposition shipped
+///     as "adverb"; Italian `verso` gaining its "towards" sense). Nothing on
+///     device edits these on a seeded word, so the seed is the only source.
 ///   - Backfills empty membership to ["common"] for legacy rows.
 ///   - Deletes seeded words the current seed no longer ships (vetted-out
 ///     junk). Custom words are the user's own and are never touched; a
@@ -23,7 +29,12 @@ enum DeckSyncMigrator {
         let existingDecks = (try? context.fetch(FetchDescriptor<Deck>())) ?? []
         let existingDeckBySlug = Dictionary(uniqueKeysWithValues: existingDecks.map { ($0.slug, $0) })
         for seedDeck in seed.decks ?? [] {
-            if existingDeckBySlug[seedDeck.slug] == nil {
+            if let existing = existingDeckBySlug[seedDeck.slug] {
+                if let order = seedDeck.sortOrder, existing.sortOrder != order {
+                    existing.sortOrder = order
+                    changed = true
+                }
+            } else {
                 context.insert(SeedDataLoader.makeDeck(seedDeck))
                 changed = true
             }
@@ -42,9 +53,21 @@ enum DeckSyncMigrator {
                     existing.setDeckSlugs(merged)
                     changed = true
                 }
-                // Backfill cefrLevel if the seed now has one and the row doesn't.
-                if existing.cefrLevel == nil, let level = seedWord.cefrLevel {
+                if existing.partOfSpeech != seedWord.partOfSpeech {
+                    existing.partOfSpeech = seedWord.partOfSpeech
+                    changed = true
+                }
+                if let level = seedWord.cefrLevel, existing.cefrLevel != level {
                     existing.cefrLevel = level
+                    changed = true
+                }
+                if existing.definitions != seedWord.definitions
+                    || existing.exampleSentence != seedWord.example.text
+                    || existing.exampleTranslations != seedWord.example.translations {
+                    let fresh = SeedDataLoader.makeWord(seedWord, encoder: encoder)
+                    existing.definitionsJSON = fresh.definitionsJSON
+                    existing.exampleSentence = fresh.exampleSentence
+                    existing.exampleTranslationsJSON = fresh.exampleTranslationsJSON
                     changed = true
                 }
             } else {

@@ -105,6 +105,10 @@ final class ChatStore {
         self.wasIncoming = wasIncoming
     }
 
+    /// Walter's lines before his goodbye — the opener, his replies and any
+    /// "you still there?" nudges — so a call is at most this many exchanges.
+    static let walrusTurnBudget = MockWalrusBrain.promptTurnCount
+
     func startIfNeeded() async {
         guard phase == .idle else { return }
         phase = .opening
@@ -171,21 +175,32 @@ final class ChatStore {
     func advance() async {
         guard phase == .walrusThinking else { return }
 
-        // Early completion: every target word has now been used. Walter
-        // wraps up with a celebratory closing instead of asking another
-        // question.
-        if !targetWords.isEmpty,
-           usedTargetWordIDs.count >= targetWords.count {
-            let history = displayMessages.map { ChatTurn(role: $0.role, text: $0.text) }
-            let closer = await brain.wrapUp(level: level, targetWords: targetWords, history: history)
+        let history = displayMessages.map { ChatTurn(role: $0.role, text: $0.text) }
+
+        // Every call ends with Walter saying goodbye, decided here rather
+        // than left to the brain: early with a celebration once every target
+        // word is used, otherwise plainly once he's had his turns.
+        let usedEveryWord = !targetWords.isEmpty && usedTargetWordIDs.count >= targetWords.count
+        let walrusTurns = history.filter { $0.role == .walrus }.count
+        if usedEveryWord || walrusTurns >= Self.walrusTurnBudget {
+            let closer = usedEveryWord
+                ? await brain.wrapUp(level: level, targetWords: targetWords, history: history)
+                : await brain.signOff(level: level, targetWords: targetWords, history: history)
             emitWalrus(closer.text, endsConversation: true)
             phase = .finished
             await finalize()
             return
         }
 
-        let history = displayMessages.map { ChatTurn(role: $0.role, text: $0.text) }
-        let next = await brain.reply(history: history, level: level, targetWords: targetWords)
+        // Steer only toward the words still to use — the ones already
+        // crossed off would just pull him back to topics that are done.
+        let remainingWords = targetWords.filter { !usedTargetWordIDs.contains($0.id) }
+        // His last line before the goodbye says he'll have to go soon, so
+        // the sign-off on the next turn is expected rather than abrupt.
+        let isLastReply = walrusTurns == Self.walrusTurnBudget - 1
+        let next = isLastReply
+            ? await brain.lastReply(history: history, level: level, targetWords: remainingWords)
+            : await brain.reply(history: history, level: level, targetWords: remainingWords)
         emitWalrus(
             next.text,
             endsConversation: next.endsConversation,
@@ -232,6 +247,27 @@ final class ChatStore {
                 usedTargetWordIDs.insert(word.id)
             }
         }
+    }
+
+    /// Enough words used to pass, so the learner may end the call on a
+    /// goodbye instead of the red button. Capped at the number of words set,
+    /// for calls with fewer than the pass mark.
+    var canSayGoodbye: Bool {
+        guard phase == .awaitingUser, !targetWords.isEmpty else { return false }
+        return usedTargetWordIDs.count >= min(MockWalrusBrain.passingThreshold, targetWords.count)
+    }
+
+    /// The learner chose to end the call. Walter says goodbye and the call
+    /// finishes as completed — unlike `endCall`, it counts toward level-up.
+    func sayGoodbye() async {
+        guard canSayGoodbye else { return }
+        cancelInactivityTimer()
+        phase = .walrusThinking
+        let history = displayMessages.map { ChatTurn(role: $0.role, text: $0.text) }
+        let closer = await brain.farewell(level: level, targetWords: targetWords, history: history)
+        emitWalrus(closer.text, endsConversation: true)
+        phase = .finished
+        await finalize()
     }
 
     func endCall() async {

@@ -6,6 +6,24 @@ struct SeedFile: Decodable {
     let language: String
     let decks: [SeedDeck]?
     let words: [SeedWord]
+    /// Word ids of the building blocks in teaching order (the hand-authored
+    /// `tools/building_blocks_<lang>.json` order).
+    let buildingBlocks: [String]?
+}
+
+/// Teaching position of each building-block word id for a language, read
+/// once from the bundled seed and cached (the seed is a few MB to parse).
+@MainActor
+enum BuildingBlockOrder {
+    private static var cache: [TargetLanguage: [String: Int]] = [:]
+
+    static func positions(for language: TargetLanguage) -> [String: Int] {
+        if let cached = cache[language] { return cached }
+        let ids = SeedDataLoader.loadSeed(for: language)?.buildingBlocks ?? []
+        let positions = Dictionary(ids.enumerated().map { ($1, $0) }, uniquingKeysWith: { first, _ in first })
+        cache[language] = positions
+        return positions
+    }
 }
 
 struct SeedDeck: Decodable {
@@ -238,7 +256,10 @@ enum SeedDataLoader {
     /// likewise preserved. Progress' `wordID` values are language-prefixed so
     /// they harmlessly orphan while another language is active and rebind when
     /// the user switches back.
-    static func switchLanguage(to language: TargetLanguage, context: ModelContext) {
+    ///
+    /// `level` is the learner's answer to "how's your French?" the first time
+    /// they switch to a language; nil keeps the language's stored level.
+    static func switchLanguage(to language: TargetLanguage, level: CEFRLevel? = nil, context: ModelContext) {
         let defaults = UserDefaults.standard
 
         // Levels are per language: freeze the outgoing language's level (and
@@ -248,6 +269,16 @@ enum SeedDataLoader {
 
         defaults.set(language.rawValue, forKey: OnboardingDefaultsKey.targetLanguage)
         OnboardingStore.activateLevel(for: language)
+        if let level, level != OnboardingStore.cefrLevel {
+            OnboardingStore.cefrLevel = level
+            OnboardingStore.cefrPassesAtCurrentLevel = 0
+        }
+        // So is the daily-set loop (today's lock, theme position).
+        DailySetState.activate(language.rawValue)
+        // Today's stack is the old language's words; drop it so the widget,
+        // Live Activity and reminders don't keep showing them until the Deck
+        // tab builds the new set.
+        DailyWordSet.clear()
 
         do {
             // Delete only seeded words; keep the user's custom words.

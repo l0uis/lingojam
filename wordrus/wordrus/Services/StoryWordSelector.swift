@@ -11,6 +11,7 @@ import SwiftData
 /// - New words (what the story teaches, 2–3): shaky words from today's card
 ///   stack first, then other words the learner keeps missing, then unseen
 ///   words from today's topic, then any unseen words at their level.
+///   Words far rarer than their level wait while others qualify.
 /// - Topic: the theme of today's card stack.
 ///
 /// A "learning word" uses the card stack's definition (`JamView.learningWords`):
@@ -21,8 +22,9 @@ import SwiftData
 /// a learner's own list is mostly the words they're still struggling with.
 @MainActor
 enum StoryWordSelector {
-    /// The worker accepts up to 500 (`MAX_KNOWN_WORDS`).
-    static let knownWordCap = 500
+    /// The worker accepts up to 1200 (`MAX_KNOWN_WORDS`; 500 before
+    /// 2026-10-12).
+    static let knownWordCap = 1200
     static let personalWordCap = 300
     static let newWordCount = 3
 
@@ -30,13 +32,29 @@ enum StoryWordSelector {
     /// use at `level`, on top of the learner's own.
     static func coreVocabularySize(for level: CEFRLevel) -> Int {
         switch level {
-        case .a1: 300
-        case .a2: 400
+        // Generous on purpose: everyday words like "ventana" or "cocina"
+        // sit around rank 800–1100, and a story that can't use them fails
+        // the check however it's written.
+        case .a1: 500
+        case .a2: 800
         default: knownWordCap
         }
     }
 
     static let fallbackTopic = "Everyday life"
+
+    /// New words rarer than this (by corpus frequency) wait while commoner
+    /// ones qualify: a story can't fit a word like "embarazada" around an
+    /// A2 word list, and Claude leaves it out. Unranked words (custom ones)
+    /// are never held back.
+    static func newWordRankCeiling(for level: CEFRLevel) -> Int? {
+        switch level {
+        case .a1: 2500
+        case .a2: 4000
+        case .b1: 6000
+        default: nil
+        }
+    }
 
     struct Selection: Equatable {
         var knownWords: [StoryWord]
@@ -126,11 +144,17 @@ enum StoryWordSelector {
                 .sorted { $0.rank < $1.rank },
             to: level
         ))
-        for allowRecent in [false, true] {
+        let rankCeiling = newWordRankCeiling(for: level)
+        func isRare(_ word: VocabularyWord) -> Bool {
+            guard let rankCeiling, let rank = frequencyRanks[word.lemma] else { return false }
+            return rank > rankCeiling
+        }
+        for (allowRecent, allowRare) in [(false, false), (true, false), (true, true)] {
             for candidates in candidateLists {
                 for word in candidates where newWords.count < newWordCount
                     && !newWords.contains(where: { $0.lemma == word.lemma })
-                    && (allowRecent || !recentNewLemmas.contains(word.lemma)) {
+                    && (allowRecent || !recentNewLemmas.contains(word.lemma))
+                    && (allowRare || !isRare(word)) {
                     newWords.append(word)
                 }
             }
@@ -174,7 +198,8 @@ enum StoryWordSelector {
     private static func dominantDeck(in words: [VocabularyWord]) -> String? {
         var counts: [String: Int] = [:]
         for word in words {
-            for slug in word.deckSlugs where slug != DeckConstants.commonSlug {
+            for slug in word.deckSlugs
+            where slug != DeckConstants.commonSlug && slug != DeckConstants.buildingBlocksSlug {
                 counts[slug, default: 0] += 1
             }
         }

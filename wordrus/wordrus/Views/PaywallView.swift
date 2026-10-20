@@ -13,6 +13,9 @@ struct PaywallView: View {
     var onSubscribed: () -> Void = {}
     /// What the user tapped to get here. Reported with `paywall_shown` / `paywall_dismissed`.
     var source: Analytics.PaywallSource = .unknown
+    /// Set when Pro has just run out: the card lists what *they* built up
+    /// with Pro, in place of the generic benefits.
+    var lapse: LapseSummary? = nil
 
     @Environment(\.dismiss) private var dismiss
     // One shown / dismissed pair per presentation; `onAppear` can run twice.
@@ -47,13 +50,14 @@ struct PaywallView: View {
 
             VStack(spacing: 0) {
                 ScrollView {
-                    VStack(spacing: 20) {
-                        header
-                        benefitsCard
+                    Group {
+                        if let lapse { lapseCard(lapse) } else { benefitsCard }
                     }
-                    .padding(.horizontal, 24)
-                    .padding(.top, 56)
-                    .padding(.bottom, 16)
+                        .background(alignment: .top) { peekingTusk }
+                        .padding(.horizontal, 24)
+                        // Layout room for Dr Tusk poking above the card.
+                        .padding(.top, 150)
+                        .padding(.bottom, 16)
                 }
                 footerArea
             }
@@ -80,15 +84,6 @@ struct PaywallView: View {
         }
     }
 
-    // MARK: - Header
-
-    private var header: some View {
-        Text("Unlock everything")
-            .font(.gochiHand(size: 38, relativeTo: .largeTitle))
-            .foregroundStyle(Color.whiteboardInk)
-            .multilineTextAlignment(.center)
-    }
-
     // MARK: - Icon tints
 
     /// One colour per icon circle so the rows don't read as a single block of
@@ -105,39 +100,107 @@ struct PaywallView: View {
 
     private var benefitsCard: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Everything in Pro")
-                .font(.sniglet(.headline))
-                .foregroundStyle(DS.Color.ink)
+            Text("Unlock everything")
+                .font(.gochiHand(size: 32, relativeTo: .largeTitle))
+                .foregroundStyle(Color.whiteboardInk)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             // Lead with what the user just reached for.
             if source == .voiceSpeed { voiceSpeedBenefit }
+            if leadsWithStacks { stacksBenefit }
             benefitRow(icon: "phone.fill", tint: IconTint.blue, title: "Call Dr Tusk anytime",
                        detail: "He still calls you for free — Pro lets you call him on demand.")
             benefitRow(icon: "book.fill", tint: IconTint.orange, title: "Daily stories from Dr Tusk",
                        detail: "A short story every day, written with your words and read aloud by Dr Tusk.")
             benefitRow(icon: "text.badge.plus", tint: IconTint.coral, title: "Add your own words",
                        detail: "Look up any word you hear or see — definition and example added instantly.")
-            // Only English speakers have more than one language to switch
-            // between; promising it to anyone else would be a false benefit.
-            if TargetLanguage.offered(to: NativeLanguage.current).count > 1 {
-                benefitRow(icon: "globe", tint: IconTint.teal, title: "Every language",
-                           detail: "Switch between all supported languages.")
-            }
-            benefitRow(icon: "square.grid.2x2.fill", tint: IconTint.purple, title: "Every topic",
-                       detail: "Unlock all themed decks, not just the basics.")
+            if !leadsWithStacks { stacksBenefit }
             if source != .voiceSpeed { voiceSpeedBenefit }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: DS.Radius.surface, style: .continuous)
+            RoundedRectangle(cornerRadius: 32, style: .continuous)
                 .fill(.white)
                 .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
         )
     }
 
+    /// "Your free week is over", with their own numbers where they have
+    /// them. Words they added stay usable without Pro, so that row is about
+    /// adding more, never about losing them.
+    private func lapseCard(_ lapse: LapseSummary) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(lapse.wasTrial ? "Your free week is over" : "Your Pro has ended")
+                    .font(.gochiHand(size: 32, relativeTo: .largeTitle))
+                    .foregroundStyle(Color.whiteboardInk)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.8)
+                Text("Keep everything you started with Dr Tusk.")
+                    .font(.sniglet(.subheadline))
+                    .foregroundStyle(.secondary)
+            }
+            if lapse.storyCount > 0 {
+                benefitRow(icon: "book.fill", tint: IconTint.orange,
+                           title: "Your ^[\(lapse.storyCount) story](inflect: true) from Dr Tusk",
+                           detail: "Written with your words. Locked until you're back — and a new one every day.")
+            } else {
+                benefitRow(icon: "book.fill", tint: IconTint.orange, title: "Daily stories from Dr Tusk",
+                           detail: "A short story every day, written with your words and read aloud by Dr Tusk.")
+            }
+            if lapse.outgoingCallCount > 0 {
+                benefitRow(icon: "phone.fill", tint: IconTint.blue,
+                           title: "^[\(lapse.outgoingCallCount) call](inflect: true) you started",
+                           detail: "Ring Dr Tusk whenever you like. He'll still call you for free.")
+            } else {
+                benefitRow(icon: "phone.fill", tint: IconTint.blue, title: "Call Dr Tusk anytime",
+                           detail: "He still calls you for free — Pro lets you call him on demand.")
+            }
+            stacksBenefit
+            if lapse.customWordCount > 0 {
+                benefitRow(icon: "text.badge.plus", tint: IconTint.coral,
+                           title: "^[\(lapse.customWordCount) word](inflect: true) you added",
+                           detail: "They're still yours. Pro lets you keep adding the words you hear.")
+            } else {
+                benefitRow(icon: "text.badge.plus", tint: IconTint.coral, title: "Add your own words",
+                           detail: "Look up any word you hear or see — definition and example added instantly.")
+            }
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 32, style: .continuous)
+                .fill(.white)
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
+        )
+    }
+
+    private var leadsWithStacks: Bool {
+        source == .anotherStack || source == .deckPicker
+    }
+
+    private var stacksBenefit: some View {
+        benefitRow(icon: "square.stack.3d.up.fill", tint: IconTint.purple, title: "Unlimited stacks",
+                   detail: "Keep swiping after your daily set — pick any topic, as often as you like.")
+    }
+
     private var voiceSpeedBenefit: some View {
         benefitRow(icon: "gauge.with.dots.needle.67percent", tint: IconTint.teal, title: "Set Dr Tusk's speaking speed",
                    detail: "Slow him down while you're learning, or speed him up once you're fluent.")
+    }
+
+    /// Dr Tusk peeking out from behind the card. Drawn as the card's
+    /// background so the white card face hides everything below his chest.
+    private var peekingTusk: some View {
+        Image("tuskPro")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 240, height: 240)
+            // The artwork sits left of centre in its square; nudge it so his
+            // head, not the canvas, lines up with the card's centre.
+            .offset(x: 10, y: -140)
+            .accessibilityHidden(true)
     }
 
     private func benefitRow(icon: String, tint: Color, title: LocalizedStringKey, detail: LocalizedStringKey) -> some View {
@@ -235,7 +298,7 @@ struct PaywallView: View {
             Text("No payment due now")
         }
         .font(.sniglet(.subheadline, weight: .bold))
-        .foregroundStyle(DS.Color.charcoal)
+        .foregroundStyle(DS.Color.ink)
     }
 
     /// The pricing statement directly under the CTA: what the user is actually

@@ -117,6 +117,15 @@ final class CallDirector {
     private var pendingUserMessage: (id: UUID, text: String)?
     private var hasStarted = false
     private var callStartedAt: Date?
+    /// Who ended the call and when, held until grading finishes so
+    /// `call_ended` can carry the result.
+    private var endedBy: String?
+    /// Who Walter's closing line is on behalf of: nil for his own sign-off,
+    /// "goodbye" once the learner asked to end the call.
+    private var closingRequestedBy: String?
+    private var endedAt: Date?
+    private var hasReportedEnd = false
+    private var hasReportedBackground = false
 
     init(store: ChatStore) {
         self.store = store
@@ -175,17 +184,75 @@ final class CallDirector {
         guard stage != .ended else { return }
         teardown()
         stage = .ended
-        captureCallEnded(by: "user")
+        markEnded(by: "user")
         Task { await store.endCall() }
     }
 
+    /// Shown once enough words are used to pass, on the learner's turn.
+    var canSayGoodbye: Bool {
+        stage == .yourTurn && store.canSayGoodbye
+    }
+
+    /// "Say goodbye": the learner ends the call, but Walter gets to sign
+    /// off first, so it closes like a phone call rather than going dead.
+    /// Counts as a completed call, where the red button is a hang-up.
+    func sayGoodbye() {
+        guard canSayGoodbye else { return }
+        cancelListening()
+        correction = nil
+        closingRequestedBy = "goodbye"
+        stage = .checking
+        isWalrusThinking = true
+        playHaptic(.light)
+        Task { await store.sayGoodbye() }
+    }
+
+    private func markEnded(by side: String) {
+        endedBy = side
+        endedAt = Date()
+    }
+
     /// `call_ended` for either side hanging up. Through 1.1.7 only the red
-    /// button reported, so calls Dr Tusk wrapped up went uncounted.
-    private func captureCallEnded(by endedBy: String) {
+    /// button reported, so calls Dr Tusk wrapped up went uncounted. Sent
+    /// once grading is done (after 1.1.9) so it can say whether the call passed.
+    private func captureCallEnded(_ evaluation: ChatEvaluation, graded: Bool) {
+        guard !hasReportedEnd else { return }
+        hasReportedEnd = true
         Analytics.capture(.callEnded, [
-            "ended_by": endedBy,
+            "ended_by": endedBy ?? "unknown",
+            "duration_bucket": Analytics.durationBucket((endedAt ?? Date()).timeIntervalSince(callStartedAt ?? Date())),
+            "passed": evaluation.passed,
+            "words_used": evaluation.elicitedWordIDs.count,
+            "target_words": store.targetWords.count,
+            "user_turns": userTurnCount,
+            "graded": graded
+        ])
+    }
+
+    /// The app left the foreground with the call still live — the closest
+    /// we get to "walked away mid-call", since a force-quit can't report.
+    func noteBackgrounded() {
+        guard hasStarted, stage != .ended, !hasReportedBackground else { return }
+        hasReportedBackground = true
+        Analytics.capture(.callBackgrounded, [
+            "stage": stageName,
+            "user_turns": userTurnCount,
             "duration_bucket": Analytics.durationBucket(Date().timeIntervalSince(callStartedAt ?? Date()))
         ])
+    }
+
+    private var userTurnCount: Int {
+        store.displayMessages.filter { $0.role == .user }.count
+    }
+
+    private var stageName: String {
+        switch stage {
+        case .connecting: "connecting"
+        case .walrusSpeaking: "walrus_speaking"
+        case .yourTurn: "your_turn"
+        case .checking: "checking"
+        case .ended: "ended"
+        }
     }
 
     /// The final grade, once `finalize` has produced one. Polls briefly
@@ -197,11 +264,17 @@ final class CallDirector {
         while store.evaluation == nil, Date.now < deadline {
             try? await Task.sleep(nanoseconds: 150_000_000)
         }
-        return store.evaluation ?? ChatEvaluation(
+        if let evaluation = store.evaluation {
+            captureCallEnded(evaluation, graded: true)
+            return evaluation
+        }
+        let fallback = ChatEvaluation(
             elicitedWordIDs: [],
             passed: false,
             encouragement: String(localized: "The call ended. Give Dr Tusk another ring when you're ready.")
         )
+        captureCallEnded(fallback, graded: false)
+        return fallback
     }
 
     /// Replay the sentence currently in Walter's bubble.
@@ -268,7 +341,7 @@ final class CallDirector {
             if utterance.endsConversation {
                 teardown()
                 stage = .ended
-                captureCallEnded(by: "walrus")
+                markEnded(by: closingRequestedBy ?? "walrus")
                 return
             }
         }
@@ -494,6 +567,14 @@ final class CallDirector {
         queue.removeAll()
         SpeechService.shared.stop()
         isWalrusThinking = false
+        // Cut off mid-goodbye: the drain that would have ended the call is
+        // gone, so end it here or the screen waits forever.
+        if store.phase == .finished {
+            teardown()
+            stage = .ended
+            markEnded(by: closingRequestedBy ?? "walrus")
+            return
+        }
         guard store.phase == .awaitingUser else { return }
         stage = .yourTurn
         store.armSilenceClock()

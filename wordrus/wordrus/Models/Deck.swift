@@ -38,6 +38,10 @@ final class Deck {
 
 enum DeckConstants {
     static let commonSlug = "common"
+    /// Hidden tag (never a picker deck) on prepositions, connectors and
+    /// time/place/quantity words. `JamView` mixes a few into every daily set.
+    /// Mirrors `BUILDING_BLOCKS_SLUG` in tools/vocab_pipeline.py.
+    static let buildingBlocksSlug = "building-blocks"
     static let allSlug = "__all"
     /// Synthetic deck for the user's own added words. Not seeded from JSON —
     /// JamView injects it into the theme rotation when custom words exist, and

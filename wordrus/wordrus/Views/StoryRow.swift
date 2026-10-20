@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 /// The unread marker for story rows, like an unread message: a dot to the
 /// left of the avatar, in the row's margin so the avatar stays aligned with
@@ -22,27 +23,37 @@ private struct UnreadDot: ViewModifier {
     }
 }
 
-/// A story in the Phone tab's Recents, styled like a message from Dr Tusk:
-/// his avatar, the story's title, and when it arrived. Unread stories get a
-/// dot before the avatar and an ink title.
+/// A story in the Phone tab's Recents: an edition of the paper, in the
+/// call rows' style — a newspaper in a circle, the headline, and which
+/// paper and issue it is. Unread stories get a
+/// dot before the avatar and an ink title. Locked once Pro lapses: still
+/// listed — they're the learner's own stories — but behind the paywall.
 struct StoryRow: View {
     let story: DailyStory
+    var isLocked: Bool = false
+
+    @Environment(\.modelContext) private var context
 
     var body: some View {
-        let unread = !story.isOpened
+        let unread = !story.isOpened && !isLocked
         HStack(spacing: 12) {
-            DrTuskAvatar(size: 40)
+            StoryPaperIcon()
                 .modifier(UnreadDot(isUnread: unread))
             VStack(alignment: .leading, spacing: 2) {
                 Text(story.title)
                     .font(.sniglet(.headline))
                     .foregroundStyle(unread ? DS.Color.ink : Color.primary)
                     .lineLimit(2)
-                Text(StoryTimestamp.string(for: story.createdAt))
+                Text(isLocked ? String(localized: "Unlock with Pro to listen again") : edition)
                     .font(.sniglet(.caption))
                     .foregroundStyle(.secondary)
             }
             Spacer()
+            if isLocked {
+                Image(systemName: "lock.fill")
+                    .foregroundStyle(DS.Color.ink)
+                    .accessibilityHidden(true)
+            }
         }
         .padding(.vertical, 4)
         .contentShape(Rectangle())
@@ -51,6 +62,25 @@ struct StoryRow: View {
             ? Text("Unread story from Dr Tusk: \(story.title). \(StoryTimestamp.string(for: story.createdAt))")
             : Text("Story from Dr Tusk: \(story.title). \(StoryTimestamp.string(for: story.createdAt))"))
         .accessibilityAddTraits(.isButton)
+    }
+
+    /// "El Antártico · No. 2 · Today, 9:05"
+    private var edition: String {
+        let issue = Newsprint.issueNumber(of: story, in: context)
+        return "\(Newsprint.name(for: story.language)) · \(String(localized: "No. \(issue)")) · \(StoryTimestamp.string(for: story.createdAt))"
+    }
+}
+
+/// The story rows' icon: the call rows' solid circle, in printer's ink,
+/// with a newspaper in it.
+struct StoryPaperIcon: View {
+    var body: some View {
+        Image(systemName: "newspaper.fill")
+            .font(.sniglet(.callout, weight: .bold))
+            .foregroundStyle(.white)
+            .frame(width: 36, height: 36)
+            .background(Circle().fill(Newsprint.ink))
+            .accessibilityHidden(true)
     }
 }
 
@@ -62,7 +92,7 @@ struct StoryLockedRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            DrTuskAvatar(size: 40)
+            StoryPaperIcon()
                 .modifier(UnreadDot(isUnread: isUnread))
             VStack(alignment: .leading, spacing: 2) {
                 Text("Daily stories from Dr Tusk")

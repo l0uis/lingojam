@@ -78,6 +78,15 @@ struct wordrusApp: App {
                 //   xcrun simctl launch <udid> <bundle> -uiPreviewPaywall
                 PaywallView()
                     .preferredColorScheme(.light)
+            } else if let id = UserDefaults.standard.string(forKey: "uiPreviewCuriosity") {
+                // Launch straight into one curiosity card for visual QA:
+                //   xcrun simctl launch <udid> <bundle> -uiPreviewCuriosity de-backpfeifengesicht
+                CuriosityCard.debugPreview(id: id)
+            } else if let dir = UserDefaults.standard.string(forKey: "uiRenderCuriosities") {
+                // Write every curiosity's share image as PNG for visual QA:
+                //   xcrun simctl launch <udid> <bundle> -uiRenderCuriosities /some/dir
+                Text(verbatim: "Rendering curiosities…")
+                    .task { CuriosityShareImage.renderAll(to: dir) }
             } else {
                 rootScene
             }
